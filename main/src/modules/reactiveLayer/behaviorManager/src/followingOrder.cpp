@@ -6,10 +6,6 @@ using namespace wysiwyd::wrdac;
 
 void FollowingOrder::configure() {
     Bottle bFollowingOrder = rf.findGroup("followingOrder");
-    bKS1.clear();
-    bKS2.clear();
-    bKS1 = *bFollowingOrder.find("ks1").asList();
-    bKS2 = *bFollowingOrder.find("ks2").asList();
 
     homeoPort = "/homeostasis/rpc";
 
@@ -19,14 +15,8 @@ void FollowingOrder::configure() {
     external_port_name = "/proactiveTagging/rpc";
     from_sensation_port_name = "/ears/target:o";
 
-    port_to_narrate_name = "/"+behaviorName+"/narrate:o";
-    port_to_narrate.open(port_to_narrate_name);
-
     port_to_homeo_name = "/"+behaviorName+"/toHomeo:o";
     port_to_homeo.open(port_to_homeo_name);
-
-    port_to_avoidance_name = "/"+behaviorName+"/avoidance:o";
-    port_to_avoidance.open(port_to_avoidance_name);
 
     manual = true;
 }
@@ -86,8 +76,6 @@ void FollowingOrder::run(const Bottle &args) {
         } else {
             handleActionBP(type, target, action);
         }
-    } else if (action == "narrate") {
-        handleNarrate();
     } else if (action == "end") {
         handleEnd();
     } else if (action == "game") {
@@ -104,24 +92,6 @@ void FollowingOrder::run(const Bottle &args) {
         cmd.addString("all");
         port_to_homeo.write(cmd, rply);
     }
-}
-
-bool FollowingOrder::handleNarrate(){
-    string port_narrate = "/narrativeHandler/rpc";
-    
-    if (!yarp::os::Network::isConnected(port_to_narrate_name, port_narrate)) {
-        if(!yarp::os::Network::connect(port_to_narrate_name, port_narrate)) {
-            yWarning() << "Could not connect to narrate";
-        }
-    }
-
-    yInfo() << "Narrate::run";
-    Bottle cmd, rply;
-    cmd.addString("narrate");
-    yInfo() << "Proactively narrating...";
-
-    port_to_narrate.write(cmd, rply);
-    return true;
 }
 
 bool FollowingOrder::handleAction(string type, string target, string action) {
@@ -174,26 +144,6 @@ bool FollowingOrder::handleAction(string type, string target, string action) {
     iCub->say("I don't know the " + target + " but I know it is not here. I will not " + action + " it.");
     iCub->home();
     return false;
-}
-
-//Randomly go through a bottle with instance number (int>0) to pick one
-int FollowingOrder::randKS(Bottle bKS) {
-    int ks = -1;
-
-    if(bKS.size() != 0){
-        //randomly pick one of the KS1 + int protection
-        int ksIndex = Random::uniform(0,(bKS.size()-1));
-        if(bKS.get(ksIndex).isInt()){
-            ks = bKS.get(ksIndex).asInt() ;
-            return ks;
-        } else {
-            yError() << "[handleActionKS] wrong input for" << bKS.toString() << ": it should be an int, and not " << bKS.get(ksIndex).toString();
-            return -1;
-        }
-    } else {
-        yError() << "[handleActionKS]: no instance for " << bKS.toString() << "found!" ;
-        return -1;
-    }
 }
 
 bool FollowingOrder::handleActionBP(string type, string target, string action) {
@@ -295,53 +245,9 @@ bool FollowingOrder::handleEnd() {
 }
 
 bool FollowingOrder::handleGame(string type) {
-    string port_avoidance = "/reactController/rpc:i";
-
-    if (!yarp::os::Network::isConnected(port_to_avoidance_name, port_avoidance))
-        yarp::os::Network::connect(port_to_avoidance_name, port_avoidance);
-
-    if (!yarp::os::Network::isConnected(port_to_avoidance_name, port_avoidance)) {
-        iCub->say("I cannot play this game right now.");
-        return false;
-    }
-
     iCub->opc->checkout();
     yInfo() << "[handleGame] type:" << type;
     iCub->lookAtPartner();
-
-    Bottle avoidance_cmd, avoidance_reply;
-    if(type == "start") {
-        iCub->say("Nice. Let me draw a circle. I will avoid obstacles.");
-        iCub->say("Please put the table away.");
-        yarp::os::Time::delay(10);
-        iCub->home();
-        iCub->say("Okay I am ready");
-
-        /*Bottle sub;
-        sub.addDouble(-0.28);
-        sub.addDouble(0.2);
-        sub.addDouble(0.05);
-        avoidance_cmd.addString("set_xd");
-        avoidance_cmd.addList() = sub;
-        yDebug() << "To avoidance:" << avoidance_cmd.toString();
-        port_to_avoidance.write(avoidance_cmd, avoidance_reply);
-        yDebug() << "Reply avoidance: " << avoidance_reply.toString();
-
-        yarp::os::Time::delay(2.0);
-
-        avoidance_cmd.addString("set_relative_circular_xd");
-        avoidance_cmd.addDouble(0.1);
-        avoidance_cmd.addDouble(0.15);
-        yDebug() << "To avoidance:" << avoidance_cmd.toString();
-        port_to_avoidance.write(avoidance_cmd, avoidance_reply);
-        yDebug() << "Reply avoidance: " << avoidance_reply.toString();*/
-    } else if (type == "end") {
-        iCub->say("This was fun! Thanks for playing with me.");
-        avoidance_cmd.addString("stop");
-        yDebug() << "To avoidance:" << avoidance_cmd.toString();
-        port_to_avoidance.write(avoidance_cmd, avoidance_reply);
-        yDebug() << "Reply avoidance: " << avoidance_reply.toString();
-    }
 
     yInfo()<<"[handleGame] freezing drives";
     manual = true;
