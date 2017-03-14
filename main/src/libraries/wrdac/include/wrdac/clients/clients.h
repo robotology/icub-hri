@@ -29,11 +29,7 @@
 #define __WYSIWYD_CLIENTS_H__
 
 #include "opcClient.h"
-#include "animation.h"
-//#include "facialExpressionCodes.h"
 #include "icubClient.h"
-#include "opcSave.h"
-#include "opcEars.h"
 
 #endif
 

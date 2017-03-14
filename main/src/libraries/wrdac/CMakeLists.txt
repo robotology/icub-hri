@@ -20,11 +20,8 @@ set(folder_source src/functions.cpp
                   src/subsystems/subSystem_recog.cpp
                   src/subsystems/subSystem_speech.cpp
                   src/subsystems/subSystem_KARMA.cpp
-                  src/clients/animation.cpp
                   src/clients/icubClient.cpp
-                  src/clients/opcClient.cpp
-                  src/clients/opcEars.cpp
-                  src/clients/opcSave.cpp)
+                  src/clients/opcClient.cpp)
 
 
 set(folder_header include/wrdac/functions.h
@@ -39,12 +36,9 @@ set(folder_header include/wrdac/functions.h
                   include/wrdac/knowledge/relation.h
                   include/wrdac/knowledge/representations.h
                   include/wrdac/knowledge/rtObject.h
-                  include/wrdac/clients/animation.h
                   include/wrdac/clients/clients.h
                   include/wrdac/clients/icubClient.h
                   include/wrdac/clients/opcClient.h
-                  include/wrdac/clients/opcEars.h
-                  include/wrdac/clients/opcSave.h
                   include/wrdac/subsystems/all.h
                   include/wrdac/subsystems/subSystem.h
                   include/wrdac/subsystems/subSystem_agentDetector.h

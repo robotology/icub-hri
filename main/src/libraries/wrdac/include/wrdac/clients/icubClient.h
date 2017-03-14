@@ -27,7 +27,6 @@
 
 #include "wrdac/clients/opcClient.h"
 #include "wrdac/subsystems/all.h"
-#include "animation.h"
 
 namespace wysiwyd{
     namespace wrdac{
@@ -47,8 +46,6 @@ namespace wysiwyd{
             std::map<std::string, SubSystem*>  subSystems;
             bool                               closed;
             std::list<Action*>                 actionsKnown;
-            std::map<std::string, BodyPosture> posturesKnown;
-            std::map<std::string, std::list< std::pair<std::string, double> > > choregraphiesKnown;
 
             //Reachability area
             double xRangeMin, yRangeMin, zRangeMin;
