@@ -6,9 +6,6 @@ if(ICUB_USE_IPOPT)
    add_subdirectory(referenceFrameHandler)
 endif()
 
-add_subdirectory(qRM)
-add_subdirectory(abmInteraction)
 add_subdirectory(opcPopulater)
-add_subdirectory(humanRobotDumper)
 add_subdirectory(actionRecogDataDumper)
 

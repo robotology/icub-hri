@@ -23,10 +23,7 @@
 // 1. #include "new_service_IDL.h"
 // 2. @ref new_service_IDL
 
-#include "slidingController_IDL.h"
-#include "interpersonalDistanceRegulator_IDL.h"
 #include "iol2opc_IDL.h"
-#include "perspectiveTaking_IDL.h"
 
 /**
 *

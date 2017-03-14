@@ -23,7 +23,6 @@
 #define SUBSYSTEM_SPEECH_ESPEAK "speech_espeak"
 
 #include "wrdac/subsystems/subSystem.h"
-#include "wrdac/subsystems/subSystem_ABM.h"
 #include "wrdac/clients/opcClient.h"
 #include "wrdac/functions.h"
 #include <iostream>
@@ -46,9 +45,6 @@ namespace wysiwyd{
             yarp::os::BufferedPort<yarp::os::Bottle> stt;
             yarp::os::Port sttRpc;
 
-
-            bool ABMconnected;
-            SubSystem_ABM* SubABM;
             OPCClient *opc;
 
         public:

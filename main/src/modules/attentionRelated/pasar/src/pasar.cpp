@@ -18,8 +18,6 @@
 */
 
 #include "pasar.h"
-#include "wrdac/subsystems/subSystem_ABM.h"
-
 
 using namespace wysiwyd::wrdac;
 using namespace yarp::os;
@@ -90,12 +88,6 @@ bool PasarModule::configure(yarp::os::ResourceFinder &rf) {
     if (!iCub->connect())
     {
         yError() << "iCubClient : Some dependencies are not running...";
-        return false;
-    }
-
-    if (!iCub->getABMClient())
-    {
-        yError() << " WARNING ABM NOT CONNECTED, MODULE CANNOT START";
         return false;
     }
 
@@ -382,18 +374,6 @@ void PasarModule::saliencyTopDown() {
                 it.second.o.m_saliency += pTopDownAppearanceBurst;
                 yInfo() << "\t\t APPEARANCE OF: " << it.second.o.name();
                 it.second.present = true;
-
-                if (iCub->getABMClient()->Connect())
-                {
-                    std::list<std::pair<std::string, std::string> > lArgument;
-                    lArgument.push_back(std::pair<std::string, std::string>(it.second.o.name(), "agent"));
-                    lArgument.push_back(std::pair<std::string, std::string>("appear", "predicate"));
-                    iCub->getABMClient()->sendActivity("action",
-                                                       "appearance",
-                                                       "pasar",
-                                                       lArgument,
-                                                       true);
-                }
             }
 
             if (disappeared)
@@ -401,18 +381,6 @@ void PasarModule::saliencyTopDown() {
                 it.second.o.m_saliency += pTopDownDisappearanceBurst;
                 yInfo() << "\t\t DISAPPEARANCE OF: " << it.second.o.name();
                 it.second.present = false;
-
-                if (iCub->getABMClient()->Connect())
-                {
-                    std::list<std::pair<std::string, std::string> > lArgument;
-                    lArgument.push_back(std::pair<std::string, std::string>(it.second.o.name(), "agent"));
-                    lArgument.push_back(std::pair<std::string, std::string>("disappear", "predicate"));
-                    iCub->getABMClient()->sendActivity("action",
-                                                       "disappearance",
-                                                       "pasar",
-                                                       lArgument,
-                                                       true);
-                }
             }
 
             if (it.second.o.entity_type() == EFAA_OPC_ENTITY_AGENT){
@@ -546,36 +514,11 @@ bool PasarModule::saliencyPointing()
     if (stopPointing){
         cout << "\t\t STOP POINTING " << endl;
         isPointing = false;
-        if (iCub->getABMClient()->Connect())
-        {
-            yInfo() << "\t\t STOP POINTING OF: " << objectPointed;
-            std::list<std::pair<std::string, std::string> > lArgument;
-            lArgument.push_back(std::pair<std::string, std::string>(ag->name(), "agent"));
-            lArgument.push_back(std::pair<std::string, std::string>("point", "predicate"));
-            iCub->getABMClient()->sendActivity("action",
-                                               "point",
-                                               "pasar",
-                                               lArgument,
-                                               false);
-        }
     }
 
     if (startPointing){
         cout << "\t\t POINTING START " << objectPointed << endl;
         isPointing = true;
-        if (iCub->getABMClient()->Connect())
-        {
-            yInfo() << "\t\t START POINTING OF: " << objectPointed;
-            std::list<std::pair<std::string, std::string> > lArgument;
-            lArgument.push_back(std::pair<std::string, std::string>(objectPointed, "object"));
-            lArgument.push_back(std::pair<std::string, std::string>(ag->name(), "agent"));
-            lArgument.push_back(std::pair<std::string, std::string>("point", "predicate"));
-            iCub->getABMClient()->sendActivity("action",
-                                               "point",
-                                               "pasar",
-                                               lArgument,
-                                               true);
-        }
     }
     if (pointingNow){
         lastTimePointing = now;
@@ -680,18 +623,15 @@ bool PasarModule::saliencyWaving()
 
         double now = yarp::os::Time::now() - initTime;
         wavingNow = false;
-        bool waveRight = false;
-        bool waveLeft = false;
+
         // if the acceleration is made on 3 consecutive frames
         if (dAccelRight > thresholdWaving && presentRightHand.first && presentRightHand.second){
             yInfo() << "\tagent is waving right hand lastTime was: " << now - lastTimeWaving;
             wavingNow = true;
-            waveRight = true;
         }
         if (dAccelLeft > thresholdWaving && presentLeftHand.first && presentLeftHand.second){
             yInfo() << "\tagent is waving left hand lastTime was: " << now - lastTimeWaving;
             wavingNow |= true;
-            waveLeft = true;
         }
 
         bool startWaving = (now - lastTimeWaving > dthresholdAppear) && !isWaving && wavingNow;
@@ -701,34 +641,10 @@ bool PasarModule::saliencyWaving()
         if (startWaving){
             isWaving = true;
             yInfo() << "\t\t START WAVING";
-            if (iCub->getABMClient()->Connect())
-            {
-                std::list<std::pair<std::string, std::string> > lArgument;
-                if (waveRight)                    lArgument.push_back(std::pair<std::string, std::string>("right hand", "object"));
-                if (waveLeft) lArgument.push_back(std::pair<std::string, std::string>("left hand", "object"));
-                lArgument.push_back(std::pair<std::string, std::string>(ag->name(), "agent"));
-                lArgument.push_back(std::pair<std::string, std::string>("wave", "predicate"));
-                iCub->getABMClient()->sendActivity("action",
-                                                   "wave",
-                                                   "pasar",
-                                                   lArgument,
-                                                   true);
-            }
         }
         if (stopWaving){
             isWaving = false;
             yInfo() << "\t\t STOP  WAVING";
-            if (iCub->getABMClient()->Connect())
-            {
-                std::list<std::pair<std::string, std::string> > lArgument;
-                lArgument.push_back(std::pair<std::string, std::string>(ag->name(), "agent"));
-                lArgument.push_back(std::pair<std::string, std::string>("wave", "predicate"));
-                iCub->getABMClient()->sendActivity("action",
-                                                   "wave",
-                                                   "pasar",
-                                                   lArgument,
-                                                   false);
-            }
         }
 
         if (wavingNow){

@@ -57,48 +57,10 @@ namespace wysiwyd{
             std::string robot;  // Name of robot           
 
         public:
-
-            std::map<std::string, BodyPosture> getPosturesKnown()
-            {
-                return posturesKnown;
-            }
-
-            bool addPosture(const std::string &postureName, BodyPosture postureJnts)
-            {
-                posturesKnown[postureName] = postureJnts;
-                return true;
-            }
-
-            void savePostures(const std::string &fileName = "defaultPostures.ini")
-            {
-                std::cout << "Saving postures...";
-                std::ofstream of(fileName.c_str());
-                of << "posturesCount \t" << posturesKnown.size() << std::endl;
-                int pCnt = 0;
-                for (std::map<std::string, BodyPosture>::iterator it = posturesKnown.begin(); it != posturesKnown.end(); it++)
-                {
-                    of << "[posture_" << pCnt << "]" << std::endl;
-                    of << "name \t" << it->first << std::endl;
-                    of << "head \t (" << it->second.head.toString(3, 3).c_str() << ")" << std::endl;
-                    of << "right_arm \t (" << it->second.right_arm.toString(3, 3).c_str() << ")" << std::endl;
-                    of << "left_arm \t (" << it->second.left_arm.toString(3, 3).c_str() << ")" << std::endl;
-                    of << "torso \t (" << it->second.torso.toString(3, 3).c_str() << ")" << std::endl;
-                    pCnt++;
-                }
-                of.close();
-                std::cout << "Done." << std::endl;
-            }
-
             SubSystem*  getSubSystem(const std::string &name){ return subSystems[name]; }
-            SubSystem_Expression* getExpressionClient();
-            SubSystem_Reactable* getReactableClient();
-            SubSystem_iKart* getIkartClient();
-            SubSystem_ABM* getABMClient();
             SubSystem_IOL2OPC* getIOL2OPCClient();
             SubSystem_Recog* getRecogClient();
-            SubSystem_SlidingController* getSlidingController();
             SubSystem_ARE* getARE();
-            SubSystem_LRH* getLRH();
             SubSystem_Speech* getSpeechClient();
             SubSystem_KARMA* getKARMA();
 
@@ -110,18 +72,7 @@ namespace wysiwyd{
             * @param moduleName The port namespace that will precede the client ports names.
             */
             ICubClient(const std::string &moduleName, const std::string &context = "icubClient",
-                const std::string &clientConfigFile = "client.ini", bool isRFVerbose = false,
-                bool bLoadChore = false, bool bLoadPostures = false);
-
-            /**
-            * Load a library of postures from config file specified in rf
-            */
-            void LoadPostures(yarp::os::ResourceFinder &rf);
-
-            /**
-            * Load a library of choregraphies from config file specified in rf
-            */
-            void LoadChoregraphies(yarp::os::ResourceFinder &rf);
+                const std::string &clientConfigFile = "client.ini", bool isRFVerbose = false);
 
             /**
             * Try to connect all functionalities.
@@ -152,39 +103,6 @@ namespace wysiwyd{
             * Commit the local definition of iCub agent to the OPC
             */
             void commitAgent();
-
-            /**
-            * Navigate to a place with a given name.
-            * @param place is the name of the entity in the OPC where the robot should go.
-            * @return true in case of successfull navigation, false either (Entity non existing, impossible to reach, etc.).
-            */
-            bool goTo(const std::string &place);
-
-            /**
-            * Move the body to a given posture if it is known
-            */
-            bool moveToPosture(const std::string &name, double time);
-
-            /**
-            * Move a part of the body to a given posture if it is known
-            */
-            bool moveBodyPartToPosture(const std::string &name, double time, const std::string &bodyPart);
-
-            /**
-            * Replay a known choregraphy
-            */
-            bool playChoregraphy(const std::string &name, double speedFactor = 1.0, bool isBlocking = true);
-
-            /**
-            * Replay a known choregraphyWith only a specific body part
-            */
-            bool playBodyPartChoregraphy(const std::string &name, const std::string &bodyPart,
-                double speedFactor = 1.0, bool isBlocking = true);
-
-            /**
-            * Get the duration of a choregraphy given a specific speedFactor
-            */
-            double getChoregraphyLength(const std::string &name, double speedFactor = 1.0);
 
             /**
             * Go in home position.
@@ -422,16 +340,6 @@ namespace wysiwyd{
                       const std::string &sName="target");
 
             /**
-            * Start tracking randomly objects in the field of view
-            */
-            bool lookAround();
-
-            /**
-            * Pause the attention control. Allowing the head to be controlled.
-            */
-            bool lookStop();
-
-            /**
             * Looks at the agent if present in the scene.
             */
             bool lookAtPartner();
@@ -501,21 +409,6 @@ namespace wysiwyd{
                 const std::string &overrideVoice = "default", bool recordABM = true, std::string addressee = "none");
 
             bool changeName(Entity *e, const std::string &newName);
-
-            /**
-            * Ask the robot to perform speech recognition of a given sentence/grammar
-            * @param timeout Timeout. If -1 the robot will wait until a sentence is recognized.
-            * @return the sentence heard
-            */
-            yarp::os::Bottle hear(const std::string &grammar, double timeout = -1.0);
-
-            /**
-            * Ask the robot to execute a generic action, that can be composite
-            * @param what The action to be executed.
-            * @param applyEstimatedDriveEffect Should the iCub automatically modify its drives based on its estimation? False by default.
-            * @return true in case of success, false either (Entity non existing, impossible to reach, etc.).
-            */
-            bool execute(Action &what, bool applyEstimatedDriveEffect = false);
 
             /**
             * Get the strongest emotion

@@ -62,11 +62,6 @@ private:
 
 
     //selfTagging.cpp
-    yarp::os::Bottle assignKinematicStructureByName(std::string sName, std::string sBodyPartType, bool forcingKS = false);
-    yarp::os::Bottle assignKinematicStructureByJoint(int joint, std::string sBodyPartType, bool forcingKS = false);
-    yarp::os::Bottle checkForKinematicStructure(int instance, bool forcingKS = false);
-    yarp::os::Bottle orderKinematicStructure(int instance);
-
     yarp::os::Bottle exploreTactileEntityWithName(yarp::os::Bottle bInput);
 
     //actionTagging

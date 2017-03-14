@@ -1,5 +1,4 @@
 #include "allostaticController.h"
-#include "wrdac/subsystems/subSystem_ABM.h"
 
 bool AllostaticController::interruptModule()
 {

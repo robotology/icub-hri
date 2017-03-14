@@ -7,10 +7,6 @@ if(ICUB_USE_IPOPT)
 endif()
 
 add_subdirectory(guiUpdater)
-add_subdirectory(qRM)
-add_subdirectory(abmInteraction)
-add_subdirectory(InsermInteractionEngine)
 add_subdirectory(opcPopulater)
-add_subdirectory(humanRobotDumper)
 add_subdirectory(actionRecogDataDumper)
 

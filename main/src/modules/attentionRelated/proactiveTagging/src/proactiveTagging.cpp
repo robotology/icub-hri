@@ -106,11 +106,6 @@ bool proactiveTagging::configure(yarp::os::ResourceFinder &rf)
         iCub->say("speech recognizer not connected");
         yWarning() << "SPEECH RECOGNIZER NOT CONNECTED";
     }
-    if (!iCub->getABMClient())
-    {
-        iCub->say("ABM not connected");
-        yWarning() << "ABM NOT CONNECTED";
-    }
 
     //rpc port
     rpcPort.open(("/" + moduleName + "/rpc").c_str());
@@ -246,65 +241,6 @@ bool proactiveTagging::respond(const Bottle& command, Bottle& reply) {
     else if (command.get(0).asString() == "searchingEntity") {
         yInfo() << " searchingEntity";
         reply = searchingEntity(command);
-    }
-    else if (command.get(0).asString() == "exploreKinematicByName") {
-        //exploreKinematicByName name bodypart [true/false]
-        //name : index, thumb, biceps, etc.
-        //bodypart : left_hand, right_arm, etc.
-        //true/false : OPTIONAL : forcingKinematicStructure : do you want to launch a KS generation (may take minutes)
-
-        yInfo() << " exploreKinematicByName";
-
-        if (command.size() < 3) {
-            yError() << " error in proactiveTagging::respond | for " << command.get(0).asString() << " | Not enough argument : exploreKinematicByName name bodypart [true/false]";
-            reply.addString("error");
-            reply.addString("Not enough argument : exploreKinematicByName name bodypart [true/false]");
-
-            rpcPort.reply(reply);
-            return true;
-        }
-
-        string sName = command.get(1).asString();
-        string sBodyPart = command.get(2).asString();
-        bool forcingKS = false;
-        if (command.size() == 4) {
-            forcingKS = (command.get(3).asString() == "true");
-        }
-        reply = assignKinematicStructureByName(sName, sBodyPart, forcingKS);
-    }
-    else if (command.get(0).asString() == "exploreKinematicByJoint") {
-        //exploreKinematicByName name bodypart [true/false]
-        //joint : 9, 10, ...
-        //bodypart : left_hand, right_arm, etc.
-        //true/false : OPTIONAL : forcingKinematicStructure : do you want to launch a KS generation (may take minutes)
-
-        yInfo() << " exploreKinematicByJoint";
-
-        if (command.size() < 3) {
-            yError() << " error in proactiveTagging::respond | for " << command.get(0).asString() << " | Not enough argument : exploreKinematicByJoint joint bodypart [true/false]";
-            reply.addString("error");
-            reply.addString("Not enough argument : exploreKinematicByJoint joint bodypart [true/false]");
-
-            rpcPort.reply(reply);
-            return true;
-        }
-
-        if (!command.get(1).isInt()) {
-            yError() << " error in proactiveTagging::respond | for " << command.get(0).asString() << " | Second argument (joint) should be an Int!";
-            reply.addString("error");
-            reply.addString("Second argument (joint) should be an Int!");
-
-            rpcPort.reply(reply);
-            return true;
-        }
-
-        int BPjoint = command.get(1).asInt();
-        string sBodyPart = command.get(2).asString();
-        bool forcingKS = false;
-        if (command.size() == 4) {
-            forcingKS = (command.get(3).asString() == "true");
-        }
-        reply = assignKinematicStructureByJoint(BPjoint, sBodyPart, forcingKS);
     }
     else if (command.get(0).asString() == "describeBabbling"){  //describeAction : TODO -> protection and stuff
         string sJointName = command.get(1).asString();
@@ -596,21 +532,6 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput)
         iCub->say("I do not know this entity type");
     }
 
-    if (iCub->getABMClient()->Connect())
-    {
-        //                yInfo() << "\t\t START POINTING OF: " << it.second.o.name();
-        std::list<std::pair<std::string, std::string> > lArgument;
-        lArgument.push_back(std::pair<std::string, std::string>("iCub", "agent"));
-        lArgument.push_back(std::pair<std::string, std::string>("rename", "predicate"));
-        lArgument.push_back(std::pair<std::string, std::string>(sNameTarget, "object"));
-        lArgument.push_back(std::pair<std::string, std::string>(sName, "recipient"));
-        iCub->getABMClient()->sendActivity("action",
-            "rename",
-            "proactiveTagging",
-            lArgument,
-            true);
-    }
-
     yInfo() << sReply;
     iCub->say(sReply, false);
     yarp::os::Time::delay(1.5);
@@ -693,14 +614,6 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput)
                     iCub->say("Now I know the " + sNameTarget, false);
                     iCub->home();
 
-                    if (iCub->getABMClient()->Connect()) {
-                        std::list<std::pair<std::string, std::string> > lArgument;
-                        lArgument.push_back(std::pair<std::string, std::string>("iCub", "agent"));
-                        lArgument.push_back(std::pair<std::string, std::string>("name", "predicate"));
-                        lArgument.push_back(std::pair<std::string, std::string>(sNameTarget, "object"));
-                        iCub->getABMClient()->sendActivity("action", "rename", "proactiveTagging", lArgument);
-                    }
-
                     bOutput.addString("name changed");
                     return bOutput;
                 }
@@ -780,15 +693,6 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput)
     }
 
     iCub->home();
-
-    if (iCub->getABMClient()->Connect())
-    {
-        std::list<std::pair<std::string, std::string> > lArgument;
-        lArgument.push_back(std::pair<std::string, std::string>("iCub", "agent"));
-        lArgument.push_back(std::pair<std::string, std::string>("name", "predicate"));
-        lArgument.push_back(std::pair<std::string, std::string>(sNameTarget, "object"));
-        iCub->getABMClient()->sendActivity("action", "rename", "proactiveTagging", lArgument);
-    }
 
     return bOutput;
 }

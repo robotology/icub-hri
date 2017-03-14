@@ -1,7 +1,5 @@
 #include "behaviorManager.h"
 
-#include "wrdac/subsystems/subSystem_ABM.h"
-
 #include "dummy.h"
 #include "tagging.h"
 #include "pointing.h"
@@ -226,24 +224,6 @@ bool BehaviorManager::respond(const Bottle& cmd, Bottle& reply)
                 yDebug() << "arguments are " << args.toString().c_str();
                 // beh->trigger(args);
                 behavior_triggered = beh->trigger(args);
-
-                // Add event into ABM
-                if (iCub->getABMClient()->Connect()) {
-                    std::list<std::pair<std::string, std::string> > lArgument;
-                    lArgument.push_back(std::pair<std::string, std::string>("iCub", "agent"));
-                    lArgument.push_back(std::pair<std::string, std::string>(cmd.get(0).asString(), "predicate"));
-                    lArgument.push_back(std::pair<std::string, std::string>("unknown_object", "object"));
-                    lArgument.push_back(std::pair<std::string, std::string>("partner", "recipient"));
-                    iCub->getABMClient()->sendActivity("action",
-                        cmd.get(0).asString(),
-                        "behavior",  // expl: "pasar", "drives"...
-                        lArgument,
-                        true);
-                    yInfo() << cmd.get(0).asString() + " behavior has been recorded in the ABM";
-                }
-                else{
-                    yDebug() << "ABM not connected; no recording of action.";
-                }
             }
         }
         if (behavior_triggered) {

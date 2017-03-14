@@ -8,7 +8,6 @@ wysiwyd::wrdac::SubSystem_Speech::SubSystem_Speech(const std::string &masterName
     stt.open(("/" + m_masterName + "/stt:i").c_str());
     sttRpc.open(("/" + m_masterName + "/stt:rpc").c_str());
     m_type = SUBSYSTEM_SPEECH;
-    SubABM = new SubSystem_ABM(m_masterName+"/from_speech");
     opc = new OPCClient(m_masterName+"/opc_from_speech");
 }
 
@@ -32,9 +31,6 @@ bool wysiwyd::wrdac::SubSystem_Speech::connect()
     }
 
     opc->connect("OPC");
-
-    ABMconnected = (SubABM->Connect());
-    std::cout << ((ABMconnected) ? "iSpeak connected to ABM" : "iSpeak didn't connect to ABM") << std::endl;
 
     return connected;
 }
@@ -63,40 +59,6 @@ void wysiwyd::wrdac::SubSystem_Speech::TTS(const std::string &text, bool shouldW
     cmd.addVocab(VOCAB('s', 't', 'a', 't'));
     std::string status = "speaking";
     bool speechStarted = false;
-
-    if (ABMconnected && recordABM)
-    {
-        std::list<std::pair<std::string, std::string> > lArgument;
-        // get agent name
-        opc->checkout();
-
-        if (addressee != "none"){
-            yDebug() << "addressee is not null: "<< addressee;
-            lArgument.push_back(std::pair<std::string, std::string>(addressee, "addressee"));
-        }
-        else {
-            yDebug() << "addressee is null, getting present agent.";
-
-            std::string partnerName = "partner";
-            std::list<std::shared_ptr<wysiwyd::wrdac::Entity> > lEntities = opc->EntitiesCacheCopy();
-            for (auto& entity : lEntities) {
-                if (entity->entity_type() == "agent") {
-                    wysiwyd::wrdac::Agent* a = dynamic_cast<wysiwyd::wrdac::Agent*>(entity.get());
-                    //We assume kinect can only recognize one skeleton at a time
-                    if (a->m_present == 1.0 && a->name() != "icub") {
-                        partnerName = a->name();
-                    }
-                }
-            }
-            yDebug() << "addressee is now" << partnerName;
-
-            lArgument.push_back(std::pair<std::string, std::string>( partnerName, "addressee"));
-        }
-
-        lArgument.push_back(std::pair<std::string, std::string>(text, "sentence"));
-        lArgument.push_back(std::pair<std::string, std::string>(m_masterName, "provider"));
-        SubABM->sendActivity("action", "sentence", "say", lArgument, true);
-    }
 
     while (shouldWait && (!speechStarted || status == "speaking"))
     {
@@ -173,10 +135,8 @@ void wysiwyd::wrdac::SubSystem_Speech::Close()
     stt.close();
     sttRpc.interrupt();
     sttRpc.close();
-    SubABM->Close();
     opc->interrupt();
     opc->close();
 
-    delete SubABM;
     delete opc;
 }

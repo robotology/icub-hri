@@ -2,10 +2,6 @@
 #include "wrdac/subsystems/subSystem_recog.h"
 
 bool wysiwyd::wrdac::SubSystem_Recog::connect() {
-    // paste master name of
-    ABMconnected = (SubABM->Connect());
-    yInfo() << ((ABMconnected) ? "Recog connected to ABM" : "Recog didn't connect to ABM");
-
     if (!yarp::os::Network::isConnected(ears_port.getName(), "/ears/rpc")) {
         if (yarp::os::Network::connect(ears_port.getName(), "/ears/rpc")) {
             yInfo() << "Recog connected to ears";
@@ -27,7 +23,6 @@ wysiwyd::wrdac::SubSystem_Recog::SubSystem_Recog(const std::string &masterName) 
     portRPC.open(("/" + m_masterName + "/recog:rpc").c_str());
     ears_port.open("/" + m_masterName + "/ears:o");
     m_type = SUBSYSTEM_RECOG;
-    SubABM = new SubSystem_ABM(m_masterName + "/from_recog");
 }
 
 void wysiwyd::wrdac::SubSystem_Recog::Close() {
@@ -35,9 +30,6 @@ void wysiwyd::wrdac::SubSystem_Recog::Close() {
     portRPC.close();
     ears_port.interrupt();
     ears_port.close();
-    SubABM->Close();
-
-    delete SubABM;
 }
 
 bool wysiwyd::wrdac::SubSystem_Recog::setSpeakerName(std::string speaker)
@@ -127,7 +119,7 @@ yarp::os::Bottle wysiwyd::wrdac::SubSystem_Recog::recogFromGrammar(std::string &
     // turn off the main grammar through ears
 }
 
-yarp::os::Bottle wysiwyd::wrdac::SubSystem_Recog::recogFromGrammarLoop(std::string sInput, int iLoop, bool keepEarsEnabled, bool forwardABM, bool keepEarsDisabledAfterRecog)
+yarp::os::Bottle wysiwyd::wrdac::SubSystem_Recog::recogFromGrammarLoop(std::string sInput, int iLoop, bool keepEarsEnabled, bool keepEarsDisabledAfterRecog)
 {
     if (!yarp::os::Network::isConnected(portRPC.getName(), "/speechRecognizer/rpc")){
         if (!yarp::os::Network::connect(portRPC.getName(), "/speechRecognizer/rpc")){
@@ -205,28 +197,6 @@ yarp::os::Bottle wysiwyd::wrdac::SubSystem_Recog::recogFromGrammarLoop(std::stri
                     fGetaReply = true;
                     bOutput.addInt(1);
                     bOutput.addList() = bAnswer;
-
-                    // send the result of recognition to the ABM
-                    if (ABMconnected && forwardABM)
-                    {
-                        std::list<std::pair<std::string, std::string> > lArgument;
-                        lArgument.push_back(std::pair<std::string, std::string>(bAnswer.get(0).toString(), "sentence"));
-                        if(bAnswer.size() > 1) {
-                            lArgument.push_back(std::pair<std::string, std::string>(bAnswer.get(1).toString(), "semantic"));
-                        }
-                        lArgument.push_back(std::pair<std::string, std::string>(m_masterName, "provider"));
-                        //add speaker name. name should be sent through fonction before
-                        if (speakerName_.empty()){
-                            speakerName_ = "partner";
-                            yWarning() << " [subSystem_Recog] " << "name of the speaker has been assigned to the default value : " << speakerName_;
-                        }
-                        lArgument.push_back(std::pair<std::string, std::string>(speakerName_, "speaker"));
-                        SubABM->sendActivity("action",
-                                             "sentence",
-                                             "recog",
-                                             lArgument,
-                                             true);
-                    }
                 }
             }
 

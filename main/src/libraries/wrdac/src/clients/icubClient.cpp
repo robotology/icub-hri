@@ -18,21 +18,12 @@
 
 #include <yarp/os/LogStream.h>
 #include "wrdac/clients/icubClient.h"
-#include "wrdac/subsystems/subSystem_ABM.h"
 #include "wrdac/subsystems/subSystem_agentDetector.h"
 #include "wrdac/subsystems/subSystem_ARE.h"
-#include "wrdac/subsystems/subSystem_attention.h"
 #include "wrdac/subsystems/subSystem_babbling.h"
-#include "wrdac/subsystems/subSystem_facialExpression.h"
 #include "wrdac/subsystems/subSystem_iol2opc.h"
-#include "wrdac/subsystems/subSystem_iKart.h"
-#include "wrdac/subsystems/subSystem_postures.h"
-#include "wrdac/subsystems/subSystem_reactable.h"
 #include "wrdac/subsystems/subSystem_speech.h"
 #include "wrdac/subsystems/subSystem_recog.h"
-#include "wrdac/subsystems/subSystem_LRH.h"
-#include "wrdac/subsystems/subSystem_slidingCtrl.h"
-
 #include "wrdac/subsystems/subSystem_KARMA.h"
 
 using namespace std;
@@ -41,7 +32,7 @@ using namespace yarp::sig;
 using namespace yarp::dev;
 using namespace wysiwyd::wrdac;
 
-ICubClient::ICubClient(const std::string &moduleName, const std::string &context, const std::string &clientConfigFile, bool isRFVerbose, bool bLoadChore, bool bLoadPostures)
+ICubClient::ICubClient(const std::string &moduleName, const std::string &context, const std::string &clientConfigFile, bool isRFVerbose)
 {
     yarp::os::ResourceFinder rfClient;
     rfClient.setVerbose(isRFVerbose);
@@ -58,24 +49,6 @@ ICubClient::ICubClient(const std::string &moduleName, const std::string &context
     {
         robot = "icub";
         yInfo("Robot name set to default, i.e. %s", robot.c_str());
-    }
-
-    if (bLoadPostures){
-        yarp::os::ResourceFinder rfPostures;
-        rfPostures.setVerbose(isRFVerbose);
-        rfPostures.setDefaultContext(context.c_str());
-        rfPostures.setDefaultConfigFile(rfClient.check("posturesFile", Value("postures.ini")).asString().c_str());
-        rfPostures.configure(0, NULL);
-        LoadPostures(rfPostures);
-    }
-
-    if (bLoadChore){
-        yarp::os::ResourceFinder rfChoregraphies;
-        rfChoregraphies.setVerbose(isRFVerbose);
-        rfChoregraphies.setDefaultContext(context.c_str());
-        rfChoregraphies.setDefaultConfigFile(rfClient.check("choregraphiesFile", Value("choregraphies.ini")).asString().c_str());
-        rfChoregraphies.configure(0, NULL);
-        LoadChoregraphies(rfChoregraphies);
     }
 
     //Reaching range
@@ -103,28 +76,12 @@ ICubClient::ICubClient(const std::string &moduleName, const std::string &context
         {
             std::string currentSS = bSubsystems->get(s).asString();
             yInfo() << "Trying to open subsystem : " << currentSS;
-            if (currentSS == SUBSYSTEM_ATTENTION)
-                subSystems[SUBSYSTEM_ATTENTION] = new SubSystem_Attention(fullName);
-            else if (currentSS == SUBSYSTEM_EXPRESSION)
-                subSystems[SUBSYSTEM_EXPRESSION] = new SubSystem_Expression(fullName);
-            else if (currentSS == SUBSYSTEM_POSTURES)
-                subSystems[SUBSYSTEM_POSTURES] = new SubSystem_Postures(fullName);
-            else if (currentSS == SUBSYSTEM_REACTABLE)
-                subSystems[SUBSYSTEM_REACTABLE] = new SubSystem_Reactable(fullName);
-            else if (currentSS == SUBSYSTEM_IKART)
-                subSystems[SUBSYSTEM_IKART] = new SubSystem_iKart(fullName);
-            else if (currentSS == SUBSYSTEM_ABM)
-                subSystems[SUBSYSTEM_ABM] = new SubSystem_ABM(fullName);
-            else if (currentSS == SUBSYSTEM_SPEECH)
+            if (currentSS == SUBSYSTEM_SPEECH)
                 subSystems[SUBSYSTEM_SPEECH] = new SubSystem_Speech(fullName);
-            else if (currentSS == SUBSYSTEM_SLIDING_CONTROLLER)
-                subSystems[SUBSYSTEM_SLIDING_CONTROLLER] = new SubSystem_SlidingController(fullName);
             else if (currentSS == SUBSYSTEM_ARE)
                 subSystems[SUBSYSTEM_ARE] = new SubSystem_ARE(fullName);
             else if (currentSS == SUBSYSTEM_RECOG)
                 subSystems[SUBSYSTEM_RECOG] = new SubSystem_Recog(fullName);
-            else if (currentSS == SUBSYSTEM_LRH)
-                subSystems[SUBSYSTEM_LRH] = new SubSystem_LRH(fullName);
             else if (currentSS == SUBSYSTEM_IOL2OPC)
                 subSystems[SUBSYSTEM_IOL2OPC] = new SubSystem_IOL2OPC(fullName);
             else if (currentSS == SUBSYSTEM_AGENTDETECTOR)
@@ -140,74 +97,6 @@ ICubClient::ICubClient(const std::string &moduleName, const std::string &context
 
     closed = false;
 }
-
-
-void ICubClient::LoadPostures(yarp::os::ResourceFinder &rf)
-{
-    posturesKnown.clear();
-
-    int posCount = rf.check("posturesCount", yarp::os::Value(0)).asInt();
-    //cout<<"Loading posture: "<<endl;
-    for (int i = 0; i < posCount; i++)
-    {
-        std::stringstream ss;
-        ss << "posture_" << i;
-        Bottle postureGroup = rf.findGroup(ss.str().c_str());
-        BodyPosture p;
-        std::string name = postureGroup.find("name").asString().c_str();
-        //std::cout<<"\t"<<name<<std::endl;
-        Bottle* bHead = postureGroup.find("head").asList();
-        Bottle* bLArm = postureGroup.find("left_arm").asList();
-        Bottle* bRArm = postureGroup.find("right_arm").asList();
-        Bottle* bTorso = postureGroup.find("torso").asList();
-
-        p.head.resize(6);
-        for (int i = 0; i < 6; i++)
-            p.head[i] = bHead->get(i).asDouble();
-        p.left_arm.resize(16);
-        for (int i = 0; i < 16; i++)
-            p.left_arm[i] = bLArm->get(i).asDouble();
-        p.right_arm.resize(16);
-        for (int i = 0; i < 16; i++)
-            p.right_arm[i] = bRArm->get(i).asDouble();
-        p.torso.resize(3);
-        for (int i = 0; i < 3; i++)
-            p.torso[i] = bTorso->get(i).asDouble();
-
-        posturesKnown[name] = p;
-    }
-}
-
-
-void ICubClient::LoadChoregraphies(yarp::os::ResourceFinder &rf)
-{
-    choregraphiesKnown.clear();
-
-    int posCount = rf.check("choregraphiesCount", yarp::os::Value(0)).asInt();
-    yInfo() << "Loading Choregraphies: ";
-    for (int i = 0; i < posCount; i++)
-    {
-        std::stringstream ss;
-        ss << "chore_" << i;
-        Bottle postureGroup = rf.findGroup(ss.str().c_str());
-
-        std::string name = postureGroup.find("name").asString().c_str();
-        yInfo() << "\t" << name;
-        Bottle* sequence = postureGroup.find("sequence").asList();
-
-        std::list< std::pair<std::string, double> > seq;
-        for (int s = 0; s < sequence->size(); s++)
-        {
-            Bottle* element = sequence->get(s).asList();
-            std::string elementName = element->get(0).asString().c_str();
-            double elementTime = element->get(1).asDouble();
-            seq.push_back(std::pair<std::string, double>(elementName, elementTime));
-            //std::cout<<"\t \t"<<elementName<< "\t" << elementTime << std::endl;
-        }
-        choregraphiesKnown[name] = seq;
-    }
-}
-
 
 bool ICubClient::connectOPC(const string &opcName)
 {
@@ -340,114 +229,6 @@ void ICubClient::commitAgent()
     if (opc->isConnected())
         opc->commit(this->icubAgent);
 }
-
-bool ICubClient::moveToPosture(const string &name, double time)
-{
-    if (subSystems.find("postures") == subSystems.end())
-    {
-        yError() << "Impossible, postures system is not running...";
-        return false;
-    }
-
-    if (posturesKnown.find(name) == posturesKnown.end())
-    {
-        yError() << "Unknown posture";
-        return false;
-    }
-
-    ((SubSystem_Postures*)subSystems["postures"])->Execute(posturesKnown[name], time);
-    return true;
-}
-
-
-bool ICubClient::moveBodyPartToPosture(const string &name, double time, const string &bodyPart)
-{
-    if (subSystems.find("postures") == subSystems.end())
-    {
-        yError() << "Impossible, postures system is not running...";
-        return false;
-    }
-
-    if (posturesKnown.find(name) == posturesKnown.end())
-    {
-        yError() << "Unknown posture";
-        return false;
-    }
-
-    ((SubSystem_Postures*)subSystems["postures"])->Execute(posturesKnown[name], time, bodyPart);
-    return true;
-}
-
-
-bool ICubClient::playBodyPartChoregraphy(const std::string &name, const std::string &bodyPart, double speedFactor, bool isBlocking)
-{
-    if (choregraphiesKnown.find(name) == choregraphiesKnown.end())
-    {
-        yError() << "Unknown choregraphy";
-        return false;
-    }
-    bool overallError = true;
-    yInfo() << "Playing " << name << " at " << speedFactor << " speed";
-    std::list< std::pair<std::string, double> > chore = choregraphiesKnown[name];
-    for (std::list< std::pair<std::string, double> >::iterator element = chore.begin(); element != chore.end(); element++)
-    {
-        double factoredTime = element->second / speedFactor;
-        yInfo() << "Going to " << element->first << " in " << factoredTime;
-        overallError &= moveBodyPartToPosture(element->first, factoredTime, bodyPart);
-
-        if (isBlocking)
-            Time::delay(factoredTime);
-    }
-    return overallError;
-}
-
-
-double ICubClient::getChoregraphyLength(const std::string &name, double speedFactor)
-{
-    if (choregraphiesKnown.find(name) == choregraphiesKnown.end())
-    {
-        yError() << "Unknown choregraphy";
-        return 0.0;
-    }
-    double totalTime = 0.0;
-    std::list< std::pair<std::string, double> > chore = choregraphiesKnown[name];
-    for (std::list< std::pair<std::string, double> >::iterator element = chore.begin(); element != chore.end(); element++)
-        totalTime += element->second / speedFactor;
-
-    yInfo() << "Playing " << name << " at " << speedFactor << " speed should take ";
-    return totalTime;
-}
-
-
-bool ICubClient::playChoregraphy(const std::string &name, double speedFactor, bool isBlocking)
-{
-    if (choregraphiesKnown.find(name) == choregraphiesKnown.end())
-    {
-        yError() << "Unknown choregraphy";
-        return false;
-    }
-    bool overallError = true;
-    yInfo() << "Playing " << name << " at " << speedFactor << " speed";
-    std::list< std::pair<std::string, double> > chore = choregraphiesKnown[name];
-    for (std::list< std::pair<std::string, double> >::iterator element = chore.begin(); element != chore.end(); element++)
-    {
-        double factoredTime = element->second / speedFactor;
-        yInfo() << "Going to " << element->first << " in " << factoredTime;
-        overallError &= moveToPosture(element->first, factoredTime);
-
-        if (isBlocking)
-            Time::delay(factoredTime);
-    }
-    return overallError;
-}
-
-
-bool ICubClient::goTo(const string &place)
-{
-    yError() << "Try to call \"gotTo\" on iCubClient but the method is not implemented.";
-    return false;
-}
-
 
 bool ICubClient::home(const string &part)
 {
@@ -819,9 +600,6 @@ bool ICubClient::look(const yarp::sig::Vector &target, const yarp::os::Bottle &o
 
 bool ICubClient::look(const string &target, const Bottle &options)
 {
-    if (subSystems.find("attention") != subSystems.end())
-        return ((SubSystem_Attention*)subSystems["attention"])->track(target);
-
     if (SubSystem_ARE *are = getARE())
     {
         if (Object *oTarget = dynamic_cast<Object*>(opc->getEntity(target, true)))
@@ -912,29 +690,6 @@ bool ICubClient::lookAtBodypart(const std::string &sBodypartName)
         return false;
     }
     return false;
-}
-
-bool ICubClient::lookAround()
-{
-    if (subSystems.find("attention") == subSystems.end())
-    {
-        yError() << "Error, Attention is not running...";
-        return false;
-    }
-
-    return ((SubSystem_Attention*)subSystems["attention"])->enableAutoMode();
-}
-
-
-bool ICubClient::lookStop()
-{
-    if (subSystems.find("attention") == subSystems.end())
-    {
-        yError() << "Error, Attention is not running...";
-        return false;
-    }
-
-    return ((SubSystem_Attention*)subSystems["attention"])->stop();
 }
 
 bool ICubClient::babbling(const string &bpName, const string &babblingLimb)
@@ -1036,88 +791,10 @@ bool ICubClient::say(const string &text, bool shouldWait, bool emotionalIfPossib
         return false;
     }
 
-    if (subSystems.find("expression") != subSystems.end() && emotionalIfPossible && subSystems["speech"]->getType() == SUBSYSTEM_SPEECH_ESPEAK)
-    {
-        string emo;
-        double value;
-        getHighestEmotion(emo, value);
-        this->getExpressionClient()->express(emo, value, (SubSystem_Speech_eSpeak*)subSystems["speech"], overrideVoice);
-    }
-
     yDebug() << "iCub says" << text;
     ((SubSystem_Speech*)subSystems["speech"])->TTS(text, shouldWait, recordABM, addressee);
     return true;
 }
-
-
-bool ICubClient::execute(Action &what, bool applyEstimatedDriveEffect)
-{
-    yInfo() << "iCubClient>> Executing plan: " << what.toString();
-    bool overallResult = true;
-    list<Action> unrolled = what.asPlan();
-    for (list<Action>::iterator a = unrolled.begin(); a != unrolled.end(); a++)
-    {
-        bool result = true;
-        yInfo() << "iCubClient>> Executing action: " << a->toString();
-
-        //First we check if the iCub should do this or if it is a someone else
-        if (a->description().subject() == "icub")
-        {
-            //At this level all actions are primitive. We check if it is known or not
-            if (a->name() == "say")
-                result = say(a->description().object());
-            else if (a->name() == "go-to")
-                result = goTo(a->description().object());
-            else if (a->name() == "grasp")
-                result = grasp(a->description().object());
-            else if (a->name() == "release")
-                result = release(a->description().object());
-            else
-            {
-                yWarning() << "Warning: " << a->description().verb() << " is not composite, however it is not a primitive";
-                result = true;
-            }
-        }
-        else
-        {
-            //todo wait for an action of the user
-            result = say("I should wait until");
-            result = say(a->description().toString());
-        }
-        overallResult = overallResult && result;
-
-        //Apply the estimated effect for each subaction
-        if (applyEstimatedDriveEffect /*&& result*/)
-        {
-            for (map<string, double>::iterator effect = a->estimatedDriveEffects.begin(); effect != a->estimatedDriveEffects.end(); effect++)
-            {
-                this->icubAgent->m_drives[effect->first].value += effect->second;
-                this->icubAgent->m_drives[effect->first].value = max(0.0, min(1.0, this->icubAgent->m_drives[effect->first].value));
-                this->commitAgent();
-            }
-        }
-
-        //If the action failed we wait 5s. FOR DEBUG PURPOSE
-        if (!result)
-        {
-            yWarning() << "Action failed... Waiting 5s";
-            Time::delay(5.0);
-        }
-    }
-
-    //Apply the estimated effect for the general plan
-    if (applyEstimatedDriveEffect /*&& result*/)
-    {
-        for (map<string, double>::iterator effect = what.estimatedDriveEffects.begin(); effect != what.estimatedDriveEffects.end(); effect++)
-        {
-            this->icubAgent->m_drives[effect->first].value += effect->second;
-            this->icubAgent->m_drives[effect->first].value = max(0.0, min(1.0, this->icubAgent->m_drives[effect->first].value));
-            this->commitAgent();
-        }
-    }
-    return overallResult;
-}
-
 
 list<Action*> ICubClient::getKnownActions()
 {
@@ -1190,38 +867,6 @@ bool ICubClient::isTargetInRange(const Vector &target) const
     return isIn;
 }
 
-SubSystem_Expression* ICubClient::getExpressionClient()
-{
-    if (subSystems.find(SUBSYSTEM_EXPRESSION) == subSystems.end())
-        return NULL;
-    else
-        return ((SubSystem_Expression*)subSystems[SUBSYSTEM_EXPRESSION]);
-}
-
-SubSystem_Reactable* ICubClient::getReactableClient()
-{
-    if (subSystems.find(SUBSYSTEM_REACTABLE) == subSystems.end())
-        return NULL;
-    else
-        return (SubSystem_Reactable*)subSystems[SUBSYSTEM_REACTABLE];
-}
-
-SubSystem_iKart* ICubClient::getIkartClient()
-{
-    if (subSystems.find(SUBSYSTEM_IKART) == subSystems.end())
-        return NULL;
-    else
-        return (SubSystem_iKart*)subSystems[SUBSYSTEM_IKART];
-}
-
-SubSystem_ABM* ICubClient::getABMClient()
-{
-    if (subSystems.find(SUBSYSTEM_ABM) == subSystems.end())
-        return NULL;
-    else
-        return (SubSystem_ABM*)subSystems[SUBSYSTEM_ABM];
-}
-
 SubSystem_IOL2OPC* ICubClient::getIOL2OPCClient()
 {
     if (subSystems.find(SUBSYSTEM_IOL2OPC) == subSystems.end())
@@ -1236,14 +881,6 @@ SubSystem_Recog* ICubClient::getRecogClient()
         return NULL;
     else
         return (SubSystem_Recog*)subSystems[SUBSYSTEM_RECOG];
-}
-
-SubSystem_SlidingController* ICubClient::getSlidingController()
-{
-    if (subSystems.find(SUBSYSTEM_SLIDING_CONTROLLER) == subSystems.end())
-        return NULL;
-    else
-        return (SubSystem_SlidingController*)subSystems[SUBSYSTEM_SLIDING_CONTROLLER];
 }
 
 SubSystem_ARE* ICubClient::getARE()
@@ -1265,14 +902,6 @@ SubSystem_Speech* ICubClient::getSpeechClient()
     }
     else
         return (SubSystem_Speech*)subSystems[SUBSYSTEM_SPEECH];
-}
-
-SubSystem_LRH* ICubClient::getLRH()
-{
-    if (subSystems.find(SUBSYSTEM_LRH) == subSystems.end())
-        return NULL;
-    else
-        return (SubSystem_LRH*)subSystems[SUBSYSTEM_LRH];
 }
 
 SubSystem_KARMA* ICubClient::getKARMA()

@@ -7,7 +7,7 @@ if(COMMAND cmake_policy)
     cmake_policy(SET CMP0003 NEW)
 endif()
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-project(wysiwyd)
+project(icub-client)
 
 find_package(YARP REQUIRED)
 find_package(ICUB REQUIRED)
@@ -53,10 +53,8 @@ add_custom_target(uninstall_wysiwyd "${CMAKE_COMMAND}" -P
 
 #### install cmake scripts
 message(STATUS "Installing cmake scripts")
-set(WYSIWYD_CMAKE_SCRIPTS FindOTL.cmake
-                          FindTBB.cmake
+set(WYSIWYD_CMAKE_SCRIPTS FindTBB.cmake
                           FindPGSQL.cmake
-                          FindTUIO.cmake
                           wysiwydOptions.cmake)
 
 foreach(conf_i ${WYSIWYD_CMAKE_SCRIPTS})

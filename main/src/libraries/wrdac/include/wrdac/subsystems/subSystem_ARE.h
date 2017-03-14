@@ -25,8 +25,6 @@
 #include <yarp/sig/all.h>
 
 #include "wrdac/subsystems/subSystem.h"
-#include "wrdac/subsystems/subSystem_ABM.h"
-#include "wrdac/subsystems/subSystem_attention.h"
 #include "wrdac/clients/opcClient.h"
 
 #define SUBSYSTEM_ARE       "ARE"
@@ -46,12 +44,6 @@ namespace wysiwyd {
         class SubSystem_ARE : public SubSystem
         {
         protected:
-            SubSystem_ABM* SubABM;
-            bool ABMconnected;
-
-            SubSystem_Attention* SubATT;
-            bool ATTconnected;
-
             OPCClient *opc;
 
             yarp::os::RpcClient cmdPort;            
@@ -65,7 +57,7 @@ namespace wysiwyd {
             void appendCartesianTarget(yarp::os::Bottle& b, const yarp::sig::Vector &t);
 
             /********************************************************************************/
-            bool sendCmd(const yarp::os::Bottle &cmd, const bool disableATT=false);
+            bool sendCmd(const yarp::os::Bottle &cmd);
 
             /********************************************************************************/
             bool sendCmdNoReply(yarp::os::Bottle &cmd);

@@ -26,8 +26,6 @@
 #include <yarp/dev/all.h>
 
 #include "wrdac/subsystems/subSystem.h"
-#include "wrdac/subsystems/subSystem_ABM.h"
-#include "wrdac/subsystems/subSystem_attention.h"
 #include "wrdac/subsystems/subSystem_ARE.h"
 
 #define SUBSYSTEM_KARMA       "KARMA"
@@ -47,12 +45,6 @@ namespace wysiwyd {
         class SubSystem_KARMA : public SubSystem
         {
         protected:
-            SubSystem_ABM* SubABM;
-            bool ABMconnected;
-
-            SubSystem_Attention* SubATT;
-            bool ATTconnected;
-
             SubSystem_ARE* SubARE;
             bool AREconnected;
 

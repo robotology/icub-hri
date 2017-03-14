@@ -73,43 +73,15 @@ bool wysiwyd::wrdac::SubSystem_KARMA::sendCmd(yarp::os::Bottle &cmd, const bool 
 {
     bool ret=false;
 
-    std::string status;
-    if (ATTconnected && disableATT)
-    {
-        SubATT->getStatus(status);
-        if (status!="quiet")
-            SubATT->stop();
-    }
-
     yarp::os::Bottle bReply;
     if (rpcPort.write(cmd,bReply))
         ret=(bReply.get(0).asVocab()==yarp::os::Vocab::encode("ack"));
-
-    if (ATTconnected && disableATT)
-    {
-        if (status=="auto")
-            SubATT->enableAutoMode();
-        else if (status!="quiet")
-            SubATT->track(status);
-    }
 
     return ret;
 }
 
 bool wysiwyd::wrdac::SubSystem_KARMA::connect()
 {
-    ABMconnected=SubABM->Connect();
-    if (ABMconnected)
-        yInfo()<<"KARMA connected to ABM";
-    else
-        yWarning()<<"KARMA didn't connect to ABM";
-
-    ATTconnected=SubATT->Connect();
-    if (ATTconnected)
-        yInfo()<<"KARMA connected to Attention";
-    else
-        yDebug()<<"KARMA didn't connect to Attention";
-
     AREconnected=SubARE->Connect();
     if (AREconnected)
         yInfo()<<"KARMA connected to ARE";
@@ -166,8 +138,6 @@ bool wysiwyd::wrdac::SubSystem_KARMA::connect()
 
 wysiwyd::wrdac::SubSystem_KARMA::SubSystem_KARMA(const std::string &masterName, const std::string &robot) : SubSystem(masterName)
 {
-    SubABM = new SubSystem_ABM(m_masterName+"/from_KARMA");
-    SubATT = new SubSystem_Attention(m_masterName+"/from_KARMA");
     SubARE = new SubSystem_ARE(m_masterName+"/from_KARMA");
 
     this->robot = robot;
@@ -188,8 +158,6 @@ void wysiwyd::wrdac::SubSystem_KARMA::Close()
     finderPort.interrupt();
     calibPort.interrupt();
 
-    SubABM->Close();
-    SubATT->Close();
     SubARE->Close();
 
     driverL.close();
@@ -383,21 +351,6 @@ bool wysiwyd::wrdac::SubSystem_KARMA::push(const yarp::sig::Vector &targetCenter
                                            const double theta, const double radius,
                                            const yarp::os::Bottle &options, const std::string &sName)
 {
-    if (ABMconnected)
-    {
-        std::list<std::pair<std::string, std::string> > lArgument;
-        lArgument.push_back(std::pair<std::string, std::string>(targetCenter.toString().c_str(), "targetCenter"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(theta).c_str(), "theta"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(radius).c_str(), "radius"));
-        lArgument.push_back(std::pair<std::string, std::string>(options.toString().c_str(), "options"));
-        lArgument.push_back(std::pair<std::string, std::string>("push", "predicate"));
-        lArgument.push_back(std::pair<std::string, std::string>(sName, "object"));
-        lArgument.push_back(std::pair<std::string, std::string>("iCub", "agent"));
-        lArgument.push_back(std::pair<std::string, std::string>(m_masterName, "provider"));
-        lArgument.push_back(std::pair<std::string, std::string>("KARMA", "subsystem"));
-        SubABM->sendActivity("action", "karmapush", "action", lArgument, true);
-    }
-
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("push"));
 
@@ -414,22 +367,6 @@ bool wysiwyd::wrdac::SubSystem_KARMA::push(const yarp::sig::Vector &targetCenter
     bool bReturn = sendCmd(bCmd,true);
     std::string status;
     bReturn ? status = "success" : status = "failed";
-
-    if (ABMconnected)
-    {
-        std::list<std::pair<std::string, std::string> > lArgument;
-        lArgument.push_back(std::pair<std::string, std::string>(targetCenter.toString().c_str(), "targetCenter"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(theta).c_str(), "theta"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(radius).c_str(), "radius"));
-        lArgument.push_back(std::pair<std::string, std::string>(options.toString().c_str(), "options"));
-        lArgument.push_back(std::pair<std::string, std::string>("push", "predicate"));
-        lArgument.push_back(std::pair<std::string, std::string>(sName, "object"));
-        lArgument.push_back(std::pair<std::string, std::string>("iCub", "agent"));
-        lArgument.push_back(std::pair<std::string, std::string>(m_masterName, "provider"));
-        lArgument.push_back(std::pair<std::string, std::string>(status, "status"));
-        lArgument.push_back(std::pair<std::string, std::string>("KARMA", "subsystem"));
-        SubABM->sendActivity("action", "karmapush", "action", lArgument, false);
-    }
 
     return bReturn;
 
@@ -482,22 +419,6 @@ bool wysiwyd::wrdac::SubSystem_KARMA::draw(const yarp::sig::Vector &targetCenter
                                            const double dist,
                                            const yarp::os::Bottle &options, const std::string &sName)
 {
-    if (ABMconnected)
-    {
-        std::list<std::pair<std::string, std::string> > lArgument;
-        lArgument.push_back(std::pair<std::string, std::string>(targetCenter.toString().c_str(), "targetCenter"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(theta).c_str(), "theta"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(radius).c_str(), "radius"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(dist).c_str(), "dist"));
-        lArgument.push_back(std::pair<std::string, std::string>(options.toString().c_str(), "options"));
-        lArgument.push_back(std::pair<std::string, std::string>("pull", "predicate"));
-        lArgument.push_back(std::pair<std::string, std::string>(sName, "object"));
-        lArgument.push_back(std::pair<std::string, std::string>("iCub", "agent"));
-        lArgument.push_back(std::pair<std::string, std::string>(m_masterName, "provider"));
-        lArgument.push_back(std::pair<std::string, std::string>("KARMA", "subsystem"));
-        SubABM->sendActivity("action", "karmapull", "action", lArgument, true);
-    }
-
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("draw"));
 
@@ -515,23 +436,6 @@ bool wysiwyd::wrdac::SubSystem_KARMA::draw(const yarp::sig::Vector &targetCenter
     std::string status;
     bReturn ? status = "success" : status = "failed";
 
-    if (ABMconnected)
-    {
-        std::list<std::pair<std::string, std::string> > lArgument;
-        lArgument.push_back(std::pair<std::string, std::string>(targetCenter.toString().c_str(), "targetCenter"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(theta).c_str(), "theta"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(radius).c_str(), "radius"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(dist).c_str(), "dist"));
-        lArgument.push_back(std::pair<std::string, std::string>(options.toString().c_str(), "options"));
-        lArgument.push_back(std::pair<std::string, std::string>("pull", "predicate"));
-        lArgument.push_back(std::pair<std::string, std::string>(sName, "object"));
-        lArgument.push_back(std::pair<std::string, std::string>("iCub", "agent"));
-        lArgument.push_back(std::pair<std::string, std::string>(m_masterName, "provider"));
-        lArgument.push_back(std::pair<std::string, std::string>(status, "status"));
-        lArgument.push_back(std::pair<std::string, std::string>("KARMA", "subsystem"));
-        SubABM->sendActivity("action", "karmapull", "action", lArgument, false);
-    }
-
     return bReturn;
 }
 
@@ -541,22 +445,6 @@ bool wysiwyd::wrdac::SubSystem_KARMA::vdraw(const std::string &targetName,
                                             const double dist,
                                             const yarp::os::Bottle &options, const std::string &sName)
 {
-    if (ABMconnected)
-    {
-        std::list<std::pair<std::string, std::string> > lArgument;
-        lArgument.push_back(std::pair<std::string, std::string>(targetCenter.toString().c_str(), "targetCenter"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(theta).c_str(), "theta"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(radius).c_str(), "radius"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(dist).c_str(), "dist"));
-        lArgument.push_back(std::pair<std::string, std::string>(options.toString().c_str(), "options"));
-        lArgument.push_back(std::pair<std::string, std::string>("virtual-draw", "predicate"));
-        lArgument.push_back(std::pair<std::string, std::string>(sName, "object"));
-        lArgument.push_back(std::pair<std::string, std::string>("iCub", "agent"));
-        lArgument.push_back(std::pair<std::string, std::string>(m_masterName, "provider"));
-        lArgument.push_back(std::pair<std::string, std::string>("KARMA", "subsystem"));
-        SubABM->sendActivity("action", "virtual-draw", "action", lArgument, true);
-    }
-
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("vdraw"));
 
@@ -574,22 +462,6 @@ bool wysiwyd::wrdac::SubSystem_KARMA::vdraw(const std::string &targetName,
     std::string status;
     bReturn ? status = "success" : status = "failed";
 
-    if (ABMconnected)
-    {
-        std::list<std::pair<std::string, std::string> > lArgument;
-        lArgument.push_back(std::pair<std::string, std::string>(targetCenter.toString().c_str(), "targetCenter"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(theta).c_str(), "theta"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(radius).c_str(), "radius"));
-        lArgument.push_back(std::pair<std::string, std::string>(std::to_string(dist).c_str(), "dist"));
-        lArgument.push_back(std::pair<std::string, std::string>(options.toString().c_str(), "options"));
-        lArgument.push_back(std::pair<std::string, std::string>("virtual-draw", "predicate"));
-        lArgument.push_back(std::pair<std::string, std::string>(sName, "object"));
-        lArgument.push_back(std::pair<std::string, std::string>("iCub", "agent"));
-        lArgument.push_back(std::pair<std::string, std::string>(m_masterName, "provider"));
-        lArgument.push_back(std::pair<std::string, std::string>(status, "status"));
-        lArgument.push_back(std::pair<std::string, std::string>("KARMA", "subsystem"));
-        SubABM->sendActivity("action", "virtual-draw", "action", lArgument, false);
-    }
     return bReturn;
 }
 
@@ -648,8 +520,6 @@ bool wysiwyd::wrdac::SubSystem_KARMA::openCartesianClient()
 
 wysiwyd::wrdac::SubSystem_KARMA::~SubSystem_KARMA()
 {
-    delete SubABM;
-    delete SubATT;
     delete SubARE;
     driverL.close();
     driverR.close();

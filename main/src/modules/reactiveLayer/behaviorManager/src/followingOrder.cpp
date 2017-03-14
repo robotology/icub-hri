@@ -1,4 +1,3 @@
-#include "wrdac/subsystems/subSystem_ABM.h"
 #include "followingOrder.h"
 
 using namespace std;
@@ -89,8 +88,6 @@ void FollowingOrder::run(const Bottle &args) {
         }
     } else if (action == "narrate") {
         handleNarrate();
-    }  else if (action == "show" && (type == "kinematic structure" || type == "kinematic structure correspondence")) {
-        handleActionKS(action, type);
     } else if (action == "end") {
         handleEnd();
     } else if (action == "game") {
@@ -197,54 +194,6 @@ int FollowingOrder::randKS(Bottle bKS) {
         yError() << "[handleActionKS]: no instance for " << bKS.toString() << "found!" ;
         return -1;
     }
-}
-
-bool FollowingOrder::handleActionKS(string action, string type) {
-    iCub->opc->checkout();
-    int ks = -1;
-
-    if(type == "kinematic structure") {
-        ks = randKS(bKS1);         //extract list of KS1
-    } else if(type=="kinematic structure correspondence") {
-        ks = randKS(bKS2);
-    } else {
-        iCub->say("I do not know this type of kinematic structure");
-        return false;
-    }
-
-    //if ks1 < 0 in case provide a negative instance...
-    if(ks < 0){
-        yError() << "[handleActionKS] wrong input for KS: it should be an instance > 0 and not " << ks;
-        return false;
-    }
-
-    yInfo() << "[handleActionKS] type: " << type  << "action:" << action << "with instance ks = " << ks;
-    iCub->lookAtPartner();
-    double speedMultiplier=1.0;
-    if(type == "kinematic structure") {
-        iCub->say("Please look at the screen. See how my arms look the same.", false);
-    } else if(type == "kinematic structure correspondence") {
-        iCub->say("I think our body parts are similar. I show you what I mean on the screen.", false);
-        speedMultiplier=0.5;
-    }
-    yarp::os::Time::delay(1.0);
-    iCub->getABMClient()->triggerStreaming(ks, true, true, speedMultiplier, "icubSim", true);
-
-    if(type=="kinematic structure correspondence") {
-        yarp::sig::Vector lHandVec = iCub->getPartnerBodypartLoc(EFAA_OPC_BODY_PART_TYPE_HAND_L);
-        if(lHandVec.size()==0) {
-            iCub->say("Although I know our hands look the same I cannot point at your hand because I cannot see it right now.");
-            iCub->home();
-        } else {
-            iCub->say("Look, because our hands look the same I know this is your hand.");
-            iCub->pointfar(lHandVec);
-            iCub->home();
-        }
-    } else {
-        iCub->home();
-    }
-
-    return true;
 }
 
 bool FollowingOrder::handleActionBP(string type, string target, string action) {

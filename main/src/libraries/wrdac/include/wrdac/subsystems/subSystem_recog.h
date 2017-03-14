@@ -22,7 +22,6 @@
 #define SUBSYSTEM_RECOG        "recog"
 
 #include "wrdac/subsystems/subSystem.h"
-#include "wrdac/subsystems/subSystem_ABM.h"
 
 #include <iostream>
 
@@ -39,7 +38,6 @@ namespace wysiwyd{
         protected:
             bool ABMconnected;
             virtual bool connect();
-            SubSystem_ABM* SubABM;
             std::string speakerName_;
             yarp::os::Port ears_port;
             yarp::os::Port portRPC;
@@ -71,7 +69,7 @@ namespace wysiwyd{
             *   From one grxml grammar, return the first sentence non-empty recognized
             *   can last for several timeout (by default 50
             */
-            yarp::os::Bottle recogFromGrammarLoop(std::string sInput, int iLoop = 50, bool keepEarsEnabled = false, bool forwardABM = true, bool keepEarsDisabledAfterRecog = false);
+            yarp::os::Bottle recogFromGrammarLoop(std::string sInput, int iLoop = 50, bool keepEarsEnabled = false, bool keepEarsDisabledAfterRecog = false);
 
         };
 

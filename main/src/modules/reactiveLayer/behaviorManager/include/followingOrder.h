@@ -35,7 +35,6 @@ public:
 
     bool handleAction(std::string type, std::string target, std::string action);
     bool handleActionBP(std::string type, std::string target, std::string action);
-    bool handleActionKS(std::string action, std::string type);
     bool handleSearch(std::string type, std::string action, bool verboseSearch);
     bool handleNarrate();
     bool handleGame(std::string type);

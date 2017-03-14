@@ -64,9 +64,9 @@ int main()
     Vector wx=T*x; //if want to create the object in the simulator
     x.pop_back();
 
-    bool ok ;
+    /*bool ok ;
 
-    /*iCub.home();    // Home by using ARE
+    iCub.home();    // Home by using ARE
     cout<<"try to pushFront with KARMA ..."<<endl;
     ok = iCub.pushKarmaFront(x,-0.35);                  //WARNING: second argument is the desired x[0] that we want and should be less than original x[0]
     cout<<(ok?"success":"failed")<<endl;

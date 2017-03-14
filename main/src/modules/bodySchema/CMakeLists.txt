@@ -1,7 +1,0 @@
-if(WYSIWYD_USE_ALSA)
-    add_subdirectory(sensoryProcessor)
-endif()
-add_subdirectory(babbling)
-if(WYSIWYD_USE_OTL)
-    add_subdirectory(modelOTL)
-endif()
