@@ -335,7 +335,7 @@ bool opcPopulater::setValueEntity(Bottle bInput){
     iCub->opc->checkout();
 
     Entity *e = iCub->opc->getEntity(sName);
-    if (e && (e->entity_type() == "agent" || e->entity_type() == "object" || e->entity_type() == "rtobject")) {
+    if (e && (e->entity_type() == "agent" || e->entity_type() == "object")) {
         Object* temp = dynamic_cast<Object*>(e);
         temp->m_value = targetValue;
         iCub->opc->commit();

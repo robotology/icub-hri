@@ -83,7 +83,7 @@ string proactiveTagging::getBestEntity(string sTypeTarget) {
         {
             if (entity->name().find("unknown")==0)
             {
-                if ((sTypeTarget == "object" && (entity->entity_type() == "object" || entity->entity_type() == "rtobject")) ||
+                if ((sTypeTarget == "object" && (entity->entity_type() == "object")) ||
                     (sTypeTarget == "bodypart" && (entity->entity_type() == "bodypart")))
                 {
                     Object* temp = dynamic_cast<Object*>(entity.get());

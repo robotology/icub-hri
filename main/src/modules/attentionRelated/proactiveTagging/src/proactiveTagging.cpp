@@ -293,7 +293,7 @@ Bottle proactiveTagging::recogName(string entityType)
             }
         }
     }
-    else if (entityType == "object" || entityType == "rtobject"){
+    else if (entityType == "object"){
         bool recognizedCorrectGrammar=false;
         while(!recognizedCorrectGrammar) {
             bRecognized = iCub->getRecogClient()->recogFromGrammarLoop(grammarToString(GrammarAskNameObject), 20);
@@ -353,7 +353,7 @@ Bottle proactiveTagging::recogName(string entityType)
     if (entityType == "agent") {
         sName = bSemantic.check("agent", Value("error")).asString();
     }
-    else if (entityType == "object" || entityType == "rtobject") {
+    else if (entityType == "object") {
         sName = bSemantic.check("object", Value("error")).asString();
     }
     else if (entityType == "bodypart") {
@@ -451,7 +451,7 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput)
             sQuestion = " Hello, I don't know you. Who are you?";
         }
     }
-    else if (currentEntityType == "object" || currentEntityType == "rtobject") {
+    else if (currentEntityType == "object") {
         iCub->look(sNameTarget);
         sQuestion = " Hum, what is this object?";
     }
@@ -497,7 +497,7 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput)
         yInfo() << sQuestion;
         iCub->say(sQuestion, false);
     }
-    else if (currentEntityType == "object" || currentEntityType == "rtobject") {
+    else if (currentEntityType == "object") {
         yDebug() << "Going to point " << sNameTarget;
         iCub->point(sNameTarget);
     }
@@ -522,9 +522,6 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput)
     }
     else if (currentEntityType == "object") {
         sReply = " I get it, this is a " + sName;
-    }
-    else if (currentEntityType == "rtobject") {
-        sReply = " So this is a " + sName;
     }
     else if (currentEntityType == "bodypart") {
         sReply = " Nice, I know that I have a " + getBodyPartNameForSpeech(sName);

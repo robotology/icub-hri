@@ -213,7 +213,7 @@ bool FollowingOrder::handleSearch(string type, string target, bool verboseSearch
     // ask for the object
     yInfo() << "send rpc to proactiveTagging";
 
-    //If there is an unknown object (to see with agents and rtobjects), add it to the rpc_command bottle, and return true
+    //If there is an unknown object (to see with agents and objects), add it to the rpc_command bottle, and return true
     Bottle cmd;
     Bottle rply;
 

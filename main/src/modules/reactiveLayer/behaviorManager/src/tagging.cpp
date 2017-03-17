@@ -52,7 +52,7 @@ void Tagging::run(const Bottle &args) {
             // ask for the object
             yInfo() << "send rpc to proactiveTagging";
 
-            //If there is an unknown object (to see with agents and rtobjects), add it to the rpc_command bottle, and return true
+            //If there is an unknown object (to see with agents and objects), add it to the rpc_command bottle, and return true
 
 
             cmd.addString("searchingEntity");
@@ -81,7 +81,7 @@ void Tagging::run(const Bottle &args) {
         type=sensation->get(id).asList()->get(0).asString();
         target=sensation->get(id).asList()->get(1).asString();
         yDebug() << "Object selected: " << target << "Type: "<<type;
-        //If there is an unknown object (to see with agents and rtobjects), add it to the rpc_command bottle, and return true
+        //If there is an unknown object (to see with agents and objects), add it to the rpc_command bottle, and return true
         
         cmd.clear();
         cmd.addString("exploreUnknownEntity");

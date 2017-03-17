@@ -76,7 +76,7 @@ Bottle proactiveTagging::describeBabbling(string sJointName, int joint) {
     string sName;
     if(entityType == "agent") {
         sName = bSemantic.check("agent", Value("unknown")).asString();
-    } else if(entityType == "object" || entityType == "rtobject") {
+    } else if(entityType == "object") {
         sName = bSemantic.check("object", Value("unknown")).asString();
     } else if(entityType == "bodypart") {
         sName = bSemantic.check("fingerName", Value("unknown")).asString();

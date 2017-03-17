@@ -116,7 +116,7 @@ public:
     }
 
     /**
-    * Return the specific type of an entity (object, agent, rt_object, adjective).
+    * Return the specific type of an entity.
     */
     std::string entity_type(){
         return m_entity_type;
