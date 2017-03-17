@@ -2,7 +2,7 @@
  * Copyright (C) 2014 WYSIWYD Consortium, European Commission FP7 Project ICT-612139
  * Authors: Ilaria Gori and Maxime Petit
  * email:   ilaria.gori@iit.it, maxime.petit@inserm.fr
- * website: http://https://github.com/robotology/icub-client// 
+ * website: https://github.com/robotology/icub-client/ 
  * Permission is granted to copy, distribute, and/or modify this program
  * under the terms of the GNU General Public License, version 2 or any
  * later version published by the Free Software Foundation.
