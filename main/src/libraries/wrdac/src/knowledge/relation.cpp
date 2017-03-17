@@ -2,7 +2,7 @@
  * Copyright (C) 2014 WYSIWYD Consortium, European Commission FP7 Project ICT-612139
  * Authors: Stéphane Lallée
  * email:   stephane.lallee@gmail.com * A copy of the license can be found at
- * website: http://efaa.upf.edu/ 
+ * website: http://https://github.com/robotology/icub-client// 
  * Permission is granted to copy, distribute, and/or modify this program
  * under the terms of the GNU General Public License, version 2 or any
  * later version published by the Free Software Foundation.
@@ -93,7 +93,7 @@ Bottle Relation::asBottle(bool ignoreID)
     Bottle b;
     Bottle bSub;
     bSub.addString("entity");
-    bSub.addString(EFAA_OPC_ENTITY_RELATION);
+    bSub.addString(ICUBCLIENT_OPC_ENTITY_RELATION);
     b.addList()=bSub;
 
     if (!ignoreID)
@@ -135,7 +135,7 @@ Bottle Relation::asLightBottle(bool ignoreID)
     Bottle b;
     Bottle bSub;
     bSub.addString("entity");
-    bSub.addString(EFAA_OPC_ENTITY_RELATION);
+    bSub.addString(ICUBCLIENT_OPC_ENTITY_RELATION);
     b.addList()=bSub;
 
     bSub.clear();

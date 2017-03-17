@@ -339,7 +339,7 @@ bool AgentDetector::updateModule()
     if (handleMultiplePlayers)
         tracked=client.getJoints(joints);
     else
-        tracked=client.getJoints(joint, EFAA_KINECT_CLOSEST_PLAYER);
+        tracked=client.getJoints(joint, ICUBCLIENT_KINECT_CLOSEST_PLAYER);
     //cout<<"Tracking value = "<<tracked<<endl;
 
     if (tracked)
@@ -425,12 +425,12 @@ bool AgentDetector::updateModule()
             Bottle bCond;
             Bottle bObject;
 
-            bObject.addString(EFAA_OPC_ENTITY_TAG);
+            bObject.addString(ICUBCLIENT_OPC_ENTITY_TAG);
             bObject.addString("==");
-            bObject.addString(EFAA_OPC_ENTITY_OBJECT);
+            bObject.addString(ICUBCLIENT_OPC_ENTITY_OBJECT);
 
             Bottle bPresent;
-            bPresent.addString(EFAA_OPC_OBJECT_PRESENT_TAG);
+            bPresent.addString(ICUBCLIENT_OPC_OBJECT_PRESENT_TAG);
             bPresent.addString("==");
             bPresent.addDouble(1.0);
 
@@ -590,7 +590,7 @@ bool AgentDetector::updateModule()
 //                        cout<<"Commiting : "<<r.toString()<<endl;
                         yarp::os::Bottle &skeleton = outputSkeletonPort.prepare();
                         skeleton.clear();
-                        //Convert the skeleton into efaaHelpers body. We loose orientation in the process...
+                        //Convert the skeleton into ICUBCLIENTHelpers body. We loose orientation in the process...
                         for(map<string,Joint>::iterator jnt = p->skeleton.begin() ; jnt != p->skeleton.end() ; jnt++)
                         {
                             Bottle bBodyPartLoc;
@@ -615,7 +615,7 @@ bool AgentDetector::updateModule()
                                 skeleton.addList() = jntBtl;
                             }
 
-                            if (jnt->first == EFAA_OPC_BODY_PART_TYPE_HEAD)
+                            if (jnt->first == ICUBCLIENT_OPC_BODY_PART_TYPE_HEAD)
                             {
                                 partner->m_ego_position = irPos;
                             }
@@ -681,31 +681,31 @@ Vector AgentDetector::getSkeletonPattern(Player p)
     //Create the skeleton pattern
     Vector pattern(5);
 
-    pattern[0] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_ELBOW_L], p.skeleton[EFAA_OPC_BODY_PART_TYPE_SHOULDER_L]);
-    pattern[1] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_SHOULDER_L], p.skeleton[EFAA_OPC_BODY_PART_TYPE_SHOULDER_C]);
-    pattern[2] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[EFAA_OPC_BODY_PART_TYPE_SHOULDER_R]);
-    pattern[3] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[EFAA_OPC_BODY_PART_TYPE_SPINE]);
-    pattern[4] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[EFAA_OPC_BODY_PART_TYPE_HEAD]);
+    pattern[0] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ELBOW_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_L]);
+    pattern[1] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C]);
+    pattern[2] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_R]);
+    pattern[3] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SPINE]);
+    pattern[4] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HEAD]);
 
     //Arms
-    //pattern[0] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_HAND_L], p.skeleton[EFAA_OPC_BODY_PART_TYPE_WRIST_L]);
-    //pattern[1] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_WRIST_L], p.skeleton[EFAA_OPC_BODY_PART_TYPE_ELBOW_L]);
-    //pattern[2] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_ELBOW_L], p.skeleton[EFAA_OPC_BODY_PART_TYPE_SHOULDER_L]);
-    //pattern[3] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_SHOULDER_L], p.skeleton[EFAA_OPC_BODY_PART_TYPE_SHOULDER_C]);
-    //pattern[4] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[EFAA_OPC_BODY_PART_TYPE_SHOULDER_R]);
-    //pattern[5] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_SHOULDER_R], p.skeleton[EFAA_OPC_BODY_PART_TYPE_ELBOW_R]);
-    //pattern[6] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_ELBOW_R], p.skeleton[EFAA_OPC_BODY_PART_TYPE_WRIST_R]);
-    //pattern[7] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_WRIST_R], p.skeleton[EFAA_OPC_BODY_PART_TYPE_HAND_R]);
+    //pattern[0] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HAND_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_WRIST_L]);
+    //pattern[1] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_WRIST_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ELBOW_L]);
+    //pattern[2] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ELBOW_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_L]);
+    //pattern[3] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C]);
+    //pattern[4] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_R]);
+    //pattern[5] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_R], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ELBOW_R]);
+    //pattern[6] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ELBOW_R], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_WRIST_R]);
+    //pattern[7] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_WRIST_R], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HAND_R]);
 
     //Legs
-    //pattern[8] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_FOOT_L], p.skeleton[EFAA_OPC_BODY_PART_TYPE_ANKLE_L]);
-    //pattern[9] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_ANKLE_L], p.skeleton[EFAA_OPC_BODY_PART_TYPE_KNEE_L]);
-    //pattern[10] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_KNEE_L], p.skeleton[EFAA_OPC_BODY_PART_TYPE_HIP_L]);
-    //pattern[11] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_HIP_L], p.skeleton[EFAA_OPC_BODY_PART_TYPE_HIP_C]);
-    //pattern[12] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_HIP_C], p.skeleton[EFAA_OPC_BODY_PART_TYPE_HIP_R]);
-    //pattern[13] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_HIP_R], p.skeleton[EFAA_OPC_BODY_PART_TYPE_KNEE_R]);
-    //pattern[14] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_KNEE_R], p.skeleton[EFAA_OPC_BODY_PART_TYPE_ANKLE_R]);
-    //pattern[15] = distanceVector(p.skeleton[EFAA_OPC_BODY_PART_TYPE_ANKLE_R], p.skeleton[EFAA_OPC_BODY_PART_TYPE_FOOT_R]); 
+    //pattern[8] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_FOOT_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ANKLE_L]);
+    //pattern[9] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ANKLE_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_KNEE_L]);
+    //pattern[10] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_KNEE_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HIP_L]);
+    //pattern[11] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HIP_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HIP_C]);
+    //pattern[12] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HIP_C], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HIP_R]);
+    //pattern[13] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HIP_R], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_KNEE_R]);
+    //pattern[14] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_KNEE_R], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ANKLE_R]);
+    //pattern[15] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ANKLE_R], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_FOOT_R]);
 
     return pattern;
 }

@@ -31,12 +31,12 @@ void Greeting::run(const Bottle &args) {
     rpc_out_port.write(cmd, rply);
 }
 
-/* From reactiveLayerEFAA
+/* From reactiveLayerICUBCLIENT
 bool ReactiveLayer::handleSalutation(bool& someoneIsPresent)
 {
     someoneIsPresent = false;
     //Handle the salutation of newcomers
-    list<Entity*> allAgents = iCub->opc->Entities(EFAA_OPC_ENTITY_TAG, "==", EFAA_OPC_ENTITY_AGENT);
+    list<Entity*> allAgents = iCub->opc->Entities(ICUBCLIENT_OPC_ENTITY_TAG, "==", ICUBCLIENT_OPC_ENTITY_AGENT);
     list<Relation> salutedAgents = iCub->opc->getRelations("saluted");
     list<Relation> identity = iCub->opc->getRelationsMatching("partner", "named");
     string identityName = "unknown";

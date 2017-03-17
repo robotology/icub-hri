@@ -2,7 +2,7 @@
 * Copyright (C) 2014 WYSIWYD Consortium, European Commission FP7 Project ICT-612139
 * Authors: Stéphane Lallée
 * email:   stephane.lallee@gmail.com
-* website: http://efaa.upf.edu/
+* website: http://ICUBCLIENT.upf.edu/
 * Permission is granted to copy, distribute, and/or modify this program
 * under the terms of the GNU General Public License, version 2 or any
 * later version published by the Free Software Foundation.
@@ -16,8 +16,8 @@
 * Public License for more details
 */
 
-#ifndef __EFAA_SUBSYSTEM_ARE_H__
-#define __EFAA_SUBSYSTEM_ARE_H__
+#ifndef __ICUBCLIENT_SUBSYSTEM_ARE_H__
+#define __ICUBCLIENT_SUBSYSTEM_ARE_H__
 
 #include <string>
 #include <algorithm>

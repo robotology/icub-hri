@@ -16,8 +16,8 @@
 * Public License for more details
 */
 
-#ifndef __EFAA_SUBSYSTEM_RECOG_H__
-#define __EFAA_SUBSYSTEM_RECOG_H__
+#ifndef __ICUBCLIENT_SUBSYSTEM_RECOG_H__
+#define __ICUBCLIENT_SUBSYSTEM_RECOG_H__
 
 #define SUBSYSTEM_RECOG        "recog"
 

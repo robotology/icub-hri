@@ -20,12 +20,12 @@ class InternalVariablesDecay: public RateThread
         Bottle condition;
 
         Bottle isAgent;
-        isAgent.addString(EFAA_OPC_ENTITY_TAG);
+        isAgent.addString(ICUBCLIENT_OPC_ENTITY_TAG);
         isAgent.addString("==");
-        isAgent.addString(EFAA_OPC_ENTITY_AGENT);
+        isAgent.addString(ICUBCLIENT_OPC_ENTITY_AGENT);
 
         Bottle isPresent;
-        isPresent.addString(EFAA_OPC_OBJECT_PRESENT_TAG);
+        isPresent.addString(ICUBCLIENT_OPC_OBJECT_PRESENT_TAG);
         isPresent.addString("==");
         isPresent.addInt(1);
 

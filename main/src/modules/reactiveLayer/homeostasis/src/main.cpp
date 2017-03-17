@@ -1,14 +1,14 @@
 /* 
-* Copyright (C) 2011 EFAA Consortium, European Commission FP7 Project IST-270490
+* Copyright (C) 2011 ICUBCLIENT Consortium, European Commission FP7 Project IST-270490
 * Authors: Stephane Lallee
 * email:   stephane.lallee@gmail.com
-* website: http://efaa.upf.edu/ 
+* website: http://https://github.com/robotology/icub-client// 
 * Permission is granted to copy, distribute, and/or modify this program
 * under the terms of the GNU General Public License, version 2 or any
 * later version published by the Free Software Foundation.
 *
 * A copy of the license can be found at
-* $EFAA_ROOT/license/gpl.txt
+* $ICUBCLIENT_ROOT/license/gpl.txt
 *
 * This program is distributed in the hope that it will be useful, but
 * WITHOUT ANY WARRANTY; without even the implied warranty of

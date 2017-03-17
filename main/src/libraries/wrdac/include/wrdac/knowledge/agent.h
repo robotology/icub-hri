@@ -2,7 +2,7 @@
  * Copyright (C) 2014 WYSIWYD Consortium, European Commission FP7 Project ICT-612139
  * Authors: Stéphane Lallée
  * email:   stephane.lallee@gmail.com
- * website: http://efaa.upf.edu/ 
+ * website: http://https://github.com/robotology/icub-client// 
  * Permission is granted to copy, distribute, and/or modify this program
  * under the terms of the GNU General Public License, version 2 or any
  * later version published by the Free Software Foundation.
@@ -16,8 +16,8 @@
  * Public License for more details
  */
 
-#ifndef __EFAA_AGENT_H__
-#define __EFAA_AGENT_H__
+#ifndef __ICUBCLIENT_AGENT_H__
+#define __ICUBCLIENT_AGENT_H__
 
 #include "object.h"
 #include "relation.h"
@@ -113,21 +113,21 @@ struct Body
 
     Body()
     {
-            m_parts[EFAA_OPC_BODY_PART_TYPE_HEAD].resize(3,0.0);
-            m_parts[EFAA_OPC_BODY_PART_TYPE_SHOULDER_C].resize(3,0.0);
-            m_parts[EFAA_OPC_BODY_PART_TYPE_SHOULDER_L].resize(3,0.0);
-            m_parts[EFAA_OPC_BODY_PART_TYPE_SHOULDER_R].resize(3,0.0);
-            m_parts[EFAA_OPC_BODY_PART_TYPE_SPINE].resize(3,0.0);
-            m_parts[EFAA_OPC_BODY_PART_TYPE_HAND_R].resize(3,0.0);
-            m_parts[EFAA_OPC_BODY_PART_TYPE_HAND_L].resize(3,0.0);
-            m_parts[EFAA_OPC_BODY_PART_TYPE_ELBOW_R].resize(3,0.0);
-            m_parts[EFAA_OPC_BODY_PART_TYPE_ELBOW_L].resize(3,0.0);
-            //m_parts[EFAA_OPC_BODY_PART_TYPE_LEFT_HIP].resize(3,0.0);
-            //m_parts[EFAA_OPC_BODY_PART_TYPE_LEFT_KNEE].resize(3,0.0);
-            //m_parts[EFAA_OPC_BODY_PART_TYPE_LEFT_FOOT].resize(3,0.0);
-            //m_parts[EFAA_OPC_BODY_PART_TYPE_RIGHT_HIP].resize(3,0.0);
-            //m_parts[EFAA_OPC_BODY_PART_TYPE_RIGHT_KNEE].resize(3,0.0);
-            //m_parts[EFAA_OPC_BODY_PART_TYPE_RIGHT_FOOT].resize(3,0.0);
+            m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_HEAD].resize(3,0.0);
+            m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C].resize(3,0.0);
+            m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_L].resize(3,0.0);
+            m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_R].resize(3,0.0);
+            m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_SPINE].resize(3,0.0);
+            m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_HAND_R].resize(3,0.0);
+            m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_HAND_L].resize(3,0.0);
+            m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_ELBOW_R].resize(3,0.0);
+            m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_ELBOW_L].resize(3,0.0);
+            //m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_LEFT_HIP].resize(3,0.0);
+            //m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_LEFT_KNEE].resize(3,0.0);
+            //m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_LEFT_FOOT].resize(3,0.0);
+            //m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_RIGHT_HIP].resize(3,0.0);
+            //m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_RIGHT_KNEE].resize(3,0.0);
+            //m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_RIGHT_FOOT].resize(3,0.0);
     }
 
     yarp::os::Bottle asBottle()
@@ -182,7 +182,7 @@ public:
             
     virtual bool    isType(std::string _entityType)
         {
-            if (_entityType == EFAA_OPC_ENTITY_AGENT)
+            if (_entityType == ICUBCLIENT_OPC_ENTITY_AGENT)
                 return true;
             else
                 return this->Object::isType(_entityType);

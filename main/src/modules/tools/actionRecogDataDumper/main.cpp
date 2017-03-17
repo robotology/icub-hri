@@ -115,7 +115,7 @@ public:
         {
             string entityName=(*itEnt)->name();
             string entityType=(*itEnt)->entity_type();
-            if (entityType==EFAA_OPC_ENTITY_OBJECT)
+            if (entityType==ICUBCLIENT_OPC_ENTITY_OBJECT)
             {
                 if (Object *object=dynamic_cast<Object*>(*itEnt))
                 {

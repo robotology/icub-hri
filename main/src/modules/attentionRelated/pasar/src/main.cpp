@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2014 WYSIWYD Consortium, European Commission FP7 Project ICT-612139
- * Authors: Grégoire Pointeau   (originally from EFAA by Stéphane Lallée)
+ * Authors: Grégoire Pointeau   (originally from ICUBCLIENT by Stéphane Lallée)
  * email:   greg.pointeau@gmail.com
  * Permission is granted to copy, distribute, and/or modify this program
  * under the terms of the GNU General Public License, version 2 or any

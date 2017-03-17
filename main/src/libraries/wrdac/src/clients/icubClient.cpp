@@ -2,7 +2,7 @@
  * Copyright (C) 2014 WYSIWYD Consortium, European Commission FP7 Project ICT-612139
  * Authors: Stéphane Lallée
  * email:   stephane.lallee@gmail.com
- * website: http://efaa.upf.edu/
+ * website: http://ICUBCLIENT.upf.edu/
  * Permission is granted to copy, distribute, and/or modify this program
  * under the terms of the GNU General Public License, version 2 or any
  * later version published by the Free Software Foundation.
@@ -163,7 +163,7 @@ void ICubClient::updateAgent()
         else
             opc->update(this->icubAgent);
     }
-    opc->Entities(EFAA_OPC_ENTITY_TAG, "==", EFAA_OPC_ENTITY_ACTION);
+    opc->Entities(ICUBCLIENT_OPC_ENTITY_TAG, "==", ICUBCLIENT_OPC_ENTITY_ACTION);
 }
 
 bool ICubClient::changeName(Entity *e, const std::string &newName) {
@@ -262,7 +262,7 @@ bool ICubClient::grasp(const string &oName, const Bottle &options)
 bool ICubClient::release(const string &oLocation, const Bottle &options)
 {
     Entity *target = opc->getEntity(oLocation, true);
-    if (!target->isType(EFAA_OPC_ENTITY_OBJECT))
+    if (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
     {
         yError() << "[iCubClient] Called release() on a unallowed location: \"" << oLocation << "\"";
         return false;
@@ -327,7 +327,7 @@ bool ICubClient::pointfar(const Vector &target, const Bottle &options, const std
 bool ICubClient::point(const string &sName, const Bottle &options)
 {
     Entity *target = opc->getEntity(sName, true);
-    if (!target->isType(EFAA_OPC_ENTITY_OBJECT) && !target->isType(EFAA_OPC_ENTITY_BODYPART))
+    if (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT) && !target->isType(ICUBCLIENT_OPC_ENTITY_BODYPART))
     {
         yWarning() << "[iCubClient] Called point() on a unallowed location: \"" << sName << "\"";
         return false;
@@ -386,7 +386,7 @@ bool ICubClient::pushKarmaLeft(const std::string &objName, const double &targetP
     if (opc->isConnected())
     {
         Entity *target = opc->getEntity(objName, true);
-        if (!target->isType(EFAA_OPC_ENTITY_OBJECT))
+        if (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
         {
             yWarning() << "[iCubClient] Called pushKarmaLeft() on a unallowed entity: \"" << objName << "\"";
             return false;
@@ -431,7 +431,7 @@ bool ICubClient::pushKarmaRight(const std::string &objName, const double &target
     if (opc->isConnected())
     {
         Entity *target = opc->getEntity(objName, true);
-        if (!target->isType(EFAA_OPC_ENTITY_OBJECT))
+        if (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
         {
             yWarning() << "[iCubClient] Called pushKarmaLeft() on a unallowed entity: \"" << objName << "\"";
             return false;
@@ -476,7 +476,7 @@ bool ICubClient::pushKarmaFront(const std::string &objName, const double &target
     if (opc->isConnected())
     {
         Entity *target = opc->getEntity(objName, true);
-        if (!target->isType(EFAA_OPC_ENTITY_OBJECT))
+        if (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
         {
             yWarning() << "[iCubClient] Called pushKarmaFront() on a unallowed entity: \"" << objName << "\"";
             return false;
@@ -534,7 +534,7 @@ bool ICubClient::pullKarmaBack(const std::string &objName, const double &targetP
     if (opc->isConnected())
     {
         Entity *target = opc->getEntity(objName, true);
-        if (!target->isType(EFAA_OPC_ENTITY_OBJECT))
+        if (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
         {
             yWarning() << "[iCubClient] Called pushKarmaFront() on a unallowed entity: \"" << objName << "\"";
             return false;
@@ -699,7 +699,7 @@ bool ICubClient::babbling(const string &bpName, const string &babblingLimb)
 
         //extract the bodypart with the name
         Entity *target = opc->getEntity(bpName, true);
-        if (!target->isType(EFAA_OPC_ENTITY_BODYPART))
+        if (!target->isType(ICUBCLIENT_OPC_ENTITY_BODYPART))
         {
             yError() << "[iCubClient] Called babbling() on a unallowed entity: \"" << bpName << "\"";
             return false;
@@ -735,7 +735,7 @@ bool ICubClient::babbling(const string &bpName, const string &babblingLimb, doub
 
         //extract the bodypart with the name
         Entity *target = opc->getEntity(bpName, true);
-        if (!target->isType(EFAA_OPC_ENTITY_BODYPART))
+        if (!target->isType(ICUBCLIENT_OPC_ENTITY_BODYPART))
         {
             yError() << "[iCubClient] Called babbling() on a unallowed entity: \"" << bpName << "\"";
             return false;
@@ -799,7 +799,7 @@ bool ICubClient::say(const string &text, bool shouldWait, bool emotionalIfPossib
 list<Action*> ICubClient::getKnownActions()
 {
     this->actionsKnown.clear();
-    list<Entity*> entities = opc->Entities(EFAA_OPC_ENTITY_TAG, "==", EFAA_OPC_ENTITY_ACTION);
+    list<Entity*> entities = opc->Entities(ICUBCLIENT_OPC_ENTITY_TAG, "==", ICUBCLIENT_OPC_ENTITY_ACTION);
     for (list<Entity*>::iterator it = entities.begin(); it != entities.end(); it++)
     {
         actionsKnown.push_back(dynamic_cast<Action*>(*it));
@@ -815,7 +815,7 @@ list<Object*> ICubClient::getObjectsInSight()
     list<Entity*> allEntities = opc->EntitiesCache();
     for (list<Entity*>::iterator it = allEntities.begin(); it != allEntities.end(); it++)
     {
-        if ((*it)->isType(EFAA_OPC_ENTITY_OBJECT))
+        if ((*it)->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
         {
             Vector itemPosition = this->icubAgent->getSelfRelativePosition((dynamic_cast<Object*>(*it))->m_ego_position);
 
@@ -839,7 +839,7 @@ list<Object*> ICubClient::getObjectsInRange()
     list<Entity*> allEntities = opc->EntitiesCache();
     for (list<Entity*>::iterator it = allEntities.begin(); it != allEntities.end(); it++)
     {
-        if ((*it)->isType(EFAA_OPC_ENTITY_OBJECT) && (dynamic_cast<Object*>(*it))->m_present == 1.0)
+        if ((*it)->isType(ICUBCLIENT_OPC_ENTITY_OBJECT) && (dynamic_cast<Object*>(*it))->m_present == 1.0)
         {
             Vector itemPosition = this->icubAgent->getSelfRelativePosition((dynamic_cast<Object*>(*it))->m_ego_position);
 

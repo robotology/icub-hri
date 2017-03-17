@@ -2,7 +2,7 @@
 * Copyright (C) 2014 WYSIWYD Consortium, European Commission FP7 Project ICT-612139
 * Authors: Gori Ilaria and Petit Maxime
 * email:   ilaria.gori@iit.it, maxime.petit@inserm.fr
-* website: http://efaa.upf.edu/ 
+* website: http://https://github.com/robotology/icub-client// 
 * Permission is granted to copy, distribute, and/or modify this program
 * under the terms of the GNU General Public License, version 2 or any
 * later version published by the Free Software Foundation.
@@ -16,8 +16,8 @@
 * Public License for more details
 */
 
-#ifndef __EFAA_ACTION_H__
-#define __EFAA_ACTION_H__
+#ifndef __ICUBCLIENT_ACTION_H__
+#define __ICUBCLIENT_ACTION_H__
 
 #include "entity.h"
 #include "relation.h"
@@ -56,7 +56,7 @@ namespace wysiwyd{namespace wrdac{
 
         virtual bool    isType(std::string _entityType)
         {
-            if (_entityType == EFAA_OPC_ENTITY_ACTION)
+            if (_entityType == ICUBCLIENT_OPC_ENTITY_ACTION)
                 return true;
             else
                 return this->Entity::isType(_entityType);

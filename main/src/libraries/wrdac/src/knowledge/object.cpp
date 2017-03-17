@@ -2,7 +2,7 @@
  * Copyright (C) 2014 WYSIWYD Consortium, European Commission FP7 Project ICT-612139
  * Authors: Stéphane Lallée
  * email:   stephane.lallee@gmail.com
- * website: http://efaa.upf.edu/ 
+ * website: http://ICUBCLIENT.upf.edu/
  * Permission is granted to copy, distribute, and/or modify this program
  * under the terms of the GNU General Public License, version 2 or any
  * later version published by the Free Software Foundation.
@@ -28,7 +28,7 @@ using namespace wysiwyd::wrdac;
 
 Object::Object():Entity()
 {
-    m_entity_type = EFAA_OPC_ENTITY_OBJECT;
+    m_entity_type = ICUBCLIENT_OPC_ENTITY_OBJECT;
     m_ego_position.resize(3,0.0);
     m_ego_orientation.resize(3,0.0);
     m_dimensions.resize(3,0.1);
@@ -64,75 +64,75 @@ Bottle Object::asBottle()
     Bottle bSub;
     //Add Object specific properties
     //Position
-    bSub.addString(EFAA_OPC_OBJECT_ROBOTPOSX_TAG);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_ROBOTPOSX_TAG);
     bSub.addDouble(m_ego_position[0]);
     b.addList() = bSub;
     bSub.clear();
-    bSub.addString(EFAA_OPC_OBJECT_ROBOTPOSY_TAG);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_ROBOTPOSY_TAG);
     bSub.addDouble(m_ego_position[1]);
     b.addList() = bSub;
     bSub.clear();
-    bSub.addString(EFAA_OPC_OBJECT_ROBOTPOSZ_TAG);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_ROBOTPOSZ_TAG);
     bSub.addDouble(m_ego_position[2]);
     b.addList() = bSub;
     bSub.clear();
-    bSub.addString(EFAA_OPC_OBJECT_ROBOTPOS_TAG);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_ROBOTPOS_TAG);
     bSub.addList().read(m_ego_position);
     b.addList() = bSub;
     bSub.clear();
 
     //Orientation
-    bSub.addString(EFAA_OPC_OBJECT_ROBOTORX_TAG);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_ROBOTORX_TAG);
     bSub.addDouble(m_ego_orientation[0]);
     b.addList() = bSub;
     bSub.clear();
-    bSub.addString(EFAA_OPC_OBJECT_ROBOTORY_TAG);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_ROBOTORY_TAG);
     bSub.addDouble(m_ego_orientation[1]);
     b.addList() = bSub;
     bSub.clear();
-    bSub.addString(EFAA_OPC_OBJECT_ROBOTORZ_TAG);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_ROBOTORZ_TAG);
     bSub.addDouble(m_ego_orientation[2]);
     b.addList() = bSub;
     bSub.clear();
 
     //Dimension
-    bSub.addString(EFAA_OPC_OBJECT_RTDIMX_TAG);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_RTDIMX_TAG);
     bSub.addDouble(m_dimensions[0]);
     b.addList() = bSub;
     bSub.clear();
-    bSub.addString(EFAA_OPC_OBJECT_RTDIMY_TAG);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_RTDIMY_TAG);
     bSub.addDouble(m_dimensions[1]);
     b.addList() = bSub;
     bSub.clear();
-    bSub.addString(EFAA_OPC_OBJECT_RTDIMZ_TAG);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_RTDIMZ_TAG);
     bSub.addDouble(m_dimensions[2]);
     b.addList() = bSub;
     bSub.clear();
 
     //Color
-    bSub.addString(EFAA_OPC_OBJECT_GUI_COLOR_R);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_GUI_COLOR_R);
     bSub.addDouble(m_color[0]);
     b.addList() = bSub;
     bSub.clear();
-    bSub.addString(EFAA_OPC_OBJECT_GUI_COLOR_G);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_GUI_COLOR_G);
     bSub.addDouble(m_color[1]);
     b.addList() = bSub;
     bSub.clear();
-    bSub.addString(EFAA_OPC_OBJECT_GUI_COLOR_B);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_GUI_COLOR_B);
     bSub.addDouble(m_color[2]);
     b.addList() = bSub;
     bSub.clear();
-    bSub.addString(EFAA_OPC_OBJECT_SALIENCY);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_SALIENCY);
     bSub.addDouble(m_saliency);
     b.addList() = bSub;
     bSub.clear();
-    bSub.addString(EFAA_OPC_OBJECT_VALUE);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_VALUE);
     bSub.addDouble(m_value);
     b.addList() = bSub;
     bSub.clear();
 
     //Present
-    bSub.addString(EFAA_OPC_OBJECT_PRESENT_TAG);
+    bSub.addString(ICUBCLIENT_OPC_OBJECT_PRESENT_TAG);
     bSub.addDouble(m_present);
     b.addList() = bSub;
     bSub.clear();
@@ -151,40 +151,40 @@ bool Object::fromBottle(const Bottle &b)
     if (!this->Entity::fromBottle(b))
         return false;
 
-    if (!b.check(EFAA_OPC_OBJECT_ROBOTPOSX_TAG) ||
-        !b.check(EFAA_OPC_OBJECT_ROBOTPOSY_TAG) ||
-        !b.check(EFAA_OPC_OBJECT_ROBOTPOSZ_TAG) ||
-        !b.check(EFAA_OPC_OBJECT_RTDIMX_TAG) ||
-        !b.check(EFAA_OPC_OBJECT_RTDIMY_TAG) ||
-        !b.check(EFAA_OPC_OBJECT_RTDIMZ_TAG) ||
-        !b.check(EFAA_OPC_OBJECT_ROBOTORX_TAG) ||
-        !b.check(EFAA_OPC_OBJECT_ROBOTORY_TAG) ||
-        !b.check(EFAA_OPC_OBJECT_ROBOTORZ_TAG) ||
-        !b.check(EFAA_OPC_OBJECT_GUI_COLOR_R) ||
-        !b.check(EFAA_OPC_OBJECT_GUI_COLOR_G) ||
-        !b.check(EFAA_OPC_OBJECT_GUI_COLOR_B) ||
-        !b.check(EFAA_OPC_OBJECT_PRESENT_TAG) ||
+    if (!b.check(ICUBCLIENT_OPC_OBJECT_ROBOTPOSX_TAG) ||
+        !b.check(ICUBCLIENT_OPC_OBJECT_ROBOTPOSY_TAG) ||
+        !b.check(ICUBCLIENT_OPC_OBJECT_ROBOTPOSZ_TAG) ||
+        !b.check(ICUBCLIENT_OPC_OBJECT_RTDIMX_TAG) ||
+        !b.check(ICUBCLIENT_OPC_OBJECT_RTDIMY_TAG) ||
+        !b.check(ICUBCLIENT_OPC_OBJECT_RTDIMZ_TAG) ||
+        !b.check(ICUBCLIENT_OPC_OBJECT_ROBOTORX_TAG) ||
+        !b.check(ICUBCLIENT_OPC_OBJECT_ROBOTORY_TAG) ||
+        !b.check(ICUBCLIENT_OPC_OBJECT_ROBOTORZ_TAG) ||
+        !b.check(ICUBCLIENT_OPC_OBJECT_GUI_COLOR_R) ||
+        !b.check(ICUBCLIENT_OPC_OBJECT_GUI_COLOR_G) ||
+        !b.check(ICUBCLIENT_OPC_OBJECT_GUI_COLOR_B) ||
+        !b.check(ICUBCLIENT_OPC_OBJECT_PRESENT_TAG) ||
         !b.check("object_area")               ||
-        !b.check(EFAA_OPC_OBJECT_VALUE))
+        !b.check(ICUBCLIENT_OPC_OBJECT_VALUE))
     {
         return false;
     }
 
-    m_ego_position[0] = b.find(EFAA_OPC_OBJECT_ROBOTPOSX_TAG).asDouble();
-    m_ego_position[1] = b.find(EFAA_OPC_OBJECT_ROBOTPOSY_TAG).asDouble();
-    m_ego_position[2] = b.find(EFAA_OPC_OBJECT_ROBOTPOSZ_TAG).asDouble();
-    m_dimensions[0] = b.find(EFAA_OPC_OBJECT_RTDIMX_TAG).asDouble();
-    m_dimensions[1] = b.find(EFAA_OPC_OBJECT_RTDIMY_TAG).asDouble();
-    m_dimensions[2] = b.find(EFAA_OPC_OBJECT_RTDIMZ_TAG).asDouble();
-    m_ego_orientation[0] = b.find(EFAA_OPC_OBJECT_ROBOTORX_TAG).asDouble();
-    m_ego_orientation[1] = b.find(EFAA_OPC_OBJECT_ROBOTORY_TAG).asDouble();
-    m_ego_orientation[2] = b.find(EFAA_OPC_OBJECT_ROBOTORZ_TAG).asDouble();
-    m_color[0] = b.find(EFAA_OPC_OBJECT_GUI_COLOR_R).asDouble();
-    m_color[1] = b.find(EFAA_OPC_OBJECT_GUI_COLOR_G).asDouble();
-    m_color[2] = b.find(EFAA_OPC_OBJECT_GUI_COLOR_B).asDouble();
-    m_saliency = b.find(EFAA_OPC_OBJECT_SALIENCY).asDouble();
-    m_value = b.find(EFAA_OPC_OBJECT_VALUE).asDouble();
-    m_present = b.find(EFAA_OPC_OBJECT_PRESENT_TAG).asDouble();
+    m_ego_position[0] = b.find(ICUBCLIENT_OPC_OBJECT_ROBOTPOSX_TAG).asDouble();
+    m_ego_position[1] = b.find(ICUBCLIENT_OPC_OBJECT_ROBOTPOSY_TAG).asDouble();
+    m_ego_position[2] = b.find(ICUBCLIENT_OPC_OBJECT_ROBOTPOSZ_TAG).asDouble();
+    m_dimensions[0] = b.find(ICUBCLIENT_OPC_OBJECT_RTDIMX_TAG).asDouble();
+    m_dimensions[1] = b.find(ICUBCLIENT_OPC_OBJECT_RTDIMY_TAG).asDouble();
+    m_dimensions[2] = b.find(ICUBCLIENT_OPC_OBJECT_RTDIMZ_TAG).asDouble();
+    m_ego_orientation[0] = b.find(ICUBCLIENT_OPC_OBJECT_ROBOTORX_TAG).asDouble();
+    m_ego_orientation[1] = b.find(ICUBCLIENT_OPC_OBJECT_ROBOTORY_TAG).asDouble();
+    m_ego_orientation[2] = b.find(ICUBCLIENT_OPC_OBJECT_ROBOTORZ_TAG).asDouble();
+    m_color[0] = b.find(ICUBCLIENT_OPC_OBJECT_GUI_COLOR_R).asDouble();
+    m_color[1] = b.find(ICUBCLIENT_OPC_OBJECT_GUI_COLOR_G).asDouble();
+    m_color[2] = b.find(ICUBCLIENT_OPC_OBJECT_GUI_COLOR_B).asDouble();
+    m_saliency = b.find(ICUBCLIENT_OPC_OBJECT_SALIENCY).asDouble();
+    m_value = b.find(ICUBCLIENT_OPC_OBJECT_VALUE).asDouble();
+    m_present = b.find(ICUBCLIENT_OPC_OBJECT_PRESENT_TAG).asDouble();
     m_objectarea = static_cast<ObjectArea>(b.find("object_area").asInt());
 
     return true;

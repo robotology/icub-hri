@@ -2,7 +2,7 @@
  * Copyright (C) 2014 WYSIWYD Consortium, European Commission FP7 Project ICT-612139
  * Authors: Stéphane Lallée
  * email:   stephane.lallee@gmail.com
- * website: http://efaa.upf.edu/
+ * website: http://ICUBCLIENT.upf.edu/
  * Permission is granted to copy, distribute, and/or modify this program
  * under the terms of the GNU General Public License, version 2 or any
  * later version published by the Free Software Foundation.
@@ -228,11 +228,11 @@ Entity *OPCClient::getEntity(int id, bool forceUpdate)
     //Cast to the right type
     if(newEntityType == "entity")
         newE = new Entity();
-    else if (newEntityType == EFAA_OPC_ENTITY_OBJECT)
+    else if (newEntityType == ICUBCLIENT_OPC_ENTITY_OBJECT)
         newE = new Object();
-    else if (newEntityType == EFAA_OPC_ENTITY_AGENT)
+    else if (newEntityType == ICUBCLIENT_OPC_ENTITY_AGENT)
         newE = new Agent();
-    else if (newEntityType == EFAA_OPC_ENTITY_ACTION)
+    else if (newEntityType == ICUBCLIENT_OPC_ENTITY_ACTION)
         newE = new Action();
     else if (newEntityType == "bodypart")
         newE = new Bodypart();
@@ -323,9 +323,9 @@ int OPCClient::getRelationID(
     Bottle& query = cmd.addList();
     Bottle sub;
 
-    sub.addString(EFAA_OPC_ENTITY_TAG);
+    sub.addString(ICUBCLIENT_OPC_ENTITY_TAG);
     sub.addString("==");
-    sub.addString(EFAA_OPC_ENTITY_RELATION);
+    sub.addString(ICUBCLIENT_OPC_ENTITY_RELATION);
     query.addList() = sub;
 
     query.addString("&&");
@@ -584,9 +584,9 @@ list<Relation> OPCClient::getRelations()
     cmd.addString("ask");
     Bottle& cond = cmd.addList();
 
-    sub.addString(EFAA_OPC_ENTITY_TAG);
+    sub.addString(ICUBCLIENT_OPC_ENTITY_TAG);
     sub.addString("==");
-    sub.addString(EFAA_OPC_ENTITY_RELATION);
+    sub.addString(ICUBCLIENT_OPC_ENTITY_RELATION);
     cond.addList() = sub;
     write(cmd,reply,isVerbose);
 
@@ -630,9 +630,9 @@ std::list<Relation>  OPCClient::getRelationsMatching(std::string subject,std::st
     cmd.addString("ask");
     Bottle& cond = cmd.addList();
 
-    sub.addString(EFAA_OPC_ENTITY_TAG);
+    sub.addString(ICUBCLIENT_OPC_ENTITY_TAG);
     sub.addString("==");
-    sub.addString(EFAA_OPC_ENTITY_RELATION);
+    sub.addString(ICUBCLIENT_OPC_ENTITY_RELATION);
     cond.addList() = sub;
     if (subject != "any")
     {
@@ -757,9 +757,9 @@ std::list<Relation>  OPCClient::getRelations(std::string entity)
 
 
     //Bottle isRelation;
-    //isRelation.addString(EFAA_OPC_ENTITY_TAG);
+    //isRelation.addString(ICUBCLIENT_OPC_ENTITY_TAG);
     //isRelation.addString("==");
-    //isRelation.addString(EFAA_OPC_ENTITY_RELATION);
+    //isRelation.addString(ICUBCLIENT_OPC_ENTITY_RELATION);
 
     //Bottle matchSubject;
     //matchSubject.addString("rSubject");
@@ -882,8 +882,8 @@ void OPCClient::checkout(bool updateCache, bool useBroadcast)
         {
             Bottle* bEntity = bBroadcastIn->get(i).asList();
             //std::string test = bEntity->toString();
-            string entityType = bEntity->check(EFAA_OPC_ENTITY_TAG,Value("INVALID")).asString();
-            if (entityType!="INVALID" && entityType != EFAA_OPC_ENTITY_RELATION)
+            string entityType = bEntity->check(ICUBCLIENT_OPC_ENTITY_TAG,Value("INVALID")).asString();
+            if (entityType!="INVALID" && entityType != ICUBCLIENT_OPC_ENTITY_RELATION)
             {
                 // TODO: NOT SURE WHETHER THIS CHANGE IS CORRECT
                 // CAN SOMEONE PLEASE LOOK OVER THIS WHETHER IT LOOKS OKAY?
@@ -899,11 +899,11 @@ void OPCClient::checkout(bool updateCache, bool useBroadcast)
                     //Cast to the right type
                     if(entityType == "entity")
                         newE = new Entity();
-                    else if (entityType == EFAA_OPC_ENTITY_OBJECT)
+                    else if (entityType == ICUBCLIENT_OPC_ENTITY_OBJECT)
                         newE = new Object();
-                    else if (entityType == EFAA_OPC_ENTITY_AGENT)
+                    else if (entityType == ICUBCLIENT_OPC_ENTITY_AGENT)
                         newE = new Agent();
-                    else if (entityType == EFAA_OPC_ENTITY_ACTION)
+                    else if (entityType == ICUBCLIENT_OPC_ENTITY_ACTION)
                         newE = new Action();
                     else if (entityType == "bodypart")
                         newE = new Bodypart();
@@ -933,9 +933,9 @@ void OPCClient::checkout(bool updateCache, bool useBroadcast)
         cmd.addString("ask");
 
         Bottle& cond = cmd.addList();
-        sub.addString(EFAA_OPC_ENTITY_TAG);
+        sub.addString(ICUBCLIENT_OPC_ENTITY_TAG);
         sub.addString("!=");
-        sub.addString(EFAA_OPC_ENTITY_RELATION);
+        sub.addString(ICUBCLIENT_OPC_ENTITY_RELATION);
         cond.addList() = sub;
 
         write(cmd,reply,isVerbose);
@@ -1086,15 +1086,15 @@ std::list<std::shared_ptr<Entity>> OPCClient::EntitiesCacheCopy()
     for(map<int,Entity*>::iterator it = this->entitiesByID.begin() ; it != this->entitiesByID.end() ; it++)
     {
         std::shared_ptr<Entity> E;
-        if ((it->second)->m_entity_type == EFAA_OPC_ENTITY_AGENT)
+        if ((it->second)->m_entity_type == ICUBCLIENT_OPC_ENTITY_AGENT)
         {
             E = std::shared_ptr<Agent>(new Agent());
         }
-        else if ((it->second)->m_entity_type == EFAA_OPC_ENTITY_OBJECT)
+        else if ((it->second)->m_entity_type == ICUBCLIENT_OPC_ENTITY_OBJECT)
         {
             E = std::shared_ptr<Object>(new Object());
         }
-        else if ((it->second)->m_entity_type == EFAA_OPC_ENTITY_ACTION)
+        else if ((it->second)->m_entity_type == ICUBCLIENT_OPC_ENTITY_ACTION)
         {
             E = std::shared_ptr<Action>(new Action());
         }

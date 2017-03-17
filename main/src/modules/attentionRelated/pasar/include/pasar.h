@@ -1,10 +1,10 @@
 // -*- mode:C++; tab-width:4; c-basic-offset:4; indent-tabs-mode:nil -*-
 
 /*
-* Copyright (C) 2014 EFAA Consortium, European Commission FP7 Project IST-270490
+* Copyright (C) 2014 ICUBCLIENT Consortium, European Commission FP7 Project IST-270490
 * Authors: Stéphane Lallée, Grégoire Pointeau
 * email:   stephane.lallee@gmail.com, gregoire.pointeau@inserm.fr
-* website: http://efaa.upf.edu/
+* website: http://ICUBCLIENT.upf.edu/
 * Permission is granted to copy, distribute, and/or modify this program
 * under the terms of the GNU General Public License, version 2 or any
 * later version published by the Free Software Foundation.

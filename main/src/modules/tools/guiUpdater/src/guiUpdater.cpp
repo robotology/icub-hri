@@ -198,7 +198,7 @@ bool GuiUpdater::updateModule()
                 {
                     if (o->name() != "icub")
                     {
-                        if (o->isType(EFAA_OPC_ENTITY_AGENT))
+                        if (o->isType(ICUBCLIENT_OPC_ENTITY_AGENT))
                         {
                             addAgent(dynamic_cast<Agent*>(o), guiTag.str());
                         }
@@ -217,7 +217,7 @@ bool GuiUpdater::updateModule()
 
 bool GuiUpdater::isDisplayable(Entity* entity)
 {
-    return entity->isType(EFAA_OPC_ENTITY_OBJECT);
+    return entity->isType(ICUBCLIENT_OPC_ENTITY_OBJECT);
 }
 
 void GuiUpdater::deleteObject(const string &opcTag, Object* o)
@@ -229,7 +229,7 @@ void GuiUpdater::deleteObject(const string &opcTag, Object* o)
 
     //Delete all the body parts
 
-    if (o != NULL && o->entity_type() == EFAA_OPC_ENTITY_AGENT && displaySkeleton)
+    if (o != NULL && o->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT && displaySkeleton)
     {
         unsigned int i = 0;
         Agent* a = dynamic_cast<Agent*>(o);
@@ -246,7 +246,7 @@ void GuiUpdater::deleteObject(const string &opcTag, Object* o)
     }
 
     //delete all the drives
-    if (o != NULL && o->entity_type() == EFAA_OPC_ENTITY_AGENT)
+    if (o != NULL && o->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT)
     {
         Agent* a = dynamic_cast<Agent*>(o);
         for(auto& drive : a->m_drives)
@@ -300,7 +300,7 @@ void GuiUpdater::addAgent(Agent* o, const string &opcTag)
     }
     else
     {
-        //Vector inCurrentRootReference = iCub->getSelfRelativePosition(o->m_body.m_parts[EFAA_OPC_BODY_PART_TYPE_HEAD]);
+        //Vector inCurrentRootReference = iCub->getSelfRelativePosition(o->m_body.m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_HEAD]);
         Vector inCurrentRootReference = iCub->getSelfRelativePosition(o->m_ego_position);
         ostringstream opcTagPart;
         opcTagPart<< o->name() <<"("<<o->opc_id()<<")";

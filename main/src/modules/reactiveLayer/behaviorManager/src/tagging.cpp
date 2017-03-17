@@ -94,7 +94,7 @@ void Tagging::run(const Bottle &args) {
 
     if(type=="bodypart" && target.find("unknown_self") == 0) {
         iCub->opc->checkout();
-        yarp::sig::Vector lHandVec = iCub->getPartnerBodypartLoc(EFAA_OPC_BODY_PART_TYPE_HAND_L);
+        yarp::sig::Vector lHandVec = iCub->getPartnerBodypartLoc(ICUBCLIENT_OPC_BODY_PART_TYPE_HAND_L);
 
         iCub->lookAtPartner();
         if(lHandVec.size()==0) {

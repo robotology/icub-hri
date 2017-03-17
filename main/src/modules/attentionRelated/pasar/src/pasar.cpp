@@ -266,7 +266,7 @@ bool PasarModule::updateModule()
     {
         if (entity->name() != "icub")
         {
-            if (entity->isType(EFAA_OPC_ENTITY_AGENT) || entity->isType(EFAA_OPC_ENTITY_OBJECT))
+            if (entity->isType(ICUBCLIENT_OPC_ENTITY_AGENT) || entity->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
             {
                 Object * ob = dynamic_cast<Object*>(entity.get());
                 OPCEntities[entity->opc_id()].o = *ob;
@@ -383,7 +383,7 @@ void PasarModule::saliencyTopDown() {
                 it.second.present = false;
             }
 
-            if (it.second.o.entity_type() == EFAA_OPC_ENTITY_AGENT){
+            if (it.second.o.entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT){
                 if (acceleration > thresholdMovementAccelAgent)
                 {
                     it.second.o.m_saliency += pTopDownAccelerationCoef;
@@ -462,7 +462,7 @@ bool PasarModule::saliencyPointing()
     // founding the agent:
     Vector vec;
     for (auto &it : OPCEntities){
-        if (it.second.o.entity_type() == EFAA_OPC_ENTITY_AGENT
+        if (it.second.o.entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT
                 && it.second.present
                 && (it.second.o.name() != "iCub")
                 && (it.second.o.name() != "icub")){
@@ -545,7 +545,7 @@ bool PasarModule::saliencyWaving()
     Agent *ag = nullptr;
     // founding the agent:
     for (auto &it : OPCEntities){
-        if (it.second.o.entity_type() == EFAA_OPC_ENTITY_AGENT
+        if (it.second.o.entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT
                 && it.second.present
                 && (it.second.o.name() != "iCub")
                 && (it.second.o.name() != "icub")){
@@ -684,7 +684,7 @@ void PasarModule::initializeMapTiming()
         {
             //!!! ONLY OBJECTS and AGENTS ARE TRACKED !!!
 
-            if (entity->isType(EFAA_OPC_ENTITY_AGENT) || entity->isType(EFAA_OPC_ENTITY_OBJECT))
+            if (entity->isType(ICUBCLIENT_OPC_ENTITY_AGENT) || entity->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
             {
                 Object * ob = dynamic_cast<Object*>(entity.get());
                 OPCEntities[entity->opc_id()].o = *ob;
@@ -700,7 +700,7 @@ void PasarModule::checkAgentHaving()
 {
     // founding all agents:
     for (auto &it : OPCEntities){
-        if (it.second.o.entity_type() == EFAA_OPC_ENTITY_AGENT
+        if (it.second.o.entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT
                 && (it.second.present || it.second.o.name() != "icub")){
             Agent *ag = dynamic_cast<Agent*>(iCub->opc->getEntity(it.second.o.name()));
 

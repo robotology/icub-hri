@@ -51,7 +51,7 @@ public:
     std::string m_part;
 
     /**
-    * The string labelling the kinect node (of a human kinematic structure, one of the EFAA_OPC_BODY_PART_TYPE_XXX) that corresponds to the iCub's joint
+    * The string labelling the kinect node (of a human kinematic structure, one of the ICUBCLIENT_OPC_BODY_PART_TYPE_XXX) that corresponds to the iCub's joint
     */
     std::string m_kinectNode;
 

@@ -2,7 +2,7 @@
  * Copyright (C) 2014 WYSIWYD Consortium, European Commission FP7 Project ICT-612139
  * Authors: Stéphane Lallée
  * email:   stephane.lallee@gmail.com
- * website: http://efaa.upf.edu/
+ * website: http://ICUBCLIENT.upf.edu/
  * Permission is granted to copy, distribute, and/or modify this program
  * under the terms of the GNU General Public License, version 2 or any
  * later version published by the Free Software Foundation.
@@ -16,8 +16,8 @@
  * Public License for more details
  */
 
-#ifndef __EFAA_ICUBCLIENT_H__
-#define __EFAA_ICUBCLIENT_H__
+#ifndef __ICUBCLIENT_ICUBCLIENT_H__
+#define __ICUBCLIENT_ICUBCLIENT_H__
 
 #include <iostream>
 #include <iomanip>
@@ -35,7 +35,7 @@ namespace wysiwyd{
         /**
         * \ingroup wrdac_clients
         *
-        * Provide a compact way to access the iCub functionalities within the EFAA framework.
+        * Provide a compact way to access the iCub functionalities within the ICUBCLIENT framework.
         *
         * Grants access to high level motor commands (grasp, touch, look, goto, etc) of the robot as well as its internal state
         * (drives, emotions, beliefs) and its interaction means (speech).
