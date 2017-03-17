@@ -230,13 +230,9 @@ Entity *OPCClient::getEntity(int id, bool forceUpdate)
         newE = new Entity();
     else if (newEntityType == EFAA_OPC_ENTITY_OBJECT)
         newE = new Object();
-    else if (newEntityType == EFAA_OPC_ENTITY_RTOBJECT)
-        newE = new RTObject();
     else if (newEntityType == EFAA_OPC_ENTITY_AGENT)
         newE = new Agent();
-    else if (newEntityType == EFAA_OPC_ENTITY_ADJECTIVE)
-        newE = new Adjective();
-    else if (newEntityType == "action")
+    else if (newEntityType == EFAA_OPC_ENTITY_ACTION)
         newE = new Action();
     else if (newEntityType == "bodypart")
         newE = new Bodypart();
@@ -905,12 +901,8 @@ void OPCClient::checkout(bool updateCache, bool useBroadcast)
                         newE = new Entity();
                     else if (entityType == EFAA_OPC_ENTITY_OBJECT)
                         newE = new Object();
-                    else if (entityType == EFAA_OPC_ENTITY_RTOBJECT)
-                        newE = new RTObject();
                     else if (entityType == EFAA_OPC_ENTITY_AGENT)
                         newE = new Agent();
-                    else if (entityType == EFAA_OPC_ENTITY_ADJECTIVE)
-                        newE = new Adjective();
                     else if (entityType == EFAA_OPC_ENTITY_ACTION)
                         newE = new Action();
                     else if (entityType == "bodypart")
@@ -1105,14 +1097,6 @@ std::list<std::shared_ptr<Entity>> OPCClient::EntitiesCacheCopy()
         else if ((it->second)->m_entity_type == EFAA_OPC_ENTITY_ACTION)
         {
             E = std::shared_ptr<Action>(new Action());
-        }
-        else if ((it->second)->m_entity_type == EFAA_OPC_ENTITY_ADJECTIVE)
-        {
-            E = std::shared_ptr<Adjective>(new Adjective());
-        }
-        else if ((it->second)->m_entity_type == EFAA_OPC_ENTITY_RTOBJECT)
-        {
-            E = std::shared_ptr<RTObject>(new RTObject());
         }
         else if ((it->second)->m_entity_type == "bodypart")
         {

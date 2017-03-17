@@ -224,20 +224,6 @@ bool opcPopulater::populateEntityRandom(Bottle bInput){
         obj = NULL;
     }
 
-    else if (bInput.get(1).toString() == "rtobject")
-    {
-        RTObject* obj = iCub->opc->addOrRetrieveEntity<RTObject>(sName);
-        obj->m_ego_position[0] = (-1.5) * (Random::uniform()) - 0.2;
-        obj->m_ego_position[1] = (2) * (Random::uniform()) - 1;
-        obj->m_present = 1.0;
-        obj->m_color[0] = Random::uniform(180, 250);
-        obj->m_color[1] = Random::uniform(100, 180);
-        obj->m_color[2] = Random::uniform(0, 80);
-        iCub->opc->commit(obj);
-
-        obj = NULL;
-    }
-
     return true;
 }
 
@@ -284,20 +270,6 @@ bool opcPopulater::addUnknownEntity(Bottle bInput){
 
         obj = NULL;
     }
-
-    else if (bInput.get(1).toString() == "rtobject")
-    {
-        RTObject* obj = iCub->opc->addEntity<RTObject>(sName);
-        obj->m_ego_position[0] = (-1.5) * (Random::uniform()) - 0.2;
-        obj->m_ego_position[1] = (2) * (Random::uniform()) - 1;
-        obj->m_present = 1.0;
-        obj->m_color[0] = Random::uniform(180, 250);
-        obj->m_color[1] = Random::uniform(100, 180);
-        obj->m_color[2] = Random::uniform(0, 80);
-        iCub->opc->commit(obj);
-
-        obj = NULL;
-    }
     else
     {
         yInfo() << " " << bInput.get(1).toString() << " unknown kind of entity";
@@ -335,14 +307,9 @@ bool opcPopulater::setSaliencyEntity(Bottle bInput){
                 Agent* temp = dynamic_cast<Agent*>(*itEnt);
                 temp->m_saliency = targetSaliency;
             }
-            if ((*itEnt)->entity_type() == "object")
+            else if ((*itEnt)->entity_type() == "object")
             {
                 Object* temp = dynamic_cast<Object*>(*itEnt);
-                temp->m_saliency = targetSaliency;
-            }
-            if ((*itEnt)->entity_type() == "rtobject")
-            {
-                RTObject* temp = dynamic_cast<RTObject*>(*itEnt);
                 temp->m_saliency = targetSaliency;
             }
         }

@@ -6,13 +6,11 @@ project(wrdac)
 
 set(folder_source src/functions.cpp
                   src/knowledge/action.cpp
-                  src/knowledge/adjective.cpp
                   src/knowledge/agent.cpp
                   src/knowledge/bodypart.cpp
                   src/knowledge/entity.cpp
                   src/knowledge/object.cpp
                   src/knowledge/relation.cpp
-                  src/knowledge/rtObject.cpp
                   src/subsystems/subSystem_agentDetector.cpp
                   src/subsystems/subSystem_ARE.cpp
                   src/subsystems/subSystem_babbling.cpp
@@ -27,15 +25,12 @@ set(folder_source src/functions.cpp
 set(folder_header include/wrdac/functions.h
                   include/wrdac/tags.h
                   include/wrdac/knowledge/action.h
-                  include/wrdac/knowledge/adjective.h
                   include/wrdac/knowledge/agent.h
                   include/wrdac/knowledge/bodypart.h
-                  include/wrdac/knowledge/conjugator.h
                   include/wrdac/knowledge/entity.h
                   include/wrdac/knowledge/object.h
                   include/wrdac/knowledge/relation.h
                   include/wrdac/knowledge/representations.h
-                  include/wrdac/knowledge/rtObject.h
                   include/wrdac/clients/clients.h
                   include/wrdac/clients/icubClient.h
                   include/wrdac/clients/opcClient.h
