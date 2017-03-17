@@ -266,7 +266,7 @@ bool PasarModule::updateModule()
     {
         if (entity->name() != "icub")
         {
-            if (entity->isType(EFAA_OPC_ENTITY_RTOBJECT) || entity->isType(EFAA_OPC_ENTITY_AGENT) || entity->isType(EFAA_OPC_ENTITY_OBJECT))
+            if (entity->isType(EFAA_OPC_ENTITY_AGENT) || entity->isType(EFAA_OPC_ENTITY_OBJECT))
             {
                 Object * ob = dynamic_cast<Object*>(entity.get());
                 OPCEntities[entity->opc_id()].o = *ob;
@@ -682,9 +682,9 @@ void PasarModule::initializeMapTiming()
 
         if (entity->name() != "icub")
         {
-            //!!! ONLY OBJECTS, RT_OBJECT and AGENTS ARE TRACKED !!!
+            //!!! ONLY OBJECTS and AGENTS ARE TRACKED !!!
 
-            if (entity->isType(EFAA_OPC_ENTITY_RTOBJECT) || entity->isType(EFAA_OPC_ENTITY_AGENT) || entity->isType(EFAA_OPC_ENTITY_OBJECT))
+            if (entity->isType(EFAA_OPC_ENTITY_AGENT) || entity->isType(EFAA_OPC_ENTITY_OBJECT))
             {
                 Object * ob = dynamic_cast<Object*>(entity.get());
                 OPCEntities[entity->opc_id()].o = *ob;

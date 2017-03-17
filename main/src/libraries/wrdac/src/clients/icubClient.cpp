@@ -262,7 +262,7 @@ bool ICubClient::grasp(const string &oName, const Bottle &options)
 bool ICubClient::release(const string &oLocation, const Bottle &options)
 {
     Entity *target = opc->getEntity(oLocation, true);
-    if (!target->isType(EFAA_OPC_ENTITY_RTOBJECT) && !target->isType(EFAA_OPC_ENTITY_OBJECT))
+    if (!target->isType(EFAA_OPC_ENTITY_OBJECT))
     {
         yError() << "[iCubClient] Called release() on a unallowed location: \"" << oLocation << "\"";
         return false;
@@ -327,7 +327,7 @@ bool ICubClient::pointfar(const Vector &target, const Bottle &options, const std
 bool ICubClient::point(const string &sName, const Bottle &options)
 {
     Entity *target = opc->getEntity(sName, true);
-    if (!target->isType(EFAA_OPC_ENTITY_RTOBJECT) && !target->isType(EFAA_OPC_ENTITY_OBJECT) && !target->isType(EFAA_OPC_ENTITY_BODYPART))
+    if (!target->isType(EFAA_OPC_ENTITY_OBJECT) && !target->isType(EFAA_OPC_ENTITY_BODYPART))
     {
         yWarning() << "[iCubClient] Called point() on a unallowed location: \"" << sName << "\"";
         return false;

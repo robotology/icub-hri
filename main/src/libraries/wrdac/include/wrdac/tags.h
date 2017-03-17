@@ -35,23 +35,13 @@
 
 #define EFAA_OPC_ENTITY_TAG                 ("entity")
 #define EFAA_OPC_ENTITY_OBJECT              ("object")
-#define EFAA_OPC_ENTITY_RTOBJECT            ("rtobject")
 #define EFAA_OPC_ENTITY_BODYPART            ("bodypart")
 #define EFAA_OPC_ENTITY_AGENT               ("agent")
-#define EFAA_OPC_ENTITY_ADJECTIVE           ("adjective")
 #define EFAA_OPC_ENTITY_ACTION              ("action")
 #define EFAA_OPC_ENTITY_RELATION            ("relation")
 
 #define EFAA_OPC_OBJECT_NAME_TAG            ("name")
 #define EFAA_OPC_OBJECT_PRESENT_TAG         ("isPresent")
-#define EFAA_OPC_OBJECT_RTID_TAG            ("rt_id")
-#define EFAA_OPC_OBJECT_RTPOSX_TAG          ("rt_position_x")
-#define EFAA_OPC_OBJECT_RTPOSY_TAG          ("rt_position_y")
-#define EFAA_OPC_OBJECT_RTPOSZ_TAG          ("rt_position_z")
-#define EFAA_OPC_OBJECT_RTANGLE_TAG         ("rt_angle")
-#define EFAA_OPC_OBJECT_RTDIMX_TAG          ("rt_dim_x")
-#define EFAA_OPC_OBJECT_RTDIMY_TAG          ("rt_dim_y")
-#define EFAA_OPC_OBJECT_RTDIMZ_TAG          ("rt_dim_z")
 #define EFAA_OPC_OBJECT_SALIENCY            ("saliency")
 #define EFAA_OPC_OBJECT_VALUE               ("value")
 #define EFAA_OPC_OBJECT_CURID_TAG           ("cur_id")
@@ -63,6 +53,10 @@
 #define EFAA_OPC_OBJECT_ROBOTORX_TAG        ("robot_orientation_x")
 #define EFAA_OPC_OBJECT_ROBOTORY_TAG        ("robot_orientation_y")
 #define EFAA_OPC_OBJECT_ROBOTORZ_TAG        ("robot_orientation_z")
+#define EFAA_OPC_OBJECT_RTDIMX_TAG          ("rt_dim_x")
+#define EFAA_OPC_OBJECT_RTDIMY_TAG          ("rt_dim_y")
+#define EFAA_OPC_OBJECT_RTDIMZ_TAG          ("rt_dim_z")
+
 
 #define EFAA_OPC_OBJECT_GUI_COLOR_R         ("color_r")
 #define EFAA_OPC_OBJECT_GUI_COLOR_G         ("color_g")
@@ -78,11 +72,6 @@
 #define EFAA_OPC_OBJECT_SPATIAL_CONTAINS    ("contains")
 #define EFAA_OPC_OBJECT_SPATIAL_CONTAINED   ("isContained")
 #define EFAA_OPC_OBJECT_SPATIAL_INTERSECTS  ("intersects")
-
-// defines for talking to tactileInterface
-#define EFAA_TACTILEIF_RT2ROBOT_REQ         ("transform-table2icub")
-
-#define EFAA_OPC_ENTITY_AGENT_KINECT_PREFIX         ("KinectAgent00")
 
 // OPC : Kinect Skeleton joints
 #define EFAA_OPC_BODY_PART_TYPE_HEAD        ("head")
@@ -138,17 +127,6 @@ const static std::vector<std::string> ALL_AVAILABLE_BODYPARTS = {
     EFAA_OPC_BODY_PART_TYPE_FT_R,
     EFAA_OPC_BODY_PART_TYPE_COM
 };
-
-// OPC: Attentional touching
-#define EFAA_OPC_CONTACT_PROPERTY_PART       ("contact_part")
-#define EFAA_OPC_CONTACT_PROPERTY_TYPE       ("contact_type")
-
-#define EFAA_OPC_CONTACT_PART_LEFT        ("left")
-#define EFAA_OPC_CONTACT_PART_RIGHT       ("right")
-#define EFAA_OPC_CONTACT_PART_BOTH        ("both")
-
-#define EFAA_OPC_CONTACT_TYPE_POKE        ("poke")
-#define EFAA_OPC_CONTACT_TYPE_GRAB        ("grab")
 
 //Kinect tags
 #define EFAA_KINECT_ALL_INFO              ("all_info")
