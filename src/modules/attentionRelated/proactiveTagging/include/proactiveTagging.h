@@ -35,7 +35,6 @@ private:
     yarp::os::Port   portToSAM;
     yarp::os::Port   portToPasar;
     yarp::os::BufferedPort<yarp::os::Bottle>   portFromTouchDetector;
-    yarp::os::BufferedPort<yarp::os::Bottle>   portNoWaitToBodySchema;
 
     std::string      GrammarAskNameAgent;
     std::string      GrammarAskNameObject;
@@ -63,9 +62,6 @@ private:
 
     //selfTagging.cpp
     yarp::os::Bottle exploreTactileEntityWithName(yarp::os::Bottle bInput);
-
-    //actionTagging
-    yarp::os::Bottle describeBabbling(std::string sJointName, int jointNumber); // to change extract the joint from the name
 
     bool setPasarPointing(bool on);
     std::string getBestEntity(std::string sTypeTarget);
