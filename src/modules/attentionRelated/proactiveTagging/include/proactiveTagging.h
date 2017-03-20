@@ -39,7 +39,6 @@ private:
     std::string      GrammarAskNameAgent;
     std::string      GrammarAskNameObject;
     std::string      GrammarAskNameBodypart;
-    std::string      GrammarDescribeAction;
 
     std::string      babblingArm; //side of the babbling arm : left or right
     std::string      defaultPartnerName; //default name of the partner: considered NOT named
