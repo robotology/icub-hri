@@ -23,10 +23,8 @@ using namespace wysiwyd::wrdac;
 using namespace std;
 
 void proactiveTagging::subPopulateObjects(Bottle* objectList, bool addOrRetrieve) {
-    if (objectList)
-    {
-        for (int d = 0; d < objectList->size(); d++)
-        {
+    if (objectList) {
+        for (int d = 0; d < objectList->size(); d++) {
             std::string name = objectList->get(d).asString().c_str();
             wysiwyd::wrdac::Object* o;
             if(addOrRetrieve) {
@@ -71,39 +69,31 @@ string proactiveTagging::getBestEntity(string sTypeTarget) {
 
     double start = yarp::os::Time::now();
     // start detecting unknown objects
-    while (!bFound && start + 8.0 > yarp::os::Time::now())
-    {
+    while (!bFound && start + 8.0 > yarp::os::Time::now()) {
         iCub->opc->checkout();
         list<shared_ptr<Entity>> lEntities = iCub->opc->EntitiesCacheCopy();
 
         double highestSaliency = 0.0;
         double secondSaliency = 0.0;
 
-        for (auto& entity : lEntities)
-        {
-            if (entity->name().find("unknown")==0)
-            {
+        for (auto& entity : lEntities) {
+            if (entity->name().find("unknown")==0) {
                 if ((sTypeTarget == "object" && (entity->entity_type() == "object")) ||
-                    (sTypeTarget == "bodypart" && (entity->entity_type() == "bodypart")))
-                {
+                    (sTypeTarget == "bodypart" && (entity->entity_type() == "bodypart"))) {
                     Object* temp = dynamic_cast<Object*>(entity.get());
                     if(!temp) {
                         yError() << "Could not cast " << entity->name() << " to an object";
                         iCub->say("Could not cast " + entity->name() + " to an object");
                     }
-                    if (temp->m_saliency > highestSaliency)
-                    {
+                    if (temp->m_saliency > highestSaliency) {
                         if (secondSaliency != 0.0)
                         {
                             secondSaliency = highestSaliency;
                         }
                         highestSaliency = temp->m_saliency;
                         sNameBestEntity = temp->name();
-                    }
-                    else
-                    {
-                        if (temp->m_saliency > secondSaliency)
-                        {
+                    } else {
+                        if (temp->m_saliency > secondSaliency) {
                             secondSaliency = temp->m_saliency;
                             sNameSecondBest = temp->name();
                         }
@@ -124,8 +114,7 @@ string proactiveTagging::getBestEntity(string sTypeTarget) {
                     yDebug() << "Two objects are salient, but one is much more";
                     //but it is enough difference
                     bFound = true;
-                }
-                else {
+                } else {
                     yDebug() << "Two objects are similarly salient";
                 }
             } else {
@@ -134,8 +123,7 @@ string proactiveTagging::getBestEntity(string sTypeTarget) {
                 bFound = true;
             }
         }
-        if (sNameBestEntity == "none")
-        {
+        if (sNameBestEntity == "none") {
             yDebug() << "No object is salient";
             bFound = false;
         }
@@ -147,10 +135,8 @@ string proactiveTagging::getBestEntity(string sTypeTarget) {
 void proactiveTagging::subPopulateBodyparts(Bottle* bodyPartList, Bottle* bodyPartJointList, bool addOrRetrieve) {
     list<shared_ptr<Entity>> currentEntitiesList = iCub->opc->EntitiesCacheCopy();
 
-    if (bodyPartList)
-    {
-        for (int d = 0; d < bodyPartList->size(); d++)
-        {
+    if (bodyPartList) {
+        for (int d = 0; d < bodyPartList->size(); d++) {
             bool foundSame = false;
             for(auto& e : currentEntitiesList) {
                 if(Bodypart* bp = dynamic_cast<Bodypart*>(e.get())) {
@@ -174,7 +160,7 @@ void proactiveTagging::subPopulateBodyparts(Bottle* bodyPartList, Bottle* bodyPa
             yInfo() << " [configureOPC] Bodypart " << o->name() << "added";
             o->m_present = 0.0;
             //apply the joint number if available. protect for the loop because using d from bodyPartList. should be same number of element between bodyPartList and bodyPartJointList
-            if(d < bodyPartJointList->size()){
+            if(d < bodyPartJointList->size()) {
                 o->m_joint_number = bodyPartJointList->get(d).asInt();
                 yInfo() << " [configureOPC] Bodypart " << o->name() << " has now a joint " << o->m_joint_number ;
             }
@@ -183,16 +169,14 @@ void proactiveTagging::subPopulateBodyparts(Bottle* bodyPartList, Bottle* bodyPa
     }
 }
 
-void proactiveTagging::configureOPC(yarp::os::ResourceFinder &rf)
-{
+void proactiveTagging::configureOPC(yarp::os::ResourceFinder &rf) {
     //Populate the OPC if required
     yDebug() << "Populating OPC...";
 
     //1. Populate AddOrRetrieve part
     Bottle grpOPC_AOR = rf.findGroup("OPC_AddOrRetrieve");
     bool shouldPopulate_AOR = grpOPC_AOR.find("populateOPC").asInt() == 1;
-    if (shouldPopulate_AOR)
-    {
+    if (shouldPopulate_AOR) {
         Bottle *objectList = grpOPC_AOR.find("objectName").asList();
         subPopulateObjects(objectList, true);
 
@@ -204,8 +188,7 @@ void proactiveTagging::configureOPC(yarp::os::ResourceFinder &rf)
     //2. Populate Add part (allows several object with same base name, e.g. object, object_1, object_2, ..., object_n)
     Bottle grpOPC_Add = rf.findGroup("OPC_Add");
     bool shouldPopulate_Add = grpOPC_Add.find("populateOPC").asInt() == 1;
-    if (shouldPopulate_Add)
-    {
+    if (shouldPopulate_Add) {
         Bottle *objectList = grpOPC_Add.find("objectName").asList();
         subPopulateObjects(objectList, false);
 

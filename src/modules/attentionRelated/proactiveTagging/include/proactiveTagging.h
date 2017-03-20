@@ -26,7 +26,6 @@ private:
 
     double      period;
 
-    std::string bodySchemaRpc;
     std::string SAMRpc;
     std::string LRHRpc;
     std::string touchDetectorRpc;

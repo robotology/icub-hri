@@ -22,8 +22,7 @@ using namespace yarp::sig;
 using namespace wysiwyd::wrdac;
 using namespace std;
 
-bool proactiveTagging::configure(yarp::os::ResourceFinder &rf)
-{
+bool proactiveTagging::configure(yarp::os::ResourceFinder &rf) {
     string moduleName = rf.check("name", Value("proactiveTagging")).asString().c_str();
     setName(moduleName.c_str());
 
@@ -43,15 +42,12 @@ bool proactiveTagging::configure(yarp::os::ResourceFinder &rf)
 
     defaultPartnerName = "partner";
 
-    //bool    bEveryThingisGood = true;
-
     //Create an iCub Client and check that all dependencies are here before starting
     bool isRFVerbose = true;
     iCub = new ICubClient(moduleName, "proactiveTagging", "client.ini", isRFVerbose);
     iCub->opc->isVerbose &= true;
 
-    while (!iCub->connect())
-    {
+    while (!iCub->connect()) {
         yWarning() << "iCubClient : Some dependencies are not running...";
         Time::delay(1.0);
     }
@@ -65,8 +61,6 @@ bool proactiveTagging::configure(yarp::os::ResourceFinder &rf)
         if (iCub->getSpeechClient())
             iCub->getSpeechClient()->SetOptions(ttsOptions);
     }
-
-    bodySchemaRpc = rf.check("bodySchemaRpc", Value("/babbling/rpc")).asString().c_str();
 
     //out to SAM
     portToSAM.open(("/" + moduleName + "/toSAM:o").c_str());
@@ -93,8 +87,7 @@ bool proactiveTagging::configure(yarp::os::ResourceFinder &rf)
         iCub->say("TOUCH DETECTOR NOT CONNECTED");
     }
 
-    if (!iCub->getRecogClient())
-    {
+    if (!iCub->getRecogClient()) {
         iCub->say("speech recognizer not connected");
         yWarning() << "SPEECH RECOGNIZER NOT CONNECTED";
     }
@@ -184,28 +177,22 @@ bool proactiveTagging::respond(const Bottle& command, Bottle& reply) {
         yInfo() << " exploreUnknownEntity";
         string type = command.get(1).toString();
         string name = command.get(2).toString();
-        yDebug() << "exploreUnknownEntity with name = " << name ;
-        //yDebug() << "It is " <<  !(name.find("unknown") == std::string::npos) << "that it contains 'unknown'" ;
-        //type is bodypart and it has been named! name.find... is true when name DOES NOT contain unknown
-        if ((type == "bodypart") && (name.find("unknown") == std::string::npos)) {
+        yDebug() << "exploreUnknownEntity with name = " << name;
+
+        if ((type == "bodypart") && (name.find("unknown") == std::string::npos)) { //type is bodypart and it already has a name
             iCub->opc->checkout();
             Bodypart* bp = dynamic_cast<Bodypart*>(iCub->opc->getEntity(name));
             if(!bp) {
                 yError() << "Could not cast" << name << "to bodypart";
                 iCub->say("Could not cast " + name + " to bodypart");
+            } else {
+                if (bp->m_tactile_number == -1) {
+                    yInfo() << "Going to tag skin part";
+                    reply = exploreTactileEntityWithName(command);
+                }
             }
-            // TODO: Make calls of exploreTactileEntityWithName and assignKinematicStructureByName consistent
-            if (bp->m_tactile_number == -1) {
-                yInfo() << "Going to tag skin part";
-                reply = exploreTactileEntityWithName(command);
-            }
-            /*else if (bp->m_kinStruct_instance == -1) {
-                yInfo() << "Going to tag kinematic structure";
-                bool forcingKS = true;
-                reply = assignKinematicStructureByName(name, type, forcingKS);
-            }*/
             else {
-                yWarning("Not sure what to do, name + kinematic structure + tactile information already known");
+                yWarning("Not sure what to do, name and tactile information already known");
             }
         } else if (type == "bodypart") {
             yInfo() << "Going to tag bodypart (include babbling)";
@@ -215,10 +202,10 @@ bool proactiveTagging::respond(const Bottle& command, Bottle& reply) {
             yInfo() << "Going to tag object (include a pointing)";
             reply = exploreUnknownEntity(command);
         } else if (type == "agent") {
-            yInfo() << "Going to tag an agent (include a gazing)";
+            yInfo() << "Going to tag an agent (face recog)";
             reply = exploreUnknownEntity(command);
         } else {
-            yWarning() << "Type = " << type << " is NON valid for exploreUnknownEntity/ doing nothing";
+            yWarning() << "Type = " << type << " is NON valid for exploreUnknownEntity -> doing nothing";
             reply.addString("error");
             reply.addString("Type is NON valid for exploreUnknownEntity");
         }
@@ -237,8 +224,6 @@ bool proactiveTagging::respond(const Bottle& command, Bottle& reply) {
 
     rpcPort.reply(reply);
 
-
-
     return true;
 }
 
@@ -249,65 +234,51 @@ bool proactiveTagging::updateModule() {
 
 /*
 * Recognize the name of an unknown entity
-* Recognize through speech the name of an unknwon entity.
+* Recognize through speech the name of an unknown entity.
 * @return (error errorDescription) or (sName)
 */
-Bottle proactiveTagging::recogName(string entityType)
-{
+Bottle proactiveTagging::recogName(string entityType) {
     Bottle bOutput;
 
-    Bottle bRecognized, //recceived FROM speech recog with transfer information (1/0 (bAnswer))
-        bAnswer; //response from speech recog without transfer information, including raw sentence
+    Bottle bRecognized, //received from speech recog with transfer information (1/0 (bAnswer))
+           bAnswer;     //response from speech recog without transfer information, including raw sentence
 
     yDebug() << "Going to load grammar.";
-    //Load the Speech Recognition with grammar according to entityType
-    // bAnswer is the result of the regognition system (first element is the raw sentence, 2nd is the list of semantic element)
-    if (entityType == "agent"){
-        bool recognizedCorrectGrammar=false;
-        while(!recognizedCorrectGrammar) {
-            bRecognized = iCub->getRecogClient()->recogFromGrammarLoop(grammarToString(GrammarAskNameAgent), 20);
-            bAnswer = *bRecognized.get(1).asList();
-            if(bAnswer.get(1).asList()->get(0).toString() != "SENTENCEAGENT") {
-                iCub->say("I did not understand you. Can you please repeat?");
-                yError() << "Wrong sentence type returned (not SENTENCEAGENT)";
-            } else {
-                recognizedCorrectGrammar = true;
-            }
-        }
-    }
-    else if (entityType == "object"){
-        bool recognizedCorrectGrammar=false;
-        while(!recognizedCorrectGrammar) {
-            bRecognized = iCub->getRecogClient()->recogFromGrammarLoop(grammarToString(GrammarAskNameObject), 20);
-            bAnswer = *bRecognized.get(1).asList();
-            if(bAnswer.get(1).asList()->get(0).toString() != "SENTENCEOBJECT") {
-                iCub->say("I did not understand you. Can you please repeat?");
-                yError() << "Wrong sentence type returned (not SENTENCEOBJECT)";
-            } else {
-                recognizedCorrectGrammar = true;
-            }
-        }
-    }
-    else if (entityType == "bodypart"){
-        bool recognizedCorrectGrammar=false;
-        while(!recognizedCorrectGrammar) {
-            bRecognized = iCub->getRecogClient()->recogFromGrammarLoop(grammarToString(GrammarAskNameBodypart), 20);
-            bAnswer = *bRecognized.get(1).asList();
-            if(bAnswer.get(1).asList()->get(0).toString() != "SENTENCEBODYPART") {
-                iCub->say("I did not understand you. Can you please repeat?");
-                yError() << "Wrong sentence type returned (not SENTENCEBODYPART)";
-            } else {
-                recognizedCorrectGrammar = true;
-            }
-        }
-    }
-    else {
+    string grammar, expectedresponse="error", semanticfield="error";
+    if (entityType == "agent") {
+        grammar = GrammarAskNameAgent;
+        expectedresponse = "SENTENCEAGENT";
+        semanticfield = "agent";
+    } else if (entityType == "object") {
+        grammar = GrammarAskNameObject;
+        expectedresponse = "SENTENCEOBJECT";
+        semanticfield = "object";
+    } else if (entityType == "bodypart") {
+        grammar = GrammarAskNameBodypart;
+        expectedresponse = "SENTENCEBODYPART";
+        semanticfield = "fingerName";
+    } else {
         yError() << " error in proactiveTagging::recogName | for " << entityType << " | Entity Type not managed";
         bOutput.addString("error");
         bOutput.addString("Entity Type not managed");
         iCub->say("I do not know what you want from me. Can you please ask me something else?");
         return bOutput;
     }
+
+    // Load the Speech Recognition with grammar according to entityType
+    // bAnswer is the result of the recognition system (first element is the raw sentence, second is the list of semantic element)
+    bool recognizedCorrectGrammar=false;
+    while(!recognizedCorrectGrammar) {
+        bRecognized = iCub->getRecogClient()->recogFromGrammarLoop(grammarToString(grammar), 20);
+        bAnswer = *bRecognized.get(1).asList();
+        if(bAnswer.get(1).asList()->get(0).toString() != expectedresponse) {
+            iCub->say("I did not understand you. Can you please repeat?");
+            yError() << "Wrong sentence type returned (not " << expectedresponse << ")";
+        } else {
+            recognizedCorrectGrammar = true;
+        }
+    }
+
     yDebug() << "Response from recogClient: " << bRecognized.toString();
 
     if (bRecognized.get(0).asInt() == 0)
@@ -330,23 +301,8 @@ Bottle proactiveTagging::recogName(string entityType)
     }
 
     Bottle bSemantic = *bAnswer.get(1).asList(); // semantic information of the content of the recognition
-
-    string sName;
-    if (entityType == "agent") {
-        sName = bSemantic.check("agent", Value("error")).asString();
-    }
-    else if (entityType == "object") {
-        sName = bSemantic.check("object", Value("error")).asString();
-    }
-    else if (entityType == "bodypart") {
-        sName = bSemantic.check("fingerName", Value("error")).asString();
-    }
-    else {
-        yError("recogName ERROR entitytype not known!");
-    }
-
+    string sName = bSemantic.check(semanticfield, Value("error")).asString();
     bOutput.addString(sName);
-
     return bOutput;
 }
 
@@ -374,8 +330,7 @@ Bottle proactiveTagging::getNameFromSAM(string sNameTarget, string currentEntity
         bOutput.addString(currentEntityType);
     }
     else {
-        if(sNameSAM == "nack")
-        {
+        if(sNameSAM == "nack") {
              yError() << bReplySam.get(1).asString();
              //iCub->say("I could not get the name from SAM");
         }
@@ -441,7 +396,6 @@ yarp::os::Bottle proactiveTagging::exploreTactileEntityWithName(Bottle bInput) {
     iCub->babbling(joint, babblingArm, babbling_duration);
 
     //3. Read until some tactile value are detected
-    //TODO: Here, instead we should check the saliency given by pasar!
     bool gotTouch = false;
     Bottle *bTactile;
     int timeout = 0;
@@ -475,7 +429,6 @@ yarp::os::Bottle proactiveTagging::exploreTactileEntityWithName(Bottle bInput) {
 
     //4.Ask human to touch
     string sThank = " Thank you, now I know when I am touching object with my " + getBodyPartNameForSpeech(sName);
-    yInfo() << " sThank: " << sThank;
     iCub->lookAtPartner();
     iCub->say(sThank);
     iCub->home();
@@ -489,8 +442,7 @@ yarp::os::Bottle proactiveTagging::exploreTactileEntityWithName(Bottle bInput) {
 * input: exploreUnknownEntity entityType entityName (eg: exploreUnknownEntity agent unknown_25)
 * ask through speech the name of an unknwon entity
 */
-Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput)
-{
+Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput) {
     Bottle bOutput;
     Bottle tryRecog;
     if (bInput.size() != 3)
@@ -587,7 +539,7 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput)
     string sName;
 
     if (bName.get(0).asString() == "error") {
-        return bName;     //if error, bName = (error errorDescription) -> return it
+        return bName; //if error, bName = (error errorDescription) -> return it
     }
     else {
         sName = bName.get(0).asString();
@@ -595,7 +547,7 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput)
 
     string sReply;
     Entity* e = iCub->opc->getEntity(sNameTarget);
-    iCub->changeName(e,sName);
+    iCub->changeName(e, sName);
 
     iCub->lookAtPartner();
     if (currentEntityType == "agent") {
@@ -630,12 +582,10 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput)
 * First element is: error - warning - success
 * Second element is: information about the action
 */
-Bottle proactiveTagging::searchingEntity(const Bottle &bInput)
-{
+Bottle proactiveTagging::searchingEntity(const Bottle &bInput) {
     Bottle bOutput;
 
-    if (bInput.size() < 3)
-    {
+    if (bInput.size() < 3) {
         yInfo() << " proactiveTagging::searchingEntity | Problem in input size.";
         bOutput.addString("error");
         bOutput.addString("Problem in input size");
@@ -653,8 +603,7 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput)
     int unknownEntitiesPresent = 0;
 
     // check if the entity is already present in the OPC
-    if (iCub->opc->isConnected())
-    {
+    if (iCub->opc->isConnected()) {
         iCub->opc->checkout();
         list<shared_ptr<Entity>> lEntities = iCub->opc->EntitiesCacheCopy();
 
@@ -672,16 +621,12 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput)
         }
 
         if(unknownEntitiesPresent == 0) {
-            //iCub->lookAtPartner();
-            //iCub->say("I know all the " + sTypeTarget + " present. The " + sNameTarget + " is not here");
-            //iCub->home();
             yInfo() << "No unknown entity is present.";
             bOutput.addString("nack");
             bOutput.addString("No unknown entity is present.");
             return bOutput;
         } else if(unknownEntitiesPresent == 1) {
             yInfo() << "There is only one unknown entity";
-            // let's find the only unknown entity
             for (auto& entity : lEntities) {
                 Object *o = dynamic_cast<Object*>(entity.get());
                 if(o && o->name().find("unknown") != string::npos && o->entity_type() == sTypeTarget && o->m_present == 1.0) {
@@ -697,9 +642,7 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput)
                 }
             }
         }
-    }
-    else
-    {
+    } else {
         yWarning() << " in proactiveTagging::searchingEntity | OPC not Connected";
         bOutput.addString("error");
         bOutput.addString("OPC not connected");
@@ -727,6 +670,7 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput)
         yInfo() << sSentence;
     }
 
+    // activate pointing detection in pasar
     if(sTypeTarget == "object") {
         iCub->home();
 
@@ -760,6 +704,7 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput)
     bOutput.addString("name changed");
     iCub->say("Now I know the " + sNameTarget, false);
 
+    // de-activate pointing detection in pasar
     if(sTypeTarget == "object") {
         bool success = setPasarPointing(false);
         if(!success) {
