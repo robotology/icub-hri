@@ -14,7 +14,7 @@
    </description-long>
 
    <arguments>
-   <param default="bodySchema" desc="To specify the module's name; all the open ports will be tagged with the prefix /name">name</param>
+   <param default="babbling" desc="To specify the module's name; all the open ports will be tagged with the prefix /name">name</param>
    <param default="icub" desc="To specify the robot's name">robot</param>
    </arguments>
 
@@ -25,7 +25,7 @@
    <data>
       <input>
           <type>yarp::sig::Bottle</type>
-          <port carrier="tcp">/bodySchema/input</port>
+          <port carrier="tcp">/babbling/rpc</port>
           <!-- required input means the execution of module depends on
                this input data. Notice that not all the input are required
                for a module to perform its task (e.g. control input, status
@@ -46,9 +46,7 @@
    
    <services>
        <server>
-           <type>bodySchema_IDL</type>
-           <idl>bodySchema.thrift</idl>
-           <port>/bodySchema/rpc</port>
+           <port>/babbling/rpc</port>
            <description>Command port</description>
        </server>
    </services>

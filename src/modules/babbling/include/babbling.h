@@ -18,24 +18,13 @@
 #ifndef _BABBLING_H_
 #define _BABBLING_H_
 
-#include <opencv2/opencv.hpp>
-
 #include <yarp/sig/all.h>
 #include <yarp/os/all.h>
 #include <yarp/dev/all.h>
 
-#include <wrdac/clients/icubClient.h>
-
 class Babbling : public yarp::os::RFModule {
 private:
-    std::string moduleName;
-
     yarp::os::Port handlerPort;
-
-    yarp::os::BufferedPort<yarp::os::Bottle> portVelocityOut;
-    yarp::os::Port portToMatlab;
-    yarp::os::BufferedPort<yarp::os::Bottle> portReadMatlab;
-
     yarp::os::RpcClient portToABM;
 
     yarp::dev::IPositionControl* posLeftArm;
@@ -58,18 +47,12 @@ private:
     yarp::dev::PolyDriver rightArmDev;
     yarp::dev::PolyDriver headDev;
 
-    yarp::sig::Vector encodersLeftArm, encodersRightArm, cmd, command, new_command, tmpSpeed, tmpAcc;
-    yarp::sig::Vector handTarget, armTarget, fingerTarget;    
+    yarp::sig::Vector encodersLeftArm, encodersRightArm, command;
 
     std::string part;
     std::string robot;
-    std::string arm;
-    std::string cmd_source;
     int single_joint;
-    int fps;
     std::string part_babbling;
-
-    std::string leftCameraPort, rightCameraPort;
 
     double freq, amp;
     double train_duration;
@@ -90,11 +73,8 @@ private:
     bool init_iCub(std::string &part);
     bool doBabbling();
     yarp::sig::Vector babblingCommands(double &t, int j_idx);
-    int babblingCommandsMatlab();
-    bool doBabblingKinStruct();
     bool moveHeadToStartPos();
     bool gotoStartPos();
-    bool gotoHomePos();
     bool dealABM(const yarp::os::Bottle& command, bool begin);
 };
 
