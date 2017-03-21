@@ -33,9 +33,6 @@ using namespace yarp::dev;
 using namespace std;
 
 int main(int argc, char * argv[]) {
-
-    cout << "Tracking a face using left eye only from WYSIWYD/visionRelated/faceTracker..." << endl;
-
     /* initialize yarp network */
     Network yarp;   // set up yarp
 
@@ -56,10 +53,8 @@ int main(int argc, char * argv[]) {
     faceTrackerModule module;
 
     /* run the module: runModule() calls configure first and, if successful, it then runs */
-    cout << "Start face tracking..." << endl;
+    yInfo() << "Start face tracking...";
     module.runModule(rf);
-
-    cout << "Main returning..." << endl;
 
     return 0;
 }

@@ -15,7 +15,7 @@ include_directories(
 )
 
 # Search for source code.
-file(GLOB sources src/*.cpp src/*.cc src/*.c)
+file(GLOB sources src/*.cpp)
 file(GLOB headers include/*.h)
 
 set(docs ${PROJECT_NAME}.xml)
@@ -32,7 +32,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include
 
 add_executable(${PROJECT_NAME} ${headers} ${sources} ${docs})
 target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES} wrdac ${OpenCV_LIBRARIES})
-set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER visionRelated)
+set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER faceTracker)
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 yarp_install(FILES ${docs} DESTINATION ${WYSIWYD_MODULES_INSTALL_DIR})
-

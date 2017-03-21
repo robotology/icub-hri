@@ -52,52 +52,24 @@
 #include <yarp/sig/all.h>
 #include <yarp/dev/all.h>
 
-#include <wrdac/clients/opcClient.h>
-
-using namespace std;
-using namespace yarp::os;
-using namespace yarp::dev;
-using namespace yarp::sig;
-using namespace yarp::sig::draw;
-using namespace yarp::sig::file;
-
-using namespace wysiwyd::wrdac;
-
-/**
-* Module in charge of polling the OPC and updating icubGUI
-*/
 class faceTrackerModule : public yarp::os::RFModule {
-    std::string moduleName;
-    std::string opcName;
-
-    std::string faceTrackerPortName;
-    std::string handlerPortName;
-
-    OPCClient *opc;                  //retrieve information from the OPC
     yarp::os::Port handlerPort;      //a port to handle messages
 
-    Agent* icub;
+    yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelRgb> > imagePortLeft;     // make a port for reading left images
 
-    BufferedPort<ImageOf<PixelRgb> > imagePortLeft;     // make a port for reading left images
-    //BufferedPort<ImageOf<PixelRgb> > imagePortRight;  // make a port for reading right images
+    yarp::dev::IPositionControl *pos;
+    yarp::dev::IVelocityControl *vel;
+    yarp::dev::IEncoders *enc;
 
-    // ==================================================================
-    // robot
-    IPositionControl *pos;
-    IVelocityControl *vel;
-    IEncoders *enc;
+    yarp::dev::PolyDriver *robotHead;
 
-    PolyDriver *robotHead;
+    yarp::sig::Vector setpoints;
+    yarp::sig::Vector cur_encoders;
+    yarp::sig::Vector prev_encoders;
 
-    Vector setpoints;
-    Vector cur_encoders;
-    Vector prev_encoders;
-
-    IControlMode2 *ictrl;
+    yarp::dev::IControlMode2 *ictrl;
 
 protected:
-    //void exploring();
-
     int counter;
     double x_buf;
     double y_buf;
@@ -108,13 +80,11 @@ protected:
     int stuck_counter;
     int tracking_counter;
 
-    // ------------------------------
-    // random motion
+    // random motion variables
     int tilt_target;
     int pan_target;
 
     double pan_r, tilt_r;
-    int seed;
     int pan_max;
     int tilt_max;
 
@@ -135,6 +105,3 @@ public:
 
 
 #endif // __FACETRACKER_MODULE_H__
-
-//----- end-of-file --- ( next line intentionally left blank ) ------------------
-

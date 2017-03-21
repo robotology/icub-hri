@@ -1,5 +1,3 @@
-// -*- mode:C++; tab-width:4; c-basic-offset:4; indent-tabs-mode:nil -*-
-
 /*
 * Copyright (C) 2014 WYSIWYD Consortium, European Commission FP7 Project ICT-612139
 * Authors: Hyung Jin Chang
@@ -30,28 +28,18 @@ using namespace std;
 /************************************************************************/
 bool faceTrackerModule::configure(yarp::os::ResourceFinder &rf) {
 
-    moduleName = rf.check("name",
+    string moduleName = rf.check("name",
                         Value("faceTracker"),
                         "module name (string)").asString();
 
     setName(moduleName.c_str());
 
-    opcName = rf.check("opcName",
-                        Value("OPC"),
-                        "Opc name (string)").asString();
-
     string xmlPath = rf.findFileByName("haarcascade_frontalface_default.xml");
 
-    // Create an iCub Client and check that all dependencies are here befor starting
-    opc = new OPCClient(moduleName.c_str());
-    opc->connect(opcName);
-    icub = NULL;
-
-    handlerPortName = "/";
-    handlerPortName +=  getName() + "/rpc";
+    string handlerPortName = "/" + getName() + "/rpc";
 
     if (!handlerPort.open(handlerPortName.c_str())) {
-        cout << getName() << ": Unable to open port " << handlerPortName << endl;
+        yError() << getName() << ": Unable to open port " << handlerPortName;
         return false;
     }
 
@@ -65,19 +53,19 @@ bool faceTrackerModule::configure(yarp::os::ResourceFinder &rf) {
     while(!Network::connect("/icub/camcalib/left/out", "/facetracking/image/left/in"))
     {
         Time::delay(3);
-        cout << "try to connect left camera, please wait ..." << endl;
+        yDebug() << "try to connect left camera, please wait ...";
     }
 
     Property options;
     options.put("device", "remote_controlboard");
-    options.put("local", "/tutorial/motor/client");
+    options.put("local", "/facetracker/motor/client");
     options.put("remote", "/icub/head");
 
     robotHead = new PolyDriver(options);
 
     if(!robotHead->isValid())
     {
-        cout << "Cannot connect to the robot head" << endl;
+        yError() << "Cannot connect to the robot head";
         return false;
     }
 
@@ -88,7 +76,7 @@ bool faceTrackerModule::configure(yarp::os::ResourceFinder &rf) {
 
     if(pos==NULL || vel==NULL || enc==NULL || ictrl==NULL)
     {
-        cout << "Cannot get interface to robot head" << endl;
+        yError() << "Cannot get interface to robot head";
         robotHead->close();
         return false;
     }
@@ -137,30 +125,27 @@ bool faceTrackerModule::configure(yarp::os::ResourceFinder &rf) {
     tilt_target = 0;
     pan_target = 0;
 
-    seed = 10000;
+    int seed = 10000;
     srand(seed);
     pan_max = 80;
     tilt_max = 20;
 
     cvIplImageLeft = NULL;
 
-
-
-    return true ;
+    return true;
 }
 
 /************************************************************************/
 bool faceTrackerModule::interruptModule() {
-    cout << "Interrupting your module, for port cleanup" << endl;
-    opc->interrupt();
+    yInfo() << "Interrupting module for port cleanup";
     handlerPort.interrupt();
     return true;
 }
 
 /************************************************************************/
 bool faceTrackerModule::close() {
-    cout << "Calling close function" << endl;
-    opc->close();
+    yInfo() << "Calling close function";
+    handlerPort.interrupt();
     handlerPort.close();
 
     cvReleaseImage(&cvIplImageLeft);
@@ -188,7 +173,7 @@ bool faceTrackerModule::respond(const Bottle& command, Bottle& reply) {
         return false;
     }
     else if (command.get(0).asString()=="help") {
-        cout << helpMessage;
+        yInfo() << helpMessage;
         reply.addString("ok");
     }
 
@@ -202,12 +187,7 @@ double faceTrackerModule::getPeriod() {
 
 /***************************************************************************/
 bool faceTrackerModule::updateModule() {
-
-    //unsigned long AAtime=0, BBtime=0; //check processing time
-    //AAtime = cv::getTickCount(); //check processing time
-
     ImageOf<PixelRgb> *yarpImageLeft = imagePortLeft.read();
-    //printf("Copying YARP image to an OpenCV/IPL image\n");
 
     if ( cvIplImageLeft == NULL )
     {
@@ -218,11 +198,7 @@ bool faceTrackerModule::updateModule() {
 
     cv::Mat cvMatImageLeft=cv::cvarrToMat(cvIplImageLeft);
 
-    //vector< cv::Mat > vImg;
-    //cv::Mat rImg;
-    //vImg.push_back(cvMatImageLeft);
-
-    if(yarpImageLeft!=NULL) // check we actually got something
+    if(yarpImageLeft!=NULL)
     {
         // resize images
         cv::resize(cvMatImageLeft, cvMatImageLeft, cv::Size(320, 240), 0,0,CV_INTER_NN);    //downsample 1/2x
@@ -236,7 +212,7 @@ bool faceTrackerModule::updateModule() {
         // face detection routine
 
         // a vector array to store the face found
-        std::vector<cv::Rect> faces_left;;
+        std::vector<cv::Rect> faces_left;
 
         face_classifier_left.detectMultiScale(cvMatGrayImageLeft, faces_left,
             1.1, // increase search scale by 10% each pass
@@ -268,7 +244,6 @@ bool faceTrackerModule::updateModule() {
         // Mode
         prev_encoders = cur_encoders;
         enc->getEncoders(cur_encoders.data());
-//          cout << "Encoder: " << cur_encoders[0] << " " << cur_encoders[1] << " "<< cur_encoders[2] << '\n';
 
         ///////////////////////////
         // To set position mode
@@ -278,8 +253,6 @@ bool faceTrackerModule::updateModule() {
             // Going to the set position mode
             if (setpos_counter < 100)
             {
-                //cout << setpos_counter << endl;
-
                 setpoints[0] = (0-cur_encoders[0])*0.3; // common tilt of head
                 setpoints[1] = (0-cur_encoders[1])*0.3; // common roll of head
                 setpoints[2] = (0-cur_encoders[2])*0.3; // common pan of head
@@ -290,7 +263,7 @@ bool faceTrackerModule::updateModule() {
             }
             else
             {
-                printf("Going to the set position is DONE!\n");
+                yDebug() << "Going to the set position is DONE!";
 
                 setpoints[0] = 0;
                 setpoints[2] = 0;
@@ -298,7 +271,7 @@ bool faceTrackerModule::updateModule() {
                 setpoints[4] = 0;
 
                 mode = 1;
-                printf("Face searching mode!\n");
+                yInfo() << "Face searching mode!";
                 setpos_counter = 0;
             }
             vel->velocityMove(setpoints.data());
@@ -310,15 +283,13 @@ bool faceTrackerModule::updateModule() {
             if(faces_left.size() > 0)
             {
                 mode = 2;
-                printf("I find a face!\n");
+                yInfo() << "I found a face!";
                 panning_counter++;
             }
             else
             {
                 //-------------------------------------------------------------
                 // panning mode
-                //printf("Face searching mode!\n");
-                //cout << panning_target << endl;
 
                 setpoints[0] = (tilt_target-cur_encoders[0])*0.3;   // common tilt of head
                 setpoints[1] = (0-cur_encoders[1])*0.3; // common roll of head
@@ -333,8 +304,6 @@ bool faceTrackerModule::updateModule() {
 
                     pan_target = (int)((pan_r*pan_max)-(pan_max/2));
                     tilt_target = (int)((tilt_r*tilt_max)-(tilt_max/2));
-
-                    //cout << pan_target << ", " << tilt_target << endl;
                 }
             }
 
@@ -348,8 +317,6 @@ bool faceTrackerModule::updateModule() {
             {
                 double x = 320-(faces_left[biggest_face_left_idx].x + faces_left[biggest_face_left_idx].width/2);
                 double y = 240-(faces_left[biggest_face_left_idx].y + faces_left[biggest_face_left_idx].height/2);
-
-                //cout << "x:" << x << " y:" << y << '\n';
 
                 x -= 320/2;
                 y -= 240/2;
@@ -376,7 +343,6 @@ bool faceTrackerModule::updateModule() {
             }
             else if (faces_left.size() == 0 && counter < 10)
             {
-                //cout << counter << endl;
                 double vx = x_buf*0.3;  // Not to move too fast
                 double vy = y_buf*0.3;
 
@@ -395,7 +361,7 @@ bool faceTrackerModule::updateModule() {
             }
             else
             {
-                printf("Hey! I don't see any face.\n");
+                yInfo() << "Hey! I don't see any face.";
 
                 setpoints[0] = 0;
                 setpoints[2] = 0;
@@ -413,31 +379,23 @@ bool faceTrackerModule::updateModule() {
                     if(panning_counter > 5)
                     {
                         mode = 0;
-                        printf("To a set position!\n");
+                        yDebug() << "To a set position!";
                         stuck_counter = 0;
                     }
                     else
                     {
                         mode = 1;
-                        printf("Face searching mode!\n");
+                        yDebug() << "Face searching mode!";
                         stuck_counter = 0;
                     }
                 }
             }
             vel->velocityMove(setpoints.data());
-
         }
-
         cv::imshow("cvImage_Left", cvMatImageLeft);
-
     }
-
-    //BBtime = cv::getTickCount(); //check processing time
 
     cv::waitKey(1);
 
     return true;
 }
-
-
-
