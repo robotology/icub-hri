@@ -189,10 +189,9 @@ bool proactiveTagging::respond(const Bottle& command, Bottle& reply) {
                 if (bp->m_tactile_number == -1) {
                     yInfo() << "Going to tag skin part";
                     reply = exploreTactileEntityWithName(command);
+                } else {
+                    yWarning("Not sure what to do, name and tactile information already known");
                 }
-            }
-            else {
-                yWarning("Not sure what to do, name and tactile information already known");
             }
         } else if (type == "bodypart") {
             yInfo() << "Going to tag bodypart (include babbling)";
@@ -390,8 +389,8 @@ yarp::os::Bottle proactiveTagging::exploreTactileEntityWithName(Bottle bInput) {
     //2.b Move also the bodypart to show it has been learnt.
     yInfo() << "Cast okay : name BP = " << BPentity->name();
     int joint = BPentity->m_joint_number;
-    //send rpc command to bodySchema to move the corresponding part
-    yInfo() << "Start bodySchema";
+    //send rpc command to babbling to move the corresponding part
+    yInfo() << "Start babbling";
     double babbling_duration = 3.0;
     iCub->babbling(joint, babblingArm, babbling_duration);
 
@@ -513,8 +512,8 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput) {
         }
         yInfo() << "Cast okay : name BP = " << BPtemp->name();
         int joint = BPtemp->m_joint_number;
-        //send rpc command to bodySchema to move the corresponding part
-        yInfo() << "Start bodySchema";
+        //send rpc command to babbling to move the corresponding part
+        yInfo() << "Start babbling";
         double babbling_duration=3.0;
         iCub->babbling(joint, babblingArm, babbling_duration);
 

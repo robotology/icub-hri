@@ -163,8 +163,8 @@ bool FollowingOrder::handleActionBP(string type, string target, string action) {
 
                 if(action == "move") { //only action available right now for bodypart but keep the check for future development
                     int joint = BPentity->m_joint_number;
-                    //send rpc command to bodySchema to move the corresponding part
-                    yInfo() << "Start bodySchema";
+                    //send rpc command to babbling to move the corresponding part
+                    yInfo() << "Start babbling";
                     double babbling_duration = 4.0;
                     iCub->say("I will move my " + target, false);
                     iCub->babbling(joint, babblingArm, babbling_duration);
