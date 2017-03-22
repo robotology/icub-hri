@@ -40,11 +40,18 @@ int main()
 
     ICubClient iCub("ARE_KARMAiCubClientExample","icubClient","example_ARE_KARMA.ini");
 
-    // we connect just to ARE (skip connecting to OPC)
+    // we connect just to ARE
     // we need connect to KARMA also
     if (!iCub.connectSubSystems())
     {
-        cout<<"KARMA seems unavailabe!"<<endl;
+        yInfo()<<"[ARE_KARMAiCubClientExample] ARE and/or KARMA seems unavailabe!";
+        return -1;
+    }
+
+    // we need connect to OPC also
+    if (!iCub.connectOPC())
+    {
+        yInfo()<<"[KARMAiCubClientExample] OPC seems unavailabe!";
         return -1;
     }
 
@@ -55,6 +62,8 @@ int main()
     x[2]=-0.05;
     x[3]=1.0;
 
+    string object = "octopus";
+
     // corresponding location in the world frame
     Matrix T(4,4);
     T(0,0)=0.0;  T(0,1)=-1.0; T(0,2)=0.0; T(0,3)=0.0;
@@ -64,63 +73,63 @@ int main()
     Vector wx=T*x; //if want to create the object in the simulator
     x.pop_back();
 
-    /*bool ok ;
+    bool ok ;
 
-    iCub.home();    // Home by using ARE
-    cout<<"try to pushFront with KARMA ..."<<endl;
-    ok = iCub.pushKarmaFront(x,-0.35);                  //WARNING: second argument is the desired x[0] that we want and should be less than original x[0]
+    iCub.home();                        // Home by using ARE
+    yInfo()<<"try to pushFront with KARMA ...";
+    ok = iCub.pushKarma(x,-90,0.1);     //WARNING: second argument is the desired x[0] that we want and should be less than original x[0]
     cout<<(ok?"success":"failed")<<endl;
     Time::delay(4.0);
 
-    iCub.home();    // Home by using ARE
-    x[1] =x[1] - 0.1;                        //offset on lateral to draw?
-    cout<<"try to pull with KARMA...";
-    ok = iCub.drawKarma(x,0,0.1,0.1);        //draw of 0.1m but the objects is considered as -0.35 so final: -0.25
+    iCub.home();                        // Home by using ARE
+    x[1] =x[1] - 0.1;                   //offset on lateral to draw?
+    yInfo()<<"try to pull with KARMA...";
+    ok = iCub.drawKarma(x,0,0.1,0.1);   //draw of 0.1m but the objects is considered as -0.35 so final: -0.25
     cout<<(ok?"success":"failed")<<endl;
     Time::delay(4.0);
-    x[1] = x[1] + 0.1; //go back to original value
-    */
+    x[1] = x[1] + 0.1;                  //go back to original value
+
 
 
     //----------------------------> ARE related action
-    /*iCub.home();     // Home by using ARE
-    cout<<"try to point using ARE..."<<endl;
-    ok = iCub.point(x);      // automatic selection of the hand
+    iCub.home();                        // Home by using ARE
+    yInfo()<<"try to point using ARE...";
+    ok = iCub.pointfar(x);              // automatic selection of the hand
     cout<<(ok?"success":"failed")<<endl;
     Time::delay(4.0);
 
-    iCub.home();     // Home by using ARE
-    cout<<"try to take from side using ARE..."<<endl;
-    Bottle bOptions("side");     // param1: side
-    ok = iCub.take(x, bOptions);     // automatic selection of the hand
+    iCub.home();                        // Home by using ARE
+    yInfo()<<"try to take from side using ARE...";
+    Bottle bOptions("side");            // param1: side
+    ok = iCub.take(object, bOptions);    // automatic selection of the hand
     cout<<(ok?"success":"failed")<<endl;
     Time::delay(4.0);
 
-    iCub.home();     // Home by using ARE
-    cout<<"try to take from above using ARE..."<<endl;
+    iCub.home();                        // Home by using ARE
+    yInfo()<<"try to take from above using ARE...";
     bOptions.clear();
     bOptions.addString("above");
-    ok = iCub.take(x, bOptions);     // automatic selection of the hand
+    ok = iCub.take(object, bOptions);   // automatic selection of the hand
     cout<<(ok?"success":"failed")<<endl;
     Time::delay(4.0);
 
-    iCub.home();     // Home by using ARE
-    cout<<"try to push using ARE..."<<endl;
-    ok = iCub.push(x);     // automatic selection of the hand
+    iCub.home();                        // Home by using ARE
+    yInfo()<<"try to push using ARE...";
+    ok = iCub.push(object);             // automatic selection of the hand
     cout<<(ok?"success":"failed")<<endl;
     Time::delay(4.0);
 
-    iCub.home();     // Home by using ARE
-    cout<<"try to push away using ARE..."<<endl;
+    iCub.home();                        // Home by using ARE
+    yInfo()<<"try to push away using ARE...";
     bOptions.clear();
     bOptions.addString("away");
-    ok = iCub.push(x,bOptions);     // automatic selection of the hand
+    ok = iCub.push(object,bOptions);    // automatic selection of the hand
     cout<<(ok?"success":"failed")<<endl;
     Time::delay(4.0);
     iCub.home();
-    */
 
-    cout<<"shutting down ... "<<endl;
+
+    yInfo()<<"shutting down ... ";
     iCub.close();
     return 0;
 }

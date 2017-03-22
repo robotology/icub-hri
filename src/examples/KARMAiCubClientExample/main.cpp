@@ -40,8 +40,7 @@ int main()
 
     ICubClient iCub("KARMAiCubClientExample","icubClient","example_ARE_KARMA.ini");
 
-    // we connect just to ARE (skip connecting to OPC)
-    // we need connect to KARMA also
+    // we connect to ARE and KARMA, which is defined in "example_ARE_KARMA.ini"
     if (!iCub.connectSubSystems())
     {
         yError()<<"[KARMAiCubClientExample] KARMA seems unavailabe!";
@@ -64,50 +63,38 @@ int main()
     Vector wx=T*x;
     x.pop_back();
 
-    /*iCub.home();    // Home by using ARE
+    // push left with pure API of KARMA. Please see KARMA document for details of how to define arguments
+    iCub.home();                            // Home by using ARE
     x[1] =x[1] - 0.1;
-    yInfo()<<"[KARMAiCubClientExample] try to push with KARMA...";
-    bool ok = iCub.pushKarma(x,180,0.2);
+    yInfo()<<"[KARMAiCubClientExample] try to push left with KARMA...";
+    bool ok = iCub.pushKarma(x,180,0.2);    // Object will be push to left with y-coordinate as -0.05 from -0.25
     yInfo()<<(ok?"success":"failed");
     Time::delay(4.0);
 
-    iCub.home();    // Home by using ARE
-    yInfo()<<"[KARMAiCubClientExample] try to pushLeft with KARMA by right hand...";
-    ok = iCub.pushKarmaLeft(x,-.2,"right");
+    // push right with pure API of KARMA. Please see KARMA document for details of how to define arguments
+    iCub.home();                            // Home by using ARE
+    yInfo()<<"[KARMAiCubClientExample] try to push right with KARMA...";
+    ok = iCub.pushKarma(x,0,0.2);           // Object will be push to right with y-coordinate as -0.05 from 0.15
     yInfo()<<(ok?"success":"failed");
     Time::delay(4.0);
 
-    iCub.home();    // Home by using ARE
-    yInfo()<<"[KARMAiCubClientExample] try to pushRight with KARMA by unknown hand...";
-    ok = iCub.pushKarmaRight(x,.2);
+    // push front with pure API of KARMA. Please see KARMA document for details of how to define arguments
+    iCub.home();                            // Home by using ARE
+    x[0] = x[0] - 0.15;
+    yInfo()<<"[KARMAiCubClientExample] try to push front with KARMA...";
+    ok = iCub.pushKarma(x,-90,0.2);         // Object will be push to front with x-coordinate as -0.45 from -0.25
     yInfo()<<(ok?"success":"failed");
     Time::delay(4.0);
 
-    iCub.home();    // Home by using ARE
-    x[0] = -0.3;
-    x[1] = 0.1;
-    yInfo()<<"[KARMAiCubClientExample] try to pushFront with KARMA ...";
-    ok = iCub.pushKarmaFront(x,-0.4);
-    yInfo()<<(ok?"success":"failed");
-    Time::delay(4.0);
-
-    iCub.home();    // Home by using ARE
+    // pull back with pure API of KARMA. Please see KARMA document for details of how to define arguments
+    iCub.home();                            // Home by using ARE
     x[0] = -0.45;
     x[1] =  0.1;
     x[2] = -0.05;
-    yInfo()<<"[KARMAiCubClientExample] try to pure pull with KARMA...";
-    ok = iCub.drawKarma(x,0,0,0.2);
+    yInfo()<<"[KARMAiCubClientExample] try to pull with KARMA...";
+    ok = iCub.drawKarma(x,0,0,0.2);         // Object will be pull back 0.2m with x-coordinate from -0.45
     yInfo()<<(ok?"success":"failed");
     Time::delay(4.0);
-
-    iCub.home();    // Home by using ARE
-    x[0] = -0.4;
-    x[1] = -0.1;
-    x[2] = -0.05;
-    yInfo()<<"[KARMAiCubClientExample] try to pullBack with KARMA...";
-    ok = iCub.pullKarmaBack(x,-0.25);
-    yInfo()<<(ok?"success":"failed");
-    Time::delay(4.0);*/
 
     yInfo()<<"[KARMAiCubClientExample] shutting down ... ";
     iCub.close();

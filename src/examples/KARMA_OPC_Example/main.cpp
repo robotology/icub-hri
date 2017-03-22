@@ -59,14 +59,14 @@ int main()
     }
 
 
-    // we connect just to ARE (skip connecting to OPC)
+    // we connect just to ARE
     // we need connect to KARMA also
     if (!iCub.connectSubSystems())
     {
         yError()<<"[KARMA_OPC_Example] KARMA seems unavailabe!";
         return -1;
     }
-
+    // we then connect to OPC
     bool connected = iCub.connectOPC();
     yInfo()<<"connected to OPC port";
     yInfo()<<(connected?"success":"failed");

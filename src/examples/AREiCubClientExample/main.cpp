@@ -40,10 +40,16 @@ int main()
 
     ICubClient iCub("AREiCubClientExample","icubClient","example_ARE.ini");
 
-    // we connect just to ARE (skip connecting to OPC)
+    // we connect to both ARE and OPC
     if (!iCub.connectSubSystems())
     {
-        cout<<"ARE seems unavailabe!"<<endl;
+        yInfo()<<"[AREiCubClientExample] ARE seems unavailabe!";
+        return -1;
+    }
+
+    if (!iCub.connectOPC())
+    {
+        yInfo()<<"[AREiCubClientExample] OPC seems unavailabe!";
         return -1;
     }
 
@@ -51,7 +57,7 @@ int main()
     port.open("/create_object");
     if (!Network::connect(port.getName().c_str(),"/icubSim/world"))
     {
-        cout<<"Unable to connect to the World!"<<endl;
+        yInfo()<<"Unable to connect to the World!";
         port.close();
         return -1;
     }
@@ -82,27 +88,29 @@ int main()
     port.write(cmd,reply);
     port.close();
 
-    /*iCub.home();
-    cout<<"pointing at the object ... "<<endl;
-    iCub.point(x);      // automatic selection of the hand
-    Time::delay(2.0);
     iCub.home();
+    yInfo()<<"pointing at the object ... ";
+    Bottle options("right");    // force the use of the right hand
+    iCub.pointfar(x, options);  // automatic selection of the hand
+    Time::delay(2.0);
 
-    cout<<"try to grasp ... ";
-    x[2]+=1.2*radius;
-    Bottle options("right");     // force the use of the right hand
-    bool ok=iCub.grasp(x,options);
-    cout<<(ok?"grasped!":"missed!")<<endl;
+
+    iCub.home();
+    string object = "octopus";
+    yInfo("try to grasp %s", object.c_str());
+    bool ok=iCub.grasp(object,options);
+    yInfo()<<(ok?"grasped!":"missed!");
     iCub.home();
 
     if (ok)
     {
-        cout<<"releasing ... "<<endl;
+        x[2]+=1.2*radius;
+        yInfo()<<"releasing ... ";
         iCub.release(x);
         iCub.home();
-    }*/
+    }
 
-    cout<<"shutting down ... "<<endl;
+    yInfo()<<"shutting down ... ";
     iCub.close();
     return 0;
 }
