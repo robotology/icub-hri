@@ -10,7 +10,7 @@
 * later version published by the Free Software Foundation.
 *
 * A copy of the license can be found at
-* $WYSIWYD/license/gpl.txt
+* $icub-client/license/gpl.txt
 *
 * This program is distributed in the hope that it will be useful, but
 * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -21,10 +21,9 @@
 #ifndef _PASAR_MODULE_H_
 #define _PASAR_MODULE_H_
 
-#include <wrdac/clients/clients.h>
+#include <wrdac/clients/icubClient.h>
 
-using namespace wysiwyd::wrdac;
-using namespace yarp::os;
+using namespace icubclient;ng namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
 using namespace std;

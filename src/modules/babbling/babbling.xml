@@ -4,7 +4,7 @@
 <module>
 
    <name>babbling</name>
-   <doxygen-group>wysiwyd_modules</doxygen-group>
+   <doxygen-group>icub_client_modules</doxygen-group>
    <description>Body Schema Learner</description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>

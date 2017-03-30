@@ -2,8 +2,6 @@
 # Authors: Ugo Pattacini
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-project(wysiwyd)
-
 add_subdirectory(agentDetector)
 add_subdirectory(attentionRelated)
 add_subdirectory(babbling)
@@ -16,4 +14,3 @@ add_subdirectory(reactiveLayer)
 add_subdirectory(samRelated)
 add_subdirectory(tools)
 add_subdirectory(touchDetector)
-

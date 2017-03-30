@@ -5,20 +5,20 @@ using namespace yarp::dev;
 using namespace yarp::os;
 using namespace yarp::sig;
 
-void wysiwyd::wrdac::SubSystem_KARMA::appendTarget(yarp::os::Bottle &b, const yarp::sig::Vector &t)
+void icubclient::SubSystem_KARMA::appendTarget(yarp::os::Bottle &b, const yarp::sig::Vector &t)
 {
     yarp::os::Bottle &sub=b;
     for (size_t i=0; i<t.length(); i++)
         sub.addDouble(t[i]);
 }
 
-void wysiwyd::wrdac::SubSystem_KARMA::appendDouble(yarp::os::Bottle &b, const double &v)
+void icubclient::SubSystem_KARMA::appendDouble(yarp::os::Bottle &b, const double &v)
 {
     yarp::os::Bottle &sub=b;
     sub.addDouble(v);
 }
 
-void wysiwyd::wrdac::SubSystem_KARMA::selectHandCorrectTarget(yarp::os::Bottle &options, const std::string &targetName,
+void icubclient::SubSystem_KARMA::selectHandCorrectTarget(yarp::os::Bottle &options, const std::string &targetName,
                                                               yarp::sig::Vector &target, const std::string handToUse)
 {
     std::string hand="";
@@ -69,7 +69,7 @@ void wysiwyd::wrdac::SubSystem_KARMA::selectHandCorrectTarget(yarp::os::Bottle &
 //    lastlyUsedHand=hand;
 }
 
-bool wysiwyd::wrdac::SubSystem_KARMA::sendCmd(yarp::os::Bottle &cmd, const bool disableATT)
+bool icubclient::SubSystem_KARMA::sendCmd(yarp::os::Bottle &cmd, const bool disableATT)
 {
     bool ret=false;
 
@@ -80,7 +80,7 @@ bool wysiwyd::wrdac::SubSystem_KARMA::sendCmd(yarp::os::Bottle &cmd, const bool 
     return ret;
 }
 
-bool wysiwyd::wrdac::SubSystem_KARMA::connect()
+bool icubclient::SubSystem_KARMA::connect()
 {
     AREconnected=SubARE->Connect();
     if (AREconnected)
@@ -136,7 +136,7 @@ bool wysiwyd::wrdac::SubSystem_KARMA::connect()
     return ret;
 }
 
-wysiwyd::wrdac::SubSystem_KARMA::SubSystem_KARMA(const std::string &masterName, const std::string &robot) : SubSystem(masterName)
+icubclient::SubSystem_KARMA::SubSystem_KARMA(const std::string &masterName, const std::string &robot) : SubSystem(masterName)
 {
     SubARE = new SubSystem_ARE(m_masterName+"/from_KARMA");
 
@@ -150,7 +150,7 @@ wysiwyd::wrdac::SubSystem_KARMA::SubSystem_KARMA(const std::string &masterName, 
     m_type = SUBSYSTEM_KARMA;
 }
 
-void wysiwyd::wrdac::SubSystem_KARMA::Close()
+void icubclient::SubSystem_KARMA::Close()
 {
     stopPort.interrupt();
     rpcPort.interrupt();
@@ -172,7 +172,7 @@ void wysiwyd::wrdac::SubSystem_KARMA::Close()
     calibPort.close();
 }
 
-yarp::sig::Vector wysiwyd::wrdac::SubSystem_KARMA::applySafetyMargins(const yarp::sig::Vector &in)
+yarp::sig::Vector icubclient::SubSystem_KARMA::applySafetyMargins(const yarp::sig::Vector &in)
 {
     yarp::sig::Vector out=in;
     out[0]=std::min(out[0],-0.1);
@@ -180,7 +180,7 @@ yarp::sig::Vector wysiwyd::wrdac::SubSystem_KARMA::applySafetyMargins(const yarp
     return out;
 }
 
-bool wysiwyd::wrdac::SubSystem_KARMA::returnArmSafely(std::string armType)
+bool icubclient::SubSystem_KARMA::returnArmSafely(std::string armType)
 {
     Vector xL(3,0.0), xR(3,0.0), xdL(3,0.0), xdR(3,0.0), odL(3,0.0), odR(3,0.0);
     double travelTime = 2.0;
@@ -236,7 +236,7 @@ bool wysiwyd::wrdac::SubSystem_KARMA::returnArmSafely(std::string armType)
     return true;
 }
 
-bool wysiwyd::wrdac::SubSystem_KARMA::chooseArm(const std::string &armType)
+bool icubclient::SubSystem_KARMA::chooseArm(const std::string &armType)
 {
     Vector dimTool(3,0.0);
     yarp::os::Bottle bCmd;
@@ -252,7 +252,7 @@ bool wysiwyd::wrdac::SubSystem_KARMA::chooseArm(const std::string &armType)
     return bReturn;
 }
 
-void wysiwyd::wrdac::SubSystem_KARMA::chooseArmAuto()
+void icubclient::SubSystem_KARMA::chooseArmAuto()
 {
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("tool"));
@@ -262,7 +262,7 @@ void wysiwyd::wrdac::SubSystem_KARMA::chooseArmAuto()
     sendCmd(bCmd,true);
 }
 
-bool wysiwyd::wrdac::SubSystem_KARMA::pushAside(const std::string &objName,
+bool icubclient::SubSystem_KARMA::pushAside(const std::string &objName,
                                                 const yarp::sig::Vector &objCenter, const double &targetPosY,
                                                 const double &theta,
                                                 const std::string &armType,
@@ -305,7 +305,7 @@ bool wysiwyd::wrdac::SubSystem_KARMA::pushAside(const std::string &objName,
     return pushSucceed;
 }
 
-bool wysiwyd::wrdac::SubSystem_KARMA::pushFront(const std::string &objName,
+bool icubclient::SubSystem_KARMA::pushFront(const std::string &objName,
                                                 const yarp::sig::Vector &objCenter, const double &targetPosXFront,
                                                 const std::string &armType,
                                                 const yarp::os::Bottle &options, const std::string &sName)
@@ -347,7 +347,7 @@ bool wysiwyd::wrdac::SubSystem_KARMA::pushFront(const std::string &objName,
     return pushSucceed;
 }
 
-bool wysiwyd::wrdac::SubSystem_KARMA::push(const yarp::sig::Vector &targetCenter,
+bool icubclient::SubSystem_KARMA::push(const yarp::sig::Vector &targetCenter,
                                            const double theta, const double radius,
                                            const yarp::os::Bottle &options, const std::string &sName)
 {
@@ -372,7 +372,7 @@ bool wysiwyd::wrdac::SubSystem_KARMA::push(const yarp::sig::Vector &targetCenter
 
 }
 
-bool wysiwyd::wrdac::SubSystem_KARMA::pullBack(const std::string &objName,
+bool icubclient::SubSystem_KARMA::pullBack(const std::string &objName,
                                                const yarp::sig::Vector &objCenter, const double &targetPosXBack,
                                                const std::string &armType,
                                                const yarp::os::Bottle &options, const std::string &sName)
@@ -414,7 +414,7 @@ bool wysiwyd::wrdac::SubSystem_KARMA::pullBack(const std::string &objName,
     return drawSucceed;
 }
 
-bool wysiwyd::wrdac::SubSystem_KARMA::draw(const yarp::sig::Vector &targetCenter,
+bool icubclient::SubSystem_KARMA::draw(const yarp::sig::Vector &targetCenter,
                                            const double theta, const double radius,
                                            const double dist,
                                            const yarp::os::Bottle &options, const std::string &sName)
@@ -439,7 +439,7 @@ bool wysiwyd::wrdac::SubSystem_KARMA::draw(const yarp::sig::Vector &targetCenter
     return bReturn;
 }
 
-bool wysiwyd::wrdac::SubSystem_KARMA::vdraw(const std::string &targetName,
+bool icubclient::SubSystem_KARMA::vdraw(const std::string &targetName,
                                             const yarp::sig::Vector &targetCenter,
                                             const double theta, const double radius,
                                             const double dist,
@@ -465,7 +465,7 @@ bool wysiwyd::wrdac::SubSystem_KARMA::vdraw(const std::string &targetName,
     return bReturn;
 }
 
-bool wysiwyd::wrdac::SubSystem_KARMA::openCartesianClient()
+bool icubclient::SubSystem_KARMA::openCartesianClient()
 {
     std::string name = "KARMA";
 
@@ -518,7 +518,7 @@ bool wysiwyd::wrdac::SubSystem_KARMA::openCartesianClient()
 
 }
 
-wysiwyd::wrdac::SubSystem_KARMA::~SubSystem_KARMA()
+icubclient::SubSystem_KARMA::~SubSystem_KARMA()
 {
     delete SubARE;
     driverL.close();

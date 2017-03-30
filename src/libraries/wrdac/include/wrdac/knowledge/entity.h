@@ -8,7 +8,7 @@
  * later version published by the Free Software Foundation.
  *
  * A copy of the license can be found at
- * wysiwyd/license/gpl.txt
+ * icub-client/license/gpl.txt
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -29,7 +29,7 @@
 #include <sstream>
 #include <wrdac/tags.h>
 
-namespace wysiwyd{namespace wrdac{
+namespace icubclient{
 
 //Anticipated declaration of relations (they are used by agents)
 class Relation;
@@ -128,7 +128,7 @@ public:
     bool operator>(const Entity &b);
 };
 
-}} //namespaces
+} //namespace
 
 #endif
 

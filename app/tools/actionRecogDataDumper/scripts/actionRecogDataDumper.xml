@@ -1,5 +1,5 @@
 <application>
-  <name>WYSIWYD Action Recognition Data Dumper</name>
+  <name>Action Recognition Data Dumper</name>
 
   <dependencies>
       <port>/icub/camcalib/left/out</port>

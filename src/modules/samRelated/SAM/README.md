@@ -45,7 +45,7 @@ If this does not work:
 
 ##How to use:
 
-Everything is accessed via **samSupervisor** which is installed to **WYSIWYD_DIR**.
+Everything is accessed via **samSupervisor** which is installed to **ICUB_CLIENT_DIR**.
 
 Connect with samSupervisor via `/sam/rpc:i` and issue help for a list of all possible commands
 
@@ -116,7 +116,7 @@ verbose:      defines the level of verbosity of samSupervisor
 
 ####SAM_Core: 
 - Includes the base classes for SAM_Core and SAM_Driver
-- Includes samSupervisor.py, trainSAMModel.py, interactionSAMModel.py classes which are installed into WYSIWYD_DIR
+- Includes samSupervisor.py, trainSAMModel.py, interactionSAMModel.py classes which are installed into ICUB_CLIENT_DIR
 -Implements the core functionality of SAM. This module is the memory system where the already transformed (by SAM_Drivers) perceived signals are compressed and stored in a coherent way. Coherent meaning that audio, visual etc signals are treated in analogous manner. This model is built upon the deep Gaussian process model using GPy, so that high-dimensional, noisy data can be compressed, chunked and "cleaned" automatically in a probabilistic way (ie the model is trying to keep the "relevant" variance in the data and eliminate redundancies in the representation by encoding memories as "clean" and non-redundant signals).
 
 ####SAM_Drivers:
@@ -129,6 +129,6 @@ Copyright (C) 2015 WYSIWYD Consortium, European Commission FP7 Project ICT-61213
 website: http://wysiwyd.upf.edu/
 Permission is granted to copy, distribute, and/or modify this program under the terms of the GNU General Public License, version 2 or any later version published by the Free Software Foundation.
 
-A copy of the license can be found at $WYSIWYD_ROOT/license/gpl.txt
+A copy of the license can be found at icub-client/license/gpl.txt
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details

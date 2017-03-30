@@ -8,7 +8,7 @@
  * later version published by the Free Software Foundation.
  *
  * A copy of the license can be found at
- * wysiwyd/license/gpl.txt
+ * icub-client/license/gpl.txt
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -24,9 +24,7 @@ using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
-using namespace wysiwyd::wrdac;
-
-Agent::Agent():Object()
+using namespace icubclient;ent::Agent():Object()
 {    
     m_entity_type = ICUBCLIENT_OPC_ENTITY_AGENT;
     m_ego_position[0] = 0.0;

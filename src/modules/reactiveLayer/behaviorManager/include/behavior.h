@@ -29,7 +29,7 @@ public:
         behavior_start_stop_port.open("/" + port_name_prefix +"/" + behaviorName + "/start_stop:o");
     }
 
-    wysiwyd::wrdac::ICubClient *iCub;
+    icubclient::ICubClient *iCub;
     std::string from_sensation_port_name, external_port_name;
     yarp::os::BufferedPort<yarp::os::Bottle> sensation_port_in, behavior_start_stop_port;
 

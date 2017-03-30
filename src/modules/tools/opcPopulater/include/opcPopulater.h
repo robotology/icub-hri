@@ -3,9 +3,7 @@
 
 using namespace std;
 using namespace yarp::os;
-using namespace wysiwyd::wrdac;
-
-class opcPopulater : public RFModule {
+using namespace icubclient;ass opcPopulater : public RFModule {
 private:
 
     ICubClient *iCub;

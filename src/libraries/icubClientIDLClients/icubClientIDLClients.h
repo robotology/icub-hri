@@ -7,7 +7,7 @@
  * later version published by the Free Software Foundation.
  *
  * A copy of the license can be found at
- * wysiwyd/license/gpl.txt
+ * icub-client/license/gpl.txt
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -15,8 +15,8 @@
  * Public License for more details
 */
 
-#ifndef __wysiwydIDLClients_H__
-#define __wysiwydIDLClients_H__
+#ifndef __icubclientIDLClients_H__
+#define __icubclientIDLClients_H__
 
 // whenever a new service (e.g. new_service_IDL) becomes available,
 // you have to add up two more lines to this file:
@@ -27,17 +27,14 @@
 
 /**
 *
-* @defgroup wysiwyd_wysiwydIDLClients IDL Client Interfaces
-* @ingroup wysiwyd_libraries
+* @defgroup icub_client_IDLClients IDL Client Interfaces
+* @ingroup icub_client_libraries
 *
 * This library contains all the definitions for a client to
-* interface to the IDL services made available by WYSIWYD
+* interface to the IDL services made available by icub-client
 * software. \n
 * Available services are listed below: \n
-* - @ref interpersonalDistanceRegulator_IDL
-* - @ref slidingController_IDL
-* - @ref cvz_IDL
-* - @ref cvzMmcm_IDL
+* - @ref iol2opc_IDL
 */
 
 #endif

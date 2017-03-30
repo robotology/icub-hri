@@ -1,5 +1,5 @@
 <application>
-<name>WYSIWYD IOL</name>
+<name>icub-client IOL</name>
 
         <dependencies>
                 <port>/icub/camcalib/left/out</port>

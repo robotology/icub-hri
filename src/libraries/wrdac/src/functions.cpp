@@ -8,7 +8,7 @@
  * later version published by the Free Software Foundation.
  *
  * A copy of the license can be found at
- * wysiwyd/license/gpl.txt
+ * icub-client/license/gpl.txt
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,10 +23,8 @@
 #include "wrdac/functions.h"
 
 using namespace yarp::os;
-using namespace wysiwyd::wrdac;
-
-/************************************************************************/
-int wysiwyd::wrdac::opcGetIdFromAdd(Bottle &reply)
+using namespace icubclient;***********************************************************************/
+int icubclient::opcGetIdFromAdd(Bottle &reply)
 {
     if (reply.size()>0)
         if (reply.get(0).asVocab()==Vocab::encode("ack"))
@@ -37,7 +35,7 @@ int wysiwyd::wrdac::opcGetIdFromAdd(Bottle &reply)
 }
 
 /************************************************************************/
-Bottle wysiwyd::wrdac::opcGetIdsFromAsk(Bottle &reply)
+Bottle icubclient::opcGetIdsFromAsk(Bottle &reply)
 {
     Bottle ids;
     if (reply.size()>0)
@@ -50,7 +48,7 @@ Bottle wysiwyd::wrdac::opcGetIdsFromAsk(Bottle &reply)
 }
 
 /************************************************************************/
-void wysiwyd::wrdac::replace_all(std::string & in, const std::string & plain, const std::string & tok)
+void icubclient::replace_all(std::string & in, const std::string & plain, const std::string & tok)
 {
     std::string::size_type n = 0;
     const std::string::size_type l = plain.length();
@@ -66,7 +64,7 @@ void wysiwyd::wrdac::replace_all(std::string & in, const std::string & plain, co
 }
 
 /************************************************************************/
-std::string wysiwyd::wrdac::grammarToString(std::string sPath)
+std::string icubclient::grammarToString(std::string sPath)
 {
     std::string sOutput = "";
     std::ifstream isGrammar(sPath.c_str());

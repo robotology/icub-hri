@@ -11,9 +11,7 @@
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
-using namespace wysiwyd::wrdac;
-
-class OpcSensation: public Sensation
+using namespace icubclient;ass OpcSensation: public Sensation
 {
 private:
     ICubClient *iCub;

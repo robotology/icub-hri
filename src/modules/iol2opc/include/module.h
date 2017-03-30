@@ -7,7 +7,7 @@
  * later version published by the Free Software Foundation.
  *
  * A copy of the license can be found at
- * wysiwyd/license/gpl.txt
+ * icub-client/license/gpl.txt
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -43,10 +43,7 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::math;
 using namespace iCub::ctrl;
-using namespace wysiwyd::wrdac;
-
-
-/**********************************************************/
+using namespace icubclient;**********************************************************/
 namespace Bridge {
     typedef enum { idle, load_database, localization } State;
 }

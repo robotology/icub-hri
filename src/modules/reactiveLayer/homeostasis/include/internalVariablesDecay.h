@@ -6,9 +6,7 @@
 
 using namespace std;
 using namespace yarp::os;
-using namespace wysiwyd::wrdac;
-
-class InternalVariablesDecay: public RateThread
+using namespace icubclient;ass InternalVariablesDecay: public RateThread
 {
     OPCClient *opc;
     list<Entity*> presentAgents;

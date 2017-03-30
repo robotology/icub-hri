@@ -2,9 +2,7 @@
 
 using namespace std;
 using namespace yarp::os;
-using namespace wysiwyd::wrdac;
-
-void Reactions::configure() {
+using namespace icubclient;id Reactions::configure() {
     // Todo: set the value beow from a config file (but we are not in a module here)
     external_port_name = "None";
     from_sensation_port_name = "None";

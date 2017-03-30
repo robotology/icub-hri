@@ -185,7 +185,7 @@ class SamSupervisorModule(yarp.RFModule):
             self.modelPath = self.rootPath + '/Models'
             self.dataPath = self.rootPath + '/Data' 
             # OLD
-            # self.trainingFunctionsPath = os.environ.get("WYSIWYD_DIR")+"/bin"
+            # self.trainingFunctionsPath = os.environ.get("ICUB_CLIENT_DIR")+"/bin"
             # NEW
             self.trainingFunctionsPath = SAM.SAM_Drivers.__path__
             self.trainingListHandles = dict()

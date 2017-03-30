@@ -8,7 +8,7 @@
 * later version published by the Free Software Foundation.
 *
 * A copy of the license can be found at
-* wysiwyd/license/gpl.txt
+* icub-client/license/gpl.txt
 *
 * This program is distributed in the hope that it will be useful, but
 * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,7 +23,7 @@
 #include "relation.h"
 #include "wrdac/functions.h"
 
-namespace wysiwyd{namespace wrdac{
+namespace icubclient{
 
     /**
     * \ingroup wrdac_representations
@@ -107,7 +107,7 @@ namespace wysiwyd{namespace wrdac{
         virtual std::string   toString(Relation newRelation);
     };
 
-}}//Namespaces
+}//Namespace
 
 #endif
 

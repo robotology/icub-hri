@@ -8,7 +8,7 @@
 * later version published by the Free Software Foundation.
 *
 * A copy of the license can be found at
-* wysiwyd/license/gpl.txt
+* icub-client/license/gpl.txt
 *
 * This program is distributed in the hope that it will be useful, but
 * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -29,119 +29,115 @@
 #include <iterator>
 #include <algorithm>
 
-namespace wysiwyd{
-    namespace wrdac{
+namespace icubclient{
+/**
+* \ingroup wrdac_clients
+*
+* Abstract subSystem for speech management (both TTS and STT )
+*/
+class SubSystem_Speech : public SubSystem
+{
+protected:
+    yarp::os::Port tts;
+    yarp::os::Port ttsRpc;
+    yarp::os::BufferedPort<yarp::os::Bottle> stt;
+    yarp::os::Port sttRpc;
 
-        /**
-        * \ingroup wrdac_clients
-        *
-        * Abstract subSystem for speech management (both TTS and STT )
-        */
-        class SubSystem_Speech : public SubSystem
-        {
-        protected:
-            yarp::os::Port tts;
-            yarp::os::Port ttsRpc;
-            yarp::os::BufferedPort<yarp::os::Bottle> stt;
-            yarp::os::Port sttRpc;
+    OPCClient *opc;
 
-            OPCClient *opc;
+public:
 
-        public:
+    SubSystem_Speech(const std::string &masterName);
+    virtual bool connect();
 
-            SubSystem_Speech(const std::string &masterName);
-            virtual bool connect();
+    unsigned int countWordsInString(std::string const& str);
 
-            unsigned int countWordsInString(std::string const& str);
-
-            /**
+    /**
             * Produce text to speech output
             * @param text The text to be said.
             * @param shouldWait Is the function blocking until the end of the sentence or not.
             */
-            virtual void TTS(const std::string &text, bool shouldWait = true, bool recordABM = true, std::string addressee = "none");
+    virtual void TTS(const std::string &text, bool shouldWait = true, bool recordABM = true, std::string addressee = "none");
 
-            /**
+    /**
             * (todo) Recognize a specific sentence or a grammar through a blocking call
             * @param grammar The grammar to be recognized.
             * @param timeout Timeout for recognition (<0 value means wait until something is recognized).
             * @return The sentence recognized
             */
-            virtual yarp::os::Bottle* STT(const std::string &grammar, double timeout = -1);
+    virtual yarp::os::Bottle* STT(const std::string &grammar, double timeout = -1);
 
-            /**
+    /**
             * Read input from the speech recognizer runtime grammar
             * @param isBlocking Should we wait for a sentence?
             * @return The sentence recognized
             */
-            virtual yarp::os::Bottle* STT(bool isBlocking);
+    virtual yarp::os::Bottle* STT(bool isBlocking);
 
-            /**
+    /**
             * Flush the pending reads by consuming all of them.
             */
-            void STTflush();
+    void STTflush();
 
-            /**
+    /**
             * Add a word to a given vocabulory
             * @param vocabuloryName The name of the vocabulory to expand
             * @param word The word to be added to this vocabulory
             */
-            virtual void STT_ExpandVocabulory(const std::string &vocabuloryName, const std::string &word);;
+    virtual void STT_ExpandVocabulory(const std::string &vocabuloryName, const std::string &word);
 
-            /**
+    /**
             * Set the command line options sent by iSpeak
             * @param custom The options as a string
             */
-            void SetOptions(const std::string &custom);
+    void SetOptions(const std::string &custom);
 
-            /**
+    /**
             * Check if iSpeak is currently speaking
             */
-            bool isSpeaking();
+    bool isSpeaking();
 
-            virtual void Close();
-        };
+    virtual void Close();
+};
 
-        //--------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------
 
-        /**
-        * \ingroup wrdac_clients
-        *
-        * SubSystem for speech synthesis with emotional tuning of speed and pitch using eSpeak
-        */
-        class SubSystem_Speech_eSpeak : public SubSystem_Speech
-        {
-        protected:
-            int m_speed;
-            int m_pitch;
+/**
+* \ingroup wrdac_clients
+*
+* SubSystem for speech synthesis with emotional tuning of speed and pitch using eSpeak
+*/
+class SubSystem_Speech_eSpeak : public SubSystem_Speech
+{
+protected:
+    int m_speed;
+    int m_pitch;
 
-        public:
+public:
 
-            SubSystem_Speech_eSpeak(std::string &masterName) :SubSystem_Speech(masterName){
+    SubSystem_Speech_eSpeak(std::string &masterName) :SubSystem_Speech(masterName){
 
-                m_type = SUBSYSTEM_SPEECH_ESPEAK;
-                m_speed = 100;
-                m_pitch = 50;
-            }
-
-            void SetVoiceParameters(int speed = 100, int pitch = 50, std::string voice = "en") {
-                speed = (std::max)(80, speed);
-                speed = (std::min)(450, speed);
-                pitch = (std::max)(0, pitch);
-                pitch = (std::min)(99, pitch);
-                m_speed = speed;
-                m_pitch = pitch;
-                std::stringstream ss;
-                ss << "-s " << speed << " -p " << pitch << " -v " << voice;
-                yarp::os::Bottle param;
-                param.addString("set");
-                param.addString("opt");
-                param.addString(ss.str().c_str());
-                ttsRpc.write(param);
-            }
-        };
-
+        m_type = SUBSYSTEM_SPEECH_ESPEAK;
+        m_speed = 100;
+        m_pitch = 50;
     }
+
+    void SetVoiceParameters(int speed = 100, int pitch = 50, std::string voice = "en") {
+        speed = (std::max)(80, speed);
+        speed = (std::min)(450, speed);
+        pitch = (std::max)(0, pitch);
+        pitch = (std::min)(99, pitch);
+        m_speed = speed;
+        m_pitch = pitch;
+        std::stringstream ss;
+        ss << "-s " << speed << " -p " << pitch << " -v " << voice;
+        yarp::os::Bottle param;
+        param.addString("set");
+        param.addString("opt");
+        param.addString(ss.str().c_str());
+        ttsRpc.write(param);
+    }
+};
 }//Namespace
 #endif
 

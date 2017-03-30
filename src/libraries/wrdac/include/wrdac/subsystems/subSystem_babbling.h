@@ -11,7 +11,7 @@
  * later version published by the Free Software Foundation.
  *
  * A copy of the license can be found at
- * wysiwyd/license/gpl.txt
+ * icub-client/license/gpl.txt
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -24,14 +24,12 @@
 #include <iostream>
 #include "wrdac/subsystems/subSystem.h"
 
-namespace wysiwyd{
-namespace wrdac{
-
+namespace icubclient{
 /**
-        * \ingroup wrdac_clients
-        *
-        * SubSystem for babbling
-        */
+* \ingroup wrdac_clients
+*
+* SubSystem for babbling
+*/
 class SubSystem_babbling : public SubSystem
 {
 protected:
@@ -50,7 +48,6 @@ public:
     bool babbling(int jointNumber, std::string babblingLimb, double train_duration = -1.0);
 
 };
-}
 }//Namespace
 
 #endif // SUBSYSTEM_BABBLING_H

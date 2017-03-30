@@ -21,7 +21,7 @@ message(STATUS "iCub is version: ${ICUB_VERSION}")
 
 add_definitions(${YARP_DEFINES})
 include(YarpInstallationHelpers)
-yarp_configure_external_installation(wysiwyd)
+yarp_configure_external_installation(icub-client)
 
 include(iCubOptions)
 include(iCubHelpers)
@@ -40,27 +40,27 @@ set(IDL_GENERATED_CODE_DIR ${PROJECT_SOURCE_DIR}/src/idl_generated_code)
 mark_as_advanced(IDL_GENERATED_CODE_DIR)
 message(STATUS "IDL generated files go to ${IDL_GENERATED_CODE_DIR}")
 
-include(wysiwydFindDependencies)
-include(wysiwydOptions)
+include(icubClientFindDependencies)
+include(icubClientOptions)
 
-#### add the "uninstall_wysiwyd" target
+#### add the "uninstall_icub-client" target
 configure_file("${CMAKE_SOURCE_DIR}/cmake_uninstall.cmake.in"
                "${CMAKE_BINARY_DIR}/cmake_uninstall.cmake"
                @ONLY)
-add_custom_target(uninstall_wysiwyd "${CMAKE_COMMAND}" -P
+add_custom_target(uninstall_icubClient "${CMAKE_COMMAND}" -P
                   "${CMAKE_BINARY_DIR}/cmake_uninstall.cmake")
 ####
 
 #### install cmake scripts
 message(STATUS "Installing cmake scripts")
-set(WYSIWYD_CMAKE_SCRIPTS FindTBB.cmake
-                          FindPGSQL.cmake
-                          wysiwydOptions.cmake)
+set(ICUB_CLIENT_CMAKE_SCRIPTS FindTBB.cmake
+                              FindPGSQL.cmake
+                              icubClientOptions.cmake)
 
-foreach(conf_i ${WYSIWYD_CMAKE_SCRIPTS})
+foreach(conf_i ${ICUB_CLIENT_CMAKE_SCRIPTS})
     configure_file(${CMAKE_SOURCE_DIR}/conf/${conf_i}
                    ${CMAKE_BINARY_DIR}/conf/${conf_i} COPYONLY IMMEDIATE)
-    install(FILES conf/${conf_i} DESTINATION share/wysiwyd/cmake/ COMPONENT Development)
+    install(FILES conf/${conf_i} DESTINATION share/icub-client/cmake/ COMPONENT Development)
 endforeach()
 ####
 

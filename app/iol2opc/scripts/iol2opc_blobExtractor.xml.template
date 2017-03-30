@@ -1,6 +1,6 @@
 
 <application>
-<name>WYSIWYD IOL blobExtractor</name>
+<name>icub-client IOL blobExtractor</name>
 
         <dependencies>
                 <port>/icub/camcalib/left/out</port>

@@ -8,7 +8,7 @@
  * later version published by the Free Software Foundation.
  *
  * A copy of the license can be found at
- * wysiwyd/license/gpl.txt
+ * icub-client/license/gpl.txt
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -25,34 +25,28 @@
 #include <iterator>
 #include <algorithm>
 
-namespace wysiwyd{
-    namespace wrdac{
+namespace icubclient{
+    /**
+    * \ingroup wrdac_clients
+    *
+    * Abstract class to handle sub-systems of the architecture (navigation, speech, action, etc...)
+    */
+    class SubSystem
+    {
+    protected:
+        bool m_isRunning;
+        std::string m_masterName;
+        std::string m_type;
+        virtual bool connect() = 0;
 
-        //--------------------------------------------------------------------------------------------
-
-        /**
-        * \ingroup wrdac_clients
-        *
-        * Abstract class to handle sub-systems of the architecture (navigation, speech, action, etc...)
-        */
-        class SubSystem
-        {
-        protected:
-            bool m_isRunning;
-            std::string m_masterName;
-            std::string m_type;
-            virtual bool connect() = 0;
-
-        public:
-            SubSystem(const std::string &masterName) { m_isRunning = false; m_masterName = masterName; m_type = SUBSYSTEM; }
-            virtual ~SubSystem() {}
-            bool isRunning() const { return m_isRunning; }
-            bool Connect() { return (m_isRunning = connect()); }
-            virtual void Close() = 0;
-            std::string getType() const { return m_type; }
-        };
-
-    }
+    public:
+        SubSystem(const std::string &masterName) { m_isRunning = false; m_masterName = masterName; m_type = SUBSYSTEM; }
+        virtual ~SubSystem() {}
+        bool isRunning() const { return m_isRunning; }
+        bool Connect() { return (m_isRunning = connect()); }
+        virtual void Close() = 0;
+        std::string getType() const { return m_type; }
+    };
 }//Namespace
 #endif
 

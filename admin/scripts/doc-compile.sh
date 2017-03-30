@@ -10,7 +10,7 @@ DESTINATIONXML=generated-from-xml
 #   echo "Usage: `basename $0` {main/contrib}"
 #else
     base=$PWD
-    cd $WYSIWYD_ROOT/main
+    cd $ICUB_CLIENT_ROOT/main
 	
 	# clean-up
     rm tmp-doc -rf

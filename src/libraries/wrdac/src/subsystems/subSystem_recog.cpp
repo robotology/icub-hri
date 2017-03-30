@@ -1,7 +1,7 @@
 #include <yarp/os/all.h>
 #include "wrdac/subsystems/subSystem_recog.h"
 
-bool wysiwyd::wrdac::SubSystem_Recog::connect() {
+bool icubclient::SubSystem_Recog::connect() {
     if (!yarp::os::Network::isConnected(ears_port.getName(), "/ears/rpc")) {
         if (yarp::os::Network::connect(ears_port.getName(), "/ears/rpc")) {
             yInfo() << "Recog connected to ears";
@@ -19,27 +19,27 @@ bool wysiwyd::wrdac::SubSystem_Recog::connect() {
     }
 }
 
-wysiwyd::wrdac::SubSystem_Recog::SubSystem_Recog(const std::string &masterName) : SubSystem(masterName){
+icubclient::SubSystem_Recog::SubSystem_Recog(const std::string &masterName) : SubSystem(masterName){
     portRPC.open(("/" + m_masterName + "/recog:rpc").c_str());
     ears_port.open("/" + m_masterName + "/ears:o");
     m_type = SUBSYSTEM_RECOG;
 }
 
-void wysiwyd::wrdac::SubSystem_Recog::Close() {
+void icubclient::SubSystem_Recog::Close() {
     portRPC.interrupt();
     portRPC.close();
     ears_port.interrupt();
     ears_port.close();
 }
 
-bool wysiwyd::wrdac::SubSystem_Recog::setSpeakerName(std::string speaker)
+bool icubclient::SubSystem_Recog::setSpeakerName(std::string speaker)
 {
     speakerName_ = speaker;
     yInfo() << " [subSystem_Recog] : speaker is now " << speakerName_;
     return true;
 }
 
-void wysiwyd::wrdac::SubSystem_Recog::listen(bool on) {
+void icubclient::SubSystem_Recog::listen(bool on) {
     if (!yarp::os::Network::isConnected(ears_port.getName(), "/ears/rpc")){
         yarp::os::Network::connect(ears_port.getName(), "/ears/rpc");
     }
@@ -61,7 +61,7 @@ void wysiwyd::wrdac::SubSystem_Recog::listen(bool on) {
     }
 }
 
-void wysiwyd::wrdac::SubSystem_Recog::waitForEars() {
+void icubclient::SubSystem_Recog::waitForEars() {
     if (!yarp::os::Network::isConnected(ears_port.getName(), "/ears/rpc")){
         yarp::os::Network::connect(ears_port.getName(), "/ears/rpc");
     }
@@ -78,7 +78,7 @@ void wysiwyd::wrdac::SubSystem_Recog::waitForEars() {
     }
 }
 
-bool wysiwyd::wrdac::SubSystem_Recog::interruptSpeechRecognizer() {
+bool icubclient::SubSystem_Recog::interruptSpeechRecognizer() {
     yarp::os::Bottle bMessenger, bReply;
     bMessenger.addString("interrupt");
     // send the message
@@ -92,7 +92,7 @@ bool wysiwyd::wrdac::SubSystem_Recog::interruptSpeechRecognizer() {
     }
 }
 
-yarp::os::Bottle wysiwyd::wrdac::SubSystem_Recog::recogFromGrammar(std::string &sInput)
+yarp::os::Bottle icubclient::SubSystem_Recog::recogFromGrammar(std::string &sInput)
 {
     if (!yarp::os::Network::isConnected(portRPC.getName(), "/speechRecognizer/rpc")){
         if (!yarp::os::Network::connect(portRPC.getName(), "/speechRecognizer/rpc")){
@@ -119,7 +119,7 @@ yarp::os::Bottle wysiwyd::wrdac::SubSystem_Recog::recogFromGrammar(std::string &
     // turn off the main grammar through ears
 }
 
-yarp::os::Bottle wysiwyd::wrdac::SubSystem_Recog::recogFromGrammarLoop(std::string sInput, int iLoop, bool keepEarsEnabled, bool keepEarsDisabledAfterRecog)
+yarp::os::Bottle icubclient::SubSystem_Recog::recogFromGrammarLoop(std::string sInput, int iLoop, bool keepEarsEnabled, bool keepEarsDisabledAfterRecog)
 {
     if (!yarp::os::Network::isConnected(portRPC.getName(), "/speechRecognizer/rpc")){
         if (!yarp::os::Network::connect(portRPC.getName(), "/speechRecognizer/rpc")){

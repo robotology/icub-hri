@@ -1,7 +1,7 @@
 #include <yarp/os/all.h>
 #include "wrdac/subsystems/subSystem_ARE.h"
 
-void wysiwyd::wrdac::SubSystem_ARE::appendCartesianTarget(yarp::os::Bottle &b, const yarp::sig::Vector &t)
+void icubclient::SubSystem_ARE::appendCartesianTarget(yarp::os::Bottle &b, const yarp::sig::Vector &t)
 {
     yarp::os::Bottle &sub=b.addList();
     sub.addString("cartesian");
@@ -9,7 +9,7 @@ void wysiwyd::wrdac::SubSystem_ARE::appendCartesianTarget(yarp::os::Bottle &b, c
         sub.addDouble(t[i]);
 }
 
-void wysiwyd::wrdac::SubSystem_ARE::selectHandCorrectTarget(yarp::os::Bottle &options, yarp::sig::Vector &target, const std::string& objName, const std::string handToUse)
+void icubclient::SubSystem_ARE::selectHandCorrectTarget(yarp::os::Bottle &options, yarp::sig::Vector &target, const std::string& objName, const std::string handToUse)
 {
     std::string hand="";
     for (int i=0; i<options.size(); i++)
@@ -59,7 +59,7 @@ void wysiwyd::wrdac::SubSystem_ARE::selectHandCorrectTarget(yarp::os::Bottle &op
     lastlyUsedHand=hand;
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::sendCmd(const yarp::os::Bottle &cmd)
+bool icubclient::SubSystem_ARE::sendCmd(const yarp::os::Bottle &cmd)
 {
     bool ret=false;
 
@@ -75,7 +75,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::sendCmd(const yarp::os::Bottle &cmd)
     return ret;
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::connect()
+bool icubclient::SubSystem_ARE::connect()
 {
     if (!yarp::os::Network::isConnected(calibPort.getName(),"/iolReachingCalibration/rpc")) {
         if (yarp::os::Network::connect(calibPort.getName(),"/iolReachingCalibration/rpc")) {
@@ -101,7 +101,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::connect()
     return ret;
 }
 
-wysiwyd::wrdac::SubSystem_ARE::SubSystem_ARE(const std::string &masterName) : SubSystem(masterName)
+icubclient::SubSystem_ARE::SubSystem_ARE(const std::string &masterName) : SubSystem(masterName)
 {
     cmdPort.open(("/" + masterName + "/" + SUBSYSTEM_ARE + "/cmd:io").c_str());
     rpcPort.open(("/" + masterName + "/" + SUBSYSTEM_ARE + "/rpc").c_str());
@@ -113,7 +113,7 @@ wysiwyd::wrdac::SubSystem_ARE::SubSystem_ARE(const std::string &masterName) : Su
     opc = new OPCClient(m_masterName+"/opc_from_ARE");
 }
 
-void wysiwyd::wrdac::SubSystem_ARE::Close()
+void icubclient::SubSystem_ARE::Close()
 {
     opc->interrupt();
     opc->close();
@@ -130,7 +130,7 @@ void wysiwyd::wrdac::SubSystem_ARE::Close()
     calibPort.close();
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::getTableHeight(double &height)
+bool icubclient::SubSystem_ARE::getTableHeight(double &height)
 {
     yarp::os::Bottle bCmd, bReply;
     bCmd.addVocab(yarp::os::Vocab::encode("get"));
@@ -148,7 +148,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::getTableHeight(double &height)
     }
 }
 
-yarp::sig::Vector wysiwyd::wrdac::SubSystem_ARE::applySafetyMargins(const yarp::sig::Vector &in)
+yarp::sig::Vector icubclient::SubSystem_ARE::applySafetyMargins(const yarp::sig::Vector &in)
 {
     yarp::sig::Vector out=in;
     out[0]=std::min(out[0],-0.1);
@@ -160,7 +160,7 @@ yarp::sig::Vector wysiwyd::wrdac::SubSystem_ARE::applySafetyMargins(const yarp::
     return out;
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::home(const std::string &part)
+bool icubclient::SubSystem_ARE::home(const std::string &part)
 {
     yDebug() << "ARE::home start";
     yarp::os::Bottle bCmd;
@@ -175,7 +175,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::home(const std::string &part)
     return bReturn;
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::take(const std::string &sName, const yarp::os::Bottle &options)
+bool icubclient::SubSystem_ARE::take(const std::string &sName, const yarp::os::Bottle &options)
 {
     yDebug() << "ARE::take start";
 
@@ -211,7 +211,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::take(const std::string &sName, const yarp::o
     return bReturn;
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::push(const std::string &sName, const yarp::os::Bottle &options)
+bool icubclient::SubSystem_ARE::push(const std::string &sName, const yarp::os::Bottle &options)
 {
     yDebug() << "ARE::push start";
 
@@ -248,7 +248,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::push(const std::string &sName, const yarp::o
 
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::point(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options, const std::string &sName)
+bool icubclient::SubSystem_ARE::point(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options, const std::string &sName)
 {
     yDebug() << "ARE::pointfar start";
     yarp::sig::Vector target=applySafetyMargins(targetUnsafe);
@@ -272,7 +272,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::point(const yarp::sig::Vector &targetUnsafe,
 }
 
 
-/*bool wysiwyd::wrdac::SubSystem_ARE::point_old(const std::string &sName, const yarp::os::Bottle &options)
+/*bool icubclient::SubSystem_ARE::point_old(const std::string &sName, const yarp::os::Bottle &options)
 {
     yDebug() << "ARE::point start";
 
@@ -313,7 +313,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::point(const yarp::sig::Vector &targetUnsafe,
     return bReturn;
 }*/
 
-bool wysiwyd::wrdac::SubSystem_ARE::drop(const yarp::os::Bottle &options)
+bool icubclient::SubSystem_ARE::drop(const yarp::os::Bottle &options)
 {
     yDebug() << "ARE::drop start";
 
@@ -331,7 +331,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::drop(const yarp::os::Bottle &options)
     return bReturn;
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::dropOn(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options)
+bool icubclient::SubSystem_ARE::dropOn(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options)
 {
     yDebug() << "ARE::dropOn start";
 
@@ -354,7 +354,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::dropOn(const yarp::sig::Vector &targetUnsafe
     return bReturn;
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::observe(const yarp::os::Bottle &options)
+bool icubclient::SubSystem_ARE::observe(const yarp::os::Bottle &options)
 {
     yDebug() << "ARE::observe start";
 
@@ -370,7 +370,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::observe(const yarp::os::Bottle &options)
     return bReturn;
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::expect(const yarp::os::Bottle &options)
+bool icubclient::SubSystem_ARE::expect(const yarp::os::Bottle &options)
 {
     yDebug() << "ARE::expect start";
 
@@ -386,7 +386,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::expect(const yarp::os::Bottle &options)
     return bReturn;
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::give(const yarp::os::Bottle &options)
+bool icubclient::SubSystem_ARE::give(const yarp::os::Bottle &options)
 {
     yDebug() << "ARE::give start";
 
@@ -401,7 +401,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::give(const yarp::os::Bottle &options)
     return bReturn;
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::waving(const bool sw)
+bool icubclient::SubSystem_ARE::waving(const bool sw)
 {
     yDebug() << "ARE::waving start";
 
@@ -416,7 +416,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::waving(const bool sw)
     return bReturn;
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::look(const yarp::sig::Vector &target, const yarp::os::Bottle &options, const std::string &sName)
+bool icubclient::SubSystem_ARE::look(const yarp::sig::Vector &target, const yarp::os::Bottle &options, const std::string &sName)
 {
     yDebug() << "ARE::look start";
 
@@ -434,7 +434,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::look(const yarp::sig::Vector &target, const 
     return bReturn;
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::track(const yarp::sig::Vector &target, const yarp::os::Bottle &options)
+bool icubclient::SubSystem_ARE::track(const yarp::sig::Vector &target, const yarp::os::Bottle &options)
 {
     // track() is meant for streaming => no point in gating the activity continuously
     yarp::os::Bottle bCmd;
@@ -444,7 +444,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::track(const yarp::sig::Vector &target, const
     return sendCmd(bCmd);
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::impedance(const bool sw)
+bool icubclient::SubSystem_ARE::impedance(const bool sw)
 {
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("impedance"));
@@ -452,7 +452,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::impedance(const bool sw)
     return rpcPort.asPort().write(bCmd);
 }
 
-bool wysiwyd::wrdac::SubSystem_ARE::setExecTime(const double execTime)
+bool icubclient::SubSystem_ARE::setExecTime(const double execTime)
 {
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("time"));
@@ -460,7 +460,7 @@ bool wysiwyd::wrdac::SubSystem_ARE::setExecTime(const double execTime)
     return rpcPort.asPort().write(bCmd);
 }
 
-wysiwyd::wrdac::SubSystem_ARE::~SubSystem_ARE()
+icubclient::SubSystem_ARE::~SubSystem_ARE()
 {
     ;
 }

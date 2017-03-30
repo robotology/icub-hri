@@ -3,7 +3,7 @@
  
 <module>
    <name>ARE_KARMAiCubClientExample</name>
-   <doxygen-group>wysiwyd_examples</doxygen-group>
+   <doxygen-group>icub_client_examples</doxygen-group>
    <description>Use case of the iCubClient using both ARE and KARMA for motor actions</description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>

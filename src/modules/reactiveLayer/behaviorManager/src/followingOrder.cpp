@@ -2,9 +2,7 @@
 
 using namespace std;
 using namespace yarp::os;
-using namespace wysiwyd::wrdac;
-
-void FollowingOrder::configure() {
+using namespace icubclient;id FollowingOrder::configure() {
     Bottle bFollowingOrder = rf.findGroup("followingOrder");
 
     homeoPort = "/homeostasis/rpc";

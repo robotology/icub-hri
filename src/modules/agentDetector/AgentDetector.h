@@ -13,9 +13,7 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::math;
 using namespace kinectWrapper;
-using namespace wysiwyd::wrdac;
-
-typedef enum {
+using namespace icubclient;pedef enum {
     idle,
     clicked_left,
     clicked_right } clickType;

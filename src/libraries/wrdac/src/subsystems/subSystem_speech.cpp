@@ -1,7 +1,7 @@
 #include <yarp/os/all.h>
 #include "wrdac/subsystems/subSystem_speech.h"
 
-wysiwyd::wrdac::SubSystem_Speech::SubSystem_Speech(const std::string &masterName) :SubSystem(masterName)
+icubclient::SubSystem_Speech::SubSystem_Speech(const std::string &masterName) :SubSystem(masterName)
 {
     tts.open(("/" + m_masterName + "/tts:o").c_str());
     ttsRpc.open(("/" + m_masterName + "/tts:rpc").c_str());
@@ -11,7 +11,7 @@ wysiwyd::wrdac::SubSystem_Speech::SubSystem_Speech(const std::string &masterName
     opc = new OPCClient(m_masterName+"/opc_from_speech");
 }
 
-bool wysiwyd::wrdac::SubSystem_Speech::connect()
+bool icubclient::SubSystem_Speech::connect()
 {
     if(!yarp::os::Network::isConnected("/iSpeak/emotions:o", "/icub/face/emotions/in")) {
         yarp::os::Network::connect("/iSpeak/emotions:o", "/icub/face/emotions/in");
@@ -35,13 +35,13 @@ bool wysiwyd::wrdac::SubSystem_Speech::connect()
     return connected;
 }
 
-unsigned int wysiwyd::wrdac::SubSystem_Speech::countWordsInString(const std::string &str)
+unsigned int icubclient::SubSystem_Speech::countWordsInString(const std::string &str)
 {
     std::stringstream stream(str);
     return std::distance(std::istream_iterator<std::string>(stream), std::istream_iterator<std::string>());
 }
 
-void wysiwyd::wrdac::SubSystem_Speech::TTS(const std::string &text, bool shouldWait, bool recordABM, std::string addressee) {
+void icubclient::SubSystem_Speech::TTS(const std::string &text, bool shouldWait, bool recordABM, std::string addressee) {
     if(text=="") {
         yWarning() << "[SubSystem_Speech] Text is empty, not going to say anything";
         return;
@@ -72,18 +72,18 @@ void wysiwyd::wrdac::SubSystem_Speech::TTS(const std::string &text, bool shouldW
     }
 }
 
-yarp::os::Bottle *wysiwyd::wrdac::SubSystem_Speech::STT(const std::string &grammar, double timeout)
+yarp::os::Bottle *icubclient::SubSystem_Speech::STT(const std::string &grammar, double timeout)
 {
     //todo
     return NULL;
 }
 
-yarp::os::Bottle *wysiwyd::wrdac::SubSystem_Speech::STT(bool isBlocking)
+yarp::os::Bottle *icubclient::SubSystem_Speech::STT(bool isBlocking)
 {
     return stt.read(isBlocking);
 }
 
-void wysiwyd::wrdac::SubSystem_Speech::STTflush()
+void icubclient::SubSystem_Speech::STTflush()
 {
     int pendingReads = stt.getPendingReads();
     if (pendingReads > 0)
@@ -93,7 +93,7 @@ void wysiwyd::wrdac::SubSystem_Speech::STTflush()
         stt.read(false);
 }
 
-void wysiwyd::wrdac::SubSystem_Speech::STT_ExpandVocabulory(const std::string &vocabuloryName, const std::string &word)
+void icubclient::SubSystem_Speech::STT_ExpandVocabulory(const std::string &vocabuloryName, const std::string &word)
 {
     yarp::os::Bottle bAugmentVocab;
     bAugmentVocab.addString("rgm");
@@ -106,7 +106,7 @@ void wysiwyd::wrdac::SubSystem_Speech::STT_ExpandVocabulory(const std::string &v
     sttRpc.write(bAugmentVocab);
 }
 
-void wysiwyd::wrdac::SubSystem_Speech::SetOptions(const std::string &custom) {
+void icubclient::SubSystem_Speech::SetOptions(const std::string &custom) {
     if(custom!="iCub") {
         yarp::os::Bottle param;
         param.addString("set");
@@ -118,14 +118,14 @@ void wysiwyd::wrdac::SubSystem_Speech::SetOptions(const std::string &custom) {
     }
 }
 
-bool wysiwyd::wrdac::SubSystem_Speech::isSpeaking() {
+bool icubclient::SubSystem_Speech::isSpeaking() {
     yarp::os::Bottle cmd, reply;
     cmd.addVocab(VOCAB('s', 't', 'a', 't'));
     ttsRpc.write(cmd, reply);
     return (reply.get(0).asString() != "quiet");
 }
 
-void wysiwyd::wrdac::SubSystem_Speech::Close()
+void icubclient::SubSystem_Speech::Close()
 {
     tts.interrupt();
     tts.close();

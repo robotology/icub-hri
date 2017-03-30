@@ -18,5 +18,5 @@ add_executable(${PROJECTNAME} ${folder_source} ${doc_files})
 target_link_libraries(${PROJECTNAME} optimization ${YARP_LIBRARIES} wrdac)
 set_target_properties(${PROJECTNAME} PROPERTIES FOLDER tools)
 install(TARGETS ${PROJECTNAME} DESTINATION bin)
-yarp_install(FILES ${doc_files} DESTINATION ${WYSIWYD_MODULES_INSTALL_DIR})
+yarp_install(FILES ${doc_files} DESTINATION ${ICUB_CLIENT_MODULES_INSTALL_DIR})
 

@@ -2,9 +2,7 @@
 
 using namespace std;
 using namespace yarp::os;
-using namespace wysiwyd::wrdac;
-
-void Greeting::configure() {
+using namespace icubclient;id Greeting::configure() {
     // Is there a need for another module for greetings? This is simpler than proactive tagging, can be handled within here
     // => named external port None.
     from_sensation_port_name = "/opcSensation/greeting:o";

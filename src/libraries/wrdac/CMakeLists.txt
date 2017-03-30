@@ -31,10 +31,8 @@ set(folder_header include/wrdac/functions.h
                   include/wrdac/knowledge/object.h
                   include/wrdac/knowledge/relation.h
                   include/wrdac/knowledge/representations.h
-                  include/wrdac/clients/clients.h
                   include/wrdac/clients/icubClient.h
                   include/wrdac/clients/opcClient.h
-                  include/wrdac/subsystems/all.h
                   include/wrdac/subsystems/subSystem.h
                   include/wrdac/subsystems/subSystem_agentDetector.h
                   include/wrdac/subsystems/subSystem_ARE.h
@@ -44,7 +42,7 @@ set(folder_header include/wrdac/functions.h
                   include/wrdac/subsystems/subSystem_speech.h
                   include/wrdac/subsystems/subSystem_KARMA.h)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${wysiwydIDLClients_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${IDLClients_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
 
 add_library(${PROJECT_NAME} ${folder_header} ${folder_source})
 
@@ -54,9 +52,9 @@ endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER wrDAC)
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
-target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES} wysiwydIDLClients)
+target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES} IDLClients)
 
-icub_export_library(${PROJECT_NAME} INTERNAL_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include ${wysiwydIDLClients_INCLUDE_DIRS}
+icub_export_library(${PROJECT_NAME} INTERNAL_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include ${IDLClients_INCLUDE_DIRS}
                                     DESTINATION include/${PROJECT_NAME}
                                     FILES_WITH_PATH ${folder_header}
                                     PATH_TO_EXCLUDE include/wrdac)

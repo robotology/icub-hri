@@ -8,7 +8,7 @@
  * later version published by the Free Software Foundation.
  *
  * A copy of the license can be found at
- * wysiwyd/license/gpl.txt
+ * icub-client/license/gpl.txt
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -19,15 +19,15 @@
 /**
  * @defgroup wrdac Helper Routines
  *
- * @ingroup wysiwyd_libraries
+ * @ingroup icub_client_libraries
  *
  * A container library containing defines and structures to formalize
  * knowledge within an objectPropertiesCollector module.
  *
  * @author Ugo Pattacini & Stéphane Lallée
  */
-#ifndef __WYSIWYD_OPCTAGS_H__
-#define __WYSIWYD_OPCTAGS_H__
+#ifndef __ICUBCLIENT_TAGS_H__
+#define __ICUBCLIENT_TAGS_H__
 
 #include <vector>
 

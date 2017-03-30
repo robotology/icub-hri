@@ -5,7 +5,7 @@ branches:
   - master
   - devel
 
-clone_folder: c:\dev\wysiwyd
+clone_folder: c:\dev\icub-client
 
 environment:
   ACE_ROOT:          c:/Program Files (x86)/robotology/ace-6.3.4_v12_x86
@@ -62,11 +62,11 @@ install:
 build:
 
 build_script:
-  - cd c:\dev\wysiwyd\main
+  - cd c:\dev\icub-client\
   - md build
   - cd build
-  - cmake -G"Visual Studio 12" -DWYSIWYD_BUILD_IOL2OPC=FALSE -DCOMPILE_TESTS=TRUE ..
-  - msbuild /m /p:Configuration=Release /p:Platform="Win32" wysiwyd.sln
+  - cmake -G"Visual Studio 12" -DICUB_CLIENT_BUILD_IOL2OPC=FALSE -DCOMPILE_TESTS=TRUE ..
+  - msbuild /m /p:Configuration=Release /p:Platform="Win32" icub-client.sln
 
 notifications:
   - provider: Email

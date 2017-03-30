@@ -1,4 +1,5 @@
 *~
+*.autosave
 /build*/
 /main/build*/
 *kdev*

@@ -8,7 +8,7 @@
  * later version published by the Free Software Foundation.
  *
  * A copy of the license can be found at
- * wysiwyd/license/gpl.txt
+ * icub-client/license/gpl.txt
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -24,14 +24,12 @@
 #include <iostream>
 #include "wrdac/subsystems/subSystem.h"
 
-namespace wysiwyd{
-namespace wrdac{
-
+namespace icubclient{
 /**
-        * \ingroup wrdac_clients
-        *
-        * SubSystem for iol2opc
-        */
+* \ingroup wrdac_clients
+*
+* SubSystem for iol2opc
+*/
 class SubSystem_IOL2OPC : public SubSystem
 {
 protected:
@@ -49,7 +47,6 @@ public:
 
     void resume();
 };
-}
 }//Namespace
 
 #endif // SUBSYSTEM_IOL2OPC_H

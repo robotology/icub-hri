@@ -11,9 +11,7 @@
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
-using namespace wysiwyd::wrdac;
-
-class TestSensation: public Sensation
+using namespace icubclient;ass TestSensation: public Sensation
 {
 private:
     bool on;

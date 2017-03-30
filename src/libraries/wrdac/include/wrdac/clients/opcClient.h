@@ -8,7 +8,7 @@
  * later version published by the Free Software Foundation.
  *
  * A copy of the license can be found at
- * wysiwyd/license/gpl.txt
+ * icub-client/license/gpl.txt
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,7 +22,7 @@
 #include <memory>
 #include "wrdac/knowledge/representations.h"
 #include "wrdac/tags.h"
-namespace wysiwyd{namespace wrdac{
+namespace icubclient{
 
 /**
 * \ingroup wrdac_clients
@@ -338,6 +338,6 @@ public:
     std::string print();
 };
 
-}}//Namespaces
+}//Namespace
 #endif
 

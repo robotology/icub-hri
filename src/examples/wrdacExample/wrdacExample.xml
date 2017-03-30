@@ -4,7 +4,7 @@
 <module>
 
    <name>wrdacExample</name>
-   <doxygen-group>wysiwyd_examples</doxygen-group>
+   <doxygen-group>icub_client_examples</doxygen-group>
    <description>Example of instantiating an iCubClient from the wrdac library</description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>

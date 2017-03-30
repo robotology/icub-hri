@@ -10,7 +10,7 @@
 * later version published by the Free Software Foundation.
 *
 * A copy of the license can be found at
-* $WYSIWYD_ROOT/license/gpl.txt
+* icub-client/license/gpl.txt
 *
 * This program is distributed in the hope that it will be useful, but
 * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,7 +23,7 @@
 
 /*
 * \defgroup faceTracker
-* @ingroup wysiwyd_modules
+* @ingroup icub_client_modules
 *
 *
 * Allow to control the gaze using objects names. Provide a random autonomous switch of attention between the present objects.

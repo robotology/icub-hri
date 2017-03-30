@@ -3,7 +3,7 @@
 
 \image html logo.png ""
 
-\section wysiwyd_software_documentation The WYSIWYD Software Repository
+\section icub_client_software_documentation The iCub-Client Software Repository
 
 What You Say Is What You Did project, software repository documentation.
 This is the documentation extracted from
@@ -12,8 +12,8 @@ Its intended audience is developers within the consortium.
 
 Topics:
 
- - \ref wysiwyd_libraries - a list of documented libraries
- - \ref wysiwyd_modules - a list of documented modules
+ - \ref icub_client_libraries - a list of documented libraries
+ - \ref icub_client_modules - a list of documented modules
 
  - Reference material:
   - The <a href="http://wysiwyd.upf.edu">WYSIWYD project website</a>.

@@ -16,7 +16,7 @@ private:
 
     yarp::os::Port rpc_in_port;
 
-    wysiwyd::wrdac::ICubClient *iCub;
+    icubclient::ICubClient *iCub;
 
     // int behavior_to_trigger;
 

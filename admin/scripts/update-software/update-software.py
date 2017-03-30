@@ -5,7 +5,7 @@
 # t.fischer@imperial.ac.uk
 #
 # Description:
-# This script can be used to update all yarp/icub/wysiwyd related projects at once
+# This script can be used to update all yarp/icub/icub-client related projects at once
 # For each project defined in the `projects` variable, it does a `git pull --rebase`,
 # `make` and optionally `make install` or `sudo make install`.
 # 
@@ -62,7 +62,7 @@ def main(argv):
         finally:
             os.chdir(prevdir)
 
-    projects=['yarp/build', 'icub-main/build', 'icub-contrib-common/build', 'kinect-wrapper/build', 'wysiwyd/main/build', \
+    projects=['yarp/build', 'icub-main/build', 'icub-contrib-common/build', 'kinect-wrapper/build', 'icub-client/build', \
               'icub-contrib-iit/stereo-vision/build', 'icub-contrib-iit/segmentation/build', 'icub-contrib-iit/iol/build']
     projects_pullonly=[]
 

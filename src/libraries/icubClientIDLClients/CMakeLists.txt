@@ -2,7 +2,7 @@
 # Authors: Ugo Pattacini
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-set(PROJECTNAME wysiwydIDLClients)
+set(PROJECTNAME icubClientIDLClients)
 project(${PROJECTNAME})
 
 file(GLOB header_files ${IDL_GENERATED_CODE_DIR}/include/*.h)

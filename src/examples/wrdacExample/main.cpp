@@ -7,7 +7,7 @@
 * later version published by the Free Software Foundation.
 *
 * A copy of the license can be found at
-* wysiwyd / license / gpl.txt
+* icub-client / license / gpl.txt
 *
 * This program is distributed in the hope that it will be useful, but
 * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,7 +22,7 @@
 
 using namespace std;
 using namespace yarp::os;
-using namespace wysiwyd::wrdac;
+using namespace icubclient;
 
 int main()
 {
@@ -31,8 +31,6 @@ int main()
     //Create an iCub Client and check that all dependencies are here before starting
     ICubClient iCub("iCubClientExample");
 
-    string command = "nothing";
-            
     char rep = 'n';
     while (rep!='y'&&!iCub.connect())
     {
@@ -42,7 +40,7 @@ int main()
         cin>>rep;
         Time::delay(1.0);
     }
-            
+
     cout<<"Connected, starting.."<<endl;
 
     //This is how you trigger postures, assuming they are defines in conf file

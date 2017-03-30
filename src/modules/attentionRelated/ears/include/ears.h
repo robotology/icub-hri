@@ -2,9 +2,7 @@
 
 using namespace std;
 using namespace yarp::os;
-using namespace wysiwyd::wrdac;
-
-class ears : public RFModule {
+using namespace icubclient;ass ears : public RFModule {
 private:
     ICubClient *iCub;
     double      period;

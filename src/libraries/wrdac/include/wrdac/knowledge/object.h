@@ -8,7 +8,7 @@
  * later version published by the Free Software Foundation.
  *
  * A copy of the license can be found at
- * wysiwyd/license/gpl.txt
+ * icub-client/license/gpl.txt
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -21,8 +21,7 @@
 
 #include "entity.h"
 
-namespace wysiwyd{
-namespace wrdac{
+namespace icubclient{
 
 enum class ObjectArea : int {HUMAN = 1, ROBOT = 2, SHARED = 3, NOTREACHABLE = 4};
 
@@ -103,11 +102,11 @@ public:
         return objectAreaAsString(m_objectarea);
     }
 
-    static std::string objectAreaAsString(wysiwyd::wrdac::ObjectArea o);
-    static wysiwyd::wrdac::ObjectArea stringToObjectArea(std::string o);
+    static std::string objectAreaAsString(icubclient::ObjectArea o);
+    static icubclient::ObjectArea stringToObjectArea(std::string o);
 };
 
-}} //namespaces
+} //namespace
 
 #endif
 

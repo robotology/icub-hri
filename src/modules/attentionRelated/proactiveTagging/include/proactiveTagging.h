@@ -7,7 +7,7 @@
  * later version published by the Free Software Foundation.
  *
  * A copy of the license can be found at
- * wysiwyd/license/gpl.txt
+ * icub-client/license/gpl.txt
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -22,7 +22,7 @@
 class proactiveTagging : public yarp::os::RFModule {
 private:
 
-    wysiwyd::wrdac::ICubClient  *iCub;
+    icubclient::ICubClient  *iCub;
 
     double      period;
 

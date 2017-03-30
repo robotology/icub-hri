@@ -7,7 +7,7 @@
  * later version published by the Free Software Foundation.
  *
  * A copy of the license can be found at
- * wysiwyd/license/gpl.txt
+ * icub-client/license/gpl.txt
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -15,8 +15,8 @@
  * Public License for more details
 */
 
-#ifndef __WYSIWYD_GUIUPV2_H__
-#define __WYSIWYD_GUIUPV2_H__
+#ifndef __GUIUPV2_H__
+#define __GUIUPV2_H__
 
 #include <string>
 #include <yarp/os/all.h>
@@ -26,9 +26,7 @@
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
-using namespace wysiwyd::wrdac;
-
-class GuiUpdater: public RFModule
+using namespace icubclient;ass GuiUpdater: public RFModule
 {
 private:
     OPCClient *opc;

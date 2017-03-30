@@ -13,5 +13,5 @@ add_executable(${PROJECTNAME} ${folder_source})
 target_link_libraries(${PROJECTNAME} kinectWrapper wrdac ${YARP_LIBRARIES})
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER humanUnderstanding)
 install(TARGETS ${PROJECTNAME} DESTINATION bin)
-yarp_install(FILES ${docs} DESTINATION ${WYSIWYD_MODULES_INSTALL_DIR})
+yarp_install(FILES ${docs} DESTINATION ${ICUB_CLIENT_MODULES_INSTALL_DIR})
 

@@ -4,7 +4,7 @@
 <module>
 
    <name>reactiveLayer</name>
-   <doxygen-group>wysiwyd_modules</doxygen-group>
+   <doxygen-group>icub_client_modules</doxygen-group>
    <description>Reactive Layer for the iCub</description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>
@@ -18,7 +18,7 @@
    </arguments>
 
    <authors>
-       <author email="stephane.lallee@gmail.com"> Stéphane Lallée </author>
+       <author email="stephane.lallee@gmail.com"> Stï¿½phane Lallï¿½e </author>
    </authors>
 
    <data>
