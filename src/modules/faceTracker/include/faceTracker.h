@@ -22,7 +22,7 @@
 #define _FACETRACKER_MODULE_H_
 
 /*
-* \defgroup faceTracker
+* @defgroup icub_client_faceTracker
 * @ingroup icub_client_modules
 *
 *

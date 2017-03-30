@@ -5,10 +5,9 @@
 
 \section icub_client_software_documentation The iCub-Client Software Repository
 
-What You Say Is What You Did project, software repository documentation.
+This is the iCub-Client software repository documentation.
 This is the documentation extracted from
-the software repository of the WYSIWYD project.  
-Its intended audience is developers within the consortium.  
+the software repository of the iCub-Client project.  
 
 Topics:
 
@@ -23,13 +22,13 @@ in the src directory of the repository. You can produce this documentation on
 your computer by running:
 
 \verbatim
-  doxygen conf/Doxyfile.txt
+  doxygen doxygen/generate.txt
 \endverbatim
 
 locally on your repository, to figure out what's going on.
 The output can be browsed at doc/html/index.html.
 
-This page can be edited at main/src/doc/main.dox.
+This page can be edited at src/doc/main.dox.
 *
 */
 

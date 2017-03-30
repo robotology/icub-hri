@@ -4,22 +4,22 @@
 *
 * A container for all software. For clarity this is further divided in groups.
 *
-* (This page can be edited at main/src/doc/groups.dox)
+* (This page can be edited at src/doc/groups.dox)
 */
 
 /**
-* \defgroup icub_client_modules iCub-Client modules
+* @defgroup icub_client_modules iCub-Client modules
 * @ingroup icub_client_software_all
 *
 *
-* This is the list of iCub-Client modules in the main/src/modules directory.
+* This is the list of iCub-Client modules in the src/modules directory.
 * To add your own module to this list,
 * just add a comment like the following anywhere in your source
 * code (replacing "your_module_name" with the name of your module):
 \verbatim
   /**
    *
-   * \defgroup icub_client_your_module_name your_module_name
+   * @defgroup icub_client_your_module_name your_module_name
    * @ingroup icub_client_modules
    *
    */
@@ -32,7 +32,7 @@
 
 
 /**
-* \defgroup icub_client_libraries iCub-Client libraries
+* @defgroup icub_client_libraries iCub-Client libraries
 * @ingroup icub_client_software_all
 *
 *
@@ -43,7 +43,7 @@
 \verbatim
   /**
    *
-   * \defgroup icub_client_your_library_name your_library_name
+   * @defgroup icub_client_your_library_name your_library_name
    * @ingroup icub_client_libraries
    *
    */
