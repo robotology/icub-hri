@@ -42,7 +42,7 @@ set(folder_header include/wrdac/functions.h
                   include/wrdac/subsystems/subSystem_speech.h
                   include/wrdac/subsystems/subSystem_KARMA.h)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${IDLClients_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${icubClientIDLClients_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
 
 add_library(${PROJECT_NAME} ${folder_header} ${folder_source})
 
@@ -52,9 +52,9 @@ endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER wrDAC)
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
-target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES} IDLClients)
+target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES} icubClientIDLClients)
 
-icub_export_library(${PROJECT_NAME} INTERNAL_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include ${IDLClients_INCLUDE_DIRS}
+icub_export_library(${PROJECT_NAME} INTERNAL_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include ${icubClientIDLClients_INCLUDE_DIRS}
                                     DESTINATION include/${PROJECT_NAME}
                                     FILES_WITH_PATH ${folder_header}
                                     PATH_TO_EXCLUDE include/wrdac)

@@ -2,7 +2,9 @@
 
 using namespace std;
 using namespace yarp::os;
-using namespace icubclient;oid Tagging::configure() {
+using namespace icubclient;
+
+void Tagging::configure() {
     // Todo: set the value beow from a config file (but we are not in a module here)
     external_port_name = "/proactiveTagging/rpc";
     from_sensation_port_name = "/opcSensation/unknown_entities:o";

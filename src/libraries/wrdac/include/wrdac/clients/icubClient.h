@@ -26,6 +26,7 @@
 #include <yarp/os/Network.h>
 
 #include "wrdac/clients/opcClient.h"
+#include "wrdac/subsystems/subSystem.h"
 
 namespace icubclient{
     // forward declarations

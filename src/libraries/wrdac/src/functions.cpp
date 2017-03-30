@@ -23,7 +23,8 @@
 #include "wrdac/functions.h"
 
 using namespace yarp::os;
-using namespace icubclient;***********************************************************************/
+using namespace icubclient;
+
 int icubclient::opcGetIdFromAdd(Bottle &reply)
 {
     if (reply.size()>0)

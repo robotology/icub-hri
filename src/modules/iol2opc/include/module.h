@@ -43,7 +43,9 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::math;
 using namespace iCub::ctrl;
-using namespace icubclient;**********************************************************/
+using namespace icubclient;
+
+/**********************************************************/
 namespace Bridge {
     typedef enum { idle, load_database, localization } State;
 }

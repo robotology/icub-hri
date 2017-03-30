@@ -23,7 +23,9 @@ using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
-using namespace icubclient;lation::Relation(
+using namespace icubclient;
+
+Relation::Relation(
             string subject, 
             string verb, 
             string object, 

@@ -62,15 +62,15 @@ bool proactiveTagging::setPasarPointing(bool on) {
     }
 }
 
-string proactiveTagging::getBestEntity(string sTypeTarget) {
+std::string proactiveTagging::getBestEntity(std::string sTypeTarget) {
     bool bFound = false;
-    string sNameBestEntity = "none", sNameSecondBest = "none";
+    std::string sNameBestEntity = "none", sNameSecondBest = "none";
 
     double start = yarp::os::Time::now();
     // start detecting unknown objects
     while (!bFound && start + 8.0 > yarp::os::Time::now()) {
         iCub->opc->checkout();
-        list<shared_ptr<Entity>> lEntities = iCub->opc->EntitiesCacheCopy();
+        std::list<std::shared_ptr<Entity>> lEntities = iCub->opc->EntitiesCacheCopy();
 
         double highestSaliency = 0.0;
         double secondSaliency = 0.0;
@@ -132,7 +132,7 @@ string proactiveTagging::getBestEntity(string sTypeTarget) {
 }
 
 void proactiveTagging::subPopulateBodyparts(Bottle* bodyPartList, Bottle* bodyPartJointList, bool addOrRetrieve) {
-    list<shared_ptr<Entity>> currentEntitiesList = iCub->opc->EntitiesCacheCopy();
+    std::list<std::shared_ptr<Entity>> currentEntitiesList = iCub->opc->EntitiesCacheCopy();
 
     if (bodyPartList) {
         for (int d = 0; d < bodyPartList->size(); d++) {

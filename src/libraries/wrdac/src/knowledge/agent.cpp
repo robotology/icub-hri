@@ -24,7 +24,9 @@ using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
-using namespace icubclient;ent::Agent():Object()
+using namespace icubclient;
+
+Agent::Agent():Object()
 {    
     m_entity_type = ICUBCLIENT_OPC_ENTITY_AGENT;
     m_ego_position[0] = 0.0;

@@ -30,7 +30,9 @@ using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
-using namespace icubclient;ubClient::ICubClient(const std::string &moduleName, const std::string &context, const std::string &clientConfigFile, bool isRFVerbose)
+using namespace icubclient;
+
+ICubClient::ICubClient(const std::string &moduleName, const std::string &context, const std::string &clientConfigFile, bool isRFVerbose)
 {
     yarp::os::ResourceFinder rfClient;
     rfClient.setVerbose(isRFVerbose);

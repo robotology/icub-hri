@@ -21,7 +21,7 @@
 
 using namespace yarp::os;
 using namespace yarp::sig;
-using namespace wysiwyd::wrdac;
+using namespace icubclient;
 
 int main()
 {
@@ -47,10 +47,6 @@ int main()
         world.close();
         return 1;
     }
-
-    // attention starts up in auto mode => stop it
-    yInfo()<<"stopping attention";
-    icub.lookStop();
     
     Object *object=world.addOrRetrieveEntity<Object>("BEER");    
     object->m_present=1.0;
@@ -66,7 +62,6 @@ int main()
     yInfo()<<"looking at the "<<object->name();
     icub.look(object->name());
     Time::delay(3.0);
-    icub.lookStop();
 
     yInfo()<<"pointing at the "<<object->name();
     icub.point(object->name());

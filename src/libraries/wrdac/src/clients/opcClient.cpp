@@ -31,7 +31,9 @@ using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
-using namespace icubclient;PCClient::OPCClient(const string &moduleName)
+using namespace icubclient;
+
+OPCClient::OPCClient(const string &moduleName)
 {
     string opcPortName = "/";
     opcPortName += moduleName;

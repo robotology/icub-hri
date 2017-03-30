@@ -19,7 +19,8 @@
 
 using namespace yarp::os;
 using namespace yarp::sig;
-using namespace icubclient;ng namespace std;
+using namespace icubclient;
+using namespace std;
 
 bool proactiveTagging::configure(yarp::os::ResourceFinder &rf) {
     string moduleName = rf.check("name", Value("proactiveTagging")).asString().c_str();

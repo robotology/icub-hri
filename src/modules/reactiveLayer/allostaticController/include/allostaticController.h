@@ -11,7 +11,9 @@ using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::math;
-using namespace icubclient;um OutCZ {UNDER, OVER};
+using namespace icubclient;
+
+enum OutCZ {UNDER, OVER};
 
 struct DriveOutCZ {
     string name;

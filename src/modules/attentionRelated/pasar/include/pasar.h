@@ -23,7 +23,8 @@
 
 #include <wrdac/clients/icubClient.h>
 
-using namespace icubclient;ng namespace yarp::os;
+using namespace icubclient;
+using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
 using namespace std;

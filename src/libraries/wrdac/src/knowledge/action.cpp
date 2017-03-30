@@ -23,7 +23,9 @@ using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
-using namespace icubclient;tion::Action():Entity()
+using namespace icubclient;
+
+Action::Action():Entity()
 {
     m_entity_type = ICUBCLIENT_OPC_ENTITY_ACTION;
 }

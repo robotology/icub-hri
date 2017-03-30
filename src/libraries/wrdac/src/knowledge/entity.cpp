@@ -22,7 +22,9 @@ using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::dev;
-using namespace icubclient;ntity::Entity(Bottle &b)
+using namespace icubclient;
+
+Entity::Entity(Bottle &b)
 {
     this->fromBottle(b);
 }

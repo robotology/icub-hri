@@ -27,7 +27,9 @@ using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::math;
-using namespace icubclient;t main()
+using namespace icubclient;
+
+int main()
 {
     Network yarp;
     if (!yarp.checkNetwork())

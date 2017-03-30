@@ -3,7 +3,9 @@
 
 using namespace std;
 using namespace yarp::os;
-using namespace icubclient;ass opcPopulater : public RFModule {
+using namespace icubclient;
+
+class opcPopulater : public RFModule {
 private:
 
     ICubClient *iCub;

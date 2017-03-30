@@ -21,7 +21,7 @@ message(STATUS "iCub is version: ${ICUB_VERSION}")
 
 add_definitions(${YARP_DEFINES})
 include(YarpInstallationHelpers)
-yarp_configure_external_installation(icub-client)
+yarp_configure_external_installation(icub_client)
 
 include(iCubOptions)
 include(iCubHelpers)
