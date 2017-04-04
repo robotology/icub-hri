@@ -56,12 +56,10 @@ bool SensationManager::configure(yarp::os::ResourceFinder &rf)
 
 bool SensationManager::updateModule()
 {
-    for(std::vector<Sensation*>::size_type i = 0; i != sensations.size(); i++) {
-        sensations[i]->publish();
+    for(auto& sensation : sensations) {
+        sensation->publish();
     }
     return true;
-
-
 }
 
 bool SensationManager::respond(const Bottle& cmd, Bottle& reply)

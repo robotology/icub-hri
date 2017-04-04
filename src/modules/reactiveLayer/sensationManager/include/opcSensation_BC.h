@@ -12,7 +12,9 @@ using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::math;
-using namespace icubclient;ass OpcSensation: public Sensation
+using namespace icubclient;
+
+class OpcSensation: public Sensation
 {
 private:
     ICubClient *iCub;

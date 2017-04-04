@@ -21,15 +21,13 @@
 #ifndef _FACETRACKER_MODULE_H_
 #define _FACETRACKER_MODULE_H_
 
-/*
-* @defgroup icub_client_faceTracker
+/**
+* \defgroup icub_client_faceTracker
 * @ingroup icub_client_modules
 *
 *
 * Allow to control the gaze using objects names. Provide a random autonomous switch of attention between the present objects.
-
 * Face tracking module for iCub head and gaze using OpenCV2.X functions
-
 * Using the face detection functions of OpenCV, the iCub is detecting faces every frame. Then, it tries to located the biggest face in the middle of the view by moving head and eye simultaneously.
     - Image sequences from left eye are used for tracking (not both eyes).
     - There are five modes for the tracking internally: 'set position mode', 'panning mode', 'face tracking mode, 'smooth stopping mode' and 'face searching mode'.
