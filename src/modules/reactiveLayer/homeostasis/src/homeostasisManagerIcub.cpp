@@ -100,11 +100,6 @@ bool HomeostaticModule::configure(yarp::os::ResourceFinder &rf)
             
         }
     }
-    stress_k = rf.check("stress-k",Value("15.")).asDouble();
-    stress_th = rf.check("stress-th",Value("0.55")).asDouble();
-    //stress=0;
-
-    stressPort.open("/"+moduleName+"/stress:o");
 
     yInfo() << "Opening RPC...";
      
@@ -395,7 +390,6 @@ bool HomeostaticModule::respond(const Bottle& cmd, Bottle& reply)
 
 bool HomeostaticModule::updateModule()
 {
-    double stress = 0;
     for(unsigned int d = 0; d<manager->drives.size();d++)
     {
         if (verbose)
@@ -406,93 +400,41 @@ bool HomeostaticModule::updateModule()
         yarp::os::Bottle* inp;
         inp = input_ports[d]->read(false);
         
+        // [CLEANUP/] should we keep this?
         if(manager->drives[d]->gradient == true)
         {
             if (inp)
             {
-                if (manager->drives[d]->name == "avoidance")
-                    {
-                        processAvoidance(d,inp);
-                    }
-                else
-                {
-                    manager->drives[d]->setValue(inp->get(0).asDouble());
-                }
+                manager->drives[d]->setValue(inp->get(0).asDouble());
             }else{
                 //manager->drives[d]->setValue(inp->get(0).asDouble());
             }
         }
+        // [/CLEANUP]
+
         manager->drives[d]->update();
         yarp::os::Bottle &out1 = outputm_ports[d]->prepare();// = output_ports[d]->prepare();
         out1.clear();
         yarp::os::Bottle &out2 = outputM_ports[d]->prepare();
         out2.clear();
-        if (manager->drives[d]->name == "avoidance")
+        out1.addDouble(-manager->drives[d]->getValue()+manager->drives[d]->homeostasisMin);
+        outputm_ports[d]->write();
+        if (verbose)
         {
-            out1.addDouble(-manager->drives[d]->getValue()+manager->drives[d]->homeostasisMin);
-            outputm_ports[d]->write();
-
-            double aux = +manager->drives[d]->getValue()-manager->drives[d]->homeostasisMax;
-            if (aux<0)
-            {
-                aux=0;
-            }else{
-                aux=1;
-                //aux = 0-aux;
-            }
-            out2.addDouble(aux);
-            outputM_ports[d]->write();
-        }else{
-            
-            out1.addDouble(-manager->drives[d]->getValue()+manager->drives[d]->homeostasisMin);
-            outputm_ports[d]->write();
-            if (verbose)
-            {
-                yInfo() <<"Drive value: " << manager->drives[d]->value;
-                yInfo() <<"Drive decay: " << manager->drives[d]->decay;
-                yInfo() <<"Drive homeostasisMin: " << manager->drives[d]->homeostasisMin;
-                yInfo() <<"Drive homeostasisMax: " << manager->drives[d]->homeostasisMax;
-                yInfo() <<"Drive gradient: " << manager->drives[d]->gradient;
-                yInfo() <<"Drive period: " << manager->drives[d]->period;
-                yInfo()<<out1.get(0).asDouble();
-            }
-
-            out2.addDouble(+manager->drives[d]->getValue()-manager->drives[d]->homeostasisMax);
-            outputM_ports[d]->write();
+            yInfo() <<"Drive value: " << manager->drives[d]->value;
+            yInfo() <<"Drive decay: " << manager->drives[d]->decay;
+            yInfo() <<"Drive homeostasisMin: " << manager->drives[d]->homeostasisMin;
+            yInfo() <<"Drive homeostasisMax: " << manager->drives[d]->homeostasisMax;
+            yInfo() <<"Drive gradient: " << manager->drives[d]->gradient;
+            yInfo() <<"Drive period: " << manager->drives[d]->period;
+            yInfo()<<out1.get(0).asDouble();
         }
-        stress += pow(out2.get(0).asDouble(),3) + pow(out1.get(0).asDouble(),3);
-        
+
+        out2.addDouble(+manager->drives[d]->getValue()-manager->drives[d]->homeostasisMax);
+        outputM_ports[d]->write();
+
     }
-    Bottle& output=stressPort.prepare();
-    output.clear();
-
-    stress = 1./(1.+exp(-stress_k*(-stress+stress_th)));
-   
-    output.addDouble(stress);
-    stressPort.write();
-
     return true;
-}
-
-//Hardcoded function. This must go outside!!!
-bool HomeostaticModule::processAvoidance(int d, Bottle* avoidanceBottle)
-{
-    // double intensity=0;
-    // for (int i =0;i<avoidanceBottle->size();i++)
-    // {
-    //     Bottle* aux = avoidanceBottle->get(i).asList();
-    //     if (aux->size() < 8)
-    //     {
-    //         intensity +=0.5;
-    //     }
-    //     else
-    //     {
-    //         intensity += aux->get(7).asDouble();
-    //     }
-    // }
-    // manager->drives[d]->setValue(intensity);
-    return true;
-
 }
 
 bool HomeostaticModule::close()
@@ -513,8 +455,6 @@ bool HomeostaticModule::close()
 
         delete manager->drives[d];
     }
-    stressPort.interrupt();
-    stressPort.close();
 
     input_ports.clear();
     outputM_ports.clear();

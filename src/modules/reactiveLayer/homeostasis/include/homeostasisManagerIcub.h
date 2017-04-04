@@ -20,18 +20,12 @@ private:
 
     std::string moduleName;
     double period;
-    double stress_k, stress_th;
-
-    //double stress;
-    yarp::os::BufferedPort<yarp::os::Bottle> stressPort;
 
 
     vector< yarp::os::BufferedPort<Bottle> * > input_ports;
     vector< yarp::os::BufferedPort<Bottle> * > outputM_ports;
     vector< yarp::os::BufferedPort<Bottle> * > outputm_ports;
     HomeostasisManager* manager;
-
-    //Reflexes
 
     Port    rpc;
 
