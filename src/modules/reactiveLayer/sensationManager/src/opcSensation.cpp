@@ -5,9 +5,9 @@ void OpcSensation::configure(yarp::os::ResourceFinder &rf)
 {
     hand_valence = rf.check("hand_valence",Value(0.5)).asDouble();
     default_object_valence = rf.check("object_valence",Value(0.0)).asDouble();
-    moduleName = "opcSensation";
+    //moduleName = "opcSensation";
     bool isRFVerbose = false;
-    iCub = new ICubClient(moduleName,"sensation","client.ini",isRFVerbose);
+    iCub = new ICubClient("opcSensation","sensation","client.ini",isRFVerbose);
     iCub->opc->isVerbose = false;
     while (!iCub->connect())
     {
@@ -15,23 +15,25 @@ void OpcSensation::configure(yarp::os::ResourceFinder &rf)
         Time::delay(1.0);
     }
 
-    opc_has_unknown_port_name = "/" + moduleName + "/opc_has_unknown:o"; //This goes to homeostasis
-    opc_has_unknown_port.open(opc_has_unknown_port_name);
+    homeoPort.open("/opcSensation/toHomeo:o");
 
-    unknown_entities_port_name = "/" + moduleName + "/unknown_entities:o"; //this goes to behaviors
-    unknown_entities_port.open(unknown_entities_port_name);
+    //opc_has_unknown_port_name = "/opcSensation/opc_has_unknown:o"; //This goes to homeostasis
+    //opc_has_unknown_port.open(opc_has_unknown_port_name);
+
+    //unknown_entities_port_name = "/opcSensation/unknown_entities:o"; //this goes to behaviors
+    unknown_entities_port.open("/opcSensation/unknown_entities:o");
  
-    opc_has_known_port_name = "/" + moduleName + "/opc_has_known:o"; //This goes to homeostasis
-    opc_has_known_port.open(opc_has_known_port_name);
+    //opc_has_known_port_name = "/opcSensation/opc_has_known:o"; //This goes to homeostasis
+    //opc_has_known_port.open(opc_has_known_port_name);
 
-    opc_has_agent_name = "/" + moduleName + "/hasAgent:o"; //This goes to homeostasis
-    opc_has_agent_port.open(opc_has_agent_name);
+    //opc_has_agent_name = "/opcSensation/hasAgent:o"; //This goes to homeostasis
+    opc_has_agent_port.open("/opcSensation/hasAgent:o");
 
-    known_entities_port_name = "/" + moduleName + "/known_entities:o"; //this goes to behaviors
-    known_entities_port.open(known_entities_port_name);
+    //known_entities_port_name = "/opcSensation/known_entities:o"; //this goes to behaviors
+    known_entities_port.open( "/opcSensation/known_entities:o");
 
-    is_touched_port_name = "/" + moduleName + "/is_touched:o";
-    is_touched_port.open(is_touched_port_name);
+    //is_touched_port_name = "/opcSensation/is_touched:o";
+    is_touched_port.open("/opcSensation/is_touched:o");
 
     u_entities.clear();
     k_entities.clear();
@@ -48,20 +50,32 @@ void OpcSensation::publish()
     // should change handleTagging to handleUnknownEntities?
     Bottle res = handleEntities();
     
-    yarp::os::Bottle &has_unkn = opc_has_unknown_port.prepare();
-    has_unkn.clear();
-    has_unkn.addInt(int(res.get(0).asInt()));
-    opc_has_unknown_port.write();
+    //yarp::os::Bottle &has_unkn = opc_has_unknown_port.prepare();
+    //has_unkn.clear();
+    //has_unkn.addInt(int(res.get(0).asInt()));
+    //opc_has_unknown_port.write();
+    yarp::os::Bottle &bot = homeoPort.prepare();
+    bot.clear();
+    yarp::os::Bottle key;
+    key.clear();
+    key.addString("unknown");
+    key.append(*res.get(0).asList());
+    bot.append(key);
+    key.clear();
+    key.addString("known");
+    key.append(*res.get(2).asList());
+    bot.append(key);
+    homeoPort.write();
     
     yarp::os::Bottle &unkn = unknown_entities_port.prepare();
     unkn.clear();
     unkn.append(*res.get(1).asList());
     unknown_entities_port.write();
   
-    yarp::os::Bottle &has_kn = opc_has_known_port.prepare();
-    has_kn.clear();
-    has_kn.addInt(int(res.get(2).asInt()));
-    opc_has_known_port.write();
+    //yarp::os::Bottle &has_kn = opc_has_known_port.prepare();
+    //has_kn.clear();
+    //has_kn.addInt(int(res.get(2).asInt()));
+    //opc_has_known_port.write();
     
     yarp::os::Bottle &kn = known_entities_port.prepare();
     kn.clear();

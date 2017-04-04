@@ -26,7 +26,7 @@ private:
     vector< yarp::os::BufferedPort<Bottle> * > outputM_ports;
     vector< yarp::os::BufferedPort<Bottle> * > outputm_ports;
     HomeostasisManager* manager;
-
+    yarp::os::BufferedPort<Bottle> input_port;
     Port    rpc;
 
     bool addNewDrive(string driveName, yarp::os::Bottle& grpHomeostatic);
@@ -38,7 +38,7 @@ public:
 
     Drive bDrive(yarp::os::Bottle* b)
     {
-        Drive d = Drive(b->get(0).asString(),b->get(1).asDouble(),b->get(2).asDouble(),b->get(3).asDouble(),b->get(4).asDouble(),b->get(5).asBool());
+        Drive d = Drive(b->get(0).asString(),b->get(1).asDouble(),b->get(2).asString(),b->get(3).asDouble(),b->get(4).asDouble(),b->get(5).asDouble(),b->get(6).asBool());
         return d;
     }
 

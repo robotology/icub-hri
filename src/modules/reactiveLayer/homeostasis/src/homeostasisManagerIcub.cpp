@@ -11,6 +11,7 @@ bool HomeostaticModule::addNewDrive(string driveName, yarp::os::Bottle& grpHomeo
     drv->setDecay(grpHomeostatic.check((driveName + "-decay"), Value(drv->decay)).asDouble());
     drv->setValue((drv->homeostasisMax + drv->homeostasisMin) / 2.);
     drv->setGradient(grpHomeostatic.check((driveName + "-gradient"), Value(drv->gradient)).asInt());
+    drv->setKey(grpHomeostatic.check((driveName + "-key"), Value(drv->key)).asString());
     
     manager->addDrive(drv);
    
@@ -30,7 +31,7 @@ bool HomeostaticModule::addNewDrive(string driveName)
     drv->setDecay(drv->decay);
     drv->setValue((drv->homeostasisMax + drv->homeostasisMin) / 2.);
     drv->setGradient(false);
-    
+
     manager->addDrive(drv);
     
     yDebug() << "default drive added. Opening ports...";//;
@@ -46,15 +47,15 @@ int HomeostaticModule::openPorts(string driveName)
     string portName = "/" + moduleName + "/" + driveName;
     
     string pn = portName + ":i";
-    input_ports.push_back(new BufferedPort<Bottle>());
+    //input_ports.push_back(new BufferedPort<Bottle>());
     outputm_ports.push_back(new BufferedPort<Bottle>());
     outputM_ports.push_back(new BufferedPort<Bottle>());
 
-    yInfo() << "Configuring port " << " : " << pn << " ..." ;
+    /*yInfo() << "Configuring port " << " : " << pn << " ..." ;
     if (!input_ports.back()->open(pn)) 
     {
         yInfo() << getName() << ": Unable to open port " << pn ;
-    }
+    }*/
     
     pn = portName + "/min:o";
     yInfo() << "Configuring port " << " : "<< pn << " ..." ;
@@ -390,6 +391,7 @@ bool HomeostaticModule::respond(const Bottle& cmd, Bottle& reply)
 
 bool HomeostaticModule::updateModule()
 {
+    yarp::os::Bottle* sens_input = input_port.read(false);
     for(unsigned int d = 0; d<manager->drives.size();d++)
     {
         if (verbose)
@@ -397,15 +399,15 @@ bool HomeostaticModule::updateModule()
             yInfo() << "Going by drive #"<<d << " with name "<< manager->drives[d]->name ;
         }
 
-        yarp::os::Bottle* inp;
-        inp = input_ports[d]->read(false);
+        double inp;
+        inp = sens_input->find(manager->drives[d]->key).asDouble();
         
         // [CLEANUP/] should we keep this?
         if(manager->drives[d]->gradient == true)
         {
             if (inp)
             {
-                manager->drives[d]->setValue(inp->get(0).asDouble());
+                manager->drives[d]->setValue(inp);
             }else{
                 //manager->drives[d]->setValue(inp->get(0).asDouble());
             }
