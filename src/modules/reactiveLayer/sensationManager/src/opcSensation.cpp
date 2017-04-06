@@ -3,9 +3,6 @@
 
 void OpcSensation::configure(yarp::os::ResourceFinder &rf)
 {
-    hand_valence = rf.check("hand_valence",Value(0.5)).asDouble();
-    default_object_valence = rf.check("object_valence",Value(0.0)).asDouble();
-
     bool isRFVerbose = false;
     iCub = new ICubClient("opcSensation","sensation","client.ini",isRFVerbose);
     iCub->opc->isVerbose = false;
@@ -23,9 +20,6 @@ void OpcSensation::configure(yarp::os::ResourceFinder &rf)
 
     u_entities.clear();
     k_entities.clear();
-    pf3dTrackerPort.open("/"+moduleName+"/pf3dTracker:i");
-
-    outputPPSPort.open("/"+moduleName+"/objects:o");
 
     yInfo() << "Configuration done.";
 
@@ -134,79 +128,10 @@ Bottle OpcSensation::handleEntities()
                 addToEntityList(temp_u_entities, entity->entity_type(), entity->name());
                 addToEntityList(temp_up_entities, entity->entity_type(), entity->name());
             }
-            else if (entity->entity_type() == "object"){
-                Object* obj1 = dynamic_cast<Object*>(entity);
-
-                //Handle red balls
-                if (obj1 && entity->name() == "red_ball"){
-                    // Set color:
-                    obj1->m_color[0] = 250;
-                    obj1->m_color[1] = 0;
-                    obj1->m_color[2] = 0;
-                    if (!Network::isConnected("/pf3dTracker/data:o",("/"+moduleName+"/pf3dTracker:i").c_str())){
-                        yDebug("RedBall Port not connected...");
-                        obj1->m_present = 0.0;
-                    }else{
-                        //update position
-                        Bottle *bot = pf3dTrackerPort.read();
-                        obj1->m_ego_position[0] = bot->get(0).asDouble();
-                        obj1->m_ego_position[1] = bot->get(1).asDouble();
-                        obj1->m_ego_position[2] = bot->get(2).asDouble();
-                        obj1->m_dimensions[0] = bot->get(3).asDouble();
-                        obj1->m_dimensions[1] = bot->get(4).asDouble();
-                        obj1->m_dimensions[2] = bot->get(5).asDouble();
-                        obj1->m_present = bot->get(6).asDouble();
-                        
-                    }
-                }
-                if (obj1 && obj1->m_present == 1.0){
-                    //send data to PPS
-                    Bottle objec;
-                    objec.clear();
-                    objec.addDouble(obj1->m_ego_position[0]);          //X
-                    objec.addDouble(obj1->m_ego_position[1]);          //Y
-                    objec.addDouble(obj1->m_ego_position[2]);          //Z
-                    double dimensions = 0.07;//sqrt(pow(obj1->m_dimensions[0],2) + pow(obj1->m_dimensions[1],2) + pow(obj1->m_dimensions[2],2));
-                    objec.addDouble(dimensions);                       //RADIUS
-                    if (default_object_valence != 0.0)
-                    {
-                        objec.addDouble(default_object_valence);
-                    }else{
-                        objec.addDouble(min(obj1->m_value,0.0)*(-1.0));    //Threat: Only negative part of value!
-                    }
-                    objects.addList()=objec;
-                    addToEntityList(temp_kp_entities, entity->entity_type(), entity->name());
-                }
-                addToEntityList(temp_k_entities, entity->entity_type(), entity->name());
-                iCub->opc->commit(obj1);
-            }
         }
         if (dynamic_cast<Object*>(entity) && dynamic_cast<Object*>(entity)->m_present == 1.0)
         {
             addToEntityList(temp_p_entities, entity->entity_type(), entity->name());
-        }
-        //Add agent right hand to interfere with robot left hand
-        if (entity->name() == iCub->getPartnerName(false) && entity->entity_type() == "agent") {
-            Agent* a = dynamic_cast<Agent*>(entity);
-            agentPresent = true;
-            if(a && (a->m_present==1.0)) {
-                double dimensions = 0.07;//sqrt(pow(obj1->m_dimensions[0],2) + pow(obj1->m_dimensions[1],2) + pow(obj1->m_dimensions[2],2));
-                Bottle right_hand;
-                right_hand.addDouble(a->m_body.m_parts["handRight"][0]);          //X
-                right_hand.addDouble(a->m_body.m_parts["handRight"][1]);          //Y
-                right_hand.addDouble(a->m_body.m_parts["handRight"][2]);          //Z
-                right_hand.addDouble(dimensions);                       //RADIUS
-                right_hand.addDouble(hand_valence);    //Currently hardcoded threat. Make adaptive
-                objects.addList()=right_hand;
-                
-                Bottle left_hand;
-                left_hand.addDouble(a->m_body.m_parts["handLeft"][0]);          //X
-                left_hand.addDouble(a->m_body.m_parts["handLeft"][1]);          //Y
-                left_hand.addDouble(a->m_body.m_parts["handLeft"][2]);          //Z
-                left_hand.addDouble(dimensions);                       //RADIUS
-                left_hand.addDouble(hand_valence);    //Currently hardcoded threat. Make adaptive
-                objects.addList()=left_hand;
-            }
         }
     }
 
@@ -217,10 +142,6 @@ Bottle OpcSensation::handleEntities()
     kp_entities.copy( temp_kp_entities);
     o_positions.copy( temp_o_positions);
 
-    Bottle& output=outputPPSPort.prepare();
-    output.clear();
-    output.addList()=objects;
-    outputPPSPort.write();
     Bottle out;
     out.addInt(up_entities.size());
     out.addList()=up_entities;
