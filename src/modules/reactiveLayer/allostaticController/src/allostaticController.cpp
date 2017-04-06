@@ -127,7 +127,7 @@ bool AllostaticController::configure(yarp::os::ResourceFinder &rf)
     moduleName = rf.check("name",Value("AllostaticController")).asString();
     setName(moduleName.c_str());
 
-    yDebug()<<moduleName<<": finding configuration files...";//<<endl;
+    yDebug()<<moduleName<<": finding configuration files...";
     period = rf.check("period",Value(0.5)).asDouble();
 
     bool isRFVerbose = true;
@@ -167,7 +167,7 @@ void AllostaticController::configureAllostatic(yarp::os::ResourceFinder &rf)
         yarp::os::Time::delay(0.2);
     }
 
-    yInfo() << "Initializing drives...";//<<endl;
+    yInfo() << "Initializing drives...";
     Bottle grpAllostatic = rf.findGroup("ALLOSTATIC");
 
     drivesList = *grpAllostatic.find("drives").asList();
