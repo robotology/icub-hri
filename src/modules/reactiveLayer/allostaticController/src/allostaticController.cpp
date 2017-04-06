@@ -15,7 +15,6 @@ bool AllostaticController::interruptModule()
     to_behavior_rpc.interrupt();
     for (auto& outputm_port : outputm_ports)
     {
-        // yDebug() << "Closing port " + itoa(i) + " to homeo min/max";
         outputm_port->interrupt();
     }
 
@@ -47,7 +46,6 @@ bool AllostaticController::close()
 
     for (auto& outputm_port : outputm_ports)
     {
-        // yDebug() << "Closing port " + itoa(i) + " to homeo min/max";
         outputm_port->interrupt();
         outputm_port->close();
         delete outputm_port;
@@ -224,8 +222,6 @@ void AllostaticController::configureAllostatic(yarp::os::ResourceFinder &rf)
 
         openPorts(driveName);
 
-        //string sensationPort = grpAllostatic.check((), Value("None")).asString();
-        //string pn = "/" + moduleName + "/" + driveName + "/sensation:i";
         while(!Network::connect("/opcSensation/toHomeo:o", "/homeostasis/fromSensations:i")) {
             yDebug()<<"Connecting " << "/opcSensation/toHomeo:o" << " to " << "/homeostasis/fromSensations:i";
             yarp::os::Time::delay(0.5);

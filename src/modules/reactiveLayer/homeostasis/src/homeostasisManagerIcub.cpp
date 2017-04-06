@@ -16,7 +16,7 @@ bool HomeostaticModule::addNewDrive(string driveName, yarp::os::Bottle& grpHomeo
     manager->addDrive(drv);
    
     openPorts(driveName);
-    yInfo() << "new drive created successfully!";//;
+    yInfo() << "new drive created successfully!";
 
     return true;
 }
@@ -36,11 +36,10 @@ bool HomeostaticModule::addNewDrive(string driveName)
     
     manager->addDrive(drv);
     
-    yDebug() << "default drive added. Opening ports...";//;
+    yDebug() << "default drive added. Opening ports...";
     openPorts(driveName);
-
-    yInfo() << "new drive created successfully!";//;
-
+    yInfo() << "new drive created successfully!";
+    
     return true;
 }
 
@@ -421,7 +420,7 @@ bool HomeostaticModule::updateModule()
             
             manager->drives[d]->update();
             
-            yarp::os::Bottle &out1 = outputm_ports[d]->prepare();// = output_ports[d]->prepare();
+            yarp::os::Bottle &out1 = outputm_ports[d]->prepare();
             out1.clear();
             yarp::os::Bottle &out2 = outputM_ports[d]->prepare();
             out2.clear();
