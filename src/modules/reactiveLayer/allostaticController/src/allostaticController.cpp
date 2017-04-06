@@ -169,8 +169,8 @@ void AllostaticController::configureAllostatic(yarp::os::ResourceFinder &rf)
 
     yInfo() << "Initializing drives...";//<<endl;
     Bottle grpAllostatic = rf.findGroup("ALLOSTATIC");
+
     drivesList = *grpAllostatic.find("drives").asList();
-    
     Bottle cmd;
 
     priority_sum = 0.;
@@ -224,10 +224,10 @@ void AllostaticController::configureAllostatic(yarp::os::ResourceFinder &rf)
 
         openPorts(driveName);
 
-        string sensationPort = grpAllostatic.check((driveName + "-sensation-port"), Value("None")).asString();
-        string pn = "/" + moduleName + "/" + driveName + "/sensation:i";
-        while(!Network::connect(sensationPort, pn)) {
-            yDebug()<<"Connecting " << sensationPort << " to " << pn;
+        //string sensationPort = grpAllostatic.check((), Value("None")).asString();
+        //string pn = "/" + moduleName + "/" + driveName + "/sensation:i";
+        while(!Network::connect("/opcSensation/toHomeo:o", "/homeostasis/fromSensations:i")) {
+            yDebug()<<"Connecting " << "/opcSensation/toHomeo:o" << " to " << "/homeostasis/fromSensations:i";
             yarp::os::Time::delay(0.5);
         }
 

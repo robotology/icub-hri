@@ -16,6 +16,7 @@ bool HomeostaticModule::addNewDrive(string driveName, yarp::os::Bottle& grpHomeo
     manager->addDrive(drv);
    
     openPorts(driveName);
+    yInfo() << "new drive created successfully!";//;
 
     return true;
 }
@@ -31,12 +32,14 @@ bool HomeostaticModule::addNewDrive(string driveName)
     drv->setDecay(drv->decay);
     drv->setValue((drv->homeostasisMax + drv->homeostasisMin) / 2.);
     drv->setGradient(false);
-
+    drv->setKey(drv->key);
+    
     manager->addDrive(drv);
     
     yDebug() << "default drive added. Opening ports...";//;
     openPorts(driveName);
-    yInfo() << "new drive created successfuly!";//;
+
+    yInfo() << "new drive created successfully!";//;
 
     return true;
 }
@@ -44,19 +47,17 @@ bool HomeostaticModule::addNewDrive(string driveName)
 int HomeostaticModule::openPorts(string driveName)
 {
     //Create Ports
-    string portName = "/" + moduleName + "/" + driveName;
-    
-    string pn = portName + ":i";
-    //input_ports.push_back(new BufferedPort<Bottle>());
+    string portName;
+    string pn;
     outputm_ports.push_back(new BufferedPort<Bottle>());
     outputM_ports.push_back(new BufferedPort<Bottle>());
-
-    /*yInfo() << "Configuring port " << " : " << pn << " ..." ;
-    if (!input_ports.back()->open(pn)) 
-    {
-        yInfo() << getName() << ": Unable to open port " << pn ;
-    }*/
     
+    if (!input_port.open("/"+moduleName+"/fromSensations:i")) 
+    {
+        yInfo() << getName() << ": Unable to open port " << "/"<<moduleName<<"/fromSensations:i" ;
+    }
+
+
     pn = portName + "/min:o";
     yInfo() << "Configuring port " << " : "<< pn << " ..." ;
     if (!outputm_ports.back()->open(pn)) 
@@ -232,9 +233,9 @@ bool HomeostaticModule::respond(const Bottle& cmd, Bottle& reply)
         {
             Bottle *ga = cmd.get(2).asList();
             Bottle grpAllostatic = ga->findGroup("ALLOSTATIC");
-
             addNewDrive(cmd.get(2).check("name",yarp::os::Value("")).asString(), grpAllostatic);
             reply.addString("add drive from config bottle: ack");
+            
         }
         else if (cmd.get(1).asString()=="botl")
         {
@@ -390,51 +391,58 @@ bool HomeostaticModule::respond(const Bottle& cmd, Bottle& reply)
 }
 
 bool HomeostaticModule::updateModule()
-{
+{    
     yarp::os::Bottle* sens_input = input_port.read(false);
-    for(unsigned int d = 0; d<manager->drives.size();d++)
-    {
-        if (verbose)
+    if (sens_input == 0)
+        yDebug()<<"Waiting for sensations";
+    else{
+    
+        for(unsigned int d = 0; d<manager->drives.size();d++)
         {
-            yInfo() << "Going by drive #"<<d << " with name "<< manager->drives[d]->name ;
-        }
-
-        double inp;
-        inp = sens_input->find(manager->drives[d]->key).asDouble();
-        
-        // [CLEANUP/] should we keep this?
-        if(manager->drives[d]->gradient == true)
-        {
-            if (inp)
+            
+            if (verbose)
             {
-                manager->drives[d]->setValue(inp);
-            }else{
-                //manager->drives[d]->setValue(inp->get(0).asDouble());
+                yInfo() << "Going by drive #"<<d << " with name "<< manager->drives[d]->name ;
             }
+
+            double inp;
+            inp = sens_input->check(manager->drives[d]->key,Value("None")).asDouble();
+            // [CLEANUP/] should we keep this?
+            if(manager->drives[d]->gradient == true)
+            {
+                if (inp)
+                {
+                    manager->drives[d]->setValue(inp);
+                }else{
+                    //manager->drives[d]->setValue(inp->get(0).asDouble());
+                }
+            }
+            // [/CLEANUP]
+            
+            manager->drives[d]->update();
+            
+            yarp::os::Bottle &out1 = outputm_ports[d]->prepare();// = output_ports[d]->prepare();
+            out1.clear();
+            yarp::os::Bottle &out2 = outputM_ports[d]->prepare();
+            out2.clear();
+            out1.addDouble(-manager->drives[d]->getValue()+manager->drives[d]->homeostasisMin);
+            outputm_ports[d]->write();
+            if (verbose)
+            {
+                yInfo() <<"Drive value: " << manager->drives[d]->value;
+                yInfo() <<"Drive decay: " << manager->drives[d]->decay;
+                yInfo() <<"Drive homeostasisMin: " << manager->drives[d]->homeostasisMin;
+                yInfo() <<"Drive homeostasisMax: " << manager->drives[d]->homeostasisMax;
+                yInfo() <<"Drive gradient: " << manager->drives[d]->gradient;
+                yInfo() <<"Drive period: " << manager->drives[d]->period;
+                yInfo()<<out1.get(0).asDouble();
+            }
+            
+
+            out2.addDouble(+manager->drives[d]->getValue()-manager->drives[d]->homeostasisMax);
+            outputM_ports[d]->write();
+
         }
-        // [/CLEANUP]
-
-        manager->drives[d]->update();
-        yarp::os::Bottle &out1 = outputm_ports[d]->prepare();// = output_ports[d]->prepare();
-        out1.clear();
-        yarp::os::Bottle &out2 = outputM_ports[d]->prepare();
-        out2.clear();
-        out1.addDouble(-manager->drives[d]->getValue()+manager->drives[d]->homeostasisMin);
-        outputm_ports[d]->write();
-        if (verbose)
-        {
-            yInfo() <<"Drive value: " << manager->drives[d]->value;
-            yInfo() <<"Drive decay: " << manager->drives[d]->decay;
-            yInfo() <<"Drive homeostasisMin: " << manager->drives[d]->homeostasisMin;
-            yInfo() <<"Drive homeostasisMax: " << manager->drives[d]->homeostasisMax;
-            yInfo() <<"Drive gradient: " << manager->drives[d]->gradient;
-            yInfo() <<"Drive period: " << manager->drives[d]->period;
-            yInfo()<<out1.get(0).asDouble();
-        }
-
-        out2.addDouble(+manager->drives[d]->getValue()-manager->drives[d]->homeostasisMax);
-        outputM_ports[d]->write();
-
     }
     return true;
 }

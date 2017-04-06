@@ -5,7 +5,7 @@ void OpcSensation::configure(yarp::os::ResourceFinder &rf)
 {
     hand_valence = rf.check("hand_valence",Value(0.5)).asDouble();
     default_object_valence = rf.check("object_valence",Value(0.0)).asDouble();
-    //moduleName = "opcSensation";
+
     bool isRFVerbose = false;
     iCub = new ICubClient("opcSensation","sensation","client.ini",isRFVerbose);
     iCub->opc->isVerbose = false;
@@ -16,24 +16,10 @@ void OpcSensation::configure(yarp::os::ResourceFinder &rf)
     }
 
     homeoPort.open("/opcSensation/toHomeo:o");
-
-    //opc_has_unknown_port_name = "/opcSensation/opc_has_unknown:o"; //This goes to homeostasis
-    //opc_has_unknown_port.open(opc_has_unknown_port_name);
-
-    //unknown_entities_port_name = "/opcSensation/unknown_entities:o"; //this goes to behaviors
     unknown_entities_port.open("/opcSensation/unknown_entities:o");
- 
-    //opc_has_known_port_name = "/opcSensation/opc_has_known:o"; //This goes to homeostasis
-    //opc_has_known_port.open(opc_has_known_port_name);
-
-    //opc_has_agent_name = "/opcSensation/hasAgent:o"; //This goes to homeostasis
     opc_has_agent_port.open("/opcSensation/hasAgent:o");
-
-    //known_entities_port_name = "/opcSensation/known_entities:o"; //this goes to behaviors
     known_entities_port.open( "/opcSensation/known_entities:o");
-
-    //is_touched_port_name = "/opcSensation/is_touched:o";
-    is_touched_port.open("/opcSensation/is_touched:o");
+    is_touched_port.open("/opcSensation/is_touched:o"); //needed?
 
     u_entities.clear();
     k_entities.clear();
@@ -47,36 +33,29 @@ void OpcSensation::configure(yarp::os::ResourceFinder &rf)
 
 void OpcSensation::publish()
 {
-    // should change handleTagging to handleUnknownEntities?
     Bottle res = handleEntities();
-    
-    //yarp::os::Bottle &has_unkn = opc_has_unknown_port.prepare();
-    //has_unkn.clear();
-    //has_unkn.addInt(int(res.get(0).asInt()));
-    //opc_has_unknown_port.write();
+
+    if (!Network::isConnected("/opcSensation/toHomeo:o", "/homeostasis/fromSensations:i"))
+        Network::connect("/opcSensation/toHomeo:o", "/homeostasis/fromSensations:i");
     yarp::os::Bottle &bot = homeoPort.prepare();
     bot.clear();
     yarp::os::Bottle key;
     key.clear();
     key.addString("unknown");
-    key.append(*res.get(0).asList());
-    bot.append(key);
+    key.addInt(res.get(0).asInt());
+    bot.addList()=key;
     key.clear();
     key.addString("known");
-    key.append(*res.get(2).asList());
-    bot.append(key);
+    key.addInt(res.get(2).asInt());
+    bot.addList()=key;
     homeoPort.write();
-    
+        
+
     yarp::os::Bottle &unkn = unknown_entities_port.prepare();
     unkn.clear();
     unkn.append(*res.get(1).asList());
     unknown_entities_port.write();
   
-    //yarp::os::Bottle &has_kn = opc_has_known_port.prepare();
-    //has_kn.clear();
-    //has_kn.addInt(int(res.get(2).asInt()));
-    //opc_has_known_port.write();
-    
     yarp::os::Bottle &kn = known_entities_port.prepare();
     kn.clear();
     kn.append(*res.get(3).asList());
@@ -86,8 +65,9 @@ void OpcSensation::publish()
     has_ag.clear();
     has_ag.addInt(int(res.get(4).asInt()));
     opc_has_agent_port.write();
-
-    handleTouch();    
+    
+    handleTouch();       
+ 
 }
 
 void OpcSensation::handleTouch()
@@ -122,6 +102,8 @@ Bottle OpcSensation::handleEntities()
                 if(o) {
                     addToEntityList(temp_o_positions, o->objectAreaAsString(), entity->name());
                 }
+        
+
         }
 
         if (entity->name().find("unknown") == 0) {
