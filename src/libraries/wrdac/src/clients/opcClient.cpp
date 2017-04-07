@@ -35,15 +35,7 @@ using namespace icubclient;
 
 OPCClient::OPCClient(const string &moduleName)
 {
-    string opcPortName = "/";
-    opcPortName += moduleName;
-    opcPortName += "/world/opc:rpc";
-    opc.open(opcPortName.c_str());
-
-    string opcBroadcastPortName = "/";
-    opcBroadcastPortName += moduleName;
-    opcBroadcastPortName += "/world/opc/broadcast:i";
-    opcBroadcast.open(opcBroadcastPortName.c_str());
+    opc.open("/" + moduleName + "/world/opc:rpc");
 
     isVerbose = false;
 }    
@@ -75,13 +67,11 @@ bool OPCClient::write(Bottle &cmd, Bottle &reply, bool Verbose)
 
 void OPCClient::interrupt()
 {
-    opcBroadcast.interrupt();
     opc.interrupt();
 }
 
 void OPCClient::close()
 {
-    opcBroadcast.close();
     opc.close();
     //Clear the content of dictionaries
     for(map<int,Entity*>::iterator it=entitiesByID.begin(); it!=entitiesByID.end(); it++)
@@ -106,7 +96,7 @@ void OPCClient::clear()
     write(cmd,reply);
 }
 
-Entity*    OPCClient::addEntity(Entity* e)
+void OPCClient::addEntity(Entity* e)
 {
     Bottle cmd,reply;
     cmd.addVocab(Vocab::encode("add"));
@@ -117,7 +107,7 @@ Entity*    OPCClient::addEntity(Entity* e)
     if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
     {
         yError() << "Impossible to communicate correctly with OPC";
-        return NULL;
+        return;
     }
 
     //Update the assigned ID
@@ -128,7 +118,6 @@ Entity*    OPCClient::addEntity(Entity* e)
 
     //Commit to the dictionary
     entitiesByID[e->opc_id()] = e;
-    return e;
 }
 
 /**
@@ -394,7 +383,7 @@ int OPCClient::getRelationID(
     return -1;
 }
 //Adds a relation between 2 entities
-bool OPCClient::addRelation(Relation r, double lifeTime)
+bool OPCClient::addRelation(const Relation &r, double lifeTime)
 {   
     Entity* subject = getEntity(r.subject());
     Entity* object = getEntity(r.object());
@@ -454,7 +443,7 @@ bool OPCClient::addRelation(
 }
 
 //Removes a relation between 2 entities
-bool OPCClient::removeRelation(Relation r)
+bool OPCClient::removeRelation(const Relation &r)
 {   
     Entity* subject = getEntity(r.subject());
     Entity* object = getEntity(r.object());
@@ -517,7 +506,7 @@ bool OPCClient::containsRelation(
     return (index != -1);
 }
 
-bool OPCClient::containsRelation(Relation r)
+bool OPCClient::containsRelation(const Relation &r)
 {    
     Entity* subject = getEntity(r.subject());
     Entity* object = getEntity(r.object());
@@ -862,7 +851,7 @@ std::list<Relation>  OPCClient::getRelations(Entity* entity)
 }
 
 //Clear local dictionnaries and populate them using the server content
-void OPCClient::checkout(bool updateCache, bool useBroadcast)
+void OPCClient::checkout(bool updateCache)
 {
     if (updateCache)
     {
@@ -874,85 +863,31 @@ void OPCClient::checkout(bool updateCache, bool useBroadcast)
         entitiesByID.clear();
     }
 
-    if (useBroadcast)
+    //Find the ids of all entities within the OPC
+    Bottle cmd,sub,reply;
+    cmd.addString("ask");
+
+    Bottle& cond = cmd.addList();
+    sub.addString(ICUBCLIENT_OPC_ENTITY_TAG);
+    sub.addString("!=");
+    sub.addString(ICUBCLIENT_OPC_ENTITY_RELATION);
+    cond.addList() = sub;
+
+    write(cmd,reply,isVerbose);
+    if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
     {
-        Bottle* bBroadcastIn = opcBroadcast.read(true);
-        for(int i=1; i<bBroadcastIn->size(); i++)
-        {
-            Bottle* bEntity = bBroadcastIn->get(i).asList();
-            //std::string test = bEntity->toString();
-            string entityType = bEntity->check(ICUBCLIENT_OPC_ENTITY_TAG,Value("INVALID")).asString();
-            if (entityType!="INVALID" && entityType != ICUBCLIENT_OPC_ENTITY_RELATION)
-            {
-                // TODO: NOT SURE WHETHER THIS CHANGE IS CORRECT
-                // CAN SOMEONE PLEASE LOOK OVER THIS WHETHER IT LOOKS OKAY?
-                map<int, Entity*>::iterator itE = entitiesByID.find(bEntity->find("id").asInt());
-                if(itE != entitiesByID.end())
-                {
-                    entitiesByID[bEntity->find("id").asInt()]->fromBottle(*bEntity);
-                }
-                else
-                {
-                    Entity* newE=NULL;
-
-                    //Cast to the right type
-                    if(entityType == "entity")
-                        newE = new Entity();
-                    else if (entityType == ICUBCLIENT_OPC_ENTITY_OBJECT)
-                        newE = new Object();
-                    else if (entityType == ICUBCLIENT_OPC_ENTITY_AGENT)
-                        newE = new Agent();
-                    else if (entityType == ICUBCLIENT_OPC_ENTITY_ACTION)
-                        newE = new Action();
-                    else if (entityType == "bodypart")
-                        newE = new Bodypart();
-                    else
-                        yError() << "checkout unknown entity type";
-
-                    if (newE!=NULL)
-                    {
-                        //Update the fields
-                        newE->fromBottle(*bEntity);
-                        newE->m_opc_id = bEntity->find("id").asInt();
-
-                        //Commit to the dictionary
-                        entitiesByID[newE->opc_id()] = newE;
-                    }
-                }
-            }
-        }
-        if (isVerbose)
-            yInfo() << "Checkout result (broadcast): " << entitiesByID.size() << " entities added.";
-
+        yError() << "Unable to talk to OPC.";
+        return;
     }
-    else
+
+    Bottle* ids = reply.get(1).asList()->get(1).asList();
+    for(int i=0;i<ids->size();i++)
     {
-        //Find the ids of all entities within the OPC
-        Bottle cmd,sub,reply;
-        cmd.addString("ask");
-
-        Bottle& cond = cmd.addList();
-        sub.addString(ICUBCLIENT_OPC_ENTITY_TAG);
-        sub.addString("!=");
-        sub.addString(ICUBCLIENT_OPC_ENTITY_RELATION);
-        cond.addList() = sub;
-
-        write(cmd,reply,isVerbose);
-        if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
-        {
-            yError() << "Unable to talk to OPC.";
-            return;
-        }
-
-        Bottle* ids = reply.get(1).asList()->get(1).asList();
-        for(int i=0;i<ids->size();i++)
-        {
-            int currentID = ids->get(i).asInt();
-            getEntity(currentID, updateCache); //Automatically update the dictionnaries
-        }
-        if (isVerbose)
-            yInfo() << "Checkout result: "<< ids->size() << " entities added.";
+        int currentID = ids->get(i).asInt();
+        getEntity(currentID, updateCache); //Automatically update the dictionnaries
     }
+    if (isVerbose)
+        yInfo() << "Checkout result: "<< ids->size() << " entities added.";
 }
 
 //Update the whole content of the world (poll the OPC for all items)
