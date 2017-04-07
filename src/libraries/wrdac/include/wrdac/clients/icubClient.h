@@ -22,6 +22,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <tuple>
 
 #include <yarp/os/Network.h>
 
@@ -68,7 +69,6 @@ namespace icubclient{
         std::string robot;  // Name of robot
 
     public:
-        SubSystem*  getSubSystem(const std::string &name){ return subSystems[name]; }
         SubSystem_IOL2OPC* getIOL2OPCClient();
         SubSystem_Recog* getRecogClient();
         SubSystem_ARE* getARE();
@@ -81,6 +81,9 @@ namespace icubclient{
         /**
         * Create an iCub client
         * @param moduleName The port namespace that will precede the client ports names.
+        * @param context The yarp context to be used.
+        * @param clientConfigFile The yarp config file to be used.
+        * @param isRFVerbose Whether the yarp resource finder should be verbose
         */
         ICubClient(const std::string &moduleName, const std::string &context = "icubClient",
             const std::string &clientConfigFile = "client.ini", bool isRFVerbose = false);
@@ -100,7 +103,7 @@ namespace icubclient{
         bool connectOPC(const std::string &opcName = "OPC");
 
         /**
-        * Try to connect to sub-systems.
+        * Try to connect to all sub-systems.
         * @return true on success.
         */
         bool connectSubSystems();
@@ -119,9 +122,8 @@ namespace icubclient{
         * Go in home position.
         * @param part the part to be homed ("gaze", "head", "arms",
         *             "fingers", "all"; "all" by default).
-        * @return true in case of successfull motor command, false
-        *         otherwise (Entity non existing, impossible to reach,
-        *         etc.).
+        * @return true in case of successful motor command, false
+        *         otherwise (e.g. wrong part name)
         */
         bool home(const std::string &part = "all");
 
@@ -187,12 +189,13 @@ namespace icubclient{
         /**
         * Enable/disable arms waving.
         * @param sw enable/disable if true/false.
-        * @return true in case of successfull request, false otherwise.
+        * @return true in case of successful request, false otherwise.
         */
         bool waving(const bool sw);
 
         /**
         * Push at a specified location.
+        * This method is deprecated, and pushKarmaLeft or pushKarmaRight should be used instead.
         * @param oName is the name of the entity in the OPC where the
         *              robot should push at.
         * @param options bottle containing a list of options (e.g. force
@@ -204,11 +207,11 @@ namespace icubclient{
         bool push(const std::string &oLocation, const yarp::os::Bottle &options = yarp::os::Bottle());
 
         /**
-         * @brief pushKarmaLeft: push an object by name to right side
-         * @param objName: name of object, which will be looked for in OPC
+         * @brief pushKarmaLeft: push an object by name to left side
+         * @param objName is the name of object, which will be looked for in OPC
          * @param targetPosYLeft: Y coordinate of object to push to
          * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-         * @param options
+         * @param options: options to be passed to Karma
          * @return true in case of success release, false otherwise
          */
         bool pushKarmaLeft(const std::string &objName, const double &targetPosYLeft,
@@ -217,10 +220,10 @@ namespace icubclient{
 
         /**
          * @brief pushKarmaRight: push an object by name to right side
-         * @param objName: name of object, which will be looked for in OPC
+         * @param objName is the name of object, which will be looked for in OPC
          * @param targetPosYRight: Y coordinate of object to push to
          * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-         * @param options
+         * @param options: options to be passed to Karma
          * @return true in case of success release, false otherwise
          */
         bool pushKarmaRight(const std::string &objName, const double &targetPosYRight,
@@ -230,9 +233,9 @@ namespace icubclient{
         /**
          * @brief pushKarmaFront: push an object by name to front
          * @param objName: name of object, which will be looked for in OPC
-         * @param targetPosXFront: Y coordinate of object to push to
+         * @param targetPosXFront: X coordinate of object to push to
          * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-         * @param options
+         * @param options: options to be passed to Karma
          * @return true in case of success release, false otherwise
          */
         bool pushKarmaFront(const std::string &objName, const double &targetPosXFront,
@@ -241,9 +244,9 @@ namespace icubclient{
         /**
          * @brief pullKarmaBack: pull an object by name back
          * @param objName: name of object, which will be looked for in OPC
-         * @param targetPosXBack: Y coordinate of object to pull back
+         * @param targetPosXBack: X coordinate of object to pull back
          * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-         * @param options
+         * @param options: options to be passed to Karma
          * @return true in case of success release, false otherwise
          */
         bool pullKarmaBack(const std::string &objName, const double &targetPosXBack,
@@ -255,7 +258,7 @@ namespace icubclient{
          * @param objCenter: coordinate of object's center
          * @param targetPosYLeft: Y coordinate of object to push to
          * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-         * @param options
+         * @param options: options to be passed to Karma
          * @param sName: name of object to push
          * @return true in case of success release, false otherwise
          */
@@ -269,7 +272,7 @@ namespace icubclient{
          * @param objCenter: coordinate of object's center
          * @param targetPosYRight: Y coordinate of object to push to
          * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-         * @param options
+         * @param options: options to be passed to Karma
          * @param sName: name of object to push
          * @return true in case of success release, false otherwise
          */
@@ -282,7 +285,7 @@ namespace icubclient{
          * @param objCenter: coordinate of object's center
          * @param targetPosXFront: X coordinate of object to push to
          * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-         * @param options
+         * @param options: options to be passed to Karma
          * @param sName: name of object to push
          * @return true in case of success release, false otherwise
          */
@@ -294,7 +297,7 @@ namespace icubclient{
          * @param objCenter: coordinate of object's center
          * @param targetPosXBack: X coordinate of object to pull back
          * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-         * @param options
+         * @param options: options to be passed to Karma
          * @param sName: name of object to pull
          * @return true in case of success release, false otherwise
          */
@@ -311,15 +314,14 @@ namespace icubclient{
         * @return true in case of success grasp, false otherwise
         *         (Entity non existing, impossible to reach, etc.).
         */
-        bool take(const std::string &oLocation, const yarp::os::Bottle &options = yarp::os::Bottle());
+        bool take(const std::string &oName, const yarp::os::Bottle &options = yarp::os::Bottle());
 
         /**
         * @brief pushKarma (KARMA): push to certain position, along a direction
         * @param targetCenter: position to push to.
         * @param theta: angle between the y-axis (in robot FoR) and starting position of push action, defines the direction of push action
         * @param radius: radius of the circle with center at @see targetCenter
-        * @param options
-        * @param sName
+        * @param options: options to be passed to Karma
         * @return true in case of success release, false otherwise
         */
         bool pushKarma(const yarp::sig::Vector &targetCenter, const double &theta, const double &radius,
@@ -331,8 +333,7 @@ namespace icubclient{
         * @param theta: angle between the y-axis (in robot FoR) and starting position of draw action.
         * @param radius: radius of the circle with center at @see targetCenter
         * @param dist: moving distance of draw action
-        * @param options
-        * @param sName
+        * @param options: options to be passed to Karma
         * @return true in case of success release, false otherwise
         */
         bool drawKarma(const yarp::sig::Vector &targetCenter, const double &theta,
@@ -347,6 +348,13 @@ namespace icubclient{
         */
         bool look(const std::string &target, const yarp::os::Bottle &options = yarp::os::Bottle());
 
+        /**
+        * Start tracking a given entity
+        * @param target is a vector where the robot should look.
+        * @param options contains options to be passed on the gaze
+        *                controller.
+        * @param sName is the name of the object which the robot is looking at
+        */
         bool look(const yarp::sig::Vector &target, const yarp::os::Bottle &options = yarp::os::Bottle(),
                   const std::string &sName="target");
 
@@ -363,12 +371,13 @@ namespace icubclient{
 
         /**
         * Extract the name of the agent interaction with the iCub (present, not iCub nor 'unnamed' partner)
+        * @param verbose, whether a yInfo output should happen if the partner is found
         * @return string, the name of the agent
         */
         std::string getPartnerName(bool verbose = true);
 
         /**
-        * Extract the localisation of the bodypart name of the partner
+        * Extract the location of the bodypart name of the partner
         * @param sBodypartName is the name of the bodypart (kinect skeleton node) to be looked at
         * @return vLoc, the vector of the bodypart localisation
         */
@@ -378,7 +387,7 @@ namespace icubclient{
         * Babbling a single joint
         * @param jointNumber contains the int corresponding to an arm joint
         * @param babblingLimb contains the string corresponding to the side of the arm used ("left" or "right")
-        * @return true in case of success release, false otherwise
+        * @return true in case of success, false otherwise
         */
         bool babbling(int jointNumber, const std::string &babblingArm);
 
@@ -386,7 +395,7 @@ namespace icubclient{
         * Babbling a single joint using the name of a corresponding bodypart
         * @param bpName contains the string with the name of the bodypart
         * @param babblingLimb contains the string corresponding to the side of the arm used ("left" or "right")
-        * @return true in case of success release, false otherwise
+        * @return true in case of success, false otherwise
         *         (bodypart non existing, no joint number assigned, etc.).
         */
         bool babbling(const std::string &bpName, const std::string &babblingArm);
@@ -396,7 +405,7 @@ namespace icubclient{
         * Babbling a single joint with modified duration
         * @param jointNumber contains the int corresponding to an arm joint
         * @param babblingLimb contains the string corresponding to the side of the arm used ("left" or "right")
-        * @param train_dur optional param, set the babbling time to the specified double
+        * @param train_dur: set the babbling time
         * @return true in case of success release, false otherwise
         */
         bool babbling(int jointNumber, const std::string &babblingArm, double train_dur);
@@ -405,7 +414,7 @@ namespace icubclient{
         * Babbling a single joint using the name of a corresponding bodypart with modified duration
         * @param bpName contains the string with the name of the bodypart
         * @param babblingLimb contains the string corresponding to the side of the arm used ("left" or "right")
-        * @param train_dur optional param, set the babbling time to the specified double
+        * @param train_dur: set the babbling time
         * @return true in case of success release, false otherwise
         *         (bodypart non existing, no joint number assigned, etc.).
         */
@@ -415,41 +424,55 @@ namespace icubclient{
         /**
         * Ask the robot to perform speech synthesis of a given sentence
         * @param text to be said.
+        * @param shouldWait: Whether the method should wait until the speech was produced, or return immediately
+        * @return true in case the sentence was uttered, false otherwise (speech subsystem not available)
         */
-        bool say(const std::string &text, bool shouldWait = true, bool emotionalIfPossible = false,
-            const std::string &overrideVoice = "default", bool recordABM = true, std::string addressee = "none");
+        bool say(const std::string &text, bool shouldWait = true);
 
+        /**
+        * Change the name of a given entity
+        * @param e - the entity whose name should be changed
+        * @param newName - the new name of the entity
+        * @return true in case the name was changed, false otherwise
+        */
         bool changeName(Entity *e, const std::string &newName);
 
         /**
         * Get the strongest emotion
+        * @return tuple with name of emotion and intensity of emotion as items
         */
-        void getHighestEmotion(std::string &emotionName, double &intensity);
+        std::tuple<std::string, double> getHighestEmotion();
 
         /**
         * Get the list of actions known the iCub
+        * @return list of pointers to actions
         */
         std::list<Action*> getKnownActions();
 
         /**
         * Get the list of object that are in front of the iCub
         * Warning: this will update the local icubAgent
+        * @return list of pointers to objects which are front of the iCub (x<0.0)
         */
         std::list<Object*> getObjectsInSight();
 
         /**
         * Get the list of objects that are graspable by the iCub
+        * See isTargetInRange() for a definition of how an object is defined to be in range
         * Warning: this will update the local icubAgent
         */
         std::list<Object*> getObjectsInRange();
 
         /**
         * Check if a given cartesian position is within the reach of the robot
+        * This can be adjusted using the reachingRangeMin and reachingRangeMax
+        * parameters in the configuration file (client.ini)
         */
         bool isTargetInRange(const yarp::sig::Vector &target) const;
 
         /**
-        * Closes properly ports opened.
+        * Properly closes all ports which were opened. This is being called automatically
+        * in the destructor, there is typically no need to call this manually.
         */
         void close();
 
@@ -460,5 +483,3 @@ namespace icubclient{
     };
 }//Namespace
 #endif
-
-

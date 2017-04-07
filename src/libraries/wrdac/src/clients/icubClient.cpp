@@ -362,7 +362,7 @@ bool ICubClient::push(const string &oLocation, const Bottle &options)
 }
 
 
-bool ICubClient::take(const std::string& sName, const Bottle &options)
+bool ICubClient::take(const std::string& oName, const Bottle &options)
 {
     SubSystem_ARE *are = getARE();
     if (are == NULL)
@@ -373,7 +373,7 @@ bool ICubClient::take(const std::string& sName, const Bottle &options)
 
     Bottle opt(options);
     opt.addString("still"); // always avoid automatic homing after point
-    return are->take(sName, opt);
+    return are->take(oName, opt);
 }
 
 // KARMA
@@ -765,10 +765,10 @@ bool ICubClient::babbling(int jointNumber, const string &babblingLimb, double tr
 }
 
 
-void ICubClient::getHighestEmotion(string &emotionName, double &intensity)
+std::tuple<std::string, double> ICubClient::getHighestEmotion()
 {
-    intensity = 0.0;
-    emotionName = "joy";
+    double intensity = 0.0;
+    string emotionName = "joy";
 
     //cout<<"EMOTIONS : "<<endl;
     for (map<string, double>::iterator d = this->icubAgent->m_emotions_intrinsic.begin(); d != this->icubAgent->m_emotions_intrinsic.end(); d++)
@@ -780,10 +780,12 @@ void ICubClient::getHighestEmotion(string &emotionName, double &intensity)
             intensity = d->second;
         }
     }
+
+    return std::make_tuple(emotionName, intensity);
 }
 
 
-bool ICubClient::say(const string &text, bool shouldWait, bool emotionalIfPossible, const std::string &overrideVoice, bool recordABM, std::string addressee)
+bool ICubClient::say(const string &text, bool shouldWait)
 {
     if (subSystems.find("speech") == subSystems.end())
     {
@@ -792,7 +794,7 @@ bool ICubClient::say(const string &text, bool shouldWait, bool emotionalIfPossib
     }
 
     yDebug() << "iCub says" << text;
-    ((SubSystem_Speech*)subSystems["speech"])->TTS(text, shouldWait, recordABM, addressee);
+    ((SubSystem_Speech*)subSystems["speech"])->TTS(text, shouldWait);
     return true;
 }
 

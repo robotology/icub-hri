@@ -41,7 +41,7 @@ unsigned int icubclient::SubSystem_Speech::countWordsInString(const std::string 
     return std::distance(std::istream_iterator<std::string>(stream), std::istream_iterator<std::string>());
 }
 
-void icubclient::SubSystem_Speech::TTS(const std::string &text, bool shouldWait, bool recordABM, std::string addressee) {
+void icubclient::SubSystem_Speech::TTS(const std::string &text, bool shouldWait) {
     if(text=="") {
         yWarning() << "[SubSystem_Speech] Text is empty, not going to say anything";
         return;
