@@ -37,6 +37,10 @@ First, follow the [installation instructions](http://wiki.icub.org/wiki/Linux:In
 To detect the human skeleton, we employ the [`kinect-wrapper` library](https://github.com/robotology/kinect-wrapper.git). Please follow the installation instructions in the readme. It might be the case that you have also to build `kinect-wrapper` with the new `OpenCV-3.x.x` library. We have enabled the possibility to build only the client part of the `kinect-wrapper` (see [**updated instructions**](https://github.com/robotology/kinect-wrapper#cmaking-the-project)).
 
 
+### iol
+For the object tracking, we rely on the `iol` pipeline. Please follow the [installation instructions](https://github.com/robotology/iol). For `icub-client`, not the full list of dependencies is needed. Only install the following dependencies: `segmentation`, `Hierarchical Image Representation`, and `stereo-vision`.
+
+
 ### speech
 This requires a Windows machine with the [Microsoft speech SDK](https://msdn.microsoft.com/en-us/library/hh361572(v=office.14).aspx) installed. Then, compile the [`speech` repository](https://github.com/robotology/speech) for speech recognition and speech synthesis.
 
@@ -51,3 +55,5 @@ Once all dependencies are installed, building `icub-client` is straightforward:
 5. `ccmake ..` and fill in the cmake var **`OpenCV_DIR`** with the path to the `OpenCV-3.2.0` build.
 6. Compile `icub-client` using `make`.
 
+### Update software script
+We provide a [Python script](https://github.com/robotology/icub-client/blob/master/update-software.py) to easily update all dependencies of `icub-client` and `icub-client` itself.
