@@ -27,7 +27,7 @@
 *
 *
 * Allow to control the gaze using objects names. Provide a random autonomous switch of attention between the present objects.
-* Face tracking module for iCub head and gaze using OpenCV2.X functions
+* Face tracking module for iCub head and gaze using OpenCV functions
 * Using the face detection functions of OpenCV, the iCub is detecting faces every frame. Then, it tries to located the biggest face in the middle of the view by moving head and eye simultaneously.
     - Image sequences from left eye are used for tracking (not both eyes).
     - There are five modes for the tracking internally: 'set position mode', 'panning mode', 'face tracking mode, 'smooth stopping mode' and 'face searching mode'.
@@ -51,54 +51,65 @@
 #include <yarp/dev/all.h>
 
 class faceTrackerModule : public yarp::os::RFModule {
-    yarp::os::Port handlerPort;      //a port to handle messages
+    yarp::os::RpcServer handlerPort; //!< Response port
+    yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelRgb> > imagePortLeft; //!< A port for reading left images
 
-    yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelRgb> > imagePortLeft;     // make a port for reading left images
-
-    yarp::dev::IPositionControl *pos;
     yarp::dev::IVelocityControl *vel;
     yarp::dev::IEncoders *enc;
 
     yarp::dev::PolyDriver *robotHead;
 
-    yarp::sig::Vector setpoints;
+    yarp::sig::Vector velocity_command;
     yarp::sig::Vector cur_encoders;
     yarp::sig::Vector prev_encoders;
 
     yarp::dev::IControlMode2 *ictrl;
 
+    int getBiggestFaceIdx(const cv::Mat& cvMatImageLeft, const std::vector<cv::Rect> &faces_left);
+
 protected:
-    int counter;
     double x_buf;
     double y_buf;
 
-    int mode; // 0: going to a set position, 1: face searching, 2: face tracking, 3: face stuck,
-    int setpos_counter;
-    int panning_counter;
+    int mode; //!< 0: going to default position, 1: face searching, 2: face tracking
+    int counter_no_face_found; //!< if in face tracking mode, for how many iterations was no face found
+    int setpos_counter; //!< how many iterations have we spend in default position mode
+    int panning_counter; //!< how many times have we spend in face searching mode. If >5, go back to default position
     int stuck_counter;
-    int tracking_counter;
 
     // random motion variables
-    int tilt_target;
-    int pan_target;
-
-    double pan_r, tilt_r;
-    int pan_max;
-    int tilt_max;
-
-    int jnts;
+    int tilt_target; //!< tilt target for face search mode (randomly chosen)
+    int pan_target; //!< pan target for face search mode (randomly chosen)
+    int pan_max; //!< maximum pan for the iCub
+    int tilt_max; //!< maximum tilt for the iCub
+    int nr_jnts; //!< number of joints of the iCub head
 
     cv::CascadeClassifier face_classifier_left;
     IplImage *cvIplImageLeft;
 
+    /**
+     * @brief Move to center position (after being stuck)
+     */
+    void moveToDefaultPosition();
+
+    /**
+     * @brief Randomly move around
+     */
+    void faceSearching(bool face_found);
+
+    /**
+     * @brief If a face was found, track it
+     */
+    void faceTracking(const std::vector<cv::Rect> &faces_left, int biggest_face_left_idx);
+
 public:
 
-    bool configure(yarp::os::ResourceFinder &rf); // configure all the module parameters and return true if successful
-    bool interruptModule();                       // interrupt, e.g., the ports
-    bool close();                                 // close and shut down the module
+    bool configure(yarp::os::ResourceFinder &rf); //!<  configure all the module parameters and return true if successful
+    bool interruptModule();                       //!<  interrupt the ports
+    bool close();                                 //!<  close and shut down the module
     bool respond(const yarp::os::Bottle& command, yarp::os::Bottle& reply);
     double getPeriod();
-    bool updateModule();
+    bool updateModule(); //!< get an image from the robot's camera and decide which mode should be chosen next
 };
 
 
