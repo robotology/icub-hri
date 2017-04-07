@@ -1,28 +1,30 @@
-wysiwyd : What You Say Is What You Did
+icub-client: A coherent framework for complex HRI scenarios on the iCub
 =======
 
-The WYSIWYD project will create a new transparency in human robot interaction (HRI) by allowing robots to both understand their own actions and those of humans, and to interpret and communicate these in human compatible intentional terms expressed as a language-like communication channel we call WYSIWYD Robotese (WR).
+Generating a complex, human-like behaviour in a humanoid robot such as the iCub requires the integration of a wide range of open source components and a scalable cognitive architecture. Hence, we present the `icub-client` library which provides convenience wrappers for components related to perception (object recognition, agent tracking, speech recognition, touch detection), object manipulation (various basic and complex motor actions), and social interaction (speech synthesis, joint attention). Communication between those components is orchestrated by a working memory, and a long-term memory allows the iCub to re-visit and reason about earlier interactions. In addition to previously integrated components, the library allows for simple extension to new components, and rapid prototyping by adapting to changes in interfaces between components. We also provide a set of modules which make use of the library, such as a high-level planner and an action recognition module. The proposed architecture has been successfully employed for a complex human robot interaction scenario involving the acquisition of language capabilities, execution of goal-oriented behaviour and expression of a verbal narrative of the robot’s experience in the world. The architecture is aimed at researchers familiarising themselves with the iCub ecosystem, as well as expert users.
 
 ## Documentation
-Visit the official Project [wiki](http://wiki.icub.org/wysiwyd/dox/html/index.html) for the software.
+Visit the official Project [wiki](http://robotology.github.com/icub-client) for the software.
 
 ## License
-WYSIWYD software and documentation are distributed under the GPL.
-The full text of the license agreement can be found in: [./license/gpl.txt](https://github.com/robotology/wysiwyd/blob/master/license/gpl.txt).
+The `icub-client` library and documentation are distributed under the GPL.
+The full text of the license agreement can be found in: [./LICENSE](https://github.com/robotology/icub-client/blob/master/LICENSE).
 
-Please read this license carefully before using the WYSIWYD code.
+Please read this license carefully before using the `icub-client` code.
 
 ## CI Build
 - Linux: [![Build Status](https://travis-ci.org/robotology/wysiwyd.png?branch=master)](https://travis-ci.org/robotology/wysiwyd)
 - Windows: [![Build status](https://ci.appveyor.com/api/projects/status/4rckcp8suov8pcv1)](https://ci.appveyor.com/project/pattacini/wysiwyd)
 
-## Build
+## Build dependencies
+`icub-client` depends on the following projects which need to be installed prior to building `icub-client:
 
-**`OpenCV-3.0.0`** or higher is a required dependency to build `iol2opc` module (**`OpenCV-3.2.0`** is recommended).
+### YARP, icub-main and icub-contrib-common
+First, follow the [installation instructions](http://wiki.icub.org/wiki/Linux:Installation_from_sources) for `yarp`, `icub-main` and `icub-contrib-common`.
 
-### Build OpenCV-3.2.0
 
-We need the new tracking features delivered with `OpenCV-3.2.0`:
+### OpenCV-3.2.0
+**`OpenCV-3.0.0`** or higher (**`OpenCV-3.2.0`** is recommended) is a required dependency to build the `iol2opc` module which is responsible for object tracking. More specifically, we need the new tracking features delivered with `OpenCV-3.2.0`:
 
 1. Download `OpenCV-3.2.0`: `git clone https://github.com/Itseez/opencv.git`.
 2. Checkout the correct branch: `git checkout 3.2.0`.
@@ -31,13 +33,21 @@ We need the new tracking features delivered with `OpenCV-3.2.0`:
 5. Configure `OpenCV` by filling in the cmake var **`OPENCV_EXTRA_MODULES_PATH`** with the path pointing to `opencv_contrib/modules` and then toggling on the var **`BUILD_opencv_tracking`**.
 6. Compile `OpenCV`.
 
-### Build WYSIWYD
+### kinect-wrapper
+To detect the human skeleton, we employ the [`kinect-wrapper` library](https://github.com/robotology/kinect-wrapper.git). Please follow the installation instructions in the readme. It might be the case that you have also to build `kinect-wrapper` with the new `OpenCV-3.x.x` library. We have enabled the possibility to build only the client part of the `kinect-wrapper` (see [**updated instructions**](https://github.com/robotology/kinect-wrapper#cmaking-the-project)).
 
-Configure the project:
 
-1. Fill in the cmake var **`OpenCV_DIR`** with the path to `OpenCV-3.2.0` build.
-2. Compile `wysiwyd`.
+### speech
+This requires a Windows machine with the [Microsoft speech SDK](https://msdn.microsoft.com/en-us/library/hh361572(v=office.14).aspx) installed. Then, compile the [`speech` repository](https://github.com/robotology/speech) for speech recognition and speech synthesis.
 
-### Building notes
+## Build icub-client
 
-It might be the case that you have also to build [**`kinect-wrapper`**](https://github.com/robotology/kinect-wrapper) with the new `OpenCV` library, as it was for me too. In particular, the setting I used foresees `yarp`, `icub-main` and all the other projects built with `OpenCV-2.x.y`, whereas `wysiwyd` along with `kinect-wrapper` built with `OpenCV-3.2.0`. This means that you can be perfectly working with two versions of the library available side by side. To ease compilation, I have also enabled the possibility to build only the client part of the `kinect-wrapper` (see [**updated instructions**](https://github.com/robotology/kinect-wrapper#cmaking-the-project)).
+Once all dependencies are installed, building `icub-client` is straightforward:
+
+1. Download `icub-client`: `git clone https://github.com/robotology/icub-client.git`.
+2. `cd icub-client`
+3. `mkdir build`
+4. `cd build`
+5. `ccmake ..` and fill in the cmake var **`OpenCV_DIR`** with the path to the `OpenCV-3.2.0` build.
+6. Compile `icub-client` using `make`.
+
