@@ -19,15 +19,11 @@ macro(checkandset_dependency package)
 endmacro(checkandset_dependency)
 
 find_package(OpenCV)
-find_package(TBB)
-find_package(PGSQL)
 find_package(kinectWrapper QUIET)
 find_package(Boost COMPONENTS chrono thread system QUIET)
 
 message(STATUS "I have found the following libraries:")
 checkandset_dependency(OpenCV)
-checkandset_dependency(TBB)
-checkandset_dependency(PGSQL)
 checkandset_dependency(Boost)
 checkandset_dependency(kinectWrapper)
 

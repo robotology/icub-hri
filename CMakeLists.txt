@@ -53,9 +53,7 @@ add_custom_target(uninstall_icubClient "${CMAKE_COMMAND}" -P
 
 #### install cmake scripts
 message(STATUS "Installing cmake scripts")
-set(ICUB_CLIENT_CMAKE_SCRIPTS FindTBB.cmake
-                              FindPGSQL.cmake
-                              icubClientOptions.cmake)
+set(ICUB_CLIENT_CMAKE_SCRIPTS icubClientOptions.cmake)
 
 foreach(conf_i ${ICUB_CLIENT_CMAKE_SCRIPTS})
     configure_file(${CMAKE_SOURCE_DIR}/conf/${conf_i}
