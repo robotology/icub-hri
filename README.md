@@ -17,7 +17,7 @@ Please read this license carefully before using the `icub-client` code.
 - Windows: [![Build status](https://ci.appveyor.com/api/projects/status/4rckcp8suov8pcv1)](https://ci.appveyor.com/project/pattacini/wysiwyd)
 
 ## Build dependencies
-`icub-client` depends on the following projects which need to be installed prior to building `icub-client:
+`icub-client` depends on the following projects which need to be installed prior to building `icub-client`:
 
 ### YARP, icub-main and icub-contrib-common
 First, follow the [installation instructions](http://wiki.icub.org/wiki/Linux:Installation_from_sources) for `yarp`, `icub-main` and `icub-contrib-common`.
@@ -34,7 +34,7 @@ First, follow the [installation instructions](http://wiki.icub.org/wiki/Linux:In
 6. Compile `OpenCV`.
 
 ### kinect-wrapper
-To detect the human skeleton, we employ the [`kinect-wrapper` library](https://github.com/robotology/kinect-wrapper.git). Please follow the installation instructions in the readme. It might be the case that you have also to build `kinect-wrapper` with the new `OpenCV-3.x.x` library. We have enabled the possibility to build only the client part of the `kinect-wrapper` (see [**updated instructions**](https://github.com/robotology/kinect-wrapper#cmaking-the-project)).
+To detect the human skeleton, we employ the [`kinect-wrapper`](https://github.com/robotology/kinect-wrapper.git) library. Please follow the installation instructions in the readme. It might be the case that you have also to build `kinect-wrapper` with the new `OpenCV-3.x.x` library. We have enabled the possibility to build only the client part of the `kinect-wrapper` (see [*updated instructions*](https://github.com/robotology/kinect-wrapper#cmaking-the-project)).
 
 
 ### iol
@@ -42,7 +42,7 @@ For the object tracking, we rely on the `iol` pipeline. Please follow the [insta
 
 
 ### speech
-This requires a Windows machine with the [Microsoft speech SDK](https://msdn.microsoft.com/en-us/library/hh361572(v=office.14).aspx) installed. Then, compile the [`speech` repository](https://github.com/robotology/speech) for speech recognition and speech synthesis.
+This requires a Windows machine with the [Microsoft speech SDK](https://msdn.microsoft.com/en-us/library/hh361572(v=office.14).aspx) installed. Then, compile the [`speech`](https://github.com/robotology/speech) repository for speech recognition and speech synthesis.
 
 ## Build icub-client
 
