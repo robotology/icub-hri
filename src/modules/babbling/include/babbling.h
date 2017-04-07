@@ -24,8 +24,7 @@
 
 class Babbling : public yarp::os::RFModule {
 private:
-    yarp::os::Port handlerPort;
-    yarp::os::RpcClient portToABM;
+    yarp::os::RpcServer handlerPort;
 
     yarp::dev::IPositionControl* posLeftArm;
     yarp::dev::IVelocityControl* velLeftArm;
@@ -47,19 +46,19 @@ private:
     yarp::dev::PolyDriver rightArmDev;
     yarp::dev::PolyDriver headDev;
 
-    yarp::sig::Vector encodersLeftArm, encodersRightArm, command;
+    yarp::sig::Vector encodersLeftArm, encodersRightArm;
 
-    std::string part;
-    std::string robot;
-    int single_joint;
-    std::string part_babbling;
+    std::string part; //!< Should be "left_arm" or "right_arm"
+    std::string robot; //!< Should be "icub" or "icubSim"
+    std::string part_babbling; //!< Whether to do babbling with the whole "arm" or "hand" (should be either one or the other)
+    int single_joint; //!< Which joint to do babbling with in case it is a single joint
 
-    double freq, amp;
-    double train_duration;
+    double freq; //!< Frequency for sin wave
+    double amp; //!< Amplitude for sin wave
+    double duration; //!< Duration for the babbling
     
-    double start_command[16];
-    double ref_command[16];
-    yarp::sig::Vector start_commandHead;
+    double start_command[16]; //!< Start command for the 16 arm joints
+    yarp::sig::Vector start_commandHead; //!< Target for head in start position
 
 public:
     bool configure(yarp::os::ResourceFinder &rf);
@@ -70,12 +69,39 @@ public:
     bool updateModule();
 
 private:
-    bool init_iCub(std::string &part);
+    /**
+     * @brief Initializes all the device controllers
+     * @return True if successful
+     */
+    bool init_iCub();
+    bool init_left_arm(); //!< Create PolyDriver for left arm
+    bool init_right_arm(); //!< Create PolyDriver for left arm
+
+    /**
+     * @brief Sets the joints to be in velocity control, then goes in a loop to call `babblingCommands` for `duration` seconds
+     * @return True if successful, false if not
+     */
     bool doBabbling();
-    yarp::sig::Vector babblingCommands(double &t, int j_idx);
+
+
+    /**
+     * @brief Issues the actual velocity commands for time `t`.
+     * @param t - time to be used for the sin wave
+     * @param j_idx - if -1, do whole arm / whole hand babbling, otherwise babble single joint
+     */
+    void babblingCommands(double &t, int j_idx);
+
+    /**
+     * @brief Use iGazeController to move head in start position
+     * @return true if successful
+     */
     bool moveHeadToStartPos();
+
+    /**
+     * @brief Move head + arm in start position
+     * @return true if successful
+     */
     bool gotoStartPos();
-    bool dealABM(const yarp::os::Bottle& command, bool begin);
 };
 
 #endif // _BABBLING_H_
