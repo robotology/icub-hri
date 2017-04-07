@@ -38,7 +38,7 @@ To detect the human skeleton, we employ the [`kinect-wrapper` library](https://g
 
 
 ### iol
-For the object tracking, we rely on the `iol` pipeline. Please follow the [installation instructions](https://github.com/robotology/iol). For `icub-client`, not the full list of dependencies is needed. Only install the following dependencies: `segmentation`, `Hierarchical Image Representation`, and `stereo-vision`.
+For the object tracking, we rely on the `iol` pipeline. Please follow the [installation instructions](https://github.com/robotology/iol). For `icub-client`, not the full list of dependencies is needed. Only install the following dependencies: `segmentation`, `Hierarchical Image Representation`, and `stereo-vision`. Within `Hierarchical Image Representation`, we don't need `SiftGPU`.
 
 
 ### speech
