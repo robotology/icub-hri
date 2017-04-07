@@ -75,7 +75,7 @@ public:
     /**
     * Return the entity as a bottle.
     */
-    virtual yarp::os::Bottle asBottle();
+    virtual yarp::os::Bottle asBottle() const;
 
     /**
     * Fill entity fields from a bottle representation

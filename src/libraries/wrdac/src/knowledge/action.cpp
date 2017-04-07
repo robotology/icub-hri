@@ -38,7 +38,7 @@ Action::Action(const Action &b):Entity(b)
 }
 
 
-Bottle Action::asBottle()
+Bottle Action::asBottle() const
 {
     Bottle b = this->Entity::asBottle();
     Bottle bSub;
@@ -48,20 +48,20 @@ Bottle Action::asBottle()
     bSub.clear();
     bSub.addString("subactions");
     Bottle& subs = bSub.addList();
-    for(list<Action>::iterator sIt = subActions.begin() ; sIt != subActions.end(); sIt++)
+    for(auto& subAction : subActions)
     {
-        subs.addList()=sIt->asBottle();
+        subs.addList()=subAction.asBottle();
     }
     b.addList() = bSub;
         
     bSub.clear();
     bSub.addString("estimatedDriveEffects");
     Bottle &subss = bSub.addList();
-    for(map<string, double>::iterator sIt = estimatedDriveEffects.begin() ; sIt != estimatedDriveEffects.end(); sIt++)
+    for(auto& estimatedDriveEffect : estimatedDriveEffects)
     {
         Bottle &ss = subss.addList();
-        ss.addString(sIt->first.c_str());
-        ss.addDouble(sIt->second);
+        ss.addString(estimatedDriveEffect.first.c_str());
+        ss.addDouble(estimatedDriveEffect.second);
     }
     b.addList() = bSub;
     return b;
@@ -136,12 +136,8 @@ Relation mapRelation(map<string,string> dico, Relation child, Relation current)
         return Relation(newSubject,newVerb,newObject,newCPlace,newCTime,newCManner);
 }
 
-void Action::setInitialDescription(Relation r)
+void Action::setInitialDescription(const Relation &r)
 {
-    //for(list<Action>::iterator sub=subActions.begin(); sub!=subActions.end();sub++)
-    //{
-    //    sub->setInitialDescription(mapRelation(sub->initialDescription,r));
-    //}
     this->initialDescription.fromBottle(r.asBottle());
 }
 

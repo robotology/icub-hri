@@ -56,7 +56,7 @@ Object::Object(const Object &b):Entity(b)
     this->m_value = b.m_value;
 }
 
-Bottle Object::asBottle()
+Bottle Object::asBottle() const
 {
     //Get the entity bottle
     Bottle b = this->Entity::asBottle();
@@ -77,7 +77,8 @@ Bottle Object::asBottle()
     b.addList() = bSub;
     bSub.clear();
     bSub.addString(ICUBCLIENT_OPC_OBJECT_ROBOTPOS_TAG);
-    bSub.addList().read(m_ego_position);
+    Vector m_ego_copy(m_ego_position);
+    bSub.addList().read(m_ego_copy);
     b.addList() = bSub;
     bSub.clear();
 
@@ -231,7 +232,7 @@ Vector Object::getSelfRelativePosition(const Vector &vInitialRoot)
     return targetRelative;
 }
 
-std::string Object::objectAreaAsString(ObjectArea o) {
+std::string Object::objectAreaAsString(const ObjectArea &o) {
     if(o==ObjectArea::HUMAN) {
         return "HumanOnly";
     } else if(o==ObjectArea::ROBOT) {
@@ -246,7 +247,7 @@ std::string Object::objectAreaAsString(ObjectArea o) {
     }
 }
 
-ObjectArea Object::stringToObjectArea(std::string o) {
+ObjectArea Object::stringToObjectArea(const std::string &o) {
     if(o=="HumanOnly") {
         return ObjectArea::HUMAN;
     } else if(o=="RobotOnly") {

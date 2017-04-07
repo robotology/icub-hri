@@ -25,18 +25,8 @@
 using namespace yarp::os;
 using namespace icubclient;
 
-int icubclient::opcGetIdFromAdd(Bottle &reply)
-{
-    if (reply.size()>0)
-        if (reply.get(0).asVocab()==Vocab::encode("ack"))
-            if (Bottle *idProp=reply.get(1).asList())
-                return idProp->get(1).asInt();
-
-    return ICUBCLIENT_OPC_INVALID_ID;
-}
-
 /************************************************************************/
-Bottle icubclient::opcGetIdsFromAsk(Bottle &reply)
+Bottle icubclient::opcGetIdsFromAsk(const Bottle &reply)
 {
     Bottle ids;
     if (reply.size()>0)
@@ -65,7 +55,7 @@ void icubclient::replace_all(std::string & in, const std::string & plain, const 
 }
 
 /************************************************************************/
-std::string icubclient::grammarToString(std::string sPath)
+std::string icubclient::grammarToString(const std::string &sPath)
 {
     std::string sOutput = "";
     std::ifstream isGrammar(sPath.c_str());

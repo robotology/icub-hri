@@ -50,12 +50,8 @@ public:
     void deleteObject(const string &opcTag, Object* o = NULL);
     void addObject(Object* o, const string &opcTag);
     void addAgent(Agent* a, const string &opcTag);
-    void addDrives(Agent* a);
     void moveBase(Agent* a);
     bool isDisplayable(Entity* entity);
-    Vector getDriveColor(const Drive &d);
 };
 
 #endif
-
-

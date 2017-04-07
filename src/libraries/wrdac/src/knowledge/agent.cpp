@@ -36,47 +36,37 @@ Agent::Agent(const Agent &b):Object(b)
 {
     this->m_belief = b.m_belief;
     this->m_emotions_intrinsic = b.m_emotions_intrinsic;
-    this->m_drives= b.m_drives;
     this->m_body = b.m_body;
 }
 
-Bottle Agent::asBottle()
+Bottle Agent::asBottle() const
 {
     //Get the Object bottle
     Bottle b = this->Object::asBottle();
     Bottle bSub;
     bSub.addString("belief");
     Bottle& bSubIds = bSub.addList();
-    for(list<Relation>::iterator it = m_belief.begin(); it != m_belief.end(); it++)
+    for(auto& m_belief_item : m_belief)
     {
         Bottle& bSub2 = bSubIds.addList();
-        bSub2 = it->asBottle();
+        bSub2 = m_belief_item.asBottle();
     }
     b.addList() = bSub;
 
     Bottle bSubEmotions;
     bSubEmotions.addString("emotions");
     Bottle& bSubEmoList = bSubEmotions.addList();
-    for(map<string, double>::iterator it = m_emotions_intrinsic.begin(); it != m_emotions_intrinsic.end(); it++)
+    for(auto & m_emotion_intrinsic : m_emotions_intrinsic)
     {
         Bottle& bSubEmo = bSubEmoList.addList();
-        bSubEmo.addString(it->first.c_str());
-        bSubEmo.addDouble(it->second);
+        bSubEmo.addString(m_emotion_intrinsic.first.c_str());
+        bSubEmo.addDouble(m_emotion_intrinsic.second);
     }
     b.addList() = bSubEmotions;
-
-    Bottle bSubDrives,bSubSub;
-    bSubDrives.addString("drives");
-    for(map<string, Drive>::iterator it = m_drives.begin(); it != m_drives.end(); it++)
-    {
-        bSubSub.addList() = it->second.asBottle();
-    }
-    bSubDrives.addList() = bSubSub;
-    b.addList() = bSubDrives;
               
     Bottle bSubBody;
     bSubBody.addString("body");
-    bSubBody.addList().copy(m_body.asBottle());
+    bSubBody.addList() = m_body.asBottle();
     b.addList() = bSubBody;  
 
     return b;
@@ -108,19 +98,6 @@ bool Agent::fromBottle(const Bottle &b)
         double emotionValue = bEmo->get(1).asDouble();
         m_emotions_intrinsic[emotionName.c_str()] = emotionValue;
     }
-
-    m_drives.clear();
-    Bottle* drivesProperty = b.find("drives").asList();
-    string drivesDebug = drivesProperty->toString().c_str();
-    for(int i=0; i<drivesProperty->size() ; i++)
-    {
-            Bottle* bD = drivesProperty->get(i).asList();
-            string drivesDebug1 = bD->toString().c_str();
-            Drive currentDrive;
-            currentDrive.fromBottle(*bD);
-            m_drives[currentDrive.name] = currentDrive;
-
-    }
                
     Bottle* bodyProperty = b.find("body").asList();
     m_body.fromBottle(*bodyProperty);
@@ -145,11 +122,6 @@ string Agent::toString()
         oss<< '\t'<<it->first <<" : "<<it->second<<endl;
     }
 
-    oss<<"Drives:"<<endl;
-    for(map<string,Drive>::iterator it = m_drives.begin(); it != m_drives.end(); it++)
-    {
-        oss<< '\t'<<it->first <<" : "<<it->second.name<<"("<<it->second.value<<")"<<endl;
-    }
     return oss.str();
 }
 

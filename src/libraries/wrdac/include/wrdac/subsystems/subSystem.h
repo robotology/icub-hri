@@ -29,22 +29,34 @@ namespace icubclient{
     /**
     * \ingroup wrdac_clients
     *
-    * Abstract class to handle sub-systems of the architecture (navigation, speech, action, etc...)
+    * Abstract class to handle sub-systems of the icub-client (speech, action, etc...)
     */
     class SubSystem
     {
     protected:
-        bool m_isRunning;
         std::string m_masterName;
         std::string m_type;
         virtual bool connect() = 0;
 
     public:
-        SubSystem(const std::string &masterName) { m_isRunning = false; m_masterName = masterName; m_type = SUBSYSTEM; }
+        SubSystem(const std::string &masterName) { m_masterName = masterName; m_type = SUBSYSTEM; }
         virtual ~SubSystem() {}
-        bool isRunning() const { return m_isRunning; }
-        bool Connect() { return (m_isRunning = connect()); }
+        /**
+         * @brief Connects the subsystem to its "host"
+         * @return True if successful, false otherwise
+         */
+        bool Connect() {
+            return connect();
+        }
+
+        /**
+        * Clean up resources.
+        */
         virtual void Close() = 0;
+
+        /**
+         * @brief Return the type of the subsystem as string
+         */
         std::string getType() const { return m_type; }
     };
 }//Namespace

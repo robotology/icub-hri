@@ -36,15 +36,32 @@ protected:
     virtual bool connect();
 
 public:
-    yarp::os::Port portRPC;
+    yarp::os::RpcClient portRPC;
+
+    /**
+    * Default constructor.
+    * @param masterName stem-name used to open up ports.
+    */
     SubSystem_agentDetector(const std::string &masterName);
 
     virtual void Close();
 
+    /**
+     * @brief Changes the name of the partner within agentDetector
+     * @param new_name
+     * @return true if successful, false otherwise
+     */
+
     bool changeDefaultName(std::string new_name);
 
+    /**
+     * @brief Pause the agentDetector. No skeleton information of the human will be updated.
+     */
     void pause();
 
+    /**
+     * @brief The skeleton detection of agentDetector will be resumed.
+     */
     void resume();
 };
 }//Namespace

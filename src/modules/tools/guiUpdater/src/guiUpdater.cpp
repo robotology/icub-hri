@@ -158,7 +158,6 @@ bool GuiUpdater::updateModule()
 
         //Display the iCub specifics
         moveBase(iCub);
-        addDrives(iCub);
 
         //Display the objects
         list<shared_ptr<Entity>> entities = opc->EntitiesCacheCopy();
@@ -228,7 +227,6 @@ void GuiUpdater::deleteObject(const string &opcTag, Object* o)
     toGui.write(cmd);
 
     //Delete all the body parts
-
     if (o != NULL && o->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT && displaySkeleton)
     {
         unsigned int i = 0;
@@ -244,26 +242,10 @@ void GuiUpdater::deleteObject(const string &opcTag, Object* o)
             i++;
         }
     }
-
-    //delete all the drives
-    if (o != NULL && o->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT)
-    {
-        Agent* a = dynamic_cast<Agent*>(o);
-        for(auto& drive : a->m_drives)
-        {
-            ostringstream opcTagDrive;
-            opcTagDrive<<a->name()<<"_"<<drive.second.name;
-            cmd.clear();
-            cmd.addString("delete");
-            cmd.addString(opcTagDrive.str().c_str());
-            toGui.write(cmd);
-        }
-    }
 }
 
 void GuiUpdater::addAgent(Agent* o, const string &opcTag)
 {
-    addDrives( o );
     if (displaySkeleton)
     {
         int i=0;
@@ -365,45 +347,6 @@ void GuiUpdater::moveBase(Agent* a)
     toGuiBase.write(cmd);
 }
 
-void GuiUpdater::addDrives(Agent* a)
-{
-    Vector driveDimension(3);
-    driveDimension[0] = 10;
-    driveDimension[1] = 500;
-    driveDimension[2] = 10;
-
-    //Create drives
-    Vector overHeadPos = iCub->getSelfRelativePosition(a->m_ego_position);
-    int driveCount = 0;
-    for(map<string,Drive>::iterator drive = a->m_drives.begin(); drive != a->m_drives.end(); drive++)
-    {
-
-        double ySize = driveDimension[1] * drive->second.value + 10;
-        ostringstream opcTag;
-        opcTag<<a->name()<<"_"<<drive->second.name;
-
-        Bottle cmd;
-        cmd.addString("object");
-        cmd.addString(opcTag.str().c_str());
-        cmd.addDouble(driveDimension[0]);
-        cmd.addDouble(ySize);
-        cmd.addDouble(driveDimension[2]);
-        cmd.addDouble(overHeadPos[0] *1000.0);
-        cmd.addDouble(overHeadPos[1] *1000.0 - ySize / 2.0 + driveDimension[1] / 2.0);
-        cmd.addDouble(overHeadPos[2] *1000.0 + 500 + driveCount * (driveDimension[2]+30) );
-        cmd.addDouble(a->m_ego_orientation[0]);
-        cmd.addDouble(a->m_ego_orientation[1]);
-        cmd.addDouble(a->m_ego_orientation[2]);
-        Vector color = getDriveColor(drive->second);
-        cmd.addInt((int)color[0]);            // color R
-        cmd.addInt((int)color[1]);            // color G
-        cmd.addInt((int)color[2]);            // color B
-        cmd.addDouble(1);                     // alpha coefficient [0,1]
-        toGui.write(cmd);
-        driveCount++;
-    }
-}
-
 void GuiUpdater::resetGUI()
 {
     Bottle cmd,reply;
@@ -411,31 +354,4 @@ void GuiUpdater::resetGUI()
     reply.clear();
     cmd.addString("reset");
     toGui.write(cmd);
-}
-
-Vector GuiUpdater::getDriveColor(const Drive &d)
-{
-    Vector color(3);
-    double x = d.value;
-    double m = d.homeoStasisMin;
-    double M = d.homeoStasisMax;
-    if (x>=m && x<=M )
-    {
-        color[0] = 255 - 255 * exp(- pow((x - (M-m)/2.0),2.0)/(2*pow(M-m,2.0)));
-        color[1] = 255.0;
-        color[2] = 0;
-    }
-    else if (x<m)
-    {
-        color[0] = 255.0;
-        color[1] = 255.0 - 255.0 * exp(- pow(x,2.0)/(2*pow(m,2.0)));
-        color[2] = 0;
-    }
-    else if (x>M)
-    {
-        color[0] = 255.0;
-        color[1] = 255.0 - 255.0 * exp(- pow(x - 1,2.0)/(2*pow(1-M,2.0)));
-        color[2] = 0;
-    }
-    return color;
 }

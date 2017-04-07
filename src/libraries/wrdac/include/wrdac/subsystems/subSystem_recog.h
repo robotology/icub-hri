@@ -36,36 +36,51 @@ class SubSystem_Recog : public SubSystem
 protected:
     bool ABMconnected;
     virtual bool connect();
-    std::string speakerName_;
-    yarp::os::Port ears_port;
-    yarp::os::Port portRPC;
+    yarp::os::RpcClient ears_port; /**< Port to /ears/rpc */
+    yarp::os::RpcClient portRPC; /**< Port to /speechRecognizer/rpc */
 
 public:
+    /**
+    * Default constructor.
+    * @param masterName stem-name used to open up ports.
+    */
     SubSystem_Recog(const std::string &masterName);
 
     virtual void Close();
 
     /**
-    * Set the speaker name to be sent as argument to abm when snapshot
-    *
-    */
-    bool setSpeakerName(std::string speaker);
-
+     * @brief Send a command to ears whether it should listen to the speechRecognizer
+     * @param on: If true, ears will take control of speechRecognizer
+     */
     void listen(bool on);
 
+    /**
+     * @brief Send a command to ears that it should stop listening to the speechRecognizer, and wait until it hands back control
+     */
     void waitForEars();
 
+
+    /**
+     * @brief Interrupt the speech recognizer. This can be used to faster get back control of the speech recognizer if it is used by another
+     * module currently (e.g. ears).
+     * @return
+     */
     bool interruptSpeechRecognizer();
 
     /**
     * From one grxml grammar, return the sentence recognized for one timeout
-    *
+    * This is not supported, use recogFromGrammarLoop() instead!
     */
     yarp::os::Bottle recogFromGrammar(std::string &sInput);
 
     /**
-    *   From one grxml grammar, return the first sentence non-empty recognized
-    *   can last for several timeout (by default 50
+    *   From one grxml grammar, return the first non-empty sentence recognized
+    *   can last for several timeout (by default 50)
+    * @param sInput: the grxml grammar in string form
+    * @param iLoop: Maximum number of loops before giving up to recognize input. If -1, loop indefinitely
+    * @param keepEarsEnabled: Whether ears should stay in control. This should only be set to true by ears itself
+    * @param keepEarsDisabledAfterRecog: If false, ears will be enabled again after an input was recognized. This can be set to true if a module wants
+    * to recognize several commands in a row without ever handing back control to ears.
     */
     yarp::os::Bottle recogFromGrammarLoop(std::string sInput, int iLoop = 50, bool keepEarsEnabled = false, bool keepEarsDisabledAfterRecog = false);
 

@@ -29,7 +29,8 @@ namespace icubclient{
     * Represent a relation between two entities.
     */
     class Relation
-    {friend class OPCClient;
+    {
+        friend class OPCClient;
 
     private:
        int   m_opcId;
@@ -61,12 +62,12 @@ namespace icubclient{
             Entity* complement_manner = NULL
             );
 
-        yarp::os::Bottle    asBottle(bool ignoreID = false);
+        yarp::os::Bottle asBottle(bool ignoreID = false) const;
         /**
         * Return the relation as a bottle without the argument to "none"
         */
         yarp::os::Bottle    asLightBottle(bool ignoreID = false);
-        void                fromBottle(const yarp::os::Bottle &b);
+        void fromBottle(const yarp::os::Bottle &b);
         virtual std::string toString();
 
         /**
@@ -78,7 +79,7 @@ namespace icubclient{
         * Get the name of the relation's subject.
         */
         std::string        subject() const;
-        
+
         /**
         * Get the name of the relation's object.
         */
@@ -93,17 +94,17 @@ namespace icubclient{
         * Get the complement of place of the relation.
         */
         std::string        complement_place() const;
-        
+
         /**
         * Get the complement of time of the relation.
         */
         std::string        complement_time() const;
-        
+
         /**
         * Get the complement of manner of the relation.
         */
         std::string        complement_manner() const;
-        
+
         bool                operator==(const Relation &b);
         bool                operator<(const Relation &b);
         bool                operator>(const Relation &b);

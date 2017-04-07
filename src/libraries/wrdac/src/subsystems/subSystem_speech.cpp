@@ -5,10 +5,7 @@ icubclient::SubSystem_Speech::SubSystem_Speech(const std::string &masterName) :S
 {
     tts.open(("/" + m_masterName + "/tts:o").c_str());
     ttsRpc.open(("/" + m_masterName + "/tts:rpc").c_str());
-    stt.open(("/" + m_masterName + "/stt:i").c_str());
-    sttRpc.open(("/" + m_masterName + "/stt:rpc").c_str());
     m_type = SUBSYSTEM_SPEECH;
-    opc = new OPCClient(m_masterName+"/opc_from_speech");
 }
 
 bool icubclient::SubSystem_Speech::connect()
@@ -23,22 +20,8 @@ bool icubclient::SubSystem_Speech::connect()
     if(!yarp::os::Network::isConnected(ttsRpc.getName(), "/iSpeak/rpc")) {
         connected &= yarp::os::Network::connect(ttsRpc.getName(), "/iSpeak/rpc");
     }
-    if(!yarp::os::Network::isConnected("/speechRecognizer/recog/continuousGrammar:o", stt.getName().c_str())) {
-        connected &= yarp::os::Network::connect("/speechRecognizer/recog/continuousGrammar:o", stt.getName().c_str());
-    }
-    if(!yarp::os::Network::isConnected(sttRpc.getName().c_str(), "/speechRecognizer/rpc")) {
-        connected &= yarp::os::Network::connect(sttRpc.getName().c_str(), "/speechRecognizer/rpc");
-    }
-
-    opc->connect("OPC");
 
     return connected;
-}
-
-unsigned int icubclient::SubSystem_Speech::countWordsInString(const std::string &str)
-{
-    std::stringstream stream(str);
-    return std::distance(std::istream_iterator<std::string>(stream), std::istream_iterator<std::string>());
 }
 
 void icubclient::SubSystem_Speech::TTS(const std::string &text, bool shouldWait) {
@@ -72,40 +55,6 @@ void icubclient::SubSystem_Speech::TTS(const std::string &text, bool shouldWait)
     }
 }
 
-yarp::os::Bottle *icubclient::SubSystem_Speech::STT(const std::string &grammar, double timeout)
-{
-    //todo
-    return NULL;
-}
-
-yarp::os::Bottle *icubclient::SubSystem_Speech::STT(bool isBlocking)
-{
-    return stt.read(isBlocking);
-}
-
-void icubclient::SubSystem_Speech::STTflush()
-{
-    int pendingReads = stt.getPendingReads();
-    if (pendingReads > 0)
-        std::cout << "[subsystem.speech] Flushing " << pendingReads << " pending read" << std::endl;
-
-    for (int i = 0; i < pendingReads; i++)
-        stt.read(false);
-}
-
-void icubclient::SubSystem_Speech::STT_ExpandVocabulory(const std::string &vocabuloryName, const std::string &word)
-{
-    yarp::os::Bottle bAugmentVocab;
-    bAugmentVocab.addString("rgm");
-    bAugmentVocab.addString("vocabulory");
-    bAugmentVocab.addString("add");
-    std::string sVocabTemp = "#";
-    sVocabTemp += vocabuloryName.c_str();
-    bAugmentVocab.addString(sVocabTemp.c_str());
-    bAugmentVocab.addString(word.c_str());
-    sttRpc.write(bAugmentVocab);
-}
-
 void icubclient::SubSystem_Speech::SetOptions(const std::string &custom) {
     if(custom!="iCub") {
         yarp::os::Bottle param;
@@ -131,12 +80,4 @@ void icubclient::SubSystem_Speech::Close()
     tts.close();
     ttsRpc.interrupt();
     ttsRpc.close();
-    stt.interrupt();
-    stt.close();
-    sttRpc.interrupt();
-    sttRpc.close();
-    opc->interrupt();
-    opc->close();
-
-    delete opc;
 }

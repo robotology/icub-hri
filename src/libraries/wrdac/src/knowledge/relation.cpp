@@ -88,7 +88,7 @@ Relation::Relation(Bottle &b)
     this->fromBottle(b);
 }
 
-Bottle Relation::asBottle(bool ignoreID)
+Bottle Relation::asBottle(bool ignoreID) const
 {
     Bottle b;
     Bottle bSub;

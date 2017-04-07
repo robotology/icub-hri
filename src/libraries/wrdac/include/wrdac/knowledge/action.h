@@ -28,25 +28,17 @@ namespace icubclient{
     /**
     * \ingroup wrdac_representations
     *
-    * Represent an action, composite or not. Stores as well the expected impact on the drives.
+    * Represents an action, whether composite or not. Stores as well the expected impact on the drives.
     */
     class Action:public Entity
-    {friend class OPCClient;
+    {
+        friend class OPCClient;
 
-    /*
-    * The description used when the action was teached
-    */
-    Relation initialDescription;
-        
-    /*
-    * Subactions that may compose a composite one
-    */
-    std::list<Action> subActions;
-
-
+        Relation initialDescription; /**< The description used when the action was teached */
+        std::list<Action> subActions; /**< Subactions that may compose a composite one */
 
     public:
-        /*
+        /**
         * Estimated effects on the drive
         */
         std::map<std::string, double> estimatedDriveEffects;
@@ -54,17 +46,17 @@ namespace icubclient{
         Action();
         Action(const Action &b);
 
-        virtual bool    isType(std::string _entityType)
+        virtual bool isType(std::string _entityType)
         {
             if (_entityType == ICUBCLIENT_OPC_ENTITY_ACTION)
                 return true;
             else
                 return this->Entity::isType(_entityType);
         }
-                        void    setInitialDescription(Relation r);
-                    Relation    description();
-                    Action      express(Relation r);
 
+        void setInitialDescription(const Relation &r);
+        Relation    description();
+        Action      express(Relation r);
 
         /**
         * Append a subaction to create a composite one
@@ -81,16 +73,18 @@ namespace icubclient{
         * @param newDescription The new arguments
         */ 
         virtual std::list<Action>    asPlan(Relation newDescription);
-                
+
         /**
         * Is an action composite or not?
         */ 
-        virtual bool            isComposite(){return subActions.size();}
+        virtual bool isComposite(){ return subActions.size(); }
+
         /**
         * Number of subactions composing this one
         */ 
-                int              size(){return subActions.size();}
-        virtual yarp::os::Bottle asBottle();
+        int size(){ return subActions.size(); }
+
+        virtual yarp::os::Bottle asBottle() const;
         virtual bool             fromBottle(const yarp::os::Bottle &b);
         virtual std::string      toString();
                 
@@ -98,13 +92,13 @@ namespace icubclient{
         * Estimate the effect of this plan on a specific drive, by summing all the effects of
         * subplans to this specific plan effect.
         */ 
-        virtual void          getPlanDrivesEffect(std::map<std::string,double> &driveEffects);
+        virtual void getPlanDrivesEffect(std::map<std::string,double> &driveEffects);
 
         /**
         * Gives the string according to a current situation
         * @param newRelation The new arguments
         */ 
-        virtual std::string   toString(Relation newRelation);
+        virtual std::string toString(Relation newRelation);
     };
 
 }//Namespace

@@ -33,8 +33,7 @@ namespace icubclient {
     /**
     * \ingroup wrdac_clients
     *
-    * SubSystem to deal with the <b>actionsRenderingEngine</b>
-    * module (a.k.a. <b>ARE</b>) for motor control.
+    * SubSystem to deal with the <b>actionsRenderingEngine</b> module (a.k.a. <b>ARE</b>) for motor control.
     *
     * For further details, please refer to the ARE main page:
     * http://wiki.icub.org/iCub_documentation/group__actionsRenderingEngine.html
@@ -44,23 +43,25 @@ namespace icubclient {
     protected:
         OPCClient *opc;
 
-        yarp::os::RpcClient cmdPort;
-        yarp::os::RpcClient rpcPort;
-        yarp::os::RpcClient getPort;
-        yarp::os::RpcClient calibPort;
+        yarp::os::RpcClient cmdPort; /**< Port to /ARE/cmd:io */
+        yarp::os::RpcClient rpcPort; /**< Port to /ARE/rpc */
+        yarp::os::RpcClient getPort; /**< Port to /ARE/get:io */
+        yarp::os::RpcClient calibPort; /**< Port to iolReachingCalibration */
 
-        std::string lastlyUsedHand;
+        std::string lastlyUsedHand; /**< The hand which was used for the last action */
 
-        /********************************************************************************/
+        /**
+         * @brief Appends a target vector <b>t</b> to the Bottle <b></b>
+         */
         void appendCartesianTarget(yarp::os::Bottle& b, const yarp::sig::Vector &t);
 
-        /********************************************************************************/
+        /**
+         * @brief Sends a command to ARE's cmdPort
+         * @param cmd: Command to be sent
+         * @return True if successful
+         */
         bool sendCmd(const yarp::os::Bottle &cmd);
 
-        /********************************************************************************/
-        bool sendCmdNoReply(yarp::os::Bottle &cmd);
-
-        /********************************************************************************/
         bool connect();
 
     public:
@@ -82,7 +83,12 @@ namespace icubclient {
         void selectHandCorrectTarget(yarp::os::Bottle& options, yarp::sig::Vector& target,
                                      const std::string& objName, const std::string handToUse="");
 
-        /********************************************************************************/
+
+        /**
+         * @brief Applies safety margins, i.e. the *in* vector should be at least table height and at least 0.1m in front of the iCub
+         * @param in: "Unsafe" vector
+         * @return "safe" vector
+         */
         yarp::sig::Vector applySafetyMargins(const yarp::sig::Vector& in);
 
         /**

@@ -191,9 +191,6 @@ bool ICubClient::changeName(Entity *e, const std::string &newName) {
 
             dynamic_cast<SubSystem_agentDetector*>(subSystems["agentDetector"])->resume();
         }
-        if (subSystems.find("recog") != subSystems.end()) {
-            dynamic_cast<SubSystem_Recog*>(subSystems["recog"])->setSpeakerName(newName);
-        }
     }
     else if (e->entity_type() == "object") {
         if (subSystems.find("iol2opc") == subSystems.end()) {

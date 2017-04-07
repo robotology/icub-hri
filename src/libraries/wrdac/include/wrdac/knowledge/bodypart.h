@@ -34,12 +34,12 @@ public:
     Bodypart();
     Bodypart(const Bodypart &b);
     /**
-    * Joint number
+    * Joint number of the represented body part
     */
     int m_joint_number;
 
     /**
-    * Tactile number
+    * Tactile number of the represented body part
     */
     int m_tactile_number;
 
@@ -60,7 +60,7 @@ public:
         else
             return this->Object::isType(_entityType);
     }
-    virtual yarp::os::Bottle asBottle();
+    virtual yarp::os::Bottle asBottle() const;
     virtual bool             fromBottle(const yarp::os::Bottle &b);
     virtual std::string      toString();
 };

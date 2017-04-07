@@ -19,29 +19,29 @@ void icubclient::SubSystem_babbling::Close() {
     portRPC.close();
 }
 
-bool icubclient::SubSystem_babbling::babblingArm(std::string babblingLimb, double train_duration) { // need to be extended for several agents
+bool icubclient::SubSystem_babbling::babblingArm(const std::string &babblingLimb, double duration) { // need to be extended for several agents
     yarp::os::Bottle bReq, bResp;
     bReq.addString("babbling");
     bReq.addString(babblingLimb);
     //changethe train_duration if specified
-    if(train_duration >= 0.0){
-        yInfo() << "Babbling with specific train_duration: " << train_duration;
-        bReq.addDouble(train_duration);
+    if(duration >= 0.0){
+        yInfo() << "Babbling with specific train_duration: " << duration;
+        bReq.addDouble(duration);
     }
     portRPC.write(bReq, bResp);
 
     return bResp.get(0).asBool();
 }
 
-bool icubclient::SubSystem_babbling::babbling(int jointNumber, std::string babblingLimb, double train_duration) { // need to be extended for several agents
+bool icubclient::SubSystem_babbling::babbling(int jointNumber, const std::string& babblingLimb, double duration) { // need to be extended for several agents
     yarp::os::Bottle bReq, bResp;
     bReq.addString("babbling");
     bReq.addString("joint");
     bReq.addInt(jointNumber);
     bReq.addString(babblingLimb);
-    if(train_duration >= 0.0){
-        yInfo() << "Babbling with specific train_duration: " << train_duration;
-        bReq.addDouble(train_duration);
+    if(duration >= 0.0){
+        yInfo() << "Babbling with specific duration: " << duration;
+        bReq.addDouble(duration);
     }
     portRPC.write(bReq, bResp);
 

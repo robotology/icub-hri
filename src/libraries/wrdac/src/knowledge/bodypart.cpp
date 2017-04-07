@@ -44,7 +44,7 @@ Bodypart::Bodypart(const Bodypart &b):Object(b)
     this->m_kinectNode = b.m_kinectNode;
 }
 
-Bottle Bodypart::asBottle()
+Bottle Bodypart::asBottle() const
 {
     //Get the Object bottle
     Bottle b = this->Object::asBottle();

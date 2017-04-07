@@ -27,83 +27,6 @@ namespace icubclient{
 /**
 * \ingroup wrdac_representations
 *
-* Represent a drive with a name, an actual value and 2 borns representing the homeostasis range.
-*
-*/
-struct Drive
-{
-    std::string name;
-    double value, homeoStasisMin, homeoStasisMax, decay;
-
-    Drive(std::string d_name, double d_value, double d_homeo_min, double d_homeo_max, double d_decay = 0.05)
-    {
-
-        //todo : check the min/max
-        name = d_name;
-        value = d_value;
-        homeoStasisMin = d_homeo_min;
-        homeoStasisMax = d_homeo_max;
-        decay = d_decay;
-    }
-
-    Drive()
-    {
-        name = "defaultDrive";
-        value = 0.5;
-        homeoStasisMin = 0.0;
-        homeoStasisMax = 1.0;
-        decay = 0.05;
-    }
-
-    Drive(const Drive &b)
-    {
-        name = b.name;
-        value = b.value;
-        homeoStasisMin = b.homeoStasisMin;
-        homeoStasisMax = b.homeoStasisMax;
-        decay = b.decay;
-    }
-
-    yarp::os::Bottle asBottle()
-    {
-        yarp::os::Bottle b;
-        yarp::os::Bottle sub;
-        sub.addString("name");
-        sub.addString(name.c_str());
-        b.addList() = sub;
-        sub.clear();
-        sub.addString("hStMin");
-        sub.addDouble(homeoStasisMin);
-        b.addList() = sub;
-        sub.clear();
-        sub.addString("hStMax");
-        sub.addDouble(homeoStasisMax);
-        b.addList() = sub;
-        sub.clear();
-        sub.addString("value");
-        sub.addDouble(value);
-        b.addList() = sub;
-        sub.clear();
-        sub.addString("decay");
-        sub.addDouble(decay);
-        b.addList() = sub;
-        return b;
-    }
-
-    bool fromBottle(const yarp::os::Bottle &b)
-    {
-        name = b.find("name").asString().c_str();
-        value = b.find("value").asDouble();
-        homeoStasisMin = b.find("hStMin").asDouble();
-        homeoStasisMax = b.find("hStMax").asDouble();
-        decay = b.find("decay").asDouble();
-        return true;
-    }
-};
-
-/**
-* \ingroup wrdac_representations
-*
 * Represent a the body of an agent. Joints are stored as a dictionnary of string, position
 *
 */
@@ -130,17 +53,17 @@ struct Body
         //m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_RIGHT_FOOT].resize(3,0.0);
     }
 
-    yarp::os::Bottle asBottle()
+    yarp::os::Bottle asBottle() const
     {
         yarp::os::Bottle b;
-        for(std::map<std::string,yarp::sig::Vector>::iterator part = m_parts.begin(); part != m_parts.end(); part++)
+        for(auto& part : m_parts)
         {
             yarp::os::Bottle sub;
-            sub.addString(part->first.c_str());
+            sub.addString(part.first.c_str());
             yarp::os::Bottle position;
-            position.addDouble(part->second[0]);
-            position.addDouble(part->second[1]);
-            position.addDouble(part->second[2]);
+            position.addDouble(part.second[0]);
+            position.addDouble(part.second[1]);
+            position.addDouble(part.second[2]);
             sub.addList() = position;
             b.addList()= sub;
         }
@@ -167,18 +90,18 @@ struct Body
 * An agent is a Object which possesses emotions and beliefs.
 * Beliefs are encoded as a list of relations.
 */
-class Agent: public Object
-{friend class OPCClient;
+class Agent : public Object
+{
+    friend class OPCClient;
 private:
-    std::list<Relation>      m_belief;
+    std::list<Relation> m_belief;
 public:
     Agent();
     Agent(const Agent &b);
     virtual ~Agent() {}
 
     std::map<std::string, double> m_emotions_intrinsic;
-    std::map<std::string, Drive>  m_drives;
-    Body                m_body;
+    Body m_body;
 
     virtual bool    isType(std::string _entityType)
     {
@@ -188,7 +111,7 @@ public:
             return this->Object::isType(_entityType);
     }
 
-    virtual yarp::os::Bottle asBottle();
+    virtual yarp::os::Bottle asBottle() const;
     virtual bool             fromBottle(const yarp::os::Bottle &b);
     virtual std::string      toString();
 

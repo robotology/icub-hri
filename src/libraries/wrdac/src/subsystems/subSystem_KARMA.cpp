@@ -69,7 +69,7 @@ void icubclient::SubSystem_KARMA::selectHandCorrectTarget(yarp::os::Bottle &opti
 //    lastlyUsedHand=hand;
 }
 
-bool icubclient::SubSystem_KARMA::sendCmd(yarp::os::Bottle &cmd, const bool disableATT)
+bool icubclient::SubSystem_KARMA::sendCmd(yarp::os::Bottle &cmd)
 {
     bool ret=false;
 
@@ -245,7 +245,7 @@ bool icubclient::SubSystem_KARMA::chooseArm(const std::string &armType)
     bCmd.addString(armType);
     appendTarget(bCmd,dimTool);
 
-    bool bReturn = sendCmd(bCmd,true);
+    bool bReturn = sendCmd(bCmd);
     std::string status;
     bReturn ? status = "success" : status = "failed";
 
@@ -259,7 +259,7 @@ void icubclient::SubSystem_KARMA::chooseArmAuto()
     bCmd.addVocab(yarp::os::Vocab::encode("remove"));
 
 
-    sendCmd(bCmd,true);
+    sendCmd(bCmd);
 }
 
 bool icubclient::SubSystem_KARMA::pushAside(const std::string &objName,
@@ -364,7 +364,7 @@ bool icubclient::SubSystem_KARMA::push(const yarp::sig::Vector &targetCenter,
 
     bCmd.append(opt);
 
-    bool bReturn = sendCmd(bCmd,true);
+    bool bReturn = sendCmd(bCmd);
     std::string status;
     bReturn ? status = "success" : status = "failed";
 
@@ -432,7 +432,7 @@ bool icubclient::SubSystem_KARMA::draw(const yarp::sig::Vector &targetCenter,
     appendDouble(bCmd,dist);
     bCmd.append(opt);
 
-    bool bReturn = sendCmd(bCmd,true);
+    bool bReturn = sendCmd(bCmd);
     std::string status;
     bReturn ? status = "success" : status = "failed";
 
@@ -458,7 +458,7 @@ bool icubclient::SubSystem_KARMA::vdraw(const std::string &targetName,
     appendDouble(bCmd,dist);
     bCmd.append(opt);
 
-    bool bReturn = sendCmd(bCmd,true);
+    bool bReturn = sendCmd(bCmd);
     std::string status;
     bReturn ? status = "success" : status = "failed";
 
@@ -520,6 +520,7 @@ bool icubclient::SubSystem_KARMA::openCartesianClient()
 
 icubclient::SubSystem_KARMA::~SubSystem_KARMA()
 {
+    SubARE->Close();
     delete SubARE;
     driverL.close();
     driverR.close();

@@ -33,68 +33,38 @@ namespace icubclient{
 /**
 * \ingroup wrdac_clients
 *
-* Abstract subSystem for speech management (both TTS and STT )
+* Abstract subSystem for speech management (Text to Speech)
 */
 class SubSystem_Speech : public SubSystem
 {
 protected:
-    yarp::os::Port tts;
-    yarp::os::Port ttsRpc;
-    yarp::os::BufferedPort<yarp::os::Bottle> stt;
-    yarp::os::Port sttRpc;
-
-    OPCClient *opc;
+    yarp::os::Port tts; /**< Port to /iSpeak */
+    yarp::os::RpcClient ttsRpc; /**< Port to /iSpeak/rpc */
 
 public:
-
+    /**
+    * Default constructor.
+    * @param masterName stem-name used to open up ports.
+    */
     SubSystem_Speech(const std::string &masterName);
     virtual bool connect();
 
-    unsigned int countWordsInString(std::string const& str);
-
     /**
-            * Produce text to speech output
-            * @param text The text to be said.
-            * @param shouldWait Is the function blocking until the end of the sentence or not.
-            */
+    * Produce text to speech output
+    * @param text The text to be said.
+    * @param shouldWait Is the function blocking until the end of the sentence or not.
+    */
     virtual void TTS(const std::string &text, bool shouldWait = true);
 
     /**
-            * (todo) Recognize a specific sentence or a grammar through a blocking call
-            * @param grammar The grammar to be recognized.
-            * @param timeout Timeout for recognition (<0 value means wait until something is recognized).
-            * @return The sentence recognized
-            */
-    virtual yarp::os::Bottle* STT(const std::string &grammar, double timeout = -1);
-
-    /**
-            * Read input from the speech recognizer runtime grammar
-            * @param isBlocking Should we wait for a sentence?
-            * @return The sentence recognized
-            */
-    virtual yarp::os::Bottle* STT(bool isBlocking);
-
-    /**
-            * Flush the pending reads by consuming all of them.
-            */
-    void STTflush();
-
-    /**
-            * Add a word to a given vocabulory
-            * @param vocabuloryName The name of the vocabulory to expand
-            * @param word The word to be added to this vocabulory
-            */
-    virtual void STT_ExpandVocabulory(const std::string &vocabuloryName, const std::string &word);
-
-    /**
-            * Set the command line options sent by iSpeak
-            * @param custom The options as a string
-            */
+    * Set the command line options sent by iSpeak
+    * @param custom The options as a string
+    */
     void SetOptions(const std::string &custom);
 
     /**
-            * Check if iSpeak is currently speaking
-            */
+    * Check if iSpeak is currently speaking
+    */
     bool isSpeaking();
 
     virtual void Close();
@@ -115,8 +85,7 @@ protected:
 
 public:
 
-    SubSystem_Speech_eSpeak(std::string &masterName) :SubSystem_Speech(masterName){
-
+    SubSystem_Speech_eSpeak(std::string &masterName) :SubSystem_Speech(masterName) {
         m_type = SUBSYSTEM_SPEECH_ESPEAK;
         m_speed = 100;
         m_pitch = 50;

@@ -65,22 +65,29 @@ protected:
     yarp::dev::ICartesianControl *iCartCtrlL;
     yarp::dev::ICartesianControl *iCartCtrlR;
 
-    /********************************************************************************/
+    /**
+     * @brief Appends a target vector <b>t</b> to the Bottle <b></b>
+     */
     void appendTarget(yarp::os::Bottle& b, const yarp::sig::Vector &tCenter);
 
+    /**
+     * @brief Appends a double value <b>v</b> to the Bottle <b></b>
+     */
     void appendDouble(yarp::os::Bottle& b, const double &v);
 
-    /********************************************************************************/
     bool returnArmSafely(std::string armType);
 
     void selectHandCorrectTarget(yarp::os::Bottle& options, const std::string &targetName,
                                  yarp::sig::Vector& target,
                                  const std::string handToUse="");
 
-    /********************************************************************************/
-    bool sendCmd(yarp::os::Bottle &cmd, const bool disableATT=false);
+    /**
+     * @brief Sends a command to KARMA's RPC port
+     * @param cmd: Command to be sent
+     * @return True if successful
+     */
+    bool sendCmd(yarp::os::Bottle &cmd);
 
-    /********************************************************************************/
     bool connect();
 
 public:
@@ -90,11 +97,13 @@ public:
     */
     SubSystem_KARMA(const std::string &masterName, const std::string &robot);
 
-    /**
-    * Clean up resources.
-    */
     void Close();
 
+    /**
+     * @brief Applies safety margins, i.e. the *in* vector should be at least table height and at least 0.1m in front of the iCub
+     * @param in: "Unsafe" vector
+     * @return "safe" vector
+     */
     yarp::sig::Vector applySafetyMargins(const yarp::sig::Vector& in);
 
     /**
@@ -115,7 +124,7 @@ public:
      * @param targetPosY: y coordinate of location to push object to
      * @param theta: angle to define pushing left (0) or right (180)
      * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-     * @param options
+     * @param options to be passed to KARMA
      * @param sName: name of object to push
      * @return true in case of success release, false otherwise
      */
@@ -132,7 +141,7 @@ public:
      * @param objCenter: coordinate of object
      * @param targetPosXFront: x coordinate of location to push object to
      * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-     * @param options
+     * @param options to be passed to KARMA
      * @param sName: name of object to push
      * @return true in case of success release, false otherwise
      */
@@ -147,7 +156,7 @@ public:
      * @param targetCenter: position to push to.
      * @param theta: angle between the y-axis (in robot FoR) and starting position of push action, defines the direction of push action
      * @param radius: radius of the circle with center at @see targetCenter
-     * @param options
+     * @param options to be passed to KARMA
      * @param sName: name of object to push
      * @return true in case of success release, false otherwise
      */
@@ -160,7 +169,7 @@ public:
      * @param objCenter: coordinate of object
      * @param targetPosXBack: x coordinate of location to pull object to
      * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-     * @param options
+     * @param options to be passed to KARMA
      * @param sName: name of object to pull
      * @return true in case of success release, false otherwise
      */
@@ -175,7 +184,7 @@ public:
      * @param theta: angle between the y-axis (in robot FoR) and starting position of draw action.
      * @param radius: radius of the circle with center at @see targetCenter
      * @param dist: moving distance of draw action
-     * @param options
+     * @param options to be passed to KARMA
      * @param sName: name of object to push
      * @return true in case of success release, false otherwise
      */
@@ -190,7 +199,7 @@ public:
      * @param theta: angle between the y-axis (in robot FoR) and starting position of draw action.
      * @param radius: radius of the circle with center at @see targetCenter
      * @param dist: moving distance of draw action
-     * @param options
+     * @param options to be passed to KARMA
      * @param sName: name of object to push
      * @return true in case of success release, false otherwise
      */

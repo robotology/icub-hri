@@ -36,16 +36,32 @@ protected:
     virtual bool connect();
 
 public:
-    yarp::os::Port portRPC;
+    yarp::os::RpcClient portRPC; /**< Port to /babbling/rpc */
+
+    /**
+    * Default constructor.
+    * @param masterName stem-name used to open up ports.
+    */
     SubSystem_babbling(const std::string &masterName);
 
     virtual void Close();
 
-    //whole arm babbling
-    bool babblingArm(std::string babblingLimb, double train_duration = -1.0);
+    /**
+     * @brief Whole arm babbling
+     * @param babblingLimb: The limb to babble. Should be "left_arm" or "right_arm"
+     * @param duration: How long to babble for
+     * @return true if successful
+     */
+    bool babblingArm(const std::string& babblingLimb, double duration = -1.0);
 
-    //single joint babbling
-    bool babbling(int jointNumber, std::string babblingLimb, double train_duration = -1.0);
+    /**
+     * @brief Single joint babbling
+     * @param jointNumber: Which joint to babble.
+     * @param babblingLimb: The limb to babble. Should be "left_arm" or "right_arm"
+     * @param duration: How long to babble for
+     * @return true if successful
+     */
+    bool babbling(int jointNumber, const std::string& babblingLimb, double duration = -1.0);
 
 };
 }//Namespace

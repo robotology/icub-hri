@@ -39,12 +39,12 @@ public:
     Object(const Object &b);
 
     /**
-    * Position of the Object, in the initial ego-centered reference frame of the agent mainting the OPC (initial root of the iCub when navigation is calibrated).
+    * Position of the Object, in the initial ego-centered reference frame of the agent mainting the OPC (initial root of the iCub).
     */
     yarp::sig::Vector m_ego_position;
 
     /**
-    * Orientation of the Object, in the initial ego-centered reference frame of the agent mainting the OPC (initial root of the iCub when navigation is calibrated).
+    * Orientation of the Object, in the initial ego-centered reference frame of the agent mainting the OPC (initial root of the iCub).
     */
     yarp::sig::Vector m_ego_orientation;
 
@@ -54,12 +54,15 @@ public:
     yarp::sig::Vector m_dimensions;
 
     /**
-    * Mean color of the object (r,g,b) used mainly for debugging/displaying purposes.
+    * Mean color of the object (r,g,b) used mainly for debugging/displaying purposes in the iCubGUI.
     */
     yarp::sig::Vector m_color;
 
     /**
     * Is the object present in the scene
+    * A value of 1.0 means that the object currently is in the scene
+    * A value of 0.5 means that the object is likely to be in the scene, but not currently visible by the iCub
+    * A value of 0.0 means that the object is currently not in the scene
     */
     double m_present;
 
@@ -76,7 +79,7 @@ public:
     /**
     * A measurement of the object subjective value [0,1]
     */  
-    double          m_value;
+    double m_value;
 
     virtual bool    isType(std::string _entityType)
     {
@@ -87,7 +90,7 @@ public:
         }
     }
 
-    virtual yarp::os::Bottle asBottle();
+    virtual yarp::os::Bottle asBottle() const;
     virtual bool             fromBottle(const yarp::os::Bottle &b);
     virtual std::string      toString();
 
@@ -102,8 +105,8 @@ public:
         return objectAreaAsString(m_objectarea);
     }
 
-    static std::string objectAreaAsString(icubclient::ObjectArea o);
-    static icubclient::ObjectArea stringToObjectArea(std::string o);
+    static std::string objectAreaAsString(const icubclient::ObjectArea &o);
+    static icubclient::ObjectArea stringToObjectArea(const std::string &o);
 };
 
 } //namespace

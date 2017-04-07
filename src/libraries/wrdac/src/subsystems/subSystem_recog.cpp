@@ -7,7 +7,7 @@ bool icubclient::SubSystem_Recog::connect() {
             yInfo() << "Recog connected to ears";
         }
         else {
-            yDebug() << "Recog didn't connect to ears at start";
+            yDebug() << "Recog didn't connect to ears";
         }
     }
 
@@ -30,13 +30,6 @@ void icubclient::SubSystem_Recog::Close() {
     portRPC.close();
     ears_port.interrupt();
     ears_port.close();
-}
-
-bool icubclient::SubSystem_Recog::setSpeakerName(std::string speaker)
-{
-    speakerName_ = speaker;
-    yInfo() << " [subSystem_Recog] : speaker is now " << speakerName_;
-    return true;
 }
 
 void icubclient::SubSystem_Recog::listen(bool on) {
@@ -103,7 +96,7 @@ yarp::os::Bottle icubclient::SubSystem_Recog::recogFromGrammar(std::string &sInp
             return bReply;
         }
     }
-    // turn on the main grammar through ears
+    // pause ears
     listen(false);
 
     yarp::os::Bottle bMessenger;
@@ -113,6 +106,7 @@ yarp::os::Bottle icubclient::SubSystem_Recog::recogFromGrammar(std::string &sInp
     bMessenger.addString(sInput);
     portRPC.write(bMessenger, bReply);
 
+    // resume ears
     listen(true);
 
     return bReply;
@@ -139,9 +133,7 @@ yarp::os::Bottle icubclient::SubSystem_Recog::recogFromGrammarLoop(std::string s
 
     if (!keepEarsEnabled) {
         listen(false);
-
         interruptSpeechRecognizer();
-
         waitForEars();
     }
 
@@ -150,8 +142,10 @@ yarp::os::Bottle icubclient::SubSystem_Recog::recogFromGrammarLoop(std::string s
     bMessenger.addString("grammarXML");
     bMessenger.addString(sInput);
 
-    int loop;
-    (iLoop == -1) ? loop = -3 : loop = 0;
+    int loop = 0;
+    if(iLoop == -1) { // loop indefinitely
+        loop = -3;
+    }
 
     // listen off
 

@@ -63,8 +63,6 @@ bool icubclient::SubSystem_ARE::sendCmd(const yarp::os::Bottle &cmd)
 {
     bool ret=false;
 
-    std::string status;
-
     yDebug() << "Send to ARE: " << cmd.toString();
     yarp::os::Bottle bReply;
     if (cmdPort.write(const_cast<yarp::os::Bottle&>(cmd),bReply))

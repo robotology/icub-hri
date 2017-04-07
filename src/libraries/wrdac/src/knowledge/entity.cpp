@@ -43,7 +43,7 @@ Entity::Entity(const Entity &b)
     this->m_opc_id = b.m_opc_id;
 }
 
-Bottle Entity::asBottle()
+Bottle Entity::asBottle() const
 {
     Bottle b;
 
@@ -60,11 +60,11 @@ Bottle Entity::asBottle()
     Bottle bProperties;
     bProperties.addString("intrinsic_properties");
     Bottle& bPropertiesGlob = bProperties.addList();
-    for(map<string, string>::iterator prop = m_properties.begin(); prop != m_properties.end(); prop++)
+    for(auto& m_property : m_properties)
     {
         Bottle bPropertiesValues;
-        bPropertiesValues.addString(prop->first.c_str());
-        bPropertiesValues.addString(prop->second.c_str());
+        bPropertiesValues.addString(m_property.first.c_str());
+        bPropertiesValues.addString(m_property.second.c_str());
         bPropertiesGlob.addList() = bPropertiesValues;
     }
     b.addList() = bProperties;
