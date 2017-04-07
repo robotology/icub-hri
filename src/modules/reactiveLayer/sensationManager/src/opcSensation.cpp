@@ -86,7 +86,7 @@ Bottle OpcSensation::handleEntities()
     list<Entity*> lEntities = iCub->opc->EntitiesCache();
 
     bool agentPresent = false;
-    Bottle temp_u_entities, temp_k_entities, temp_up_entities, temp_kp_entities, temp_p_entities, temp_o_positions;
+    //Bottle u_entities, k_entities, up_entities, kp_entities, p_entities, o_positions;
     Bottle objects;
 
     for (auto& entity : lEntities)
@@ -94,7 +94,7 @@ Bottle OpcSensation::handleEntities()
         if(entity->entity_type() == "object") {
             Object* o = dynamic_cast<Object*>(entity);
                 if(o) {
-                    addToEntityList(temp_o_positions, o->objectAreaAsString(), entity->name());
+                    addToEntityList(o_positions, o->objectAreaAsString(), entity->name());
                 }
         
 
@@ -106,41 +106,34 @@ Bottle OpcSensation::handleEntities()
                 Object* o = dynamic_cast<Object*>(entity);
                 
                 if(o && (o->m_present==1.0)) {
-                    addToEntityList(temp_up_entities, entity->entity_type(), entity->name());
+                    addToEntityList(up_entities, entity->entity_type(), entity->name());
                 }
-                addToEntityList(temp_u_entities, entity->entity_type(), entity->name());
+                addToEntityList(u_entities, entity->entity_type(), entity->name());
             }
             else if(entity->entity_type() == "bodypart") {
-                addToEntityList(temp_u_entities, entity->entity_type(), entity->name());
-                addToEntityList(temp_up_entities, entity->entity_type(), entity->name());
+                addToEntityList(u_entities, entity->entity_type(), entity->name());
+                addToEntityList(up_entities, entity->entity_type(), entity->name());
             }
         }
         else if (entity->name() == "partner" && entity->entity_type() == "agent") {
             Agent* a = dynamic_cast<Agent*>(entity);
             if(a && (a->m_present==1.0)) {
-                addToEntityList(temp_up_entities, entity->entity_type(), entity->name());
+                addToEntityList(up_entities, entity->entity_type(), entity->name());
             }
-            addToEntityList(temp_u_entities, entity->entity_type(), entity->name());
+            addToEntityList(u_entities, entity->entity_type(), entity->name());
         }
         else {
             if (entity->entity_type() == "bodypart" && (dynamic_cast<Bodypart*>(entity)->m_tactile_number == -1))
             {
-                addToEntityList(temp_u_entities, entity->entity_type(), entity->name());
-                addToEntityList(temp_up_entities, entity->entity_type(), entity->name());
+                addToEntityList(u_entities, entity->entity_type(), entity->name());
+                addToEntityList(up_entities, entity->entity_type(), entity->name());
             }
         }
         if (dynamic_cast<Object*>(entity) && dynamic_cast<Object*>(entity)->m_present == 1.0)
         {
-            addToEntityList(temp_p_entities, entity->entity_type(), entity->name());
+            addToEntityList(p_entities, entity->entity_type(), entity->name());
         }
     }
-
-    u_entities.copy( temp_u_entities);
-    k_entities.copy( temp_k_entities);
-    p_entities.copy( temp_p_entities);
-    up_entities.copy( temp_up_entities);
-    kp_entities.copy( temp_kp_entities);
-    o_positions.copy( temp_o_positions);
 
     Bottle out;
     out.addInt(up_entities.size());
@@ -177,7 +170,6 @@ int OpcSensation::get_property(string name,string property)
     if (check_position)
     {
         yDebug()<<"Checking object position"<<name<<property;
-        yDebug()<<"b:"<<b.toString();
         for (int i=0;i<b.size();i++)
         {
             if (name == "any"){
