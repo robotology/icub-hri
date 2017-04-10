@@ -1,5 +1,5 @@
 #include "opcPopulater.h"
-#include "wrdac/subsystems/subSystem_ARE.h"
+#include "icubclient/subsystems/subSystem_ARE.h"
 
 bool opcPopulater::configure(yarp::os::ResourceFinder &rf)
 {

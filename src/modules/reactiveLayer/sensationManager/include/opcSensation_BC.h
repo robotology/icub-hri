@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <yarp/os/all.h>
 #include <yarp/sig/all.h>
-#include "wrdac/clients/icubClient.h"
+#include "icubclient/clients/icubClient.h"
 #include <map>
 
 #include "sensation.h"

@@ -6,8 +6,7 @@
 # demoModule CMake file, freely inspired by the iCub demoModule.
 #
 
-set(PROJECTNAME planner)
-project(${PROJECTNAME})
+project(planner)
 
 include_directories(
     ${PROJECT_SOURCE_DIR}/include
@@ -19,15 +18,15 @@ include_directories(
 file(GLOB sources src/*.cpp)
 file(GLOB headers include/*.h)
 
-set(docs ${PROJECTNAME}.xml)
+set(docs ${PROJECT_NAME}.xml)
 
 source_group("Source Files" FILES ${sources})
 source_group("Header Files" FILES ${headers})
 source_group("DOC Files"    FILES ${docs})
 
 
-add_executable(${PROJECTNAME} ${headers} ${sources} ${docs})
-target_link_libraries(${PROJECTNAME} ${YARP_LIBRARIES} wrdac)
-set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER wrDAC)
-install(TARGETS ${PROJECTNAME} DESTINATION bin)
+add_executable(${PROJECT_NAME} ${headers} ${sources} ${docs})
+target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES} icubclient)
+set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER planner)
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 yarp_install(FILES ${docs} DESTINATION ${ICUBCLIENT_MODULES_INSTALL_DIR})

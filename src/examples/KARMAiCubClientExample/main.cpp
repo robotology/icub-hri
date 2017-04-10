@@ -21,7 +21,7 @@
 #include <yarp/sig/all.h>
 #include <yarp/math/Math.h>
 #include <yarp/math/SVD.h>
-#include "wrdac/clients/icubClient.h"
+#include "icubclient/clients/icubClient.h"
 
 using namespace std;
 using namespace yarp::os;

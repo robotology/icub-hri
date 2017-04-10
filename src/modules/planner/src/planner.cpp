@@ -1,5 +1,5 @@
 #include "planner.h"
-#include "wrdac/subsystems/subSystem_recog.h"
+#include "icubclient/subsystems/subSystem_recog.h"
 
 bool Planner::configure(yarp::os::ResourceFinder &rf)
 {

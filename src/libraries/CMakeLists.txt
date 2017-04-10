@@ -2,6 +2,6 @@
 # Authors: Ugo Pattacini
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-add_subdirectory(icubClientIDLClients)
-add_subdirectory(wrdac)
+add_subdirectory(icubclientIDLClients)
+add_subdirectory(icubclient)
 

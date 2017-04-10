@@ -9,7 +9,7 @@ else()
 endif()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-project(ICUBCLIENT
+project(icubclient
         LANGUAGES CXX
         VERSION 0.0.0.1)
 
@@ -33,7 +33,7 @@ message(STATUS "iCub is version: ${ICUB_VERSION}")
 
 add_definitions(${YARP_DEFINES})
 include(YarpInstallationHelpers)
-yarp_configure_external_installation(icubclient)
+yarp_configure_external_installation(${PROJECT_NAME})
 
 ### Options
 # Shared/Dynamic or Static library?
@@ -85,7 +85,7 @@ set(ICUBCLIENT_CMAKE_SCRIPTS icubClientOptions.cmake)
 foreach(conf_i ${ICUBCLIENT_CMAKE_SCRIPTS})
     configure_file(${CMAKE_SOURCE_DIR}/conf/${conf_i}
                    ${CMAKE_BINARY_DIR}/conf/${conf_i} COPYONLY IMMEDIATE)
-    install(FILES conf/${conf_i} DESTINATION share/icubclient/conf/ COMPONENT Development)
+    install(FILES conf/${conf_i} DESTINATION share/${PROJECT_NAME}/conf/ COMPONENT Development)
 endforeach()
 ####
 

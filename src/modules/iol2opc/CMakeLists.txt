@@ -34,7 +34,7 @@ if(ICUBCLIENT_BUILD_IOL2OPC)
                        ${ICUB_INCLUDE_DIRS} )
 
    add_executable(${PROJECT_NAME} ${idl_files} ${folder_header} ${folder_source})
-   target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBRARIES} ctrlLib ${YARP_LIBRARIES} wrdac)
+   target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBRARIES} ctrlLib ${YARP_LIBRARIES} icubclient)
 
    set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER systemVisual)
    install(TARGETS ${PROJECT_NAME} DESTINATION bin)

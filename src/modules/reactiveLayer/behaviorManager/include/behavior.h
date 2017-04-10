@@ -3,7 +3,7 @@
 
 #include <string>
 #include <yarp/os/all.h>
-#include "wrdac/clients/icubClient.h"
+#include "icubclient/clients/icubClient.h"
 
 class Behavior
 {

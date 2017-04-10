@@ -1,6 +1,6 @@
 #include "ears.h"
-#include "wrdac/functions.h"
-#include "wrdac/subsystems/subSystem_recog.h"
+#include "icubclient/functions.h"
+#include "icubclient/subsystems/subSystem_recog.h"
 
 bool ears::configure(yarp::os::ResourceFinder &rf)
 {

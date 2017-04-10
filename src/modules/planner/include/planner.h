@@ -1,4 +1,4 @@
-#include "wrdac/clients/icubClient.h"
+#include "icubclient/clients/icubClient.h"
 #include <algorithm>
 
 using namespace std;
