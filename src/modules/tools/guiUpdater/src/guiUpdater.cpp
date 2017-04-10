@@ -34,78 +34,65 @@ using namespace yarp::dev;
 
 bool GuiUpdater::configure(yarp::os::ResourceFinder &rf)
 {
-    string moduleName      = rf.check("name",
-                                      Value("guiUpdater"),
-                                      "module name (string)").asString().c_str();
-
-    string opcName      = rf.check("OPCname",
-                                   Value("OPC"),
-                                   "OPC name (string)").asString().c_str();
+    string moduleName = rf.check("name", Value("guiUpdater"), "module name (string)").asString().c_str();
+    string opcName = rf.check("OPCname", Value("OPC"), "OPC name (string)").asString().c_str();
 
     setName(moduleName.c_str());
 
     displaySkeleton = rf.check("displaySkeletons");
-    cout<<"Display skeleton status: "<<displaySkeleton<<endl;
+    yInfo() << "Display skeleton status:" << displaySkeleton;
 
     opc = new OPCClient(getName().c_str());
     opc->connect(opcName);
     opc->isVerbose = false;
     if(opc->isConnected()) {
         iCub = opc->addOrRetrieveEntity<Agent>("icub");
+    } else {
+        yError() << "Could not connect to OPC, abort";
+        return -1;
     }
 
     //GUI Port
-    string guiPortName = "/";
-    guiPortName +=  getName() + "/gui:o";
-    toGui.open(guiPortName.c_str());
+    toGui.open("/" + getName() + "/gui:o");
     resetGUI();
 
     //GUI Base Port
-    string guiBasePortName = "/";
-    guiBasePortName +=  getName() + "/guiBase:o";
-    toGuiBase.open(guiBasePortName.c_str());
+    toGuiBase.open("/" + getName() + "/guiBase:o");
 
     //RPC
-    string handlerPortName = "/";
-    handlerPortName +=  getName() + "/rpc";
-    if (!handlerPort.open(handlerPortName.c_str())) {
-        cout << getName() << ": Unable to open port " << handlerPortName << endl;
+    if (!handlerPort.open("/" + getName() + "/rpc")) {
+        yError() << getName() << ": Unable to open port " << handlerPort.getName();
         return false;
     }
-    attach(handlerPort);                  // attach to port
+    attach(handlerPort);
 
-    return true ;
+    return true;
 }
 
 bool GuiUpdater::interruptModule()
 {
-    yDebug() << "interrupt";
+    handlerPort.interrupt();
     opc->interrupt();
     toGui.interrupt();
     toGuiBase.interrupt();
-    handlerPort.interrupt();
-    yDebug() << "interrupt done";
     return true;
 }
 
 bool GuiUpdater::close()
 {
     yDebug() << "close";
+    handlerPort.interrupt();
+    handlerPort.close();
+
     if(opc) {
         opc->close();
         delete opc;
-    }
-    if(iCub) {
-        delete iCub;
     }
 
     toGui.interrupt();
     toGui.close();
     toGuiBase.interrupt();
     toGuiBase.close();
-
-    handlerPort.interrupt();
-    handlerPort.close();
 
     yDebug() << "bye";
 
@@ -127,11 +114,12 @@ bool GuiUpdater::respond(const yarp::os::Bottle& command, yarp::os::Bottle& repl
         return false;
     }
     else if (command.get(0).asString()=="help") {
-        cout << helpMessage;
+        yInfo() << helpMessage;
         reply.addString("ok");
+        reply.addString(helpMessage);
     }
     else if (command.get(0).asString()=="reset") {
-        cout << "Reset"<<endl;
+        yInfo() << "Reset";
         resetGUI();
         reply.addString("ok");
     }
@@ -147,17 +135,10 @@ bool GuiUpdater::updateModule()
 {
     if (opc->isConnected())
     {
-        //Retrieve every entities
-        opc->checkout();
-
-        //Just add the iCub in case it's not there
-        iCub = opc->addOrRetrieveEntity<Agent>("icub");
-
-        //cout<<"iCub Position: \t"<<iCub->m_ego_position.toString(3,3)<<endl
-        //    <<"iCub Orientation: \t"<<iCub->m_ego_orientation.toString(3,3)<<endl;
+        opc->checkout(); //Retrieve all entities
 
         //Display the iCub specifics
-        moveBase(iCub);
+        addiCub(iCub);
 
         //Display the objects
         list<shared_ptr<Entity>> entities = opc->EntitiesCacheCopy();
@@ -167,20 +148,17 @@ bool GuiUpdater::updateModule()
             list<shared_ptr<Entity>>::iterator e_new, e_old;
             for(e_new = entities.begin(), e_old = oldEntities.begin();
                 e_new != entities.end() && e_old != oldEntities.end();
-                e_new++, e_old++)
-            {
+                e_new++, e_old++) {
                 if((*e_new)->name() != (*e_old)->name()) {
-                    resetGUI();
+                    resetGUI(); // Entities are the same, but a name has changed, so reset
                     break;
                 }
             }
         }
         oldEntities = entities;
 
-        for(auto& entity : entities)
-        {
-            if( isDisplayable(entity.get()) )
-            {
+        for(auto& entity : entities) {
+            if( isDisplayable(entity.get()) ) {
                 Object* o = dynamic_cast<Object*>(entity.get());
                 if(!o) {
                     yError() << "Could not cast " << entity->name();
@@ -188,22 +166,16 @@ bool GuiUpdater::updateModule()
                 }
 
                 ostringstream guiTag;
-                guiTag<< o->name() <<"("<<o->opc_id()<<")";
+                guiTag << o->name() << "(" << o->opc_id() << ")";
 
                 if (o->m_present==0.0) {
                     deleteObject(guiTag.str(), o);
-                }
-                else
-                {
-                    if (o->name() != "icub")
-                    {
-                        if (o->isType(ICUBCLIENT_OPC_ENTITY_AGENT))
-                        {
-                            addAgent(dynamic_cast<Agent*>(o), guiTag.str());
-                        }
-                        else
-                        {
-                            addObject(o,guiTag.str());
+                } else {
+                    if (o->name() != "icub") {
+                        if (o->isType(ICUBCLIENT_OPC_ENTITY_AGENT)) {
+                            addAgent(dynamic_cast<Agent*>(o));
+                        } else {
+                            addObject(o);
                         }
                     }
                 }
@@ -231,7 +203,7 @@ void GuiUpdater::deleteObject(const string &opcTag, Object* o)
     {
         unsigned int i = 0;
         Agent* a = dynamic_cast<Agent*>(o);
-        while (i < a->m_body.m_parts.size())
+        while (i < a->m_body.m_parts.size()) // remove all body parts of the agent
         {
             ostringstream opcTagPart;
             opcTagPart << o->opc_id() << "_" << i;
@@ -244,17 +216,15 @@ void GuiUpdater::deleteObject(const string &opcTag, Object* o)
     }
 }
 
-void GuiUpdater::addAgent(Agent* o, const string &opcTag)
+void GuiUpdater::addAgent(Agent* o)
 {
-    if (displaySkeleton)
+    if (displaySkeleton) // display all body parts
     {
         int i=0;
         for(auto& part : o->m_body.m_parts)
         {
             //Get the position of the object in the current reference frame of the robot (not the initial one)
             Vector inCurrentRootReference = iCub->getSelfRelativePosition(part.second);
-            //cout<<o->name()<<" init Root: \t \t"<<o->m_ego_position.toString(3,3)<<endl
-            //    <<o->name()<<" current Root: \t \t"<<inCurrentRootReference.toString(3,3)<<endl;
 
             ostringstream opcTagPart;
             opcTagPart<<o->opc_id() << "_" << i;
@@ -280,12 +250,11 @@ void GuiUpdater::addAgent(Agent* o, const string &opcTag)
             i++;
         }
     }
-    else
+    else // only display the head
     {
-        //Vector inCurrentRootReference = iCub->getSelfRelativePosition(o->m_body.m_parts[ICUBCLIENT_OPC_BODY_PART_TYPE_HEAD]);
         Vector inCurrentRootReference = iCub->getSelfRelativePosition(o->m_ego_position);
         ostringstream opcTagPart;
-        opcTagPart<< o->name() <<"("<<o->opc_id()<<")";
+        opcTagPart << o->name() << "(" << o->opc_id() << ")";
         Bottle cmd;
         cmd.addString("object");
         cmd.addString(opcTagPart.str().c_str());
@@ -308,16 +277,17 @@ void GuiUpdater::addAgent(Agent* o, const string &opcTag)
     }
 }
 
-void GuiUpdater::addObject(Object* o, const string &opcTag)
+void GuiUpdater::addObject(Object* o)
 {
     //Get the position of the object in the current reference frame of the robot (not the initial one)
     Vector inCurrentRootReference = iCub->getSelfRelativePosition(o->m_ego_position);
-    //cout<<o->name()<<" init Root: \t \t"<<o->m_ego_position.toString(3,3)<<endl
-    //    <<o->name()<<" current Root: \t \t"<<inCurrentRootReference.toString(3,3)<<endl;
+
+    ostringstream guiTag;
+    guiTag << o->name() << "(" << o->opc_id() << ")";
 
     Bottle cmd;
     cmd.addString("object");
-    cmd.addString(opcTag.c_str());
+    cmd.addString(guiTag.str());
 
     cmd.addDouble(o->m_dimensions[0] *1000.0);    // dimX in [mm]
     cmd.addDouble(o->m_dimensions[1] *1000.0);    // dimY in [mm]
@@ -327,7 +297,7 @@ void GuiUpdater::addObject(Object* o, const string &opcTag)
     cmd.addDouble(inCurrentRootReference[2] *1000.0);        // posZ in [mm]
     cmd.addDouble(o->m_ego_orientation[0] - iCub->m_ego_orientation[0]);             // Deal with the object orientation that is moving with the base
     cmd.addDouble(o->m_ego_orientation[1] - iCub->m_ego_orientation[1]);             // "
-    cmd.addDouble(o->m_ego_orientation[2] - iCub->m_ego_orientation[2]);              // "
+    cmd.addDouble(o->m_ego_orientation[2] - iCub->m_ego_orientation[2]);             // "
     cmd.addInt((int)o->m_color[0]);            // color R
     cmd.addInt((int)o->m_color[1]);            // color G
     cmd.addInt((int)o->m_color[2]);            // color B
@@ -335,7 +305,7 @@ void GuiUpdater::addObject(Object* o, const string &opcTag)
     toGui.write(cmd);
 }
 
-void GuiUpdater::moveBase(Agent* a)
+void GuiUpdater::addiCub(Agent* a)
 {
     Bottle cmd;
     cmd.addDouble(a->m_ego_orientation[0]); //in opc we store rotation around x,y,z, which seems different of the iCubGUI

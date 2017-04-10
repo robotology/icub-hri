@@ -21,7 +21,7 @@
 #include <string>
 #include <yarp/os/all.h>
 #include <yarp/sig/all.h>
-#include <wrdac/clients/opcClient.h>
+#include "wrdac/clients/opcClient.h"
 
 using namespace std;
 using namespace yarp::os;
@@ -33,9 +33,9 @@ class GuiUpdater: public RFModule
 private:
     OPCClient *opc;
     Agent* iCub;
-    Port handlerPort;      //a port to handle messages 
-    Port toGui;
-    Port toGuiBase;
+    RpcServer handlerPort;      //a port to handle messages
+    RpcClient toGui;
+    RpcClient toGuiBase;
     list<shared_ptr<Entity>> oldEntities;
     bool displaySkeleton;
 
@@ -46,11 +46,42 @@ public:
     bool respond(const yarp::os::Bottle& command, yarp::os::Bottle& reply);
     double getPeriod(); 
     bool updateModule();
+
+    /**
+     * @brief Send a request to the iCubGUI to remove all items
+     */
     void resetGUI();
+
+    /**
+     * @brief Deletes an object with name `opcTag` from the OPC
+     * @param opcTag - name of the object to be deleted
+     * @param o - if this is an `Agent` instance, take care of removing all associated body parts
+     */
     void deleteObject(const string &opcTag, Object* o = NULL);
-    void addObject(Object* o, const string &opcTag);
-    void addAgent(Agent* a, const string &opcTag);
-    void moveBase(Agent* a);
+
+    /**
+     * @brief Adds an object to the iCubGUI. Takes care of reading the position, dimensions, color etc.
+     * @param o - the object to be added
+     */
+    void addObject(Object* o);
+
+    /**
+     * @brief Adds an agent to the iCubGUI. Takes care of adding the body parts if `displaySkeleton` is true
+     * @param a - the agent to be added
+     */
+    void addAgent(Agent* a);
+
+    /**
+     * @brief Adds the iCub the the iCubGUI
+     * @param a - reference to the iCub agent
+     */
+    void addiCub(Agent* a);
+
+    /**
+     * @brief Checks whether an Entity can be displayed in the GUI
+     * @param entity - Entity to be checked
+     * @return true if it is an `Object` or a subtype of `Object`, false otherwise
+     */
     bool isDisplayable(Entity* entity);
 };
 
