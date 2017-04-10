@@ -22,25 +22,25 @@ set(${LIBRARY_TARGET_NAME}_SRC src/functions.cpp
                   src/clients/opcClient.cpp)
 
 
-set(${LIBRARY_TARGET_NAME}_HDR include/wrdac/functions.h
-                  include/wrdac/tags.h
-                  include/wrdac/knowledge/action.h
-                  include/wrdac/knowledge/agent.h
-                  include/wrdac/knowledge/bodypart.h
-                  include/wrdac/knowledge/entity.h
-                  include/wrdac/knowledge/object.h
-                  include/wrdac/knowledge/relation.h
-                  include/wrdac/knowledge/representations.h
-                  include/wrdac/clients/icubClient.h
-                  include/wrdac/clients/opcClient.h
-                  include/wrdac/subsystems/subSystem.h
-                  include/wrdac/subsystems/subSystem_agentDetector.h
-                  include/wrdac/subsystems/subSystem_ARE.h
-                  include/wrdac/subsystems/subSystem_babbling.h
-                  include/wrdac/subsystems/subSystem_iol2opc.h
-                  include/wrdac/subsystems/subSystem_recog.h
-                  include/wrdac/subsystems/subSystem_speech.h
-                  include/wrdac/subsystems/subSystem_KARMA.h)
+set(${LIBRARY_TARGET_NAME}_HDR include/${LIBRARY_TARGET_NAME}/functions.h
+                  include/${LIBRARY_TARGET_NAME}/tags.h
+                  include/${LIBRARY_TARGET_NAME}/knowledge/action.h
+                  include/${LIBRARY_TARGET_NAME}/knowledge/agent.h
+                  include/${LIBRARY_TARGET_NAME}/knowledge/bodypart.h
+                  include/${LIBRARY_TARGET_NAME}/knowledge/entity.h
+                  include/${LIBRARY_TARGET_NAME}/knowledge/object.h
+                  include/${LIBRARY_TARGET_NAME}/knowledge/relation.h
+                  include/${LIBRARY_TARGET_NAME}/knowledge/representations.h
+                  include/${LIBRARY_TARGET_NAME}/clients/icubClient.h
+                  include/${LIBRARY_TARGET_NAME}/clients/opcClient.h
+                  include/${LIBRARY_TARGET_NAME}/subsystems/subSystem.h
+                  include/${LIBRARY_TARGET_NAME}/subsystems/subSystem_agentDetector.h
+                  include/${LIBRARY_TARGET_NAME}/subsystems/subSystem_ARE.h
+                  include/${LIBRARY_TARGET_NAME}/subsystems/subSystem_babbling.h
+                  include/${LIBRARY_TARGET_NAME}/subsystems/subSystem_iol2opc.h
+                  include/${LIBRARY_TARGET_NAME}/subsystems/subSystem_recog.h
+                  include/${LIBRARY_TARGET_NAME}/subsystems/subSystem_speech.h
+                  include/${LIBRARY_TARGET_NAME}/subsystems/subSystem_KARMA.h)
 
 add_library(${LIBRARY_TARGET_NAME} ${${LIBRARY_TARGET_NAME}_SRC} ${${LIBRARY_TARGET_NAME}_HDR})
 target_link_libraries(${LIBRARY_TARGET_NAME} ${YARP_LIBRARIES} icubClientIDLClients)
@@ -61,8 +61,8 @@ install(TARGETS ${LIBRARY_TARGET_NAME}
         EXPORT  ${PROJECT_NAME}
         LIBRARY       DESTINATION "${CMAKE_INSTALL_LIBDIR}"                            COMPONENT shlib
         ARCHIVE       DESTINATION "${CMAKE_INSTALL_LIBDIR}"                            COMPONENT lib
-        RUNTIME       DESTINATION "${CMAKE_INSTALL_BINDIR}"                            COMPONENT bin
-        PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${LIBRARY_TARGET_NAME}" COMPONENT dev)
+        RUNTIME       DESTINATION "${CMAKE_INSTALL_BINDIR}"                            COMPONENT bin)
+install(DIRECTORY include/${LIBRARY_TARGET_NAME}/ DESTINATION include/${LIBRARY_TARGET_NAME} COMPONENT dev)
 
 set_property(GLOBAL APPEND PROPERTY ${PROJECT_NAME}_TARGETS ${LIBRARY_TARGET_NAME})
 
