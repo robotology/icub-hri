@@ -194,7 +194,7 @@ bool ears::updateModule() {
         if(bAnswer.get(1).asList()->get(1).isList()) {
             bSemantic = *(*bAnswer.get(1).asList()).get(1).asList();
         }
-        yDebug() << bSemantic.toString();
+        //yDebug() << bSemantic.toString();
         string sObject, sAction;
         string sQuestionKind = bAnswer.get(1).asList()->get(0).toString();
 
@@ -202,9 +202,20 @@ bool ears::updateModule() {
         if(sQuestionKind == "SENTENCEOBJECT") {
             sAction = bSemantic.check("predicateObject", Value("none")).asString();
             if (sAction == "please take")
-                sAction = "take";
+                {
+                    sAction = "take";
+                    sCommand = "moveObject";
+                }
             else if (sAction == "give me")
-                sAction = "give";
+                {
+                    sAction = "give";
+                    sCommand = "moveObject";
+                }
+            else if (sAction == "point to")
+                {
+                    sAction = "pointing";
+                    sCommand = "pointing";
+                }
             sObjectType = "object";
             sObject = bSemantic.check("object", Value("none")).asString();
             sCommand = "followingOrder";
@@ -213,7 +224,7 @@ bool ears::updateModule() {
             sObject = bSemantic.check("bodypart", Value("none")).asString();
             sObjectType = "bodypart";
             sCommand = "followingOrder";
-        } else if(sQuestionKind == "SENTENCENARRATIVE") {
+        }/* else if(sQuestionKind == "SENTENCENARRATIVE") {
             sAction = "narrate";
             sObjectType = "";
             sObject = "";
@@ -248,12 +259,12 @@ bool ears::updateModule() {
             sAction = "game";
             sObjectType = "end";
             sObject = "";
-        } else {
+        }*/ else {
             yError() << "[ears] Unknown predicate: " << sQuestionKind;
             return true;
         }
         //send rpc data to planner
-        if (onPlannerMode) {
+        /*if (onPlannerMode) {
             Bottle &bToTarget = portTarget.prepare();
             bToTarget.clear();
             Bottle bAux;
@@ -269,24 +280,39 @@ bool ears::updateModule() {
             bToTarget.addList()=bAux;
             portTarget.write();
             yDebug() << "Sending " + bToTarget.toString();
-        } else {
-            Bottle &bToTarget = portTarget.prepare();
+        } else {*/
+            /*Bottle &bToTarget = portTarget.prepare();
             bToTarget.clear();
             bToTarget.addString(sAction);
             bToTarget.addString(sObjectType);
             bToTarget.addString(sObject);
             portTarget.write();
+            */
 
-            Bottle bCondition;
-            bCondition.addString(sCommand);
-            bCondition.addString(sAction);
-            bCondition.addString(sObjectType);
-            bCondition.addString(sObject);
+            //freeze
 
-            portToBehavior.write(bCondition);
+            Bottle bAction;
+            bAction.addString("tagging");
+            bAction.addString(sObject);
+            bAction.addString(sAction);
+            bAction.addString(sObjectType);
+            portToBehavior.write(bAction);
+            yDebug() << "Sending " + bAction.toString();
+
+            //wait for BM
+
+            bAction.clear();
+            bAction.addString(sCommand);
+            bAction.addString(sObject);
+            bAction.addString(sAction);
+            bAction.addString(sObjectType);
+            portToBehavior.write(bAction);
+            yDebug() << "Sending " + bAction.toString();
+
+            //wait for bm
+            //unfreeze
      
-            yDebug() << "Sending " + bCondition.toString();
-        }
+        //}
     } else {
         yDebug() << "Not bShouldListen";
         yarp::os::Time::delay(0.5);
