@@ -53,20 +53,20 @@ class FrameHandlerModule: public RFModule
 {
     //Store the translation matrices allowing transformation from one frame toward the icub pivot frame
     map<string, FrameInfo> frames;
-    string matricesFilePath;
+    string matricesFilePath; //!< This points to the home context path (.local)
     bool isVerbose;
-    Port rpc; Port opc;
+    RpcServer rpc;
+    RpcClient opc; //!< Directly talk to OPC, do not use OPCClient here
     Vector bboxMin,bboxMax;
     Vector scaleMin,scaleMax;
 
 public:
     /************************************************************************/
     bool configure(ResourceFinder &rf)
-    {    
-        Bottle &bGeneral = rf.findGroup("general");
-        setName( bGeneral.check("name",Value("referenceFrameHandler")).asString().c_str() );
-        isVerbose = (bGeneral.check("isVerbose",Value(0)).asInt() == 1);
-        bool isEmpty = bGeneral.check("empty")||rf.check("empty");
+    {
+        setName( rf.check("name",Value("referenceFrameHandler")).asString().c_str() );
+        isVerbose = (rf.check("isVerbose",Value(0)).asInt() == 1);
+        bool isEmpty = rf.check("empty")||rf.check("empty");
 
         //Define the working bounding box
         bboxMin.resize(3); bboxMax.resize(3);
@@ -98,21 +98,30 @@ public:
         // we store new matrices in the home context path instead
         matricesFilePath=rf.getHomeContextPath()+"/"+matricesFileName;
 
-        //Create OPC
-        string opcName = "/";
-        opcName+= getName() + "/opc:rpc";
-        opc.open(opcName.c_str());
-
-        //Create RPC
-        string rpcName = "/";
-        rpcName += getName() + "/rpc";
-        rpc.open(rpcName.c_str());
+        opc.open("/"+getName() + "/opc:rpc"); //Create port to OPC
+        rpc.open("/" + getName() + "/rpc"); //Create RPC port
         attach(rpc); 
 
         return true;
     }
 
-    /************************************************************************/
+    /**
+     * @brief Inverts the scale of the provided matrix
+     * @param in - input matrix
+     * @return Matrix with inverted scale
+     */
+    Matrix inverseScale(const Matrix &in)
+    {
+        Matrix out = in;
+        out(0,0) = 1.0 / out(0,0);
+        out(1,1) = 1.0 / out(1,1);
+        out(2,2) = 1.0 / out(2,2);
+        return out;
+    }
+
+    /**
+     * @brief LoadMatrices - reads the matrices from the specified *matricesFile* file. Use `SaveMatrices` to write this file in the proper format.
+     */
     void LoadMatrices(Property &prop)
     {
         Bottle &bFrames = prop.findGroup("frames");
@@ -153,17 +162,58 @@ public:
         }
     }
 
-    /************************************************************************/
-    Matrix inverseScale(const Matrix &B)
+
+    /**
+     * @brief Saves the matrices to a file; this file can later be loaded using `LoadMatrices`
+     * @param fileName - absolute path to the file
+     */
+    void SaveMatrices(const string &fileName)
     {
-        Matrix A = B;
-        A(0,0) = 1.0 / A(0,0);
-        A(1,1) = 1.0 / A(1,1);
-        A(2,2) = 1.0 / A(2,2);
-        return A;
+        ofstream file(fileName.c_str());
+        file<<"[frames]"<<endl;
+        for(map<string, FrameInfo>::iterator it=frames.begin(); it!= frames.end(); it++)
+        {
+            if (it->second.isCalibrated)
+            {
+                file<<it->second.name<<endl;
+                Bottle b;
+                b.clear();
+
+                for(int i=0;i<4;i++)
+                {
+                    for(int j=0;j<4;j++)
+                    {
+                        b.addDouble(it->second.H(i,j));
+                    }
+                }
+
+                file<< b.toString().c_str()<<endl;
+
+                Bottle bScale;
+                bScale.clear();
+                for(int i=0;i<4;i++)
+                {
+                    for(int j=0;j<4;j++)
+                    {
+                        bScale.addDouble(it->second.S(i,j));
+                    }
+                }
+                file<< bScale.toString().c_str()<<endl;
+
+                cout<<"Saving Frame"<<endl
+                    <<it->second.name<<endl
+                    <<it->second.H.toString(3,3)<<endl
+                    <<"Scale"<<endl
+                    <<it->second.S.toString(3,3)<<endl;
+            }
+        }
+        file.close();
     }
 
-    /************************************************************************/
+    /**
+     * @brief Loads the calibration matrices from the OPC
+     * \deprecated This is not supported anymore and may be removed in future versions
+     */
     void LoadMatricesFromOPC()
     {
         Bottle opcCmd,opcReply;
@@ -234,7 +284,10 @@ public:
         }
     }
 
-    /************************************************************************/
+    /**
+     * @brief Saves the calibration matrices to the OPC
+     * \deprecated This is not supported anymore and may be removed in future versions
+     */
     void SaveMatrices2OPC()
     {
         for(map<string, FrameInfo>::iterator it=frames.begin(); it!= frames.end(); it++)
@@ -305,51 +358,6 @@ public:
                     <<lastReply.toString().c_str()<<endl;
             }
         }
-
-    }
-    
-    /************************************************************************/    
-    void SaveMatrices(const string &fileName)
-    {        
-        ofstream file(fileName.c_str());
-        file<<"[frames]"<<endl;
-        for(map<string, FrameInfo>::iterator it=frames.begin(); it!= frames.end(); it++)
-        {
-            if (it->second.isCalibrated)
-            {
-                file<<it->second.name<<endl;
-                Bottle b;
-                b.clear();
-                
-                for(int i=0;i<4;i++)
-                {
-                    for(int j=0;j<4;j++)
-                    {
-                        b.addDouble(it->second.H(i,j));
-                    }
-                }
-
-                file<< b.toString().c_str()<<endl;
-
-                Bottle bScale;
-                bScale.clear();
-                for(int i=0;i<4;i++)
-                {
-                    for(int j=0;j<4;j++)
-                    {
-                        bScale.addDouble(it->second.S(i,j));
-                    }
-                }
-                file<< bScale.toString().c_str()<<endl;
-
-                cout<<"Saving Frame"<<endl
-                    <<it->second.name<<endl
-                    <<it->second.H.toString(3,3)<<endl
-                    <<"Scale"<<endl
-                    <<it->second.S.toString(3,3)<<endl;
-            }
-        }
-        file.close();
     }
 
     /************************************************************************/
@@ -358,24 +366,27 @@ public:
         //On the basis of the command sent an action is performed
         switch (cmd.get(0).asVocab())
         {
-            //Write matrices to opc
+            //Write matrices to opc - not supported!
             case VOCAB4('o','p','c','w'):
             {
                 SaveMatrices2OPC();
                 reply.addString("ack");
                 reply.addString("written to OPC");
+                reply.addString("this method is deprecated!");
                 break;
             }
 
-            //read matrices from opc
+            //read matrices from opc - not supported!
             case VOCAB4('o','p','c','r'):
             {
                 LoadMatricesFromOPC();
                 reply.addString("ack");
                 reply.addString("updated from OPC");
+                reply.addString("this method is deprecated!");
                 break;
             }
 
+            //save matrices to file
             case VOCAB4('s','a','v','e'):
             {
                 SaveMatrices(matricesFilePath.c_str());
@@ -724,7 +735,6 @@ public:
     /************************************************************************/
     bool updateModule()
     {
-        //cout<<"Reference frame handler is running happily..."<<endl;
         return true;
     }
 
@@ -734,8 +744,6 @@ public:
         return 0.5;
     }
 };
-
-////////////////////////MAIN//////////////////////////////////////////
 
 int main(int argc, char *argv[])
 {
@@ -753,5 +761,3 @@ int main(int argc, char *argv[])
 
     return mod.runModule(rf);
 }
-
-
