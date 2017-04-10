@@ -5,7 +5,6 @@ using namespace yarp::os;
 
 
 void Pointing::configure() {
-    // Todo: set the value beow from a config file (but we are not in a module here)
     external_port_name = "/proactiveTagging/rpc";
     from_sensation_port_name = "/opcSensation/known_entities:o";
 }

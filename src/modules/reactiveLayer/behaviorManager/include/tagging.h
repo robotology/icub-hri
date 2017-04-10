@@ -5,7 +5,6 @@
 #include <yarp/os/all.h>
 
 #include "behavior.h"
-#include "followingOrder.h"
 
 class Tagging: public Behavior
 {

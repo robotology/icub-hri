@@ -5,7 +5,6 @@ using namespace yarp::os;
 using namespace icubclient;
 
 void Tagging::configure() {
-    // Todo: set the value beow from a config file (but we are not in a module here)
     external_port_name = "/proactiveTagging/rpc";
     from_sensation_port_name = "/opcSensation/unknown_entities:o";
 
@@ -20,7 +19,6 @@ void Tagging::run(const Bottle &args) {
     yInfo() << "Tagging::run";
     yDebug() << "send rpc to proactiveTagging";
     string type, target;
-    //bool no_objects = true;
     Bottle cmd;
     Bottle rply;
     if (args.size()!=0){
@@ -47,13 +45,7 @@ void Tagging::run(const Bottle &args) {
             }
 
             yInfo() << "I need to explore by name!";
-
-            // ask for the object
             yInfo() << "send rpc to proactiveTagging";
-
-            //If there is an unknown object (to see with agents and objects), add it to the rpc_command bottle, and return true
-
-
             cmd.addString("searchingEntity");
             cmd.addString(type);
             cmd.addString(target);

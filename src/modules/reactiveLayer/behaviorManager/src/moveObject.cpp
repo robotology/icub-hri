@@ -26,8 +26,6 @@ void MoveObject::run(const Bottle &args) {
     }
     yInfo() << "received context from planner:" << move_type << "and" << obj_name;
 
-    //iCub->lookAtPartner();
-
     if(move_type == "front") {
         iCub->say("I will push the " + obj_name + " to the front");
     } else if(move_type == "back") {
@@ -41,10 +39,6 @@ void MoveObject::run(const Bottle &args) {
         iCub->say("I don't know this direction");
         return;
     }
-
-    //iCub->home();
-    //yarp::os::Time::delay(1.0);
-    //iCub->opc->checkout();
 
     iCub->opc->checkout();
 

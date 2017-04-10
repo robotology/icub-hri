@@ -18,8 +18,6 @@ private:
 
     icubclient::ICubClient *iCub;
 
-    // int behavior_to_trigger;
-
     yarp::os::Mutex mut;
     std::string behavior_name;
 
