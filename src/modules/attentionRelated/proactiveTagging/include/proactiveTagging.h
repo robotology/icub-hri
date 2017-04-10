@@ -44,29 +44,71 @@ private:
     double  thresholdDistinguishObjectsRatio; //ratio of saliency needed to detect if 1 object is more salient that the other
     double  thresholdSalienceDetection; //value of saliency needed to detect if 1 object is more salient that the other
 
-    yarp::os::Bottle   recogName(std::string entityType);
-
     //Configure
+    /**
+     * @brief Read config file and fill OPC accordingly
+     * @param rf - resourceFinder instance
+     */
     void configureOPC(yarp::os::ResourceFinder &rf);
     void subPopulateObjects(yarp::os::Bottle* objectList, bool addOrRetrieve);
     void subPopulateBodyparts(yarp::os::Bottle* bodyPartList, yarp::os::Bottle* bodyPartJointList, bool addOrRetrieve);
 
     //objectTagging
+    /**
+    * Recognize the name of an unknown entity (communicate with speech recognizer)
+    * @return Bottle with either name of the object or (error errorDescription)
+    */
+    yarp::os::Bottle   recogName(std::string entityType);
+
+    /**
+    * Explore an unknown entity by asking for the name (response via speech recognition)
+    * @param bInput: exploreUnknownEntity entityType entityName (eg: exploreUnknownEntity agent unknown_25)
+    * @return Bottle with (success entityType) or (nack errorMessage)
+    */
     yarp::os::Bottle  exploreUnknownEntity(const yarp::os::Bottle &bInput);
+
+    /**
+    * Search for the entity corresponding to a certain name in all the unknown entities
+    * @param bInput: searchingEntity entityType entityName [verbose] (eg: searchingEntity object octopus)
+    * @return Bottle consisting of two elements. First element is {error; warning; success} Second element is: information about the action
+    */
     yarp::os::Bottle  searchingEntity(const yarp::os::Bottle &bInput);
+
+    /**
+     * @brief Return a "nice" version of a body part name, eg given "index" as input, it returns "index finger"
+     * @param bodypart - "Plain" version of a body part name, eg "index"
+     * @return "Nice" version of a body part name for speech synthesis, eg "index finger"
+     */
     std::string getBodyPartNameForSpeech(const std::string bodypart);
 
-
-    //selfTagging.cpp
+    /**
+    * Explore an unknown tactile entity (e.g. fingertips), when knowing the name
+    * @param: Bottle with (exploreTactileEntityWithName entityType entityName) (eg: exploreTactileEntityWithName bodypart index) - entityType must be "bodypart"!
+    * @return Bottle with the result (ack skin_patch_number) or (nack error_message)
+    */
     yarp::os::Bottle exploreTactileEntityWithName(yarp::os::Bottle bInput);
 
     /**
-     * @brief Ask pasar
-     * @param on
-     * @return
+     * @brief Ask pasar to increase saliency when a human is pointing to an object
+     * @param on - whether pasar should increase the saliency
+     * @return True if communication to pasar was successful, false otherwise
      */
     bool setPasarPointing(bool on);
+
+    /**
+     * @brief Loop through all objects in the OPC, and check their saliency. Return the name of the object with the highest saliency
+     * @param sTypeTarget - type of the target. For now, only "object" is supported
+     * @return Name of the most salient object
+     */
     std::string getBestEntity(std::string sTypeTarget);
+
+
+    /**
+     * @brief Send request to SAM to use its face recognition to recognise partner
+     * @param sNameTarget: name of the entity to detect, typically "partner"
+     * @param currentEntityType: type of the entity, typically "agent"
+     * @return Bottle. In case of success: (success entityType) where entityType = agent, in case of failure: (nack)
+     */
     yarp::os::Bottle getNameFromSAM(std::string sNameTarget, std::string currentEntityType);
 
 public:
@@ -76,13 +118,11 @@ public:
 
     bool close();
 
-    double getPeriod()
-    {
+    double getPeriod() {
         return period;
     }
 
     bool updateModule();
 
-    //RPC & scenarios
     bool respond(const yarp::os::Bottle& cmd, yarp::os::Bottle& reply);
 };

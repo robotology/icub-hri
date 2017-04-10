@@ -228,80 +228,6 @@ bool proactiveTagging::updateModule() {
     return true;
 }
 
-/*
-* Recognize the name of an unknown entity
-* Recognize through speech the name of an unknown entity.
-* @return (error errorDescription) or (sName)
-*/
-Bottle proactiveTagging::recogName(string entityType) {
-    Bottle bOutput;
-
-    Bottle bRecognized, //received from speech recog with transfer information (1/0 (bAnswer))
-           bAnswer;     //response from speech recog without transfer information, including raw sentence
-
-    yDebug() << "Going to load grammar.";
-    string grammar, expectedresponse="error", semanticfield="error";
-    if (entityType == "agent") {
-        grammar = GrammarAskNameAgent;
-        expectedresponse = "SENTENCEAGENT";
-        semanticfield = "agent";
-    } else if (entityType == "object") {
-        grammar = GrammarAskNameObject;
-        expectedresponse = "SENTENCEOBJECT";
-        semanticfield = "object";
-    } else if (entityType == "bodypart") {
-        grammar = GrammarAskNameBodypart;
-        expectedresponse = "SENTENCEBODYPART";
-        semanticfield = "fingerName";
-    } else {
-        yError() << " error in proactiveTagging::recogName | for " << entityType << " | Entity Type not managed";
-        bOutput.addString("error");
-        bOutput.addString("Entity Type not managed");
-        iCub->say("I do not know what you want from me. Can you please ask me something else?");
-        return bOutput;
-    }
-
-    // Load the Speech Recognition with grammar according to entityType
-    // bAnswer is the result of the recognition system (first element is the raw sentence, second is the list of semantic element)
-    bool recognizedCorrectGrammar=false;
-    while(!recognizedCorrectGrammar) {
-        bRecognized = iCub->getRecogClient()->recogFromGrammarLoop(grammarToString(grammar), 20);
-        bAnswer = *bRecognized.get(1).asList();
-        if(bAnswer.get(1).asList()->get(0).toString() != expectedresponse) {
-            iCub->say("I did not understand you. Can you please repeat?");
-            yError() << "Wrong sentence type returned (not " << expectedresponse << ")";
-        } else {
-            recognizedCorrectGrammar = true;
-        }
-    }
-
-    yDebug() << "Response from recogClient: " << bRecognized.toString();
-
-    if (bRecognized.get(0).asInt() == 0)
-    {
-        yError() << " error in proactiveTagging::askName | for " << entityType << " | Error in speechRecog";
-        bOutput.addString("error");
-        bOutput.addString("error in speechRecog");
-        return bOutput;
-    }
-
-    string sSentence = bAnswer.get(0).asString();
-    iCub->say("I've understood " + sSentence);
-
-    if (bAnswer.get(0).asString() == "stop")
-    {
-        yError() << " in proactiveTagging::askName | for " << entityType << " | stop called";
-        bOutput.addString("error");
-        bOutput.addString("stop called");
-        return bOutput;
-    }
-
-    Bottle bSemantic = *bAnswer.get(1).asList(); // semantic information of the content of the recognition
-    string sName = bSemantic.check(semanticfield, Value("error")).asString();
-    bOutput.addString(sName);
-    return bOutput;
-}
-
 Bottle proactiveTagging::getNameFromSAM(string sNameTarget, string currentEntityType) {
     iCub->say("Have we met before?", false);
     Bottle bOutput;
@@ -327,8 +253,7 @@ Bottle proactiveTagging::getNameFromSAM(string sNameTarget, string currentEntity
     }
     else {
         if(sNameSAM == "nack") {
-             yError() << bReplySam.get(1).asString();
-             //iCub->say("I could not get the name from SAM");
+             yError() << "[getNameFromSAM]" << bReplySam.get(1).asString();
         }
         
         bOutput.addString("nack");
@@ -336,54 +261,49 @@ Bottle proactiveTagging::getNameFromSAM(string sNameTarget, string currentEntity
     return bOutput;
 }
 
-
-/*
-* Explore an unknown tactile entity (e.g. fingertips), when knowing the name
-* @param: Bottle with (exploreTactileUnknownEntity entityType entityName) (eg: exploreUnknownEntity agent unknown_25)
-* @return Bottle with the result (error or ack?)
-*/
 yarp::os::Bottle proactiveTagging::exploreTactileEntityWithName(Bottle bInput) {
     Bottle bOutput;
 
     if (bInput.size() != 3)
     {
-        yInfo() << " proactiveTagging::exploreTactileEntityWithName | Problem in input size.";
+        yError() << " proactiveTagging::exploreTactileEntityWithName | Problem in input size.";
+        bOutput.addString("nack");
         bOutput.addString("Problem in input size");
         iCub->say("Error in input size explore tactile with name");
         return bOutput;
     }
 
-    string sBodyPart = bInput.get(1).toString();
     string sName = bInput.get(2).toString();
-
-    yInfo() << " EntityType : " << sBodyPart;
 
     //1. search through opc for the bodypart entity
     iCub->opc->checkout();
     Bodypart* BPentity = dynamic_cast<Bodypart*>(iCub->opc->getEntity(sName, true));
     if(!BPentity) {
-        iCub->say("Could not cast to bodypart in tactile");
-        yError() << "Could not cast to bodypart in tactile";
+        iCub->say("Could not cast to bodypart in exploreTactileEntityWithName");
+        yError() << "Could not cast to bodypart in exploreTactileEntityWithName";
         bOutput.addString("nack");
         return bOutput;
     }
 
     if (!Network::isConnected(touchDetectorRpc.c_str(), portFromTouchDetector.getName().c_str())) {
         if (!Network::connect(touchDetectorRpc.c_str(), portFromTouchDetector.getName().c_str())) {
-        yWarning() << "TOUCH DETECTOR NOT CONNECTED: selfTagging will not work";
+            yError() << " proactiveTagging::exploreTactileEntityWithName | touch detector not connected.";
+            bOutput.addString("nack");
+            bOutput.addString("touch detector not connected");
+            iCub->say("I cannot feel my skin, sorry!");
+            return bOutput;
         }
     }
 
     //2.Ask human to touch
     string sAsking = "I know how to move my " + getBodyPartNameForSpeech(sName) + ", but how does it feel when I touch something? Can you touch my " + getBodyPartNameForSpeech(sName) + " when I move it, please?";
-    yInfo() << " sAsking: " << sAsking;
     iCub->lookAtPartner();
     iCub->say(sAsking, false);
     portFromTouchDetector.read(false); // clear buffer from previous readings
 
     yarp::os::Time::delay(1.0);
 
-    //2.b Move also the bodypart to show it has been learnt.
+    // Move the bodypart to show it has been learnt
     yInfo() << "Cast okay : name BP = " << BPentity->name();
     int joint = BPentity->m_joint_number;
     //send rpc command to babbling to move the corresponding part
@@ -408,7 +328,7 @@ yarp::os::Bottle proactiveTagging::exploreTactileEntityWithName(Bottle bInput) {
 
     if(!gotTouch) {
         yError() << " error in proactiveTagging::exploreTactileEntityWithName | for " << sName << " | Touch not detected!" ;
-        bOutput.addString("error");
+        bOutput.addString("nack");
         bOutput.addString("I did not feel any touch.");
         iCub->say("I did not feel any touch.", false);
         iCub->home();
@@ -433,14 +353,8 @@ yarp::os::Bottle proactiveTagging::exploreTactileEntityWithName(Bottle bInput) {
 }
 
 
-/*
-* Explore an unknown entity by asking the name
-* input: exploreUnknownEntity entityType entityName (eg: exploreUnknownEntity agent unknown_25)
-* ask through speech the name of an unknwon entity
-*/
 Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput) {
     Bottle bOutput;
-    Bottle tryRecog;
     if (bInput.size() != 3)
     {
         yInfo() << " proactiveTagging::exploreEntity | Problem in input size.";
@@ -455,27 +369,26 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput) {
 
     yInfo() << " EntityType : " << currentEntityType;
 
-    //Check if name is known or not. if yes, and body part : ask tactile
-
     //Ask question for the human, or ask to pay attention (if action to focus attention after)
     string sQuestion;
     if (currentEntityType == "agent") {
         iCub->lookAtPartner();
 
+        // try to do face recognition with SAM
         if (!Network::connect(portToSAM.getName().c_str(), SAMRpc.c_str())) {
             yWarning() << " SAM NOT CONNECTED: face recognition will not work";
         }
         if(portToSAM.getOutputCount()>0) {
-           tryRecog = getNameFromSAM(sNameTarget, currentEntityType);
+           Bottle recogFromSAM = getNameFromSAM(sNameTarget, currentEntityType);
 
-           if (tryRecog.get(0).toString() == "nack" ){
+           if (recogFromSAM.get(0).toString() == "nack" ){ // SAM responded but could not recognize face
               sQuestion = " No, I don't know you. What is your name?";
            }
-           else{
-              return tryRecog;
+           else{ // SAM responded, directly return the Bottle from SAM
+              return recogFromSAM;
            }
         }
-        else
+        else // SAM not connected
         {
             sQuestion = " Hello, I don't know you. Who are you?";
         }
@@ -507,14 +420,12 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput) {
             iCub->say(bOutput.toString());
             return bOutput;
         }
-        yInfo() << "Cast okay : name BP = " << BPtemp->name();
         int joint = BPtemp->m_joint_number;
         //send rpc command to babbling to move the corresponding part
         yInfo() << "Start babbling";
         double babbling_duration=3.0;
         iCub->babbling(joint, babblingArm, babbling_duration);
 
-        //add name of the partner in the question if defined
         iCub->lookAtPartner();
         sQuestion = " How do you call this part of my body?";
 
@@ -522,10 +433,11 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput) {
         iCub->say(sQuestion, false);
     }
     else if (currentEntityType == "object") {
-        yDebug() << "Going to point " << sNameTarget;
+        yDebug() << "Going to point to " << sNameTarget;
         iCub->point(sNameTarget);
     }
 
+    // now detect name via speech recognizer
     Bottle bName = recogName(currentEntityType);
     string sName;
 
@@ -537,6 +449,7 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput) {
     }
 
     string sReply;
+    // change name of the entity with name provided by human
     Entity* e = iCub->opc->getEntity(sNameTarget);
     iCub->changeName(e, sName);
 
@@ -567,12 +480,7 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput) {
     return bOutput;
 }
 
-/*
-* Search for the entity corresponding to a certain name in all the unknown entities
-* return a bottle of 2 elements.
-* First element is: error - warning - success
-* Second element is: information about the action
-*/
+
 Bottle proactiveTagging::searchingEntity(const Bottle &bInput) {
     Bottle bOutput;
 
@@ -591,7 +499,7 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput) {
     }
     yInfo() << " Entity to find: " << sNameTarget << "(Type: " << sTypeTarget << ", verbosity: " << verboseSearch << ")";
 
-    int unknownEntitiesPresent = 0;
+    int unknownEntitiesPresent = 0; // # of unknown entities
 
     // check if the entity is already present in the OPC
     if (iCub->opc->isConnected()) {
@@ -641,7 +549,7 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput) {
         return bOutput;
     }
 
-    // if there is several objects unknown (or at least one)
+    // if there are several objects unknown
     string sSentence;
     if(verboseSearch) {
         if(sTypeTarget == "object") {
@@ -655,8 +563,7 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput) {
         yInfo() << sSentence;
     }
 
-    // activate pointing detection in pasar
-    if(sTypeTarget == "object") {
+    if(sTypeTarget == "object") { // activate pointing detection in pasar if it's an object
         iCub->home();
 
         bool success = setPasarPointing(true);

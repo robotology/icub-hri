@@ -17,6 +17,7 @@
 
 #include "proactiveTagging.h"
 
+using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace icubclient;
@@ -77,8 +78,7 @@ std::string proactiveTagging::getBestEntity(std::string sTypeTarget) {
 
         for (auto& entity : lEntities) {
             if (entity->name().find("unknown")==0) {
-                if ((sTypeTarget == "object" && (entity->entity_type() == "object")) ||
-                    (sTypeTarget == "bodypart" && (entity->entity_type() == "bodypart"))) {
+                if (sTypeTarget == "object" && (entity->entity_type() == "object")) {
                     Object* temp = dynamic_cast<Object*>(entity.get());
                     if(!temp) {
                         yError() << "Could not cast " << entity->name() << " to an object";
@@ -128,6 +128,66 @@ std::string proactiveTagging::getBestEntity(std::string sTypeTarget) {
     }
 
     return sNameBestEntity;
+}
+
+Bottle proactiveTagging::recogName(std::string entityType) {
+    Bottle bOutput;
+
+    Bottle bRecognized, //received from speech recog with transfer information (1/0 (bAnswer))
+           bAnswer;     //response from speech recog without transfer information, including raw sentence
+
+    yDebug() << "Going to load grammar.";
+    string grammar, expectedresponse="error", semanticfield="error";
+    if (entityType == "agent") {
+        grammar = GrammarAskNameAgent;
+        expectedresponse = "SENTENCEAGENT";
+        semanticfield = "agent";
+    } else if (entityType == "object") {
+        grammar = GrammarAskNameObject;
+        expectedresponse = "SENTENCEOBJECT";
+        semanticfield = "object";
+    } else if (entityType == "bodypart") {
+        grammar = GrammarAskNameBodypart;
+        expectedresponse = "SENTENCEBODYPART";
+        semanticfield = "fingerName";
+    } else {
+        yError() << " error in proactiveTagging::recogName | for " << entityType << " | Entity Type not managed";
+        bOutput.addString("error");
+        bOutput.addString("Entity Type not managed");
+        iCub->say("I do not know what you want from me. Can you please ask me something else?");
+        return bOutput;
+    }
+
+    // Load the Speech Recognition with grammar according to entityType
+    // bAnswer is the result of the recognition system (first element is the raw sentence, second is the list of semantic element)
+    bool recognizedCorrectGrammar=false;
+    while(!recognizedCorrectGrammar) {
+        bRecognized = iCub->getRecogClient()->recogFromGrammarLoop(grammarToString(grammar), 20);
+        bAnswer = *bRecognized.get(1).asList();
+        if(bAnswer.get(1).asList()->get(0).toString() != expectedresponse) {
+            iCub->say("I did not understand you. Can you please repeat?");
+            yError() << "Wrong sentence type returned (not " << expectedresponse << ")";
+        } else {
+            recognizedCorrectGrammar = true;
+        }
+    }
+
+    yDebug() << "Response from recogClient: " << bRecognized.toString();
+
+    if (bRecognized.get(0).asInt() == 0)
+    {
+        yError() << " error in proactiveTagging::askName | for " << entityType << " | Error in speechRecog";
+        bOutput.addString("error");
+        bOutput.addString("error in speechRecog");
+        return bOutput;
+    }
+
+    iCub->say("I've understood " + bAnswer.get(0).asString());
+
+    Bottle bSemantic = *bAnswer.get(1).asList(); // semantic information of the content of the recognition
+    string sName = bSemantic.check(semanticfield, Value("error")).asString();
+    bOutput.addString(sName);
+    return bOutput;
 }
 
 void proactiveTagging::subPopulateBodyparts(Bottle* bodyPartList, Bottle* bodyPartJointList, bool addOrRetrieve) {
