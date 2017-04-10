@@ -2,10 +2,10 @@
 
 bool AllostaticController::interruptModule()
 {
-    if(iCub) {
+    /*if(iCub) {
         iCub->close();
         delete iCub;
-    }
+    }*/
 
     yDebug() << "Interrupt rpc port";
     rpc_in_port.interrupt();
@@ -129,14 +129,14 @@ bool AllostaticController::configure(yarp::os::ResourceFinder &rf)
     period = rf.check("period",Value(0.5)).asDouble();
 
     bool isRFVerbose = true;
-    iCub = new ICubClient(moduleName, "allostaticController", "client.ini", isRFVerbose);
+    /*iCub = new ICubClient(moduleName, "allostaticController", "client.ini", isRFVerbose);
     iCub->opc->isVerbose &= true;
 
     if (!iCub->connect())
     {
         yInfo() << "iCubClient : Some dependencies are not running...";
         Time::delay(1.0);
-    }
+    }*/
 
     configureAllostatic(rf);
 
@@ -390,27 +390,27 @@ bool AllostaticController::updateAllostatic()
 
     // Create relation for the drive
 
-    iCub->opc->addOrRetrieveEntity<Agent>("icub");
+    /*iCub->opc->addOrRetrieveEntity<Agent>("icub");
     iCub->opc->addOrRetrieveEntity<Action>("want");
     iCub->opc->addOrRetrieveEntity<Action>(activeDrive.name);
 
     Relation Rel;
     Rel.m_subject = "icub";
     Rel.m_verb = "want";
-    Rel.m_object = activeDrive.name;
+    Rel.m_object = activeDrive.name;*/
 
     if (allostaticDrives[activeDrive.name].active) {
         yInfo() << "Trigerring " + activeDrive.name;
 
         // commiting drive as relation
-        iCub->opc->addRelation(Rel);
-        iCub->opc->commit();
+        /*iCub->opc->addRelation(Rel);
+        iCub->opc->commit();*/
 
         allostaticDrives[activeDrive.name].triggerBehavior(activeDrive.level);
 
         // remove the relation once the drive is fulfilled
-        iCub->opc->removeRelation(Rel);
-        iCub->opc->commit();
+        /*iCub->opc->removeRelation(Rel);
+        iCub->opc->commit();*/
     }
     else {
         yInfo() << "Drive " + activeDrive.name + " is not active";

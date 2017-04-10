@@ -13,6 +13,15 @@ private:
     virtual void run(const yarp::os::Bottle &args) = 0;
 public:
 
+
+    icubclient::ICubClient *iCub;
+    std::string from_sensation_port_name, external_port_name;
+    yarp::os::BufferedPort<yarp::os::Bottle> sensation_port_in, behavior_start_stop_port;
+
+    yarp::os::Port rpc_out_port;
+    std::string behaviorName;
+    yarp::os::ResourceFinder& rf;
+
     Behavior(yarp::os::Mutex* _mut, yarp::os::ResourceFinder &_rf, std::string _behaviorName) : mut(_mut), behaviorName(_behaviorName), rf(_rf){
         from_sensation_port_name = "None";
         external_port_name = "None";
@@ -29,13 +38,6 @@ public:
         behavior_start_stop_port.open("/" + port_name_prefix +"/" + behaviorName + "/start_stop:o");
     }
 
-    icubclient::ICubClient *iCub;
-    std::string from_sensation_port_name, external_port_name;
-    yarp::os::BufferedPort<yarp::os::Bottle> sensation_port_in, behavior_start_stop_port;
-
-    yarp::os::Port rpc_out_port;
-    std::string behaviorName;
-    yarp::os::ResourceFinder& rf;
 
     bool trigger(const yarp::os::Bottle& args) {
         yDebug() << behaviorName << "::trigger starts"; 
