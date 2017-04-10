@@ -89,7 +89,6 @@ bool BehaviorManager::configure(yarp::os::ResourceFinder &rf)
         yDebug()<<"not using ears";
     }
 
-    // id = 0;
     for(auto& beh : behaviors) {
         beh->configure();
         beh->openPorts(moduleName);
@@ -154,12 +153,6 @@ bool BehaviorManager::respond(const Bottle& cmd, Bottle& reply)
         bool behavior_triggered = false;
         for(auto& beh : behaviors) {
             if (cmd.get(0).asString() == beh->behaviorName) {
-        //         Bottle args;
-        //         args.clear();
-        //         for (int a = 1; a < cmd.size(); a++)
-        //         {
-        //             args.add(&cmd.get(a));
-        //         }
                 bool aux;
                 if (beh->from_sensation_port_name != "None") {
                     if (!Network::isConnected(beh->from_sensation_port_name, beh->sensation_port_in.getName())) {
@@ -179,7 +172,6 @@ bool BehaviorManager::respond(const Bottle& cmd, Bottle& reply)
                     args = cmd.tail();
                 }
                 yDebug() << "arguments are " << args.toString().c_str();
-                // beh->trigger(args);
                 behavior_triggered = beh->trigger(args);
             }
         }
