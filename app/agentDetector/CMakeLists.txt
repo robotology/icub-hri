@@ -4,7 +4,7 @@
 
 set(appname agentDetector)
 file(GLOB conf ${CMAKE_CURRENT_SOURCE_DIR}/conf/*.*)
-yarp_install(FILES ${conf} DESTINATION ${ICUB_CLIENT_CONTEXTS_INSTALL_DIR}/${appname})
+yarp_install(FILES ${conf} DESTINATION ${ICUBCLIENT_CONTEXTS_INSTALL_DIR}/${appname})
 file(GLOB template ${CMAKE_CURRENT_SOURCE_DIR}/scripts/*.*)
-yarp_install(FILES ${template} DESTINATION ${ICUB_CLIENT_APPLICATIONS_TEMPLATES_INSTALL_DIR})
+yarp_install(FILES ${template} DESTINATION ${ICUBCLIENT_APPLICATIONS_TEMPLATES_INSTALL_DIR})
 

@@ -40,7 +40,6 @@ private:
     std::string      GrammarAskNameBodypart;
 
     std::string      babblingArm; //side of the babbling arm : left or right
-    std::string      defaultPartnerName; //default name of the partner: considered NOT named
 
     double  thresholdDistinguishObjectsRatio; //ratio of saliency needed to detect if 1 object is more salient that the other
     double  thresholdSalienceDetection; //value of saliency needed to detect if 1 object is more salient that the other
@@ -61,6 +60,11 @@ private:
     //selfTagging.cpp
     yarp::os::Bottle exploreTactileEntityWithName(yarp::os::Bottle bInput);
 
+    /**
+     * @brief Ask pasar
+     * @param on
+     * @return
+     */
     bool setPasarPointing(bool on);
     std::string getBestEntity(std::string sTypeTarget);
     yarp::os::Bottle getNameFromSAM(std::string sNameTarget, std::string currentEntityType);

@@ -12,7 +12,7 @@ project(${PROJECTNAME})
 include_directories(
     ${PROJECT_SOURCE_DIR}/include
     ${YARP_INCLUDE_DIRS}
-    ${wrdac_INCLUDE_DIRS}
+    ${icubclient_INCLUDE_DIRS}
 )
 
 # Search for source code.
@@ -29,4 +29,4 @@ add_executable(${PROJECTNAME} ${headers} ${sources} ${docs})
 target_link_libraries(${PROJECTNAME} ${YARP_LIBRARIES} wrdac)
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER attentionRelated)
 install(TARGETS ${PROJECTNAME} DESTINATION bin)
-yarp_install(FILES ${docs} DESTINATION ${ICUB_CLIENT_MODULES_INSTALL_DIR})
+yarp_install(FILES ${docs} DESTINATION ${ICUBCLIENT_MODULES_INSTALL_DIR})

@@ -85,8 +85,7 @@ std::string proactiveTagging::getBestEntity(std::string sTypeTarget) {
                         iCub->say("Could not cast " + entity->name() + " to an object");
                     }
                     if (temp->m_saliency > highestSaliency) {
-                        if (secondSaliency != 0.0)
-                        {
+                        if (secondSaliency != 0.0) {
                             secondSaliency = highestSaliency;
                         }
                         highestSaliency = temp->m_saliency;

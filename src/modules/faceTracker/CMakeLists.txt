@@ -11,7 +11,7 @@ project(faceTracker)
 include_directories(
     ${PROJECT_SOURCE_DIR}/include
     ${YARP_INCLUDE_DIRS}
-    ${wrdac_INCLUDE_DIRS}
+    ${icubclient_INCLUDE_DIRS}
 )
 
 # Search for source code.
@@ -26,7 +26,7 @@ source_group("DOC Files"    FILES ${docs})
 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include
-                    ${wrdac_INCLUDE_DIRS}
+                    ${icubclient_INCLUDE_DIRS}
                     ${YARP_INCLUDE_DIRS}
                     ${OpenCV_INCLUDE_DIRS})
 
@@ -34,4 +34,4 @@ add_executable(${PROJECT_NAME} ${headers} ${sources} ${docs})
 target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES} wrdac ${OpenCV_LIBRARIES})
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER faceTracker)
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-yarp_install(FILES ${docs} DESTINATION ${ICUB_CLIENT_MODULES_INSTALL_DIR})
+yarp_install(FILES ${docs} DESTINATION ${ICUBCLIENT_MODULES_INSTALL_DIR})

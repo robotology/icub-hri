@@ -27,8 +27,8 @@
 
 /**
 *
-* @defgroup icub_client_IDLClients IDL Client Interfaces
-* @ingroup icub_client_libraries
+* @defgroup icubclient_IDLClients IDL Client Interfaces
+* @ingroup icubclient_libraries
 *
 * This library contains all the definitions for a client to
 * interface to the IDL services made available by icub-client

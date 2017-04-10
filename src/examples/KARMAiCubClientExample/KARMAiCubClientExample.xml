@@ -3,7 +3,7 @@
  
 <module>
    <name>KARMAiCubClientExample</name>
-   <doxygen-group>icub_client_examples</doxygen-group>
+   <doxygen-group>icubclient_examples</doxygen-group>
    <description>Use case of the iCubClient using KARMA for motor actions</description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>

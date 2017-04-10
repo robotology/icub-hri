@@ -15,11 +15,11 @@ source_group("Header Files" FILES ${folder_header})
 source_group("Source Files" FILES ${folder_source})
 source_group("DOC Files"    FILES ${doc_files})
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${wrdac_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${icubclient_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
 
 add_executable(${PROJECTNAME} ${folder_header} ${folder_source} ${doc_files})
 target_link_libraries(${PROJECTNAME} wrdac ${YARP_LIBRARIES})
 set_target_properties(${PROJECTNAME} PROPERTIES FOLDER tools)
 install(TARGETS ${PROJECTNAME} DESTINATION bin)
-yarp_install(FILES ${doc_files} DESTINATION ${ICUB_CLIENT_MODULES_INSTALL_DIR})
+yarp_install(FILES ${doc_files} DESTINATION ${ICUBCLIENT_MODULES_INSTALL_DIR})
 

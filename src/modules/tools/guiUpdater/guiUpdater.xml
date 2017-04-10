@@ -4,7 +4,7 @@
 <module>
 
    <name>guiUpdater</name>
-   <doxygen-group>icub_client_modules</doxygen-group>
+   <doxygen-group>icubclient_modules</doxygen-group>
    <description>Module responsible for polling the OPC for various content (objects, skeletons, etc.) and updating icubGui based on this.</description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>

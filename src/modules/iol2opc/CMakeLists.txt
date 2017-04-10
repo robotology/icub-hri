@@ -2,9 +2,9 @@
 # Authors: Ugo Pattacini, Tobias Fischer
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-set(ICUB_CLIENT_BUILD_IOL2OPC TRUE CACHE BOOL "Enable compilation of iol2opc")
-mark_as_advanced(ICUB_CLIENT_BUILD_IOL2OPC)
-if(ICUB_CLIENT_BUILD_IOL2OPC)
+set(ICUBCLIENT_BUILD_IOL2OPC TRUE CACHE BOOL "Enable compilation of iol2opc")
+mark_as_advanced(ICUBCLIENT_BUILD_IOL2OPC)
+if(ICUBCLIENT_BUILD_IOL2OPC)
    project(iol2opc)
 
    include(YarpIDL)
@@ -28,7 +28,7 @@ if(ICUB_CLIENT_BUILD_IOL2OPC)
 
    include_directories(${PROJECT_SOURCE_DIR}/include
                        ${IDL_GENERATED_CODE_DIR}/include
-                       ${wrdac_INCLUDE_DIRS}
+                       ${icubclient_INCLUDE_DIRS}
                        ${OpenCV_INCLUDE_DIRS}
                        ${YARP_INCLUDE_DIRS}
                        ${ICUB_INCLUDE_DIRS} )

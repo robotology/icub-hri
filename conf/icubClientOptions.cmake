@@ -43,6 +43,7 @@ if(NOT CMAKE_CONFIGURATION_TYPES)
        set(CMAKE_BUILD_TYPE "Release" CACHE STRING
            "Choose the build type, recommanded options are: Debug or Release" FORCE)
     endif()
-    set(ICUB_CLIENT_BUILD_TYPES "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
-    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${ICUB_CLIENT_BUILD_TYPES})
+    set(ICUBCLIENT_BUILD_TYPES "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${ICUBCLIENT_BUILD_TYPES})
 endif()
+

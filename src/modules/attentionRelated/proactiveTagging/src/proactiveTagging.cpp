@@ -37,10 +37,7 @@ bool proactiveTagging::configure(yarp::os::ResourceFinder &rf) {
 
     yDebug() << "------------> babblingArm: " << babblingArm;
 
-    yInfo() << moduleName << ": finding configuration files...";
     period = rf.check("period", Value(0.1)).asDouble();
-
-    defaultPartnerName = "partner";
 
     //Create an iCub Client and check that all dependencies are here before starting
     bool isRFVerbose = true;
@@ -518,13 +515,8 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput) {
         iCub->babbling(joint, babblingArm, babbling_duration);
 
         //add name of the partner in the question if defined
-        string partnerName = iCub->getPartnerName();
         iCub->lookAtPartner();
-        if(partnerName == defaultPartnerName){
-            sQuestion = " How do you call this part of my body?";
-        } else {
-            sQuestion = partnerName + ", How do you call this part of my body?";
-        }
+        sQuestion = " How do you call this part of my body?";
 
         yInfo() << sQuestion;
         iCub->say(sQuestion, false);
@@ -656,12 +648,6 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput) {
             sSentence = "I don't known which of these objects is a " + sNameTarget + ". Can you show me the " + sNameTarget;
         } else if (sTypeTarget == "bodypart") {
             sSentence = "I don't known my " + sNameTarget + ". Can you please touch my " + sNameTarget;
-        }
-
-        //add name of the partner at the end of the question if defined
-        string partnerName = iCub->getPartnerName();
-        if(partnerName != defaultPartnerName){
-            sSentence += ", " + partnerName;
         }
 
         iCub->lookAtPartner();

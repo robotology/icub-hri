@@ -2,8 +2,6 @@
 # Authors: Stéphane Lallée
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-cmake_minimum_required(VERSION 2.8)
-
 set(PROJECTNAME referenceFrameHandler)
 project(${PROJECTNAME})
 
@@ -13,10 +11,10 @@ set(doc_files ${PROJECTNAME}.xml)
 source_group("Source Files" FILES ${folder_source})
 source_group("DOC Files"    FILES ${doc_files})
 
-include_directories(${YARP_INCLUDE_DIRS} ${ICUB_INCLUDE_DIRS} ${wrdac_INCLUDE_DIRS})
+include_directories(${YARP_INCLUDE_DIRS} ${ICUB_INCLUDE_DIRS} ${icubclient_INCLUDE_DIRS})
 add_executable(${PROJECTNAME} ${folder_source} ${doc_files})
 target_link_libraries(${PROJECTNAME} optimization ${YARP_LIBRARIES} wrdac)
 set_target_properties(${PROJECTNAME} PROPERTIES FOLDER tools)
 install(TARGETS ${PROJECTNAME} DESTINATION bin)
-yarp_install(FILES ${doc_files} DESTINATION ${ICUB_CLIENT_MODULES_INSTALL_DIR})
+yarp_install(FILES ${doc_files} DESTINATION ${ICUBCLIENT_MODULES_INSTALL_DIR})
 

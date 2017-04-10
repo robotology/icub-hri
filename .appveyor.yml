@@ -65,7 +65,7 @@ build_script:
   - cd c:\dev\icub-client\
   - md build
   - cd build
-  - cmake -G"Visual Studio 12" -DICUB_CLIENT_BUILD_IOL2OPC=FALSE -DCOMPILE_TESTS=TRUE ..
+  - cmake -G"Visual Studio 12" -DICUBCLIENT_BUILD_IOL2OPC=FALSE -DCOMPILE_TESTS=TRUE ..
   - msbuild /m /p:Configuration=Release /p:Platform="Win32" icub-client.sln
 
 notifications:

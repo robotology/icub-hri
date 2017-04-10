@@ -17,8 +17,8 @@
  */
 
 #include <fstream>
-#include <yarp/os/LogStream.h>
 #include <yarp/os/Value.h>
+#include <yarp/os/LogStream.h>
 #include <yarp/os/Vocab.h>
 #include "wrdac/functions.h"
 

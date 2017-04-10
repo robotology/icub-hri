@@ -19,7 +19,7 @@
 /**
  * @defgroup wrdac Helper Routines
  *
- * @ingroup icub_client_libraries
+ * @ingroup icubclient_libraries
  *
  * A container library containing defines and structures to formalize
  * knowledge within an objectPropertiesCollector module.

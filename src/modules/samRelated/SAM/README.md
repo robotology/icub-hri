@@ -45,7 +45,7 @@ If this does not work:
 
 ##How to use:
 
-Everything is accessed via **samSupervisor** which is installed to **ICUB_CLIENT_DIR**.
+Everything is accessed via **samSupervisor** which is installed to **ICUBCLIENT_DIR**.
 
 Connect with samSupervisor via `/sam/rpc:i` and issue help for a list of all possible commands
 
@@ -116,7 +116,7 @@ verbose:      defines the level of verbosity of samSupervisor
 
 ####SAM_Core: 
 - Includes the base classes for SAM_Core and SAM_Driver
-- Includes samSupervisor.py, trainSAMModel.py, interactionSAMModel.py classes which are installed into ICUB_CLIENT_DIR
+- Includes samSupervisor.py, trainSAMModel.py, interactionSAMModel.py classes which are installed into ICUBCLIENT_DIR
 -Implements the core functionality of SAM. This module is the memory system where the already transformed (by SAM_Drivers) perceived signals are compressed and stored in a coherent way. Coherent meaning that audio, visual etc signals are treated in analogous manner. This model is built upon the deep Gaussian process model using GPy, so that high-dimensional, noisy data can be compressed, chunked and "cleaned" automatically in a probabilistic way (ie the model is trying to keep the "relevant" variance in the data and eliminate redundancies in the representation by encoding memories as "clean" and non-redundant signals).
 
 ####SAM_Drivers:

@@ -4,5 +4,5 @@
 
 set(appname planner)
 file(GLOB conf ${CMAKE_CURRENT_SOURCE_DIR}/conf/*.ini)
-yarp_install(FILES ${conf} DESTINATION ${ICUB_CLIENT_CONTEXTS_INSTALL_DIR}/${appname})
+yarp_install(FILES ${conf} DESTINATION ${ICUBCLIENT_CONTEXTS_INSTALL_DIR}/${appname})
 

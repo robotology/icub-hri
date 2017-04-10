@@ -12,12 +12,12 @@ add_subdirectory(tools)
 add_subdirectory(touchDetector)
 
 #Add modules with dependencies here
-if(ICUB_CLIENT_USE_OpenCV)
+if(ICUBCLIENT_USE_OpenCV)
     add_subdirectory(faceTracker)
     add_subdirectory(iol2opc)
 endif()
 
-if(ICUB_CLIENT_USE_kinectWrapper)
+if(ICUBCLIENT_USE_kinectWrapper)
     add_subdirectory(agentDetector)
 endif()
 
