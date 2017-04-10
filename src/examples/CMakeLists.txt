@@ -3,7 +3,6 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 add_subdirectory(AREiCubClientExample)
-add_subdirectory(wrdacExample)
 add_subdirectory(KARMAiCubClientExample)
 add_subdirectory(KARMA_OPC_Example)
 add_subdirectory(ARE_KARMAiCubClientExample)

@@ -48,20 +48,10 @@ int main()
     }
 
     // object location in the iCub frame
-    Vector x(4);
+    Vector x(3);
     x[0]=-0.30;
     x[1]=0.05;
     x[2]=-0.05;
-    x[3]=1.0;
-
-    // corresponding location in the world frame
-    Matrix T(4,4);
-    T(0,0)=0.0;  T(0,1)=-1.0; T(0,2)=0.0; T(0,3)=0.0;
-    T(1,0)=0.0;  T(1,1)=0.0;  T(1,2)=1.0; T(1,3)=0.5976;
-    T(2,0)=-1.0; T(2,1)=0.0;  T(2,2)=0.0; T(2,3)=-0.026;
-    T(3,0)=0.0;  T(3,1)=0.0;  T(3,2)=0.0; T(3,3)=1.0;
-    Vector wx=T*x;
-    x.pop_back();
 
     // push left with pure API of KARMA. Please see KARMA document for details of how to define arguments
     iCub.home();                            // Home by using ARE
@@ -100,5 +90,3 @@ int main()
     iCub.close();
     return 0;
 }
-
-

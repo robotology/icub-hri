@@ -40,53 +40,34 @@ int main()
 
     ICubClient iCub("AREiCubClientExample","icubClient","example_ARE.ini");
 
+    ResourceFinder rfClient;
+    rfClient.setVerbose(true);
+    rfClient.setDefaultContext("icubClient");
+    rfClient.setDefaultConfigFile("example_ARE.ini");
+    rfClient.configure(0, NULL);
+
     // we connect to both ARE and OPC
-    if (!iCub.connectSubSystems())
-    {
-        yInfo()<<"[AREiCubClientExample] ARE seems unavailabe!";
+    if(!iCub.connect()) {
+        yError()<<"[ARE_KARMAiCubClientExample] ARE and/or OPC seems unavailabe!";
         return -1;
     }
 
-    if (!iCub.connectOPC())
-    {
-        yInfo()<<"[AREiCubClientExample] OPC seems unavailabe!";
-        return -1;
+    string target;
+    if (rfClient.check("target")) {
+        target = rfClient.find("target").asString();
+        yInfo("target name set to %s", target.c_str());
+    } else {
+        target = "octopus";
+        yInfo("target name set to default, i.e. %s", target.c_str());
     }
 
-    RpcClient port;
-    port.open("/create_object");
-    if (!Network::connect(port.getName().c_str(),"/icubSim/world"))
-    {
-        yInfo()<<"Unable to connect to the World!";
-        port.close();
-        return -1;
-    }
+    double radius=0.025;
 
     // object location in the iCub frame
-    Vector x(4);
+    Vector x(3);
     x[0]=-0.35;
     x[1]=-0.05;
     x[2]=-0.05;
-    x[3]=1.0;
-
-    // corresponding location in the world frame
-    Matrix T(4,4);
-    T(0,0)=0.0;  T(0,1)=-1.0; T(0,2)=0.0; T(0,3)=0.0;
-    T(1,0)=0.0;  T(1,1)=0.0;  T(1,2)=1.0; T(1,3)=0.5976;
-    T(2,0)=-1.0; T(2,1)=0.0;  T(2,2)=0.0; T(2,3)=-0.026;
-    T(3,0)=0.0;  T(3,1)=0.0;  T(3,2)=0.0; T(3,3)=1.0;
-    Vector wx=T*x;
-    x.pop_back();
-
-    // create a static object in the simulated world
-    Bottle cmd,reply;
-    double radius=0.025;
-    cmd.addString("world"); cmd.addString("mk"); cmd.addString("ssph");
-    cmd.addDouble(radius);
-    cmd.addDouble(wx[0]); cmd.addDouble(wx[1]); cmd.addDouble(wx[2]);
-    cmd.addDouble(1.0);   cmd.addDouble(0.0);   cmd.addDouble(0.0);
-    port.write(cmd,reply);
-    port.close();
 
     iCub.home();
     yInfo()<<"pointing at the object ... ";
@@ -96,9 +77,8 @@ int main()
 
 
     iCub.home();
-    string object = "octopus";
-    yInfo("try to grasp %s", object.c_str());
-    bool ok=iCub.grasp(object,options);
+    yInfo("try to grasp %s", target.c_str());
+    bool ok=iCub.grasp(target,options);
     yInfo()<<(ok?"grasped!":"missed!");
     iCub.home();
 
