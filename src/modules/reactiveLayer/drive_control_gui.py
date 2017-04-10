@@ -74,8 +74,6 @@ fixed_buttons["Autonomous mode"] = Button(window, text="Autonomous mode", comman
 fixed_buttons["freeze"] = Button(window, text="Freeze", command=freeze_all)
 fixed_buttons["unfreeze"] = Button(window, text="Unfreeze", command=unfreeze_all)
 fixed_buttons["reset"] = Button(window, text="Reset", command=reset_all)
-#driveButtons["pointing"] = Button(window, text="Pointing", command=pointing)
-#driveButtons["tagging"] = Button(window, text="Tagging", command=tagging)
 driveButtons["dummyButtonD"] = Button(window, text="dummyButton", command=please)
 behaviorButtons["dummyButtonB"] = Button(window, text="dummyButton", command=please)
 
