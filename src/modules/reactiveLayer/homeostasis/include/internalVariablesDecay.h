@@ -2,11 +2,13 @@
 #include <iostream>
 #include <iomanip>
 #include <yarp/os/all.h>
-#include <wrdac/clients/opcClient.h>
+#include "wrdac/clients/opcClient.h"
 
 using namespace std;
 using namespace yarp::os;
-using namespace icubclient;ass InternalVariablesDecay: public RateThread
+using namespace icubclient;
+
+class InternalVariablesDecay: public RateThread
 {
     OPCClient *opc;
     list<Entity*> presentAgents;

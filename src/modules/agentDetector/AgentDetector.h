@@ -5,8 +5,8 @@
 #include <yarp/os/RFModule.h>
 #include <yarp/math/Math.h>
 #include <kinectWrapper/kinectWrapper_client.h>
-#include <wrdac/clients/opcClient.h>
-#include <wrdac/knowledge/agent.h>
+#include "wrdac/clients/opcClient.h"
+#include "wrdac/knowledge/agent.h"
 
 using namespace std;
 using namespace yarp::os;

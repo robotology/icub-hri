@@ -27,7 +27,7 @@
 #include <yarp/math/Math.h>
 #include <yarp/math/Rand.h>
 #include <iCub/ctrl/filters.h>
-#include <wrdac/clients/opcClient.h>
+#include "wrdac/clients/opcClient.h"
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/tracking.hpp>

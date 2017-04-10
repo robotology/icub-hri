@@ -27,8 +27,8 @@
 
 #include <iCub/ctrl/math.h>
 #include <iCub/optimization/calibReference.h>
-#include <wrdac/tags.h>
-#include <wrdac/functions.h>
+#include "wrdac/tags.h"
+#include "wrdac/functions.h"
 
 using namespace std;
 using namespace yarp::os;
@@ -98,7 +98,7 @@ public:
         // we store new matrices in the home context path instead
         matricesFilePath=rf.getHomeContextPath()+"/"+matricesFileName;
 
-        opc.open("/"+getName() + "/opc:rpc"); //Create port to OPC
+        opc.open("/" + getName() + "/opc:rpc"); //Create port to OPC
         rpc.open("/" + getName() + "/rpc"); //Create RPC port
         attach(rpc); 
 

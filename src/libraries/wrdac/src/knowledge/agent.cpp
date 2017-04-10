@@ -17,7 +17,7 @@
  */
 
 
-#include <wrdac/knowledge/agent.h>
+#include "wrdac/knowledge/agent.h"
 #include <algorithm>
 
 using namespace std;

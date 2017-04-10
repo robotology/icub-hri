@@ -21,7 +21,7 @@
 #ifndef _PASAR_MODULE_H_
 #define _PASAR_MODULE_H_
 
-#include <wrdac/clients/icubClient.h>
+#include "wrdac/clients/icubClient.h"
 
 using namespace icubclient;
 using namespace yarp::os;

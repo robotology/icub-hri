@@ -20,7 +20,7 @@
 
 #include <yarp/os/all.h>
 #include <yarp/sig/all.h>
-#include <wrdac/clients/icubClient.h>
+#include "wrdac/clients/icubClient.h"
 
 using namespace std;
 using namespace yarp::os;

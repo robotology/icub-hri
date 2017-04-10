@@ -5,7 +5,7 @@
 #include <yarp/sig/all.h>
 #include <yarp/math/Rand.h>
 #include <map>
-#include <wrdac/clients/icubClient.h>
+#include "wrdac/clients/icubClient.h"
 
 using namespace std;
 using namespace yarp::os;

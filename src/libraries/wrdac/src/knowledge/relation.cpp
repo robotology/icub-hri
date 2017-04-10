@@ -17,7 +17,7 @@
  */
 
 
-#include <wrdac/knowledge/relation.h>
+#include "wrdac/knowledge/relation.h"
 
 using namespace std;
 using namespace yarp::os;
