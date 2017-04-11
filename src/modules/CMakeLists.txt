@@ -3,7 +3,6 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 #Add here modules without specific dependency
-add_subdirectory(attentionRelated)
 add_subdirectory(babbling)
 add_subdirectory(ears)
 add_subdirectory(pasar)
