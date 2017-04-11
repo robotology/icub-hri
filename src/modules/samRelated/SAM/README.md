@@ -65,7 +65,7 @@ Connect with samSupervisor via `/sam/rpc:i` and issue help for a list of all pos
 
 -`quit`: 			Terminates samSupervisor
 
--`train` <modelName>:		Launches a training process for the corresponding model
+-`train <modelName>`:		Launches a training process for the corresponding model
 
 -`list_callSigns`:		Compiles a list of currently active callSigns. Where callSigns are the messages that loaded models respond to
 

@@ -256,7 +256,7 @@ bool ICubClient::grasp(const string &oName, const Bottle &options)
 }
 
 
-bool ICubClient::release(const string &oLocation, const Bottle &options)
+bool ICubClient::release(const std::string &oLocation, const yarp::os::Bottle &options)
 {
     Entity *target = opc->getEntity(oLocation, true);
     if (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
@@ -276,7 +276,7 @@ bool ICubClient::release(const string &oLocation, const Bottle &options)
 }
 
 
-bool ICubClient::release(const Vector &target, const Bottle &options)
+bool ICubClient::release(const yarp::sig::Vector &target, const yarp::os::Bottle &options)
 {
     SubSystem_ARE *are = getARE();
     if (are == NULL)
@@ -317,7 +317,7 @@ bool ICubClient::pointfar(const Vector &target, const Bottle &options, const std
 
     Bottle opt(options);
     opt.addString("still"); // always avoid automatic homing after point
-    return are->point(target, opt, sName);
+    return are->point(target, opt);
 }
 
 
@@ -595,7 +595,7 @@ bool ICubClient::look(const yarp::sig::Vector &target, const yarp::os::Bottle &o
     return false;
 }
 
-bool ICubClient::look(const string &target, const Bottle &options)
+bool ICubClient::look(const std::string &target, const yarp::os::Bottle &options)
 {
     if (SubSystem_ARE *are = getARE())
     {

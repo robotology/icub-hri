@@ -246,7 +246,7 @@ bool icubclient::SubSystem_ARE::push(const std::string &sName, const yarp::os::B
 
 }
 
-bool icubclient::SubSystem_ARE::point(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options, const std::string &sName)
+bool icubclient::SubSystem_ARE::point(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options)
 {
     yDebug() << "ARE::pointfar start";
     yarp::sig::Vector target=applySafetyMargins(targetUnsafe);
@@ -414,7 +414,7 @@ bool icubclient::SubSystem_ARE::waving(const bool sw)
     return bReturn;
 }
 
-bool icubclient::SubSystem_ARE::look(const yarp::sig::Vector &target, const yarp::os::Bottle &options, const std::string &sName)
+bool icubclient::SubSystem_ARE::look(const yarp::sig::Vector &target, const yarp::os::Bottle &options)
 {
     yDebug() << "ARE::look start";
 

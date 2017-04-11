@@ -51,7 +51,9 @@ namespace icubclient {
         std::string lastlyUsedHand; /**< The hand which was used for the last action */
 
         /**
-         * @brief Appends a target vector <b>t</b> to the Bottle <b></b>
+         * @brief Appends a target vector <b>t</b> to the Bottle <b>b</b>
+         * @param b Bottle to append vector to
+         * @param t Vector to be appended
          */
         void appendCartesianTarget(yarp::os::Bottle& b, const yarp::sig::Vector &t);
 
@@ -76,7 +78,11 @@ namespace icubclient {
         */
         void Close();
 
-        /********************************************************************************/
+        /**
+         * @brief Gets the table height from ARE
+         * @param height - reference to the output double
+         * @return true on successful communication with ARE, false otherwise
+         */
         bool getTableHeight(double &height);
 
         /********************************************************************************/
@@ -105,7 +111,7 @@ namespace icubclient {
         * "side" or "above" can be supplied to choose the orientation
         * the robot should keep while performing the action (default:
         * "above").
-        * @param target Target to grasp in cartesian coordinates
+        * @param sName Name of target to grasp
         * @param options Options of ARE commands ("no_head", "no_gaze",
         *             "no_sacc", "still", "left", "right").
         * @return true in case of successfull motor command, false
@@ -118,7 +124,7 @@ namespace icubclient {
         * laterally. Optional parameter "away" can be supplied in order
         * to have the robot push the object away from its root reference
         * frame.
-        * @param target Target to push in cartesian coordinates
+        * @param sName Name of target to push in cartesian coordinates
         * @param options Options of ARE commands ("no_head", "no_gaze",
         *             "no_sacc", "still", "left", "right").
         * @return true in case of successfull motor command, false
@@ -129,16 +135,15 @@ namespace icubclient {
         /**
         * Point at the specified [target] with the index finger.
         * The target can be far away from the iCub, e.g. a body part of the human
-        * @param target Target to point to in cartesian coordinates
+        * @param targetUnsafe Target to point to in cartesian coordinates
         * @param options Options of ARE commands ("no_head", "no_gaze",
         *             "no_sacc", "still", "left", "right").
         * @return true in case of successfull motor command, false
         *         otherwise.
         */
-        bool point(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options = yarp::os::Bottle(),
-                   const std::string &sName="target");
+        bool point(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options = yarp::os::Bottle());
 
-        /**
+        /***
         * Point at the specified [target] with the index finger.
         * @param target Target to point (object name)
         * @param options Options of ARE commands ("no_head", "no_gaze",
@@ -160,7 +165,7 @@ namespace icubclient {
 
         /**
         * Drop the object on a given target.
-        * @param target Target where to drop in cartesian coordinates
+        * @param targetUnsafe Target where to drop in cartesian coordinates
         * @param options Options of ARE commands ("no_head", "no_gaze",
         *             "no_sacc", "still", "left", "right").
         * @return true in case of successfull motor command, false
@@ -214,8 +219,7 @@ namespace icubclient {
         * @return true in case of successfull motor command, false
         *         otherwise.
         */
-        bool look(const yarp::sig::Vector &target, const yarp::os::Bottle &options = yarp::os::Bottle(),
-                  const std::string &sName="target");
+        bool look(const yarp::sig::Vector &target, const yarp::os::Bottle &options = yarp::os::Bottle());
 
         /**
         * Track the specified [target].

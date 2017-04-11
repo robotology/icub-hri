@@ -94,6 +94,7 @@ public:
     /**
     * Default constructor.
     * @param masterName stem-name used to open up ports.
+    * @param robot name of the robot (`icub` or `icubSim`)
     */
     SubSystem_KARMA(const std::string &masterName, const std::string &robot);
 
@@ -191,7 +192,7 @@ public:
      * @param radius: radius of the circle with center at @see targetCenter
      * @param dist: moving distance of draw action
      * @param options to be passed to KARMA
-     * @param sName: name of object to push
+     * @param targetName: name of object to push
      * @return true in case of success release, false otherwise
      */
     bool vdraw(const std::string &targetName,

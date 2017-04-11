@@ -26,7 +26,7 @@ using namespace yarp::os;
 using namespace icubclient;
 
 /************************************************************************/
-Bottle icubclient::opcGetIdsFromAsk(const Bottle &reply)
+yarp::os::Bottle icubclient::opcGetIdsFromAsk(const yarp::os::Bottle &reply)
 {
     Bottle ids;
     if (reply.size()>0)

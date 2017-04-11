@@ -18,11 +18,6 @@
 * Public License for more details
 */
 
-/**
-* @file main.cpp
-* @brief main code.
-*/
-
 #include "faceTracker.h"
 
 using namespace yarp::os;

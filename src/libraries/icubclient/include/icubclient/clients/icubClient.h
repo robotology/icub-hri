@@ -141,7 +141,7 @@ namespace icubclient{
 
         /**
         * Release the hand-held object on a given location.
-        * @param oName is the name of the entity in the OPC where the robot should release.
+        * @param oLocation is the name of the entity in the OPC where the robot should release.
         * @param options bottle containing a list of options (e.g. force
         *                to use specific hand with "left"|"right"
         *                option).
@@ -172,11 +172,11 @@ namespace icubclient{
         * @return true in case of success release, false otherwise
         *         (Entity non existing, impossible to reach, etc.).
         */
-        bool pointfar(const yarp::sig::Vector &target, const yarp::os::Bottle &options = yarp::os::Bottle(), const std::string &sName = "target");
+        bool pointfar(const yarp::sig::Vector &target, const yarp::os::Bottle &options = yarp::os::Bottle());
 
         /**
         * Point at a specified location.
-        * @param oName is the name of the entity in the OPC where the
+        * @param oLocation is the name of the entity in the OPC where the
         *              robot should point at.
         * @param options bottle containing a list of options (e.g. force
         *                to use specific hand with "left"|"right"
@@ -196,7 +196,7 @@ namespace icubclient{
         /**
         * Push at a specified location.
         * This method is deprecated, and pushKarmaLeft or pushKarmaRight should be used instead.
-        * @param oName is the name of the entity in the OPC where the
+        * @param oLocation is the name of the entity in the OPC where the
         *              robot should push at.
         * @param options bottle containing a list of options (e.g. force
         *                to use specific hand with "left"|"right"
@@ -254,12 +254,11 @@ namespace icubclient{
             const yarp::os::Bottle &options = yarp::os::Bottle());
         /**
          * @brief pushKarmaLeft: push an object to left side, this wrapper simplify pure push action of KARMA
-         * @param objName: name of object's center
+         * @param objName: name of object to push (used for iolReachingCalibration)
          * @param objCenter: coordinate of object's center
          * @param targetPosYLeft: Y coordinate of object to push to
          * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
          * @param options: options to be passed to Karma
-         * @param sName: name of object to push
          * @return true in case of success release, false otherwise
          */
         bool pushKarmaLeft(const std::string &objName, const yarp::sig::Vector &objCenter, const double &targetPosYLeft,
@@ -268,25 +267,22 @@ namespace icubclient{
 
         /**
          * @brief pushKarmaRight: push an object to right side, this wrapper simplify pure push action of KARMA
-         * @param objName: name of object's center
+         * @param objName: name of object to push (used for iolReachingCalibration)
          * @param objCenter: coordinate of object's center
          * @param targetPosYRight: Y coordinate of object to push to
          * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
          * @param options: options to be passed to Karma
-         * @param sName: name of object to push
          * @return true in case of success release, false otherwise
          */
         bool pushKarmaRight(const std::string &objName, const yarp::sig::Vector &objCenter, const double &targetPosYRight,
-            const std::string &armType = "selectable",
-            const yarp::os::Bottle &options = yarp::os::Bottle());
+            const std::string &armType = "selectable", const yarp::os::Bottle &options = yarp::os::Bottle());
         /**
          * @brief pushKarmaFront: push an object to front, this wrapper simplify pure push action of KARMA
-         * @param objName: name of object's center
+         * @param objName: name of object to push (used for iolReachingCalibration)
          * @param objCenter: coordinate of object's center
          * @param targetPosXFront: X coordinate of object to push to
          * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
          * @param options: options to be passed to Karma
-         * @param sName: name of object to push
          * @return true in case of success release, false otherwise
          */
         bool pushKarmaFront(const std::string &objName, const yarp::sig::Vector &objCenter, const double &targetPosXFront,
@@ -298,7 +294,7 @@ namespace icubclient{
          * @param targetPosXBack: X coordinate of object to pull back
          * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
          * @param options: options to be passed to Karma
-         * @param sName: name of object to pull
+         * @param objName: name of object to pull (used for iolReachingCalibration)
          * @return true in case of success release, false otherwise
          */
         bool pullKarmaBack(const std::string &objName, const yarp::sig::Vector &objCenter, const double &targetPosXBack,
@@ -371,8 +367,8 @@ namespace icubclient{
 
         /**
         * Extract the name of the agent interaction with the iCub (present, not iCub nor 'unnamed' partner)
-        * @param verbose, whether a yInfo output should happen if the partner is found
-        * @return string, the name of the agent
+        * @param verbose  - whether a yInfo output should happen if the partner is found
+        * @return string: the name of the agent
         */
         std::string getPartnerName(bool verbose = true);
 
@@ -386,7 +382,7 @@ namespace icubclient{
         /**
         * Babbling a single joint
         * @param jointNumber contains the int corresponding to an arm joint
-        * @param babblingLimb contains the string corresponding to the side of the arm used ("left" or "right")
+        * @param babblingArm contains the string corresponding to the side of the arm used ("left" or "right")
         * @return true in case of success, false otherwise
         */
         bool babbling(int jointNumber, const std::string &babblingArm);
@@ -394,7 +390,7 @@ namespace icubclient{
         /**
         * Babbling a single joint using the name of a corresponding bodypart
         * @param bpName contains the string with the name of the bodypart
-        * @param babblingLimb contains the string corresponding to the side of the arm used ("left" or "right")
+        * @param babblingArm contains the string corresponding to the side of the arm used ("left" or "right")
         * @return true in case of success, false otherwise
         *         (bodypart non existing, no joint number assigned, etc.).
         */
@@ -404,7 +400,7 @@ namespace icubclient{
         /**
         * Babbling a single joint with modified duration
         * @param jointNumber contains the int corresponding to an arm joint
-        * @param babblingLimb contains the string corresponding to the side of the arm used ("left" or "right")
+        * @param babblingArm contains the string corresponding to the side of the arm used ("left" or "right")
         * @param train_dur: set the babbling time
         * @return true in case of success release, false otherwise
         */
@@ -413,7 +409,7 @@ namespace icubclient{
         /**
         * Babbling a single joint using the name of a corresponding bodypart with modified duration
         * @param bpName contains the string with the name of the bodypart
-        * @param babblingLimb contains the string corresponding to the side of the arm used ("left" or "right")
+        * @param babblingArm contains the string corresponding to the side of the arm used ("left" or "right")
         * @param train_dur: set the babbling time
         * @return true in case of success release, false otherwise
         *         (bodypart non existing, no joint number assigned, etc.).

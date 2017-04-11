@@ -24,7 +24,7 @@ using namespace yarp::sig;
 using namespace yarp::dev;
 using namespace icubclient;
 
-Entity::Entity(Bottle &b)
+Entity::Entity(yarp::os::Bottle &b)
 {
     this->fromBottle(b);
 }

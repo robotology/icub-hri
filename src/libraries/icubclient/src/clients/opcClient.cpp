@@ -962,7 +962,7 @@ void OPCClient::commit(Entity *e)
     }
 }
 
-list<Entity*> OPCClient::Entities(const Bottle &condition)
+std::list<Entity*> OPCClient::Entities(const yarp::os::Bottle &condition)
 {
     list<Entity*> matchingEntities;
     //Find the ids of all entities within the OPC

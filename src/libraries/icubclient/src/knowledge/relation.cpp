@@ -83,7 +83,7 @@ Relation::Relation(
         m_complement_manner = "none";
 }
 
-Relation::Relation(Bottle &b)
+Relation::Relation(yarp::os::Bottle &b)
 {
     this->fromBottle(b);
 }
