@@ -2,11 +2,6 @@
 
 bool AllostaticController::interruptModule()
 {
-    /*if(iCub) {
-        iCub->close();
-        delete iCub;
-    }*/
-
     yDebug() << "Interrupt rpc port";
     rpc_in_port.interrupt();
 
@@ -127,16 +122,6 @@ bool AllostaticController::configure(yarp::os::ResourceFinder &rf)
 
     yDebug()<<moduleName<<": finding configuration files...";
     period = rf.check("period",Value(0.5)).asDouble();
-
-    bool isRFVerbose = true;
-    /*iCub = new ICubClient(moduleName, "allostaticController", "client.ini", isRFVerbose);
-    iCub->opc->isVerbose &= true;
-
-    if (!iCub->connect())
-    {
-        yInfo() << "iCubClient : Some dependencies are not running...";
-        Time::delay(1.0);
-    }*/
 
     configureAllostatic(rf);
 
