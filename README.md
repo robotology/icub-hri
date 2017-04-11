@@ -44,6 +44,9 @@ For the object tracking, we rely on the `iol` pipeline. Please follow the [insta
 ### speech
 This requires a Windows machine with the [Microsoft speech SDK](https://msdn.microsoft.com/en-us/library/hh361572(v=office.14).aspx) installed. Then, compile the [`speech`](https://github.com/robotology/speech) repository for speech recognition and speech synthesis.
 
+### push/pull actions
+This requires a high-level motor primitives generator [karmaWYSIWYD](https://github.com/towardthesea/karmaWysiwyd), which facilitates users to control iCub push/pull action. Please follow the installation instructions in the readme.
+
 ## Build icub-client
 
 Once all dependencies are installed, building `icub-client` is straightforward:
