@@ -187,7 +187,7 @@ public:
     * The relation is directly added on the server side.
     * @param r - The relation to be added on the server
     * @param lifeTime - how long the relation should last for
-    * @return true in case of success (relation was not present and was successfully added), false in other cases.
+    * @return true in case of success (relation was not present and was successfuly added), false in other cases.
     */
     bool addRelation(const Relation &r, double lifeTime = -1);
 
@@ -195,7 +195,7 @@ public:
     * Obtains a relation between two entities. If this relation already present on the server side then the local relations are updated, else a new one is created.
     * The relation is directly added on the server side.
     * @param lifeTime - how long the relation should last for
-    * @return true in case of success (relation was not present and was successfully added), false in other cases.
+    * @return true in case of success (relation was not present and was successfuly added), false in other cases.
     */
     bool addRelation(
             Entity* subject,

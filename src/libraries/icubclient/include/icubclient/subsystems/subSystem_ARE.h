@@ -101,7 +101,7 @@ namespace icubclient {
         * Put the specified part ih home position.
         * @param part the part to be homed ("gaze", "head", "arms",
         *             "fingers", "all"; "all" by default).
-        * @return true in case of successfull motor command, false
+        * @return true in case of successful motor command, false
         *         otherwise.
         */
         bool home(const std::string &part = "all");
@@ -114,7 +114,7 @@ namespace icubclient {
         * @param sName Name of target to grasp
         * @param options Options of ARE commands ("no_head", "no_gaze",
         *             "no_sacc", "still", "left", "right").
-        * @return true in case of successfull motor command, false
+        * @return true in case of successful motor command, false
         *         otherwise.
         */
         bool take(const std::string &sName, const yarp::os::Bottle &options = yarp::os::Bottle());
@@ -127,7 +127,7 @@ namespace icubclient {
         * @param sName Name of target to push in cartesian coordinates
         * @param options Options of ARE commands ("no_head", "no_gaze",
         *             "no_sacc", "still", "left", "right").
-        * @return true in case of successfull motor command, false
+        * @return true in case of successful motor command, false
         *         otherwise.
         */
         bool push(const std::string &sName, const yarp::os::Bottle &options = yarp::os::Bottle());
@@ -138,7 +138,7 @@ namespace icubclient {
         * @param targetUnsafe Target to point to in cartesian coordinates
         * @param options Options of ARE commands ("no_head", "no_gaze",
         *             "no_sacc", "still", "left", "right").
-        * @return true in case of successfull motor command, false
+        * @return true in case of successful motor command, false
         *         otherwise.
         */
         bool point(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options = yarp::os::Bottle());
@@ -148,7 +148,7 @@ namespace icubclient {
         * @param target Target to point (object name)
         * @param options Options of ARE commands ("no_head", "no_gaze",
         *             "no_sacc", "still", "left", "right").
-        * @return true in case of successfull motor command, false
+        * @return true in case of successful motor command, false
         *         otherwise.
         */
         //bool point_old(const std::string &sName, const yarp::os::Bottle &options = yarp::os::Bottle());
@@ -158,7 +158,7 @@ namespace icubclient {
         * random position.
         * @param options Options of ARE commands ("no_head", "no_gaze",
         *             "no_sacc", "still", "left", "right").
-        * @return true in case of successfull motor command, false
+        * @return true in case of successful motor command, false
         *         otherwise.
         */
         bool drop(const yarp::os::Bottle &options = yarp::os::Bottle());
@@ -168,7 +168,7 @@ namespace icubclient {
         * @param targetUnsafe Target where to drop in cartesian coordinates
         * @param options Options of ARE commands ("no_head", "no_gaze",
         *             "no_sacc", "still", "left", "right").
-        * @return true in case of successfull motor command, false
+        * @return true in case of successful motor command, false
         *         otherwise.
         */
         bool dropOn(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options = yarp::os::Bottle());
@@ -178,7 +178,7 @@ namespace icubclient {
         * purpose of visual exploration.
         * @param options Options of ARE commands ("no_head", "no_gaze",
         *             "no_sacc", "still", "left", "right").
-        * @return true in case of successfull motor command, false
+        * @return true in case of successful motor command, false
         *         otherwise.
         */
         bool observe(const yarp::os::Bottle &options = yarp::os::Bottle());
@@ -188,7 +188,7 @@ namespace icubclient {
         * object.
         * @param options Options of ARE commands ("no_head", "no_gaze",
         *             "no_sacc", "still", "left", "right").
-        * @return true in case of successfull motor command, false
+        * @return true in case of successful motor command, false
         *         otherwise.
         */
         bool expect(const yarp::os::Bottle &options = yarp::os::Bottle());
@@ -199,7 +199,7 @@ namespace icubclient {
         * taken.
         * @param options Options of ARE commands ("no_head", "no_gaze",
         *             "no_sacc", "still", "left", "right").
-        * @return true in case of successfull motor command, false
+        * @return true in case of successful motor command, false
         *         otherwise.
         */
         bool give(const yarp::os::Bottle &options = yarp::os::Bottle());
@@ -207,7 +207,7 @@ namespace icubclient {
         /**
         * Enable/disable arms waving.
         * @param sw enable/disable if true/false.
-        * @return true in case of successfull request, false otherwise.
+        * @return true in case of successful request, false otherwise.
         */
         bool waving(const bool sw);
 
@@ -216,7 +216,7 @@ namespace icubclient {
         * @param target Target to look at in cartesian coordinates
         * @param options Options of ARE commands ("fixate",
         *             "wait", (block_eyes ver)).
-        * @return true in case of successfull motor command, false
+        * @return true in case of successful motor command, false
         *         otherwise.
         */
         bool look(const yarp::sig::Vector &target, const yarp::os::Bottle &options = yarp::os::Bottle());
@@ -225,7 +225,7 @@ namespace icubclient {
         * Track the specified [target].
         * @param target Target to look at in cartesian coordinates
         * @param options Options of ARE commands ("no_sacc").
-        * @return true in case of successfull motor command, false
+        * @return true in case of successful motor command, false
         *         otherwise.
         */
         bool track(const yarp::sig::Vector &target, const yarp::os::Bottle &options = yarp::os::Bottle());
@@ -233,7 +233,7 @@ namespace icubclient {
         /**
         * Enable/disable impedance control.
         * @param sw enable/disable if true/false.
-        * @return true in case of successfull request, false otherwise.
+        * @return true in case of successful request, false otherwise.
         */
         bool impedance(const bool sw);
 
@@ -241,7 +241,7 @@ namespace icubclient {
         * Change default arm movement execution time.
         * @param execTime the arm movement execution time given in
         *                 seconds.
-        * @return true in case of successfull request, false otherwise.
+        * @return true in case of successful request, false otherwise.
         */
         bool setExecTime(const double execTime);
 

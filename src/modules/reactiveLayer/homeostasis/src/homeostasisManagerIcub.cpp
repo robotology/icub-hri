@@ -35,7 +35,7 @@ bool HomeostaticModule::addNewDrive(string driveName)
     
     yDebug() << "default drive added. Opening ports...";//;
     openPorts(driveName);
-    yInfo() << "new drive created successfully!";//;
+    yInfo() << "new drive created successfuly!";//;
 
     return true;
 }
@@ -271,7 +271,7 @@ bool HomeostaticModule::respond(const Bottle& cmd, Bottle& reply)
             {
                 bool b = removeDrive(d);
                 if (b)
-                    reply.addString("ack: Successfully removed");
+                    reply.addString("ack: Successfuly removed");
                 else
                     reply.addString("ack: Could not remove the drive");
 

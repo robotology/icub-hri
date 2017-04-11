@@ -204,8 +204,8 @@ bool ICubClient::changeName(Entity *e, const std::string &newName) {
         else {
             string oldName = e->name();
             if (!dynamic_cast<SubSystem_IOL2OPC*>(subSystems["iol2opc"])->changeName(oldName, newName)) {
-                yError() << "iol2opc did not change name successfully";
-                say("iol2opc did not change name successfully");
+                yError() << "iol2opc did not change name successfuly";
+                say("iol2opc did not change name successfuly");
                 allOkay = false;
             }
         }

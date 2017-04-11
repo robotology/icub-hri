@@ -133,7 +133,7 @@ namespace icubclient{
         * @param options bottle containing a list of options (e.g. force
         *                to use specific hand with "left"|"right"
         *                option; grasp type such as "above", "side").
-        * @return true in case of successfull motor command, false
+        * @return true in case of successful motor command, false
         *         otherwise (Entity non existing, impossible to reach,
         *         not grasped, etc.).
         */
