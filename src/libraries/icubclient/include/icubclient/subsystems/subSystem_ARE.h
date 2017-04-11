@@ -31,7 +31,7 @@
 
 namespace icubclient {
     /**
-    * \ingroup icubclient_clients
+    * \ingroup icubclient_subsystems
     *
     * SubSystem to deal with the <b>actionsRenderingEngine</b> module (a.k.a. <b>ARE</b>) for motor control.
     *

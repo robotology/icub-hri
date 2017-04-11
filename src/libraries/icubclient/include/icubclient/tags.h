@@ -16,16 +16,6 @@
  * Public License for more details
  */
 
-/**
- * @defgroup icubclient Helper Routines
- *
- * @ingroup icubclient_libraries
- *
- * A container library containing defines and structures to formalize
- * knowledge within an objectPropertiesCollector module.
- *
- * @author Ugo Pattacini & Stéphane Lallée
- */
 #ifndef __ICUBCLIENT_TAGS_H__
 #define __ICUBCLIENT_TAGS_H__
 

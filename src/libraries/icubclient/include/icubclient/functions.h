@@ -1,11 +1,40 @@
+/*
+ * Copyright (C) 2014 WYSIWYD Consortium, European Commission FP7 Project ICT-612139
+ * Authors: Ugo Pattacini, Stéphane Lallée
+ * email:   ugo.pattacini@iit.it stephane.lallee@gmail.com
+ * website: https://github.com/robotology/icub-client/
+ * Permission is granted to copy, distribute, and/or modify this program
+ * under the terms of the GNU General Public License, version 2 or any
+ * later version published by the Free Software Foundation.
+ *
+ * A copy of the license can be found at
+ * icub-client/license/gpl.txt
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+ * Public License for more details
+ */
+
 #include <yarp/os/Bottle.h>
 #include <string>
 #include <vector>
 #include "icubclient/tags.h"
 
+/**
+ * @defgroup icubclient_helpers Helper Routines
+ *
+ * @ingroup icubclient_libraries
+ *
+ * A container library containing defines and structures to formalize
+ * knowledge within an objectPropertiesCollector module.
+ *
+ * @author Ugo Pattacini & Stéphane Lallée
+ */
+
 namespace icubclient{
 /**
- * @ingroup icubclient
+ * @ingroup icubclient_helpers
  *
  * Allow retrieving the list of unique identifiers of those items
  * verifying the set of conditions queried to the database
@@ -18,7 +47,7 @@ namespace icubclient{
 yarp::os::Bottle opcGetIdsFromAsk(const yarp::os::Bottle &reply);
 
 /**
- * @ingroup icubclient
+ * @ingroup icubclient_helpers
  *
  * Simple search and replace function for strings;
  *
@@ -29,7 +58,7 @@ yarp::os::Bottle opcGetIdsFromAsk(const yarp::os::Bottle &reply);
 void replace_all(std::string & in, const std::string & plain, const std::string & tok);
 
 /**
- * @ingroup icubclient
+ * @ingroup icubclient_helpers
  *
  * Get the context path of a .grxml grammar, and return it as a string
  *

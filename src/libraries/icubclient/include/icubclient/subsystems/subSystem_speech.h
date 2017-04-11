@@ -32,7 +32,7 @@
 
 namespace icubclient{
 /**
-* \ingroup icubclient_clients
+* \ingroup icubclient_subsystems
 *
 * Abstract subSystem for speech management (Text to Speech)
 */
@@ -74,7 +74,7 @@ public:
 //--------------------------------------------------------------------------------------------
 
 /**
-* \ingroup icubclient_clients
+* \ingroup icubclient_subsystems
 *
 * SubSystem for speech synthesis with emotional tuning of speed and pitch using eSpeak
 */

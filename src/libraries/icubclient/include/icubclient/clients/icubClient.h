@@ -29,6 +29,14 @@
 #include "icubclient/clients/opcClient.h"
 #include "icubclient/subsystems/subSystem.h"
 
+/**
+* @defgroup icubclient_clients Clients
+* \ingroup icubclient_libraries
+*
+* Provide a compact way to access the iCub functionalities within the icub-client framework.
+*
+*/
+
 namespace icubclient{
     // forward declarations
     class SubSystem_ABM;
@@ -49,8 +57,6 @@ namespace icubclient{
 
     /**
     * \ingroup icubclient_clients
-    *
-    * Provide a compact way to access the iCub functionalities within the ICUBCLIENT framework.
     *
     * Grants access to high level motor commands (grasp, touch, look, goto, etc) of the robot as well as its internal state
     * (drives, emotions, beliefs) and its interaction means (speech).

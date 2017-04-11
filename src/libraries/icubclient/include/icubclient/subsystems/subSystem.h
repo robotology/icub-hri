@@ -25,11 +25,19 @@
 #include <iterator>
 #include <algorithm>
 
+/**
+* @defgroup icubclient_subsystems Subsystems
+* \ingroup icubclient_libraries
+*
+* Abstract class to handle sub-systems of the icub-client (speech, action, etc...)
+* and the relevant subclasses
+*/
+
 namespace icubclient{
     /**
-    * \ingroup icubclient_clients
+    * \ingroup icubclient_subsystems
     *
-    * Abstract class to handle sub-systems of the icub-client (speech, action, etc...)
+    * Abstract class to handle sub-systems of the icub-client
     */
     class SubSystem
     {

@@ -22,7 +22,7 @@ in the src directory of the repository. You can produce this documentation on
 your computer by running:
 
 \verbatim
-  doxygen doxygen/generate.txt
+  ./doc-compile.sh
 \endverbatim
 
 locally on your repository, to figure out what's going on.

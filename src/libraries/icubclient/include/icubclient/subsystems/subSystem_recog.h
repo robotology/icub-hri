@@ -27,7 +27,7 @@
 
 namespace icubclient{
 /**
-* \ingroup icubclient_clients
+* \ingroup icubclient_subsystems
 *
 * Abstract subSystem for speech recognizer
 */

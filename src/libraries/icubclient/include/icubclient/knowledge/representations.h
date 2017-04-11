@@ -19,7 +19,7 @@
 /**
  * @defgroup icubclient_representations World Representation
  *  
- * @ingroup icubclient
+ * @ingroup icubclient_libraries
  *  
  * Contains classes to represent entities and relations between them.
  * Those classes are meant to be accessed through the opcClient.

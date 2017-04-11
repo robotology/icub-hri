@@ -36,7 +36,7 @@
 * @ingroup icubclient_software_all
 *
 *
-* This is the list of iCub-Client libraries in the main/src/libraires directory.
+* This is the list of iCub-Client libraries in the main/src/libraries directory.
 * To add your own library to this list,
 * just add a comment like the following anywhere in your source
 * code (replacing "your_library_name" with the name of your module):
