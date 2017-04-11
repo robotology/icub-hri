@@ -28,9 +28,9 @@ bool ears::configure(yarp::os::ResourceFinder &rf)
     MainGrammar = rf.findFileByName(rf.check("MainGrammar", Value("MainGrammar.xml")).toString());
     bShouldListen = true;
 
-    if (!onPlannerMode) {
-        portToBehavior.open("/" + moduleName + "/behavior:o");
-    }
+
+    portToBehavior.open("/" + moduleName + "/behavior:o");
+
 
     rpc.open(("/" + moduleName + "/rpc").c_str());
     attach(rpc);
@@ -203,22 +203,22 @@ bool ears::updateModule() {
             sAction = bSemantic.check("predicateObject", Value("none")).asString();
             if (sAction == "please take")
                 {
-                    sAction = "take";
+                    sAction = "back";
                     sCommand = "moveObject";
                 }
             else if (sAction == "give me")
                 {
-                    sAction = "give";
+                    sAction = "front";
                     sCommand = "moveObject";
                 }
-            else if (sAction == "point to")
+            else if (sAction == "point")
                 {
                     sAction = "pointing";
                     sCommand = "pointing";
                 }
             sObjectType = "object";
             sObject = bSemantic.check("object", Value("none")).asString();
-            sCommand = "followingOrder";
+            //sCommand = "followingOrder";
         } else if(sQuestionKind == "SENTENCEBODYPART") {
             sAction = bSemantic.check("predicateBodypart", Value("none")).asString();
             sObject = bSemantic.check("bodypart", Value("none")).asString();
@@ -291,11 +291,12 @@ bool ears::updateModule() {
 
             //freeze
 
-            Bottle bAction;
+            Bottle bAction,bArgs;
             bAction.addString("tagging");
-            bAction.addString(sObject);
-            bAction.addString(sAction);
-            bAction.addString(sObjectType);
+            bArgs.addString(sObject);
+            bArgs.addString(sAction);
+            bArgs.addString(sObjectType);
+            bAction.addList()=bArgs;
             portToBehavior.write(bAction);
             yDebug() << "Sending " + bAction.toString();
 
@@ -303,9 +304,10 @@ bool ears::updateModule() {
 
             bAction.clear();
             bAction.addString(sCommand);
-            bAction.addString(sObject);
-            bAction.addString(sAction);
-            bAction.addString(sObjectType);
+            bArgs.addString(sObject);
+            bArgs.addString(sAction);
+            bArgs.addString(sObjectType);
+            bAction.addList()=bArgs;
             portToBehavior.write(bAction);
             yDebug() << "Sending " + bAction.toString();
 
