@@ -5,11 +5,13 @@
 #Add here modules without specific dependency
 add_subdirectory(attentionRelated)
 add_subdirectory(babbling)
+add_subdirectory(ears)
+add_subdirectory(pasar)
+add_subdirectory(proactiveTagging)
 add_subdirectory(planner)
 add_subdirectory(reactiveLayer)
 add_subdirectory(samRelated)
 add_subdirectory(tools)
-add_subdirectory(touchDetector)
 
 #Add modules with dependencies here
 if(ICUBCLIENT_USE_OpenCV)

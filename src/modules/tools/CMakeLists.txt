@@ -9,4 +9,5 @@ endif()
 add_subdirectory(guiUpdater)
 add_subdirectory(opcPopulater)
 add_subdirectory(actionRecogDataDumper)
+add_subdirectory(touchDetector)
 

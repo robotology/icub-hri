@@ -9,7 +9,7 @@ else()
 endif()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-project(ICUBCLIENT
+project(icubclient
         LANGUAGES CXX
         VERSION 0.0.0.1)
 
