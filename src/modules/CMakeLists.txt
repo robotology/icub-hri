@@ -4,10 +4,13 @@
 
 #Add here modules without specific dependency
 add_subdirectory(babbling)
+<<<<<<< HEAD
 add_subdirectory(ears)
 add_subdirectory(pasar)
 add_subdirectory(proactiveTagging)
 add_subdirectory(planner)
+=======
+>>>>>>> [planner] removed
 add_subdirectory(reactiveLayer)
 add_subdirectory(SAM)
 add_subdirectory(tools)
