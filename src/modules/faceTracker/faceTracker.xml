@@ -3,7 +3,7 @@
 
 <module>
 
-  <name>icubclient_faceTracker_source</name>
+  <name>icubclient_faceTracker</name>
   <doxygen-group>icubclient_modules</doxygen-group>
   <description>Face tracking module for iCub head and gaze using OpenCV functions</description>
   <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
