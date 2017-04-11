@@ -71,7 +71,12 @@ build_script:
 notifications:
   - provider: Email
     to:
-      - wysiwyd-technical@googlegroups.com
+      - ugo.pattacini@iit.it
+      - jordiysard@gmail.com
+      - t.fischer@imperial.ac.uk
+      - clement.moulinfrier@gmail.com
+      - dcamilleri1@sheffield.ac.uk
+      - Phuong.Nguyen@iit.it
     on_build_success: false
     on_build_failure: false
     on_build_status_changed: true
