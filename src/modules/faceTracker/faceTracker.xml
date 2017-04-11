@@ -3,8 +3,8 @@
 
 <module>
 
-  <name>faceTracker</name>
-  <doxygen-group>icubclient_faceTracker</doxygen-group>
+  <name>icubclient_faceTracker_source</name>
+  <doxygen-group>icubclient_modules</doxygen-group>
   <description>Face tracking module for iCub head and gaze using OpenCV functions</description>
   <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
   <version>1.0</version>
@@ -12,7 +12,7 @@
   <description-long>
 	Using the face detection functions of OpenCV, the iCub is detecting faces every frame. Then, it tries to located the biggest face in the middle of the view by moving head and eye simultaneously.
 	- Image sequences from left eye are used for tracking (not both eyes).
-	- There are five modes for the tracking internally: 'set position mode', 'panning mode', 'face tracking mode, 'smooth stopping mode' and 'face searching mode'.
+	- There are five modes for the tracking internally: 'set position mode', 'face tracking mode, and 'face searching mode'.
   </description-long>
 
   <authors>

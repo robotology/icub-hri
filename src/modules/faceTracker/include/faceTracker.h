@@ -22,20 +22,9 @@
 #define _FACETRACKER_MODULE_H_
 
 /**
-* \defgroup icubclient_faceTracker Facetracker
+* \defgroup icubclient_faceTracker_source faceTracker
+* @{
 * @ingroup icubclient_modules
-*
-*
-* Allow to control the gaze using objects names. Provide a random autonomous switch of attention between the present objects.
-* Face tracking module for iCub head and gaze using OpenCV functions
-* Using the face detection functions of OpenCV, the iCub is detecting faces every frame. Then, it tries to located the biggest face in the middle of the view by moving head and eye simultaneously.
-    - Image sequences from left eye are used for tracking (not both eyes).
-    - There are five modes for the tracking internally: 'set position mode', 'panning mode', 'face tracking mode, 'smooth stopping mode' and 'face searching mode'.
-*
-* \author Hyung Jin Chang
-*
-* Copyright (C) 2014 WYSIWYD Consortium\n
-* CopyPolicy: Released under the terms of the GNU GPL v2.0.\n
 *
 */
 
@@ -50,6 +39,9 @@
 #include <yarp/sig/all.h>
 #include <yarp/dev/all.h>
 
+/**
+ * @brief The faceTrackerModule class
+ */
 class faceTrackerModule : public yarp::os::RFModule {
     yarp::os::RpcServer handlerPort; //!< Response port
     yarp::os::BufferedPort<yarp::sig::ImageOf<yarp::sig::PixelRgb> > imagePortLeft; //!< A port for reading left images
@@ -112,5 +104,6 @@ public:
     bool updateModule(); //!< get an image from the robot's camera and decide which mode should be chosen next
 };
 
+/** @} */
 
 #endif // __FACETRACKER_MODULE_H__

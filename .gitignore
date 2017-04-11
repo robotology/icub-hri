@@ -7,3 +7,4 @@
 CMakeLists.txt.user
 src/modules/samRelated/SAM/.idea/
 doxygen/doc
+doxygen/generated-from-xml
