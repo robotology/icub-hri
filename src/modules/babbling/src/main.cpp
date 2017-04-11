@@ -13,13 +13,6 @@
 * Public License for more details
 */
 
-/** 
-
-\section intro_sec Description 
-
-
-*/
-
 #include <yarp/os/all.h>
 #include "babbling.h"
 

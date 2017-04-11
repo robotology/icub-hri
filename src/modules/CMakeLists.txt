@@ -9,7 +9,7 @@ add_subdirectory(pasar)
 add_subdirectory(proactiveTagging)
 add_subdirectory(planner)
 add_subdirectory(reactiveLayer)
-add_subdirectory(samRelated)
+add_subdirectory(SAM)
 add_subdirectory(tools)
 
 #Add modules with dependencies here
