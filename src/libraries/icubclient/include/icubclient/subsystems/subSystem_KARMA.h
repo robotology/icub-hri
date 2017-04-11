@@ -125,15 +125,13 @@ public:
      * @param theta: angle to define pushing left (0) or right (180)
      * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
      * @param options to be passed to KARMA
-     * @param sName: name of object to push
      * @return true in case of success release, false otherwise
      */
     bool pushAside(const std::string &objName,
                    const yarp::sig::Vector &objCenter, const double &targetPosY,
                    const double &theta,
                    const std::string &armType = "selectable",
-                   const yarp::os::Bottle &options = yarp::os::Bottle(),
-                   const std::string &sName = "target");
+                   const yarp::os::Bottle &options = yarp::os::Bottle());
 
     /**
      * @brief pushFront (KARMA): push an object to a certain location along x-axis of robot RoF
@@ -142,42 +140,37 @@ public:
      * @param targetPosXFront: x coordinate of location to push object to
      * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
      * @param options to be passed to KARMA
-     * @param sName: name of object to push
      * @return true in case of success release, false otherwise
      */
     bool pushFront(const std::string &objName,
                    const yarp::sig::Vector &objCenter, const double &targetPosXFront,
                    const std::string &armType = "selectable",
-                   const yarp::os::Bottle &options = yarp::os::Bottle(),
-                   const std::string &sName = "target");
+                   const yarp::os::Bottle &options = yarp::os::Bottle());
 
     /**
-     * @brief push (KARMA): push to certain position, along a direction
+     * @brief push (KARMA): push to certain position, along a defined direction
      * @param targetCenter: position to push to.
      * @param theta: angle between the y-axis (in robot FoR) and starting position of push action, defines the direction of push action
      * @param radius: radius of the circle with center at @see targetCenter
      * @param options to be passed to KARMA
-     * @param sName: name of object to push
      * @return true in case of success release, false otherwise
      */
     bool push(const yarp::sig::Vector &targetCenter, const double theta, const double radius,
-              const yarp::os::Bottle &options = yarp::os::Bottle(),
-              const std::string &sName="target");
+              const yarp::os::Bottle &options = yarp::os::Bottle());
 
     /**
      * @brief pullBack (KARMA): pull an object to a certain location along x-axis of robot RoF
+     * @param objName: name of object to pull
      * @param objCenter: coordinate of object
      * @param targetPosXBack: x coordinate of location to pull object to
      * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
      * @param options to be passed to KARMA
-     * @param sName: name of object to pull
      * @return true in case of success release, false otherwise
      */
     bool pullBack(const std::string &objName,
                   const yarp::sig::Vector &objCenter, const double &targetPosXBack,
                   const std::string &armType = "selectable",
-                  const yarp::os::Bottle &options = yarp::os::Bottle(),
-                  const std::string &sName="target");
+                  const yarp::os::Bottle &options = yarp::os::Bottle());
     /**
      * @brief draw (KARMA): draw action, along the positive direction of the x-axis (in robot FoR)
      * @param targetCenter: center of a circle
@@ -185,16 +178,14 @@ public:
      * @param radius: radius of the circle with center at @see targetCenter
      * @param dist: moving distance of draw action
      * @param options to be passed to KARMA
-     * @param sName: name of object to push
      * @return true in case of success release, false otherwise
      */
     bool draw(const yarp::sig::Vector &targetCenter, const double theta,
               const double radius, const double dist,
-              const yarp::os::Bottle &options = yarp::os::Bottle(),
-              const std::string &sName="target");
+              const yarp::os::Bottle &options = yarp::os::Bottle());
 
     /**
-     * @brief vdraw (KARMA): draw action, along the positive direction of the x-axis (in robot FoR)
+     * @brief vdraw (KARMA): virtual draw action, along the positive direction of the x-axis (in robot FoR)
      * @param targetCenter: center of a circle
      * @param theta: angle between the y-axis (in robot FoR) and starting position of draw action.
      * @param radius: radius of the circle with center at @see targetCenter
@@ -205,9 +196,8 @@ public:
      */
     bool vdraw(const std::string &targetName,
                const yarp::sig::Vector &targetCenter, const double theta,
-              const double radius, const double dist,
-              const yarp::os::Bottle &options = yarp::os::Bottle(),
-              const std::string &sName="target");
+               const double radius, const double dist,
+               const yarp::os::Bottle &options = yarp::os::Bottle());
 
     bool openCartesianClient();
 

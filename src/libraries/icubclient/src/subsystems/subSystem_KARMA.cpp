@@ -263,10 +263,10 @@ void icubclient::SubSystem_KARMA::chooseArmAuto()
 }
 
 bool icubclient::SubSystem_KARMA::pushAside(const std::string &objName,
-                                                const yarp::sig::Vector &objCenter, const double &targetPosY,
-                                                const double &theta,
-                                                const std::string &armType,
-                                                const yarp::os::Bottle &options, const std::string &sName)
+                                            const yarp::sig::Vector &objCenter, const double &targetPosY,
+                                            const double &theta,
+                                            const std::string &armType,
+                                            const yarp::os::Bottle &options)
 {
     // Calculate the pushing distance (radius) for push with Karma
     Vector object = objCenter;
@@ -294,7 +294,7 @@ bool icubclient::SubSystem_KARMA::pushAside(const std::string &objName,
         armChoose = chooseArm(armType);
 
     // Call push (no calibration)
-    bool pushSucceed = push(targetCenter,theta,radius + actionOffset,options,sName);
+    bool pushSucceed = push(targetCenter,theta,radius + actionOffset,options);
 
     //if (pushSucceed)
     //    returnArmSafely(armType);
@@ -306,9 +306,9 @@ bool icubclient::SubSystem_KARMA::pushAside(const std::string &objName,
 }
 
 bool icubclient::SubSystem_KARMA::pushFront(const std::string &objName,
-                                                const yarp::sig::Vector &objCenter, const double &targetPosXFront,
-                                                const std::string &armType,
-                                                const yarp::os::Bottle &options, const std::string &sName)
+                                            const yarp::sig::Vector &objCenter, const double &targetPosXFront,
+                                            const std::string &armType,
+                                            const yarp::os::Bottle &options)
 {
     // Calculate the pushing distance (radius) for push with Karma
     Vector object = objCenter;
@@ -336,7 +336,7 @@ bool icubclient::SubSystem_KARMA::pushFront(const std::string &objName,
         armChoose = chooseArm(armType);
 
     // Call push (no calibration)
-    bool pushSucceed = push(targetCenter,-90,radius + actionOffset,options,sName);
+    bool pushSucceed = push(targetCenter,-90,radius + actionOffset,options);
 
     //if (pushSucceed)
     //    returnArmSafely(armType);
@@ -348,8 +348,8 @@ bool icubclient::SubSystem_KARMA::pushFront(const std::string &objName,
 }
 
 bool icubclient::SubSystem_KARMA::push(const yarp::sig::Vector &targetCenter,
-                                           const double theta, const double radius,
-                                           const yarp::os::Bottle &options, const std::string &sName)
+                                       const double theta, const double radius,
+                                       const yarp::os::Bottle &options)
 {
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("push"));
@@ -373,9 +373,9 @@ bool icubclient::SubSystem_KARMA::push(const yarp::sig::Vector &targetCenter,
 }
 
 bool icubclient::SubSystem_KARMA::pullBack(const std::string &objName,
-                                               const yarp::sig::Vector &objCenter, const double &targetPosXBack,
-                                               const std::string &armType,
-                                               const yarp::os::Bottle &options, const std::string &sName)
+                                           const yarp::sig::Vector &objCenter, const double &targetPosXBack,
+                                           const std::string &armType,
+                                           const yarp::os::Bottle &options)
 {
     // Calculate the pulling distance (dist) for pull with Karma
     Vector object = objCenter;
@@ -403,7 +403,7 @@ bool icubclient::SubSystem_KARMA::pullBack(const std::string &objName,
         armChoose = chooseArm(armType);
 
     // Call draw (no calibration)
-    bool drawSucceed = draw(targetCenter,90,actionOffset,dist + actionOffset,options,sName);
+    bool drawSucceed = draw(targetCenter,90,actionOffset,dist + actionOffset,options);
 
     //if (drawSucceed)
     //    returnArmSafely(armType);
@@ -415,9 +415,8 @@ bool icubclient::SubSystem_KARMA::pullBack(const std::string &objName,
 }
 
 bool icubclient::SubSystem_KARMA::draw(const yarp::sig::Vector &targetCenter,
-                                           const double theta, const double radius,
-                                           const double dist,
-                                           const yarp::os::Bottle &options, const std::string &sName)
+                                       const double theta, const double radius,
+                                       const double dist, const yarp::os::Bottle &options)
 {
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("draw"));
@@ -440,10 +439,10 @@ bool icubclient::SubSystem_KARMA::draw(const yarp::sig::Vector &targetCenter,
 }
 
 bool icubclient::SubSystem_KARMA::vdraw(const std::string &targetName,
-                                            const yarp::sig::Vector &targetCenter,
-                                            const double theta, const double radius,
-                                            const double dist,
-                                            const yarp::os::Bottle &options, const std::string &sName)
+                                        const yarp::sig::Vector &targetCenter,
+                                        const double theta, const double radius,
+                                        const double dist,
+                                        const yarp::os::Bottle &options)
 {
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("vdraw"));
