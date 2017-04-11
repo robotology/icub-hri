@@ -52,6 +52,9 @@ namespace Bridge {
 
 
 /**********************************************************/
+/**
+ * @brief The IOLObject class
+ */
 class IOLObject
 {
 protected:
@@ -86,12 +89,19 @@ public:
     }
 
     /**********************************************************/
+    /**
+     * @brief heartBeat current time value
+     */
     void heartBeat()
     {
         presenceTimer=Time::now();
     }
 
     /**********************************************************/
+    /**
+     * @brief isDead duration comparison procedure with presenceTmo
+     * @return True if presenceTmo is exceeded, False otherwise
+     */
     bool isDead()
     {
         bool dead=(Time::now()-presenceTimer>=presenceTmo);
@@ -101,6 +111,13 @@ public:
     }
 
     /**********************************************************/
+    /**
+     * @brief filt apply the median filter
+     * @param x Yarp Vector of current state of x
+     * @param xFilt Yarp Vector of filtered state of x
+     * @param d Yarp Vector of current state of d
+     * @param dFilt Yarp Vector of filtered state of d
+     */
     void filt(const Vector &x, Vector &xFilt,
               const Vector &d, Vector &dFilt)
     {
@@ -118,6 +135,9 @@ public:
     }
 
     /**********************************************************/
+    /**
+     * @brief prepare initialize the tracker
+     */
     void prepare()
     {
         if (trackerState==no_need)
@@ -125,6 +145,10 @@ public:
     }
 
     /**********************************************************/
+    /**
+     * @brief latchBBox assign tracker with bounding box value
+     * @param bbox CvRect object containing bouding box value, i.e x, y, width, height
+     */
     void latchBBox(const CvRect& bbox)
     {
         trackerResult.x=bbox.x;
@@ -135,6 +159,10 @@ public:
     }
 
     /**********************************************************/
+    /**
+     * @brief track procdure to start tracking an image
+     * @param img Image type object
+     */
     void track(const Image& img)
     {
         cv::Mat frame=cv::cvarrToMat((IplImage*)img.getIplImage());
@@ -166,6 +194,11 @@ public:
     }
 
     /**********************************************************/
+    /**
+     * @brief is_tracking procedure to check the tracking state
+     * @param bbox the tracked bouding box
+     * @return True if the trackerState is not idle, False otherwise
+     */
     bool is_tracking(CvRect& bbox) const
     {
         bbox=cvRect((int)trackerResult.x,(int)trackerResult.y,
@@ -176,6 +209,9 @@ public:
 
 
 /**********************************************************/
+/**
+ * @brief The IOL2OPCBridge class provides some methods to communicate between IOL and OPC
+ */
 class IOL2OPCBridge : public RFModule, public iol2opc_IDL
 {
 protected:
