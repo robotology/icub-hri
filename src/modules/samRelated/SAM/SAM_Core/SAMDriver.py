@@ -20,11 +20,10 @@ import numpy
 import os
 import logging
 
-
-# """"""""""""""""
-# Class developed for the implementation of the face recognition task in real-time mode.
-# """"""""""""""""
-## @ingroup icubclient_SAM_Core
+## \defgroup icubclient_SAM_Drivers SAM Drivers
+## @{
+## \ingroup icubclient_SAM_source
+## Class developed for the implementation of the face recognition task in real-time mode.
 class SAMDriver:
     # """"""""""""""""
     # Initilization of the SAM class
@@ -343,3 +342,5 @@ class SAMDriver:
     # """"""""""""""""
     def formatGeneratedData(self, instance):
         raise NotImplementedError("this needs to be implemented to use the model class")
+
+## @}

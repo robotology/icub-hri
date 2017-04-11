@@ -28,7 +28,9 @@ import operator
 import os
 
 
-## @ingroup icubclient_SAM_Core
+## @{
+## \defgroup icubclient_SAM_Core SAM Core
+## \ingroup icubclient_SAM_source
 class LFM(object):
     """
     SAM based on Latent Feature Models
@@ -842,3 +844,4 @@ def latent_cluster_centers(SAMObject, X=None, labels=None, center='gaussian', pl
         for i in range(K):
             util_plot_cov_ellipse(cntr[i, :], covars[i], ax=ax, which_indices=which_indices)
     return cntr, covars
+## @}

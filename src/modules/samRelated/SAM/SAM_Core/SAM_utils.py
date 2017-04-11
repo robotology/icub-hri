@@ -37,9 +37,9 @@ np.set_printoptions(precision=2)
 #     else:
 #         return __builtin__.print(*args, **kwargs)
 
+## \defgroup icubclient_SAM_utils SAM Utils
 ## @{
-## \ingroup icubclient_SAM_Core
-
+## \ingroup icubclient_SAM_source
 def initialiseModels(argv, update, initMode='training'):
     # argv[1] = dataPath
     # argv[2] = modelPath

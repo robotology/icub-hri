@@ -33,8 +33,9 @@ np.set_printoptions(threshold=np.nan, precision=2)
 
 
 # thisModel = None
+## \defgroup icubclient_SAM_Tests SAM Tests
 ## @{
-## \ingroup icubclient_SAM_Core
+## \ingroup icubclient_SAM_source
 
 def deep_getsizeof(o, ids):
     d = deep_getsizeof

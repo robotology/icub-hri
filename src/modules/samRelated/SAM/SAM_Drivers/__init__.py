@@ -2,8 +2,7 @@
 
 # from .SAMDriver_speech import *
 ## @{
-## \defgroup icubclient_SAM_Drivers SAM Drivers
-## \ingroup icubclient_SAM_source
+## \ingroup icubclient_SAM_Drivers
 from .SAMDriver_AR import *
 from .SAMDriver_ARWin import *
 from .SAMDriver_temporalActions import *
