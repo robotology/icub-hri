@@ -20,7 +20,7 @@ from SAM.SAM_Core import SAM_utils as utils
 import logging
 np.set_printoptions(threshold=numpy.nan)
 
-
+## @ingroup icubclient_SAM_Drivers
 class SAMDriver_ARWin(SAMDriver):
 
     def __init__(self):

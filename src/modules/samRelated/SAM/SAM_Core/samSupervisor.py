@@ -24,7 +24,7 @@ import copy
 # np.set_printoptions(precision=2)
 # from time import sleep
 
-
+## @ingroup icubclient_SAM_Core
 class SamSupervisorModule(yarp.RFModule):
 
     def __init__(self):

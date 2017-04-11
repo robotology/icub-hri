@@ -33,7 +33,8 @@ np.set_printoptions(threshold=np.nan, precision=2)
 
 
 # thisModel = None
-
+## @{
+## \ingroup icubclient_SAM_Core
 
 def deep_getsizeof(o, ids):
     d = deep_getsizeof
@@ -702,3 +703,5 @@ def combineClassifications(thisModel, labels, likelihoods):
     maxIdx = [j for j, k in enumerate(sumLikelihoods) if k == m][0]
 
     return [labelList[maxIdx], m / counts[maxIdx]]
+
+## @}

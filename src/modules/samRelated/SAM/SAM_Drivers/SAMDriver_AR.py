@@ -19,7 +19,7 @@ from SAM.SAM_Core import SAMDriver
 from SAM.SAM_Core import SAMTesting
 np.set_printoptions(threshold=numpy.nan)
 
-
+## @ingroup icubclient_SAM_Drivers
 class SAMDriver_AR(SAMDriver):
 
     def __init__(self):

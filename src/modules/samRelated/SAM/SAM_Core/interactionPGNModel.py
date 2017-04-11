@@ -19,7 +19,7 @@ yarp.Network()
 warnings.simplefilter("ignore")
 np.set_printoptions(precision=2)
 
-
+## @ingroup icubclient_SAM_Core
 class interactionPGNModel(yarp.RFModule):
 
     def __init__(self):

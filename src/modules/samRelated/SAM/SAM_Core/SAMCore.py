@@ -28,12 +28,11 @@ import operator
 import os
 
 
-"""
-SAM based on Latent Feature Models
-"""
-
-
+## @ingroup icubclient_SAM_Core
 class LFM(object):
+    """
+    SAM based on Latent Feature Models
+    """
     def __init__(self):
         self.type = []
         self.model = []

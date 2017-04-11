@@ -31,7 +31,7 @@ except:
     optNotFound = True
     pass
 
-
+## @ingroup icubclient_SAM_Core
 class modelOptClass(object):
     def __init__(self, fName, dataDir, modelDir, driverName, mode, baseName, persistence, windowed, verbose):
         # check package is present

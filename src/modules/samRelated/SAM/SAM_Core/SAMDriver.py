@@ -24,7 +24,7 @@ import logging
 # """"""""""""""""
 # Class developed for the implementation of the face recognition task in real-time mode.
 # """"""""""""""""
-
+## @ingroup icubclient_SAM_Core
 class SAMDriver:
     # """"""""""""""""
     # Initilization of the SAM class

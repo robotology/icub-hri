@@ -37,6 +37,8 @@ np.set_printoptions(precision=2)
 #     else:
 #         return __builtin__.print(*args, **kwargs)
 
+## @{
+## \ingroup icubclient_SAM_Core
 
 def initialiseModels(argv, update, initMode='training'):
     # argv[1] = dataPath
@@ -955,3 +957,5 @@ class ipyClusterManager:
                 pass
             time.sleep(0.2)
         self.actualProcessors = 0
+
+## @}

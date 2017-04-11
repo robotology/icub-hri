@@ -54,7 +54,7 @@ from SAM.SAM_Core import SAMDriver
 #""""""""""""""""
 #Class developed for the implementation of the face recognition task in real-time mode.
 #""""""""""""""""
-
+## @ingroup icubclient_SAM_Drivers
 class SAMDriver_speech(SAMDriver):
 
 #""""""""""""""""

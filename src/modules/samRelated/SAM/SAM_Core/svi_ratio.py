@@ -16,6 +16,7 @@ try:
 except:
     pass
 
+## @ingroup icubclient_SAM_Core
 class SVI_Ratio(LatentFunctionInference):
     """
     Inference the marginal likelihood through \frac{p(y,y*)}{p(y)}
