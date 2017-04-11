@@ -23,7 +23,7 @@
 
 namespace icubclient{
 /**
-* \ingroup wrdac_representations
+* \ingroup icubclient_representations
 *
 * Represents a body part of the robot
 */

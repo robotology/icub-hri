@@ -27,7 +27,7 @@
 
 namespace icubclient{
     /**
-    * \ingroup wrdac_clients
+    * \ingroup icubclient_clients
     *
     * Abstract class to handle sub-systems of the icub-client (speech, action, etc...)
     */

@@ -26,7 +26,7 @@
 namespace icubclient{
 
     /**
-    * \ingroup wrdac_representations
+    * \ingroup icubclient_representations
     *
     * Represents an action, whether composite or not. Stores as well the expected impact on the drives.
     */

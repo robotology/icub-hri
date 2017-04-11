@@ -35,7 +35,7 @@ namespace icubclient{
 class Relation;
 
 /**
-* \ingroup wrdac_representations
+* \ingroup icubclient_representations
 *
 * Represent any entity that can be stored within the OPC.
 * All representations derive from entities.

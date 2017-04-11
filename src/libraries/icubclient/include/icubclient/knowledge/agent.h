@@ -25,7 +25,7 @@
 namespace icubclient{
 
 /**
-* \ingroup wrdac_representations
+* \ingroup icubclient_representations
 *
 * Represent a the body of an agent. Joints are stored as a dictionnary of string, position
 *
@@ -84,7 +84,7 @@ struct Body
 };
 
 /**
-* \ingroup wrdac_representations
+* \ingroup icubclient_representations
 *
 * Represent an agent.
 * An agent is a Object which possesses emotions and beliefs.

@@ -17,7 +17,7 @@
 
 #include <yarp/os/all.h>
 #include <yarp/sig/all.h>
-#include <wrdac/clients/icubClient.h>
+#include "icubclient/clients/icubClient.h"
 
 using namespace yarp::os;
 using namespace yarp::sig;

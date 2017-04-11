@@ -25,7 +25,7 @@
 namespace icubclient{
 
 /**
-* \ingroup wrdac_clients
+* \ingroup icubclient_clients
 *
 * An OPC client using the datastructures defined within the icub-client library.
 * Using this ensures you that your manipulation of the OPC will be done with correct formatting.

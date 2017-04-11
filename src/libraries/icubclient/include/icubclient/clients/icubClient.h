@@ -48,7 +48,7 @@ namespace icubclient{
     class SubSystem_KARMA;
 
     /**
-    * \ingroup wrdac_clients
+    * \ingroup icubclient_clients
     *
     * Provide a compact way to access the iCub functionalities within the ICUBCLIENT framework.
     *

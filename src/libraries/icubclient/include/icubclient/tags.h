@@ -17,7 +17,7 @@
  */
 
 /**
- * @defgroup wrdac Helper Routines
+ * @defgroup icubclient Helper Routines
  *
  * @ingroup icubclient_libraries
  *

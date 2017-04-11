@@ -17,9 +17,9 @@
  */
 
 /**
- * @defgroup wrdac_representations World Representation
+ * @defgroup icubclient_representations World Representation
  *  
- * @ingroup wrdac
+ * @ingroup icubclient
  *  
  * Contains classes to represent entities and relations between them.
  * Those classes are meant to be accessed through the opcClient.

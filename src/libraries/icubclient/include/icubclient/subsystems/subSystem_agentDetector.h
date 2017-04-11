@@ -26,7 +26,7 @@
 
 namespace icubclient{
 /**
-* \ingroup wrdac_clients
+* \ingroup icubclient_clients
 *
 * SubSystem for agentDetector
 */

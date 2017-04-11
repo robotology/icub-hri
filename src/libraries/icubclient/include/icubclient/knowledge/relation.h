@@ -24,7 +24,7 @@
 namespace icubclient{
     
     /**
-    * \ingroup wrdac_representations
+    * \ingroup icubclient_representations
     *
     * Represent a relation between two entities.
     */

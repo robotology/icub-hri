@@ -32,7 +32,7 @@
 
 namespace icubclient {
 /**
-* \ingroup wrdac_clients
+* \ingroup icubclient_clients
 *
 * SubSystem to deal with the <b>experimental affordance learning</b>
 * module (a.k.a. <b>KARMA</b>) for motor control.

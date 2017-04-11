@@ -32,7 +32,7 @@
 
 namespace icubclient{
 /**
-* \ingroup wrdac_clients
+* \ingroup icubclient_clients
 *
 * Abstract subSystem for speech management (Text to Speech)
 */
@@ -74,7 +74,7 @@ public:
 //--------------------------------------------------------------------------------------------
 
 /**
-* \ingroup wrdac_clients
+* \ingroup icubclient_clients
 *
 * SubSystem for speech synthesis with emotional tuning of speed and pitch using eSpeak
 */

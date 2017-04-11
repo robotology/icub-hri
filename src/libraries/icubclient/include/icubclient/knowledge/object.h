@@ -26,7 +26,7 @@ namespace icubclient{
 enum class ObjectArea : int {HUMAN = 1, ROBOT = 2, SHARED = 3, NOTREACHABLE = 4};
 
 /**
-* \ingroup wrdac_representations
+* \ingroup icubclient_representations
 *
 * Represent any physical entity (including objects and agents) that can be stored within the OPC.
 */

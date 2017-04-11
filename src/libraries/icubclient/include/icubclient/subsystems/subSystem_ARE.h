@@ -31,7 +31,7 @@
 
 namespace icubclient {
     /**
-    * \ingroup wrdac_clients
+    * \ingroup icubclient_clients
     *
     * SubSystem to deal with the <b>actionsRenderingEngine</b> module (a.k.a. <b>ARE</b>) for motor control.
     *

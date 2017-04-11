@@ -5,7 +5,7 @@
 
 namespace icubclient{
 /**
- * @ingroup wrdac
+ * @ingroup icubclient
  *
  * Allow retrieving the list of unique identifiers of those items
  * verifying the set of conditions queried to the database
@@ -18,7 +18,7 @@ namespace icubclient{
 yarp::os::Bottle opcGetIdsFromAsk(const yarp::os::Bottle &reply);
 
 /**
- * @ingroup wrdac
+ * @ingroup icubclient
  *
  * Simple search and replace function for strings;
  *
@@ -29,7 +29,7 @@ yarp::os::Bottle opcGetIdsFromAsk(const yarp::os::Bottle &reply);
 void replace_all(std::string & in, const std::string & plain, const std::string & tok);
 
 /**
- * @ingroup wrdac
+ * @ingroup icubclient
  *
  * Get the context path of a .grxml grammar, and return it as a string
  *
