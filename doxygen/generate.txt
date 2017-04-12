@@ -97,7 +97,7 @@ BRIEF_MEMBER_DESC      = YES
 # brief descriptions will be completely suppressed.
 # The default value is: YES.
 
-REPEAT_BRIEF           = YES
+REPEAT_BRIEF           = NO
 
 # This tag implements a quasi-intelligent brief description abbreviator that is
 # used to form the text in various listings. Each string in this list, if found
@@ -350,7 +350,7 @@ SUBGROUPING            = YES
 # SEPARATE_MEMBER_PAGES.
 # The default value is: NO.
 
-INLINE_GROUPED_CLASSES = NO
+INLINE_GROUPED_CLASSES = YES
 
 # When the INLINE_SIMPLE_STRUCTS tag is set to YES, structs, classes, and unions
 # with only public data fields or simple typedef fields will be shown inline in
@@ -360,7 +360,7 @@ INLINE_GROUPED_CLASSES = NO
 # Man pages) or section (for LaTeX and RTF).
 # The default value is: NO.
 
-INLINE_SIMPLE_STRUCTS  = NO
+INLINE_SIMPLE_STRUCTS  = YES
 
 # When TYPEDEF_HIDES_STRUCT tag is enabled, a typedef of a struct, union, or
 # enum is documented as struct, union, or enum with the name of the typedef. So

@@ -25,7 +25,6 @@
    </authors>
 
    <data>
-   <data>
      <input>
          <type>Bottle</type>
          <port carrier="tcp">/guiUpdater/rpc</port>
