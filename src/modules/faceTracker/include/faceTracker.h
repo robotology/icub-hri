@@ -21,13 +21,6 @@
 #ifndef _FACETRACKER_MODULE_H_
 #define _FACETRACKER_MODULE_H_
 
-/**
-* \defgroup faceTracker faceTracker
-* @{
-* @ingroup icubclient_modules
-*
-*/
-
 #include <cstdio>
 #include <iostream>
 #include <ctime>
@@ -40,7 +33,7 @@
 #include <yarp/dev/all.h>
 
 /**
- * @brief The faceTrackerModule class
+ * @ingroup faceTracker
  */
 class faceTrackerModule : public yarp::os::RFModule {
     yarp::os::RpcServer handlerPort; //!< Response port
@@ -103,7 +96,5 @@ public:
     double getPeriod();
     bool updateModule(); //!< get an image from the robot's camera and decide which mode should be chosen next
 };
-
-/** @} */
 
 #endif // __FACETRACKER_MODULE_H__

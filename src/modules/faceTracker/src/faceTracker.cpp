@@ -42,7 +42,7 @@ bool faceTrackerModule::configure(yarp::os::ResourceFinder &rf) {
         return false;
     }
 
-    imagePortLeft.open("/facetracking/image/in");
+    imagePortLeft.open("/" + getName() + "/image/in");
 
     while(!Network::connect(imagePortName, imagePortLeft.getName()))
     {

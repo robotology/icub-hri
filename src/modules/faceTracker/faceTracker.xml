@@ -24,8 +24,18 @@
 
   <data>
     <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/faceTracker/rpc</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Response port. Supported commands:
+                        - help
+                        - quit
+        </description>
+    </input>
+    <input>
         <type>Image</type>
-        <port carrier="tcp">/facetracking/image/in</port>
+        <port carrier="tcp">/faceTracker/image/in</port>
         <required>yes</required>
         <priority>no</priority>
         <description>Feed images to facetracking using this port.</description>
