@@ -64,8 +64,8 @@ bool Babbling::configure(yarp::os::ResourceFinder &rf) {
 
     Bottle &babbl_par = rf.findGroup("babbling_param");
     freq = babbl_par.check("freq", Value(0.2)).asDouble();
-    amp = babbl_par.check("amp", Value(5)).asDouble();
-    duration = babbl_par.check("train_duration", Value(20.0)).asDouble();
+    amp = babbl_par.check("amp", Value(5.0)).asDouble();
+    duration = babbl_par.check("duration", Value(20.0)).asDouble();
 
     setName(moduleName.c_str());
 
@@ -115,6 +115,8 @@ bool Babbling::respond(const Bottle &command, Bottle &reply) {
     string helpMessage = string(getName().c_str()) + " commands are: \n " +
             "babbling arm <left/right>: motor commands sent to all "
             "the arm joints \n " +
+            "babbling hand <left/right>: motor commands sent to all "
+            "the hand joints \n " +
             "babbling joint <int joint_number> <left/right>: motor "
             "commands sent to joint_number only \n " +
             "help \n " + "quit \n";
@@ -137,7 +139,7 @@ bool Babbling::respond(const Bottle &command, Bottle &reply) {
                 yInfo() << "Babbling " + command.get(2).asString() + " arm...";
 
                 if (command.size() >= 4) {
-                    yInfo() << "Custom train_duration = " << command.get(3).asDouble();
+                    yInfo() << "Custom duration = " << command.get(3).asDouble();
                     if (command.get(3).asDouble() >= 0.0) {
                         double newDuration = command.get(3).asDouble();
                         double oldDuration = duration;
@@ -169,7 +171,7 @@ bool Babbling::respond(const Bottle &command, Bottle &reply) {
                     part = command.get(3).asString() + "_arm";
                     yInfo() << "Babbling joint " << single_joint << " of " << part;
 
-                    // change train_duration if specified
+                    // change duration if specified
                     if (command.size() >= 5) {
                         yInfo() << "Custom duration = " << command.get(4).asDouble();
                         if (command.get(4).asDouble() >= 0.0) {
@@ -215,7 +217,7 @@ bool Babbling::respond(const Bottle &command, Bottle &reply) {
                 reply.addString("ack");
                 return true;
             } else {
-                yError("Invalid babbling part: specify LEFT or RIGHT after 'arm'.");
+                yError("Invalid babbling part: specify LEFT or RIGHT after 'hand'.");
                 reply.addString("nack");
                 return false;
             }

@@ -1,21 +1,28 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="yarpmanifest.xsl"?>
  
 <module>
 
    <name>babbling</name>
    <doxygen-group>icubclient_modules</doxygen-group>
-   <description>Body Schema Learner</description>
+   <description>Motor babbling with the iCub</description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>
    
    <description-long>
-   A module to learn body schema for the iCub robot.
+     A module to issue pseudo random (sinusoids) commands to the iCub
+     (either several joints, or individual joints)
    </description-long>
 
    <arguments>
-   <param default="babbling" desc="To specify the module's name; all the open ports will be tagged with the prefix /name">name</param>
-   <param default="icub" desc="To specify the robot's name">robot</param>
+       <param default="babbling" desc="To specify the module's name; all the open ports will be tagged with the prefix /name">name</param>
+       <param default="icub" desc="To specify the robot's name">robot</param>
+       <param default="-1" desc="To specify whether a single joint should be used for babbling. If >=0, the indicated joint will be used. If -1, multiple joints will be used.">single_joint</param>
+       <param default="(-20, -20, 10)" desc="Where should the head be pointed during babbling">start_position::head</param>
+       <param default="(-45, -35, 0, 50, -45, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0)" desc="Start joint configuration for arm when doing the babbling">start_position::arm</param>
+       <param default="0.2" desc="Frequency used for sinusoids">babbling_param::freq</param>
+       <param default="5.0" desc="Amplitude used for sinusoids">babbling_param::amp</param>
+       <param default="20.0" desc="Time duration for babbling">babbling_param::duration</param>
    </arguments>
 
    <authors>
@@ -26,35 +33,22 @@
       <input>
           <type>yarp::sig::Bottle</type>
           <port carrier="tcp">/babbling/rpc</port>
-          <!-- required input means the execution of module depends on
-               this input data. Notice that not all the input are required
-               for a module to perform its task (e.g. control input, status
-               request input). -->
           <required>no</required>
-          <!-- priority forces the execution of module to be delayed
-               until the required data becomes available on the port -->
           <priority>no</priority>
           <description>
-              ...
+             Response port. Supported commands:
+              - help
+              - quit
+              - babbling arm left/right [duration]
+              - babbling hand left/right
+              - babbling joint #jointnumber left/right [duration]
           </description>
       </input>
    </data>
    
 
-   
-   
-   
    <services>
-       <server>
-           <port>/babbling/rpc</port>
-           <description>Command port</description>
-       </server>
    </services>
-
-
-
-
-
 
    
 </module>
