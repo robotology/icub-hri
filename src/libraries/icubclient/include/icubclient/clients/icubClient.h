@@ -481,7 +481,12 @@ namespace icubclient{
         /**
         * Destructor.
         */
-        virtual ~ICubClient() { close(); }
+        virtual ~ICubClient() {
+            close();
+            if(opc) {
+                delete opc;
+            }
+        }
     };
 }//Namespace
 #endif

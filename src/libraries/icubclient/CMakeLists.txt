@@ -19,6 +19,8 @@ set(${LIBRARY_TARGET_NAME}_SRC src/functions.cpp
                   src/subsystems/subSystem_speech.cpp
                   src/subsystems/subSystem_KARMA.cpp
                   src/clients/icubClient.cpp
+                  src/clients/icubClient_ARErelated.cpp
+                  src/clients/icubClient_KARMArelated.cpp
                   src/clients/opcClient.cpp)
 
 
