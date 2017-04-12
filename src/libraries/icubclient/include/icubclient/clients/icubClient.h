@@ -39,21 +39,13 @@
 
 namespace icubclient{
     // forward declarations
-    class SubSystem_ABM;
     class SubSystem_agentDetector;
     class SubSystem_ARE;
-    class SubSystem_Attention;
     class SubSystem_babbling;
-    class SubSystem_Expression;
-    class SubSystem_iKart;
     class SubSystem_IOL2OPC;
-    class SubSystem_Postures;
-    class SubSystem_Reactable;
-    class SubSystem_Speech;
-    class SubSystem_Recog;
-    class SubSystem_LRH;
-    class SubSystem_SlidingController;
     class SubSystem_KARMA;
+    class SubSystem_Recog;
+    class SubSystem_Speech;
 
     /**
     * \ingroup icubclient_clients
@@ -75,11 +67,13 @@ namespace icubclient{
         std::string robot;  // Name of robot
 
     public:
-        SubSystem_IOL2OPC* getIOL2OPCClient();
-        SubSystem_Recog* getRecogClient();
+        SubSystem_agentDetector* getAgentDetectorClient();
         SubSystem_ARE* getARE();
-        SubSystem_Speech* getSpeechClient();
+        SubSystem_babbling* getBabblingClient();
+        SubSystem_IOL2OPC* getIOL2OPCClient();
         SubSystem_KARMA* getKARMA();
+        SubSystem_Recog* getRecogClient();
+        SubSystem_Speech* getSpeechClient();
 
         OPCClient*                  opc;
         Agent*                      icubAgent;

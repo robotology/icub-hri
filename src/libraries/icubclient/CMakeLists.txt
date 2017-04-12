@@ -22,7 +22,8 @@ set(${LIBRARY_TARGET_NAME}_SRC src/functions.cpp
                   src/clients/opcClient.cpp)
 
 
-set(${LIBRARY_TARGET_NAME}_HDR include/${LIBRARY_TARGET_NAME}/functions.h
+set(${LIBRARY_TARGET_NAME}_HDR include/${LIBRARY_TARGET_NAME}/all.h
+                  include/${LIBRARY_TARGET_NAME}/functions.h
                   include/${LIBRARY_TARGET_NAME}/tags.h
                   include/${LIBRARY_TARGET_NAME}/knowledge/action.h
                   include/${LIBRARY_TARGET_NAME}/knowledge/agent.h

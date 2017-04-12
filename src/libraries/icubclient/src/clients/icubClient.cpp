@@ -865,6 +865,22 @@ bool ICubClient::isTargetInRange(const Vector &target) const
     return isIn;
 }
 
+SubSystem_agentDetector* ICubClient::getAgentDetectorClient()
+{
+    if (subSystems.find(SUBSYSTEM_AGENTDETECTOR) == subSystems.end())
+        return NULL;
+    else
+        return (SubSystem_agentDetector*)subSystems[SUBSYSTEM_AGENTDETECTOR];
+}
+
+SubSystem_babbling* ICubClient::getBabblingClient()
+{
+    if (subSystems.find(SUBSYSTEM_BABBLING) == subSystems.end())
+        return NULL;
+    else
+        return (SubSystem_babbling*)subSystems[SUBSYSTEM_BABBLING];
+}
+
 SubSystem_IOL2OPC* ICubClient::getIOL2OPCClient()
 {
     if (subSystems.find(SUBSYSTEM_IOL2OPC) == subSystems.end())

@@ -27,9 +27,9 @@
  * @author Ugo Pattacini & Stéphane Lallée
  */ 
 
+#include "action.h"
+#include "agent.h"
+#include "bodypart.h"
 #include "entity.h"
 #include "object.h"
-#include "bodypart.h"
-#include "agent.h"
 #include "relation.h"
-#include "action.h"
