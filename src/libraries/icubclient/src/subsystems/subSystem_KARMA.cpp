@@ -63,7 +63,7 @@ void icubclient::SubSystem_KARMA::selectHandCorrectTarget(yarp::os::Bottle &opti
 
         Bottle opt;
         opt.addString("fixate");
-        SubARE->look(target,opt,targetName);
+        SubARE->look(target,opt);
     }
 
 //    lastlyUsedHand=hand;

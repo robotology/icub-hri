@@ -53,7 +53,7 @@ void icubclient::SubSystem_ARE::selectHandCorrectTarget(yarp::os::Bottle &option
 
         yarp::os::Bottle opt;
         opt.addString("fixate");
-        look(target,opt,objName);
+        look(target,opt);
     }
 
     lastlyUsedHand=hand;

@@ -306,7 +306,7 @@ bool ICubClient::waving(const bool sw) {
 }
 
 
-bool ICubClient::pointfar(const Vector &target, const Bottle &options, const std::string &sName)
+bool ICubClient::pointfar(const Vector &target, const Bottle &options)
 {
     SubSystem_ARE *are = getARE();
     if (are == NULL)
@@ -335,7 +335,7 @@ bool ICubClient::point(const string &sName, const Bottle &options)
         SubSystem_ARE *are = getARE();
         Vector target = oTarget->m_ego_position;
         are->selectHandCorrectTarget(const_cast<Bottle&>(options), target, sName);
-        return pointfar(target, options, sName);
+        return pointfar(target, options);
     } else {
         yError() << "[iCubClient] pointfar: Could not cast Entity to Object";
         return false;
@@ -583,12 +583,11 @@ bool ICubClient::drawKarma(const yarp::sig::Vector &targetCenter, const double &
     return karma->draw(targetCenter, theta, radius, dist, options);
 }
 
-bool ICubClient::look(const yarp::sig::Vector &target, const yarp::os::Bottle &options,
-                      const std::string& sName)
+bool ICubClient::look(const yarp::sig::Vector &target, const yarp::os::Bottle &options)
 {
     if (SubSystem_ARE *are = getARE())
     {
-        return are->look(target, options, sName);
+        return are->look(target, options);
     }
 
     yError() << "Error, ARE not running...";
@@ -601,7 +600,7 @@ bool ICubClient::look(const std::string &target, const yarp::os::Bottle &options
     {
         if (Object *oTarget = dynamic_cast<Object*>(opc->getEntity(target, true)))
             if (oTarget->m_present == 1.0)
-                return are->look(oTarget->m_ego_position, options, oTarget->name());
+                return are->look(oTarget->m_ego_position, options);
 
         yWarning() << "[iCubClient] Called look() on an unavailable target: \"" << target << "\"";
         return false;
@@ -680,7 +679,7 @@ bool ICubClient::lookAtBodypart(const std::string &sBodypartName)
         Vector vLoc;
         vLoc = getPartnerBodypartLoc(sBodypartName);
         if (vLoc.size() == 3){
-            return are->look(vLoc, yarp::os::Bottle(), sBodypartName);
+            return are->look(vLoc, yarp::os::Bottle());
         }
 
         yWarning() << "[iCubClient] Called lookAtBodypart() on an unvalid/unpresent agent or bodypart (" << sBodypartName << ")";

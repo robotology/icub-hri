@@ -355,10 +355,8 @@ namespace icubclient{
         * @param target is a vector where the robot should look.
         * @param options contains options to be passed on the gaze
         *                controller.
-        * @param sName is the name of the object which the robot is looking at
         */
-        bool look(const yarp::sig::Vector &target, const yarp::os::Bottle &options = yarp::os::Bottle(),
-                  const std::string &sName="target");
+        bool look(const yarp::sig::Vector &target, const yarp::os::Bottle &options = yarp::os::Bottle());
 
         /**
         * Looks at the agent if present in the scene.
