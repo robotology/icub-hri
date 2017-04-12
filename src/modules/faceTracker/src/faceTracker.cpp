@@ -34,14 +34,17 @@ bool faceTrackerModule::configure(yarp::os::ResourceFinder &rf) {
 
     string xmlPath = rf.findFileByName("haarcascade_frontalface_default.xml");
 
+    string imagePortName = rf.check("imagePortName", Value("/icub/camcalib/left/out")).asString();
+
+
     if (!handlerPort.open("/" + getName() + "/rpc")) {
         yError() << getName() << ": Unable to open port " << handlerPort.getName();
         return false;
     }
 
-    imagePortLeft.open("/facetracking/image/left/in");  // give the left port a name
+    imagePortLeft.open("/facetracking/image/in");
 
-    while(!Network::connect("/icub/camcalib/left/out", "/facetracking/image/left/in"))
+    while(!Network::connect(imagePortName, imagePortLeft.getName()))
     {
         Time::delay(3);
         yDebug() << "try to connect left camera, please wait ...";
@@ -147,11 +150,6 @@ bool faceTrackerModule::close() {
 bool faceTrackerModule::respond(const Bottle& command, Bottle& reply) {
     string helpMessage =  string(getName().c_str()) +
         " commands are: \n" +
-        "track <string name> : track a face with the given opc name \n" +
-        "track <int id> : track the object with the given opc id \n" +
-        "track <double x> <double y> <double z> : track with the object coordinates\n" +
-        "auto : switch attention between present objects \n" +
-        "sleep : pauses the head control until next command" +
         "help \n" +
         "quit \n" ;
 

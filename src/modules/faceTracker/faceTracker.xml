@@ -3,20 +3,37 @@
 
 <module>
 
-  <name>icubclient_faceTracker_source</name>
+  <name>faceTracker</name>
   <doxygen-group>icubclient_modules</doxygen-group>
   <description>Face tracking module for iCub head and gaze using OpenCV functions</description>
   <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
   <version>1.0</version>
 
   <description-long>
-	Using the face detection functions of OpenCV, the iCub is detecting faces every frame. Then, it tries to located the biggest face in the middle of the view by moving head and eye simultaneously.
-	- Image sequences from left eye are used for tracking (not both eyes).
-	- There are five modes for the tracking internally: 'set position mode', 'face tracking mode, and 'face searching mode'.
+	Using the face detection functions of OpenCV, the iCub is detecting faces every frame. Then, it tries to follow the located face in the middle of the view by moving the head and eyes simultaneously. Only the images of the left eye are used for tracking (not both eyes). There are several modes which are internally used for the tracking: 'set position mode', 'face tracking mode, and 'face searching mode'.
   </description-long>
 
   <authors>
     <author email="hj.chang@imperial.ac.uk"> Hyung Jin Chang </author>
   </authors>
+
+  <arguments>
+    <param default="faceTracker" desc="name of the module"> name </param>
+    <param default="/icub/camcalib/left/out" desc="name of the port where the images are to be taken from"> imagePortName </param>
+  </arguments>
+
+  <data>
+    <input>
+        <type>Image</type>
+        <port carrier="tcp">/facetracking/image/in</port>
+        <required>yes</required>
+        <priority>no</priority>
+        <description>Feed images to facetracking using this port.</description>
+    </input>
+  </data>
+
+
+  <services>
+  </services>
 
 </module>
