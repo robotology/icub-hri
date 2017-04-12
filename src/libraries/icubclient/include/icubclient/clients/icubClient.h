@@ -67,6 +67,14 @@ namespace icubclient{
         std::string robot;  // Name of robot
 
     public:
+        template <class T>
+        T* getSubSystem(const std::string &subSystemName) {
+            if (subSystems.find(subSystemName) == subSystems.end())
+                return NULL;
+            else
+                return (T*)subSystems[subSystemName];
+        }
+
         SubSystem_agentDetector* getAgentDetectorClient();
         SubSystem_ARE* getARE();
         SubSystem_babbling* getBabblingClient();

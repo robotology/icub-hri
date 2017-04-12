@@ -828,10 +828,6 @@ list<Object*> ICubClient::getObjectsInSight()
 
 list<Object*> ICubClient::getObjectsInRange()
 {
-    //float sideReachability = 0.3f; //30cm on each side
-    //float frontCloseReachability = -0.1f; //from 10cm in front of the robot
-    //float frontFarReachability = -0.3f; //up to 30cm in front of the robot
-
     list<Object*> inRange;
     opc->checkout();
     list<Entity*> allEntities = opc->EntitiesCache();
@@ -851,77 +847,52 @@ list<Object*> ICubClient::getObjectsInRange()
 
 bool ICubClient::isTargetInRange(const Vector &target) const
 {
-    //cout<<"Target current root position is : "<<target.toString(3,3)<<endl;
-    //cout<<"Range is : \n"
-    //    <<"\t x in ["<<xRangeMin<<" ; "<<xRangeMax<<"]\n"
-    //    <<"\t y in ["<<yRangeMin<<" ; "<<yRangeMax<<"]\n"
-    //    <<"\t z in ["<<zRangeMin<<" ; "<<zRangeMax<<"]\n";
-
     bool isIn = ((target[0] > xRangeMin) && (target[0] < xRangeMax) &&
         (target[1] > yRangeMin) && (target[1]<yRangeMax) &&
         (target[2]>zRangeMin) && (target[2] < zRangeMax));
-    //cout<<"Target in range = "<<isIn<<endl;
 
     return isIn;
 }
 
+
 SubSystem_agentDetector* ICubClient::getAgentDetectorClient()
 {
-    if (subSystems.find(SUBSYSTEM_AGENTDETECTOR) == subSystems.end())
-        return NULL;
-    else
-        return (SubSystem_agentDetector*)subSystems[SUBSYSTEM_AGENTDETECTOR];
+    return getSubSystem<SubSystem_agentDetector>(SUBSYSTEM_AGENTDETECTOR);
 }
 
 SubSystem_babbling* ICubClient::getBabblingClient()
 {
-    if (subSystems.find(SUBSYSTEM_BABBLING) == subSystems.end())
-        return NULL;
-    else
-        return (SubSystem_babbling*)subSystems[SUBSYSTEM_BABBLING];
+    return getSubSystem<SubSystem_babbling>(SUBSYSTEM_BABBLING);
 }
 
 SubSystem_IOL2OPC* ICubClient::getIOL2OPCClient()
 {
-    if (subSystems.find(SUBSYSTEM_IOL2OPC) == subSystems.end())
-        return NULL;
-    else
-        return (SubSystem_IOL2OPC*)subSystems[SUBSYSTEM_IOL2OPC];
+    return getSubSystem<SubSystem_IOL2OPC>(SUBSYSTEM_IOL2OPC);
 }
 
 SubSystem_Recog* ICubClient::getRecogClient()
 {
-    if (subSystems.find(SUBSYSTEM_RECOG) == subSystems.end())
-        return NULL;
-    else
-        return (SubSystem_Recog*)subSystems[SUBSYSTEM_RECOG];
+    return getSubSystem<SubSystem_Recog>(SUBSYSTEM_RECOG);
 }
 
 SubSystem_ARE* ICubClient::getARE()
 {
-    if (subSystems.find(SUBSYSTEM_ARE) == subSystems.end())
-        return NULL;
-    else
-        return (SubSystem_ARE*)subSystems[SUBSYSTEM_ARE];
-}
-
-SubSystem_Speech* ICubClient::getSpeechClient()
-{
-    if (subSystems.find(SUBSYSTEM_SPEECH) == subSystems.end())
-    {
-        if (subSystems.find(SUBSYSTEM_SPEECH_ESPEAK) == subSystems.end())
-            return NULL;
-        else
-            return (SubSystem_Speech*)subSystems[SUBSYSTEM_SPEECH_ESPEAK];
-    }
-    else
-        return (SubSystem_Speech*)subSystems[SUBSYSTEM_SPEECH];
+    return getSubSystem<SubSystem_ARE>(SUBSYSTEM_ARE);
 }
 
 SubSystem_KARMA* ICubClient::getKARMA()
 {
-    if (subSystems.find(SUBSYSTEM_KARMA) == subSystems.end())
-        return NULL;
-    else
-        return (SubSystem_KARMA*)subSystems[SUBSYSTEM_KARMA];
+    return getSubSystem<SubSystem_KARMA>(SUBSYSTEM_KARMA);
+}
+
+SubSystem_Speech* ICubClient::getSpeechClient()
+{
+    // first, try to get SUBSYSTEM_SPEECH
+    // if it's not available, fall back to SUBSYSTEM_SPEECH_ESPEAK
+    SubSystem_Speech* s = getSubSystem<SubSystem_Speech>(SUBSYSTEM_SPEECH);
+    if(s==NULL) {
+        return getSubSystem<SubSystem_Speech>(SUBSYSTEM_SPEECH_ESPEAK);
+    } else {
+        return s;
+    }
 }
