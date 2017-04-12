@@ -5,20 +5,60 @@
 
    <name>proactiveTagging</name>
    <doxygen-group>icubclient_modules</doxygen-group>
-   <description>fill up empty relation in the OPC</description>
+   <description>Proactively tag (name) objects, self body parts and agents</description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>
-   
-   <description-long>
-		Module to interact with the OPC or the ABM to fill empty relation in the OPC under the H5W form. Then to be extended to more complex information filling.
-   </description-long>
-
-   <arguments>
-   </arguments>
 
    <authors>
+       <author email="t.fischer@imperial.ac.uk"> Tobias Fischer </author>
        <author email="greg.pointeau@gmail.com"> Grégoire Pointeau </author>
+       <author email="maxpetit@gmail.com"> Maxime Petit </author>
    </authors>
+   
+   <description-long>Module which proactively acquires the names of objects, body parts and other agents. It does so by looking at the other agent and asking for his/her name (via speech recognition), pointing to an object and asking the partner for the name, or moving its body part and asking for the name of the body part. It also finds correspondences between the tactile patches of the skin and the body part joint.</description-long>
+
+   <arguments>
+      <param default="proactiveTagging" desc="name of the module"> name </param>
+      <param default="GrammarAskNameObject.xml" desc="name of the grammar file to be loaded when tagging objects"> GrammarAskNameObject </param>
+      <param default="GrammarAskNameBodypart.xml" desc="name of the grammar file to be loaded when tagging bodyparts"> GrammarAskNameBodypart </param>
+      <param default="GrammarAskNameAgent.xml" desc="name of the grammar file to be loaded when tagging agents"> GrammarAskNameAgent </param>
+      <param default="left" desc="Which arm to use when tagging body parts"> babblingArm </param>
+      <param default="3.0" desc="The ratio which needs to be exceeded between the most salient and second most salient object when the human is pointing to an object such that the most salient object is being recognized."> thresholdDistinguishObjectsRatio </param>
+      <param default="1.5" desc="Minimum salience of the most salient object so it is used when human is pointing to it."> thresholdSalienceDetection </param>
+   </arguments>
+
+  <data>
+    <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/proactiveTagging/rpc</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Response port. Supported commands:
+                        - help
+                        - quit
+                        - change_name oldname newname (Changes the name of an entity in the OPC)
+                        - exploreUnknownEntity entity_type entity_name (Ask for the name of `entity_name` via speech recognition)
+                        - searchingEntity entity_type entity_name (Search for the entity corresponding to `entity_name` in all the unknown entities)
+        </description>
+    </input>
+    <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/proactiveTagging/fromTouch:i</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Communication port to touchDetector to detect if partner has touched the robots skin.</description>
+    </input>
+    <output>
+        <type>Bottle</type>
+        <port carrier="tcp">/proactiveTagging/toSAM:o</port>
+        <description>Communication port to SAM to ask for face label.</description>
+    </output>
+    <output>
+        <type>Bottle</type>
+        <port carrier="tcp">/proactiveTagging/pasar:o</port>
+        <description>Communication port to pasar to enable / disable the pointing detection.</description>
+    </output>
+  </data>
    
 </module>
 

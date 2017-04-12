@@ -28,7 +28,7 @@ bool proactiveTagging::configure(yarp::os::ResourceFinder &rf) {
 
     GrammarAskNameObject = rf.findFileByName(rf.check("GrammarAskNameObject", Value("GrammarAskNameObject.xml")).toString());
     GrammarAskNameAgent = rf.findFileByName(rf.check("GrammarAskNameAgent", Value("GrammarAskNameAgent.xml")).toString());
-    GrammarAskNameBodypart = rf.findFileByName(rf.check("GrammarAskNameBodypart", Value("GrammarAskNameSelf.xml")).toString());
+    GrammarAskNameBodypart = rf.findFileByName(rf.check("GrammarAskNameBodypart", Value("GrammarAskNameBodypart.xml")).toString());
 
     babblingArm = rf.check("babblingArm", Value("left")).toString();
 
@@ -52,13 +52,13 @@ bool proactiveTagging::configure(yarp::os::ResourceFinder &rf) {
 
     configureOPC(rf);
 
-    //--------------------------------------------- output port
     std::string ttsOptions = rf.check("ttsOptions", yarp::os::Value("iCub")).toString();
     if (ttsOptions != "iCub") {
         if (iCub->getSpeechClient())
             iCub->getSpeechClient()->SetOptions(ttsOptions);
     }
 
+    //--------------------------------------------- output ports
     //out to SAM
     portToSAM.open(("/" + moduleName + "/toSAM:o").c_str());
     SAMRpc = rf.check("SAMRpc", Value("/sam/rpc:i")).asString().c_str();
@@ -140,12 +140,8 @@ bool proactiveTagging::respond(const Bottle& command, Bottle& reply) {
         "quit \n" +
         "change_name oldname newname \n" +
         "exploreUnknownEntity entity_type entity_name \n" +
-        "searchingEntity entity_type entity_name \n" +
-        "exploreKinematicByName entity_name bodypart [true/false] \n" +
-        "exploreKinematicByJoint joint bodypart [true/false] \n";
-
+        "searchingEntity entity_type entity_name \n";
     reply.clear();
-
 
     if (command.get(0).asString() == "quit") {
         reply.addString("quitting");

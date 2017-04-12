@@ -19,30 +19,32 @@
 #include "icubclient/subsystems/subSystem_recog.h"
 #include "icubclient/subsystems/subSystem_speech.h"
 
+/**
+ * \ingroup proactiveTagging
+ */
 class proactiveTagging : public yarp::os::RFModule {
 private:
 
-    icubclient::ICubClient  *iCub;
+    icubclient::ICubClient  *iCub; //!< icubclient
 
     double      period;
 
-    std::string SAMRpc;
-    std::string LRHRpc;
-    std::string touchDetectorRpc;
+    std::string SAMRpc; //!< Name of SAM RPC port
+    std::string touchDetectorRpc; //!< Name of touchDetector RPC port
 
-    yarp::os::Port   rpcPort;
-    yarp::os::Port   portToSAM;
-    yarp::os::Port   portToPasar;
-    yarp::os::BufferedPort<yarp::os::Bottle>   portFromTouchDetector;
+    yarp::os::Port   rpcPort; //!< Response port
+    yarp::os::Port   portToSAM; //!< Port used to communicate with SAM
+    yarp::os::Port   portToPasar; //!< Port used to communicate with pasar
+    yarp::os::BufferedPort<yarp::os::Bottle>   portFromTouchDetector;  //!< Port used to communicate with touch detector
 
-    std::string      GrammarAskNameAgent;
-    std::string      GrammarAskNameObject;
-    std::string      GrammarAskNameBodypart;
+    std::string      GrammarAskNameAgent; //!< Name of grammar file when asking for name of agent
+    std::string      GrammarAskNameObject; //!< Name of grammar file when asking for name of object
+    std::string      GrammarAskNameBodypart; //!< Name of grammar file when asking for name of bodypart
 
-    std::string      babblingArm; //side of the babbling arm : left or right
+    std::string      babblingArm; //!< side of the babbling arm : left or right
 
-    double  thresholdDistinguishObjectsRatio; //ratio of saliency needed to detect if 1 object is more salient that the other
-    double  thresholdSalienceDetection; //value of saliency needed to detect if 1 object is more salient that the other
+    double  thresholdDistinguishObjectsRatio; //!< ratio of saliency needed to detect if 1 object is more salient that the other
+    double  thresholdSalienceDetection; //!< value of saliency needed to detect if 1 object is more salient that the other
 
     //Configure
     /**
@@ -55,13 +57,28 @@ private:
 
     //objectTagging
     /**
-    * Recognize the name of an unknown entity (communicate with speech recognizer)
+    * @brief Recognize the name of an unknown entity (communicate with speech recognizer)
     * @return Bottle with either name of the object or (error errorDescription)
     */
     yarp::os::Bottle   recogName(std::string entityType);
 
     /**
-    * Explore an unknown entity by asking for the name (response via speech recognition)
+     * @brief Return a "nice" version of a body part name, eg given "index" as input, it returns "index finger"
+     * @param bodypart - "Plain" version of a body part name, eg "index"
+     * @return "Nice" version of a body part name for speech synthesis, eg "index finger"
+     */
+    std::string getBodyPartNameForSpeech(const std::string bodypart);
+
+    /**
+     * @brief Ask pasar to increase saliency when a human is pointing to an object
+     * @param on - whether pasar should increase the saliency
+     * @return True if communication to pasar was successful, false otherwise
+     */
+    bool setPasarPointing(bool on);
+
+public:
+    /**
+    * @brief Explore an unknown entity by asking for the name (response via speech recognition)
     * @param bInput: exploreUnknownEntity entityType entityName (eg: exploreUnknownEntity agent unknown_25)
     * @return Bottle with (success entityType) or (nack errorMessage)
     */
@@ -73,27 +90,6 @@ private:
     * @return Bottle consisting of two elements. First element is {error; warning; success} Second element is: information about the action
     */
     yarp::os::Bottle  searchingEntity(const yarp::os::Bottle &bInput);
-
-    /**
-     * @brief Return a "nice" version of a body part name, eg given "index" as input, it returns "index finger"
-     * @param bodypart - "Plain" version of a body part name, eg "index"
-     * @return "Nice" version of a body part name for speech synthesis, eg "index finger"
-     */
-    std::string getBodyPartNameForSpeech(const std::string bodypart);
-
-    /**
-    * Explore an unknown tactile entity (e.g. fingertips), when knowing the name
-    * @param: Bottle with (exploreTactileEntityWithName entityType entityName) (eg: exploreTactileEntityWithName bodypart index) - entityType must be "bodypart"!
-    * @return Bottle with the result (ack skin_patch_number) or (nack error_message)
-    */
-    yarp::os::Bottle exploreTactileEntityWithName(yarp::os::Bottle bInput);
-
-    /**
-     * @brief Ask pasar to increase saliency when a human is pointing to an object
-     * @param on - whether pasar should increase the saliency
-     * @return True if communication to pasar was successful, false otherwise
-     */
-    bool setPasarPointing(bool on);
 
     /**
      * @brief Loop through all objects in the OPC, and check their saliency. Return the name of the object with the highest saliency
@@ -111,7 +107,13 @@ private:
      */
     yarp::os::Bottle getNameFromSAM(std::string sNameTarget, std::string currentEntityType);
 
-public:
+    /**
+    * @brief Explore an unknown tactile entity (e.g. fingertips), when knowing the name
+    * @param bInput: Bottle with (exploreTactileEntityWithName entityType entityName) (eg: exploreTactileEntityWithName bodypart index) - entityType must be "bodypart"!
+    * @return Bottle with the result (ack skin_patch_number) or (nack error_message)
+    */
+    yarp::os::Bottle exploreTactileEntityWithName(yarp::os::Bottle bInput);
+
     bool configure(yarp::os::ResourceFinder &rf);
 
     bool interruptModule();
