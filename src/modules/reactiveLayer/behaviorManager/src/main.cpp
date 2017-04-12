@@ -17,10 +17,6 @@
 */
 
 /** 
-\defgroup mainLoop Main Loop
-
-
-\section intro_sec Description 
 
 Handle the integration of all sensors and reactions of the robot.
 The robot is reacting to tactile stimuli, gestures, voice and joystick inputs.
