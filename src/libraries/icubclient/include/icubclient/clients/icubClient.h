@@ -55,7 +55,7 @@ namespace icubclient{
     */
     class ICubClient
     {
-    private:
+    protected:
         std::map<std::string, SubSystem*>  subSystems;
         bool                               closed;
         std::list<Action*>                 actionsKnown;

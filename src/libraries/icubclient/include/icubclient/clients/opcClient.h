@@ -35,7 +35,7 @@ class OPCClient
 {
     friend class ICubClient;
 
-private:
+protected:
     yarp::os::Port opc; /**< Port which connects to /OPC/rpc */
 
     /**

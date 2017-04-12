@@ -6,7 +6,7 @@ using namespace yarp::os;
 using namespace icubclient;
 
 class opcPopulater : public RFModule {
-private:
+protected:
 
     ICubClient *iCub;
     double      period;

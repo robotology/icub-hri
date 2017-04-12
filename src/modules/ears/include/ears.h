@@ -5,7 +5,7 @@ using namespace yarp::os;
 using namespace icubclient;
 
 class ears : public RFModule {
-private:
+protected:
     ICubClient *iCub;
     double      period;
     Port        rpc;

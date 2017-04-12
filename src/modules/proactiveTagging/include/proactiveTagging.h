@@ -23,7 +23,7 @@
  * \ingroup proactiveTagging
  */
 class proactiveTagging : public yarp::os::RFModule {
-private:
+protected:
 
     icubclient::ICubClient  *iCub; //!< icubclient
 

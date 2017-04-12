@@ -9,16 +9,13 @@
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>
    
-   <description-long>
-   Module responsible for handling the conversion between multiple reference frame (e.g multiple kinects, tactile table, etc)
-   </description-long>
+   <description-long>Module responsible for handling the conversion between multiple reference frame (e.g multiple kinects, tactile table, etc)</description-long>
 
    <arguments>
-   <param default="referenceFrameHandler" desc="To specify the module's name; all the open ports will be tagged with the prefix /name">name</param>
-   <param default="referenceFrameHandler" desc="file to be used for loading/saving purposes of the matrices">matricesFile</param>
-   <param default="referenceFrameHandler" desc="starts the module without trying to load matrices from the file. (they can still be saved afterward)">empty</param>
-   <param default="referenceFrameHandler" desc="To specify if debug information should be printed on the stdio">verbose</param>
-
+       <param default="referenceFrameHandler" desc="To specify the module's name; all the open ports will be tagged with the prefix /name">name</param>
+       <param default="frames.ini" desc="file to be used for loading/saving purposes of the matrices">matricesFile</param>
+       <param desc="starts the module without trying to load matrices from the file. (they can still be saved afterward)">empty</param>
+       <param default="0" desc="To specify if debug information should be printed">verbose</param>
    </arguments>
 
    <authors>

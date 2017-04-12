@@ -28,9 +28,12 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace icubclient;
 
+/**
+ * \ingroup guiUpdater
+ */
 class GuiUpdater: public RFModule
 {
-private:
+protected:
     OPCClient *opc;
     Agent* iCub;
     RpcServer handlerPort;      //a port to handle messages

@@ -38,7 +38,9 @@ using namespace iCub::ctrl;
 using namespace iCub::optimization;
 using namespace icubclient;
 
-/***********************************************************************/
+/**
+ * \ingroup referenceFrameHandler
+ */
 struct FrameInfo
 {
     string name;
@@ -48,7 +50,9 @@ struct FrameInfo
     CalibReferenceWithMatchedPoints calibrator;
 };
 
-/************************************************************************/
+/**
+ * \ingroup referenceFrameHandler
+ */
 class FrameHandlerModule: public RFModule
 {
     //Store the translation matrices allowing transformation from one frame toward the icub pivot frame

@@ -22,8 +22,11 @@
 #include <yarp/os/all.h>
 #include <yarp/dev/all.h>
 
+/**
+ * @ingroup babbling
+ */
 class Babbling : public yarp::os::RFModule {
-private:
+protected:
     yarp::os::RpcServer handlerPort;
 
     yarp::dev::IPositionControl* posLeftArm;
@@ -68,7 +71,7 @@ public:
     double getPeriod();
     bool updateModule();
 
-private:
+protected:
     /**
      * @brief Initializes all the device controllers
      * @return True if successful
