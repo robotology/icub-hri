@@ -14,7 +14,7 @@ project(icubclient
         VERSION 0.0.0.1)
 
 find_package(YARP REQUIRED)
-find_package(ICUB REQUIRED)
+find_package(ICUB)
 
 # Defines the CMAKE_INSTALL_LIBDIR, CMAKE_INSTALL_BINDIR and many other useful macros
 # See https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html
