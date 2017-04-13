@@ -49,7 +49,7 @@ bool GuiUpdater::configure(yarp::os::ResourceFinder &rf)
         iCub = opc->addOrRetrieveEntity<Agent>("icub");
     } else {
         yError() << "Could not connect to OPC, abort";
-        return -1;
+        return false;
     }
 
     //GUI Port
