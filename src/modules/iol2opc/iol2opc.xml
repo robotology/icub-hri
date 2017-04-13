@@ -5,7 +5,7 @@
 
   <name>iol2opc</name>
   <doxygen-group>icubclient_modules</doxygen-group>
-  <description>Bridge module between the interactive object learning and recognition system (iol) and yarp database of object properties</description>
+  <description>%Bridge module between the interactive object learning and recognition system (iol) and yarp database of object properties</description>
   <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
   <version>1.0</version>
 
@@ -102,10 +102,11 @@
         <priority>no</priority>
         <description>Send requests to himrepClassifier for object classification.</description>
     </output>
+  </data>
 
   <services>
     <server>
-        <type>iol2opc</type>
+        <type>iol2opc_IDL</type>
         <idl>iol2opc.thrift</idl>
         <port>/iol2opc/rpc</port>
         <description>Command port</description>

@@ -18,6 +18,8 @@ if(ICUBCLIENT_BUILD_IOL2OPC)
                          src/main.cpp
                          ${IDL_GENERATED_CODE_DIR}/src/${PROJECT_NAME}_IDL.cpp)
 
+        set(docs ${PROJECT_NAME}.xml)
+
         set(idl_files ${PROJECT_NAME}.thrift)
 
         yarp_idl_to_dir(${idl_files} ${IDL_GENERATED_CODE_DIR})
@@ -25,6 +27,7 @@ if(ICUBCLIENT_BUILD_IOL2OPC)
         source_group("Header Files" FILES ${folder_header})
         source_group("Source Files" FILES ${folder_source})
         source_group("IDL Files"    FILES ${idl_files})
+        source_group("DOC Files"    FILES ${docs})
 
         include_directories(${PROJECT_SOURCE_DIR}/include
                            ${IDL_GENERATED_CODE_DIR}/include
@@ -33,7 +36,7 @@ if(ICUBCLIENT_BUILD_IOL2OPC)
                            ${YARP_INCLUDE_DIRS}
                            ${ICUB_INCLUDE_DIRS} )
 
-        add_executable(${PROJECT_NAME} ${idl_files} ${folder_header} ${folder_source})
+        add_executable(${PROJECT_NAME} ${idl_files} ${folder_header} ${folder_source} ${docs})
         target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBRARIES} ctrlLib ${YARP_LIBRARIES} icubclient)
 
         set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER systemVisual)
