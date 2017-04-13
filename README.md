@@ -13,7 +13,7 @@ The full text of the license agreement can be found in: [./LICENSE](https://gith
 Please read this license carefully before using the `icub-client` code.
 
 ## CI Build
-- Linux: [![Build Status](https://travis-ci.org/robotology/wysiwyd.png?branch=master)](https://travis-ci.org/robotology/wysiwyd)
+- Linux: [![Build Status](https://travis-ci.org/robotology/icub-client.png?branch=master)](https://travis-ci.org/robotology/icub-client)
 - Windows: [![Build status](https://ci.appveyor.com/api/projects/status/4rckcp8suov8pcv1)](https://ci.appveyor.com/project/pattacini/wysiwyd)
 
 ## Build dependencies
