@@ -20,7 +20,6 @@
 
   <arguments>
     <param default="iol2opc" desc="name of the module"> name </param>
-    <param default="/icub/camcalib/left/out" desc="name of the port where the images are to be taken from"> imagePortName </param>
   </arguments>
 
   <data>
