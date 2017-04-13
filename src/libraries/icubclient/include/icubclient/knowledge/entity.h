@@ -69,6 +69,7 @@ public:
     */
     virtual bool isType(std::string _entityType)
     {
+        (void) _entityType; // to avoid unused parameter warning
         return false;
     }
 

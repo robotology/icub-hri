@@ -98,44 +98,6 @@ bool Action::fromBottle(const Bottle &b)
     return true;
 }
 
-
-
-Relation mapRelation(map<string,string> dico, Relation child, Relation current)
-{
-
-    string newSubject = child.subject();
-    map<string,string>::iterator place = dico.find(newSubject);
-        if (place != dico.end() )
-            newSubject = place->second;
-
-        string newObject =child.object();
-        place = dico.find(newObject);
-        if (place != dico.end() )
-            newObject = place->second;
-
-        string newVerb = child.verb();
-        //place = dico.find(newVerb);
-        //if (place != dico.end() )
-        //    newVerb = place->second;
-        
-        string newCTime = child.complement_time();
-        place = dico.find(newCTime);
-        if (place != dico.end() )
-            newCTime = place->second;
-
-        string newCManner = child.complement_manner();
-        place = dico.find(newCManner);
-        if (place != dico.end() )
-            newCManner = place->second;
-
-        string newCPlace = child.complement_place();
-        place = dico.find(newCPlace);
-        if (place != dico.end() )
-            newCPlace = place->second;
-
-        return Relation(newSubject,newVerb,newObject,newCPlace,newCTime,newCManner);
-}
-
 void Action::setInitialDescription(const Relation &r)
 {
     this->initialDescription.fromBottle(r.asBottle());

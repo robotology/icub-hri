@@ -103,6 +103,9 @@ public:
 
     static void click_callback(int event, int x, int y, int flags, void* param)
     {
+        (void) flags; // to prevent unused variable warning
+        (void) param; // to prevent unused variable warning
+
         switch (event)
         {
         case CV_EVENT_LBUTTONDOWN:

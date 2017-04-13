@@ -15,12 +15,11 @@ if(MSVC)
 
 elseif(CMAKE_COMPILER_IS_GNUCXX OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 
-   set(WARNINGS_LIST -Wall)
+   # enable all warnings + extra warnings
+   set(WARNINGS_LIST -Wall -Wextra)
    foreach(WARNING ${WARNINGS_LIST})
       set(WARNINGS_STRING "${WARNINGS_STRING} ${WARNING}")
    endforeach(WARNING)
-   set(WARNINGS_STRING "${WARNINGS_STRING} -Wno-deprecated-declarations")
-
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNINGS_STRING}")
 
    # require C++11

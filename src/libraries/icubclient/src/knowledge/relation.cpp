@@ -130,7 +130,7 @@ Bottle Relation::asBottle(bool ignoreID) const
     return b;
 }
 
-Bottle Relation::asLightBottle(bool ignoreID)
+Bottle Relation::asLightBottle()
 {
     Bottle b;
     Bottle bSub;

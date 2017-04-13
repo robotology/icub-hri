@@ -49,7 +49,8 @@ add_library(${LIBRARY_TARGET_NAME} ${${LIBRARY_TARGET_NAME}_SRC} ${${LIBRARY_TAR
 target_link_libraries(${LIBRARY_TARGET_NAME} ${YARP_LIBRARIES} icubclientIDLClients)
 
 set_target_properties(${LIBRARY_TARGET_NAME} PROPERTIES VERSION       ${${PROJECT_NAME}_VERSION}
-                                                        DEBUG_POSTFIX "d")
+                                                        DEBUG_POSTFIX "d"
+                                                        LINKER_LANGUAGE CXX)
 
 target_include_directories(${LIBRARY_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${icubclientIDLClients_INCLUDE_DIRS};${YARP_INCLUDE_DIRS}>"
                                                          "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")

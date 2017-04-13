@@ -16,10 +16,11 @@ add_library(${LIBRARY_TARGET_NAME} ${${LIBRARY_TARGET_NAME}_SRC} ${${LIBRARY_TAR
 target_link_libraries(${LIBRARY_TARGET_NAME} ${YARP_LIBRARIES})
 
 set_target_properties(${LIBRARY_TARGET_NAME} PROPERTIES DEBUG_POSTFIX "d"
-                                                        VERSION       ${${PROJECT_NAME}_VERSION})
+                                                        VERSION       ${${PROJECT_NAME}_VERSION}
+                                                        LINKER_LANGUAGE CXX)
 
-target_include_directories(${LIBRARY_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${YARP_INCLUDE_DIRS};${IDL_GENERATED_CODE_DIR}/include>"
-                                                         "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
+target_include_directories(${LIBRARY_TARGET_NAME} SYSTEM PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${YARP_INCLUDE_DIRS};${IDL_GENERATED_CODE_DIR}/include>"
+                                                                "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
 # Specify installation targets, typology and destination folders.
 install(TARGETS ${LIBRARY_TARGET_NAME}
