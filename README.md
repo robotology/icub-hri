@@ -25,9 +25,9 @@ First, follow the [installation instructions](http://wiki.icub.org/wiki/Linux:In
 ### OpenCV-3.2.0 (object tracking; optional)
 **`OpenCV-3.0.0`** or higher (**`OpenCV-3.2.0`** is recommended) is a required dependency to build the `iol2opc` module which is responsible for object tracking. More specifically, we need the new tracking features delivered with `OpenCV-3.2.0`:
 
-1. Download `OpenCV`: `git clone https://github.com/Itseez/opencv.git`.
+1. Download `OpenCV`: `git clone https://github.com/opencv/opencv.git`.
 2. Checkout the correct branch: `git checkout 3.2.0`.
-3. Download the external modules: `git clone https://github.com/Itseez/opencv_contrib.git`.
+3. Download the external modules: `git clone https://github.com/opencv/opencv_contrib.git`.
 4. Checkout the correct branch: `git checkout 3.2.0`.
 5. Configure `OpenCV` by filling in the cmake var **`OPENCV_EXTRA_MODULES_PATH`** with the path pointing to `opencv_contrib/modules` and then toggling on the var **`BUILD_opencv_tracking`**.
 6. Compile `OpenCV`.
