@@ -40,9 +40,17 @@ The compilation can be disabled using the `ICUBCLIENT_BUILD_IOL2OPC` cmake flag.
 ### kinect-wrapper (skeleton tracking; optional)
 To detect the human skeleton, we employ the [`kinect-wrapper`](https://github.com/robotology/kinect-wrapper.git) library. Please follow the installation instructions in the [readme](https://github.com/robotology/kinect-wrapper/blob/master/README.md). It might be the case that you have also to build `kinect-wrapper` with the new `OpenCV-3.x.x` library. We have enabled the possibility to build only the client part of the `kinect-wrapper` (see [*updated instructions*](https://github.com/robotology/kinect-wrapper#cmaking-the-project)) which allows to run the `agentDetector` module on a separate machine as the one with the Kinect attached and running `kinectServer`.
 
+In order to calibrate the Kinect reference frame with that of the iCub, we need to have (at least) three points known in both reference frames. To do that, we employ `iol2opc` to get the reference frame of an object in the iCub's root reference frame, and the `agentDetector` to manually find the corresponding position in the Kinect's reference frame. The `referenceFrameHandler` can then be used to find the transformation matrix between the two frames.
+
+The procedure is as follows:
+1. Start `iol2opc` (with its dependencies), `agentDetector --showImages` (after `kinectServer`) and `referenceFrameHandler` and connect all ports.
+2. Place one object in front of the iCub (or, multiple objects with one of them being called "target"). Make sure this object is reliably detected by `iol2opc`.
+3. Left click the target object in the depth image of the `agentDetector` window.
+4. Move the object and repeat steps 3+4 at least three times.
+5. Right click the depth image which issues a "cal" and a "save" command to `referenceFrameHandler`. This saves the transformation in a file which will be loaded the next time `referenceFrameHandler` is started.
 
 ### speech (speech recognition + synthesis; optional)
-This requires a Windows machine with the [Microsoft speech SDK](https://msdn.microsoft.com/en-us/library/hh361572(v=office.14).aspx) installed. Then, compile the [`speech`](https://github.com/robotology/speech) repository for speech recognition and speech synthesis.
+This requires a Windows machine with the [Microsoft speech SDK](https://msdn.microsoft.com/en-us/library/hh361572(v=office.14).aspx) installed. Then, compile the [`speech`](https://github.com/robotology/speech) repository for speech recognition and speech synthesis. If you use version 5.1 of the SDK, use this [patch](https://github.com/robotology/speech/tree/master/sapi5.1%20patch) to fix the compilation.
 
 ### karmaWYSIWYD (push/pull actions; optional)
 Push and pull actions require the high-level motor primitives generator [karmaWYSIWYD](https://github.com/towardthesea/karmaWysiwyd), which facilitates users to control iCub push/pull actions on objects. Please follow the installation instructions in the [readme](https://github.com/towardthesea/karmaWYSIWYD/blob/master/README.md).
