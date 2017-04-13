@@ -42,7 +42,7 @@ protected:
     * Send a command to the OPC and return the reply
     * @param cmd: the command to be send to the OPC
     * @param reply: reference to the reply of the OPC
-    * @param verbose: Whether to output additional information using yInfo()
+    * @param Verbose: Whether to output additional information using yInfo()
     */
     bool write(yarp::os::Bottle &cmd, yarp::os::Bottle &reply, bool Verbose=false);
 

@@ -41,7 +41,7 @@
               - quit
               - babbling arm left/right [duration]
               - babbling hand left/right
-              - babbling joint #jointnumber left/right [duration]
+              - babbling joint joint_number left/right [duration]
           </description>
       </input>
    </data>
