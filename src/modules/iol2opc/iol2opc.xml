@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="yarpmanifest.xsl"?>
+
+<module>
+
+  <name>iol2opc</name>
+  <doxygen-group>icubclient_modules</doxygen-group>
+  <description>Bridge module between the interactive object learning and recognition system (iol) and yarp database of object properties</description>
+  <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
+  <version>1.0</version>
+
+  <description-long>
+	This module provides wrappers of procedures to acquire perceived information from iol and store them in opc database.
+  </description-long>
+
+  <authors>
+    <author email="ugo.pattacini@iit.it"> Ugo Pattacini </author>
+    <author email="t.fischer@imperial.ac.uk"> Tobias Fischer </author>
+  </authors>
+
+  <arguments>
+    <param default="iol2opc" desc="name of the module"> name </param>
+    <param default="/icub/camcalib/left/out" desc="name of the port where the images are to be taken from"> imagePortName </param>
+  </arguments>
+
+  <data>
+    <input>
+        <type>Bottle</type>
+        <port carrier="udp">/iol2opc/blobs:i</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Get extracted blobs from lbpExtract.</description>
+    </input>
+    <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/iol2opc/histObjLocation:i</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Receives the pixel in the image from which retrieve a cartesian position for displaying the classification histograms of the closest blob.</description>
+    </input>
+    <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/iol2opc/img:i</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Get calibrated images from camera.</description>
+    </input>
+    <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/iol2opc/getClick:i</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Get clicked position through this port</description>
+    </input>
+
+    <output>
+        <type>Image</type>
+        <port carrier="udp">/iol2opc/imgTrack:o</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Stream out the image of tracked objects</description>
+    </output>
+    <output>
+        <type>Image</type>
+        <port carrier="udp">/iol2opc/imgLoc:o</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Streams out the images for real-time objects localization.</description>
+    </output>
+    <output>
+        <type>Image</type>
+        <port carrier="udp">/iol2opc/imgHistogram:o</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Stream out the histogram of classification scores.</description>
+    </output>
+    <output>
+        <type>Image</type>
+        <port carrier="tcp">/iol2opc/imgClassifier:o</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Pass images to the classifier.</description>
+    </output>
+    <output>
+        <type>Image</type>
+        <port carrier="tcp">/iol2opc/imgSel:o</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Stream out the image inside the selected blob.</description>
+    </output>
+
+    <output>
+        <type>rpc</type>
+        <port carrier="tcp">/iol2opc/get3d:rpc</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Send requests to SFM for 3D estimation.</description>
+    </output>
+    <output>
+        <type>rpc</type>
+        <port carrier="tcp">/iol2opc/classify:rpc</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Send requests to himrepClassifier for object classification.</description>
+    </output>
+
+  <services>
+    <server>
+        <type>iol2opc</type>
+        <idl>iol2opc.thrift</idl>
+        <port>/iol2opc/rpc</port>
+        <description>Command port</description>
+    </server>
+  </services>
+
+</module>
