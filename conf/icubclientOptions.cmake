@@ -7,7 +7,7 @@ if(MSVC)
    if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
       string(REGEX REPLACE "/W[0-4]" "/W2" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
    else()
-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W2")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W2 /wd4251")
    endif()
 
    add_definitions(-D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_DEPRECATE)
