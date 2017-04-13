@@ -48,15 +48,15 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BIND
                           DEPENDS ENABLE_RPATH
                           USE_LINK_PATH)
 
-set(LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-make_directory(${LIBRARY_OUTPUT_DIRECTORY})
-mark_as_advanced(LIBRARY_OUTPUT_DIRECTORY)
-message(STATUS "Libraries go to ${LIBRARY_OUTPUT_DIRECTORY}")
+set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
+make_directory(${LIBRARY_OUTPUT_PATH})
+mark_as_advanced(LIBRARY_OUTPUT_PATH)
+message(STATUS "Libraries go to ${LIBRARY_OUTPUT_PATH}")
 
-set(RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-make_directory(${RUNTIME_OUTPUT_DIRECTORY})
-mark_as_advanced(RUNTIME_OUTPUT_DIRECTORY)
-message(STATUS "Executables go to ${RUNTIME_OUTPUT_DIRECTORY}")
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+make_directory(${EXECUTABLE_OUTPUT_PATH})
+mark_as_advanced(EXECUTABLE_OUTPUT_PATH)
+message(STATUS "Executables go to ${EXECUTABLE_OUTPUT_PATH}")
 
 set(IDL_GENERATED_CODE_DIR ${PROJECT_SOURCE_DIR}/src/idl_generated_code)
 mark_as_advanced(IDL_GENERATED_CODE_DIR)
