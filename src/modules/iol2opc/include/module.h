@@ -45,6 +45,10 @@ using namespace yarp::math;
 using namespace iCub::ctrl;
 using namespace icubclient;
 
+
+/**
+ * @ingroup iol2opc
+ */
 /**********************************************************/
 namespace Bridge {
     typedef enum { idle, load_database, localization } State;
@@ -53,23 +57,23 @@ namespace Bridge {
 
 /**********************************************************/
 /**
- * @brief The IOLObject class
+ * @ingroup iol2opc
  */
 class IOLObject
 {
 protected:
-    MedianFilter filterPos;
-    MedianFilter filterDim;
+    MedianFilter filterPos; //!< median filter for position of object
+    MedianFilter filterDim; //!< median filter for object dimension
     bool init_filters;
-    double presenceTmo;
-    double presenceTimer;
+    double presenceTmo;     //!< current set timeout
+    double presenceTimer;   //!< current timer
 
     enum { idle, init, no_need, tracking };
 
     string trackerType;
-    int trackerState;
-    double trackerTmo;
-    double trackerTimer;    
+    int trackerState;       //!< tracker state: idle, init, no_need or tracking
+    double trackerTmo;      //!< set value of tracker timout
+    double trackerTimer;    //!< current value of tracker timer
 
     cv::Rect2d trackerResult;
     cv::Ptr<cv::Tracker> tracker;
@@ -210,33 +214,33 @@ public:
 
 /**********************************************************/
 /**
- * @brief The IOL2OPCBridge class provides some methods to communicate between IOL and OPC
+ * @ingroup iol2opc
  */
 class IOL2OPCBridge : public RFModule, public iol2opc_IDL
 {
 protected:
-    RpcServer  rpcPort;
-    RpcClient  rpcClassifier;
-    RpcClient  rpcGet3D;
-    OPCClient *opc;
+    RpcServer  rpcPort;                                 //!< rpc server to receive user request
+    RpcClient  rpcClassifier;                           //!< rpc client port to send requests to himrepClassifier
+    RpcClient  rpcGet3D;                                //!< rpc client port to send requests to SFM
+    OPCClient *opc;                                     //!< OPC client object
 
-    BufferedPort<Bottle>             blobExtractor;
-    BufferedPort<Bottle>             histObjLocPort;
-    BufferedPort<Bottle>             getClickPort;
-    BufferedPort<Bottle>             objLocOut;
-    BufferedPort<ImageOf<PixelBgr> > imgIn;
-    BufferedPort<ImageOf<PixelBgr> > imgRtLocOut;
-    BufferedPort<ImageOf<PixelBgr> > imgTrackOut;
-    BufferedPort<ImageOf<PixelBgr> > imgSelBlobOut;
-    BufferedPort<ImageOf<PixelBgr> > imgHistogram;
-    Port imgClassifier;
+    BufferedPort<Bottle>             blobExtractor;     //!< buffered port of input of received blobs from lbpExtract
+    BufferedPort<Bottle>             histObjLocPort;    //!< buffered port of input of localized objects from iol localizer
+    BufferedPort<Bottle>             getClickPort;      //!< buffered port of input of clicked position
+    BufferedPort<Bottle>             objLocOut;         //!< buffered port of output of localized objects
+    BufferedPort<ImageOf<PixelBgr> > imgIn;             //!< buffered port of input calibrated image from left camera of iCub
+    BufferedPort<ImageOf<PixelBgr> > imgRtLocOut;       //!< buffered port of output image for real-time objects localization
+    BufferedPort<ImageOf<PixelBgr> > imgTrackOut;       //!< buffered port of output image of tracked object
+    BufferedPort<ImageOf<PixelBgr> > imgSelBlobOut;     //!< buffered port of output image inside the selected blob (by clicking on)
+    BufferedPort<ImageOf<PixelBgr> > imgHistogram;      //!< buffered port of output image of histogram of classification scores.
+    Port imgClassifier;                                 //!< port of output image to himrefClassifier
 
     RtLocalization rtLocalization;
     OpcUpdater opcUpdater;
     int opcMedianFilterOrder;
     ClassifierReporter classifierReporter;
 
-    ImageOf<PixelBgr> imgRtLoc;
+    ImageOf<PixelBgr> imgRtLoc;                         //!< Image for real-time objects localization
     Mutex mutexResources;
     Mutex mutexResourcesOpc;
     Mutex mutexResourcesSFM;
@@ -249,7 +253,7 @@ protected:
     double presence_timeout;
     string tracker_type;
     double tracker_timeout;
-    VectorOf<int> tracker_min_blob_size;
+    VectorOf<int> tracker_min_blob_size;                //!< minimum size of tracker blob
     map<string,IOLObject> db;
     Bridge::State state;
     IOLObject onlyKnownObjects;
@@ -259,21 +263,21 @@ protected:
     deque<CvScalar> histColorsCode;
 
     double blobs_detection_timeout;
-    double lastBlobsArrivalTime;
-    Bottle lastBlobs;
-    Bottle opcBlobs;
-    Bottle opcScores;
+    double lastBlobsArrivalTime;                        //!< time stamp of last received blob
+    Bottle lastBlobs;                                   //!< Bottle contains last blob information
+    Bottle opcBlobs;                                    //!< Bottle contains received blobs of objects from OPC
+    Bottle opcScores;                                   //!< Bottle contains received (class) score of objects from OPC
 
-    Vector skim_blobs_x_bounds;
-    Vector skim_blobs_y_bounds;
+    Vector skim_blobs_x_bounds;                         //!< Yarp Vector of min, max bounding in x-axis to reduce the blob detection
+    Vector skim_blobs_y_bounds;                         //!< Yarp Vector of min, max bounding in y-axis to reduce the blob detection
     Vector histObjLocation;
 
-    Vector human_area_x_bounds;
-    Vector human_area_y_bounds;
-    Vector robot_area_x_bounds;
-    Vector robot_area_y_bounds;
-    Vector shared_area_x_bounds;
-    Vector shared_area_y_bounds;
+    Vector human_area_x_bounds;                         //!< Yarp Vector of min, max bounding of human region in x-axis
+    Vector human_area_y_bounds;                         //!< Yarp Vector of min, max bounding of human region in y-axis
+    Vector robot_area_x_bounds;                         //!< Yarp Vector of min, max bounding of robot region in x-axis
+    Vector robot_area_y_bounds;                         //!< Yarp Vector of min, max bounding of robot region in y-axis
+    Vector shared_area_x_bounds;                        //!< Yarp Vector of min, max bounding of shared region in x-axis
+    Vector shared_area_y_bounds;                        //!< Yarp Vector of min, max bounding of shared region in y-axis
 
     CvPoint clickLocation;
 
