@@ -4,7 +4,7 @@
 
 set(ICUBCLIENT_BUILD_IOL2OPC TRUE CACHE BOOL "Enable compilation of iol2opc")
 if(ICUBCLIENT_BUILD_IOL2OPC)
-   if(ICUB_FOUND)
+   if(ICUB_FOUND AND (NOT (OpenCV_VERSION LESS 3)))
         project(iol2opc)
 
         include(YarpIDL)
@@ -39,7 +39,7 @@ if(ICUBCLIENT_BUILD_IOL2OPC)
         set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER systemVisual)
         install(TARGETS ${PROJECT_NAME} DESTINATION bin)
   else()
-    message(SEND_WARNING "ICUBCLIENT_BUILD_IOL2OPC is ON but ICUB is not found. Will not compile iol2opc")
+    message(WARNING "ICUBCLIENT_BUILD_IOL2OPC is ON but ICUB is not found or OpenCV3 is not installed. Will not compile iol2opc.")
   endif()
 endif()
 
