@@ -55,7 +55,7 @@ public:
 
     virtual bool isType(std::string _entityType)
     {
-        if (_entityType == "bodypart")
+        if (_entityType == ICUBCLIENT_OPC_ENTITY_BODYPART)
             return true;
         else
             return this->Object::isType(_entityType);

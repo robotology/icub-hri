@@ -192,7 +192,7 @@ bool opcPopulater::populateEntityRandom(Bottle bInput){
     }
     string sName = bInput.get(2).toString();
 
-    if (bInput.get(1).toString() == "agent")
+    if (bInput.get(1).toString() == ICUBCLIENT_OPC_ENTITY_AGENT)
     {
         Agent* agent = iCub->opc->addOrRetrieveEntity<Agent>(sName);
         agent->m_ego_position[0] = (-1.5) * (Random::uniform()) - 0.5;
@@ -207,7 +207,7 @@ bool opcPopulater::populateEntityRandom(Bottle bInput){
         agent = NULL;
     }
 
-    else if (bInput.get(1).toString() == "object")
+    else if (bInput.get(1).toString() == ICUBCLIENT_OPC_ENTITY_OBJECT)
     {
         Object* obj = iCub->opc->addOrRetrieveEntity<Object>(sName);
         obj->m_ego_position[0] = (-1.5) * (Random::uniform()) - 0.2;
@@ -240,7 +240,7 @@ bool opcPopulater::addUnknownEntity(Bottle bInput){
     string sName = "unknown";
     yInfo() << " to be added: " << bInput.get(1).toString() << " called " << sName;
 
-    if (bInput.get(1).toString() == "agent")
+    if (bInput.get(1).toString() == ICUBCLIENT_OPC_ENTITY_AGENT)
     {
         sName = "partner";
         Agent* agent = iCub->opc->addEntity<Agent>(sName);
@@ -256,7 +256,7 @@ bool opcPopulater::addUnknownEntity(Bottle bInput){
         agent = NULL;
     }
 
-    else if (bInput.get(1).toString() == "object")
+    else if (bInput.get(1).toString() == ICUBCLIENT_OPC_ENTITY_OBJECT)
     {
         Object* obj = iCub->opc->addEntity<Object>(sName);
         obj->m_ego_position[0] = (-1.5) * (Random::uniform()) - 0.2;
@@ -302,15 +302,9 @@ bool opcPopulater::setSaliencyEntity(Bottle bInput){
     {
         if ((*itEnt)->name() == sName)
         {
-            if ((*itEnt)->entity_type() == "agent")
+            if ((*itEnt)->entity_type() == ICUBCLIENT_OPC_ENTITY_OBJECT || (*itEnt)->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT)
             {
-                Agent* temp = dynamic_cast<Agent*>(*itEnt);
-                temp->m_saliency = targetSaliency;
-            }
-            else if ((*itEnt)->entity_type() == "object")
-            {
-                Object* temp = dynamic_cast<Object*>(*itEnt);
-                temp->m_saliency = targetSaliency;
+                dynamic_cast<Object*>(*itEnt)->m_saliency = targetSaliency;
             }
         }
     }
@@ -335,9 +329,8 @@ bool opcPopulater::setValueEntity(Bottle bInput){
     iCub->opc->checkout();
 
     Entity *e = iCub->opc->getEntity(sName);
-    if (e && (e->entity_type() == "agent" || e->entity_type() == "object")) {
-        Object* temp = dynamic_cast<Object*>(e);
-        temp->m_value = targetValue;
+    if (e && (e->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT || e->entity_type() == ICUBCLIENT_OPC_ENTITY_OBJECT)) {
+        dynamic_cast<Object*>(e)->m_value = targetValue;
         iCub->opc->commit();
     }
     else{

@@ -169,7 +169,7 @@ void ICubClient::updateAgent()
 
 bool ICubClient::changeName(Entity *e, const std::string &newName) {
     bool allOkay = true;
-    if (e->entity_type() == "agent") {
+    if (e->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT) {
         if (subSystems.find("agentDetector") == subSystems.end()) {
             say("Could not change name of default partner of agentDetector");
             yWarning() << "Could not change name of default partner of agentDetector";
@@ -233,7 +233,7 @@ std::string ICubClient::getPartnerName(bool verbose)
     string partnerName = "";
     list<shared_ptr<Entity>> lEntities = opc->EntitiesCacheCopy();
     for (auto& entity : lEntities) {
-        if (entity->entity_type() == "agent") {
+        if (entity->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT) {
             Agent* a = dynamic_cast<Agent*>(entity.get());
             //We assume kinect can only recognize one skeleton at a time
             if (a->m_present == 1.0 && a->name() != "icub") {

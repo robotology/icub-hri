@@ -25,7 +25,7 @@ using namespace icubclient;
 
 Bodypart::Bodypart():Object()
 {
-    m_entity_type = "bodypart";
+    m_entity_type = ICUBCLIENT_OPC_ENTITY_BODYPART;
     m_joint_number = -1;
     m_tactile_number = -1;
     m_part = "unknown";

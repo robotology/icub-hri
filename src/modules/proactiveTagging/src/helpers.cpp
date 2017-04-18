@@ -78,7 +78,7 @@ std::string proactiveTagging::getBestEntity(std::string sTypeTarget) {
 
         for (auto& entity : lEntities) {
             if (entity->name().find("unknown")==0) {
-                if (sTypeTarget == "object" && (entity->entity_type() == "object")) {
+                if (sTypeTarget == ICUBCLIENT_OPC_ENTITY_OBJECT && (entity->entity_type() == ICUBCLIENT_OPC_ENTITY_OBJECT)) {
                     Object* temp = dynamic_cast<Object*>(entity.get());
                     if(!temp) {
                         yError() << "Could not cast " << entity->name() << " to an object";
@@ -138,15 +138,15 @@ Bottle proactiveTagging::recogName(std::string entityType) {
 
     yDebug() << "Going to load grammar.";
     string grammar, expectedresponse="error", semanticfield="error";
-    if (entityType == "agent") {
+    if (entityType == ICUBCLIENT_OPC_ENTITY_AGENT) {
         grammar = GrammarAskNameAgent;
         expectedresponse = "SENTENCEAGENT";
         semanticfield = "agent";
-    } else if (entityType == "object") {
+    } else if (entityType == ICUBCLIENT_OPC_ENTITY_OBJECT) {
         grammar = GrammarAskNameObject;
         expectedresponse = "SENTENCEOBJECT";
         semanticfield = "object";
-    } else if (entityType == "bodypart") {
+    } else if (entityType == ICUBCLIENT_OPC_ENTITY_BODYPART) {
         grammar = GrammarAskNameBodypart;
         expectedresponse = "SENTENCEBODYPART";
         semanticfield = "fingerName";

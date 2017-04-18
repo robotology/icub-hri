@@ -55,7 +55,7 @@ bool AgentDetector::configure(ResourceFinder &rf)
 
     list<shared_ptr<Entity>> entityList = opc->EntitiesCacheCopy();
     for(auto e : entityList) {
-        if(e->entity_type() == "agent" && e->name() != "icub") {
+        if(e->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT && e->name() != "icub") {
             partner_default_name = e->name();
         }
     }
