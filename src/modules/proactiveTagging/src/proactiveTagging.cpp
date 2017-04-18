@@ -580,7 +580,7 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput) {
 
     // change name
     Object* TARGET = dynamic_cast<Object*>(iCub->opc->getEntity(sNameBestEntity));
-    if(sTypeTarget == ICUBCLIENT_OPC_ENTITY_OBEJCT) {
+    if(sTypeTarget == ICUBCLIENT_OPC_ENTITY_OBJECT) {
         iCub->look(TARGET->name());
     }
 
