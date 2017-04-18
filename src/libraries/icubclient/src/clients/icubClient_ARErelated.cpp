@@ -37,23 +37,6 @@ bool ICubClient::home(const string &part)
     return are->home(part);
 }
 
-
-bool ICubClient::grasp(const string &oName, const Bottle &options)
-{
-    Bottle opt(options);
-    opt.addString("still"); // always avoid automatic homing after grasp
-
-    SubSystem_ARE *are = getARE();
-    if (are == NULL)
-    {
-        yError() << "[iCubClient] Called grasp() but ARE subsystem is not available.";
-        return false;
-    }
-
-    return are->take(oName, opt);
-}
-
-
 bool ICubClient::release(const std::string &oLocation, const yarp::os::Bottle &options)
 {
     Entity *target = opc->getEntity(oLocation, true);
@@ -104,7 +87,7 @@ bool ICubClient::waving(const bool sw) {
 }
 
 
-bool ICubClient::pointfar(const Vector &target, const Bottle &options)
+bool ICubClient::point(const Vector &target, const Bottle &options)
 {
     SubSystem_ARE *are = getARE();
     if (are == NULL)
@@ -133,7 +116,7 @@ bool ICubClient::point(const string &sName, const Bottle &options)
         SubSystem_ARE *are = getARE();
         Vector target = oTarget->m_ego_position;
         are->selectHandCorrectTarget(const_cast<Bottle&>(options), target, sName);
-        return pointfar(target, options);
+        return point(target, options);
     } else {
         yError() << "[iCubClient] pointfar: Could not cast Entity to Object";
         return false;

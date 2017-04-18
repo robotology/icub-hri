@@ -289,42 +289,6 @@ bool ICubClient::lookAtPartner()
     return look(getPartnerName());
 }
 
-bool ICubClient::babbling(const string &bpName, const string &babblingLimb)
-{
-    //check the subsystem is running
-    if (subSystems.find("babbling") != subSystems.end()){
-
-        //extract the bodypart with the name
-        Entity *target = opc->getEntity(bpName, true);
-        if (!target->isType(ICUBCLIENT_OPC_ENTITY_BODYPART))
-        {
-            yError() << "[iCubClient] Called babbling() on a unallowed entity: \"" << bpName << "\"";
-            return false;
-        }
-
-        Bodypart *bp = dynamic_cast<Bodypart*>(target);
-        int jointNumber = bp->m_joint_number;
-        if (jointNumber == -1){
-            yError() << "[iCubClient] Called babbling() on " << bpName << " which have no joint number linked to it\"";
-            return false;
-        }
-
-        return ((SubSystem_babbling*)subSystems["babbling"])->babbling(jointNumber, babblingLimb);
-    }
-
-    yError() << "Error, babbling is not running...";
-    return false;
-}
-
-bool ICubClient::babbling(int jointNumber, const string &babblingLimb)
-{
-    if (subSystems.find("babbling") != subSystems.end())
-        return ((SubSystem_babbling*)subSystems["babbling"])->babbling(jointNumber, babblingLimb);
-
-    yError() << "Error, babbling is not running...";
-    return false;
-}
-
 bool ICubClient::babbling(const string &bpName, const string &babblingLimb, double train_dur)
 {
     //check the subsystem is running

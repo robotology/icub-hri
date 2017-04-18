@@ -32,8 +32,18 @@ namespace icubclient{
 */
 class SubSystem_IOL2OPC : public SubSystem
 {
+    friend class ICubClient;
+
 protected:
     virtual bool connect();
+
+    /**
+     * @brief Change the name of an object
+     * Internally used by ICubClient::changeName
+     * @param old_name: Name of the object to be changed
+     * @param new_name: New name of the object
+     */
+    bool changeName(const std::string &old_name, const std::string &new_name);
 
 public:
     yarp::os::RpcClient portRPC;
@@ -45,13 +55,6 @@ public:
     SubSystem_IOL2OPC(const std::string &masterName);
 
     virtual void Close();
-
-    /**
-     * @brief Change the name of an object
-     * @param old_name: Name of the object to be changed
-     * @param new_name: New name of the object
-     */
-    bool changeName(const std::string &old_name, const std::string &new_name);
 
     /**
      * @brief Pause the iol2opc object detection.

@@ -102,7 +102,7 @@ void Tagging::run(const Bottle &args) {
         } else {
             iCub->say("Look, because our hands look the same I know this is your hand.");
             iCub->look(lHandVec);
-            iCub->pointfar(lHandVec);
+            iCub->point(lHandVec);
             iCub->home();
         }
     }

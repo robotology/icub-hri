@@ -134,7 +134,9 @@ namespace icubclient {
 
         /**
         * Point at the specified [target] with the index finger.
-        * The target can be far away from the iCub, e.g. a body part of the human
+        * The target can be far away from the iCub, e.g. a body part of the human.
+        * If the target is further away than 31cm, use the "pfar" functionality of ARE.
+        * If it is closer than 31cm, use the "point" functionality of ARE.
         * @param targetUnsafe Target to point to in cartesian coordinates
         * @param options Options of ARE commands ("no_head", "no_gaze",
         *             "no_sacc", "still", "left", "right").
@@ -142,16 +144,6 @@ namespace icubclient {
         *         otherwise.
         */
         bool point(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options = yarp::os::Bottle());
-
-        /***
-        * Point at the specified [target] with the index finger.
-        * @param target Target to point (object name)
-        * @param options Options of ARE commands ("no_head", "no_gaze",
-        *             "no_sacc", "still", "left", "right").
-        * @return true in case of successful motor command, false
-        *         otherwise.
-        */
-        //bool point_old(const std::string &sName, const yarp::os::Bottle &options = yarp::os::Bottle());
 
         /**
         * If an object is held, bring it over the table and drop it on a

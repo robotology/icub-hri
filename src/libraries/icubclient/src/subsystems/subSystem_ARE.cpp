@@ -248,13 +248,15 @@ bool icubclient::SubSystem_ARE::push(const std::string &sName, const yarp::os::B
 
 bool icubclient::SubSystem_ARE::point(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options)
 {
-    yDebug() << "ARE::pointfar start";
+    yDebug() << "ARE::point start";
     yarp::sig::Vector target=applySafetyMargins(targetUnsafe);
 
     yarp::os::Bottle bCmd;
-    if(target[0]<-0.31) {
+    if(target[0]<-0.31) { // everything further than 31cm should be pointed at using the "point far" of ARE
+        yDebug() << "Use ARE::pfar for pointing";
         bCmd.addVocab(yarp::os::Vocab::encode("pfar"));
     } else {
+        yDebug() << "Use ARE::point for pointing";
         bCmd.addVocab(yarp::os::Vocab::encode("point"));
     }
 
@@ -265,51 +267,9 @@ bool icubclient::SubSystem_ARE::point(const yarp::sig::Vector &targetUnsafe, con
     std::string status;
     bReturn ? status = "success" : status = "failed";
 
-    yDebug() << "ARE::pointfar stop";
-    return bReturn;
-}
-
-
-/*bool icubclient::SubSystem_ARE::point_old(const std::string &sName, const yarp::os::Bottle &options)
-{
-    yDebug() << "ARE::point start";
-
-    Entity* e = opc->getEntity(sName, true);
-    Object *o;
-    if(e) {
-        o = dynamic_cast<Object*>(e);
-    }
-    else {
-        yError() << sName << " is not an Entity";
-        return false;
-    }
-    if(!o) {
-        yError() << "Could not cast" << e->name() << "to Object";
-        return false;
-    }
-
-    if(o->m_ego_position[0]<-0.42) {
-        yWarning() << "This object is too far for ARE::point. Use ARE::pointfar instead.";
-        return pointfar(o->m_ego_position, options, sName);
-    }
-
-    yarp::os::Bottle bCmd;
-    bCmd.addVocab(yarp::os::Vocab::encode("point"));
-
-    yarp::sig::Vector target=o->m_ego_position;
-    yarp::os::Bottle opt=options;
-    selectHandCorrectTarget(opt,target,sName);
-    target=applySafetyMargins(target);
-    appendCartesianTarget(bCmd,target);
-    bCmd.append(opt);
-
-    bool bReturn = sendCmd(bCmd,true);
-    std::string status;
-    bReturn ? status = "success" : status = "failed";
-
     yDebug() << "ARE::point stop";
     return bReturn;
-}*/
+}
 
 bool icubclient::SubSystem_ARE::drop(const yarp::os::Bottle &options)
 {

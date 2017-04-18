@@ -32,8 +32,19 @@ namespace icubclient{
 */
 class SubSystem_agentDetector : public SubSystem
 {
+    friend class ICubClient;
+
 protected:
     virtual bool connect();
+
+    /**
+     * @brief Changes the name of the partner within agentDetector
+     * Internally used by ICubClient::changeName
+     * @param new_name
+     * @return true if successful, false otherwise
+     */
+
+    bool changeDefaultName(std::string new_name);
 
 public:
     yarp::os::RpcClient portRPC;
@@ -45,14 +56,6 @@ public:
     SubSystem_agentDetector(const std::string &masterName);
 
     virtual void Close();
-
-    /**
-     * @brief Changes the name of the partner within agentDetector
-     * @param new_name
-     * @return true if successful, false otherwise
-     */
-
-    bool changeDefaultName(std::string new_name);
 
     /**
      * @brief Pause the agentDetector. No skeleton information of the human will be updated.

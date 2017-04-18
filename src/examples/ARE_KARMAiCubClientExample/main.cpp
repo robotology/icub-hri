@@ -86,7 +86,7 @@ int main()
     //----------------------------> ARE related action
     iCub.home();                        // Home by using ARE
     yInfo()<<"try to point using ARE...";
-    ok = iCub.pointfar(x);              // automatic selection of the hand
+    ok = iCub.point(x);              // automatic selection of the hand
     yInfo()<<(ok?"success":"failed");
     Time::delay(4.0);
 

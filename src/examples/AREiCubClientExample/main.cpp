@@ -72,13 +72,13 @@ int main()
     iCub.home();
     yInfo()<<"pointing at the object ... ";
     Bottle options("right");    // force the use of the right hand
-    iCub.pointfar(x, options);  // automatic selection of the hand
+    iCub.point(x, options);  // automatic selection of the hand
     Time::delay(2.0);
 
 
     iCub.home();
     yInfo("try to grasp %s", target.c_str());
-    bool ok=iCub.grasp(target,options);
+    bool ok=iCub.take(target,options);
     yInfo()<<(ok?"grasped!":"missed!");
     iCub.home();
 
