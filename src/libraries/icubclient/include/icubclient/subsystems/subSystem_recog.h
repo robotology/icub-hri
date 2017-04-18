@@ -69,7 +69,7 @@ public:
 
     /**
     * From one grxml grammar, return the sentence recognized for one timeout
-    * This is not supported, use recogFromGrammarLoop() instead!
+    * This is not supported, use SubSystem_Recog::recogFromGrammarLoop() instead!
     */
     yarp::os::Bottle recogFromGrammar(std::string &sInput);
 

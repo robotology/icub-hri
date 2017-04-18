@@ -46,8 +46,9 @@ protected:
 
     bool changeDefaultName(std::string new_name);
 
-public:
     yarp::os::RpcClient portRPC;
+
+public:
 
     /**
     * Default constructor.
