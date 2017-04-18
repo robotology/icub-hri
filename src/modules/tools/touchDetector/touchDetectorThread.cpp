@@ -211,9 +211,7 @@ const char* ParsingException::what() const throw()
 {
     if (line != -1)
     {
-        stringstream ss;
-        ss << "Error parsing line " << line;
-        return ss.str().c_str();
+        return "Error parsing line " + line;
     }
     else
     {
@@ -221,15 +219,11 @@ const char* ParsingException::what() const throw()
     }
 }
 
-BadFormatException::BadFormatException()
-{
-    expectedType = NULL;
-    portName = NULL;
-}
+BadFormatException::BadFormatException() { }
 
-const char* BadFormatException::what() const throw()
+const char* BadFormatException::what() throw()
 {
-    string msg = "Bad format encountered ";
+    msg = "Bad format encountered ";
     if (expectedType != NULL)
     {
         msg += "(expecting ";
@@ -246,6 +240,7 @@ const char* BadFormatException::what() const throw()
     {
         msg += "a port";
     }
+
     return msg.c_str();
 }
 

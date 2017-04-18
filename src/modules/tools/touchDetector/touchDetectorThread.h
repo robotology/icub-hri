@@ -75,12 +75,15 @@ class ParsingException: public std::exception
 
 class BadFormatException: public std::exception
 {
-    public:
-        const char* expectedType;
-        const char* portName;
-        
-        BadFormatException();
-        virtual const char* what() const throw();
+private:
+    std::string msg;
+
+public:
+    std::string expectedType;
+    std::string portName;
+
+    BadFormatException();
+    virtual const char* what() throw();
 };
 
 #endif
