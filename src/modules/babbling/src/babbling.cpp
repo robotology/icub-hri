@@ -36,30 +36,30 @@ bool Babbling::configure(yarp::os::ResourceFinder &rf) {
     Bottle *b_start_commandHead = start_pos.find("head").asList();
     Bottle *b_start_command = start_pos.find("arm").asList();
 
-    start_commandHead.resize(3, 0.0);
+    start_command_head.resize(3, 0.0);
     if ((b_start_commandHead->isNull()) || (b_start_commandHead->size() < 3)) {
         yWarning("Something is wrong in ini file. Default value is used");
-        start_commandHead[0] = -20.0;
-        start_commandHead[1] = -20.0;
-        start_commandHead[2] = +10.0;
+        start_command_head[0] = -20.0;
+        start_command_head[1] = -20.0;
+        start_command_head[2] = +10.0;
     } else {
         for (int i = 0; i < b_start_commandHead->size(); i++) {
-            start_commandHead[i] = b_start_commandHead->get(i).asDouble();
-            yDebug() << start_commandHead[i];
+            start_command_head[i] = b_start_commandHead->get(i).asDouble();
+            yDebug() << start_command_head[i];
         }
     }
 
     if ((b_start_command->isNull()) || (b_start_command->size() < 16)) {
         yWarning("Something is wrong in ini file. Default values are used");
-        start_command[0] = -45.0; start_command[1] = 35.0; start_command[2] = 0.0;
-        start_command[3] = 50.0; start_command[4] = -45.0; start_command[5] = 0.0;
-        start_command[6] = 0.0; start_command[7] = 0.0; start_command[8] = 10.0;
-        start_command[9] = 0.0; start_command[10] = 0.0; start_command[11] = 0.0;
-        start_command[12] = 0.0; start_command[13] = 0.0; start_command[14] = 0.0;
-        start_command[15] = 0.0;
+        start_command_arm[0] = -45.0; start_command_arm[1] = 35.0; start_command_arm[2] = 0.0;
+        start_command_arm[3] = 50.0; start_command_arm[4] = -45.0; start_command_arm[5] = 0.0;
+        start_command_arm[6] = 0.0; start_command_arm[7] = 0.0; start_command_arm[8] = 10.0;
+        start_command_arm[9] = 0.0; start_command_arm[10] = 0.0; start_command_arm[11] = 0.0;
+        start_command_arm[12] = 0.0; start_command_arm[13] = 0.0; start_command_arm[14] = 0.0;
+        start_command_arm[15] = 0.0;
     } else {
         for (int i = 0; i < b_start_command->size(); i++)
-            start_command[i] = b_start_command->get(i).asDouble();
+            start_command_arm[i] = b_start_command->get(i).asDouble();
     }
 
     Bottle &babbl_par = rf.findGroup("babbling_param");
@@ -289,7 +289,7 @@ void Babbling::babblingCommands(double &t, int j_idx) {
     }
 
     for (unsigned int l = 0; l < 16; l++) {
-        ref_command[l] = start_command[l] + amp * sin(freq * t * 2 * M_PI);
+        ref_command[l] = start_command_arm[l] + amp * sin(freq * t * 2 * M_PI);
     }
 
     if (part == "right_arm" || part == "left_arm") {
@@ -361,7 +361,7 @@ void Babbling::babblingCommands(double &t, int j_idx) {
 }
 
 bool Babbling::moveHeadToStartPos() {
-    yarp::sig::Vector ang = start_commandHead;
+    yarp::sig::Vector ang = start_command_head;
     if (part == "right_arm") {
         ang[0] = -ang[0];
     }
@@ -386,14 +386,14 @@ bool Babbling::gotoStartPos() {
             command = encodersLeftArm;
             for (int i = 0; i < 16; i++) {
                 ictrlLeftArm->setControlMode(i, VOCAB_CM_POSITION);
-                command[i] = start_command[i];
+                command[i] = start_command_arm[i];
             }
             posLeftArm->positionMove(command.data());
         } else {
             command = encodersRightArm;
             for (int i = 0; i < 16; i++) {
                 ictrlRightArm->setControlMode(i, VOCAB_CM_POSITION);
-                command[i] = start_command[i];
+                command[i] = start_command_arm[i];
             }
             posRightArm->positionMove(command.data());
         }
@@ -455,7 +455,7 @@ bool Babbling::init_left_arm() {
 
     for (int l = 0; l < 16; l++) {
         yInfo() << "Joint " << l << ": limits = [" << minLimArm[l] << ","
-                << maxLimArm[l] << "]. start_commad = " << start_command[l];
+                << maxLimArm[l] << "]. start_commad = " << start_command_arm[l];
     }
 
     if (posLeftArm == NULL || encsLeftArm == NULL || velLeftArm == NULL ||
@@ -512,7 +512,7 @@ bool Babbling::init_right_arm() {
 
     for (int l = 0; l < 16; l++) {
         yInfo() << "Joint " << l << ": limits = [" << minLimArm[l] << ","
-                << maxLimArm[l] << "]. start_commad = " << start_command[l];
+                << maxLimArm[l] << "]. start_commad = " << start_command_arm[l];
     }
 
     if (posRightArm == NULL || encsRightArm == NULL || velRightArm == NULL ||

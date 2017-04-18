@@ -60,8 +60,8 @@ protected:
     double amp; //!< Amplitude for sin wave
     double duration; //!< Duration for the babbling
     
-    double start_command[16]; //!< Start command for the 16 arm joints
-    yarp::sig::Vector start_commandHead; //!< Target for head in start position
+    double start_command_arm[16]; //!< Start command for the 16 arm joints
+    yarp::sig::Vector start_command_head; //!< Target for head in start position
 
 public:
     bool configure(yarp::os::ResourceFinder &rf);
