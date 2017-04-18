@@ -21,6 +21,17 @@
 
 #include <vector>
 
+/**
+ * @defgroup icubclient_tags Global defines
+ *
+ * @ingroup icubclient_libraries
+ *
+ * Global defines which are used throughout the iCubClient library
+ *
+ * @author Ugo Pattacini & Stéphane Lallée & Tobias Fischer
+ * @{
+ */
+
 #define ICUBCLIENT_OPC_INVALID_ID                 -1
 
 #define ICUBCLIENT_OPC_ENTITY_TAG                 ("entity")
@@ -131,5 +142,7 @@ const static std::vector<std::string> ALL_AVAILABLE_BODYPARTS = {
 #define ICUBCLIENT_KINECT_CMD_GET3DPOINT        ("get3D")
 #define ICUBCLIENT_KINECT_SEATED_MODE           ("seated")
 #define ICUBCLIENT_KINECT_CLOSEST_PLAYER         -1
+
+/** @} */
 
 #endif
