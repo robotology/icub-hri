@@ -146,13 +146,13 @@ public:
         switch (event)
         {
         case CV_EVENT_LBUTTONDOWN:
-            cout<<"Got a left-click."<<endl;
+            yInfo()<<"Got a left-click.";
             AgentDetector::clickX=(float)x;
             AgentDetector::clickY=(float)y;
             AgentDetector::clicked=clicked_left;
             break;
         case CV_EVENT_RBUTTONDOWN:
-            cout<<"Got a right-click."<<endl;
+            yInfo()<<"Got a right-click.";
             AgentDetector::clicked=clicked_right;
             break;
         }

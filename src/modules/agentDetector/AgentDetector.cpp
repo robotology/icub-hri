@@ -47,7 +47,7 @@ bool AgentDetector::configure(ResourceFinder &rf)
     dSince = 0.0;
     while (!opc->connect(opcName))
     {
-        cout<<"Waiting connection to OPC..."<<endl;
+        yInfo()<<"Waiting connection to OPC...";
         Time::delay(1.0);
     }
     opc->checkout();
@@ -71,7 +71,7 @@ bool AgentDetector::configure(ResourceFinder &rf)
 
     while (!Network::connect(rfh.getName(), rfhRemote.c_str()))
     {
-        cout<<"Waiting connection to RFH..."<<endl;
+        yInfo()<<"Waiting connection to RFH...";
         Time::delay(1.0);
     }
 
@@ -260,7 +260,7 @@ bool AgentDetector::respond(const Bottle& cmd, Bottle& reply)
 {
     if (cmd.get(0).asString() == "train" ) {
         reply.addString("ack");
-        cout<<"Received a training order"<<endl;
+        yInfo()<<"Received a training order";
         currentTrainingFace = cmd.get(1).asString();
     }
     else if (cmd.get(0).asString() == "change_partner_name" ) {
@@ -382,9 +382,9 @@ bool AgentDetector::updateModule()
 
             //Get the clicked point coordinate in Kinect space
             Vector clickedPoint(3);
-            cout<<"Processing a click on ("<<AgentDetector::clickX<<" "<<AgentDetector::clickY<<") --> ";
+            yInfo("Processing a click on (%f %f) -->",AgentDetector::clickX, AgentDetector::clickY);
             client.get3DPoint((int)AgentDetector::clickX,(int)AgentDetector::clickY,clickedPoint);
-            cout<<clickedPoint.toString(3,3)<<endl;
+            yInfo()<<clickedPoint.toString(3,3);
 
             Bottle bCond;
             Bottle bObject;
@@ -432,8 +432,8 @@ bool AgentDetector::updateModule()
                 cooiCub.addDouble(o->m_ego_position[1]);
                 cooiCub.addDouble(o->m_ego_position[2]);
                 rfh.write(botRPH,botRPHRep);
-                cout<<"Sent to RFH: "<<botRPH.toString().c_str()<<endl;
-                cout<<"Got from RFH: "<<botRPHRep.toString().c_str()<<endl;
+                yInfo("Sent to RFH: %s", botRPH.toString().c_str());
+                yInfo("Got from RFH: %s", botRPHRep.toString().c_str());
 
                 pointsCnt++;
             } else {
@@ -451,12 +451,12 @@ bool AgentDetector::updateModule()
                 calibBottle.addString("cal");
                 calibBottle.addString("kinect");
                 rfh.write(calibBottle,calibReply);
-                cout<<"Calibrated ! "<<calibReply.toString().c_str()<<endl;
+                yInfo("Calibrated: %s!", calibReply.toString().c_str());
 
                 calibBottle.clear();
                 calibBottle.addString("save");
                 rfh.write(calibBottle,calibReply);
-                cout<<"Saved to file ! "<<calibReply.toString().c_str()<<endl;
+                yInfo("Saved to file: %s!", calibReply.toString().c_str());
                 checkCalibration();
             }
             else
@@ -521,7 +521,7 @@ bool AgentDetector::updateModule()
                         
                         if (identities.find(p->ID) == identities.end())
                         {
-                            cout<<"Assigning name "<<playerName<<" to skeleton "<<p->ID<<endl;
+                            yInfo("Assigning name %s to skeleton %i", playerName.c_str(), p->ID);
 
                             Agent* specificAgent = opc->addOrRetrieveEntity<Agent>(playerName);
                             if(specificAgent == nullptr) {
