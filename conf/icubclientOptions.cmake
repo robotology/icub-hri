@@ -15,8 +15,6 @@ if(MSVC)
    set(CMAKE_DEBUG_POSTFIX "d")
 
 elseif(CMAKE_COMPILER_IS_GNUCXX OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang")
-
-   message(WARNING "CLang")
    # enable all warnings + extra warnings
    set(WARNINGS_LIST -Wall -Wextra)
    foreach(WARNING ${WARNINGS_LIST})
