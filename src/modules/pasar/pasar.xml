@@ -5,7 +5,8 @@
 
   <name>pasar</name>
   <doxygen-group>icubclient_modules</doxygen-group>
-  <description></description>
+  <description>%A module that gets the objects present in the OPC, and change their top down saliency according to their acceleration, appereance and disappereance.\n
+  The Bottom Up saliency is based on lumicroma and will integrate the visual component.</description>
   <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
   <version>1.0</version>
 

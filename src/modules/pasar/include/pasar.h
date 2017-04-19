@@ -45,18 +45,18 @@ struct ObjectModel
 */
 class PasarModule : public yarp::os::RFModule {
     //Parameter
-    double pTopDownAppearanceBurst;         // score of saliency for an appereance
-    double pTopDownDisappearanceBurst;      // score of saliency for an diappereance
-    double pTopDownAccelerationCoef;        // score of saliency for an acceleration detected
-    double pExponentialDecrease;            // Speed of the decrease of the saliency over the time (should be less than 1)
-    double pTopDownWaving;                  // increase of saliency if waving
-	double thresholdMovementAccelAgent;          // minimum acceleration to detect an agent
-	double thresholdMovementAccelObject;          // minimum acceleration to detect an object
-	double thresholdWaving;                 // minimum waving detected
-	double thresholdPointing;                 // minimum pointing detected
-	double rangeHaving;                 // minimum range to have an object detected
-	double persistenceHaving;                 // minimum life time of a relation "having"
-	double thresholdSaliency;
+    double pTopDownAppearanceBurst;         //!< score of saliency for an appereance
+    double pTopDownDisappearanceBurst;      //!< score of saliency for an diappereance
+    double pTopDownAccelerationCoef;        //!< score of saliency for an acceleration detected
+    double pExponentialDecrease;            //!< Speed of the decrease of the saliency over the time (should be less than 1)
+    double pTopDownWaving;                  //!< increase of saliency if waving
+    double thresholdMovementAccelAgent;     //!< minimum acceleration to detect an agent
+    double thresholdMovementAccelObject;    //!< minimum acceleration to detect an object
+    double thresholdWaving;                 //!< minimum waving detected
+    double thresholdPointing;               //!< minimum pointing detected
+    double rangeHaving;                     //!< minimum range to have an object detected
+    double persistenceHaving;               //!< minimum life time of a relation "having"
+    double thresholdSaliency;
     double dthresholdAppear;
     double dthresholdDisappear;
     double dBurstOfPointing;
@@ -64,19 +64,19 @@ class PasarModule : public yarp::os::RFModule {
     double lastTimeWaving;
     double lastTimePointing;
 
-	bool checkWaving;
-	bool checkHaving;
-	bool checkPointing;
+    bool checkWaving;
+    bool checkHaving;
+    bool checkPointing;
     ICubClient  *iCub;
 
-    yarp::os::Port handlerPort;      //a port to handle messages 
+    yarp::os::Port handlerPort;             //!< a port to handle messages
 
     list<shared_ptr<Entity>> entities;
 
-    yarp::sig::Vector rightHandt1;  // position of right at t1
-    yarp::sig::Vector rightHandt2;  // position of right at t2
-    yarp::sig::Vector leftHandt1;   // position of left hand at t1
-    yarp::sig::Vector leftHandt2;   // position of left hand at t2
+    yarp::sig::Vector rightHandt1;          //!< position of right at t1
+    yarp::sig::Vector rightHandt2;          //!< position of right at t2
+    yarp::sig::Vector leftHandt1;           //!< position of left hand at t1
+    yarp::sig::Vector leftHandt2;           //!< position of left hand at t2
 
     pair<bool, bool> presentRightHand;
     pair<bool, bool> presentLeftHand;
@@ -89,15 +89,34 @@ class PasarModule : public yarp::os::RFModule {
 
     std::string trackedObject;
 
-    bool isPointing; // if the human is pointing
-    bool isWaving; // if if the human is waving
+    bool isPointing;                        //!< if the human is pointing
+    bool isWaving;                          //!< if if the human is waving
     double initTime;
 
 protected:
+
+    /**
+     * @brief saliencyTopDown Update the salience according to the informations contained in the OPC (acceleration, appareance, disappareance)
+     */
     void saliencyTopDown();
     void saliencyNormalize();
+
+    /**
+     * @brief saliencyLeakyIntegration Decrease of the salience through time.
+     * Exponential factor pExponentialDecrease < 1
+     */
     void saliencyLeakyIntegration();
+
+    /**
+     * @brief saliencyPointing Increase the salience of the closest object from the right hand
+     * @return True if robot is pointing now, False otherwise
+     */
     bool saliencyPointing();
+
+    /**
+     * @brief saliencyWaving Increase the saliency of the agent waving
+     * @return true is the agent is wavingNow, False otherwise
+     */
     bool saliencyWaving();
     void initializeMapTiming();
 	void updateMapTiming();

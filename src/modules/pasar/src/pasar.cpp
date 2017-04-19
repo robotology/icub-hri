@@ -25,13 +25,10 @@ using namespace yarp::sig;
 using namespace std;
 
 /************************************************************************/
-bool PasarModule::configure(yarp::os::ResourceFinder &rf) {
+bool PasarModule::configure(yarp::os::ResourceFinder &rf)
+{
     string moduleName = rf.check("name", Value("pasar")).asString().c_str();
     setName(moduleName.c_str());
-
-    //    moduleName = rf.check("name",
-    //        Value("pasar")).asString();
-    //    setName(moduleName.c_str());
 
     //Parameters
     pTopDownAppearanceBurst = rf.check("parameterTopDownAppearanceBurst",
@@ -40,8 +37,6 @@ bool PasarModule::configure(yarp::os::ResourceFinder &rf) {
                                           Value(2.)).asDouble();
     pTopDownAccelerationCoef = rf.check("parameterTopDownAccelerationCoef",
                                         Value(0.1)).asDouble();
-    //pLeakyIntegrationA        =  rf.check("parameterLeakyIntegrationA",
-    //    Value(0.9)).asDouble();
     pExponentialDecrease = rf.check("ExponentialDecrease",
                                     Value(0.9)).asDouble();
     pTopDownWaving = rf.check("pTopDownWaving",
@@ -115,7 +110,7 @@ bool PasarModule::configure(yarp::os::ResourceFinder &rf) {
 
     for (auto &it : OPCEntities)
     {
-        cout << "start: checking entity: " << it.second.o.name() << " opcPresence: " << it.second.o.m_present << ", pasar presence: " << it.second.present << endl;
+        yInfo() << "start: checking entity: " << it.second.o.name() << " opcPresence: " << it.second.o.m_present << ", pasar presence: " << it.second.present;
     }
 
     yInfo() << "\n \n" << "----------------------------------------------" << "\n \n" << moduleName << " ready ! \n \n ";
@@ -125,7 +120,8 @@ bool PasarModule::configure(yarp::os::ResourceFinder &rf) {
 }
 
 /************************************************************************/
-bool PasarModule::interruptModule() {
+bool PasarModule::interruptModule()
+{
     yDebug() << "Interrupt OPC";
     iCub->opc->interrupt();
     yDebug() << "Interrupt RPC port";
@@ -134,7 +130,8 @@ bool PasarModule::interruptModule() {
 }
 
 /************************************************************************/
-bool PasarModule::close() {
+bool PasarModule::close()
+{
     if(iCub) {
         yDebug() << "Close iCub";
         iCub->close();
@@ -148,7 +145,8 @@ bool PasarModule::close() {
 }
 
 /************************************************************************/
-bool PasarModule::respond(const Bottle& command, Bottle& reply) {
+bool PasarModule::respond(const Bottle& command, Bottle& reply)
+{
     string helpMessage = string(getName().c_str()) +
             " commands are: \n" +
             "track <string name> : track the object with the given opc name \n" +
@@ -240,15 +238,7 @@ bool PasarModule::respond(const Bottle& command, Bottle& reply) {
     }
     else if (command.get(0).asString() == "set") {
         reply.addString("set");
-        /* if (command.get(1).asString()=="leak")
-        {
-        reply.addString("leak");
-        this->pLeakyIntegrationA = command.get(2).asDouble();
-        }*/
-        //if
-        //{
         reply.addString("ir");
-        //  }
     }
     return true;
 }
@@ -280,7 +270,6 @@ bool PasarModule::updateModule()
         saliencyTopDown();
         if (checkPointing) saliencyPointing();
         if (checkWaving) saliencyWaving();
-        //		if (checkHaving) checkAgentHaving();
 
         //Leaky integrate
         saliencyLeakyIntegration();
@@ -289,7 +278,6 @@ bool PasarModule::updateModule()
         auto mostSalientObject = OPCEntities.begin();
         for (auto it = OPCEntities.begin(); it != OPCEntities.end(); it++)
         {
-            //  cout<<"Saliency ("<<it->second.o.name()<<") = "<<it->second.o.m_saliency<<endl;
             if (it->second.o.m_saliency > mostSalientObject->second.o.m_saliency)
                 mostSalientObject = it;
         }
@@ -298,7 +286,7 @@ bool PasarModule::updateModule()
 
         if (OPCEntities[mostSalientObject->first].o.m_saliency > 0.0)
         {
-            cout << "Tracking : " << trackedObject << " Salience : " << OPCEntities[mostSalientObject->first].o.m_saliency << endl;
+            yInfo() << "Tracking : " << trackedObject << " Salience : " << OPCEntities[mostSalientObject->first].o.m_saliency;
         }
 
 
@@ -324,14 +312,9 @@ bool PasarModule::updateModule()
     return true;
 }
 
-
-
-/*
-*   Update the salience according to the informations contained in the OPC (acceleration, appareance, disappareance)
-*
-*/
 /************************************************************************/
-void PasarModule::saliencyTopDown() {
+void PasarModule::saliencyTopDown()
+{
     double now = yarp::os::Time::now() - initTime;
     //Add up the top down saliency
     for (auto &it : OPCEntities)
@@ -347,14 +330,14 @@ void PasarModule::saliencyTopDown() {
             // if the lastTimeSeen was more than a threshold, the object dissapeared
             disappeared = (now - it.second.lastTimeSeen > dthresholdDisappear) && (it.second.o.m_present == 0.0) && it.second.present;
             if (disappeared){
-                cout << "DISAPPEARED since: " << now - it.second.lastTimeSeen << endl;
+                yInfo() << "DISAPPEARED since: " << now - it.second.lastTimeSeen;
             }
 
             // If the object is present:
             // if the lastTimeSeen was more than a threshold, the object appeared
             appeared = (now - it.second.lastTimeSeen > dthresholdAppear) && (it.second.o.m_present == 1.0) && !it.second.present;
             if (appeared){
-                cout << "APPEARED since: " << now - it.second.lastTimeSeen << endl;
+                yInfo() << "APPEARED since: " << now - it.second.lastTimeSeen;
             }
 
             if (it.second.o.m_present == 1.0) it.second.lastTimeSeen = now;
@@ -403,9 +386,8 @@ void PasarModule::saliencyTopDown() {
 }
 
 /************************************************************************/
-void PasarModule::saliencyNormalize() {
-    //cout<<"Normalizing Saliency"<<endl;
-
+void PasarModule::saliencyNormalize()
+{
     //Get the max
     map< int, ObjectModel >::iterator mostSalientObject = OPCEntities.begin();
 
@@ -424,14 +406,9 @@ void PasarModule::saliencyNormalize() {
     }
 }
 
-/*
-*   Decrease of the salience through time.
-*   Exponential facotr pExponentialDecrease < 1
-*/
 /************************************************************************/
-void PasarModule::saliencyLeakyIntegration() {
-    //cout<<"Leaky integration"<<endl;
-    //cout<<"Membrane Activity : "<<endl;
+void PasarModule::saliencyLeakyIntegration()
+{
     for (auto &it : OPCEntities)
     {
         if (it.second.o.name() != "" && it.second.o.m_present != 0.5)
@@ -444,14 +421,12 @@ void PasarModule::saliencyLeakyIntegration() {
 }
 
 /************************************************************************/
-double PasarModule::getPeriod() {
+double PasarModule::getPeriod()
+{
     return 0.1;
 }
 
-/*
-* increase the salience of the closest object from the right hand
-*
-*/
+
 bool PasarModule::saliencyPointing()
 {
     bool startPointing = false;
@@ -512,12 +487,12 @@ bool PasarModule::saliencyPointing()
     startPointing = (now - lastTimePointing > dthresholdAppear) && !isPointing && pointingNow;
 
     if (stopPointing){
-        cout << "\t\t STOP POINTING " << endl;
+        yInfo() << "\t\t STOP POINTING ";
         isPointing = false;
     }
 
     if (startPointing){
-        cout << "\t\t POINTING START " << objectPointed << endl;
+        yInfo() << "\t\t POINTING START " << objectPointed;
         isPointing = true;
     }
     if (pointingNow){
@@ -535,10 +510,7 @@ bool PasarModule::saliencyPointing()
 }
 
 
-/*
-*  Increase the saliency of the agent waving
-*  return true is the agent is wavingNow
-*/
+
 bool PasarModule::saliencyWaving()
 {
     bool wasPresent = false;
@@ -550,7 +522,6 @@ bool PasarModule::saliencyWaving()
                 && (it.second.o.name() != "iCub")
                 && (it.second.o.name() != "icub")){
             ag = dynamic_cast<Agent*>(iCub->opc->getEntity(it.second.o.name()));
-            //Vector vec = ag->m_body.m_parts["handRight"];
             wasPresent = true;
         }
     }
@@ -705,7 +676,7 @@ void PasarModule::checkAgentHaving()
             Agent *ag = dynamic_cast<Agent*>(iCub->opc->getEntity(it.second.o.name()));
 
             for (auto &ob : OPCEntities){
-                // calcul of distance onl in X and Y
+                // calculate of distance onl in X and Y
                 double distance = (ag->m_ego_position[0] - ob.second.o.m_ego_position[0]) *
                         (ag->m_ego_position[0] - ob.second.o.m_ego_position[0]) +
                         (ag->m_ego_position[1] - ob.second.o.m_ego_position[1]) *
