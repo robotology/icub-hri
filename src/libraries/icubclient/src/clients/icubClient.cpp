@@ -179,7 +179,7 @@ bool ICubClient::changeName(Entity *e, const std::string &newName) {
             allOkay = false;
         }
         else {
-            SubSystem_agentDetector sub_agent = dynamic_cast<SubSystem_agentDetector*>(subSystems["agentDetector"]);
+            SubSystem_agentDetector* sub_agent = dynamic_cast<SubSystem_agentDetector*>(subSystems["agentDetector"]);
             if(!sub_agent) {
                 yError() << "Could not cast to SubSystem_agentDetector!";
                 return false;
