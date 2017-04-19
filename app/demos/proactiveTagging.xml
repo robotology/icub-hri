@@ -1,5 +1,5 @@
 <application>
-    <name>WYSIWYD DEMO Y3 @UPF</name>
+    <name>icub-client proactive tagging</name>
     <dependencies>
         <port>/icub/camcalib/right/out</port>
         <port>/icub/camcalib/left/out</port>
@@ -10,24 +10,25 @@
     </dependencies>
 
     <module>
-      <name>yarpdev</name>
-      <parameters>--name /icub/face/raw --device serial --subdevice serialport --context faceExpressions --from serialport.ini</parameters>
-	  <node>pc104</node>
-	<tag>face_device</tag>
+        <name>yarpdev</name>
+        <parameters>--name /icub/face/raw --device serial --subdevice serialport --context faceExpressions --from serialport.ini</parameters>
+	    <node>pc104</node>
+        <tag>face_device</tag>
    </module>
-   <module>
-      <name>emotionInterface</name>
-      <parameters>--name /icub/face/emotions --context faceExpressions --from emotions.ini</parameters>
-      <node>pc104</node>
-	<tag>emotions_interface</tag>
-   </module>
+
+    <module>
+        <name>emotionInterface</name>
+        <parameters>--name /icub/face/emotions --context faceExpressions --from emotions.ini</parameters>
+        <node>pc104</node>
+	    <tag>emotions_interface</tag>
+    </module>
 
     <module>
         <name>actionsRenderingEngine</name>
         <parameters>--motor::block_eyes 5.0 --motor::impedance on</parameters>
         <node>icubAlien</node>
 	    <ensure>	   
-	       <wait when="stop">21</wait>
+	        <wait when="stop">18</wait>
 	    </ensure>
     </module>
 
@@ -36,7 +37,7 @@
         <parameters></parameters>
         <node>icubVulcan</node>
 	    <ensure>	   
-	       <wait when="stop">18</wait>
+	        <wait when="stop">16</wait>
 	    </ensure>
         <dependencies>
             <port timeout="10">/actionsRenderingEngine/cmd:io</port>
@@ -48,7 +49,7 @@
         <parameters></parameters>
         <node>icub-debian1</node>
 	    <ensure>	   
-	       <wait when="stop">3</wait>
+	        <wait when="stop">3</wait>
 	    </ensure>
         <dependencies>
             <port timeout="10">/karmaMotor/rpc</port>
@@ -60,7 +61,7 @@
         <node>ikart</node>
         <parameters>--seatedMode</parameters>
 	    <ensure>	   
-	       <wait when="stop">13</wait>
+	        <wait when="stop">13</wait>
 	    </ensure>
     </module>
 
@@ -69,23 +70,11 @@
         <parameters>--name OPC --no-load-db --no-save-db</parameters>
         <node>icubVulcan</node>
 	    <ensure>	   
-	       <wait when="stop">17</wait>
+	        <wait when="stop">17</wait>
 	    </ensure>
         <dependencies>
             <port timeout="10">/karmaMotor/rpc</port>
         </dependencies>
-    </module>
-
-    <module>
-        <name>autobiographicalMemory</name>
-        <parameters></parameters>
-        <node>icubAlien</node>
-        <dependencies>
-            <port timeout="10">/OPC/rpc</port>
-        </dependencies>
-	    <ensure>	   
-	       <wait when="stop">15</wait>
-	    </ensure>
     </module>
 
     <module>
@@ -96,7 +85,7 @@
             <port timeout="10">/OPC/rpc</port>
         </dependencies>
 	    <ensure>	   
-	       <wait when="stop">13</wait>
+	        <wait when="stop">13</wait>
 	    </ensure>
     </module>
 
@@ -110,7 +99,7 @@
             <port timeout="10">/referenceFrameHandler/rpc</port>
         </dependencies>
 	    <ensure>	   
-	       <wait when="stop">11</wait>
+	        <wait when="stop">11</wait>
 	    </ensure>
     </module>
 
@@ -122,7 +111,7 @@
         </dependencies>
         <node>icub-debian1</node>
 	    <ensure>	   
-	       <wait when="stop">5</wait>
+	        <wait when="stop">5</wait>
 	    </ensure>
     </module>
 
@@ -130,20 +119,18 @@
         <name>babbling</name>
         <parameters></parameters>
         <node>icubAlien</node>
-        <dependencies>
-            <port timeout="10">/autobiographicalMemory/rpc</port>
-        </dependencies>
 	    <ensure>	   
-	       <wait when="stop">7</wait>
+	        <wait when="stop">7</wait>
 	    </ensure>
     </module>
 
+    <!-- iol2opc related start -->
     <module>
         <name>himrepClassifier</name>
         <parameters></parameters>
         <node>icubVulcan</node>
 	    <ensure>	   
-	       <wait when="stop">12</wait>
+	        <wait when="stop">12</wait>
 	    </ensure>
     </module>
 
@@ -152,7 +139,7 @@
         <parameters></parameters>
         <node>icububuntu</node>
 	    <ensure>	   
-	       <wait when="stop">10</wait>
+	        <wait when="stop">10</wait>
 	    </ensure>
     </module>
 
@@ -167,7 +154,7 @@
             <port timeout="10">/iolReachingCalibration/rpc</port>
         </dependencies>
 	    <ensure>	   
-	       <wait when="stop">8</wait>
+	        <wait when="stop">8</wait>
 	    </ensure>
     </module>
 
@@ -176,24 +163,26 @@
         <parameters></parameters>
         <node>icububuntu</node>
 	    <ensure>	   
-	       <wait when="stop">13</wait>
+	        <wait when="stop">13</wait>
 	    </ensure>
     </module>
+
     <module>
         <name>caffeCoder</name>
         <parameters></parameters>
         <node>icubVulcan</node>
 	    <ensure>	   
-	       <wait when="stop">13</wait>
+	        <wait when="stop">13</wait>
 	    </ensure>
     </module>
+
     <module>
         <name>linearClassifierModule</name>
         <parameters>--BufferSize 1 --CSVM 1.0 --databaseFolder IOL2OPCDatabase
             --WeightedSVM 1</parameters>
         <node>icubVulcan</node>
 	    <ensure>	   
-	       <wait when="stop">14</wait>
+	        <wait when="stop">14</wait>
 	    </ensure>
     </module>
 
@@ -202,63 +191,21 @@
         <parameters></parameters>
         <node>icubVulcan</node>
 	    <ensure>	   
-	       <wait when="stop">13</wait>
+	        <wait when="stop">13</wait>
 	    </ensure>
     </module>
+    <!-- iol2opc related end -->
 
-    <!--
-    <module>
-        <name>attentionSelector</name>
-        <parameters></parameters>
-        <node>icub-b3</node>
-        <dependencies>
-            <port timeout="10">/OPC/rpc</port>
-            <port timeout="10">/actionsRenderingEngine/cmd:io</port>
-        </dependencies>
-    </module>
-    -->
- 
     <module>
         <name>pasar</name>
         <parameters></parameters>
         <node>icubVulcan</node>
         <dependencies>
             <port timeout="10">/OPC/rpc</port>
-            <port timeout="10">/autobiographicalMemory/rpc</port>
             <port timeout="10">/agentDetector/skeleton:o</port>
         </dependencies>
 	    <ensure>	   
-	       <wait when="stop">9</wait>
-	    </ensure>
-    </module>
-
-    <module>
-        <name>lrh</name>
-        <parameters></parameters>
-        <node>icubAlien</node>
-        <dependencies>
-            <port timeout="10">/OPC/rpc</port>
-            <port timeout="10">/autobiographicalMemory/rpc</port>
-        </dependencies>
-	    <ensure>	   
-	       <wait when="stop">13</wait>
-	    </ensure>
-    </module>
-
-    <module>
-        <name>narrativeGraph</name>
-        <parameters></parameters>
-        <node>icubVulcan</node>
-        <dependencies>
-            <port timeout="10">/OPC/rpc</port>
-            <port timeout="10">/actionsRenderingEngine/cmd:io</port>
-            <port timeout="10">/autobiographicalMemory/rpc</port>
-            <port timeout="10">/iSpeak</port>
-            <port timeout="10">/speechRecognizer/rpc</port>
-            <port timeout="10">/lrh/rpc</port>
-        </dependencies>
-	    <ensure>	   
-	       <wait when="stop">15</wait>
+	        <wait when="stop">9</wait>
 	    </ensure>
     </module>
 
@@ -267,14 +214,10 @@
         <parameters>--from skinManAll.ini --context skinGui</parameters>
         <node>icububuntu</node>
 	    <ensure>	   
-	       <wait when="stop">11</wait>
+	        <wait when="stop">11</wait>
 	    </ensure>
     </module>
-    <module>
-        <name>yarpview</name>
-        <parameters>--name /yarpview/autobiographicalMemory/icub/camcalib/left/out/KSC0 --x 1450 --y 20 --h 480 --w 480 --compact</parameters>
-        <node>icubAlien</node>
-    </module>
+
     <module>
         <name>yarpview</name>
         <parameters>--name /viewer/iol/lbpSegmented --x 30 --y -30 --p 50 --compact</parameters>
@@ -314,25 +257,25 @@
 	    </ensure>
     </module>
 
-  <module>
-    <name>iCubSkinGui</name>
-    <!-- Remember to use the proper configuration files (i.e. "_V2.ini" for V2 robots) --> 
-    <parameters>--from right_hand_V2_1.ini --useCalibration --xpos 935 --ypos 600 --width 200 --height 200</parameters>
-    <node>icubAlien</node>
-    <tag>skinGuiRH</tag>
+    <module>
+        <name>iCubSkinGui</name>
+        <!-- Remember to use the proper configuration files (i.e. "_V2.ini" for V2 robots) --> 
+        <parameters>--from right_hand_V2_1.ini --useCalibration --xpos 935 --ypos 600 --width 200 --height 200</parameters>
+        <node>icubAlien</node>
+        <tag>skinGuiRH</tag>
 	    <ensure>	   
-	       <wait when="stop">9</wait>
+	        <wait when="stop">9</wait>
 	    </ensure>
-  </module>
+    </module>
 
-   <module>
+    <module>
        <name>samSupervisor.py</name>
        <parameters></parameters>
        <node>icubVulcan</node>
 	    <ensure>	   
-	       <wait when="stop">11</wait>
+	        <wait when="stop">11</wait>
 	    </ensure>
-  </module>
+    </module>
 
     <module>
         <name>actionRecogDataDumper</name>
@@ -342,7 +285,7 @@
             <port timeout="10">/OPC/rpc</port>
         </dependencies>
 	    <ensure>	   
-	       <wait when="stop">9</wait>
+	        <wait when="stop">9</wait>
 	    </ensure>
     </module>
 
@@ -354,19 +297,8 @@
             <port timeout="10">/OPC/rpc</port>
         </dependencies>
 	    <ensure>	   
-	       <wait when="stop">9</wait>
+	        <wait when="stop">9</wait>
 	    </ensure>
-    </module>
-
-
-    <module>
-        <name>VMI.sh</name>
-        <parameters></parameters>
-        <node>icubAlien</node>
-        <dependencies>
-            <port timeout="10">/sam/rpc:i</port>
-            <port timeout="10">/sam/faces/imageData:o</port>
-        </dependencies>
     </module>
 
     <module>
@@ -382,9 +314,9 @@
 	    </ensure>
     </module>
 
-   <module>
+    <module>
         <name>sensationManager</name>
-        <parameters>--object_valence -1 --hand_valence 0.7</parameters>
+        <parameters></parameters>
         <node>icubVulcan</node>
         <dependencies>
             <port timeout="10">/OPC/rpc</port>
@@ -393,6 +325,7 @@
 	       <wait when="stop">8</wait>
 	    </ensure>
     </module>
+
     <module>
         <name>homeostasis</name>
         <parameters></parameters>
@@ -408,7 +341,6 @@
         <node>icubVulcan</node>
         <dependencies>
             <port timeout="10">/OPC/rpc</port>
-            <port timeout="10">/autobiographicalMemory/rpc</port>
             <port timeout="10">/iSpeak</port>
             <port timeout="10">/speechRecognizer/rpc</port>
             <port timeout="10">/actionsRenderingEngine/cmd:io</port>
@@ -432,11 +364,9 @@
             <port timeout="10">/OPC/rpc</port>
             <port timeout="10">/iSpeak</port>
             <port timeout="10">/actionsRenderingEngine/cmd:io</port>
-            <port timeout="10">/autobiographicalMemory/rpc</port>
             <port timeout="20">/opcSensation/unknown_entities:o</port>
             <port timeout="20">/opcSensation/known_entities:o</port>
             <port timeout="20">/proactiveTagging/rpc</port>
-            <port timeout="10">/narrativeGraph/rpc</port>
             <port timeout="10">/sam/rpc:i</port>
         </dependencies>
 	    <ensure>	   
@@ -444,34 +374,14 @@
 	    </ensure>
     </module>
 
-
     <module>
         <name>allostaticController</name>
         <parameters></parameters>
         <node>icubVulcan</node>
         <dependencies>
             <port timeout="10">/opcSensation/opc_has_unknown:o</port>
-            <port timeout="10">/autobiographicalMemory/rpc</port>
             <port timeout="10">/homeostasis/rpc</port>
             <port timeout="35">/BehaviorManager/trigger:i</port>
-        </dependencies>
-	    <ensure>	   
-	       <wait when="stop">2</wait>
-	    </ensure>
-    </module>
-
-
-    <module>
-        <name>planner</name>
-        <parameters></parameters>
-        <node>icubVulcan</node>
-        <dependencies>
-            <port timeout="10">/OPC/rpc</port>
-            <port timeout="10">/autobiographicalMemory/rpc</port>
-            <port timeout="10">/homeostasis/rpc</port>
-            <port timeout="35">/BehaviorManager/trigger:i</port>
-            <port timeout="35">/ears/target:o</port>
-            <port timeout="35">/SensationManager/rpc</port>
         </dependencies>
 	    <ensure>	   
 	       <wait when="stop">2</wait>
@@ -495,23 +405,13 @@
         </dependencies>
     </module>
 
+    <connection>
+        <from>/icub/face/emotions/out</from>
+        <to>/icub/face/raw/in</to>
+        <protocol>tcp</protocol>
+    </connection> 
 
-    <module>
-        <name>command.sh</name>
-        <parameters></parameters>
-        <node>icubAlien</node>
-        <dependencies>
-            <port timeout="10">/speechRecognizer/rpc</port>
-        </dependencies>
-    </module>
-
-
-  <connection>
-  <from>/icub/face/emotions/out</from>
-  <to>/icub/face/raw/in</to>
-  <protocol>tcp</protocol>
-</connection> 
-
+    <!-- iol2opc related start -->
     <connection>
         <from>/icub/camcalib/right/out</from>
         <to>/SFM/right:i</to>
@@ -607,6 +507,8 @@
         <to>/iol2opc/img:i</to>
         <protocol>tcp</protocol>
     </connection>
+    <!-- iol2opc related end -->
+
     <connection>
         <from>/iolReachingCalibration/are</from>
         <to>/actionsRenderingEngine/cmd:io</to>
@@ -627,6 +529,8 @@
         <to>/viewer/skeleton</to>
         <protocol>udp</protocol>
     </connection>
+
+    <!-- skin related start -->
     <connection>
         <from>/icub/skin/torso_comp</from>
         <to>/touchDetector/torso:i</to>
@@ -662,7 +566,9 @@
         <to>/touchDetector/right_hand:i</to>
         <protocol>udp</protocol>
     </connection>
+    <!-- skin related end -->
 
+    <!-- iCubGui related start -->
     <connection>
         <from>/guiUpdater/gui:o</from>
         <to>/iCubGui/objects</to>
@@ -703,54 +609,36 @@
         <to>/iCubGui/forces</to>
         <protocol>udp</protocol>
     </connection>
-  <connection>
-    <from>/icub/skin/right_hand_comp</from>
-    <to>/skinGui/right_hand:i</to>
-    <protocol>udp</protocol>
-  </connection>
-  <connection>
-      <from>/sam/opcRpc:o</from>
-      <to>/OPC/rpc</to>
-      <protocol>tcp</protocol>
-  </connection>
-  <connection>
-      <from>/actionRecogDataDumper/data/dump:o</from>
-      <to>/sam/actions/actionData:i</to>
-      <protocol>udp</protocol>
-  </connection>
-  <connection>
-      <from>/CLM/imageSeg/out</from>
-      <to>/viewer/faceSegmentation</to>
-      <protocol>udp</protocol>
-  </connection>
-  <connection>
-      <from>/CLM/imageSeg/out</from>
-      <to>/sam/faces/imageData:i</to>
-      <protocol>udp</protocol>
-  </connection>
-  <connection>
-      <from>/kinectServer/image:o</from>
-      <to>/CLM/image/in</to>
-      <protocol>udp</protocol>
-  </connection>
-  <connection>
-      <from>/sam/faces/imageData:o</from>
-      <to>/sam/unity/face:i</to>
-      <protocol>udp</protocol>
-  </connection>
-  <connection>
-      <from>/sam/unity/generate:o</from>
-      <to>/sam/rpc:i</to>
-      <protocol>udp</protocol>
-  </connection>
-  <connection>
-      <from>/sam/unity/paor:i</from>
-      <to>/narrativeGraph/icubClient/lrh:o:sam</to>
-      <protocol>udp</protocol>
-  </connection>
-  <connection>
-      <from>/speechRecognizer/rpc</from>
-      <to>/speechvisualizer</to>
-      <protocol>tcp+log.in</protocol>
-  </connection>
+    <connection>
+        <from>/icub/skin/right_hand_comp</from>
+        <to>/skinGui/right_hand:i</to>
+        <protocol>udp</protocol>
+    </connection>
+    <!-- iCubGui related end -->
+
+    <connection>
+        <from>/sam/opcRpc:o</from>
+        <to>/OPC/rpc</to>
+        <protocol>tcp</protocol>
+    </connection>
+    <connection>
+        <from>/actionRecogDataDumper/data/dump:o</from>
+        <to>/sam/actions/actionData:i</to>
+        <protocol>udp</protocol>
+    </connection>
+    <connection>
+        <from>/CLM/imageSeg/out</from>
+        <to>/viewer/faceSegmentation</to>
+        <protocol>udp</protocol>
+    </connection>
+    <connection>
+        <from>/CLM/imageSeg/out</from>
+        <to>/sam/faces/imageData:i</to>
+        <protocol>udp</protocol>
+    </connection>
+    <connection>
+        <from>/kinectServer/image:o</from>
+        <to>/CLM/image/in</to>
+        <protocol>udp</protocol>
+    </connection>
 </application>
