@@ -30,7 +30,6 @@ bool AgentDetector::configure(ResourceFinder &rf)
     period = rf.check("period",Value(0.03)).asDouble();
     int verbosity=rf.check("verbosity",Value(0)).asInt();
     string name=rf.check("name",Value("agentDetector")).asString().c_str();
-    useFaceRecognition = rf.check("useFaceRecognition");
     handleMultiplePlayers = rf.check("multiplePlayers");
     isMounted = !rf.check("isFixed");
     string show=rf.check("showImages",Value("false")).asString().c_str();
@@ -203,34 +202,7 @@ bool AgentDetector::configure(ResourceFinder &rf)
         }
     }
 
-    //Initialise Face Recognizer
-    if (useFaceRecognition)
-    {    
-        string faceRecognName = "/";
-        faceRecognName+=name;
-        faceRecognName+="/faceRecognizer:rpc";
-        faceRecognizerModule.open(faceRecognName.c_str());
-
-        string faceRecognResName = "/";
-        faceRecognResName+=name;
-        faceRecognResName+="/faceRecognizer/results:i";
-        faceRecognizerModuleResults.open(faceRecognResName.c_str());
-
-        // WARNING: Do not use getContextPath if that ever should be used again!
-        //recognizer->loadTrainingSet(rf.getContextPath().c_str());
-        //recognizer->Train();
-        //cout<<"Loading recognizer: "
-        //    <<recognizer->loadRecognizer("defaultFaces.tpc")<<endl;
-    }
-    else
-    {
-        //Load the skeletonPatterns
-    }
-
-    string rpcName = "/";
-    rpcName+=name;
-    rpcName+="/rpc";
-    rpc.open(rpcName.c_str());
+    rpc.open("/"+name+"/rpc");
     attach(rpc);
 
     pointsCnt=0;
@@ -659,15 +631,6 @@ bool AgentDetector::updateModule()
 
 void AgentDetector::setIdentity(Player p, string name)
 {
-    if (useFaceRecognition)
-    {
-        Bottle bFeed;
-        bFeed.clear();
-        bFeed.addString("acquire");
-        bFeed.addString(name.c_str());
-        faceRecognizerModule.write(bFeed);
-    }
-
     this->skeletonPatterns[name.c_str()] = getSkeletonPattern(p);
 }
 
@@ -718,52 +681,34 @@ string AgentDetector::getIdentity(Player p)
     {
         return identities[p.ID];
     }
-    if (useFaceRecognition)
+
+    if (skeletonPatterns.size()>0)
     {
-        Bottle* results = faceRecognizerModuleResults.read(false);
-        if (results)
+        double bestVal = DBL_MAX;
+        string bestName = partner_default_name;
+
+        Vector currentPattern = getSkeletonPattern(p);
+        for(map<string, Vector>::iterator patternIt = skeletonPatterns.begin(); patternIt != skeletonPatterns.end();patternIt++)
         {
-            for(unsigned int i = 0; results->size() ; i++)
+            double distance = 0;
+            for(size_t i=0; i<currentPattern.size();i++)
             {
-                Bottle* bFace = results->get(i).asList();
-                string name = bFace->get(0).asString().c_str();
-                //todo check if the face location is the one of the actual guy
-                return name;
+                distance += pow( patternIt->second[i] - currentPattern[i], 2.0);
+            }
+            distance = sqrt(distance);
+
+            if (distance < bestVal)
+            {
+                bestVal = distance;
+                bestName = patternIt->first;
             }
         }
+        return bestName;
     }
     else
     {
-        if (skeletonPatterns.size()>0)
-        {
-            double bestVal = DBL_MAX;
-            string bestName = partner_default_name;
-
-            Vector currentPattern = getSkeletonPattern(p);
-            for(map<string, Vector>::iterator patternIt = skeletonPatterns.begin(); patternIt != skeletonPatterns.end();patternIt++)
-            {
-                double distance = 0;
-                for(size_t i=0; i<currentPattern.size();i++)
-                {
-                    distance += pow( patternIt->second[i] - currentPattern[i], 2.0);
-                }
-                distance = sqrt(distance);
-
-                if (distance < bestVal)
-                {
-                    bestVal = distance;
-                    bestName = patternIt->first;
-                }
-            }
-            return bestName;
-        }
-        else
-        {
-            return partner_default_name;
-        }
-
+        return partner_default_name;
     }
-    return partner_default_name;
 }
 
 Vector AgentDetector::transform2IR(Vector v)

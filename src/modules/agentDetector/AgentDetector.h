@@ -63,9 +63,6 @@ protected:
     static float clickX, clickY;
 
     //Agent Identity related
-    bool useFaceRecognition;
-    Port faceRecognizerModule;
-    BufferedPort<Bottle> faceRecognizerModuleResults;
     Agent* partner;
     map<int, string> identities;
     string currentTrainingFace;
