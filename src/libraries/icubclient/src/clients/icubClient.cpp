@@ -179,18 +179,24 @@ bool ICubClient::changeName(Entity *e, const std::string &newName) {
             allOkay = false;
         }
         else {
-            dynamic_cast<SubSystem_agentDetector*>(subSystems["agentDetector"])->pause();
+            SubSystem_agentDetector sub_agent = dynamic_cast<SubSystem_agentDetector*>(subSystems["agentDetector"]);
+            if(!sub_agent) {
+                yError() << "Could not cast to SubSystem_agentDetector!";
+                return false;
+            }
+
+            sub_agent->pause();
 
             opc->changeName(e, newName);
             opc->commit(e);
 
-            if (!dynamic_cast<SubSystem_agentDetector*>(subSystems["agentDetector"])->changeDefaultName(newName)) {
+            if (!sub_agent->changeDefaultName(newName)) {
                 say("could not change default name of partner");
                 yError() << "[SubSystem_agentDetector] Could not change default name of partner";
                 allOkay = false;
             }
 
-            dynamic_cast<SubSystem_agentDetector*>(subSystems["agentDetector"])->resume();
+            sub_agent->resume();
         }
     }
     else if (e->entity_type() == ICUBCLIENT_OPC_ENTITY_OBJECT) {
@@ -203,8 +209,9 @@ bool ICubClient::changeName(Entity *e, const std::string &newName) {
             allOkay = false;
         }
         else {
+            SubSystem_IOL2OPC* sub_iol2opc = dynamic_cast<SubSystem_IOL2OPC*>(subSystems["iol2opc"]);
             string oldName = e->name();
-            if (!dynamic_cast<SubSystem_IOL2OPC*>(subSystems["iol2opc"])->changeName(oldName, newName)) {
+            if (!sub_iol2opc || !sub_iol2opc->changeName(oldName, newName)) {
                 yError() << "iol2opc did not change name successfuly";
                 say("iol2opc did not change name successfuly");
                 allOkay = false;
@@ -403,12 +410,15 @@ list<Object*> ICubClient::getObjectsInRange()
     list<Entity*> allEntities = opc->EntitiesCache();
     for (list<Entity*>::iterator it = allEntities.begin(); it != allEntities.end(); it++)
     {
-        if ((*it)->isType(ICUBCLIENT_OPC_ENTITY_OBJECT) && (dynamic_cast<Object*>(*it))->m_present == 1.0)
+        if ((*it)->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
         {
-            Vector itemPosition = this->icubAgent->getSelfRelativePosition((dynamic_cast<Object*>(*it))->m_ego_position);
-
-            if (isTargetInRange(itemPosition))
-                inRange.push_back(dynamic_cast<Object*>(*it));
+            Object* o = dynamic_cast<Object*>(*it);
+            if(o && o->m_present == 1.0) {
+                Vector itemPosition = this->icubAgent->getSelfRelativePosition((dynamic_cast<Object*>(*it))->m_ego_position);
+    
+                if (isTargetInRange(itemPosition))
+                    inRange.push_back(dynamic_cast<Object*>(*it));
+            }
         }
     }
     return inRange;

@@ -210,8 +210,15 @@ Entity *OPCClient::getEntity(int id, bool forceUpdate)
         return NULL;
     }
 
+    Bottle* reply_bottle = reply.get(1).asList();
+    if(!reply_bottle) {
+        yError() << "Unable to talk correctly to OPC in getEntity with ID";
+        yError() << "Reply does not contain Bottle as expected";
+        return NULL;
+    }
+
     Entity* newE = NULL;
-    std::string newEntityType = reply.get(1).asList()->find("entity").asString().c_str();
+    std::string newEntityType = reply_bottle->find("entity").asString().c_str();
 
     //Cast to the right type
     if(newEntityType == "entity")
@@ -230,10 +237,9 @@ Entity *OPCClient::getEntity(int id, bool forceUpdate)
     }
 
     //Update the fields
-    newE->fromBottle(*reply.get(1).asList());
+    newE->fromBottle(*reply_bottle);
     newE->m_opc_id = id;
     newE->m_original_entity = newE->asBottle();
-
 
     //Commit to the dictionary
     entitiesByID[newE->opc_id()] = newE;
