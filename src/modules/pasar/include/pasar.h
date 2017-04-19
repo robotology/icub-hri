@@ -21,17 +21,12 @@
 #ifndef _PASAR_MODULE_H_
 #define _PASAR_MODULE_H_
 
+#include <utility>
 #include "icubclient/clients/icubClient.h"
-
-using namespace icubclient;
-using namespace yarp::os;
-using namespace yarp::sig;
-using namespace yarp::dev;
-using namespace std;
 
 struct ObjectModel
 {
-    Object o;
+    icubclient::Object o;
     double speed;
     double acceleration;
     int restingSteps;
@@ -54,40 +49,36 @@ class PasarModule : public yarp::os::RFModule {
     double thresholdMovementAccelObject;    //!< minimum acceleration to detect an object
     double thresholdWaving;                 //!< minimum waving detected
     double thresholdPointing;               //!< minimum pointing detected
-    double rangeHaving;                     //!< minimum range to have an object detected
-    double persistenceHaving;               //!< minimum life time of a relation "having"
     double thresholdSaliency;
     double dthresholdAppear;
     double dthresholdDisappear;
-    double dBurstOfPointing;
+    double dBurstOfPointing;                //!< how much to increase saliency if object is pointed at
 
     double lastTimeWaving;
     double lastTimePointing;
 
-    bool checkWaving;
-    bool checkHaving;
-    bool checkPointing;
-    ICubClient  *iCub;
+    bool checkWaving;                       //!< whether to detect waving of an agent
+    bool checkPointing;                     //!< whether to detect pointing of an agent
+    icubclient::ICubClient  *iCub;
 
     yarp::os::Port handlerPort;             //!< a port to handle messages
 
-    list<shared_ptr<Entity>> entities;
+    std::list<std::shared_ptr<icubclient::Entity>> entities;
 
     yarp::sig::Vector rightHandt1;          //!< position of right at t1
     yarp::sig::Vector rightHandt2;          //!< position of right at t2
     yarp::sig::Vector leftHandt1;           //!< position of left hand at t1
     yarp::sig::Vector leftHandt2;           //!< position of left hand at t2
 
-    pair<bool, bool> presentRightHand;
-    pair<bool, bool> presentLeftHand;
+    std::pair<bool, bool> presentRightHand; //!< first: whether right hand was present at t-1; second: whether right hand is present (at t)
+    std::pair<bool, bool> presentLeftHand;  //!< first: whether left hand was present at t-1; second: whether left hand is present (at t)
 
-    map<int, ObjectModel>  presentObjectsLastStep;
-    map<int, pair<double, double> > presentLastSpeed;
-    map<int, pair<double, double> > presentCurrentSpeed;
-    map<int, ObjectModel>  OPCEntities;
+    std::map<int, ObjectModel>  presentObjectsLastStep;
+    std::map<int, std::pair<double, double> > presentLastSpeed;
+    std::map<int, std::pair<double, double> > presentCurrentSpeed;
+    std::map<int, ObjectModel>  OPCEntities;
 
-
-    std::string trackedObject;
+    std::string trackedObject;              //!< most salient object which is being tracked
 
     bool isPointing;                        //!< if the human is pointing
     bool isWaving;                          //!< if if the human is waving
@@ -99,6 +90,10 @@ protected:
      * @brief saliencyTopDown Update the salience according to the informations contained in the OPC (acceleration, appareance, disappareance)
      */
     void saliencyTopDown();
+
+    /**
+     * @brief saliencyNormalize Normalize salience such that maximum salience = 1
+     */
     void saliencyNormalize();
 
     /**
@@ -120,7 +115,6 @@ protected:
     bool saliencyWaving();
     void initializeMapTiming();
 	void updateMapTiming();
-	void checkAgentHaving();
 
 public:
     bool configure(yarp::os::ResourceFinder &rf); // configure all the module parameters and return true if successful

@@ -68,13 +68,6 @@ bool PasarModule::configure(yarp::os::ResourceFinder &rf)
                                Value(0.02)).asDouble();
     thresholdSaliency = rf.check("thresholdSaliency",
                                  Value(0.005)).asDouble();
-    rangeHaving = rf.check("rangeHaving",
-                           Value(0.3)).asDouble();
-    persistenceHaving = rf.check("persistenceHaving",
-                                 Value(1.0)).asDouble();
-
-    //Ports
-
 
     bool isRFVerbose = true;
     iCub = new ICubClient(moduleName, "pasar", "pasar.ini", isRFVerbose);
@@ -88,14 +81,12 @@ bool PasarModule::configure(yarp::os::ResourceFinder &rf)
 
     checkPointing = rf.find("isPointing").asInt() == 1;
     checkWaving = rf.find("isWaving").asInt() == 1;
-    checkHaving = rf.find("isHaving").asInt() == 0;
 
     isPointing = false;
     isWaving = false;
 
     yInfo() << " pointing: " << checkPointing;
     yInfo() << " waving: " << checkWaving;
-    yInfo() << " having: " << checkHaving;
 
     if (!handlerPort.open(("/" + moduleName + "/rpc").c_str())) {
         yError() << getName() << ": Unable to open port rpc";
@@ -191,27 +182,6 @@ bool PasarModule::respond(const Bottle& command, Bottle& reply)
                 yInfo() << " start pointing";
                 reply.addString("ack");
                 reply.addString("start pointing");
-            }
-        }
-    }
-    else if (command.get(0).asString() == "having") {
-        if (command.size() != 2)
-        {
-            reply.addString("error in PASAR: Bottle 'having' misses information (on/off)");
-        }
-        else
-        {
-            if (command.get(1).asString() == "off")
-            {
-                checkHaving = false;
-                yInfo() << " stop having";
-                reply.addString("stop having");
-            }
-            else if (command.get(1).asString() == "on")
-            {
-                checkHaving = true;
-                yInfo() << " start having";
-                reply.addString("start having");
             }
         }
     }
@@ -666,36 +636,3 @@ void PasarModule::initializeMapTiming()
     }
 }
 
-
-void PasarModule::checkAgentHaving()
-{
-    // founding all agents:
-    for (auto &it : OPCEntities){
-        if (it.second.o.entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT
-                && (it.second.present || it.second.o.name() != "icub")){
-            Agent *ag = dynamic_cast<Agent*>(iCub->opc->getEntity(it.second.o.name()));
-
-            for (auto &ob : OPCEntities){
-                // calculate of distance onl in X and Y
-                double distance = (ag->m_ego_position[0] - ob.second.o.m_ego_position[0]) *
-                        (ag->m_ego_position[0] - ob.second.o.m_ego_position[0]) +
-                        (ag->m_ego_position[1] - ob.second.o.m_ego_position[1]) *
-                        (ag->m_ego_position[1] - ob.second.o.m_ego_position[1]);
-                distance = sqrt(distance);
-                if (distance < rangeHaving){
-                    //create relation
-                    Relation relHaving;
-                    relHaving.m_subject = ag->name();
-                    relHaving.m_verb = "have";
-                    relHaving.m_object = ob.second.o.name();
-
-                    yInfo() << "\t" << relHaving.toString() << " distance: " << distance;
-
-                    iCub->opc->addRelation(relHaving, persistenceHaving);
-                }
-            }
-        }
-    }
-
-    iCub->opc->commit();
-}
