@@ -4,8 +4,8 @@
 
 project(touchDetector)
 
-file(GLOB folder_source *.cpp)
-file(GLOB folder_header *.h)
+file(GLOB folder_source src/*.cpp)
+file(GLOB folder_header include/*.h)
 set(doc_files ${PROJECT_NAME}.xml)
 
 source_group("Source Files" FILES ${folder_source})
