@@ -65,12 +65,11 @@ bool AgentDetector::configure(ResourceFinder &rf)
 
     //Retrieve the calibration matrix from RFH
     string rfhName=rf.check("rfh",Value("referenceFrameHandler")).asString().c_str();
-    string rfhLocal = "/"+name+"/rfh:o";
-    rfh.open(rfhLocal.c_str());
+    rfh.open("/"+name+"/rfh:o");
 
     string rfhRemote = "/"+rfhName+"/rpc";
 
-    while (!Network::connect(rfhLocal.c_str(),rfhRemote.c_str()))
+    while (!Network::connect(rfh.getName(), rfhRemote.c_str()))
     {
         cout<<"Waiting connection to RFH..."<<endl;
         Time::delay(1.0);
@@ -78,17 +77,15 @@ bool AgentDetector::configure(ResourceFinder &rf)
 
     isCalibrated=false;
     if(!checkCalibration())
-        yWarning() << " ========================= KINECT NEED TO BE CALIBRATED ============================" ;
+        yWarning() << " ========================= KINECT NEEDS TO BE CALIBRATED ============================" ;
 
-    string clientName = name;
-    clientName += "/kinect";
+    string clientName = name + "/kinect";
 
     outputSkeletonPort.open(("/"+name+"/skeleton:o").c_str());
-    depthPort.open( ("/"+clientName+"/depthPort:o").c_str());
+    depthPort.open(("/"+clientName+"/depthPort:o").c_str());
     imagePort.open(("/"+clientName+"/imagePort:o").c_str());
     playersPort.open(("/"+clientName+"/playersPort:o").c_str());
     skeletonPort.open(("/"+clientName+"/skeletonPort:o").c_str());
-
     agentLocOutPort.open(("/"+clientName+"/agentLoc:o").c_str());
 
     Property options;
@@ -308,7 +305,6 @@ bool AgentDetector::updateModule()
         tracked=client.getJoints(joints);
     else
         tracked=client.getJoints(joint, ICUBCLIENT_KINECT_CLOSEST_PLAYER);
-    //cout<<"Tracking value = "<<tracked<<endl;
 
     if (tracked)
     {
@@ -529,7 +525,7 @@ bool AgentDetector::updateModule()
 
                             Agent* specificAgent = opc->addOrRetrieveEntity<Agent>(playerName);
                             if(specificAgent == nullptr) {
-                                yError() << "SHIT specificAgent";
+                                yError() << playerName << " is not in the OPC";
                             } else {
                                 identities[p->ID] = specificAgent->name();
                                 specificAgent->m_present = 1.0;
