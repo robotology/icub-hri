@@ -43,7 +43,7 @@ class TouchDetectorThread : public yarp::os::RateThread
         double threshold;
         int taxelThreshold;
         std::string clustersConfFilepath;
-        std::vector<int> taxels2Clusters[7];
+        std::vector<int> taxels2Clusters[7];                        //!< standard vector of integer containing the taxel IDs in form of cluster ID
         
         /* ports */
         yarp::os::BufferedPort<yarp::os::Bottle> *torsoPort;
@@ -56,9 +56,29 @@ class TouchDetectorThread : public yarp::os::RateThread
         yarp::os::BufferedPort<yarp::os::Bottle> *touchPort;
         yarp::os::BufferedPort<yarp::os::Bottle> *touchPortCleaned;
         
+        /**
+         * @brief readTaxelsMapping Read taxels map from configure file, which relates to nbBodyParts and bodyParts
+         * @param filename Name of configure file of taxels
+         * @return True for all case
+         */
         bool readTaxelsMapping(std::string filename);
         void parseMappingLine(std::string line, int &bodyPart, int &firstTaxel, int &lastTaxel);
+
+        /**
+         * @brief getBodyPartId Obtain the ID of body parts, which are "torso", "left_arm", "right_arm", "left_forearm", "right_forearm", "left_hand", "right_hand"
+         * @param bodyPartName String value of the name of body part to get ID
+         * @return Integer value of ID
+         */
         int getBodyPartId(std::string bodyPartName);
+
+        /**
+         * @brief updateMapping Change all taxels of a body part to clusterID
+         * @param bodyPart An integer value of body part ID
+         * @param firstTaxel An integer value of the 1st taxel of the body part
+         * @param lastTaxel An integer value of the last taxel of the body part
+         * @param cluster An integer value of the cluster ID
+         * @see taxels2Clusters
+         */
         void updateMapping(int bodyPart, int firstTaxel, int lastTaxel, int cluster);
         void countActivations(int bodyPart, yarp::os::Bottle *data, std::vector<int> &activations);
         void processPort(int portNum, yarp::os::BufferedPort<yarp::os::Bottle> *port, std::vector<int> &activations);
