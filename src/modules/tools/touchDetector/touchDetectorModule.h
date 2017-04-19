@@ -40,27 +40,27 @@ class TouchDetectorModule: public yarp::os::RFModule
         double threshold;
         int taxelThreshold;
         std::string moduleName;
-        std::string torsoPortName;
-        std::string leftArmPortName;
-        std::string rightArmPortName;
-        std::string leftForearmPortName;
-        std::string rightForearmPortName;
-        std::string leftHandPortName;
-        std::string rightHandPortName;
-        std::string touchPortName;
-        std::string touchPortCleanName;
-        std::string clustersConfFilepath;
+        std::string torsoPortName;                                      //!< name of torso port
+        std::string leftArmPortName;                                    //!< name of left arm port
+        std::string rightArmPortName;                                   //!< name of right arm port
+        std::string leftForearmPortName;                                //!< name of left forearm port
+        std::string rightForearmPortName;                               //!< name of right forearm port
+        std::string leftHandPortName;                                   //!< name of left hand port
+        std::string rightHandPortName;                                  //!< name of right hand port
+        std::string touchPortName;                                      //!< name of touchport
+        std::string touchPortCleanName;                                 //!< name of touchportClean
+        std::string clustersConfFilepath;                               //!< string for path to cluster configure file
 
         /* class variables */
-        yarp::os::BufferedPort<yarp::os::Bottle> torsoPort;
-        yarp::os::BufferedPort<yarp::os::Bottle> leftArmPort;
-        yarp::os::BufferedPort<yarp::os::Bottle> rightArmPort;
-        yarp::os::BufferedPort<yarp::os::Bottle> leftForearmPort;
-        yarp::os::BufferedPort<yarp::os::Bottle> rightForearmPort;
-        yarp::os::BufferedPort<yarp::os::Bottle> leftHandPort;
-        yarp::os::BufferedPort<yarp::os::Bottle> rightHandPort;
-        yarp::os::BufferedPort<yarp::os::Bottle> touchPort;
-        yarp::os::BufferedPort<yarp::os::Bottle> touchPortCleaned;
+        yarp::os::BufferedPort<yarp::os::Bottle> torsoPort;             //!< Yarp BufferedPort of bottle for input torso activations
+        yarp::os::BufferedPort<yarp::os::Bottle> leftArmPort;           //!< Yarp BufferedPort of bottle for input left arm activations
+        yarp::os::BufferedPort<yarp::os::Bottle> rightArmPort;          //!< Yarp BufferedPort of bottle for input right arm activations
+        yarp::os::BufferedPort<yarp::os::Bottle> leftForearmPort;       //!< Yarp BufferedPort of bottle for input left forearm activations
+        yarp::os::BufferedPort<yarp::os::Bottle> rightForearmPort;      //!< Yarp BufferedPort of bottle for input right forearm activations
+        yarp::os::BufferedPort<yarp::os::Bottle> leftHandPort;          //!< Yarp BufferedPort of bottle for input left hand activations
+        yarp::os::BufferedPort<yarp::os::Bottle> rightHandPort;         //!< Yarp BufferedPort of bottle for input right hand activations
+        yarp::os::BufferedPort<yarp::os::Bottle> touchPort;             //!< Yarp BufferedPort of bottle for output touched activations
+        yarp::os::BufferedPort<yarp::os::Bottle> touchPortCleaned;      //!< Yarp BufferedPort of bottle for output touched taxel
         TouchDetectorThread *thread;
         
         void initializeParameters(yarp::os::ResourceFinder &rf);
