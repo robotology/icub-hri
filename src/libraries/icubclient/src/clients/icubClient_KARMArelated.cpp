@@ -31,6 +31,13 @@ bool ICubClient::pushKarmaLeft(const std::string &objName, const double &targetP
     const std::string &armType,
     const yarp::os::Bottle &options)
 {
+    SubSystem_KARMA *karma = getKARMA();
+    if (karma == NULL)
+    {
+        yError() << "[iCubClient] Called pushKarmaLeft() but KARMA subsystem is not available.";
+        return false;
+    }
+
     if (opc->isConnected())
     {
         Entity *target = opc->getEntity(objName, true);
@@ -49,61 +56,17 @@ bool ICubClient::pushKarmaLeft(const std::string &objName, const double &targetP
 
         yInfo("[icubClient pushKarmaLeft] object %s position from OPC (no calibration): %s", oTarget->name().c_str(),
             oTarget->m_ego_position.toString().c_str());
-        return pushKarmaLeft(objName, oTarget->m_ego_position, targetPosYLeft, armType, options);
+        return karma->pushAside(objName, oTarget->m_ego_position, targetPosYLeft, 0, armType, options);
     }
     else
     {
         yWarning() << "[iCubClient] There is no OPC connection";
         return false;
     }
-}
-
-bool ICubClient::pushKarmaLeft(const std::string &objName, const yarp::sig::Vector &objCenter, const double &targetPosYLeft,
-    const std::string &armType,
-    const yarp::os::Bottle &options)
-{
-    SubSystem_KARMA *karma = getKARMA();
-    if (karma == NULL)
-    {
-        yError() << "[iCubClient] Called pushKarmaLeft() but KARMA subsystem is not available.";
-        return false;
-    }
-    return karma->pushAside(objName,objCenter, targetPosYLeft, 0, armType, options);
 }
 
 // Right push
 bool ICubClient::pushKarmaRight(const std::string &objName, const double &targetPosYRight,
-    const std::string &armType,
-    const yarp::os::Bottle &options)
-{
-    if (opc->isConnected())
-    {
-        Entity *target = opc->getEntity(objName, true);
-        if (!target || !target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
-        {
-            yWarning() << "[iCubClient] Called pushKarmaLeft() on a unallowed entity: \"" << objName << "\"";
-            return false;
-        }
-
-        Object *oTarget = dynamic_cast<Object*>(target);
-        if (!oTarget || oTarget->m_present != 1.0)
-        {
-            yWarning() << "[iCubClient] Called pushKarmaLeft() on an unavailable entity: \"" << objName << "\"";
-            return false;
-        }
-
-        yInfo("[icubClient pushKarmaRight] object %s position from OPC (no calibration): %s", oTarget->name().c_str(),
-            oTarget->m_ego_position.toString().c_str());
-        return pushKarmaRight(objName, oTarget->m_ego_position, targetPosYRight, armType, options);
-    }
-    else
-    {
-        yWarning() << "[iCubClient] There is no OPC connection";
-        return false;
-    }
-}
-
-bool ICubClient::pushKarmaRight(const std::string &objName, const yarp::sig::Vector &objCenter, const double &targetPosYRight,
     const std::string &armType,
     const yarp::os::Bottle &options)
 {
@@ -113,7 +76,32 @@ bool ICubClient::pushKarmaRight(const std::string &objName, const yarp::sig::Vec
         yError() << "[iCubClient] Called pushKarmaRight() but KARMA subsystem is not available.";
         return false;
     }
-    return karma->pushAside(objName, objCenter, targetPosYRight, 180, armType, options);
+
+    if (opc->isConnected())
+    {
+        Entity *target = opc->getEntity(objName, true);
+        if (!target || !target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
+        {
+            yWarning() << "[iCubClient] Called pushKarmaRight() on a unallowed entity: \"" << objName << "\"";
+            return false;
+        }
+
+        Object *oTarget = dynamic_cast<Object*>(target);
+        if (!oTarget || oTarget->m_present != 1.0)
+        {
+            yWarning() << "[iCubClient] Called pushKarmaRight() on an unavailable entity: \"" << objName << "\"";
+            return false;
+        }
+
+        yInfo("[icubClient pushKarmaRight] object %s position from OPC (no calibration): %s", oTarget->name().c_str(),
+            oTarget->m_ego_position.toString().c_str());
+        return karma->pushAside(objName, oTarget->m_ego_position, targetPosYRight, 180, armType, options);
+    }
+    else
+    {
+        yWarning() << "[iCubClient] There is no OPC connection";
+        return false;
+    }
 }
 
 // Front push
@@ -121,6 +109,13 @@ bool ICubClient::pushKarmaFront(const std::string &objName, const double &target
     const std::string &armType,
     const yarp::os::Bottle &options)
 {
+    SubSystem_KARMA *karma = getKARMA();
+    if (karma == NULL)
+    {
+        yError() << "[iCubClient] Called pushKarmaFront() but KARMA subsystem is not available.";
+        return false;
+    }
+
     if (opc->isConnected())
     {
         Entity *target = opc->getEntity(objName, true);
@@ -139,26 +134,13 @@ bool ICubClient::pushKarmaFront(const std::string &objName, const double &target
 
         yInfo("[icubClient pushKarmaFront] object %s position from OPC (no calibration): %s", oTarget->name().c_str(),
             oTarget->m_ego_position.toString().c_str());
-        return pushKarmaFront(objName, oTarget->m_ego_position, targetPosXFront, armType, options);
+        return karma->pushFront(objName, oTarget->m_ego_position, targetPosXFront, armType, options);
     }
     else
     {
         yWarning() << "[iCubClient] There is no OPC connection";
         return false;
     }
-}
-
-bool ICubClient::pushKarmaFront(const std::string& objName, const yarp::sig::Vector &objCenter, const double &targetPosXFront,
-    const std::string &armType,
-    const yarp::os::Bottle &options)
-{
-    SubSystem_KARMA *karma = getKARMA();
-    if (karma == NULL)
-    {
-        yError() << "[iCubClient] Called pushKarmaFront() but KARMA subsystem is not available.";
-        return false;
-    }
-    return karma->pushFront(objName, objCenter, targetPosXFront, armType, options);
 }
 
 // Pure push in KARMA
@@ -179,6 +161,13 @@ bool ICubClient::pullKarmaBack(const std::string &objName, const double &targetP
     const std::string &armType,
     const yarp::os::Bottle &options)
 {
+    SubSystem_KARMA *karma = getKARMA();
+    if (karma == NULL)
+    {
+        yError() << "[iCubClient] Called pullKarmaBack() but KARMA subsystem is not available.";
+        return false;
+    }
+
     if (opc->isConnected())
     {
         Entity *target = opc->getEntity(objName, true);
@@ -197,7 +186,7 @@ bool ICubClient::pullKarmaBack(const std::string &objName, const double &targetP
 
         yInfo("[icubClient pullKarmaBack] object %s position from OPC (no calibration): %s", oTarget->name().c_str(),
             oTarget->m_ego_position.toString().c_str());
-        return pullKarmaBack(objName, oTarget->m_ego_position, targetPosXBack, armType, options);
+        return karma->pullBack(objName, oTarget->m_ego_position, targetPosXBack, armType, options);
     }
     else
     {
@@ -205,20 +194,6 @@ bool ICubClient::pullKarmaBack(const std::string &objName, const double &targetP
         return false;
     }
 }
-
-bool ICubClient::pullKarmaBack(const std::string &objName,const yarp::sig::Vector &objCenter, const double &targetPosXBack,
-    const std::string &armType,
-    const yarp::os::Bottle &options)
-{
-    SubSystem_KARMA *karma = getKARMA();
-    if (karma == NULL)
-    {
-        yError() << "[iCubClient] Called pullKarmaBack() but KARMA subsystem is not available.";
-        return false;
-    }
-    return karma->pullBack(objName,objCenter, targetPosXBack, armType, options);
-}
-
 
 // Pure pull (draw) in KARMA
 bool ICubClient::drawKarma(const yarp::sig::Vector &targetCenter, const double &theta,
