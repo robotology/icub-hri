@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="yarpmanifest.xsl"?>
+
+<module>
+
+  <name>touchDetector</name>
+  <doxygen-group>icubclient_modules</doxygen-group>
+  <description>%Module to detect touch activations to robot 's body parts</description>
+  <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
+  <version>1.0</version>
+
+  <description-long>
+	This module provides wrappers of procedures to count the number of activations to robot 's body parts through some yarp ports.
+  </description-long>
+
+  <authors>
+    <author email="bertrand.higy@iit.it"> Bertrand Higy </author>
+  </authors>
+
+  <arguments>
+    <param default="touchDetector" desc="name of the module"> name </param>
+  </arguments>
+
+  <data>
+    <input>
+        <type>Bottle</type>
+        <port carrier="udp">/touchDetector/torso:i</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Get touch activation from torso</description>
+    </input>
+    <input>
+        <type>Bottle</type>
+        <port carrier="udp">/touchDetector/left_arm:i</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Get touch activation from left arm</description>
+    </input>
+    <input>
+        <type>Bottle</type>
+        <port carrier="udp">/touchDetector/right_arm:i</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Get touch activation from right arm</description>
+    </input>
+    <input>
+        <type>Bottle</type>
+        <port carrier="udp">/touchDetector/left_forearm:i</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Get touch activation from left forearm</description>
+    </input>
+    <input>
+        <type>Bottle</type>
+        <port carrier="udp">/touchDetector/right_forearm:i</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Get touch activation from right forearm</description>
+    </input>
+    <input>
+        <type>Bottle</type>
+        <port carrier="udp">/touchDetector/left_hand:i</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Get touch activation from left hand</description>
+    </input>
+    <input>
+        <type>Bottle</type>
+        <port carrier="udp">/touchDetector/right_hand:i</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Get touch activation from right hand</description>
+    </input>
+    
+    <output>
+        <type>Bottle</type>
+        <port carrier="udp">/touchDetector/touch:o</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Stream out the number of activations</description>
+    </output>
+    <output>
+        <type>Bottle</type>
+        <port carrier="udp">/touchDetector/touchClean:o</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Stream out the touched taxel ID</description>
+    </output>
+    
+  </data>
+
+
+</module>

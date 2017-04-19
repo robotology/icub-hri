@@ -25,6 +25,9 @@
 
 #include "touchDetectorThread.h"
 
+/**
+ * @ingroup touchDetector
+ */
 class TouchDetectorModule: public yarp::os::RFModule
 {
     public:

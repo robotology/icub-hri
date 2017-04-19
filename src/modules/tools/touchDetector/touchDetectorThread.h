@@ -26,6 +26,9 @@
 #include <yarp/os/BufferedPort.h>
 #include <yarp/os/RateThread.h>
 
+/**
+ * @ingroup touchDetector
+ */
 class TouchDetectorThread : public yarp::os::RateThread
 {
     public:
