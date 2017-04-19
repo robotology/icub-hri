@@ -129,6 +129,7 @@ bool icubclient::SubSystem_KARMA::connect()
     }
     else
     {
+        hasTable = false;
         tableHeight = 0.0;
         yWarning("[SubSystem_KARMA] not connected to ARE");
     }
@@ -148,6 +149,12 @@ icubclient::SubSystem_KARMA::SubSystem_KARMA(const std::string &masterName, cons
     finderPort.open(("/" + masterName + "/" + SUBSYSTEM_KARMA + "/finder:rpc").c_str());
     calibPort.open(("/" + masterName + "/" + SUBSYSTEM_KARMA + "/calib:io").c_str());
     m_type = SUBSYSTEM_KARMA;
+
+    hasTable = false;
+    AREconnected = false;
+    iCartCtrlL = nullptr;
+    iCartCtrlR = nullptr;
+    tableHeight = 0.0;
 }
 
 void icubclient::SubSystem_KARMA::Close()
@@ -245,11 +252,7 @@ bool icubclient::SubSystem_KARMA::chooseArm(const std::string &armType)
     bCmd.addString(armType);
     appendTarget(bCmd,dimTool);
 
-    bool bReturn = sendCmd(bCmd);
-    std::string status;
-    bReturn ? status = "success" : status = "failed";
-
-    return bReturn;
+    return sendCmd(bCmd);
 }
 
 void icubclient::SubSystem_KARMA::chooseArmAuto()
@@ -259,7 +262,9 @@ void icubclient::SubSystem_KARMA::chooseArmAuto()
     bCmd.addVocab(yarp::os::Vocab::encode("remove"));
 
 
-    sendCmd(bCmd);
+    if(!sendCmd(bCmd)) {
+        yError() << "Could not communicate with Karma";
+    }
 }
 
 bool icubclient::SubSystem_KARMA::pushAside(const std::string &objName,
@@ -364,12 +369,7 @@ bool icubclient::SubSystem_KARMA::push(const yarp::sig::Vector &targetCenter,
 
     bCmd.append(opt);
 
-    bool bReturn = sendCmd(bCmd);
-    std::string status;
-    bReturn ? status = "success" : status = "failed";
-
-    return bReturn;
-
+    return sendCmd(bCmd);
 }
 
 bool icubclient::SubSystem_KARMA::pullBack(const std::string &objName,
@@ -431,11 +431,7 @@ bool icubclient::SubSystem_KARMA::draw(const yarp::sig::Vector &targetCenter,
     appendDouble(bCmd,dist);
     bCmd.append(opt);
 
-    bool bReturn = sendCmd(bCmd);
-    std::string status;
-    bReturn ? status = "success" : status = "failed";
-
-    return bReturn;
+    return sendCmd(bCmd);
 }
 
 bool icubclient::SubSystem_KARMA::vdraw(const std::string &targetName,
@@ -457,11 +453,7 @@ bool icubclient::SubSystem_KARMA::vdraw(const std::string &targetName,
     appendDouble(bCmd,dist);
     bCmd.append(opt);
 
-    bool bReturn = sendCmd(bCmd);
-    std::string status;
-    bReturn ? status = "success" : status = "failed";
-
-    return bReturn;
+    return sendCmd(bCmd);
 }
 
 bool icubclient::SubSystem_KARMA::openCartesianClient()

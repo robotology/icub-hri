@@ -62,7 +62,8 @@ namespace icubclient{
         * Append a subaction to create a composite one
         * @param a The subaction
         */ 
-                        void    append(Action a);
+        void    append(Action &a);
+
         /**
         * Get an unrolled plan description
         */ 
@@ -72,7 +73,7 @@ namespace icubclient{
         * Get an unrolled plan description based on new arguments
         * @param newDescription The new arguments
         */ 
-        virtual std::list<Action>    asPlan(Relation newDescription);
+        virtual std::list<Action>    asPlan(Relation& newDescription);
 
         /**
         * Is an action composite or not?

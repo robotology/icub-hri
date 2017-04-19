@@ -193,7 +193,7 @@ bool ICubClient::changeName(Entity *e, const std::string &newName) {
             dynamic_cast<SubSystem_agentDetector*>(subSystems["agentDetector"])->resume();
         }
     }
-    else if (e->entity_type() == "object") {
+    else if (e->entity_type() == ICUBCLIENT_OPC_ENTITY_OBJECT) {
         if (subSystems.find("iol2opc") == subSystems.end()) {
             say("iol2opc not reachable, did not change object name");
             yWarning() << "iol2opc not reachable, did not change object name";
@@ -236,7 +236,7 @@ std::string ICubClient::getPartnerName(bool verbose)
         if (entity->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT) {
             Agent* a = dynamic_cast<Agent*>(entity.get());
             //We assume kinect can only recognize one skeleton at a time
-            if (a->m_present == 1.0 && a->name() != "icub") {
+            if (a && a->m_present == 1.0 && a->name() != "icub") {
                 partnerName = a->name();
                 if (verbose) {
                     yInfo() << "Partner found: name =" << partnerName;
@@ -303,13 +303,18 @@ bool ICubClient::babbling(const string &bpName, const string &babblingLimb, doub
         }
 
         Bodypart *bp = dynamic_cast<Bodypart*>(target);
-        int jointNumber = bp->m_joint_number;
-        if (jointNumber == -1){
-            yError() << "[iCubClient] Called babbling() on " << bpName << " which have no joint number linked to it\"";
+        if(bp) {
+            int jointNumber = bp->m_joint_number;
+            if (jointNumber == -1){
+                yError() << "[iCubClient] Called babbling() on " << bpName << " which have no joint number linked to it\"";
+                return false;
+            }
+
+            return ((SubSystem_babbling*)subSystems["babbling"])->babbling(jointNumber, babblingLimb, train_dur);
+        } else {
+            yError() << "Could not cast" << target << "to Bodypart";
             return false;
         }
-
-        return ((SubSystem_babbling*)subSystems["babbling"])->babbling(jointNumber, babblingLimb, train_dur);
     }
 
     yError() << "Error, babbling is not running...";

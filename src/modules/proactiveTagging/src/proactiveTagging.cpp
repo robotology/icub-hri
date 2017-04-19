@@ -235,17 +235,28 @@ Bottle proactiveTagging::getNameFromSAM(string sNameTarget, string currentEntity
     yDebug() << "Reply from SAM: " << bReplySam.toString();
     string sNameSAM = bReplySam.get(0).asString();
     if(sNameSAM != "nack" && sNameSAM != "unknown" && sNameSAM != "" && sNameSAM != "None") {
-        Agent* TARGET = dynamic_cast<Agent*>(iCub->opc->getEntity(sNameTarget));
-        yDebug() << "Changing name from " << TARGET->name() << " to " << sNameSAM;
-        iCub->changeName(TARGET,sNameSAM);
-        iCub->opc->commit(TARGET);
+        Entity* e = iCub->opc->getEntity(sNameTarget);
+        if(e) {
+            Agent* TARGET = dynamic_cast<Agent*>(e);
+            if(TARGET) {
+                yDebug() << "Changing name from " << TARGET->name() << " to " << sNameSAM;
+                iCub->changeName(TARGET,sNameSAM);
+                iCub->opc->commit(TARGET);
 
-        iCub->say("Yes, I remember. Nice to see you, " + sNameSAM);
-        yarp::os::Time::delay(0.2);
-        iCub->home();
+                iCub->say("Yes, I remember. Nice to see you, " + sNameSAM);
+                yarp::os::Time::delay(0.2);
+                iCub->home();
 
-        bOutput.addString("success");
-        bOutput.addString(currentEntityType);
+                bOutput.addString("success");
+                bOutput.addString(currentEntityType);
+            } else {
+                bOutput.addString("nack");
+                yError() << "Could not cast" << e->name() << "to Agent";
+            }
+        } else {
+            bOutput.addString("nack");
+            yError() << sNameTarget << "is not an entity";
+        }
     }
     else {
         if(sNameSAM == "nack") {

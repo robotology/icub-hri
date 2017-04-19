@@ -34,14 +34,14 @@ bool ICubClient::pushKarmaLeft(const std::string &objName, const double &targetP
     if (opc->isConnected())
     {
         Entity *target = opc->getEntity(objName, true);
-        if (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
+        if (!target || !target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
         {
             yWarning() << "[iCubClient] Called pushKarmaLeft() on a unallowed entity: \"" << objName << "\"";
             return false;
         }
 
         Object *oTarget = dynamic_cast<Object*>(target);
-        if (oTarget->m_present != 1.0)
+        if (!oTarget || oTarget->m_present != 1.0)
         {
             yWarning() << "[iCubClient] Called pushKarmaLeft() on an unavailable entity: \"" << objName << "\"";
             return false;
@@ -79,14 +79,14 @@ bool ICubClient::pushKarmaRight(const std::string &objName, const double &target
     if (opc->isConnected())
     {
         Entity *target = opc->getEntity(objName, true);
-        if (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
+        if (!target || !target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
         {
             yWarning() << "[iCubClient] Called pushKarmaLeft() on a unallowed entity: \"" << objName << "\"";
             return false;
         }
 
         Object *oTarget = dynamic_cast<Object*>(target);
-        if (oTarget->m_present != 1.0)
+        if (!oTarget || oTarget->m_present != 1.0)
         {
             yWarning() << "[iCubClient] Called pushKarmaLeft() on an unavailable entity: \"" << objName << "\"";
             return false;
@@ -124,14 +124,14 @@ bool ICubClient::pushKarmaFront(const std::string &objName, const double &target
     if (opc->isConnected())
     {
         Entity *target = opc->getEntity(objName, true);
-        if (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
+        if (!target || !target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
         {
             yWarning() << "[iCubClient] Called pushKarmaFront() on a unallowed entity: \"" << objName << "\"";
             return false;
         }
 
         Object *oTarget = dynamic_cast<Object*>(target);
-        if (oTarget->m_present != 1.0)
+        if (!oTarget || oTarget->m_present != 1.0)
         {
             yWarning() << "[iCubClient] Called pushKarmaFront() on an unavailable entity: \"" << objName << "\"";
             return false;
@@ -182,14 +182,14 @@ bool ICubClient::pullKarmaBack(const std::string &objName, const double &targetP
     if (opc->isConnected())
     {
         Entity *target = opc->getEntity(objName, true);
-        if (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
+        if (!target || !target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
         {
             yWarning() << "[iCubClient] Called pushKarmaFront() on a unallowed entity: \"" << objName << "\"";
             return false;
         }
 
         Object *oTarget = dynamic_cast<Object*>(target);
-        if (oTarget->m_present != 1.0)
+        if (!oTarget || oTarget->m_present != 1.0)
         {
             yWarning() << "[iCubClient] Called pushKarmaFront() on an unavailable entity: \"" << objName << "\"";
             return false;

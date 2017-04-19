@@ -224,8 +224,10 @@ Entity *OPCClient::getEntity(int id, bool forceUpdate)
         newE = new Action();
     else if (newEntityType == "bodypart")
         newE = new Bodypart();
-    else
+    else {
         yError() << "getEntity: Unknown Entity type!";
+        return nullptr;
+    }
 
     //Update the fields
     newE->fromBottle(*reply.get(1).asList());

@@ -26,6 +26,7 @@ using namespace icubclient;
 
 Entity::Entity(yarp::os::Bottle &b)
 {
+    this->m_opc_id = -1;
     this->fromBottle(b);
 }
 

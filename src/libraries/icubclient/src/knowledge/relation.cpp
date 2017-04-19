@@ -34,9 +34,9 @@ Relation::Relation(
             string complement_manner)
 {   
     m_opcId = -1;
-     m_subject = subject;
-     m_verb = verb;
-     m_object = object;
+    m_subject = subject;
+    m_verb = verb;
+    m_object = object;
     m_complement_place = complement_place;
     m_complement_time = complement_time;
     m_complement_manner = complement_manner;

@@ -221,26 +221,30 @@ const char* ParsingException::what() const throw()
 
 BadFormatException::BadFormatException() { }
 
-const char* BadFormatException::what() throw()
+const char* BadFormatException::what() const throw()
 {
+    std::string msg;
     msg = "Bad format encountered ";
-    if (expectedType != NULL)
+
+    if (expectedType != "")
     {
         msg += "(expecting ";
         msg += expectedType;
         msg += ") ";
     }
     msg += "while reading ";
-    if (portName != NULL)
+    if (portName != "")
     {
         msg += "port ";
-        msg += portName; 
+        msg += portName;
     }
     else
     {
         msg += "a port";
     }
 
-    return msg.c_str();
+    yError() << msg;
+
+    return "Bad format encountered";
 }
 

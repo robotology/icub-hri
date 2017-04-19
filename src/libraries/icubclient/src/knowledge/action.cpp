@@ -130,7 +130,7 @@ Relation Action::description()
     return r;
 }
 
-void Action::append(Action a)
+void Action::append(Action& a)
 {
     subActions.push_back(a);
 }
@@ -149,7 +149,7 @@ list<Action> Action::asPlan()
     return unrolled;
 }
 
-list<Action> Action::asPlan(Relation newDescription)
+list<Action> Action::asPlan(Relation &newDescription)
 {            
     Action expressed = this->express(newDescription);
     list<Action> unrolled = expressed.asPlan();

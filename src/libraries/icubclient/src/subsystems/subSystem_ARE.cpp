@@ -115,7 +115,6 @@ void icubclient::SubSystem_ARE::Close()
 {
     opc->interrupt();
     opc->close();
-    delete opc;
 
     cmdPort.interrupt();
     rpcPort.interrupt();
@@ -420,5 +419,5 @@ bool icubclient::SubSystem_ARE::setExecTime(const double execTime)
 
 icubclient::SubSystem_ARE::~SubSystem_ARE()
 {
-    ;
+    delete opc;
 }

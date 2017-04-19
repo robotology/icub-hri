@@ -34,7 +34,6 @@ namespace icubclient{
 class SubSystem_Recog : public SubSystem
 {
 protected:
-    bool ABMconnected;
     virtual bool connect();
     yarp::os::RpcClient ears_port; /**< Port to /ears/rpc */
     yarp::os::RpcClient portRPC; /**< Port to /speechRecognizer/rpc */

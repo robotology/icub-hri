@@ -43,7 +43,9 @@ namespace icubclient{
         std::string  m_complement_time;
         std::string  m_complement_manner;
 
-        Relation(){}
+        Relation() {
+            m_opcId = -1;
+        }
         Relation(yarp::os::Bottle &b);
         Relation(
             std::string subject, 

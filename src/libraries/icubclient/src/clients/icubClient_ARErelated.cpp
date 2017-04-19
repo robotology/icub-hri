@@ -40,14 +40,14 @@ bool ICubClient::home(const string &part)
 bool ICubClient::release(const std::string &oLocation, const yarp::os::Bottle &options)
 {
     Entity *target = opc->getEntity(oLocation, true);
-    if (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
+    if (!target || !target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
     {
         yError() << "[iCubClient] Called release() on a unallowed location: \"" << oLocation << "\"";
         return false;
     }
 
     Object *oTarget = dynamic_cast<Object*>(target);
-    if (oTarget->m_present != 1.0)
+    if (!oTarget || oTarget->m_present != 1.0)
     {
         yWarning() << "[iCubClient] Called release() on an unavailable entity: \"" << oLocation << "\"";
         return false;
@@ -105,7 +105,7 @@ bool ICubClient::point(const Vector &target, const Bottle &options)
 bool ICubClient::point(const string &sName, const Bottle &options)
 {
     Entity *target = opc->getEntity(sName, true);
-    if (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT) && !target->isType(ICUBCLIENT_OPC_ENTITY_BODYPART))
+    if (!target || (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT) && !target->isType(ICUBCLIENT_OPC_ENTITY_BODYPART)))
     {
         yWarning() << "[iCubClient] Called point() on a unallowed location: \"" << sName << "\"";
         return false;
@@ -114,9 +114,14 @@ bool ICubClient::point(const string &sName, const Bottle &options)
     Object *oTarget = dynamic_cast<Object*>(target);
     if(oTarget!=nullptr) {
         SubSystem_ARE *are = getARE();
-        Vector target = oTarget->m_ego_position;
-        are->selectHandCorrectTarget(const_cast<Bottle&>(options), target, sName);
-        return point(target, options);
+        if(are) {
+            Vector target = oTarget->m_ego_position;
+            are->selectHandCorrectTarget(const_cast<Bottle&>(options), target, sName);
+            return point(target, options);
+        } else {
+            yError() << "[iCubClient] Called point() but ARE subsystem is not available.";
+            return false;
+        }
     } else {
         yError() << "[iCubClient] pointfar: Could not cast Entity to Object";
         return false;
