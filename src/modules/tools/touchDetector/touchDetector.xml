@@ -5,7 +5,7 @@
 
   <name>touchDetector</name>
   <doxygen-group>icubclient_modules</doxygen-group>
-  <description>%Module to detect touch activations to robot 's body parts</description>
+  <description>%Module to detect touch activations to robot's body parts</description>
   <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
   <version>1.0</version>
 
