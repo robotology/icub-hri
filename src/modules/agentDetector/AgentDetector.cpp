@@ -65,14 +65,10 @@ bool AgentDetector::configure(ResourceFinder &rf)
 
     //Retrieve the calibration matrix from RFH
     string rfhName=rf.check("rfh",Value("referenceFrameHandler")).asString().c_str();
-    string rfhLocal = "/";
-    rfhLocal+=name;
-    rfhLocal+="/rfh:o";
+    string rfhLocal = "/"+name+"/rfh:o";
     rfh.open(rfhLocal.c_str());
 
-    string rfhRemote = "/";
-    rfhRemote += rfhName ;
-    rfhRemote += "/rpc";
+    string rfhRemote = "/"+rfhName+"/rpc";
 
     while (!Network::connect(rfhLocal.c_str(),rfhRemote.c_str()))
     {
@@ -474,18 +470,6 @@ bool AgentDetector::updateModule()
 
     if (isRefreshed)
     {
-//        yInfo() << " refreshed";
-        //////////////////////////////////////////////////////////////////
-        //Clear the previous agents
-        //for(map<int, Agent*>::iterator pA=identities.begin(); pA!=identities.end() ; pA++)
-        //{
-        //    pA->second->m_present = 0.0;
-        //}  
-        //partner->m_present = 0.0;
-
-        // check if last apparition was more than dThreshlodDisaparition ago
-
-
         if (tracked)
         {
             //Go through all skeletons
@@ -543,7 +527,6 @@ bool AgentDetector::updateModule()
                         {
                             cout<<"Assigning name "<<playerName<<" to skeleton "<<p->ID<<endl;
 
-                            //Agent* specificAgent = opc->addEntity<Agent>(playerName);
                             Agent* specificAgent = opc->addOrRetrieveEntity<Agent>(playerName);
                             if(specificAgent == nullptr) {
                                 yError() << "SHIT specificAgent";
@@ -556,10 +539,6 @@ bool AgentDetector::updateModule()
                             }
                         }
 
-//                        Relation r(partner->name(),"named",playerName);
-//                        opc->addRelation(r,1.0);
-
-//                        cout<<"Commiting : "<<r.toString()<<endl;
                         yarp::os::Bottle &skeleton = outputSkeletonPort.prepare();
                         skeleton.clear();
                         //Convert the skeleton into ICUBCLIENTHelpers body. We loose orientation in the process...
@@ -602,11 +581,8 @@ bool AgentDetector::updateModule()
                         agentLocOutPort.write();
 
                         opc->commit(partner);
-//                        cout << skeleton.toString()<< endl;
-                        outputSkeletonPort.write();
-                        //opc->commit(agent);
+                        outputSkeletonPort.write();                       
                     }
-//                    cout<<'1'<<endl;
                 }
             }
         }
@@ -618,11 +594,6 @@ bool AgentDetector::updateModule()
                 partner = opc->addOrRetrieveEntity<Agent>(partner_default_name);
                 partner->m_present = 0.0;
                 opc->commit(partner);
-            }
-            else
-            {
-                //yInfo() << " clock is: " << clock() << "\t last apparition: " << dTimingLastApparition  << "\t dSince: " << dSince;
-                //yInfo() << " agent dissapeared but not for too long.";
             }
         }
     }
@@ -649,26 +620,6 @@ Vector AgentDetector::getSkeletonPattern(Player p)
     pattern[2] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_R]);
     pattern[3] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SPINE]);
     pattern[4] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HEAD]);
-
-    //Arms
-    //pattern[0] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HAND_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_WRIST_L]);
-    //pattern[1] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_WRIST_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ELBOW_L]);
-    //pattern[2] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ELBOW_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_L]);
-    //pattern[3] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C]);
-    //pattern[4] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_R]);
-    //pattern[5] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_R], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ELBOW_R]);
-    //pattern[6] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ELBOW_R], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_WRIST_R]);
-    //pattern[7] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_WRIST_R], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HAND_R]);
-
-    //Legs
-    //pattern[8] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_FOOT_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ANKLE_L]);
-    //pattern[9] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ANKLE_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_KNEE_L]);
-    //pattern[10] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_KNEE_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HIP_L]);
-    //pattern[11] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HIP_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HIP_C]);
-    //pattern[12] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HIP_C], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HIP_R]);
-    //pattern[13] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HIP_R], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_KNEE_R]);
-    //pattern[14] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_KNEE_R], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ANKLE_R]);
-    //pattern[15] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ANKLE_R], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_FOOT_R]);
 
     return pattern;
 }
@@ -716,8 +667,6 @@ Vector AgentDetector::transform2IR(Vector v)
     Agent* icub = opc->addOrRetrieveEntity<Agent>("icub");
     Vector Xs = icub->m_ego_position;
     double phi = icub->m_ego_orientation[2] * M_PI / 180.0;
-    //cout<<"Robot position = "<<Xs.toString(3,3)<< " Orientation = "<<phi<<endl;
-    // cout<<"Kinect position = "<<v.toString(3,3)<<endl;
 
     Matrix H(4,4);
     H(0,0) = cos(phi);  H(0,1) = -sin(phi);    H(0,2) = 0.0; H(0,3) = Xs[0];
@@ -728,6 +677,5 @@ Vector AgentDetector::transform2IR(Vector v)
     Vector vIR = v;
     vIR.push_back(1.0);
     vIR = H * vIR;
-    //cout<<"Kinect in IR = "<<vIR.toString(3,3)<<endl;
     return vIR;
 }
