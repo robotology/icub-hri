@@ -276,61 +276,6 @@ namespace icubclient{
             const yarp::os::Bottle &options = yarp::os::Bottle());
 
         /**
-         * @brief pushKarmaLeft: push an object to left side, this wrapper simplify pure push action of KARMA
-         * See the SubSystem_KARMA::pushAside documentation for more details.
-         * @param objName: name of object to push (used for iolReachingCalibration)
-         * @param objCenter: coordinate of object's center
-         * @param targetPosYLeft: Y coordinate of object to push to
-         * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-         * @param options: options to be passed to Karma
-         * @return true in case of success release, false otherwise
-         */
-        bool pushKarmaLeft(const std::string &objName, const yarp::sig::Vector &objCenter, const double &targetPosYLeft,
-            const std::string &armType = "selectable",
-            const yarp::os::Bottle &options = yarp::os::Bottle());
-
-        /**
-         * @brief pushKarmaRight: push an object to right side, this wrapper simplify pure push action of KARMA
-         * See the SubSystem_KARMA::pushAside documentation for more details.
-         * @param objName: name of object to push (used for iolReachingCalibration)
-         * @param objCenter: coordinate of object's center
-         * @param targetPosYRight: Y coordinate of object to push to
-         * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-         * @param options: options to be passed to Karma
-         * @return true in case of success release, false otherwise
-         */
-        bool pushKarmaRight(const std::string &objName, const yarp::sig::Vector &objCenter, const double &targetPosYRight,
-            const std::string &armType = "selectable", const yarp::os::Bottle &options = yarp::os::Bottle());
-
-        /**
-         * @brief pushKarmaFront: push an object to front, this wrapper simplify pure push action of KARMA
-         * See the SubSystem_KARMA::pushFront documentation for more details.
-         * @param objName: name of object to push (used for iolReachingCalibration)
-         * @param objCenter: coordinate of object's center
-         * @param targetPosXFront: X coordinate of object to push to
-         * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-         * @param options: options to be passed to Karma
-         * @return true in case of success release, false otherwise
-         */
-        bool pushKarmaFront(const std::string &objName, const yarp::sig::Vector &objCenter, const double &targetPosXFront,
-            const std::string &armType = "selectable",
-            const yarp::os::Bottle &options = yarp::os::Bottle());
-
-        /**
-         * @brief pullKarmaBack: pull an object back, this wrapper simplify pure draw action of KARMA
-         * See the SubSystem_KARMA::pullBack documentation for more details.
-         * @param objCenter: coordinate of object's center
-         * @param targetPosXBack: X coordinate of object to pull back
-         * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
-         * @param options: options to be passed to Karma
-         * @param objName: name of object to pull (used for iolReachingCalibration)
-         * @return true in case of success release, false otherwise
-         */
-        bool pullKarmaBack(const std::string &objName, const yarp::sig::Vector &objCenter, const double &targetPosXBack,
-            const std::string &armType = "selectable",
-            const yarp::os::Bottle &options = yarp::os::Bottle());
-
-        /**
         * @brief pushKarma (KARMA): push to certain position, along a direction
         * See the SubSystem_KARMA::push documentation for more details.
         * @param targetCenter: position to push to.
