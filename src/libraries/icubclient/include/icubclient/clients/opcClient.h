@@ -57,10 +57,10 @@ protected:
     int getRelationID(
             Entity* subject,
             Entity* verb,
-            Entity* object = NULL,
-            Entity* complement_place = NULL,
-            Entity* complement_time = NULL,
-            Entity* complement_manner = NULL);
+            Entity* object = nullptr,
+            Entity* complement_place = nullptr,
+            Entity* complement_time = nullptr,
+            Entity* complement_manner = nullptr);
 
     /**
     * Change the name of an entity and send messages to relevant subsystems
@@ -93,7 +93,7 @@ public:
         int appendix = 0;
         Entity *e = getEntity(name, true);
         // loop until we find the first appendix which is not used yet
-        while(e!=NULL) {
+        while(e!=nullptr) {
             ++appendix;
             name_appended = name + "_" + std::to_string(appendix);
             e = getEntity(name_appended,true);
@@ -118,7 +118,7 @@ public:
     T* addOrRetrieveEntity(const std::string &name)
     {
         Entity *e = getEntity(name,true);
-        if ( e != NULL)
+        if ( e != nullptr)
         {
             if (isVerbose)
                 yError() <<"Trying to add an already existing entity (" << name << ")";
@@ -200,11 +200,11 @@ public:
     bool addRelation(
             Entity* subject,
             Entity* verb,
-            Entity* object = NULL,
+            Entity* object = nullptr,
             double lifeTime = -1,
-            Entity* complement_place = NULL,
-            Entity* complement_time = NULL,
-            Entity* complement_manner = NULL
+            Entity* complement_place = nullptr,
+            Entity* complement_time = nullptr,
+            Entity* complement_manner = nullptr
             );
 
     /**
@@ -223,10 +223,10 @@ public:
     bool removeRelation(
             Entity* subject,
             Entity* verb,
-            Entity* object = NULL,
-            Entity* complement_place = NULL,
-            Entity* complement_time = NULL,
-            Entity* complement_manner = NULL
+            Entity* object = nullptr,
+            Entity* complement_place = nullptr,
+            Entity* complement_time = nullptr,
+            Entity* complement_manner = nullptr
             );
     
     /**
@@ -236,10 +236,10 @@ public:
     bool containsRelation(
             Entity* subject,
             Entity* verb,
-            Entity* object = NULL,
-            Entity* complement_place = NULL,
-            Entity* complement_time = NULL,
-            Entity* complement_manner = NULL
+            Entity* object = nullptr,
+            Entity* complement_place = nullptr,
+            Entity* complement_time = nullptr,
+            Entity* complement_manner = nullptr
             );
 
     /**
@@ -287,7 +287,7 @@ public:
     * Gets an entity based on its name, but do no create it if it doesn't exist yet.
     * @param name The name of the entity to retrieve.
     * @param forceUpdate Update the entity instead of retrieving from the cache. (false by default)
-    * @return Pointer to the entity or NULL if not existing
+    * @return Pointer to the entity or nullptr if not existing
     */
     Entity *getEntity(const std::string &name, bool forceUpdate = false);
 
@@ -295,7 +295,7 @@ public:
     * Gets an entity based on its id, but do no create it if it doesn't exist yet.
     * @param id The ID of the entity to retrieve.
     * @param forceUpdate Update the entity instead of retrieving from the cache. (false by default)
-    * @return Pointer to the entity or NULL if not existing
+    * @return Pointer to the entity or nullptr if not existing
     */
     Entity *getEntity(int id, bool forceUpdate = false);
 

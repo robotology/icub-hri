@@ -458,8 +458,8 @@ bool Babbling::init_left_arm() {
                 << maxLimArm[l] << "]. start_commad = " << start_command_arm[l];
     }
 
-    if (posLeftArm == NULL || encsLeftArm == NULL || velLeftArm == NULL ||
-            itrqLeftArm == NULL || ictrlLeftArm == NULL || encsLeftArm == NULL) {
+    if (posLeftArm == nullptr || encsLeftArm == nullptr || velLeftArm == nullptr ||
+            itrqLeftArm == nullptr || ictrlLeftArm == nullptr || encsLeftArm == nullptr) {
         yError() << "Cannot get interface to robot device for left arm";
         leftArmDev.close();
     }
@@ -515,8 +515,8 @@ bool Babbling::init_right_arm() {
                 << maxLimArm[l] << "]. start_commad = " << start_command_arm[l];
     }
 
-    if (posRightArm == NULL || encsRightArm == NULL || velRightArm == NULL ||
-            itrqRightArm == NULL || ictrlRightArm == NULL || encsRightArm == NULL) {
+    if (posRightArm == nullptr || encsRightArm == nullptr || velRightArm == nullptr ||
+            itrqRightArm == nullptr || ictrlRightArm == nullptr || encsRightArm == nullptr) {
         yError() << "Cannot get interface to robot device for right arm";
         rightArmDev.close();
     }

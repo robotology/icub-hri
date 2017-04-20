@@ -70,7 +70,7 @@ namespace icubclient{
         template <class T>
         T* getSubSystem(const std::string &subSystemName) {
             if (subSystems.find(subSystemName) == subSystems.end())
-                return NULL;
+                return nullptr;
             else
                 return (T*)subSystems[subSystemName];
         }

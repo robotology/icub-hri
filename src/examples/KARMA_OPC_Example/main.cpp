@@ -44,7 +44,7 @@ int main()
     rfClient.setVerbose(true);
     rfClient.setDefaultContext("icubClient");
     rfClient.setDefaultConfigFile("example_KARMA_OPC.ini");
-    rfClient.configure(0, NULL);
+    rfClient.configure(0, nullptr);
 
     string target;
     if (rfClient.check("target"))

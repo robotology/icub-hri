@@ -32,7 +32,7 @@ bool ICubClient::pushKarmaLeft(const std::string &objName, const double &targetP
     const yarp::os::Bottle &options)
 {
     SubSystem_KARMA *karma = getKARMA();
-    if (karma == NULL)
+    if (karma == nullptr)
     {
         yError() << "[iCubClient] Called pushKarmaLeft() but KARMA subsystem is not available.";
         return false;
@@ -71,7 +71,7 @@ bool ICubClient::pushKarmaRight(const std::string &objName, const double &target
     const yarp::os::Bottle &options)
 {
     SubSystem_KARMA *karma = getKARMA();
-    if (karma == NULL)
+    if (karma == nullptr)
     {
         yError() << "[iCubClient] Called pushKarmaRight() but KARMA subsystem is not available.";
         return false;
@@ -110,7 +110,7 @@ bool ICubClient::pushKarmaFront(const std::string &objName, const double &target
     const yarp::os::Bottle &options)
 {
     SubSystem_KARMA *karma = getKARMA();
-    if (karma == NULL)
+    if (karma == nullptr)
     {
         yError() << "[iCubClient] Called pushKarmaFront() but KARMA subsystem is not available.";
         return false;
@@ -148,7 +148,7 @@ bool ICubClient::pushKarma(const yarp::sig::Vector &targetCenter, const double &
     const yarp::os::Bottle &options)
 {
     SubSystem_KARMA *karma = getKARMA();
-    if (karma == NULL)
+    if (karma == nullptr)
     {
         yError() << "[iCubClient] Called pushKarma() but KARMA subsystem is not available.";
         return false;
@@ -162,7 +162,7 @@ bool ICubClient::pullKarmaBack(const std::string &objName, const double &targetP
     const yarp::os::Bottle &options)
 {
     SubSystem_KARMA *karma = getKARMA();
-    if (karma == NULL)
+    if (karma == nullptr)
     {
         yError() << "[iCubClient] Called pullKarmaBack() but KARMA subsystem is not available.";
         return false;
@@ -201,7 +201,7 @@ bool ICubClient::drawKarma(const yarp::sig::Vector &targetCenter, const double &
     const yarp::os::Bottle &options)
 {
     SubSystem_KARMA *karma = getKARMA();
-    if (karma == NULL)
+    if (karma == nullptr)
     {
         yError() << "[iCubClient] Called drawKarma() but KARMA subsystem is not available.";
         return false;

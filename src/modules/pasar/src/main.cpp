@@ -27,7 +27,7 @@ using namespace yarp::sig;
 
 
 int main(int argc, char * argv[]) {
-    srand((int)time(NULL));
+    srand((int)time(nullptr));
     /* initialize yarp network */
     Network yarp;
 

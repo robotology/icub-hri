@@ -67,7 +67,7 @@ bool faceTrackerModule::configure(yarp::os::ResourceFinder &rf) {
     robotHead->view(enc);
     robotHead->view(ictrl);
 
-    if(vel==NULL || enc==NULL || ictrl==NULL)
+    if(vel==nullptr || enc==nullptr || ictrl==nullptr)
     {
         yError() << "Cannot get interface to robot head";
         robotHead->close();
@@ -122,7 +122,7 @@ bool faceTrackerModule::configure(yarp::os::ResourceFinder &rf) {
     pan_max = 80;
     tilt_max = 20;
 
-    cvIplImageLeft = NULL;
+    cvIplImageLeft = nullptr;
 
     return true;
 }
@@ -336,7 +336,7 @@ int faceTrackerModule::getBiggestFaceIdx(const cv::Mat& cvMatImageLeft, const st
 bool faceTrackerModule::updateModule() {
     ImageOf<PixelRgb> *yarpImageLeft = imagePortLeft.read();
 
-    if ( cvIplImageLeft == NULL ) {
+    if ( cvIplImageLeft == nullptr ) {
         cvIplImageLeft = cvCreateImage(cvSize(yarpImageLeft->width(),yarpImageLeft->height()), IPL_DEPTH_8U,3);
     }
 
@@ -344,7 +344,7 @@ bool faceTrackerModule::updateModule() {
     cvCvtColor((IplImage*)yarpImageLeft->getIplImage(), cvIplImageLeft, CV_RGB2BGR);
     cv::Mat cvMatImageLeft=cv::cvarrToMat(cvIplImageLeft);
 
-    if(yarpImageLeft!=NULL)
+    if(yarpImageLeft!=nullptr)
     {
         // resize images (downsample to 320x240)
         cv::resize(cvMatImageLeft, cvMatImageLeft, cv::Size(320, 240), 0,0,CV_INTER_NN);

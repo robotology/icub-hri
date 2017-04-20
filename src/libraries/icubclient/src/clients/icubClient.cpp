@@ -38,7 +38,7 @@ ICubClient::ICubClient(const std::string &moduleName, const std::string &context
     rfClient.setVerbose(isRFVerbose);
     rfClient.setDefaultContext(context.c_str());
     rfClient.setDefaultConfigFile(clientConfigFile.c_str());
-    rfClient.configure(0, NULL);
+    rfClient.configure(0, nullptr);
 
     if (rfClient.check("robot"))
     {
@@ -56,13 +56,13 @@ ICubClient::ICubClient(const std::string &moduleName, const std::string &context
     Bottle defaultRangeMax; defaultRangeMax.fromString("-0.1 0.3 0.5");
     Bottle *rangeMin = rfClient.find("reachingRangeMin").asList();
     Bottle *rangeMax = rfClient.find("reachingRangeMax").asList();
-    if (rangeMin == NULL) rangeMin = new Bottle(defaultRangeMin);
-    if (rangeMax == NULL) rangeMax = new Bottle(defaultRangeMax);
+    if (rangeMin == nullptr) rangeMin = new Bottle(defaultRangeMin);
+    if (rangeMax == nullptr) rangeMax = new Bottle(defaultRangeMax);
     xRangeMin = defaultRangeMin.get(0).asDouble(); xRangeMax = defaultRangeMax.get(0).asDouble();
     yRangeMin = defaultRangeMin.get(1).asDouble(); yRangeMax = defaultRangeMax.get(1).asDouble();
     zRangeMin = defaultRangeMin.get(2).asDouble(); zRangeMax = defaultRangeMax.get(2).asDouble();
 
-    icubAgent = NULL;
+    icubAgent = nullptr;
 
     //OPC
     string fullName = moduleName + "/icubClient";
@@ -157,7 +157,7 @@ void ICubClient::updateAgent()
 {
     if (opc->isConnected())
     {
-        if (this->icubAgent == NULL)
+        if (this->icubAgent == nullptr)
         {
             icubAgent = opc->addOrRetrieveEntity<Agent>("icub");
         }
@@ -470,7 +470,7 @@ SubSystem_Speech* ICubClient::getSpeechClient()
     // first, try to get SUBSYSTEM_SPEECH
     // if it's not available, fall back to SUBSYSTEM_SPEECH_ESPEAK
     SubSystem_Speech* s = getSubSystem<SubSystem_Speech>(SUBSYSTEM_SPEECH);
-    if(s==NULL) {
+    if(s==nullptr) {
         return getSubSystem<SubSystem_Speech>(SUBSYSTEM_SPEECH_ESPEAK);
     } else {
         return s;

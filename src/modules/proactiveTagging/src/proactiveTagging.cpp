@@ -324,7 +324,7 @@ yarp::os::Bottle proactiveTagging::exploreTactileEntityWithName(Bottle bInput) {
     int timeout = 0;
     while(!gotTouch && timeout<10) {
         bTactile = portFromTouchDetector.read(false);
-        if(bTactile != NULL) {
+        if(bTactile != nullptr) {
             gotTouch = true;
             break;
         } else {

@@ -60,7 +60,7 @@ public:
      * @param opcTag - name of the object to be deleted
      * @param o - if this is an `Agent` instance, take care of removing all associated body parts
      */
-    void deleteObject(const string &opcTag, Object* o = NULL);
+    void deleteObject(const string &opcTag, Object* o = nullptr);
 
     /**
      * @brief Adds an object to the iCubGUI. Takes care of reading the position, dimensions, color etc.

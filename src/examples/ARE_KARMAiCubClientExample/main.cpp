@@ -49,7 +49,7 @@ int main()
     rfClient.setVerbose(true);
     rfClient.setDefaultContext("icubClient");
     rfClient.setDefaultConfigFile("example_ARE_KARMA.ini");
-    rfClient.configure(0, NULL);
+    rfClient.configure(0, nullptr);
 
     // object location in the iCub frame
     Vector x(3);

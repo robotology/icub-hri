@@ -50,14 +50,14 @@ string IOL2OPCBridge::findName(const Bottle &scores,
     double maxScore=0.0;
 
     Bottle *blobScores=scores.find(tag.c_str()).asList();
-    if (blobScores==NULL)
+    if (blobScores==nullptr)
         return retName;
 
     // first find the most likely object for the given blob
     for (int i=0; i<blobScores->size(); i++)
     {
         Bottle *item=blobScores->get(i).asList();
-        if (item==NULL)
+        if (item==nullptr)
             continue;
 
         string name=item->get(0).asString().c_str();
@@ -80,7 +80,7 @@ string IOL2OPCBridge::findName(const Bottle &scores,
                 // skip the blob under examination
                 string name=blob->get(0).asString().c_str();
                 Bottle *blobScores=blob->get(1).asList();
-                if ((name==tag) || (blobScores==NULL))
+                if ((name==tag) || (blobScores==nullptr))
                     continue;
 
                 if (blobScores->find(retName.c_str()).asDouble()>=maxScore)
@@ -172,7 +172,7 @@ CvPoint IOL2OPCBridge::getBlobCOG(const Bottle &blobs, const int i)
     {
         CvPoint tl,br;
         Bottle *item=blobs.get(i).asList();
-        if (item==NULL)
+        if (item==nullptr)
             return cog;
 
         tl.x=(int)item->get(0).asDouble();
@@ -415,7 +415,7 @@ void IOL2OPCBridge::drawScoresHistogram(const Bottle &blobs,
             for (int j=0; j<blobScores->size(); j++)
             {
                 Bottle *item=blobScores->get(j).asList();
-                if (item==NULL)
+                if (item==nullptr)
                     continue;
 
                 string name=item->get(0).asString().c_str();
@@ -709,7 +709,7 @@ void IOL2OPCBridge::updateOPC()
         for (int j=0; j<blobs.size(); j++)
         {
             Bottle *item=blobs.get(j).asList();
-            if (item==NULL)
+            if (item==nullptr)
                 continue;
 
             ostringstream tag;

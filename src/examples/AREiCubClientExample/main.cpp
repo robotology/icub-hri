@@ -44,7 +44,7 @@ int main()
     rfClient.setVerbose(true);
     rfClient.setDefaultContext("icubClient");
     rfClient.setDefaultConfigFile("example_ARE.ini");
-    rfClient.configure(0, NULL);
+    rfClient.configure(0, nullptr);
 
     // we connect to both ARE and OPC
     if(!iCub.connect()) {

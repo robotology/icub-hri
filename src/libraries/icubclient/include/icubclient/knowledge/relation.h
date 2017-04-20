@@ -58,10 +58,10 @@ namespace icubclient{
         Relation(
             Entity* subject, 
             Entity* verb,
-            Entity* object = NULL, 
-            Entity* complement_place = NULL,
-            Entity* complement_time = NULL,
-            Entity* complement_manner = NULL
+            Entity* object = nullptr, 
+            Entity* complement_place = nullptr,
+            Entity* complement_time = nullptr,
+            Entity* complement_manner = nullptr
             );
 
         yarp::os::Bottle asBottle(bool ignoreID = false) const;

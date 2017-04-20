@@ -28,7 +28,7 @@ using namespace icubclient;
 bool ICubClient::home(const string &part)
 {
     SubSystem_ARE *are = getARE();
-    if (are == NULL)
+    if (are == nullptr)
     {
         yError() << "[iCubClient] Called home() but ARE subsystem is not available.";
         return false;
@@ -60,7 +60,7 @@ bool ICubClient::release(const std::string &oLocation, const yarp::os::Bottle &o
 bool ICubClient::release(const yarp::sig::Vector &target, const yarp::os::Bottle &options)
 {
     SubSystem_ARE *are = getARE();
-    if (are == NULL)
+    if (are == nullptr)
     {
         yError() << "[iCubClient] Called release() but ARE subsystem is not available.";
         return false;
@@ -77,7 +77,7 @@ bool ICubClient::release(const yarp::sig::Vector &target, const yarp::os::Bottle
 
 bool ICubClient::waving(const bool sw) {
     SubSystem_ARE *are = getARE();
-    if (are == NULL)
+    if (are == nullptr)
     {
         yError() << "[iCubClient] Called waving() but ARE subsystem is not available.";
         return false;
@@ -90,7 +90,7 @@ bool ICubClient::waving(const bool sw) {
 bool ICubClient::point(const Vector &target, const Bottle &options)
 {
     SubSystem_ARE *are = getARE();
-    if (are == NULL)
+    if (are == nullptr)
     {
         yError() << "[iCubClient] Called pointfar() but ARE subsystem is not available.";
         return false;
@@ -132,7 +132,7 @@ bool ICubClient::point(const string &sName, const Bottle &options)
 bool ICubClient::push(const string &oLocation, const Bottle &options)
 {
     SubSystem_ARE *are = getARE();
-    if (are == NULL)
+    if (are == nullptr)
     {
         yError() << "[iCubClient] Called push() but ARE subsystem is not available.";
         return false;
@@ -148,7 +148,7 @@ bool ICubClient::push(const string &oLocation, const Bottle &options)
 bool ICubClient::take(const std::string& oName, const Bottle &options)
 {
     SubSystem_ARE *are = getARE();
-    if (are == NULL)
+    if (are == nullptr)
     {
         yError() << "[iCubClient] Called take() but ARE subsystem is not available.";
         return false;

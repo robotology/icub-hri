@@ -204,7 +204,7 @@ bool opcPopulater::populateEntityRandom(Bottle bInput){
         agent->m_color[2] = Random::uniform(80, 180);
         iCub->opc->commit(agent);
 
-        agent = NULL;
+        agent = nullptr;
     }
 
     else if (bInput.get(1).toString() == ICUBCLIENT_OPC_ENTITY_OBJECT)
@@ -221,7 +221,7 @@ bool opcPopulater::populateEntityRandom(Bottle bInput){
         yDebug() << "value: " << obj->m_value;
         iCub->opc->commit(obj);
 
-        obj = NULL;
+        obj = nullptr;
     }
 
     return true;
@@ -253,7 +253,7 @@ bool opcPopulater::addUnknownEntity(Bottle bInput){
         agent->m_color[2] = Random::uniform(80, 180);
         iCub->opc->commit(agent);
 
-        agent = NULL;
+        agent = nullptr;
     }
 
     else if (bInput.get(1).toString() == ICUBCLIENT_OPC_ENTITY_OBJECT)
@@ -268,7 +268,7 @@ bool opcPopulater::addUnknownEntity(Bottle bInput){
         obj->m_color[2] = Random::uniform(180, 250);
         iCub->opc->commit(obj);
 
-        obj = NULL;
+        obj = nullptr;
     }
     else
     {

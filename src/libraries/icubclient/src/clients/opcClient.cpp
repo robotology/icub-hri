@@ -127,7 +127,7 @@ bool OPCClient::setEntityProperty(std::string sourceEntityName, std::string prop
 {
     Entity* source = getEntity(sourceEntityName,false);
     Entity* target = getEntity(targetEntityName,false);
-    if (source == NULL || target == NULL)
+    if (source == nullptr || target == nullptr)
         return false;
     
     source->m_properties[propertyName] = targetEntityName;
@@ -163,13 +163,13 @@ Entity* OPCClient::getEntity(const string &name, bool forceUpdate)
         yError() << "Unable to talk correctly to OPC in getEntity with name";
         yError() << "Command was:" << cmd.toString();
         yError() << "Reply was:" << reply.toString();
-        return NULL;
+        return nullptr;
     }
 
     if (reply.get(1).asList()->get(1).asList()->size() == 0)
     {
         //yError() << "Entity doesn't exist yet. Use addEntity<>() first.";
-        return NULL;
+        return nullptr;
     }
 
     if (reply.get(1).asList()->get(1).asList()->size() > 1)
@@ -207,17 +207,17 @@ Entity *OPCClient::getEntity(int id, bool forceUpdate)
         yError() << "Unable to talk correctly to OPC in getEntity with ID";
         yError() << "Command was:" << cmd.toString();
         yError() << "Reply was:" << reply.toString();
-        return NULL;
+        return nullptr;
     }
 
     Bottle* reply_bottle = reply.get(1).asList();
     if(!reply_bottle) {
         yError() << "Unable to talk correctly to OPC in getEntity with ID";
         yError() << "Reply does not contain Bottle as expected";
-        return NULL;
+        return nullptr;
     }
 
-    Entity* newE = NULL;
+    Entity* newE = nullptr;
     std::string newEntityType = reply_bottle->find("entity").asString().c_str();
 
     //Cast to the right type
@@ -399,7 +399,7 @@ bool OPCClient::addRelation(const Relation &r, double lifeTime)
     Entity* cTime = getEntity(r.complement_time());
     Entity* cManner = getEntity(r.complement_manner());
     Entity* verb = getEntity(r.verb());
-    if (subject == NULL || verb == NULL)
+    if (subject == nullptr || verb == nullptr)
     {
         yError() << "Verb and subject should exist before you try to add a relation";
         return false;
@@ -945,7 +945,7 @@ std::list<std::shared_ptr<Entity>> OPCClient::EntitiesCacheCopy()
             yError() << "EntitiesCacheCopy: Unknown entity type!";
         }
 
-        if(E != NULL) {
+        if(E != nullptr) {
             E->fromBottle(it->second->asBottle());
             E->m_opc_id = it->second->m_opc_id;
             lR.push_back(E);

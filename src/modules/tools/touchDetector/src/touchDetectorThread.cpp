@@ -172,7 +172,7 @@ void TouchDetectorThread::run()
 void TouchDetectorThread::processPort(int portNum, yarp::os::BufferedPort<yarp::os::Bottle> *port, vector<int> &activations)
 {
     Bottle *tactileData = port->read(false);
-    if (tactileData != NULL)
+    if (tactileData != nullptr)
     {
         countActivations(portNum, tactileData, activations);
     }

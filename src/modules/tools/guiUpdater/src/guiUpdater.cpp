@@ -199,7 +199,7 @@ void GuiUpdater::deleteObject(const string &opcTag, Object* o)
     toGui.write(cmd);
 
     //Delete all the body parts
-    if (o != NULL && o->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT && displaySkeleton)
+    if (o != nullptr && o->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT && displaySkeleton)
     {
         unsigned int i = 0;
         Agent* a = dynamic_cast<Agent*>(o);

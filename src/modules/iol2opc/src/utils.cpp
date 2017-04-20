@@ -24,7 +24,7 @@
 /**********************************************************/
 RtLocalization::RtLocalization() : RateThread(30)
 {
-    bridge=NULL;
+    bridge=nullptr;
 }
 
 
@@ -38,7 +38,7 @@ void RtLocalization::setBridge(IOL2OPCBridge *bridge)
 /**********************************************************/
 bool RtLocalization::threadInit()
 {
-    return ((bridge!=NULL) && (getRate()!=0.0));
+    return ((bridge!=nullptr) && (getRate()!=0.0));
 }
 
 
@@ -52,7 +52,7 @@ void RtLocalization::run()
 /**********************************************************/
 OpcUpdater::OpcUpdater() : RateThread(100)
 {
-    bridge=NULL;
+    bridge=nullptr;
 }
 
 
@@ -66,7 +66,7 @@ void OpcUpdater::setBridge(IOL2OPCBridge *bridge)
 /**********************************************************/
 bool OpcUpdater::threadInit()
 {
-    return ((bridge!=NULL) && (getRate()!=0.0));
+    return ((bridge!=nullptr) && (getRate()!=0.0));
 }
 
 
@@ -80,7 +80,7 @@ void OpcUpdater::run()
 /**********************************************************/
 ClassifierReporter::ClassifierReporter()
 {
-    bridge=NULL;
+    bridge=nullptr;
 }
 
 
@@ -94,7 +94,7 @@ void ClassifierReporter::setBridge(IOL2OPCBridge *bridge)
 /**********************************************************/
 void ClassifierReporter::report(const PortInfo &info)
 {
-    if ((bridge!=NULL) && info.created && !info.incoming)
+    if ((bridge!=nullptr) && info.created && !info.incoming)
     {
         if (bridge->state==Bridge::idle)
         {
