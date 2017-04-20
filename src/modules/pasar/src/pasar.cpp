@@ -94,7 +94,6 @@ bool PasarModule::configure(yarp::os::ResourceFinder &rf)
     }
 
     attach(handlerPort);                  // attach to port
-    trackedObject = "";
     presentObjectsLastStep.clear();
     initTime = yarp::os::Time::now();
     initializeMapTiming();
@@ -140,11 +139,6 @@ bool PasarModule::respond(const Bottle& command, Bottle& reply)
 {
     string helpMessage = string(getName().c_str()) +
             " commands are: \n" +
-            "track <string name> : track the object with the given opc name \n" +
-            "track <int id> : track the object with the given opc id \n" +
-            "track <double x> <double y> <double z> : track with the object coordinates\n" +
-            "auto : switch attention between present objects \n" +
-            "sleep : pauses the head control until next command\n" +
             "help \n" +
             "pointing on/off:  launch or stop pointing\n" +
             "waving on/off:  launch or stop waving\n" +
@@ -217,7 +211,7 @@ bool PasarModule::respond(const Bottle& command, Bottle& reply)
 bool PasarModule::updateModule()
 {
     iCub->opc->checkout();
-    entities = iCub->opc->EntitiesCacheCopy();
+    std::list<std::shared_ptr<icubclient::Entity>> entities = iCub->opc->EntitiesCacheCopy();
 
     presentLastSpeed = presentCurrentSpeed;
     presentCurrentSpeed.clear();
@@ -244,22 +238,6 @@ bool PasarModule::updateModule()
         //Leaky integrate
         saliencyLeakyIntegration();
 
-        //Get the most salient object and track it
-        auto mostSalientObject = OPCEntities.begin();
-        for (auto it = OPCEntities.begin(); it != OPCEntities.end(); it++)
-        {
-            if (it->second.o.m_saliency > mostSalientObject->second.o.m_saliency)
-                mostSalientObject = it;
-        }
-
-        trackedObject = mostSalientObject->second.o.name();
-
-        if (OPCEntities[mostSalientObject->first].o.m_saliency > 0.0)
-        {
-            yInfo() << "Tracking : " << trackedObject << " Salience : " << OPCEntities[mostSalientObject->first].o.m_saliency;
-        }
-
-
         //Update the OPC values
         for (auto it = entities.begin(); it != entities.end(); it++)
         {
@@ -273,8 +251,9 @@ bool PasarModule::updateModule()
             }
         }
     }
-    else{
-        yInfo(" no object present in the OPC");
+    else
+    {
+        yInfo("no objects present in the OPC");
     }
 
     presentObjectsLastStep = OPCEntities;
@@ -289,10 +268,8 @@ void PasarModule::saliencyTopDown()
     //Add up the top down saliency
     for (auto &it : OPCEntities)
     {
-
         if (presentObjectsLastStep.find(it.first) != presentObjectsLastStep.end() && it.second.o.name() != "cursor_0" && it.second.o.name() != "icub")
         {
-
             //Objects appears/disappears
             bool appeared, disappeared;
 
@@ -440,8 +417,8 @@ bool PasarModule::saliencyPointing()
 
             distance = sqrt(
                         (x - it.second.o.m_ego_position[0])*(x - it.second.o.m_ego_position[0]) +
-                    (y - it.second.o.m_ego_position[1])*(y - it.second.o.m_ego_position[1]) +
-                    (z - it.second.o.m_ego_position[2])*(z - it.second.o.m_ego_position[2])
+                        (y - it.second.o.m_ego_position[1])*(y - it.second.o.m_ego_position[1]) +
+                        (z - it.second.o.m_ego_position[2])*(z - it.second.o.m_ego_position[2])
                     );
 
             if (distance < closest)
@@ -485,7 +462,7 @@ bool PasarModule::saliencyWaving()
 {
     bool wasPresent = false;
     Agent *ag = nullptr;
-    // founding the agent:
+    // find the agent:
     for (auto &it : OPCEntities){
         if (it.second.o.entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT
                 && it.second.present
@@ -612,7 +589,7 @@ void PasarModule::initializeMapTiming()
     isPointing = false;
 
     iCub->opc->checkout();
-    entities = iCub->opc->EntitiesCacheCopy();
+    std::list<std::shared_ptr<icubclient::Entity>> entities = iCub->opc->EntitiesCacheCopy();
     double now = yarp::os::Time::now() - initTime;
     OPCEntities.clear();
 

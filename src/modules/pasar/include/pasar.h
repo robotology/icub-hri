@@ -39,6 +39,7 @@ struct ObjectModel
 * Module in charge of polling the OPC and updating icubGUI
 */
 class PasarModule : public yarp::os::RFModule {
+protected:
     //Parameter
     double pTopDownAppearanceBurst;         //!< score of saliency for an appereance
     double pTopDownDisappearanceBurst;      //!< score of saliency for an diappereance
@@ -48,14 +49,14 @@ class PasarModule : public yarp::os::RFModule {
     double thresholdMovementAccelAgent;     //!< minimum acceleration to detect an agent
     double thresholdMovementAccelObject;    //!< minimum acceleration to detect an object
     double thresholdWaving;                 //!< minimum waving detected
-    double thresholdPointing;               //!< minimum pointing detected
-    double thresholdSaliency;
-    double dthresholdAppear;
-    double dthresholdDisappear;
+    double thresholdPointing;               //!< maximum distance between hand and object to detect pointing
+    double thresholdSaliency;               //!< if object saliency is below this value, it is set to 0
+    double dthresholdAppear;                //!< minimum time an object has to be present before it is detected as appeared
+    double dthresholdDisappear;             //!< minimum time an object has to be absent before it is detected as disappeared
     double dBurstOfPointing;                //!< how much to increase saliency if object is pointed at
 
-    double lastTimeWaving;
-    double lastTimePointing;
+    double lastTimeWaving;                  //!< last time point when the agent was waving
+    double lastTimePointing;                //!< last time point when the agent was pointing
 
     bool checkWaving;                       //!< whether to detect waving of an agent
     bool checkPointing;                     //!< whether to detect pointing of an agent
@@ -63,28 +64,22 @@ class PasarModule : public yarp::os::RFModule {
 
     yarp::os::Port handlerPort;             //!< a port to handle messages
 
-    std::list<std::shared_ptr<icubclient::Entity>> entities;
-
     yarp::sig::Vector rightHandt1;          //!< position of right at t1
     yarp::sig::Vector rightHandt2;          //!< position of right at t2
     yarp::sig::Vector leftHandt1;           //!< position of left hand at t1
     yarp::sig::Vector leftHandt2;           //!< position of left hand at t2
 
-    std::pair<bool, bool> presentRightHand; //!< first: whether right hand was present at t-1; second: whether right hand is present (at t)
-    std::pair<bool, bool> presentLeftHand;  //!< first: whether left hand was present at t-1; second: whether left hand is present (at t)
+    std::pair<bool, bool> presentRightHand; //!< first: whether right hand was present at t1; second: whether right hand is present at t2
+    std::pair<bool, bool> presentLeftHand;  //!< first: whether left hand was present at t1; second: whether left hand is present at t2
 
     std::map<int, ObjectModel>  presentObjectsLastStep;
     std::map<int, std::pair<double, double> > presentLastSpeed;
     std::map<int, std::pair<double, double> > presentCurrentSpeed;
     std::map<int, ObjectModel>  OPCEntities;
 
-    std::string trackedObject;              //!< most salient object which is being tracked
-
     bool isPointing;                        //!< if the human is pointing
     bool isWaving;                          //!< if if the human is waving
     double initTime;
-
-protected:
 
     /**
      * @brief saliencyTopDown Update the salience according to the informations contained in the OPC (acceleration, appareance, disappareance)
@@ -114,7 +109,6 @@ protected:
      */
     bool saliencyWaving();
     void initializeMapTiming();
-	void updateMapTiming();
 
 public:
     bool configure(yarp::os::ResourceFinder &rf); // configure all the module parameters and return true if successful

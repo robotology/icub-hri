@@ -37,13 +37,8 @@
           <required>no</required>
           <priority>no</priority>
           <description>Response port. Supported commands:
-                            - track string_name:  track the object with the given opc name
-                            - track int_id: track the object with the given opc id
-                            - track double_x double_y double_z: track with the object coordinates
-                            - auto: switch attention between present objects
-                            - sleep: pause the head control until next command
-                            - pointing on/off: launch or stop pointing
-                            - waving on/off: launch or stop waving
+                            - pointing on/off: launch or stop pointing detection
+                            - waving on/off: launch or stop waving detection
                             - help
                             - quit
           </description>
