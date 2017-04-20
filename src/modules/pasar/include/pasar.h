@@ -24,6 +24,9 @@
 #include <utility>
 #include "icubclient/clients/icubClient.h"
 
+/**
+ * @ingroup pasar
+ */
 struct ObjectModel
 {
     icubclient::Object o;
@@ -36,8 +39,8 @@ struct ObjectModel
 
 
 /**
-* Module in charge of polling the OPC and updating icubGUI
-*/
+ * @ingroup pasar
+ */
 class PasarModule : public yarp::os::RFModule {
 protected:
     //Parameter

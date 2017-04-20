@@ -32,13 +32,16 @@ using namespace yarp::math;
 using namespace kinectWrapper;
 using namespace icubclient;
 
+/**
+ * @ingroup agentDetector
+ */
 typedef enum {
     idle,
     clicked_left,
     clicked_right } clickType;
 
 /**
- * @ingroup AgentDetector
+ * @ingroup agentDetector
  */
 class AgentDetector: public RFModule
 {
