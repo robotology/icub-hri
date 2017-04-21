@@ -191,7 +191,7 @@ bool Object::fromBottle(const Bottle &b)
     return true;
 }
 
-string Object::toString()
+string Object::toString() const
 {
     std::ostringstream oss;
     oss<< this->Entity::toString();

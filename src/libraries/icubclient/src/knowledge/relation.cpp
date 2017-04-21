@@ -130,7 +130,7 @@ Bottle Relation::asBottle(bool ignoreID) const
     return b;
 }
 
-Bottle Relation::asLightBottle()
+Bottle Relation::asLightBottle() const
 {
     Bottle b;
     Bottle bSub;
@@ -188,7 +188,7 @@ void Relation::fromBottle(const Bottle &b)
     m_complement_manner = b.find("rCompManner").asString().c_str();
 }
 
-string Relation::toString()
+string Relation::toString() const
 {    
     std::ostringstream oss;
     oss<< subject() << " " <<verb()<<" ";
@@ -204,7 +204,7 @@ string Relation::toString()
     return oss.str();
 }
 
-int Relation::ID()
+int Relation::ID() const
 {    
     return m_opcId;
 }

@@ -105,21 +105,21 @@ bool Agent::fromBottle(const Bottle &b)
     return true;
 }
 
-string Agent::toString()
+string Agent::toString() const
 {    
     std::ostringstream oss;
     oss<< this->Object::toString();
 
     oss<<"Believes that : \n";
-    for(list<Relation>::iterator it = m_belief.begin(); it != m_belief.end(); it++)
+    for(const auto& it : m_belief)
     {
-        oss<< it->toString() <<endl;
+        oss<< it.toString() <<endl;
     }
 
     oss<<"Emotions:"<<endl;
-       for(map<string,double>::iterator it = m_emotions_intrinsic.begin(); it != m_emotions_intrinsic.end(); it++)
+    for(const auto& it : m_emotions_intrinsic)
     {
-        oss<< '\t'<<it->first <<" : "<<it->second<<endl;
+        oss<< '\t'<<it.first <<" : "<<it.second<<endl;
     }
 
     return oss.str();

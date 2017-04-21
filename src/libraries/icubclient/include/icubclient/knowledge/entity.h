@@ -52,7 +52,7 @@ private:
 
     //The entity status when the class is updated by the OPCClient
     yarp::os::Bottle m_original_entity;
-    yarp::os::Bottle asBottleOnlyModifiedProperties();
+    yarp::os::Bottle asBottleOnlyModifiedProperties() const;
 
 protected:
     std::string m_entity_type;
@@ -67,7 +67,7 @@ public:
     /**
     * Test if an entity is inheriting a given type
     */
-    virtual bool isType(std::string _entityType)
+    virtual bool isType(std::string _entityType) const
     {
         (void) _entityType; // to avoid unused parameter warning
         return false;
@@ -87,7 +87,7 @@ public:
     /**
     * Return a human readable description of the entity
     */
-    virtual std::string toString();
+    virtual std::string toString() const;
 
     //Getters
     /**
@@ -107,9 +107,9 @@ public:
     /**
     * Returns the name of an entity contained in a property, returns the string NULL if property is not set
     */
-    std::string properties(std::string p) {
+    std::string properties(const std::string& p) const {
         if (m_properties.find(p)!=m_properties.end()) {
-            return m_properties[p];
+            return m_properties.find(p)->second;
         }
         else {
             return "NULL";
@@ -119,7 +119,7 @@ public:
     /**
     * Return the specific type of an entity.
     */
-    std::string entity_type(){
+    std::string entity_type() const {
         return m_entity_type;
     }
 

@@ -72,7 +72,7 @@ Bottle Entity::asBottle() const
     return b;
 }
 
-Bottle Entity::asBottleOnlyModifiedProperties()
+Bottle Entity::asBottleOnlyModifiedProperties() const
 {
     Bottle current_entity = this->asBottle();
 
@@ -115,7 +115,7 @@ bool Entity::fromBottle(const Bottle &b)
     return true;
 }
 
-string Entity::toString()
+string Entity::toString() const
 {
     std::ostringstream oss;
     oss << "**************"<<endl;
@@ -123,10 +123,8 @@ string Entity::toString()
     oss <<"ID : "    <<    m_opc_id<<endl;
     oss <<"Type : "    <<    m_entity_type<<endl;
     oss <<"Intrinsic properties: "<<endl;
-    for(map<string, string>::iterator prop = m_properties.begin(); prop != m_properties.end(); prop++)
-    {
-        oss<<'\t'<<prop->first.c_str()<<" : "<<prop->second.c_str()<<endl;
-
+    for(const auto& prop : m_properties) {
+        oss<<'\t'<<prop.first<<" : "<<prop.second<<endl;
     }
     return oss.str();
 }

@@ -68,14 +68,14 @@ namespace icubclient{
         /**
         * Return the relation as a bottle without the argument to "none"
         */
-        yarp::os::Bottle    asLightBottle();
+        yarp::os::Bottle    asLightBottle() const;
         void fromBottle(const yarp::os::Bottle &b);
-        virtual std::string toString();
+        virtual std::string toString() const;
 
         /**
         * Get the opc ID of the relation.
         */
-        int        ID();
+        int        ID() const;
 
         /**
         * Get the name of the relation's subject.

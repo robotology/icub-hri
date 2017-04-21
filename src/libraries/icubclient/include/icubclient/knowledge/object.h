@@ -81,7 +81,7 @@ public:
     */  
     double m_value;
 
-    virtual bool    isType(std::string _entityType)
+    virtual bool    isType(std::string _entityType) const
     {
         if (_entityType == ICUBCLIENT_OPC_ENTITY_OBJECT) {
             return true;
@@ -92,7 +92,7 @@ public:
 
     virtual yarp::os::Bottle asBottle() const;
     virtual bool             fromBottle(const yarp::os::Bottle &b);
-    virtual std::string      toString();
+    virtual std::string      toString() const;
 
     /**
     * Express a point given in the initial ego-centered reference frame in respect to the object reference frame.

@@ -46,7 +46,7 @@ namespace icubclient{
         Action();
         Action(const Action &b);
 
-        virtual bool isType(std::string _entityType)
+        virtual bool isType(std::string _entityType) const
         {
             if (_entityType == ICUBCLIENT_OPC_ENTITY_ACTION)
                 return true;
@@ -56,7 +56,7 @@ namespace icubclient{
 
         void setInitialDescription(const Relation &r);
         Relation    description();
-        Action      express(Relation r);
+        Action      express(Relation r) const;
 
         /**
         * Append a subaction to create a composite one
@@ -67,13 +67,13 @@ namespace icubclient{
         /**
         * Get an unrolled plan description
         */ 
-        virtual std::list<Action>    asPlan();
+        virtual std::list<Action>    asPlan() const;
 
         /**
         * Get an unrolled plan description based on new arguments
         * @param newDescription The new arguments
         */ 
-        virtual std::list<Action>    asPlan(Relation& newDescription);
+        virtual std::list<Action>    asPlan(Relation& newDescription) const;
 
         /**
         * Is an action composite or not?
@@ -87,7 +87,7 @@ namespace icubclient{
 
         virtual yarp::os::Bottle asBottle() const;
         virtual bool             fromBottle(const yarp::os::Bottle &b);
-        virtual std::string      toString();
+        virtual std::string      toString() const;
                 
         /**
         * Estimate the effect of this plan on a specific drive, by summing all the effects of
@@ -99,7 +99,7 @@ namespace icubclient{
         * Gives the string according to a current situation
         * @param newRelation The new arguments
         */ 
-        virtual std::string toString(Relation newRelation);
+        virtual std::string toString(Relation newRelation) const;
     };
 
 }//Namespace

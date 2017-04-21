@@ -70,7 +70,7 @@ Bottle Bodypart::asBottle() const
     return b;
 }
 
-string Bodypart::toString()
+string Bodypart::toString() const
 {
     std::ostringstream oss;
     oss<< this->Object::toString();

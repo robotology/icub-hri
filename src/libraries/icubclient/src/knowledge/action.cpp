@@ -103,7 +103,7 @@ void Action::setInitialDescription(const Relation &r)
     this->initialDescription.fromBottle(r.asBottle());
 }
 
-Action Action::express(Relation r)
+Action Action::express(Relation r) const
 {
     Action a;
     string initial = this->asBottle().toString().c_str();
@@ -135,21 +135,22 @@ void Action::append(Action& a)
     subActions.push_back(a);
 }
 
-list<Action> Action::asPlan()
+list<Action> Action::asPlan() const
 {
     list<Action> unrolled;
-    if (this->subActions.size() == 0)
+    if (this->subActions.size() == 0) {
         unrolled.push_back(*this);
-    else
-        for(list<Action>::iterator it = subActions.begin(); it != subActions.end() ; it++)
+    } else {
+        for(const auto& it : subActions)
         {
-            list<Action> subUnrolled = it->asPlan();
+            list<Action> subUnrolled = it.asPlan();
             unrolled.splice(unrolled.end(), subUnrolled);
         }
+    }
     return unrolled;
 }
 
-list<Action> Action::asPlan(Relation &newDescription)
+list<Action> Action::asPlan(Relation &newDescription) const
 {            
     Action expressed = this->express(newDescription);
     list<Action> unrolled = expressed.asPlan();
@@ -170,12 +171,12 @@ void Action::getPlanDrivesEffect(map<string,double> &driveEffects)
         it->getPlanDrivesEffect(driveEffects);
     }
 }
-string Action::toString()
+string Action::toString() const
 {   
     return toString(this->initialDescription);
 }
 
-string Action::toString(Relation newRelation)
+string Action::toString(Relation newRelation) const
 {        
     std::ostringstream oss;
     oss<<"Unrolling: "<<newRelation.toString()<<endl;
