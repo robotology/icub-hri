@@ -99,9 +99,9 @@ public:
     *@param vInitialRoot the point to transform
     *@return The transformed vector (x y z)
     */
-    yarp::sig::Vector getSelfRelativePosition(const yarp::sig::Vector &vInitialRoot);
+    yarp::sig::Vector getSelfRelativePosition(const yarp::sig::Vector &vInitialRoot) const;
 
-    std::string objectAreaAsString() {
+    std::string objectAreaAsString() const {
         return objectAreaAsString(m_objectarea);
     }
 

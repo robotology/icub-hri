@@ -103,7 +103,7 @@ void Action::setInitialDescription(const Relation &r)
     this->initialDescription.fromBottle(r.asBottle());
 }
 
-Action Action::express(Relation r) const
+Action Action::express(const Relation& r) const
 {
     Action a;
     string initial = this->asBottle().toString().c_str();
@@ -150,7 +150,7 @@ list<Action> Action::asPlan() const
     return unrolled;
 }
 
-list<Action> Action::asPlan(Relation &newDescription) const
+list<Action> Action::asPlan(const Relation &newDescription) const
 {            
     Action expressed = this->express(newDescription);
     list<Action> unrolled = expressed.asPlan();
@@ -176,7 +176,7 @@ string Action::toString() const
     return toString(this->initialDescription);
 }
 
-string Action::toString(Relation newRelation) const
+string Action::toString(const Relation& newRelation) const
 {        
     std::ostringstream oss;
     oss<<"Unrolling: "<<newRelation.toString()<<endl;

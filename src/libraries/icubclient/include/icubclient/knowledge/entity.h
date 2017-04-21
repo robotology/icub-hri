@@ -48,7 +48,7 @@ class Entity
 private:
     int                 m_opc_id;
     std::string         m_name;
-    std::map<std::string, std::string > m_properties;
+    std::map<std::string, std::string > m_properties; //!< deprecated, not used!
 
     //The entity status when the class is updated by the OPCClient
     yarp::os::Bottle m_original_entity;
@@ -99,13 +99,15 @@ public:
 
     /**
     * Return the id of an entity (which has to be unique within the OPC)
+    * Typically, modules should employ the name() instead.
     */
     int opc_id() const {
         return m_opc_id;
     }
 
     /**
-    * Returns the name of an entity contained in a property, returns the string NULL if property is not set
+    * Returns the name of an entity contained in a property, returns the string "NULL" if property is not set
+    * Deprecated, do not use!
     */
     std::string properties(const std::string& p) const {
         if (m_properties.find(p)!=m_properties.end()) {

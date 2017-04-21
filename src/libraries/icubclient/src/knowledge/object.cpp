@@ -214,7 +214,7 @@ string Object::toString() const
     return oss.str();
 }
 
-Vector Object::getSelfRelativePosition(const Vector &vInitialRoot)
+Vector Object::getSelfRelativePosition(const Vector &vInitialRoot) const
 {
     Vector targetAbsolute(4,1.0);
     targetAbsolute.setSubvector(0,vInitialRoot);

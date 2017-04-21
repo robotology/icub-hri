@@ -906,37 +906,37 @@ list<Entity*> OPCClient::Entities(const string &prop, const string &op, const st
 }
 
 //Getter of the list of entities stored locally
-list<Entity*> OPCClient::EntitiesCache()
+list<Entity*> OPCClient::EntitiesCache() const
 {
     list<Entity*> lR;
-    for(map<int,Entity*>::iterator it = this->entitiesByID.begin() ; it != this->entitiesByID.end() ; it++)
+    for(const auto& it : this->entitiesByID)
     {
-        lR.push_back(it->second);
+        lR.push_back(it.second);
     }
     return lR;
 }
 
 
 //Getter of the list of entities stored locally
-std::list<std::shared_ptr<Entity>> OPCClient::EntitiesCacheCopy()
+std::list<std::shared_ptr<Entity>> OPCClient::EntitiesCacheCopy() const
 {
     list<std::shared_ptr<Entity>> lR;
-    for(map<int,Entity*>::iterator it = this->entitiesByID.begin() ; it != this->entitiesByID.end() ; it++)
+    for(const auto& it : this->entitiesByID)
     {
         std::shared_ptr<Entity> E;
-        if ((it->second)->m_entity_type == ICUBCLIENT_OPC_ENTITY_AGENT)
+        if (it.second->m_entity_type == ICUBCLIENT_OPC_ENTITY_AGENT)
         {
             E = std::shared_ptr<Agent>(new Agent());
         }
-        else if ((it->second)->m_entity_type == ICUBCLIENT_OPC_ENTITY_OBJECT)
+        else if (it.second->m_entity_type == ICUBCLIENT_OPC_ENTITY_OBJECT)
         {
             E = std::shared_ptr<Object>(new Object());
         }
-        else if ((it->second)->m_entity_type == ICUBCLIENT_OPC_ENTITY_ACTION)
+        else if (it.second->m_entity_type == ICUBCLIENT_OPC_ENTITY_ACTION)
         {
             E = std::shared_ptr<Action>(new Action());
         }
-        else if ((it->second)->m_entity_type == "bodypart")
+        else if (it.second->m_entity_type == "bodypart")
         {
             E = std::shared_ptr<Bodypart>(new Bodypart());
         }
@@ -946,8 +946,8 @@ std::list<std::shared_ptr<Entity>> OPCClient::EntitiesCacheCopy()
         }
 
         if(E != nullptr) {
-            E->fromBottle(it->second->asBottle());
-            E->m_opc_id = it->second->m_opc_id;
+            E->fromBottle(it.second->asBottle());
+            E->m_opc_id = it.second->m_opc_id;
             lR.push_back(E);
         }
     }
@@ -958,14 +958,14 @@ std::list<std::shared_ptr<Entity>> OPCClient::EntitiesCacheCopy()
 string OPCClient::print()
 {
     string s="WORLD STATE \n";
-    for(map<int, Entity* >::iterator it = entitiesByID.begin(); it != entitiesByID.end(); it++)
+    for(const auto& it : entitiesByID)
     {
-        s += it->second->toString();
+        s += it.second->toString();
     }
     s+= "RELATIONS \n";
     list<Relation> rels = getRelations();
-    for(list<Relation>::iterator it = rels.begin(); it!=rels.end(); it++)
-        s += it->toString() + '\n';
+    for(const auto& it : rels)
+        s += it.toString() + '\n';
 
     return s;
 }

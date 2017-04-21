@@ -56,7 +56,7 @@ namespace icubclient{
 
         void setInitialDescription(const Relation &r);
         Relation    description();
-        Action      express(Relation r) const;
+        Action      express(const Relation &r) const;
 
         /**
         * Append a subaction to create a composite one
@@ -73,7 +73,7 @@ namespace icubclient{
         * Get an unrolled plan description based on new arguments
         * @param newDescription The new arguments
         */ 
-        virtual std::list<Action>    asPlan(Relation& newDescription) const;
+        virtual std::list<Action>    asPlan(const Relation& newDescription) const;
 
         /**
         * Is an action composite or not?
@@ -99,7 +99,7 @@ namespace icubclient{
         * Gives the string according to a current situation
         * @param newRelation The new arguments
         */ 
-        virtual std::string toString(Relation newRelation) const;
+        virtual std::string toString(const Relation &newRelation) const;
     };
 
 }//Namespace
