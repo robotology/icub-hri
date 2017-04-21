@@ -88,7 +88,6 @@ protected:
     //Agent Identity related
     Agent*              partner;                //!< human as an agent object
     map<int, string>    identities;
-    string              currentTrainingFace;    //!< string value for the current trained human face
     map<string, Vector> skeletonPatterns;       //!< properties of skeleton obtained from kinect
     double              dSince;                 //!< double value of timers
 

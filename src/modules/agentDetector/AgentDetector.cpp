@@ -258,12 +258,7 @@ bool AgentDetector::close()
 
 bool AgentDetector::respond(const Bottle& cmd, Bottle& reply)
 {
-    if (cmd.get(0).asString() == "train" ) {
-        reply.addString("ack");
-        yInfo()<<"Received a training order";
-        currentTrainingFace = cmd.get(1).asString();
-    }
-    else if (cmd.get(0).asString() == "change_partner_name" ) {
+    if (cmd.get(0).asString() == "change_partner_name" ) {
         if(cmd.get(1).isString()) {
             reply.addString("ack");
             partner_default_name=cmd.get(1).asString();
@@ -493,14 +488,6 @@ bool AgentDetector::updateModule()
                     }
                     else
                     {   
-                        //Check if we should learn this face
-                        if (currentTrainingFace != "")
-                        {
-                            setIdentity(*p,currentTrainingFace);
-                            currentTrainingFace = "";
-                        }
-
-                        //if (useFaceRecognition)
                         playerName = getIdentity(*p);
                     }
 
@@ -594,11 +581,6 @@ bool AgentDetector::updateModule()
         }
     }
     return true;
-}
-
-void AgentDetector::setIdentity(Player p, string name)
-{
-    this->skeletonPatterns[name.c_str()] = getSkeletonPattern(p);
 }
 
 double distanceVector(Joint j1, Joint j2)
