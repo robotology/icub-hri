@@ -23,6 +23,7 @@
 #include <iomanip>
 #include <fstream>
 #include <tuple>
+#include <typeindex>
 
 #include <yarp/os/Network.h>
 
@@ -73,6 +74,20 @@ namespace icubclient{
                 return nullptr;
             else
                 return (T*)subSystems[subSystemName];
+        }
+
+        /**
+         * get a subsystem by just providing the type
+         * untested, just to play around with C++11
+         */
+        template <class T>
+        T* getSubSystem(T) {
+            for(const auto subSystem : subSystems) {
+                if(std::type_index(typeid(T)) == std::type_index(typeid(subSystem))) {
+                    return subSystem;
+                }
+            }
+            return nullptr;
         }
 
         SubSystem_agentDetector* getAgentDetectorClient();
