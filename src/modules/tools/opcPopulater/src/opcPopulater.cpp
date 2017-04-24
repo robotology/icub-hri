@@ -72,12 +72,10 @@ bool opcPopulater::respond(const Bottle& command, Bottle& reply) {
         "quit \n" +
         "populateSpecific1 entity_type entity_name \n" +
         "populateSpecific2 \n" +
-        "populateSpecific3 \n"
+        "populateSpecific3 \n" +
+        "populateRedBall \n" +
+        "populateMoving \n" +
         "addUnknownEntity entity_type\n" +
-        "populateABM \n" +
-        "populateABMiCubStory \n" +
-        "storyFromPOV POV\n" +
-        "populateScenario + N\n" +
         "setSaliencyEntity entity_name saliency_name\n";
 
     reply.clear();
@@ -113,11 +111,11 @@ bool opcPopulater::respond(const Bottle& command, Bottle& reply) {
     }
     else if (command.get(0).asString() == "setSaliencyEntity") {
         yInfo() << " setSaliencyEntity";
-        (setSaliencyEntity(command)) ? reply.addString("setSaliencyEntity done !") : reply.addString("setSaliencyEntity failed !");
+        (setAttributeEntity(command, &Object::setSaliency)) ? reply.addString("setSaliencyEntity done !") : reply.addString("setSaliencyEntity failed !");
     }
     else if (command.get(0).asString() == "setValueEntity") {
         yInfo() << " setValueEntity";
-        (setValueEntity(command)) ? reply.addString("setValueEntity done !") : reply.addString("setValueEntity failed !");
+        (setAttributeEntity(command, &Object::setValue)) ? reply.addString("setValueEntity done !") : reply.addString("setValueEntity failed !");
     }
     else if (command.get(0).asString() == "clear") {
         yInfo() << " clearing OPC";
@@ -278,64 +276,27 @@ bool opcPopulater::addUnknownEntity(Bottle bInput){
     return true;
 }
 
+bool opcPopulater::setAttributeEntity(Bottle bInput, std::function<void(Object*, double)> f_setter){
 
-/*
-*  change the saliency of an entity in the OPC
-*  input: Bottle ("setSaliencyEntity" entity_name saliency_level )
-*/
-bool opcPopulater::setSaliencyEntity(Bottle bInput){
-
-    if (bInput.size() != 3)
-    {
-        yWarning() << " in opcPopulater::setSaliencyEntity| wrong number of input";
+    if (bInput.size() != 3) {
+        yWarning() << " in opcPopulater::setAttributeEntity| wrong number of input";
         return false;
     }
 
-
     string sName = bInput.get(1).toString();
-    double targetSaliency = bInput.get(2).asDouble();
-
-    iCub->opc->checkout();
-    list<Entity*> lEntities = iCub->opc->EntitiesCache();
-
-    for (list<Entity*>::iterator itEnt = lEntities.begin(); itEnt != lEntities.end(); itEnt++)
-    {
-        if ((*itEnt)->name() == sName)
-        {
-            if ((*itEnt)->entity_type() == ICUBCLIENT_OPC_ENTITY_OBJECT || (*itEnt)->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT)
-            {
-                dynamic_cast<Object*>(*itEnt)->m_saliency = targetSaliency;
-            }
-        }
-    }
-
-    iCub->opc->commit();
-
-    return true;
-}
-
-bool opcPopulater::setValueEntity(Bottle bInput){
-
-    if (bInput.size() != 3)
-    {
-        yWarning() << " in opcPopulater::setValueEntity| wrong number of input";
-        return false;
-    }
-
-
-    string sName = bInput.get(1).toString();
-    double targetValue = bInput.get(2).asDouble();
+    double target = bInput.get(2).asDouble();
 
     iCub->opc->checkout();
 
     Entity *e = iCub->opc->getEntity(sName);
     if (e && (e->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT || e->entity_type() == ICUBCLIENT_OPC_ENTITY_OBJECT)) {
-        dynamic_cast<Object*>(e)->m_value = targetValue;
+        f_setter(dynamic_cast<Object*>(e), target);
         iCub->opc->commit();
-    }
-    else{
+    } else{
         yWarning() << "Trying to change value of the non-object entity: " << sName << ". Please check!";
+        return false;
     }
+
     return true;
 }
 

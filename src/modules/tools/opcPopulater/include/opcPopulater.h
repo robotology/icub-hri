@@ -41,7 +41,6 @@ public:
         return period;
     }
 
-
     bool updateModule();
     bool    populateEntityRandom(Bottle bInput);
     bool    populateRedBall();
@@ -52,8 +51,7 @@ public:
     bool    populateSpecific3();
 
     bool    addUnknownEntity(Bottle bInput);
-    bool    setSaliencyEntity(Bottle bInput);
-    bool    setValueEntity(Bottle bInput);
+    bool    setAttributeEntity(Bottle bInput, std::function<void(Object*, double)> f_setter);
 
     //RPC & scenarios
     bool respond(const Bottle& cmd, Bottle& reply);

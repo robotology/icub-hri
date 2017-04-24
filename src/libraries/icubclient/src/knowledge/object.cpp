@@ -55,6 +55,26 @@ Object::Object(const Object &b):Entity(b)
     this->m_objectarea = b.m_objectarea;
     this->m_value = b.m_value;
 }
+double Object::value() const
+{
+    return m_value;
+}
+
+void Object::setValue(double value)
+{
+    m_value = value;
+}
+
+double Object::saliency() const
+{
+    return m_saliency;
+}
+
+void Object::setSaliency(double saliency)
+{
+    m_saliency = saliency;
+}
+
 
 Bottle Object::asBottle() const
 {

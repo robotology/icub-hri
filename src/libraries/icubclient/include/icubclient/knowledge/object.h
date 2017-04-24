@@ -107,6 +107,30 @@ public:
 
     static std::string objectAreaAsString(const icubclient::ObjectArea &o);
     static icubclient::ObjectArea stringToObjectArea(const std::string &o);
+
+    /**
+     * @brief Get saliency of object
+     * @return saliency of object
+     */
+    double saliency() const;
+
+    /**
+     * @brief Set saliency of object
+     * @param saliency - New saliency value
+     */
+    void setSaliency(double saliency);
+
+    /**
+     * @brief Get value of object
+     * @return value of object
+     */
+    double value() const;
+
+    /**
+     * @brief Set value of object
+     * @param value - New value
+     */
+    void setValue(double value);
 };
 
 } //namespace
