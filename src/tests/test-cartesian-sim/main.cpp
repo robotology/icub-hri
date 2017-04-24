@@ -51,19 +51,10 @@ int main(int argc, char *argv[])
     ResourceFinder rf;
     rf.configure(argc,argv);
 
-    OPCClient world("test_cartesian_sim/opc");
-    if (!world.connect("OPC"))
-    {
-        yError()<<"OPC seems unavailabe!";
-        return 1;
-    }
-    world.clear();
-
     ICubClient icub("test_cartesian_sim","icubClient","test_cartesian_sim.ini");
     if (!icub.connect())
     {
-        yError()<<"One or more functionalities seem unavailabe!";
-        world.close();
+        yError()<<"One or more functionalities seem unavailable!";
         return 1;
     }
 
