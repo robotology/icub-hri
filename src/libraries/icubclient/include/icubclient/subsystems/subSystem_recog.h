@@ -51,7 +51,7 @@ public:
      * @brief Send a command to ears whether it should listen to the speechRecognizer
      * @param on: If true, ears will take control of speechRecognizer
      */
-    void listen(bool on);
+    void enableEars(bool on);
 
     /**
      * @brief Send a command to ears that it should stop listening to the speechRecognizer, and wait until it hands back control

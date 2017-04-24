@@ -32,7 +32,7 @@ void icubclient::SubSystem_Recog::Close() {
     ears_port.close();
 }
 
-void icubclient::SubSystem_Recog::listen(bool on) {
+void icubclient::SubSystem_Recog::enableEars(bool on) {
     if (!yarp::os::Network::isConnected(ears_port.getName(), "/ears/rpc")){
         yarp::os::Network::connect(ears_port.getName(), "/ears/rpc");
     }
@@ -97,7 +97,7 @@ yarp::os::Bottle icubclient::SubSystem_Recog::recogFromGrammar(std::string &sInp
         }
     }
     // pause ears
-    listen(false);
+    enableEars(false);
 
     yarp::os::Bottle bMessenger;
     yarp::os::Bottle bReply;
@@ -107,7 +107,7 @@ yarp::os::Bottle icubclient::SubSystem_Recog::recogFromGrammar(std::string &sInp
     portRPC.write(bMessenger, bReply);
 
     // resume ears
-    listen(true);
+    enableEars(true);
 
     return bReply;
     // turn off the main grammar through ears
@@ -132,7 +132,7 @@ yarp::os::Bottle icubclient::SubSystem_Recog::recogFromGrammarLoop(std::string s
             bOutput; // semantic information of the content of the recognition
 
     if (!keepEarsEnabled) {
-        listen(false);
+        enableEars(false);
         interruptSpeechRecognizer();
         waitForEars();
     }
@@ -162,7 +162,7 @@ yarp::os::Bottle icubclient::SubSystem_Recog::recogFromGrammarLoop(std::string s
             osError << "Check grammar";
             bOutput.addString(osError.str());
             yError() << " " << osError.str();
-            if (!keepEarsDisabledAfterRecog) listen(true);
+            if (!keepEarsDisabledAfterRecog) enableEars(true);
             return bOutput;
         }
         else if (bReply.get(0).toString() == "0")
@@ -171,7 +171,7 @@ yarp::os::Bottle icubclient::SubSystem_Recog::recogFromGrammarLoop(std::string s
             osError << "Grammar not recognized";
             bOutput.addString(osError.str());
             yError() << " " << osError.str();
-            if (!keepEarsDisabledAfterRecog) listen(true);
+            if (!keepEarsDisabledAfterRecog) enableEars(true);
             return bOutput;
         }
         else if (bReply.get(0).toString() == "ACK")
@@ -206,6 +206,6 @@ yarp::os::Bottle icubclient::SubSystem_Recog::recogFromGrammarLoop(std::string s
         bOutput.addString(osError.str());
         yDebug() << osError.str();
     }
-    if (!keepEarsDisabledAfterRecog) listen(true);
+    if (!keepEarsDisabledAfterRecog) enableEars(true);
     return bOutput;
 }
