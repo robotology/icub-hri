@@ -116,11 +116,11 @@ bool opcPopulater::respond(const Bottle& command, Bottle& reply) {
     }
     else if (command.get(0).asString() == "setSaliencyEntity") {
         yInfo() << " setSaliencyEntity";
-        (setAttributeEntity(command, &Object::setSaliency)) ? reply.addString("setSaliencyEntity done !") : reply.addString("setSaliencyEntity failed !");
+        (setAttributeEntity(command, std::mem_fn(&Object::setSaliency))) ? reply.addString("setSaliencyEntity done !") : reply.addString("setSaliencyEntity failed !");
     }
     else if (command.get(0).asString() == "setValueEntity") {
         yInfo() << " setValueEntity";
-        (setAttributeEntity(command, &Object::setValue)) ? reply.addString("setValueEntity done !") : reply.addString("setValueEntity failed !");
+        (setAttributeEntity(command, std::mem_fn(&Object::setValue))) ? reply.addString("setValueEntity done !") : reply.addString("setValueEntity failed !");
     }
     else if (command.get(0).asString() == "clear") {
         yInfo() << " clearing OPC";
