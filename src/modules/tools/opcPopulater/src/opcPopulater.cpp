@@ -1,5 +1,10 @@
+#include <functional>
 #include "opcPopulater.h"
 #include "icubclient/subsystems/subSystem_ARE.h"
+
+using namespace std;
+using namespace yarp::os;
+using namespace icubclient;
 
 bool opcPopulater::configure(yarp::os::ResourceFinder &rf)
 {
@@ -181,7 +186,7 @@ bool opcPopulater::updateModule() {
     return true;
 }
 
-bool opcPopulater::populateEntityRandom(Bottle bInput){
+bool opcPopulater::populateEntityRandom(const Bottle& bInput){
 
     if (bInput.size() != 3)
     {
@@ -226,7 +231,7 @@ bool opcPopulater::populateEntityRandom(Bottle bInput){
 }
 
 
-bool opcPopulater::addUnknownEntity(Bottle bInput){
+bool opcPopulater::addUnknownEntity(const Bottle &bInput){
 
     if (bInput.size() != 2)
     {
@@ -276,7 +281,7 @@ bool opcPopulater::addUnknownEntity(Bottle bInput){
     return true;
 }
 
-bool opcPopulater::setAttributeEntity(Bottle bInput, std::function<void(Object*, double)> f_setter){
+bool opcPopulater::setAttributeEntity(const Bottle& bInput, std::function<void(Object*, double)> f_setter){
 
     if (bInput.size() != 3) {
         yWarning() << " in opcPopulater::setAttributeEntity| wrong number of input";

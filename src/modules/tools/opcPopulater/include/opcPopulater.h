@@ -1,16 +1,13 @@
+#include <functional>
+
 #include "icubclient/clients/icubClient.h"
-#include <time.h>
 
-using namespace std;
-using namespace yarp::os;
-using namespace icubclient;
-
-class opcPopulater : public RFModule {
+class opcPopulater : public yarp::os::RFModule {
 protected:
 
-    ICubClient *iCub;
-    double      period;
-    Port        rpc;
+    icubclient::ICubClient *iCub;
+    double period;
+    yarp::os::Port rpc;
 
     double X_obj;
     double Y_obj;
@@ -19,12 +16,10 @@ protected:
     double Y_ag;
     double Z_ag;
     double noise;
-    vector<double> spd1;
-    vector<double> spd2;
+    std::vector<double> spd1;
+    std::vector<double> spd2;
     bool move;
     int iter;
-
-
 
 public:
     bool configure(yarp::os::ResourceFinder &rf);
@@ -42,17 +37,17 @@ public:
     }
 
     bool updateModule();
-    bool    populateEntityRandom(Bottle bInput);
+    bool    populateEntityRandom(const yarp::os::Bottle &bInput);
     bool    populateRedBall();
     bool    populateMoving();
     bool    populateSpecific();
-    bool    populateSpecific1(Bottle bInput);
+    bool    populateSpecific1(const yarp::os::Bottle &bInput);
     bool    populateSpecific2();
     bool    populateSpecific3();
 
-    bool    addUnknownEntity(Bottle bInput);
-    bool    setAttributeEntity(Bottle bInput, std::function<void(Object*, double)> f_setter);
+    bool    addUnknownEntity(const yarp::os::Bottle &bInput);
+    bool    setAttributeEntity(const yarp::os::Bottle &bInput, std::function<void(icubclient::Object*, double)> f_setter);
 
     //RPC & scenarios
-    bool respond(const Bottle& cmd, Bottle& reply);
+    bool respond(const yarp::os::Bottle& cmd, yarp::os::Bottle& reply);
 };
