@@ -955,7 +955,7 @@ std::list<std::shared_ptr<Entity>> OPCClient::EntitiesCacheCopy() const
 }
 
 //Return a (printable) string with the contents of the OPC
-string OPCClient::print()
+string OPCClient::toString()
 {
     string s="WORLD STATE \n";
     for(const auto& it : entitiesByID)

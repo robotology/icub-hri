@@ -1,5 +1,6 @@
 *~
 *.autosave
+/bindings/build*/
 /build*/
 *kdev*
 *.orig

@@ -101,7 +101,7 @@
 #define ICUBCLIENT_OPC_BODY_PART_TYPE_FT_R        ("fingertipRight")
 #define ICUBCLIENT_OPC_BODY_PART_TYPE_COM         ("CoM")
 
-const static std::vector<std::string> ALL_AVAILABLE_BODYPARTS = {
+const std::vector<std::string> ALL_AVAILABLE_BODYPARTS = {
     ICUBCLIENT_OPC_BODY_PART_TYPE_HEAD,
     ICUBCLIENT_OPC_BODY_PART_TYPE_HAND_L,
     ICUBCLIENT_OPC_BODY_PART_TYPE_HAND_R,

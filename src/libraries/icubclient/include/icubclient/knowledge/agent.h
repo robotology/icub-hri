@@ -98,7 +98,6 @@ private:
 public:
     Agent();
     Agent(const Agent &b);
-    virtual ~Agent() {}
 
     std::map<std::string, double> m_emotions_intrinsic;
     Body m_body;
@@ -137,8 +136,6 @@ public:
     * Get a read-only copy of the agent believes.
     */
     const std::list<Relation> &beliefs();
-
-    bool                operator==(const Agent &b);
 };
 
 } //namespaces

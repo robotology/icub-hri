@@ -364,7 +364,7 @@ public:
     /**
     * Returns a human readable description of the client content (Entities & Relations)
     */
-    std::string print();
+    std::string toString();
 };
 
 }//Namespace

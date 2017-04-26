@@ -106,7 +106,7 @@ bool Agent::fromBottle(const Bottle &b)
 }
 
 string Agent::toString() const
-{    
+{
     std::ostringstream oss;
     oss<< this->Object::toString();
 
@@ -163,6 +163,3 @@ const std::list<Relation> &Agent::beliefs()
 {
     return m_belief;
 }
-
-
-
