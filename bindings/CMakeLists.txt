@@ -16,6 +16,8 @@ find_package(SWIG REQUIRED 3)
 find_package(icubclient REQUIRED)
 find_package(YARP REQUIRED)
 
+get_target_property(icubclient_includes icubclient::icubclient INTERFACE_INCLUDE_DIRECTORIES)
+
 set(ICUBCLIENT_USE_PYTHON_VERSION "" CACHE STRING "Specify python version to use" )
 find_package(PythonInterp ${ICUBCLIENT_USE_PYTHON_VERSION} REQUIRED)
 set(ICUBCLIENT_USE_PYTHON_VERSION_ARGS)
@@ -29,7 +31,7 @@ include(${SWIG_USE_FILE})
 
 set(target_name icubclient)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${PYTHON_INCLUDE_PATH} "/usr/local/src/robot/install/icub-client/include" ${YARP_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${PYTHON_INCLUDE_PATH} ${icubclient_includes} ${YARP_INCLUDE_DIRS})
 
 set(CMAKE_SWIG_FLAGS "-module;${target_name};-threads")
 
