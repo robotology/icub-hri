@@ -13,6 +13,8 @@ Topics:
 
  - \ref icubclient_libraries - a list of documented libraries
  - \ref icubclient_modules - a list of documented modules
+ - \ref icubclient_bindings - a tutorial how to compile bindings for the iCub-Client
+ - \ref icubclient_tutorials - a list of tutorials
 
  - Reference material:
   - The <a href="http://wysiwyd.upf.edu">WYSIWYD project website</a>.
