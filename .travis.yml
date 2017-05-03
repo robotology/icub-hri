@@ -4,6 +4,8 @@ dist: trusty
 
 language: cpp
 
+osx_image: xcode8.3
+
 os: 
   - linux
   - osx
