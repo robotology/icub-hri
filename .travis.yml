@@ -31,8 +31,8 @@ install:
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install `brew deps --1 yarp | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'`; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install eigen goocanvas sdl sdl_gfx sdl_image; fi
   # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install ode --with-double-precision; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew tap homebrew/science; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install opencv3; fi
+  # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew tap homebrew/science; fi
+  # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install opencv3; fi
 
   - cd ..
 
@@ -73,8 +73,9 @@ install:
 before_script:
   - mkdir build
   - cd build
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cmake -DCMAKE_BUILD_TYPE=Release -DICUBCLIENT_BUILD_IOL2OPC=FALSE ..; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then cmake -DCMAKE_BUILD_TYPE=Release ..; fi
+  #- if [ "$TRAVIS_OS_NAME" = "linux" ]; then cmake -DCMAKE_BUILD_TYPE=Release -DICUBCLIENT_BUILD_IOL2OPC=FALSE ..; fi
+  #- if [ "$TRAVIS_OS_NAME" = "osx" ]; then cmake -DCMAKE_BUILD_TYPE=Release ..; fi
+  - cmake -DCMAKE_BUILD_TYPE=Release -DICUBCLIENT_BUILD_IOL2OPC=FALSE ..
 
 script:
   - make
