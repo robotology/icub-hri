@@ -33,7 +33,6 @@ install:
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install ode --with-double-precision; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew tap homebrew/science; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install opencv3; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install qt; fi
 
   - cd ..
 
