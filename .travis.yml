@@ -25,7 +25,9 @@ install:
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 57A5ACB6110576A6; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get --quiet --yes update; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get --quiet --yes install icub-common libeigen3-dev; fi
-  
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get --quiet --yes install doxygen xsltproc; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo pip install doxypypy; fi
+
   # OS X dependencies
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew tap robotology/cask; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install `brew deps --1 yarp | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'`; fi
@@ -36,6 +38,7 @@ install:
 
   - cd ..
 
+  - pwd
   - git clone https://github.com/robotology/yarp.git
   - cd yarp
   - mkdir build
