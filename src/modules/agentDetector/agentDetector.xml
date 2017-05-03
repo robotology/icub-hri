@@ -41,24 +41,81 @@
 
   <data>
     <input>
-      <type>yarp::sig::Bottle</type>
-      <port carrier="tcp">/agentDetector/world/opc/broadcast:i</port>
-      <required>yes</required>
-      <priority>no</priority>
-      <description>
-        to retrieve data from the OPC
-      </description>
+        <type>Bottle</type>
+        <port carrier="tcp">/agentDetector/rpc</port>
+        <required>yes</required>
+        <priority>no</priority>
+        <description>Response port. Supported commands:
+                        - change_partner_name NAME_STRING: change the name of partner
+                        - pause: lock with mutex
+                        - resume: unlock the mutex
+        </description>
     </input>
 
-     <output>
-      <type>yarp::sig::Bottle</type>
-      <port carrier="tcp">/agentDetector/world/opc:rpc</port>
-      <required>yes</required>
-      <priority>no</priority>
-      <description>
-        rpc port of the module in order to access opc (connects to /OPC:rpc)
-      </description>
+    <output>
+        <type>yarp::sig::Bottle</type>
+        <port carrier="tcp">/agentDetector/skeleton:o</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>
+            buffered port streaming out skeleton properties
+        </description>
     </output>
+    <output>
+        <type>yarp::sig::ImageOf</type>
+        <port carrier="udp">/agentDetector/kinect/depthPort:o</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>
+            buffered port streaming out depth images
+        </description>
+    </output>
+    <output>
+        <type>yarp::sig::ImageOf</type>
+        <port carrier="udp">/agentDetector/kinect/imagePort:o</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>
+            buffered port streaming out images
+        </description>
+    </output>
+    <output>
+        <type>yarp::sig::ImageOf</type>
+        <port carrier="udp">/agentDetector/kinect/playerPort:o</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>
+            buffered port streaming out partner images
+        </description>
+    </output>
+    <output>
+        <type>yarp::sig::ImageOf</type>
+        <port carrier="udp">/agentDetector/kinect/skeletonPort:o</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>
+            buffered port streaming out skeleton images
+        </description>
+    </output>
+    <output>
+        <type>yarp::sig::Bottle</type>
+        <port carrier="tcp">/agentDetector/kinect/agentLoc:o</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>
+            buffered port streaming out agent location
+        </description>
+    </output>
+    <output>
+        <type>rpc</type>
+        <port carrier="tcp">/agentDetector/rfh:o</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>
+            port to communicate with referenceFrameHandler rpc server
+        </description>
+    </output>
+
 
   </data>
 </module>
