@@ -4,6 +4,10 @@ dist: trusty
 
 language: cpp
 
+os: 
+  - linux
+  - osx
+
 compiler:
   - gcc
   - clang
@@ -14,10 +18,21 @@ branches:
   - devel
 
 install:
-  - sudo sh -c 'echo "deb http://www.icub.org/ubuntu trusty contrib/science" > /etc/apt/sources.list.d/icub.list'
-  - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 57A5ACB6110576A6
-  - sudo apt-get --quiet --yes update
-  - sudo apt-get --quiet --yes install icub-common libeigen3-dev
+  # Ubuntu dependencies
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo sh -c 'echo "deb http://www.icub.org/ubuntu trusty contrib/science" > /etc/apt/sources.list.d/icub.list'; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 57A5ACB6110576A6; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get --quiet --yes update; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get --quiet --yes install icub-common libeigen3-dev; fi
+  
+  # OS X dependencies
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew tap robotology/cask; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install `brew deps --1 yarp | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'`; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install cmake eigen goocanvas sdl sdl_gfx sdl_image gcc; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install ode --enable-double-precision; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew tap homebrew/science; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install opencv3; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install --with-qt3support qt; fi
+
   - cd ..
 
   - git clone https://github.com/robotology/yarp.git
@@ -57,7 +72,8 @@ install:
 before_script:
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=Release -DICUBCLIENT_BUILD_IOL2OPC=FALSE ..
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cmake -DCMAKE_BUILD_TYPE=Release -DICUBCLIENT_BUILD_IOL2OPC=FALSE ..; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then cmake -DCMAKE_BUILD_TYPE=Release ..; fi
 
 script:
   - make
