@@ -20,31 +20,43 @@ from SAM.SAM_Core import samOptimiser
 from os import listdir
 from os.path import join, isdir
 import threading
-import os
-import subprocess
-import time
-import ipyparallel as ipp
 import logging
 
 np.set_printoptions(precision=2)
 
-# def printPrefix(context, *args, **kwargs):
-#     # logging.info()
-#     if len(args) == 1 and args[0] == '\n':
-#         return __builtin__.print(*args, **kwargs)
-#     elif not context[0]:
-#         return __builtin__.print(context[1], *args, **kwargs)
-#     else:
-#         return __builtin__.print(*args, **kwargs)
-
 ## \defgroup icubclient_SAM_utils SAM Utils
-## @{
+## @{Utility class for functions required by both interactionSAMModel.py and trainSAMModel.py
 ## \ingroup icubclient_SAM_source
+
+
 def initialiseModels(argv, update, initMode='training'):
-    # argv[1] = dataPath
-    # argv[2] = modelPath
-    # argv[3] = driverName
-    # update = 'update' or 'new'
+    """Initialise SAM Model data structure, training parameters and user parameters.
+
+        This method starts by initialising the required Driver from the driver name in argv[3] if it exists
+        in SAM_Drivers folder. The standard model parameters and the specific user parameters are then initialised
+        and the data is read in by the SAMDriver.readData method to complete the model data structure. This method
+        then replicates the model data structure for training with multiple models if it is required in the config
+        file loaded by the Driver.
+
+        Args:
+            argv_0: dataPath containing the data that is to be trained on.
+            argv_1: modelPath containing the path of where the model is to be stored.
+            argv_2: driverName containing the name of the driver class that is to be loaded from SAM_Drivers folder.
+            update: String having either a value of 'update' or 'new'. 'new' will load the parameters as set in the
+                    config file of the driver being loaded present in the dataPath directory. This is used to train a
+                     new model from scratch. 'update' will check for an existing model in the modelPath directory and
+                     load the parameters from this model if it exists. This is used for retraining a model when new
+                     data becomes available.
+            initMode: String having either a value of 'training' or 'interaction'. 'training' takes into consideration
+                      the value of update in loading the parameters. (Used by trainSAMModel.py) 'interaction' loads
+                      the parameters directly from the model if the model exists. (Used by interactionSAMModel.py)
+
+        Returns:
+            The output is a list of SAMDriver models. The list is of length 1 when the config file requests a single
+            model or a list of length n+1 for a config file requesting multiple models where n is the number of
+            requested models. The number of models either depends on the number of directories present in the dataPath
+            or from the length of textLabels returned from the SAMDriver.readData method.
+    """
 
     from SAM.SAM_Core import SAMDriver as Driver
     dataPath = argv[0]
@@ -77,7 +89,6 @@ def initialiseModels(argv, update, initMode='training'):
     logging.info('-------------------')
     logging.info('Loading Parameters...')
     logging.info('')
-    temporalFlag = False
     modeConfig = ''
     found = ''
     try:
@@ -113,12 +124,6 @@ def initialiseModels(argv, update, initMode='training'):
             found = parser.read(dataPath + "/config.ini")
 
             mySAMpy.experiment_number = 'exp'
-            # load parameters from config file
-            # if parser.has_option(trainName, 'experiment_number'):
-            #     mySAMpy.experiment_number = int(parser.get(trainName, 'experiment_number'))
-            # elif '.pickle' in modelPath:
-            #     mySAMpy.experiment_number = int(modelPath.split('__')[-2].replace('exp', '')) + 1
-            # else:
 
             if parser.has_option(trainName, 'model_type'):
                 mySAMpy.model_type = parser.get(trainName, 'model_type')
@@ -245,32 +250,6 @@ def initialiseModels(argv, update, initMode='training'):
             if mySAMpy.calibrateUnknown:
                 mySAMpy.classificationDict = modelPickle['classificationDict']
 
-            # try:
-            #     mySAMpy.listOfModels = modelPickle['listOfModels']
-            #     mySAMpy.classifiers = modelPickle['classifiers']
-            #     mySAMpy.classif_thresh = modelPickle['classif_thresh']
-            #     mulClassLoadFail = False
-            #     logging.info('Successfully loaded multiple model classifiers')
-            # except:
-            #     mulClassLoadFail = True
-            #     logging.info('Failed to load multiple model classifiers')
-            #     pass
-            #
-            # # try loading classification parameters for single model implementation
-            # try:
-            #     mySAMpy.varianceDirection = modelPickle['varianceDirection']
-            #     mySAMpy.varianceThreshold = modelPickle['varianceThreshold']
-            #     mySAMpy.bestDistanceIDX = modelPickle['bestDistanceIDX']
-            #     logging.info('Successfully loaded single model classifiers')
-            #     singClassLoadFail = False
-            # except:
-            #     singClassLoadFail = True
-            #     logging.info('Failed to load single model classifiers')
-            #     pass
-
-            # if mulClassLoadFail and singClassLoadFail:
-            #     raise ValueError('Failed to load model classifiers')
-
         except IOError:
             logging.warning('IO Exception reading ', found)
             pass
@@ -292,11 +271,6 @@ def initialiseModels(argv, update, initMode='training'):
     # test_mode = True
 
     mySAMpy.readData(dataPath, participantList)
-    # at this point, all the data that will be eventually used for training is contained in mySAMpy.Y
-    # and mySAMpy.L contains all labels if any (depending on mrd model or bgplvm model)
-    # mySAMpy.L is a list of labels while mySAMpy.Y is a numpy array of data
-    # mySAMpy.Y should have 2 dimensions, length of dimension 0 = number of instances
-    # length of dimension 1 = length of feature vector
 
     if mySAMpy.model_mode != 'temporal':
         # get list of labels
@@ -411,6 +385,17 @@ def initialiseModels(argv, update, initMode='training'):
 
 
 def varianceClass(varianceDirection, x, thresh):
+    """
+        Utility function to perform threshold or range checking.
+
+        Args:
+            varianceDirection : List of strings with the conditions to check.
+            x : The value to be checked.
+            thresh : The threshold against which x is to be checked given the checks in varianceDirection.
+
+        Returns:
+            Boolean True or False confirming arg x validates varianceDirection conditions for the threshold.
+    """
     if varianceDirection == ['greater', 'smaller']:
         return thresh[0] < x < thresh[1]
     elif varianceDirection == ['smaller', 'greater']:
@@ -422,11 +407,21 @@ def varianceClass(varianceDirection, x, thresh):
 
 
 class TimeoutError(Exception):
+    """Custom TimeoutError Exception.
+
+        Description:
+            Class used to raise TimeoutError Exceptions.
+    """
     pass
 
 
 class InterruptableThread(threading.Thread):
+    """Class to launch a function inside of a separate thread.
+    """
     def __init__(self, func, *args, **kwargs):
+        """
+            Initialise the interruptible thread.
+        """
         threading.Thread.__init__(self)
         self._func = func
         self._args = args
@@ -434,18 +429,34 @@ class InterruptableThread(threading.Thread):
         self._result = None
 
     def run(self):
+        """
+            Run the function.
+        """
         self._result = self._func(*self._args, **self._kwargs)
 
     @property
     def result(self):
+        """
+        Returns:
+            Result of the function.
+        """
         return self._result
 
 
 class timeout(object):
+    """
+        Class to terminate a function running inside of a separate thread.
+    """
     def __init__(self, sec):
+        """
+            Initialise the timeout function.
+        """
         self._sec = sec
 
     def __call__(self, f):
+        """
+            Initialise an interruptible thread and start the thread.
+        """
         def wrapped_f(*args, **kwargs):
             it = InterruptableThread(f, *args, **kwargs)
             it.start()
@@ -457,6 +468,20 @@ class timeout(object):
 
 
 def plotKnownAndUnknown(varDict, colour, axlist, width=[0.2, 0.2], factor=[(0, 0.6), (0.4, 1)], plotRange=False):
+    """
+        Utility function to plot variances of known and unknown as gaussian distributions.
+
+        Args:
+            varDict : Dictionary containing the mean and variances of known and unknown for different sections of data.
+            colour : List of strings with the colours to be used for each plot.
+            axlist : Plot object to pass in and update.
+            width : List of floats with the linewidth for the plots.
+            factor : List of tuples with factors for the plotting of ranges.
+            plotRange : Boolean to plot a range together with gaussian distributions or not.
+
+        Returns:
+            Plot object for the generated plot.
+    """
     count = 0
     for k, j in enumerate(varDict.keys()):
         if len(varDict[j]) > 0 and 'Results' not in j:
@@ -467,11 +492,22 @@ def plotKnownAndUnknown(varDict, colour, axlist, width=[0.2, 0.2], factor=[(0, 0
     return axlist
 
 
-# This function provides a measure for the separability of two univariate gaussians
-# Main purpose to get a distance that is used to optimise for separability
-# between known and unknown classes
-# TODO extend method to multivariate gaussians
 def bhattacharyya_distance(mu1, mu2, var1, var2):
+    """
+        Calculates a measure for the separability of two univariate gaussians.
+
+        Returns the bhattacharyya distance that is used to optimise for separability between known and unknown classes when these are modelled as univariate gaussians.
+
+        Args:
+            mu1: Float with mean of distribution 1.
+            mu2: Float with mean of distribution 2.
+            var1: Float with variance of distribution 1.
+            var2: Float with variance of distribution 2.
+
+        Returns:
+            Returns a float with the bhattacharyya distance between the two distributions.
+    """
+
     t1 = float(var1/var2) + float(var2/var1) + 2
     t2 = np.log(0.25*t1)
     t3 = float(mu1-mu2)*float(mu1-mu2)
@@ -480,6 +516,19 @@ def bhattacharyya_distance(mu1, mu2, var1, var2):
 
 
 def plot_confusion_matrix(cm, targetNames, title='Confusion matrix', cmap=plt.cm.inferno):
+    """Generate and display a confusion matrix.
+
+        This method plots a formatted confusion matrix from the provided array and target names.
+
+        Args:
+            cm: Square numpy array containing the values for the confusion matrix.
+            targetNames: labels for the different classes.
+            title: Title of the plot.
+            cmap: Matplotlib colourmap for the plot.
+
+        Returns:
+            No return. Blocking call to matplotlib.plot.
+    """
     plt.figure()
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title(title)
@@ -494,6 +543,23 @@ def plot_confusion_matrix(cm, targetNames, title='Confusion matrix', cmap=plt.cm
 
 
 def plotGaussFromList(mlist, vlist, rlist, colour, label, width, factor, axlist, plotRange=False):
+    """
+    Plot multiple Gaussians from a list on the same plot.
+
+    Args:
+        mlist: List of float means.
+        vlist: List of float variances.
+        rlist: List of float data ranges.
+        colour: Colour for the plots.
+        label: Label for the plot.
+        width: Width of line in the plot.
+        factor: Factor for the height of the ranges to make them more aesthetic.
+        axlist: List of axes.
+        plotRange: Boolean to plot ranges or not.
+
+    Returns:
+        List of axes.
+    """
     numPlots = len(mlist)
 
     if len(axlist) == 0:
@@ -523,6 +589,18 @@ def plotGaussFromList(mlist, vlist, rlist, colour, label, width, factor, axlist,
 
 
 def solve_intersections(m1, m2, std1, std2):
+    """
+    Solve for the intersection/s of two Gaussian distributions.
+
+    Args:
+        m1: Float Mean of Gaussian 1.
+        m2: Float Mean of Gaussian 2.
+        std1: Float Standard Deviation of Gaussian 1.
+        std2: Float Standard Deviation of Gaussian 2.
+
+    Returns:
+        Points of intersection for the two Gaussian distributions.
+    """
     a = 1/(2*std1**2) - 1/(2*std2**2)
     b = m2/(std2**2) - m1/(std1**2)
     c = m1**2 / (2*std1**2) - m2**2 / (2*std2**2) - np.log(std2/std1)
@@ -530,6 +608,17 @@ def solve_intersections(m1, m2, std1, std2):
 
 
 def PfromHist(sample, hist, binWidth):
+    """
+    Calulates the probability of a sample from a histogram.
+
+    Args:
+        sample : Float with sample to be tested.
+        hist : Numpy array with normalised histogram probability values.
+        binWidth : Float indicating the width for each probability bin.
+
+    Returns:
+        Probability ranging from 0 to 1 for sample with respect to the histogram.
+    """
     idx = np.asarray(sample)//binWidth
     idx = idx.astype(np.int)
     pList = []
@@ -539,6 +628,15 @@ def PfromHist(sample, hist, binWidth):
 
 
 def meanVar_varianceDistribution(dataList):
+    """
+    Calculate list of means, variances and ranges for the data in the dataList.
+
+    Args:
+        dataList: List of numpy arrays containing the data to check.
+
+    Returns:
+        List of means, list of variances and list of ranges. One for each array in the dataList.
+    """
     mlist = []
     vlist = []
     rlist = []
@@ -567,6 +665,16 @@ def meanVar_varianceDistribution(dataList):
 
 
 def bhattacharyya_dict(m, v):
+    """
+    Calculate bhattacharyya distances for each item in the dictionaries.
+
+    Args:
+        m : Dictionary of means.
+        v : Dictionary of variances.
+
+    Returns:
+        List of bhattacharyya distances for the input dictionaries.
+    """
     knownLabel = None
     unknownLabel = None
     dists = []
@@ -588,23 +696,17 @@ def bhattacharyya_dict(m, v):
 
 
 def smooth1D(x, window_len=11, window='hanning'):
-    """smooth the data using a window with requested size.
+    """Smooth the data using a window with a requested size.
 
-    This method is based on the convolution of a scaled window with the signal.
-    The signal is prepared by introducing reflected copies of the signal
-    (with the window size) in both ends so that transient parts are minimized
-    in the beginning and end part of the output signal.
+    This method is based on the convolution of a scaled window with the signal. The signal is prepared by introducing reflected copies of the signal (with the window size) in both ends so that transient parts are minimized in the beginning and end part of the output signal.
 
     input:
-        x: the input signal
-        window_len: the dimension of the smoothing window; should be an odd integer
-        window: the type of window from 'flat', 'hanning', 'hamming', 'bartlett', 'blackman'
-            flat window will produce a moving average smoothing.
+        x: The input signal.
+        window_len: The dimension of the smoothing window; should be an odd integer.
+        window: The type of window from 'flat', 'hanning', 'hamming', 'bartlett', 'blackman' flat window will produce a moving average smoothing.
 
     output:
-        the smoothed signal
-
-    NOTE: length(output) != length(input), to correct this: return y[(window_len/2-1):-(window_len/2)] instead of just y.
+        The smoothed signal.
     """
 
     if x.ndim != 1:
@@ -636,6 +738,22 @@ def smooth1D(x, window_len=11, window='hanning'):
 
 def transformTimeSeriesToSeq(Y, timeWindow, offset=1, normalised=False, reduced=False, noY=False, doOffset=False):
     # TODO add parameter for number of points to skip between sampled windows
+    """
+    Utility function to convert a time series into multiple time windows with additional functionality.
+
+    Args:
+        Y : Time series data.
+        timeWindow : Length of the time window.
+        offset : Number of non-overlapping frames between successive time windows.
+        normalised : Boolean to normalise time windows with respect to the starting frame.
+        reduced : Boolean to remove the starting frame if normalisation is enabled since this frame contains 0.
+        noY : Boolean to return time windows of labels together.
+        doOffset : In future versions this parameter will enable skipping data points between sampled windows.
+
+    Returns:
+        X : numpy array of size (numberWindows x lengthOfWindow) containing the time series split up into windows.
+        Y : numpy array of size (numberWindows x lengthOfWindow) containing the labels for each frame in the time series split into windows.
+    """
     Ntr, D = Y.shape
     if noY:
         blocksNumber = (Ntr - timeWindow + 1) // offset
@@ -665,297 +783,5 @@ def transformTimeSeriesToSeq(Y, timeWindow, offset=1, normalised=False, reduced=
         if not noY:
             Ynew[i, :] = Y[base + timeWindow, :]
     return X, Ynew
-
-
-def transformSeqToTimeSeries(X, Y, timeWindow):
-    assert (X.shape[0] == Y.shape[0])
-    N = X.shape[0] + timeWindow
-    D = X.shape[1] / (timeWindow * 1.0)
-    Ynew = np.zeros((N, D))
-    for i in range(X.shape[0]):
-        Ynew[i:i + timeWindow, :] = X[i, :].reshape(D, timeWindow).T
-    Ynew[-1, :] = Y[-1, :]
-    return Ynew
-
-
-def test_transformSeries(Y, timeWindow):
-    (xx, yy) = transformTimeSeriesToSeq(Y, timeWindow)
-    return transformSeqToTimeSeries(xx, yy, timeWindow)
-
-
-def gp_narx(m, x_start, N, Uts, ws, Ydebug=None):
-    # m is a GP model from GPy.
-
-    D = m.output_dim
-    Q = x_start.shape[1]
-    Y = np.empty((N, D,))
-    Y[:] = np.NAN
-    varY = Y.copy()
-    assert (Q % ws == 0)
-    assert (D == Q / ws)
-
-    Xnew = m.X.copy()
-    Ynew = m.Y.copy()
-
-    curX = x_start
-
-    varYpred = None
-
-    for i in range(N):
-        # Make sure the added x_add is a matrix (1,Q) and not (Q,)
-        if len(curX.shape) < 2:
-            curX = curX.reshape(1, curX.shape[0])
-        varYpred_prev = varYpred
-        # Ypred, varYpred = m._raw_predict(np.hstack((curX,curU)))
-        # curU = Uts[i,:]
-        # Ypred, varYpred = m._raw_predict(np.hstack((curX,Uts[i,:][None,:])))
-        if Uts is not None:
-            Ypred, varYpred = m.predict(np.hstack((curX, Uts[i, :][None, :])))
-        else:
-            Ypred, varYpred = m.predict(curX)
-
-        Y[i, :] = Ypred
-        varY[i, :] = varYpred
-
-        # logging.info((i, ': ', Y[i,:] , ' | var: ', varYpred)  #####
-
-        if Ydebug is not None:
-            if Uts is not None:
-                logging.info(i + ': X=' + str(curX.flatten()) + 'U=' + str(Uts[i, :].flatten()) +
-                             'Y=' + str(Ydebug[i, :]))
-            else:
-                logging.info(i + ': X=' + str(curX.flatten()) + 'U=None' + 'Y=' + str(Ydebug[i, :]))
-
-        if i == N - 1:
-            break
-
-        curX = np.hstack((curX[0, D:], Ypred[0, :]))
-
-    return Y, varY
-
-
-def random_data_split(Y, percentage=[0.5, 0.5]):
-    N = Y.shape[0]
-    N_1 = np.ceil(N*percentage[0])
-    N_2 = np.floor(N*percentage[1])
-    assert(N==N_1+N_2)
-    perm = np.random.permutation(N)
-    inds_1 = perm[0:N_1]
-    inds_2 = perm[N_1:N_1+N_2]
-    return Y[inds_1, :], Y[inds_2, :], inds_1, inds_2
-
-
-class SURFProcessor:
-    def __init__(self, imgHNew, imgWNew,n_clusters=20, SURFthresh=500, crop_thresholds=(40, 160, 40, 160), magnify=1):
-        self.imgHNew = imgHNew
-        self.imgWNew = imgWNew
-        self.n_clusters = n_clusters
-        self.SURFthresh = SURFthresh
-        self.crop_thresholds = crop_thresholds
-        self.magnify = magnify # Magnify photos (scale up) before extracting SURF
-
-        self._is_trained = False
-
-    def _find_surf(self,Y,thresh=None,h=None,w=None,limits=None,magnify=None):
-        import sys
-        if thresh is None: thresh=self.SURFthresh
-        if h is None: h = self.imgHNew
-        if w is None: w = self.imgWNew
-        if limits is None: limits = self.crop_thresholds
-        if magnify is None: magnify = self.magnify
-
-        logging.info('# Finding SURF features from ' + str(Y.shape[0]) + ' images...')
-        sys.stdout.flush()
-        import cv2
-        surf = cv2.SURF(thresh)
-        descriptors = []
-        desclabels = []
-        for i in range(Y.shape[0]):
-            if magnify is not 1:
-                y_tmp = cv2.resize(Y[i,:].reshape(h,w),(h*magnify,w*magnify)).flatten()
-                kp, des = surf.detectAndCompute(np.uint8(y_tmp.reshape(h*magnify, w*magnify)),None)
-            else:
-                y_tmp = Y[i,:]
-                kp, des = surf.detectAndCompute(np.uint8(y_tmp.reshape(h, w)),None)
-
-            for j in range(len(kp)):
-                if (limits is not None) and (kp[j].pt[0] < limits[0] or kp[j].pt[0]>limits[1] or kp[j].pt[1] < limits[2] or kp[j].pt[1]>limits[3]):
-                    continue
-                desclabels.append(i)
-                descriptors.append(des[j])
-
-        descriptors = np.array(descriptors)
-        desclabels = np.array(desclabels)
-        logging.info(' Found ' + str(len(desclabels)) + ' features.')
-        return descriptors, desclabels
-
-    def _make_BoW(self,N, c_trainPredict, desclabels, n_clusters=None):
-        if n_clusters is None: n_clusters = self.n_clusters
-        logging.info('# Making BoW...')
-        features = []
-        for i in range(N):
-            feature_counts = c_trainPredict[desclabels==i]
-            feature_vector = np.zeros(n_clusters)
-            for j in range(n_clusters):
-                feature_vector[j] = np.where(feature_counts==j)[0].shape[0]
-            features.append(feature_vector)
-
-        return np.sqrt(np.array(features))
-
-    def make_SURF_BoW(self, Y, normalize=True,imgHNew=None, imgWNew=None, n_clusters=None, SURFthresh=None, crop_thresholds=None):
-        if imgHNew is None: imgHNew = self.imgHNew;
-        if imgWNew is None: imgWNew = self.imgWNew;
-        if n_clusters is None: n_clusters = self.n_clusters
-        if SURFthresh is None: SURFthresh = self.SURFthresh
-        if crop_thresholds is None: crop_thresholds = self.crop_thresholds
-        self.normalize = normalize
-
-        from sklearn.cluster import KMeans
-        from scipy.spatial import distance
-
-        #### APPROACH 1: Bag of feature approach:
-        # Cluster all descriptors (for each image) and then replace each image with a histogram
-        # saying how many descriptors it has that fall in cluster K. So, K dimensional feature vec.
-        
-        # Thresh to exclude corners...
-
-        ## TRAINING DATA
-        descriptors, desclabels = self._find_surf(Y,SURFthresh,imgHNew, imgWNew,crop_thresholds)
-
-        # Agglomeratice only: Define the structure A of the data. Here a 10 nearest neighbors
-        #from sklearn.neighbors import kneighbors_graph
-        #connectivity = kneighbors_graph(descriptors, n_neighbors=10, include_self=False)
-
-        # Compute clustering
-        #ward = AgglomerativeClustering(n_clusters=n_clusters, connectivity=connectivity,linkage='ward',compute_full_tree=True).fit(descriptors)
-        #Y_ = ward.labels_
-
-        c = KMeans(n_clusters=n_clusters, max_iter=10000,random_state=1)
-
-        c_trainFit = c.fit(descriptors)
-        c_trainPredict = c_trainFit.predict(descriptors)
-
-        #Equiv:
-        #c = KMeans(n_clusters=n_clusters, max_iter=2000,random_state=1)
-        #c_trainFitPredict=c.fit_predict(descriptors)
-
-        #plt.plot(c_trainPredict, 'x')
-        Z = self._make_BoW(Y.shape[0], c_trainPredict, desclabels, n_clusters)
-        self.c_trainFit = c_trainFit
-
-        #plt.matshow(Z);  plt.colorbar(); plt.gca().set_aspect('normal');plt.draw()
-        #plt.matshow(mySAMpy.L);  plt.gca().set_aspect('normal');plt.draw()
-
-        if normalize:
-            Zmean = Z.mean()
-            Zn = Z - Zmean
-            Zstd = Zn.std()
-            Zn /= Zstd
-            self.Zmean = Zmean
-            self.Zstd = Zstd
-            Z = Zn
-
-        self._is_trained = True
-        return Z.copy(), descriptors, desclabels, c_trainFit
-
-    def make_SURF_BoW_test(self,Ytest):
-        # SURF for test data
-        assert self._is_trained, "First you have to do a train BoW."
-        descriptors, desclabels = self._find_surf(Ytest)
-        c_testPredict = self.c_trainFit.predict(descriptors)
-        Ztest = self._make_BoW(Ytest.shape[0], c_testPredict, desclabels, self.n_clusters)
-        if self.normalize:
-            Ztestn = Ztest - self.Zmean
-            Ztestn /= self.Zstd
-            Ztest = Ztest
-
-        return Ztest.copy()
-
-
-def RepresentsInt(s):
-    try:
-        int(s)
-        return True
-    except ValueError:
-        return False
-
-
-class ipyClusterManager:
-    def __init__(self, nodesDict, controllerIP, devnull, totalControl=True):
-        self.expectedProcessors = 0
-        self.actualProcessors = 0
-        self.totalControl = totalControl
-        self.controllerProc = []
-        self.nodesDict = nodesDict
-        self.controllerIP = controllerIP
-        self.devnull = devnull
-
-    def startCluster(self):
-        try:
-            self.controllerProc.append(
-                subprocess.Popen(["ipcontroller", '--ip=' + self.controllerIP], stdout=self.devnull))
-            for j in self.nodesDict.keys():
-                if j != 'localhost':
-                    cmd = 'scp ~/.ipython/profile_default/security/ipcontroller-engine.json ' + j + ':./'
-                    os.system(cmd)
-                    time.sleep(5)
-
-            for j in self.nodesDict.keys():
-                logging.info(str(j))
-                if j != 'localhost':
-                    if self.totalControl:
-                        cmd = ['ssh', j, 'ipengine', '--file=~/ipcontroller-engine.json', '&']
-                    else:
-                        cmd = 'ssh ' + j + ' ipengine --file=~/ipcontroller-engine.json &'
-                else:
-                    if self.totalControl:
-                        cmd = ['ipengine', '&']
-                    else:
-                        cmd = 'ipengine &'
-
-                for n in range(self.nodesDict[j]):
-                    self.expectedProcessors += 1
-                    logging.info('\t' + ' '.join(cmd))
-                    if self.totalControl:
-                        self.controllerProc.append(subprocess.Popen(cmd, stdout=self.devnull))
-                    else:
-                        os.system(cmd)
-                    time.sleep(2)
-
-            logging.info('Waiting for engines to start')
-            time.sleep(max(self.expectedProcessors, 10))
-            success = True
-            try:
-                c = ipp.Client()
-                self.actualProcessors = len(c._engines)
-                c.close()
-                del c
-                logging.info('Controller started correctly')
-            except:
-                success = False
-                self.terminateProcesses()
-                logging.error('Controller failure')
-
-            if self.actualProcessors == 0:
-                success = False
-                logging.error('Complete engine failure')
-            else:
-                logging.info('Engines started correctly')
-        except:
-            success = False
-            self.terminateProcesses()
-            logging.error('Failed to initialise controller')
-
-        return success
-
-    def terminateProcesses(self):
-        for j in self.controllerProc:
-            try:
-                j.kill()
-                j.wait()
-            except:
-                pass
-            time.sleep(0.2)
-        self.actualProcessors = 0
 
 ## @}

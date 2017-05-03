@@ -21,9 +21,17 @@ import logging
 np.set_printoptions(threshold=numpy.nan)
 
 ## @ingroup icubclient_SAM_Drivers
-class SAMDriver_ARWin(SAMDriver):
 
+class SAMDriver_ARWin(SAMDriver):
+    """
+    Class developed for the implementation of windowed real time action recognition.
+    """
     def __init__(self):
+        """
+        Initialise class using SAMDriver.__init__ and augment with custom parameters.
+
+        additionalParameterList is a list of extra parameters to preserve between training and interaction.
+        """
         SAMDriver.__init__(self)
         self.data = dict()
         self.numJoints = 9
@@ -43,7 +51,18 @@ class SAMDriver_ARWin(SAMDriver):
                                          'seqTestPerc']
 
     def loadParameters(self, parser, trainName):
+        """
+            Function to load parameters from the model config.ini file.
 
+            Method to load parameters from file loaded in parser from within section trainName and store these parameters in self.paramsDict.
+
+        Args:
+            parser: SafeConfigParser with pre-read config file.
+            trainName: Section from which parameters are to be read.
+
+        Returns:
+            None
+        """
         if parser.has_option(trainName, 'includeParts'):
             self.paramsDict['includeParts'] = parser.get(trainName, 'includeParts').split(',')
             self.paramsDict['includeParts'] = [j for j in self.paramsDict['includeParts'] if j != '']
@@ -127,6 +146,11 @@ class SAMDriver_ARWin(SAMDriver):
             self.paramsDict['normaliseWindow'] = False
 
     def saveParameters(self):
+        """
+        Override SAMDriver.saveParameters.
+
+        This function adds items of additionalParametersList to paramsDict to be saved.
+        """
         for j in self.additionalParametersList:
             commandString = 'self.paramsDict[\'' + j + '\'] = self.' + j
             try:
@@ -136,6 +160,20 @@ class SAMDriver_ARWin(SAMDriver):
                 pass
 
     def testPerformance(self, testModel, Yall, Lall, YtestAll, LtestAll, verbose):
+        """
+        Custom testPerformance method. This augments the standard testPerformance method by including testing of known and unknown together with testing on known training points and known testing points.
+
+        Args:
+            testModel : SAMObject Model to be tested.
+            Yall : Numpy array with training data vectors to be tested.
+            Lall : List with corresponding training data labels.
+            YtestAll : Numpy array with testing data vectors to be tested.
+            LtestAll : List with corresponding testing data labels.
+            verbose : Boolean turning logging to stdout on or off.
+
+        Returns:
+             Square numpy array confusion matrix.
+        """
 
         yTrainingData = SAMTesting.formatDataFunc(Yall)
         [self.segTrainConf, self.segTrainPerc, labelsSegTrain, labelComparisonDict] = \
@@ -152,6 +190,12 @@ class SAMDriver_ARWin(SAMDriver):
         return self.segTestConf, labelsSegTest, labelComparisonDict
 
     def diskDataToLiveData(self, root_data_dir):
+        """
+            This method reads in time series data from disk for SAMDriver_ARWin.
+
+            Returns:
+                list of strings with raw data and list of strings with ground truth classifications.
+        """
         onlyfiles = [f for f in listdir(root_data_dir) if isfile(join(root_data_dir, f))]
         dataLogList = [f for f in onlyfiles if 'data' in f]
         dataLogList.sort()
@@ -215,6 +259,17 @@ class SAMDriver_ARWin(SAMDriver):
         return rawDataList, rawLabelList
 
     def convertToDict(self, rawData, mode, verbose):
+        """
+        Convert list of strings time series to dictionary with joints and objects as different items of the dictionary and windows of positions for each joint.
+
+        Args:
+            rawData: List of strings read in from files.
+            mode: `'testing'` or `'live'`. `'testing'` will format strings read from file. `'live'` will format strings received via Yarp during interaction.
+            verbose: Switch logging to stdout on or off.
+
+        Returns:
+            Dictionary with the windowed data, list of joints present in dictionary items, list of objects present in dictionary items.
+        """
         data = dict()
         firstPass = True
         jointsList = []
@@ -345,235 +400,21 @@ class SAMDriver_ARWin(SAMDriver):
 
         return data2, jointsList, objectsList
 
-    def readData1(self, root_data_dir, participant_index, *args, **kw):
-        self.rawData, labelsList = self.diskDataToLiveData(root_data_dir)
-        data2, jointsList, objectsList = self.convertToDict(self.rawData, 'testing', verbose=self.verbose)
 
-        # extract a set of labels
-        labels = list(set(labelsList))
-        labels.sort()
-
-        logging.info('')
-        # convert text labels into numbers 
-        labelNumsList = None
-        for n, k in enumerate(labelsList):
-            res = [m for m, l in enumerate(labels) if l == k]
-            if n == 0:
-                labelNumsList = np.array(res)
-            else:
-                labelNumsList = np.vstack([labelNumsList, res])
-        logging.info('shape of number labels:' + str(labelNumsList.shape))
-
-        uu, tmp = utils.transformTimeSeriesToSeq(labelNumsList, self.paramsDict['windowSize'],
-                                                 self.paramsDict['windowOffset'], False, False)
-        data2NumLabels = uu
-        logging.info('windowed number labels shape:' + str(data2NumLabels.shape))
-
-        # now that labels are in windowed form it is time to
-        # assign them a text label again that describes them
-        # the rule here is if the window appertains to the same label,
-        # that label is assigned otherwise it is labelled as transition
-        data2Labels = []
-        for j in data2NumLabels:
-            numItems = list(set(j))
-            if len(numItems) == 1:
-                l = labels[int(numItems[0])]
-                data2Labels.append(l)
-            else:
-                # Another way to do this would be to label it according to 75% majority
-                # This would decrease the region size of the transition blocks
-                # which are currently dependant on windowSize
-                data2Labels.append('transition')
-
-        logging.info('windowed data labels compressed:' + str(len(data2Labels)))
-
-        logging.info('')
-        # create list of specific joints to be used
-
-        jointsToUse = []
-        objectDict = dict()
-        handDict = dict()
-        for j in self.paramsDict['includeParts']:
-            if j == 'object':
-                for k in objectsList:
-                    if k != 'partner':
-                        objectDict[k] = (len(jointsToUse))
-                        jointsToUse.append(k)
-            elif 'hand' in j:
-                handDict[j] = (len(jointsToUse))
-                jointsToUse.append(j)
-            else:
-                jointsToUse.append(j)
-
-        combineObjects = len(objectDict) > 1
-
-        combineHands = len(handDict) > 1
-
-        logging.info(jointsToUse)
-        logging.info(objectDict)
-        logging.info(handDict)
-
-        # concatenate data for all joints in a single vector
-        logging.info('')
-        dataVecAll = None
-        for j in jointsToUse:
-            if dataVecAll is None:
-                dataVecAll = data2[j]
-            else:
-                dataVecAll = np.hstack([dataVecAll, data2[j]])
-        itemsPerJoint = dataVecAll.shape[1] / len(jointsToUse)
-        logging.info(dataVecAll.shape)
-        logging.info(itemsPerJoint)
-        self.itemsPerJoint = itemsPerJoint
-        logging.info('')
-
-        # it is now time to combine objects if multiple exist
-        #
-        self.featureSequence = ['object']
-        logging.info('')
-        combinedObjs = None
-        if combineObjects:
-            logging.info('Combining Objects')
-            for j in range(len(data2Labels)):
-                #         logging.info(data2Labels[j])
-                if len(data2Labels[j].split('_')) > 2:
-                    idxBase = objectDict[data2Labels[j].split('_')[2]] * itemsPerJoint
-                else:
-                    idxBase = objectDict[objectDict.keys()[0]] * itemsPerJoint
-
-                if combinedObjs is None:
-                    combinedObjs = dataVecAll[j, idxBase:idxBase + itemsPerJoint]
-                else:
-                    combinedObjs = np.vstack([combinedObjs, dataVecAll[j, idxBase:idxBase + itemsPerJoint]])
-            logging.info(combinedObjs.shape)
-
-        logging.info(dataVecAll.shape)
-
-        logging.info('')
-        # it is now time to combine hands if multiple exist
-        combinedHands = None
-        if combineHands and self.paramsDict['combineHands']:
-            logging.info('Combining hands')
-            self.handsCombined = True
-            self.featureSequence.append('hand')
-            for j in range(len(data2Labels)):
-                if len(data2Labels[j].split('_')) > 2:
-                    idxBase = handDict[data2Labels[j].split('_')[3] + data2Labels[j].split('_')[4].capitalize()] * \
-                              itemsPerJoint
-                else:
-                    idxBase = handDict[handDict.keys()[0]] * itemsPerJoint
-
-                if combinedHands is None:
-                    combinedHands = dataVecAll[j, idxBase:idxBase + itemsPerJoint]
-                else:
-                    combinedHands = np.vstack([combinedHands, dataVecAll[j, idxBase:idxBase + itemsPerJoint]])
-            logging.info(dataVecAll.shape)
-            logging.info(combinedHands.shape)
-        else:
-            self.handsCombined = False
-
-        dataVecReq = None
-
-        if combinedHands is not None:
-            dataVecReq = combinedHands
-
-        if combinedObjs is not None:
-            if dataVecReq is None:
-                dataVecReq = combinedObjs
-            else:
-                dataVecReq = np.hstack([dataVecReq, combinedObjs])
-
-        logging.info(jointsToUse)
-        for j, item in enumerate(jointsToUse):
-            if self.handsCombined:
-                if item not in handDict and item not in objectDict:
-                    self.featureSequence.append(item)
-                    idxBase = j * itemsPerJoint
-
-                    if dataVecReq is None:
-                        dataVecReq = dataVecAll[:, idxBase:idxBase + itemsPerJoint]
-                    else:
-                        dataVecReq = np.hstack([dataVecReq, dataVecAll[:, idxBase:idxBase + itemsPerJoint]])
-            else:
-                if item not in objectDict:
-                    self.featureSequence.append(item)
-                    idxBase = j * itemsPerJoint
-
-                    if dataVecReq is None:
-                        dataVecReq = dataVecAll[:, idxBase:idxBase + itemsPerJoint]
-                    else:
-                        dataVecReq = np.hstack([dataVecReq, dataVecAll[:, idxBase:idxBase + itemsPerJoint]])
-
-        logging.info(dataVecReq.shape)
-        logging.info(len(data2Labels))
-        logging.info('')
-        self.dataVec = copy.deepcopy(dataVecReq)
-
-        data2ShortLabels = []
-        for j in data2Labels:
-            splitLabel = j.split('_')
-            slabel = ('_'.join(splitLabel[:2]))
-
-            if splitLabel[0] == 'push' or splitLabel[0] == 'pull':
-                if splitLabel[-1] == 'no':
-                    add = splitLabel[-2]
-                else:
-                    add = splitLabel[-1]
-
-                if add == 'left' and self.paramsDict['flip']:
-                    if splitLabel[0] == 'push':
-                        splitLabel[0] = 'pull'
-                    else:
-                        splitLabel[0] = 'push'
-                    slabel = ('_'.join(splitLabel[:2]))
-
-                if self.paramsDict['sepRL']:
-                    slabel += '_' + add
-
-            data2ShortLabels.append(slabel)
-
-        self.data2Labels = copy.deepcopy(data2ShortLabels)
-
-        if self.paramsDict['sepRL']:
-            if 'pull_object' in self.paramsDict['actionsAllowedList']:
-                self.paramsDict['actionsAllowedList'].index('pull_object') == 'pull_object_right'
-                self.paramsDict['actionsAllowedList'].append('pull_object_left')
-
-            if 'push_object' in self.paramsDict['actionsAllowedList']:
-                self.paramsDict['actionsAllowedList'].index('push_object') == 'push_object_right'
-                self.paramsDict['actionsAllowedList'].append('push_object_left')
-
-        # remove labels which will not be trained
-        listToDelete = []
-        for n in reversed(range(len(data2Labels))):
-            if len([j for j in self.paramsDict['actionsAllowedList'] if j in data2Labels[n]]) == 0 or \
-                            'no' in data2Labels[n]:
-                listToDelete.append(n)
-
-        dataVecReq = np.delete(dataVecReq, listToDelete, axis=0)
-        npdata2ShortLabels = np.asarray(data2ShortLabels)
-        npdata2ShortLabels = np.delete(npdata2ShortLabels, listToDelete, axis=0)
-        # find left hand push and pull and label as pull and push respectively
-        data2ShortLabels = np.ndarray.tolist(npdata2ShortLabels)
-
-        self.Y = dataVecReq
-        self.L = data2ShortLabels
-        # logging.info('\n'.join(data2Labels))
-        logging.info(self.Y.shape)
-        logging.info(len(self.L))
-
-        # now that all joints are in the form of a window, time to create
-        # all possible vectors to classify
-
-        self.allDataDict = dict()
-        self.allDataDict['Y'] = self.dataVec
-        self.allDataDict['L'] = self.data2Labels
-
-        listOfVectorsToClassify = self.listOfClassificationVectors(self.featureSequence, objectsList)
-        for j in listOfVectorsToClassify:
-            logging.info(j)
 
     def readData(self, root_data_dir, participant_index, *args, **kw):
+        """
+            Method which accepts a data directory, reads all the data in and outputs self.Y which is a numpy array with n instances of m length feature vectors and self.L which is a list of text Labels of length n.
+
+            This method reads data<number>.log files and the corresponding labels<number>.log files present in the root_data_dir and formats the time series data into normalised and smoothed windows. Subsequently depending on the list of joints chosen by the user and other parameters set in the config file present in the root_data_dir, the information of the different joints and objects are appended into a single feature vector. Number of feature vectors is equal to the number of windows extracted from the time series data.
+
+            Args:
+                root_data_dir: Data directory.
+                participant_index: List of subfolders to consider. Can be left as an empty list.
+
+            Returns:
+                None
+        """
         self.rawData, labelsList = self.diskDataToLiveData(root_data_dir)
         data2, jointsList, objectsList = self.convertToDict(self.rawData, 'testing', verbose=self.verbose)
         logging.info('unique labels' + str(set(labelsList)))
@@ -902,6 +743,24 @@ class SAMDriver_ARWin(SAMDriver):
         logging.info(len(self.L))
 
     def listOfClassificationVectors(self, featureSequence, objectsList, partnerName='partner'):
+        """
+        Constructs a list of classifications to carry out.
+
+        Consider an example where featureSequence consists of `object', 'hand', 'head'. Assuming there are 2 objects in the scene, this method constructs 4 possible vectors to classify. \n
+
+        1) `object1, rightHand, head` \n
+        2) `object1, leftHand, head` \n
+        3) `object2, rightHand, head` \n
+        4) `object2, leftHand, head` \n
+
+        Args:
+            featureSequence: Organisation of features within the feature vector.
+            objectsList: List of objects currently in the scene.
+            partnerName: Object name to ignore. This ignores the motion of the interacting agent.
+
+        Returns:
+            List of vectors to classify.
+        """
         listOfVectorsToClassify = []
         for j in featureSequence:
             if j == 'object':
@@ -929,6 +788,16 @@ class SAMDriver_ARWin(SAMDriver):
         return listOfVectorsToClassify
 
     def messageChecker(self, dataMessage, mode):
+        """
+        Method to check validity of incoming messages and split into components if valid.
+
+        Args:
+            dataMessage: String message to validate.
+            mode: Mode of validation. Either `'test'` or `'live'`.
+
+        Returns:
+             List of strings with split sections and a boolean indicating validity of received string.
+        """
         goAhead = True
         try:
             dataMessage = dataMessage.replace('"' + dataMessage.partition('"')[-1].rpartition('"')[0] + '"', 'partner')
@@ -965,9 +834,21 @@ class SAMDriver_ARWin(SAMDriver):
 
         return [t, goAhead]
 
-    def processLiveData(self, dataList, thisModel, verbose=False, returnUnknown=False, printClass=True,
-                        additionalData=dict()):
-        # dataList is list of yarp bottles
+    def processLiveData(self, dataList, thisModel, verbose=False, returnUnknown=False, printClass=True, additionalData=dict()):
+        """
+            Method which receives a list of data frames and outputs a classification if available or 'no_classification' if it is not.
+
+            Args:
+                dataList: List of dataFrames collected. Length of list is variable.
+                thisModel: List of models required for testing.
+                verbose : Boolean turning logging to stdout on or off.
+                returnUnknown : Boolean to turn on or off the return a sentence if the classification is unknown.
+                printClass : Boolean to turn on or off logging of classification to stdout.
+                additionalData : Dictionary containing additional data required for classification to occur.
+            Returns:
+                String with result of classification, likelihood of the classification, and list of frames with the latest x number of frames popped where x is the window length of the model. Classification result can be string `'None'` if the classification is unknown or message is invalid or `None` if a different error occurs.
+
+        """
         mode = 'live'
         sentence = []
         classifs = []

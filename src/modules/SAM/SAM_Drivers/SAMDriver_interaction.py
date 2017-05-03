@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 # """"""""""""""""""""""""""""""""""""""""""""""
 # The University of Sheffield
 # WYSIWYD Project
@@ -21,27 +19,34 @@ from SAM.SAM_Core import SAMDriver
 from SAM.SAM_Core import SAMTesting
 import logging
 
-
-# """"""""""""""""
-# Class developed for the implementation of the face recognition task in real-time mode.
-# """"""""""""""""
 ## @ingroup icubclient_SAM_Drivers
 class SAMDriver_interaction(SAMDriver):
-    # """"""""""""""""
-    # Initilization of the SAM class
-    # Inputs:
-    #    - isYarprunning: specifies if yarp is used (True) or not(False)
-    #    - imgH, imgW: original image width and height
-    #    - imgHNew imgWNew: width and height values to resize the image
-    #
-    # Outputs: None
-    # """"""""""""""""
+    """
+    Class developed for the implementation of face recognition.
+    """
     def __init__(self):
+        """
+        Initialise class using SAMDriver.__init__ and augment with custom parameters.
+
+        additionalParameterList is a list of extra parameters to preserve between training and interaction.
+        """
         SAMDriver.__init__(self)
         self.additionalParametersList = ['imgH', 'imgW', 'imgHNew', 'imgWNew',
                                          'image_suffix', 'pose_index', 'pose_selection']
 
     def loadParameters(self, parser, trainName):
+        """
+            Function to load parameters from the model config.ini file.
+
+            Method to load parameters from file loaded in parser from within section trainName and store these parameters in self.paramsDict.
+
+        Args:
+            parser: SafeConfigParser with pre-read config file.
+            trainName: Section from which parameters are to be read.
+
+        Returns:
+            None
+        """
         if parser.has_option(trainName, 'imgH'):
             self.paramsDict['imgH'] = int(parser.get(trainName, 'imgH'))
         else:
@@ -78,12 +83,25 @@ class SAMDriver_interaction(SAMDriver):
             self.paramsDict['pose_selection'] = 0
 
     def saveParameters(self):
+        """
+            Executes SAMDriver.saveParameters to save default parameters.
+        """
         SAMDriver.saveParameters(self)
 
 
     # """"""""""""""""
     def readData(self, root_data_dir, participant_index, *args, **kw):
+        """
+        Method which accepts a data directory, reads all the data in and outputs self.Y which is a numpy array with n instances of m length feature vectors and self.L which is a list of text Labels of length n.
 
+        This method reads .ppm images from disk, converts the images to grayscale and serialises the data into a feature vector.
+
+        Args:
+            root_data_dir: Data directory.
+            participant_index: List of subfolders to consider. Can be left as an empty list.
+
+        Returns:
+    """
         if not os.path.exists(root_data_dir):
             logging.error("CANNOT FIND:" + root_data_dir)
         else:
@@ -182,6 +200,17 @@ class SAMDriver_interaction(SAMDriver):
         return self.Y.shape[1]
 
     def processLiveData(self, dataList, thisModel, verbose, additionalData=dict()):
+        """
+            Method which receives a list of data frames and outputs a classification if available or 'no_classification' if it is not
+
+            Args:
+                dataList: List of dataFrames collected. Length of list is variable.
+                thisModel: List of models required for testing.
+                verbose : Boolean turning logging to stdout on or off.
+                additionalData : Dictionary containing additional data required for classification to occur.
+            Returns:
+               String with result of classification, likelihood of the classification, and list of frames with the latest x number of frames popped where x is the window length of the model. Classification result can be string `'None'` if the classification is unknown or message is invalid or `None` if a different error occurs.
+        """
 
         logging.info('process live data')
         logging.info(len(dataList))
@@ -224,6 +253,15 @@ class SAMDriver_interaction(SAMDriver):
             return [None, 0, None]
 
     def formatGeneratedData(self, instance):
+        """
+        Method to transform a generated instance from the model into a Yarp formatted output.
+
+        Args:
+            instance: Feature vector returned during generation of a label.
+
+        Returns:
+            Yarp formatted output for instance.
+        """
         # normalise image between 0 and 1
         yMin = instance.min()
         instance -= yMin

@@ -22,8 +22,38 @@ np.set_printoptions(precision=2)
 
 ## @ingroup icubclient_SAM_Core
 class interactionSAMModel(yarp.RFModule):
+    """Generic interaction function
 
+        Description:
+            Generic interaction function that carries out live collection of data, classification of said data, interaction with other modules requesting the classification and generation of training outputs for recall. The parameters for the interaction function are loaded from the config file specified in the `config_path` parameter of the default context file for samSupervisor.py. An example of the configuration structure is shown below.
+
+        Example:
+            [Model Name]
+            dataIn = <portName/ofInputData>:i <dataType of Port>
+            dataOut = <portName/ofOutputData>:o <dataType of Port>
+            rpcBase = <portName/ofRpcPort>
+            call_sign = ask_<X>_label,ask_<X>_instance
+            collectionMethod = collectionMethod lengthOfBuffer
+
+            [Faces]
+            dataIn = /sam/faces/imageData:i ImageRgb
+            dataOut = /sam/faces/imageData:o ImageMono
+            rpcBase = /sam/faces/rpc
+            callSign = ask_face_label,ask_face_instance
+            collectionMethod = future_buffered 3
+
+        Args:
+            dataIn : The port name for the port that will received the data to be classified and the dataType to be expected.
+            dataOut : The port name for the port that will output generated data and the dataType to be transmitted.
+            rpcBase : The rpc port that will receive external requests. This is usually controlled by samSupervisor.py.
+            call_sign : The commands that will trigger a classify from data event or a generate from label event.
+            collectionMethod : The collection method to be used. Either `buffered`, `future_buffered` or `continuous`. Followed by an integer indicating the length of the buffer to be used. In the case of `continuous` the buffer length is the maximum number of classification labels to be stored in a First In Last Out (FILO) configuration. Otherwise the buffer length indicates the number of data frames that are required for a classification to take place.
+
+    """
     def __init__(self):
+        """
+        Initialisation of the interaction function
+        """
         yarp.RFModule.__init__(self)
         self.mm = None
         self.dataPath = None
@@ -81,7 +111,19 @@ class interactionSAMModel(yarp.RFModule):
         self.my_mutex = thread.allocate_lock()
 
     def configure(self, rf):
+        """
+         Configure interactionSAMModel yarp module
 
+        Args:
+            rf: Yarp RF context input
+            argv_1 : String containing data path.
+            argv_2 : String containing model path.
+            argv_3 : String containing config file path (from `config_path` parameter of samSupervisor config file).
+            argv_4 : String driver name corresponding to a valid driver present in SAM_Drivers folder.
+            argv_5 : String `'True'` or `'False'` to switch formatting of logging depending on whether interaction is logging to a separate window or to the stdout of another process.
+        Returns:
+            Boolean indicating success or no success in initialising the yarp module
+        """
         stringCommand = 'from SAM.SAM_Drivers import ' + sys.argv[4] + ' as Driver'
         exec stringCommand
 
@@ -244,6 +286,15 @@ class interactionSAMModel(yarp.RFModule):
             return False
 
     def close(self):
+        """
+            Close Yarp module
+
+            Args:
+                None
+
+            Returns:
+                Boolean indicating success or no success in closing the Yarp module
+        """
         # close ports of loaded models
         logging.info('Exiting ...')
         for j in self.portsList:
@@ -252,11 +303,41 @@ class interactionSAMModel(yarp.RFModule):
 
     @timeout(3)
     def closePort(self, j):
+        """
+            Helper function to close ports with an enforced timeout of 3 seconds so the module doesn't hang.
+
+            Args:
+                j: Yarp Port
+
+            Returns:
+                None
+        """
         j.interrupt()
         time.sleep(1)
         j.close()
 
     def respond(self, command, reply):
+        """
+            Respond to external requests
+
+            Description:
+                Available requests \n
+                1) __heartbeat__      :  Sanity check request to make sure module is still alive. \n
+                2) __information__    :  Utility request to pass in contextual information. \n
+                3) __portNames__      :  Request to return the name of the currently open ports for samSupervisor to keep a list of open ports. \n
+                4) __reload__         :  Request to reload model from disk. \n
+                5) __toggleVerbose__  :  Switch logging to stdout on or off. \n
+                6) __EXIT__           :  Abort and close the module. \n
+                7) __ask_X_label__    :  Request a classification from the module. \n
+                8) __ask_X_instance__ :  Request a generative output from the module. \n
+
+            Args:
+                command : Incoming Yarp bottle containing external request.
+                reply : Outgoing Yarp bottle containing reply to processed request.
+
+            Returns:
+                Boolean indicating success or no success in responding to external requests.
+        """
         # this method responds to samSupervisor commands
         reply.clear()
         action = command.get(0).asString()
@@ -335,6 +416,21 @@ class interactionSAMModel(yarp.RFModule):
         return True
 
     def classifyInstance(self, reply):
+        """
+            Classify a live collected data instance
+
+            Description:
+                This method responds to an `ask_x_label` request sent via the rpc port of the module. \n
+                In the case of __collectionMethod__ = `buffered`, the data currently in the buffer is sent to processLiveData() method for the current driver which returns a classification label that is embedded in reply.\n
+                In the case of __collectionMethod__ = `future_buffered`, this method reads incoming frames from the `dataIn` port until the collection buffer is full at which point it calls processLiveData() to get a classification label.\n
+                In the case of __collectionMethod__ = `continuous`, this model returns the most recent label in the FILO buffer containing classification labels.\n
+
+            Args:
+                reply : Outgoing Yarp bottle containing classification label.
+
+            Returns:
+                None
+        """
         if self.portsList[self.labelPort].getInputCount() > 0:
             if self.verboseSetting:
                 logging.info('-------------------------------------')
@@ -470,6 +566,18 @@ class interactionSAMModel(yarp.RFModule):
         logging.info('--------------------------------------')
 
     def generateInstance(self, reply, instanceName):
+        """Responds to an ask_X_instance request
+
+        Description:
+            Implements the logic for responding to an `ask_X_instance` rpc request for __instanceName__. This method responds with an `ack` or `nack` on the rpc port indicating success of memory generation and outputs the generated instance returned by recallFromLabel on the `dataOut` port.
+
+        Args:
+            reply : Yarp Bottle to embed the rpc response.
+            instanceName : Name of class to generate.
+
+        Returns:
+            None
+        """
         if self.portsList[self.instancePort].getOutputCount() != 0:
             if instanceName in self.mm[0].textLabels:
                 instance = self.recallFromLabel(instanceName)
@@ -502,7 +610,15 @@ class interactionSAMModel(yarp.RFModule):
             reply.addString('No outgoing connections on ' + str(self.portsList[self.instancePort].getName()))
 
     def recallFromLabel(self, label):
+        """
+            Generates instance based on label.
 
+            Args:
+                label : String containing the class label for the requested generated instance.
+
+            Returns:
+               Serialised vector representing the generated instance.
+        """
         ind = self.mm[0].textLabels.index(label)
         if len(self.mm) > 1:
             indsToChooseFrom = self.mm[ind + 1].SAMObject.model.textLabelPts[ind]
@@ -516,15 +632,30 @@ class interactionSAMModel(yarp.RFModule):
         return yrecall
 
     def interruptModule(self):
+        """
+        Module interrupt logic.
+
+        Returns : Boolean indicating success of logic or not.
+        """
         return True
 
     def getPeriod(self):
+        """
+           Module refresh rate.
+
+           Returns : The period of the module in seconds.
+        """
         return 0.1
 
     def updateModule(self):
-        # this method will monitor incoming data
+        """
+            Logic to execute every getPeriod() seconds.
 
-        # test incoming data connection
+            Description:
+                This function makes sure important ports are connected. Priority 1 is the rpc port. Priority 2 is the data in port. If both are connected this function triggers collectData().
+
+            Returns: Boolean indicating success of logic or not.
+        """
         out = self.portsList[self.svPort].getOutputCount() + self.portsList[self.svPort].getInputCount()
         if out != 0:
             if not self.rpcConnected:
@@ -555,6 +686,14 @@ class interactionSAMModel(yarp.RFModule):
         return True
 
     def readFrame(self):
+        """
+            Logic to read an available data frame.
+
+            Description:
+                This function first checks the required data type of the frame to be received and instantiates the required yarp data object. This function then subsequently reads in the latest frame from the __dataIn__ port which it returns. Return is `None` if the data type is not recognised. This is currently a limitation because `ImageRgb`, `ImageMono` and `Bottle` are so far the only supported bottle types. This can be easily extended in this section by adding more cases.
+
+            Returns: Boolean indicating success of logic or not.
+        """
         if self.inputType == 'imagergb':
             frame = yarp.ImageRgb()
         elif self.inputType == 'imagemono':
@@ -574,7 +713,18 @@ class interactionSAMModel(yarp.RFModule):
         return frame
 
     def collectData(self):
+        """Collect data function
 
+        Description:
+            This function implements three types of data collection procedures: \n
+
+            1) __buffered__ : Collects data in a fixed length FIFO buffer of past frames. This buffer is read by classifyInstance(). \n
+            2) __future_buffered__ : No operation. \n
+            3) __continuous__ : Collect data until a buffer of length windowSize is full and then perform a classification on this data. The classification is then stored in a buffer with is read by classifyInstance(). \n
+
+            Returns:
+                None
+        """
         self.noDataCount = 0
 
         if self.collectionMethod == 'buffered':
@@ -665,6 +815,9 @@ class interactionSAMModel(yarp.RFModule):
             pass
 
     def test(self):
+        """
+            Utility function to test data collection procedures for debugging purposes.
+        """
         count = 0
         if self.collectionMethod == 'continuous':
             classifyBlock = self.mm[0].paramsDict['windowSize']
@@ -704,6 +857,18 @@ class interactionSAMModel(yarp.RFModule):
 
 
 def exception_hook(exc_type, exc_value, exc_traceback):
+    """Callback function to record any errors that occur in the log files.
+
+        Documentation:
+            Substitutes the standard python exception_hook with one that records the error into a log file. Can only work if interactionSAMModel.py is called from python and not ipython because ipython overrides this substitution.
+        Args:
+            exc_type: Exception Type.
+            exc_value: Exception Value.
+            exc_traceback: Exception Traceback.
+
+        Returns:
+            None
+    """
     logging.error("Uncaught exception", exc_info=(exc_type, exc_value, exc_traceback))
 
 sys.excepthook = exception_hook

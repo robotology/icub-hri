@@ -21,12 +21,36 @@ import SAM.SAM_Core.SAM_utils as utils
 import logging
 import copy
 
-# np.set_printoptions(precision=2)
-# from time import sleep
-
 ## @ingroup icubclient_SAM_Core
 class SamSupervisorModule(yarp.RFModule):
+    """Model management and supervisor
 
+        Description:
+            Single point of entry for managing training and interaction with multiple models running in parallel. Parameters loaded from `default.ini` in `samSupervisor` context folder which contains the configuration details for samSupervisor as seen in the example below.
+
+        Example:
+            root_path	/usr/local/SAM_Data_Models
+            config_path	sensory_level_conf.ini
+            persistence	True
+            windowed 	True
+            verbose		True
+            useOPC		False
+            startModels     False
+            acceptableDelay	"5"
+            controllerIP    127.0.0.1
+
+        Args:
+            root_path   : Path to folder containing Data and Models folders.
+            config_path	: Name of configuration file detailing parameters for different drivers.
+            persistence	: `'True'` or `'False'` indicating terminals opened by samSupervisor stay open even after process termination.
+            windowed 	: `'True'` or `'False'` indicating separate terminals will be opened by samSupervisor for each training and interaction process.
+            verbose		: `'True'` or `'False'` switching on or off logging to stdout.
+            useOPC		: `'True'` or `'False'` indicating using or not using OPC for further information.
+            startModels : `'True'` or `'False'` indicating all models in the config_path file will be automatically loaded during samSupervisor startup.
+            acceptableDelay	: String with an integer for the number of tries before a model is declared dead, aborted and restarted.
+            controllerIP :  IP address for the ipyparallel controller. Currently not in use. Leave at 127.0.0.1.
+
+    """
     def __init__(self):
         yarp.RFModule.__init__(self)
         self.SIGNALS_TO_NAMES_DICT = None
@@ -76,6 +100,15 @@ class SamSupervisorModule(yarp.RFModule):
         self.baseLogFileName = 'samSupervisorErrorLog'
 
     def configure(self, rf):
+        """
+             Configure interactionSAMModel Yarp module.
+
+            Args:
+                rf: Yarp RF context input.
+
+            Returns:
+                Boolean indicating success or no success in initialising the Yarp module.
+        """
         self.rootPath = rf.find("root_path").asString()
         file_i = 0
         loggerFName = join(self.rootPath, self.baseLogFileName + '_' + str(file_i) + '.log')
@@ -168,8 +201,6 @@ class SamSupervisorModule(yarp.RFModule):
                 self.nonResponsiveThreshold = 5
             logging.info('Responsive Delay = ' + str(self.nonResponsiveThreshold))
 
-
-
             logging.info('Root supervisor path:     \t' + str(self.rootPath))
             logging.info('Model configuration file: \t' + str(self.interactionConfPath))
             logging.info('Bash Persistence set to:  \t' + str(self.persistence))
@@ -216,21 +247,21 @@ class SamSupervisorModule(yarp.RFModule):
                 self.opcPort.open(self.opcPortName)
                 yarp.Network.connect(self.opcPortName, self.opcRPCName)
 
-            if len(nodesDict) > 0:
-                self.cluster = utils.ipyClusterManager(nodesDict, controllerIP, self.devnull, totalControl=True)
-                success = self.cluster.startCluster()
-
-                if not success:
-                    self.cluster = None
-                    cmd = 'ipcluster start -n 4'
-                    command = "bash -c \"" + cmd + "\""
-
-                    if self.windowed:
-                        c = subprocess.Popen([self.terminal, '-e', command], shell=False)
-                    else:
-                        c = subprocess.Popen([cmd], shell=True)
-
-                    self.trainingListHandles['Cluster'] = c
+            # if len(nodesDict) > 0:
+            #     self.cluster = utils.ipyClusterManager(nodesDict, controllerIP, self.devnull, totalControl=True)
+            #     success = self.cluster.startCluster()
+            #
+            #     if not success:
+            #         self.cluster = None
+            #         cmd = 'ipcluster start -n 4'
+            #         command = "bash -c \"" + cmd + "\""
+            #
+            #         if self.windowed:
+            #             c = subprocess.Popen([self.terminal, '-e', command], shell=False)
+            #         else:
+            #             c = subprocess.Popen([cmd], shell=True)
+            #
+            #         self.trainingListHandles['Cluster'] = c
 
             if len(self.uptodateModels) + len(self.updateModels) > 0:
                 if self.verbose:
@@ -281,6 +312,18 @@ class SamSupervisorModule(yarp.RFModule):
             return True
 
     def close(self):
+        """
+            Close Yarp module.
+
+            Description:
+                Starts by issuing an `EXIT` command to all loaded interaction modules. Terminates training processes. Closes samSupervisor ports and terminates cluster if one has been started.
+
+            Args:
+                None
+
+            Returns:
+                Boolean indicating success or no success in closing the Yarp module.
+        """
         # close ports of loaded models
         for j in self.rpcConnections:
             j[1].write(yarp.Bottle('EXIT'), self.inputBottle)
@@ -307,6 +350,18 @@ class SamSupervisorModule(yarp.RFModule):
             self.cluster.terminateProcesses()
 
     def checkAvailabilities(self, reply):
+        """
+            Check model availabilities
+
+            Description:
+                This function starts by compiling a list of models present in the `root_path/Models`. Then cross checks that the corresponding data folder exists in `root_path/Data` and that it contains an appropriate `config.ini` file. If a data folder exists but a model does not, this is added to __noModels__ list. If the folder and the model both exist and the modification date of the data is newer than that of the model it is added to __updateModels__ (requiring an update) if the modification date of the model is newer it is added to __uptodateModels__. If the model exists but not the data folder config file, the model is ignored. Each model and data folder pair is then paired with its respective driver from the SAM_Drivers folder. If a corresponding driver is not available, the data and model are ignored.
+
+            Args:
+                reply : Yarp Bottle containing a many string formatted response to indicate the state of all the available drivers and the corresponding models.
+
+            Returns:
+                None
+        """
         # after finding the root path, go to models folder and compile list of all
         # models together with the last time they were modified
         onlyfiles = [f for f in listdir(self.modelPath) if isfile(join(self.modelPath, f))]
@@ -491,7 +546,36 @@ class SamSupervisorModule(yarp.RFModule):
             return True
 
     def respond(self, command, reply):
+        """
+            Respond to external requests
 
+            Description:
+                Available requests \n
+                1) __askOPC__               :   Query the OPC for additional contextual data. calls askOPC() \n
+                2) __attentionModulation <>__  :   Modulate attention of all models. Enable classification if <param> is `continue`. Disable classification if <param> is `stop`. Calls attentionModulation() \n
+                3) __check_all__            :   Cross checks available models, data folders, config files and driver availability. Calls checkAvailabilities() \n
+                4) __check <modelName>__    :   Cross check available models, data folders, config files and driver availability for a specific <modelName>. Calls checkModel()\n
+                5) __config <modelName>__   :   Opens the data folder config file for the specific <modelName> to view or change the training parameters. Calls configModel() \n
+                6) __dataDir <modelName>__  :   Returns the model filename that will be used for the specific <modelName>. Calls dataDirModel() \n
+                7) __delete <modelName>__   :   Deletes model from hard disk. Calls deleteModel() \n
+                8) __help__                 :   Returns a many formatted list of available commands \n
+                9) __load <modelName>__     :   Launches interactionSAMModel.py for the <modelName>. Calls loadModel() \n
+                10) __close <modelName>__    :   Terminates the interactionSAMModel.py process for the <modelName>. Calls closeModel() \n
+                11) __optimise <modelName>__ :   Launches samOptimiser.py to optimise the training of the specified model. Calls optimise().\n
+                12) __quit__                 :   Closes all loaded models and stops samSupervisor.\n
+                13) __report <modelName> <plotFlag>__   :   Reports the confusion matrix of <modelName> if it is a trained model. Plot result if <plotFlag> is set to `plot`. Return a formatted confusion matrix if <plotFlag> is not `plot`. Calls reportModel()\n
+                14) __train <modelName>__    :   Launches trainSAMModel.py to train the specified model. Calls train() \n
+                15) __list_callSigns__       :   Returns a list of the `ask_X_label` and `ask_X_instance` call signs for all models that are currently loaded with interactionSAMModel.py\n
+                7) __ask_X_label__    :  Forwards the received ask label request to the corresponding loaded model if the callsign is present in __list_callsigns__. This command has an enforced timeout of 10 seconds to respond otherwise returns `nack`. \n
+                8) __ask_X_instance__ :  Forwards the received ask instance request to the corresponding loaded model if the callsign is present in __list_callsigns__. This command has an enforced timeout of 10 seconds to respond otherwise returns `nack`. \n
+
+            Args:
+                command : Incoming Yarp bottle containing external request.
+                reply : Outgoing Yarp bottle containing reply to processed request.
+
+            Returns:
+                Boolean indicating success or no success in responding to external requests.
+        """
         helpMessage = ["Commands are: ", "\taskOPC", "\tattentionModulation", "\tcheck_all", "\tcheck modelName",
                        "\tclose modelName", "\tconfig modelName", "\tdataDir modelName", "\tdelete modelName", "\thelp",
                        "\tload modelName", "\toptimise modelName", "\tquit", "\treport modelName", "\ttrain modelName",
@@ -569,19 +653,43 @@ class SamSupervisorModule(yarp.RFModule):
 
     @utils.timeout(10)
     def forwardCommand(self, command, reply):
+        """
+            Helper function to forward a call sign  to the respective model with an enforced timeout of 10 seconds for the reply so the module does not hang.
+
+            Args:
+                command : Yarp bottle with the call sign.
+                reply   : Yarp bottle for the reply from the model.
+
+            Returns:
+                None
+        """
         for e in self.rpcConnections:
             if command.get(0).asString() in e[3]:
                 e[1].write(command, reply)
 
-    @staticmethod
-    def signal_handler(signum, frame):
-        raise Exception("Timed out!")
-
     def interruptModule(self):
+        """
+            Module interrupt logic.
+
+            Returns : Boolean indicating success of logic or not.
+        """
         return True
 
     def attentionModulation(self, reply, command):
-        # raise Exception('BOOM')
+        """ Modulate attention of all models.
+
+            Args:
+                command : Yarp bottle with command. Example valid commands below.
+                reply   : Yarp bottle for the reply from the model.
+
+            Returns :
+                Boolean indicating success or not.
+
+            Example :
+                attentionModulation stop \n
+                attentionModulation continue
+
+        """
         reply.clear()
         logging.info(command.toString())
         if command.size() < 2:
@@ -601,6 +709,17 @@ class SamSupervisorModule(yarp.RFModule):
         return True
 
     def askOPC(self, reply):
+        """ Query the OPC for additional contextual data.
+
+            Description:
+                Query name of agent from OPC and forward it to Actions model if it is loaded. This is currently the only model that uses this method. Method will be generalised in future versions.
+
+            Args:
+                reply   : Yarp bottle for the reply from OPC.
+
+            Returns :
+                Boolean indicating success or not.
+        """
         reply.clear()
         actionsLoadedList = [t for t in self.rpcConnections if 'Actions' in t[0]]
 
@@ -660,7 +779,19 @@ class SamSupervisorModule(yarp.RFModule):
         return True
 
     def closeModel(self, reply, command, external=False):
+        """ Close a loaded model.
 
+            Description:
+                Check that a model has been loaded and if it is close the loaded model.
+
+            Args:
+                reply   : Yarp bottle for the reply from the function.
+                command : Yarp bottle with the command and the model name to close.
+                external: Boolean indicating model to be closed is to be closed for good if `True`. Else model is to be closed for restart.
+
+            Returns :
+                Boolean indicating success or not.
+        """
         if command.size() != 2:
             reply.addString('nack')
             reply.addString("Model name required. e.g. close Actions")
@@ -696,6 +827,18 @@ class SamSupervisorModule(yarp.RFModule):
         return True
 
     def loadModel(self, reply, command):
+        """ Load a trained model
+
+            Description:
+                 Launches interactionSAMModel.py for the model mentioned in the command.
+
+            Args:
+                reply   : Yarp bottle for the reply from the function.
+                command : Yarp bottle with the command and the model name to load.
+
+            Returns :
+                None
+        """
         parser = SafeConfigParser()
 
         if command.size() < 2:
@@ -889,6 +1032,19 @@ class SamSupervisorModule(yarp.RFModule):
         del parser
 
     def checkModel(self, reply, command, allCheck=False):
+        """ Check availability and status of a model.
+
+            Description:
+                  Cross check available models, data folders, config files and driver availability for a specific model.
+
+            Args:
+                reply   : Yarp bottle for the reply from the function.
+                command : Yarp bottle with the command and the model name to check.
+                allCheck : Boolean to check all models if True and check a single model if False.
+
+            Returns :
+                Boolean indicating success or not.
+        """
         reply.clear()
         # update to show which models are loaded or not and which are currently training
         repStr = ''
@@ -915,6 +1071,18 @@ class SamSupervisorModule(yarp.RFModule):
         return True
         
     def train(self, reply, command):
+        """ Logic for training a model.
+
+            Description:
+                  Checks that requested model is present and available for training.
+
+            Args:
+                reply   : Yarp bottle for the reply from the function.
+                command : Yarp bottle with the command and the model name to train.
+
+            Returns :
+                Boolean indicating success or not.
+        """
         reply.clear()
         
         if command.size() != 2:
@@ -940,6 +1108,18 @@ class SamSupervisorModule(yarp.RFModule):
         return True
 
     def optimise(self, reply, command):
+        """ Logic for optimising a model.
+
+            Description:
+                  Checks that requested model is present and available for optimisation.
+
+            Args:
+                reply   : Yarp bottle for the reply from the function.
+                command : Yarp bottle with the command and the model name to optimise.
+
+            Returns :
+                Boolean indicating success or not.
+        """
         reply.clear()
         
         if command.size() < 2:
@@ -966,6 +1146,15 @@ class SamSupervisorModule(yarp.RFModule):
         return True
 
     def deleteModel(self, reply, command):
+        """ Deletes model from hard disk.
+
+            Args:
+                reply   : Yarp bottle for the reply from the function.
+                command : Yarp bottle with the command and the model name to delete.
+
+            Returns :
+                Boolean indicating success or not.
+        """
         reply.clear()
         b = yarp.Bottle()
         self.checkAvailabilities(b)
@@ -1029,6 +1218,15 @@ class SamSupervisorModule(yarp.RFModule):
         return True
 
     def configModel(self, reply, command):
+        """ Displays the model configuration file using a system call to gedit.
+
+            Args:
+                reply   : Yarp bottle for the reply from the function.
+                command : Yarp bottle with the command and the model name to display.
+
+            Returns :
+                Boolean indicating success or not.
+        """
         reply.clear()
         if command.size() != 2:
             reply.addString('nack')
@@ -1050,6 +1248,18 @@ class SamSupervisorModule(yarp.RFModule):
         return True
 
     def dataDirModel(self, reply, command):
+        """ Returns the chosen model
+
+            Description:
+                samOptimiser creates multiple models with different suffixes. `best` indicates the best performing model. `exp` indicates the last trained model. `backup` indicates the model present before optimisation started. The priority of suffixes is `best`, `exp`, `backup`.
+
+            Args:
+                reply   : Yarp bottle for the reply from the function.
+                command : Yarp bottle with the command and the model name to chose.
+
+            Returns :
+                Boolean indicating success or not.
+        """
         reply.clear()
         if command.size() < 2:
             reply.addString('nack')
@@ -1086,6 +1296,22 @@ class SamSupervisorModule(yarp.RFModule):
         return True
 
     def reportModel(self, reply, command):
+        """ Returns the performance of the trained model.
+
+            Description:
+                Returns the confusion matrix for a trained model or returns the confusion matrix together with a plot of the matrix.
+
+            Args:
+                reply   : Yarp bottle for the reply from the function.
+                command : Yarp bottle with the command, the model name to report and a plot parameter to switch plot on or off.
+
+            Examples:
+                report <modelName> \n
+                report <modelName> plot
+
+            Returns :
+                Boolean indicating success or not.
+        """
         reply.clear()
 
         if command.size() < 2:
@@ -1134,6 +1360,17 @@ class SamSupervisorModule(yarp.RFModule):
         return True
 
     def train_model(self, mod):
+        """ Train a model.
+
+            Description:
+                  Launches trainSAMModel.py to train the specified model.
+
+            Args:
+                mod   : String with the model name to load.
+
+            Returns :
+                Boolean indicating success or not.
+        """
         if self.verbose:
             logging.info("Training Models:")
             logging.info('')
@@ -1202,6 +1439,18 @@ class SamSupervisorModule(yarp.RFModule):
         return True
 
     def optimise_model(self, mod, modName):
+        """ Optimise a model.
+
+            Description:
+                  Launches samOptimiser.py to optimise the specified model.
+
+            Args:
+                mod     : Model information.
+                modName : Model name.
+
+            Returns :
+                Boolean indicating success or not.
+        """
         if self.verbose:
             logging.info("Training Models:")
             logging.info('')
@@ -1263,9 +1512,24 @@ class SamSupervisorModule(yarp.RFModule):
         return True
 
     def getPeriod(self):
+        """
+           Module refresh rate.
+
+           Returns : The period of the module in seconds.
+        """
         return 0.1
 
     def onlineModelCheck(self):
+        """ Check status of loaded models.
+
+            Description:
+                  Checks that ports for all loaded models are alive and working. If a loaded model is not working restart the model.
+
+            Args:
+                None
+            Returns :
+                None
+        """
         # check communication with loaded models
         readyList = []
         for i, v in self.trainingListHandles.iteritems():
@@ -1374,6 +1638,17 @@ class SamSupervisorModule(yarp.RFModule):
                     self.connectionCheckCount = 0
 
     def checkOperation(self, j):
+        """
+            Check heartbeat of model.
+
+            Args:
+                j : Yarp rpc port for loaded model to check.
+
+            Returns:
+                correctOp_check1 : Check that output count for the model rpc port is > 0.
+                correctOp_check2 : Check that the model returns `ack` to a `hartbeat` request.
+
+        """
         correctOp_check1 = True if j[1].getOutputCount() > 0 else False
         rep = yarp.Bottle()
         cmd = yarp.Bottle()
@@ -1384,6 +1659,14 @@ class SamSupervisorModule(yarp.RFModule):
         return correctOp_check1, correctOp_check2
 
     def updateModule(self):
+        """
+            Logic to execute every getPeriod() seconds.
+
+            Description:
+                This function makes checks that all loaded modules are still alive and if OPC querying is enabled query OPC.
+
+            Returns: Boolean indicating success of logic or not.
+        """
         if self.iter == 10:
             self.onlineModelCheck()
             if self.useOPC:
@@ -1396,6 +1679,18 @@ class SamSupervisorModule(yarp.RFModule):
 
 
 def exception_hook(exc_type, exc_value, exc_traceback):
+    """Callback function to record any errors that occur in the log files.
+
+        Documentation:
+            Substitutes the standard python exception_hook with one that records the error into a log file. Can only work if interactionSAMModel.py is called from python and not ipython because ipython overrides this substitution.
+        Args:
+            exc_type: Exception Type.
+            exc_value: Exception Value.
+            exc_traceback: Exception Traceback.
+
+        Returns:
+            None
+    """
     logging.error("Uncaught exception", exc_info=(exc_type, exc_value, exc_traceback))
 
 sys.excepthook = exception_hook

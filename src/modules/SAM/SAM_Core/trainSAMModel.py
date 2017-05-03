@@ -11,6 +11,7 @@
 # @author: Daniel Camilleri
 #
 # """"""""""""""""""""""""""""""""""""""""""""""
+## \defgroup icubclient_SAM_source SAM
 import warnings
 import sys
 import numpy
@@ -24,8 +25,27 @@ from os.path import join
 np.set_printoptions(threshold=numpy.nan, precision=2)
 warnings.simplefilter("ignore")
 
+## \ingroup icubclient_SAM_Core
+##\brief@{
+## Generic training function
+#\details@{
+## Generic training function that carries out SAM Model training on a collection of data, The parameters for training function are loaded from the config file present in the folder containing the data to be trained. An example of the configuration structure is shown in samOptimiser.modelOptClass
+
 
 def exception_hook(exc_type, exc_value, exc_traceback):
+    """Callback function to record any errors that occur in the log files.
+
+        Documentation:
+            Substitutes the standard python exception_hook with one that records the error into a log file. Can only work if trainSAMModel.py is called from python and not ipython because ipython overrides this substitution.
+
+        Args:
+            exc_type: Exception Type.
+            exc_value: Exception Value.
+            exc_traceback: Exception Traceback.
+
+        Returns:
+            None
+    """
     logging.error("Uncaught exception", exc_info=(exc_type, exc_value, exc_traceback))
 
 sys.excepthook = exception_hook

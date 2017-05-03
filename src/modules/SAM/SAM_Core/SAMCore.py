@@ -30,12 +30,18 @@ import os
 
 ## @{
 ## \defgroup icubclient_SAM_Core SAM Core
+## This Module implements the core functionality to create Gaussian Process Latent Feature Models
 ## \ingroup icubclient_SAM_source
+## @}
+## \ingroup icubclient_SAM_Core
 class LFM(object):
     """
-    SAM based on Latent Feature Models
+    SAM based on Latent Feature Models.
     """
     def __init__(self):
+        """
+        Initalise the Latent Feature Models.
+        """
         self.type = []
         self.model = []
         self.observed = None
@@ -48,23 +54,21 @@ class LFM(object):
         self.Ylist = None
 
     def store(self, observed, inputs=None, Q=None, kernel=None, num_inducing=None, init_X='PCA'):
-        """
-        Store events.
-        ARG: observed: A N x D matrix, where N is the number of points and D the number
-        of features needed to describe each point.
-        ARG: inputs: A N x Q matrix, where Q is the number of features per input. 
-        Leave None for unsupervised learning.
-        ARG: Q: Leave None for supervised learning (Q will then be the dimensionality of
-        inputs). Otherwise, specify with Q the dimensionality (number of features) for the
-        compressed space that acts as "latent" inputs.
-        ARG: kernel: for the GP. can be left as None for default.
-        ARG: num_inducing: says how many inducing points to use. Inducing points are
-        a fixed number of variables through which all memory is filtered, to achieve
-        full compression. E.g. it can correspond to the number of neurons.
-        Of course, this is not absolutely fixed, but it also doesn't grow necessarily
-        proportionally to the data, since synapses can make more complicated combinations
-        of the existing neurons. The GP is here playing the role of "synapses", by learning
-        non-linear and rich combinations of the inducing points.
+        """Store events.
+
+            Description:
+                Read in the args observed and inputs and configure the LFM model for training or recollection.
+
+            Args:
+                observed: An `(N x D)` matrix, where `N` is the number of points and `D` the number of features needed to describe each point.
+                inputs: A `(N x Q)` matrix, where `Q` is the number of features per input. Leave `"None"` for unsupervised learning.
+                Q: Leave `None` for supervised learning (`Q` will then be the dimensionality of inputs). Otherwise, specify with an integer `Q` the dimensionality (number of features) for the compressed space that acts as "latent" inputs.
+                kernel: For the GP. Can be left as `"None"` for the default kernel.
+                num_inducing: Integer of how many inducing points to use. Inducing points are a fixed number of variables through which all memory is filtered, to achieve full compression. E.g. it can correspond to the number of neurons. This is not absolutely fixed, but it also doesn't grow necessarily proportionally to the data, since synapses can make more complicated combinations of the existing neurons. The GP is here playing the role of "synapses", by learning non-linear and rich combinations of the inducing points.
+                init_X: Initialisation method for model output. String either `PCA` or `PPCA`. Default= `PCA`. Initialisation uses `PPCA` when `PCA`
+
+            Returns:
+                None
         """
         assert(isinstance(observed, dict))
         self.observed = observed
@@ -152,12 +156,16 @@ class LFM(object):
     #    X, fracs = initialize_latent(init, input_dim, Y)
 
     def add_labels(self, labels):
-        """
-        If observables are associated with labels, they can be added here.
-        labels has to be a matrix of size N x K, where K is the total number
-        of different labels. If e.g. the i-th row of L is [1 0 0] (or [1 -1 -1])
-        then this means that there are K=3 different classes and the i-th row
-        of the observables belongs to the first class.
+        """Add labels to observations.
+
+        Description:
+            If observables are associated with labels, they can be added here. Labels has to be a matrix of size N x K, where K is the total number of different labels. If e.g. the i-th row of L is [1 0 0] (or [1 -1 -1]) then this means that there are K=3 different classes and the i-th row of the observables belongs to the first class.
+
+        Args:
+            labels: list of strings containing the labels for the observations
+
+        Returns:
+            None
         """
         if len(labels.shape) == 1 or labels.shape[1] == 1:
             self.model.data_labels = labels
@@ -168,6 +176,15 @@ class LFM(object):
     def learn(self, optimizer='bfgs', max_iters=1000, init_iters=300, verbose=True):
         """
         Learn the model (analogous to "forming synapses" after perceiving data).
+
+        Args:
+            optimizer: String with the requested optimiser taken from a the list of available scipy optimisers.
+            max_iters: Integer with the maximum number of training iterations for the second phase of training the model.
+            init_iters: Integer with the maximum number of training iterations for the first phase of training.
+            verbose: Boolean to turn logging to stdout on or off.
+
+        Returns:
+            None
         """
         if self.type == 'bgplvm' or self.type == 'mrd':
             self.model['.*noise'].fix()
@@ -181,13 +198,24 @@ class LFM(object):
         for j in list(np.unique(self.model.data_labels)):
             self.model.textLabelPts[j] = [l for l, k in enumerate(self.model.data_labels) if k[0] == j]
 
-    def check_snr(self, warning=True, messages=True):
+    def check_snr(self, warningEnable=True, messages=True):
+        """Checks the signal to noise ratio(SNR) of the trained model.
+
+        Description:
+            Provides an indicator of successful learning by looking at the variance distribution of the model.
+
+        Args:
+            warningEnable: Boolean to switch warnings on or off in the case of a low SNR.
+            messages: Boolean to turn output to stdout on or off.
+        Returns:
+            None
+        """
         if self.type == 'bgplvm':
             snr = self.model.Y.var()/self.model.Gaussian_noise.variance.values[0]
 
             if messages:
                 print('# SNR: ' + str(snr))
-            if warning and snr < 8:
+            if warningEnable and snr < 8:
                 print(' WARNING! SNR is small!')
         elif self.type == 'mrd':
             snr = []
@@ -195,7 +223,7 @@ class LFM(object):
                 snr.append(self.model.bgplvms[i].Y.var()/self.model.bgplvms[i].Gaussian_noise.variance.values[0])
                 if messages:
                     print('# SNR view ' + str(i) + ': ' + str(snr[-1]))
-                if warning and snr[-1] < 8:
+                if warningEnable and snr[-1] < 8:
                     print(' WARNING! SNR for view ' + str(i) + ' is small!!')
         else:
             snr = None
@@ -203,7 +231,17 @@ class LFM(object):
         
     def visualise(self, which_indices=None, plot_scales=True):
         """
-        Show the internal representation of the memory
+        Show the internal representation of the memory.
+
+        Description:
+            Creates a 2D plot showing the mean and variance distribution of the model.
+
+        Args:
+            which_indices: Tuple of two integers that specify which indices of the `Q` indices that make up the model are to be plotted.
+            plot_scales: Boolean to switch scale labelling on or off in the plots.
+
+        Returns:
+            None
         """
         # if self.type == 'bgplvm' and which_indices is None:
         #    which_indices = most_significant_input_dimensions(self.model,None)
@@ -226,12 +264,27 @@ class LFM(object):
         
         return ret
 
-    def visualise_interactive(self, dimensions=(20,28), transpose=True, order='F', invert=False, scale=False, colorgray=True, view=0, which_indices=(0, 1)):
+    def visualise_interactive(self, dimensions=(20, 28), transpose=True, order='F', invert=False, scale=False,
+                              colorgray=True, view=0, which_indices=(0, 1)):
+        """Interactive plot of the model.
+
+        Description:
+            Show the internal representation of the memory and allow the user to interact with it to map samples/points from the compressed space to the original output space.
+
+        Args:
+            dimensions: Tuple of integers describing the dimensions that the image needs to be transposed to for display.
+            transpose: Boolean whether to transpose the image before display.
+            order: Boolean whether array is in Fortan ordering ('F') or Python ordering ('C').
+            invert: Boolean whether to invert the pixels or not.
+            scale: Boolean whether to scale the image or not.
+            colorgray: Boolean whether to plot in grayscale or not.
+            view: Integer in the case of MRD models which describes the view to be plotted.
+            which_indices: Tuple of two integers that specify which indices of the `Q` indices that make up the model are to be plotted.
+
+        Returns:
+            None
         """
-        Show the internal representation of the memory and allow the user to
-        interact with it to map samples/points from the compressed space to the
-        original output space
-        """
+
         if self.type == 'bgplvm':
             ax = self.model.plot_latent(which_indices)
             y = self.model.Y[0, :]
@@ -258,9 +311,16 @@ class LFM(object):
 
     def recall(self, locations):
         """
-        Recall stored events. This is closely related to performing pattern pattern_completion
-        given "training" data.
-        Input is the index of the stored event (TODO: make it more generic)
+        Recall stored events.
+
+        Description:
+            This is closely related to performing pattern pattern_completion but given "training" data.
+
+        Args:
+             locations: Integer which is the index of the stored event.
+
+        Returns:
+            A `(Dx1)` numpy array containing the data of a training point as reconstructed by the model.
         """
         if locations == -1:
             locations = range(self.N)
@@ -270,13 +330,20 @@ class LFM(object):
             return self.model.bgplvms[0].Y[locations, :].values
 
     def pattern_completion(self, test_data, view=0, verbose=False, visualiseInfo=None, optimise=100):
-        """
-        In the case of supervised learning, pattern completion means that we 
-        give new inputs and infer their corresponding outputs. In the case of
-        unsupervised learning, pattern completion means that we give new
-        outputs and we infer their corresponding "latent" inputs, ie the internal
-        compressed representation of the new outputs in terms of the already
-        formed "synapses".
+        """Recall novel events
+
+        Description:
+            In the case of supervised learning, pattern completion means that we give new inputs and infer their corresponding outputs. In the case of unsupervised learning, pattern completion means that we give new outputs and we infer their corresponding "latent" inputs, ie the internal compressed representation of the new outputs in terms of the already formed "synapses".
+
+        Args:
+            test_data : A `(Dx1)` numpy array containing the feature vector for which you would like to obtain the closest neighbour.
+            view : Integer which is the index for the view of the MRD model that will be used for pattern completion.
+            verbose : Boolean switching logging to stdout on and off.
+            visualiseInfo: Plot object returned by visualiseInfo. If present, plot the location of the pattern completed point. If none, no plotting.
+            optimise : Integer number of optimisation iterations when performing pattern completion.
+
+        Returns:
+            A `(Qx1)` numpy array with the predicted mean, a `(Qx1)` numpy array with the predicted variance, a plot object with plotted point and an inference object returned by optimiser.
         """
         if self.type == 'bgplvm':
             # tmp = self.model.infer_newX(test_data)[0]
@@ -308,14 +375,18 @@ class LFM(object):
         return pred_mean, pred_variance, pp, tmp
 
     def pattern_completion_inference(self, y, target_modality=-1):
-        """
-        This is a wrapper around pattern completion where:
-        1) First, we do normal pattern completion, where given an output y, out map to the memory space to get a test memory x*.
-        2) Now the test memory x* is compared with stored memories. This allows us to infer the label of x*. If the labels
-           are given in another modality (by default in the last one), then we return the label from that modality (careful, 
-            the encoding might be 1-of-K, e.g. -1 1 -1 -> 2 and also noise might exist).
-           Instead, if the labels are not given in another modality (completely unsupervised learning), then we just return
-           the index to the most similar training memory.
+        """Pattern completion wrapper.
+
+        Description:
+            1) First, we do normal pattern completion, where given an output y, out map to the memory space to get a test memory x*.
+            2) Now the test memory x* is compared with stored memories. This allows us to infer the label of x*. If the labels are given in another modality (by default in the last one), then we return the label from that modality (careful, The encoding might be 1-of-K, e.g. -1 1 -1 -> 2 and also noise might exist). Instead, if the labels are not given in another modality (completely unsupervised learning), then we just return the index to the most similar training memory.
+
+        Args:
+            y : A `(Dx1)` numpy array containing the feature vector for which you would like to obtain the closest neighbour.
+            target_modality : Integer which is the index for the view of the MRD model that will be used for pattern completion.
+
+        Returns:
+            Inference object returned by optimiser containing multi-dimensional mean and variance of nearest neighbour.
         """
         # Returns the predictive mean, the predictive variance and the axis (pp) of the latent space backwards mapping.            
         ret = self.pattern_completion(y)
@@ -334,10 +405,16 @@ class LFM(object):
         return ret
 
     def fantasy_memory(self, X, view=0):
-        """
-        The opposite of pattern completion. Instead of finding a memory from an output, here we find an output from a
-        (possibly fantasy) memory. Here, fantasy memory is a memory not existing in the training set, found by interpolating
-        or sampling in the memory space.
+        """Generating novel outputs.
+
+        Description:
+            The opposite of pattern completion. Instead of finding a memory from an output, here we find an output from a (possibly fantasy) memory. Here, fantasy memory is a memory not existing in the training set, found by interpolating or sampling in the memory space.
+
+        Args:
+            X: A `(Qx1)` numpy array with the location of the `Q` dimensional model that is to be generated.
+            view: Integer which is the index for the view of the MRD model that will be used to generate the fantasy_memory.
+        Returns:
+            A `(Qx1)` numpy array with the predicted mean and a `(Qx1)` numpy array with the predicted variance.
         """
         if self.type == 'mrd':
             pred_mean, pred_variance = self.model.bgplvms[view].predict(X)
@@ -348,6 +425,20 @@ class LFM(object):
         return pred_mean, pred_variance
 
     def familiarity(self, Ytest, ytrmean=None, ytrstd=None, optimise=100):
+        """Familiarity testing.
+
+        Description:
+            This function tests the familiarity/similarity of an input with the inputs used to train the model.
+
+        Args:
+            Ytest : A `(Dx1)` numpy array whose familiarity/similarity is tested with trained outputs of the model.
+            ytrmean : A `(Dx1)` numpy array with the mean of the training inputs.
+            ytrstd :  A `(Dx1)` numpy array with the variance of the training inputs.
+            optimise : Integer number of optimisation iterations when performing pattern completion.
+
+        Returns:
+            A float with a measure of familiarity for Ytest with the current model.
+        """
         assert(self.type == 'bgplvm')
 
         N = Ytest.shape[0]
@@ -366,128 +457,72 @@ class LFM(object):
                               Ytest[i, :][None, :], self.model.posterior)[0]
         ll /= N
         return ll
-        
-##############################  TMP   ##############################################################
-    def familiarity_reverse(self, Ytest, ytrmean=None, ytrstd=None, source_view=0, max_iters=1000, num_inducing=15):
-        if Ytest is None:
-            if self.type == 'bgplvm':
-                tmpX = self.model.Y.values.copy()
-            elif self.type == 'mrd':
-                tmpX = self.model.bgplvms[source_view].Y.values.copy()
-            kernel = GPy.kern.RBF(tmpX.shape[1], ARD=False)+GPy.kern.Bias(tmpX.shape[1])
-            tmpY = self.model.X.mean.values.copy()
-            self.back_GP = GPy.models.SparseGPRegression(tmpX, tmpY, kernel=kernel, num_inducing=num_inducing)
-            self.back_GP.optimize(optimizer='bfgs', max_iters=max_iters, messages=1)
-            return (None,None)
-        else:
-            if ytrmean is not None:
-                Ytest -= ytrmean
-                Ytest /= ytrstd
-            return self.back_GP.predict(Ytest)
 
-    def familiarity3(self, Ytest, ytrmean=None, ytrstd=None):
-        assert(self.type == 'bgplvm')
+    def __get_latent__(self):
+        """ Return number of latent dimensions.
 
-        import numpy as np
-        N = Ytest.shape[0]
-        if ytrmean is not None:
-            Ytest -= ytrmean
-            Ytest /= ytrstd
+            Description:
+                Convenience function to return the number of latent dimensions.
 
-        qx, mm = self.model.infer_newX(Ytest)
-        # Optional for more iters---
-        mm.optimize(max_iters=800)
-        # qx = mm.X
+            Args:
+                None.
 
-        return mm._log_marginal_likelihood - self.model._log_marginal_likelihood
-
-    def familiarity2(self, Ytest, ytrmean = None, ytrstd=None, sigma2=None, use_uncert=True):
-        #def my_logpdf(y, ymean, yvar):
-        #    import numpy as np
-        #    N = y.shape[0]
-        #    ln_det_cov = N * np.log(yvar)
-        #    return -0.5 * (np.sum((y - ymean) ** 2 / yvar) + ln_det_cov + N * np.log(2. * np.pi))
-        #from scipy.stats import multivariate_normal
-        #var = multivariate_normal(mean=[0,0], cov=[[1,0],[0,1]])
-        #var.pdf([1,0])
-        from scipy.stats import lognorm
-
-        assert(self.type == 'bgplvm')
-
-        import numpy as np
-        N = Ytest.shape[0]
-        if ytrmean is not None:
-            Ytest -= ytrmean
-            Ytest /= ytrstd
-
-        qx, mm = self.model.infer_newX(Ytest)
-        # Optional for more iters---
-        mm.optimize(max_iters=400)
-        qx = mm.X
-        #----
-        
-        #ymean, yvar = model._raw_predict(qx)
-        # This causes the code to hang!!! Replace qx with qx.mean.values...!!!!
-        if use_uncert:
-            ymean, yvar = self.model.predict(qx)
-        else:
-            ymean,yvar = self.model.predict(qx.mean.values)
-        ll = np.zeros(N)
-        for j in range(N):
-            #ll[j] = my_logpdf(Ytest[j], ymean[j], yvar[j])
-            #ll[j] = multivariate_normal(mean=ymean[j], cov=np.diag(yvar[j])).pdf(Ytest[j])
-            ll[j] = lognorm.pdf(Ytest[j], s=1, loc=ymean[j], scale=yvar[j]).mean()
-        loglike = ll.mean()
-
-        return loglike
-##############################  TMP   ##############################################################
-
-
-
-
-
-    def _get_inducing(self):
-        # TODO
-        pass
-
-    def _get_latent(self):
+            Returns:
+                Integer with the number of latent dimensions of the model.
+        """
         if self.type == 'bgplvm':
-            return self.model.X.mean
+            numLatentDimensions = self.model.X.mean
         elif self.type == 'mrd':
-            return self.model.bgplvms[0].X.mean
+            numLatentDimensions = self.model.bgplvms[0].X.mean
         else:
             print('No latent space for this type of model.')
-            return None
+            numLatentDimensions = None
+        return numLatentDimensions
 
 
-
-"""
-Helper functions for saving and loading the SAMObject.
-For the moment, these are quite naive functions which dump the whole object as a
-serialized sequence of bytes, into a txt file.
-For the future, we can make them "smarter" by not having to save information e.g. about
-the data or about the object functions, but just save the parameters of the trained model.
-"""
-
-
+## \ingroup icubclient_SAM_Core
 def save_model(mm, fileName='m_serialized.txt'):
+    """ Save serialised model.
+
+        Args:
+            mm : Model object to save.
+            fileName : String with the filename of saved model.
+        Returns:
+            None
+    """
     #mPruned = mm.getstate() # TODO (store less stuff)
     output = open(fileName, 'wb')
     #pickle.dump(mPruned, output)
     pickle.dump(mm, output)
     output.close()
 
-
+## \ingroup icubclient_SAM_Core
 def load_model(fileName='m_serialized.txt'):
-    mm = pickle.load(open(fileName,'r'))
+    """ Load serialised model.
+
+        Args:
+            fileName : String with the filename of model to load.
+        Returns:
+            SAMObject Model
+    """
+    mm = pickle.load(open(fileName, 'r'))
     return mm
 
-
+## \ingroup icubclient_SAM_Core
 def save_pruned_model(mm, fileName='m_pruned', economy=False, extraDict=dict()):
-    """
-    Save a trained model after prunning things that are not needed to be stored.
-    Economy set to True will trigger a (currently BETA) storing which creates much smaller files.
-    See the load_pruned_model discussion on what this means in terms of restrictions.
+    """Save a pruned model
+
+    Description:
+            Save a trained model after pruning things that are not needed to be stored. Economy set to `True` will trigger a storing which creates much smaller files. See the load_pruned_model discussion on what this means in terms of restrictions.
+
+    Args:
+        mm : Model object to save.
+        fileName : String with the filename of saved model.
+        economy : Boolean to enable or disable economy saving.
+        extraDict : Dictionary with parameters that are requested to be saved which are not in the default saved parameters but are required when loading the model for interaction.
+
+    Returns:
+        None
     """
     SAMObjPruned=dict()
     SAMObjPruned['type'] = mm.type
@@ -531,14 +566,21 @@ def save_pruned_model(mm, fileName='m_pruned', economy=False, extraDict=dict()):
     pickle.dump(SAMObjPruned, output)
     output.close()
 
-
+## \ingroup icubclient_SAM_Core
 def load_pruned_model(fileName='m_pruned', economy=False, m=None):
-    """
-    Load a trained model. If economy is set to True, then a not-None initial model m is needed.
-    This model needs to be created exactly as the one that was saved (so, it is demo specific!) and
-    in this case calling the present function will set its parameters (meaning that you still need to
-    create a model but don't need to optimize it.)
-    """
+    """Load a pruned model
+
+        Description:
+            Load a trained model. If economy is set to `True`, then a not-None initial model m is needed. This model needs to be created exactly as the one that was saved (so, it is demo specific!) and in this case calling the present function will set its parameters (meaning that you still need to create a model but don't need to optimize it).
+
+        Args:
+            fileName : String with the filename of the model to load.
+            economy : Boolean to indicate whether an economy object is being loaded or not.
+            m : Model object into which the data to be loaded is to be stored in. If left at `None` model will be loaded into a default model initialisation.
+
+        Returns:
+            SAMObject model
+        """
     folderPath = os.path.join('/', *fileName.split('/')[:-1])
     SAMObjPruned = pickle.load(open(fileName + '.pickle', 'rb'))
     SAMObject = LFM()
@@ -571,277 +613,28 @@ def load_pruned_model(fileName='m_pruned', economy=False, m=None):
 
     return SAMObject
 
+## \ingroup icubclient_SAM_Core
+def most_significant_input_dimensions(model):
+    """ Determine the most descriptive output dimensions.
 
-# Copied from GPy
-def most_significant_input_dimensions(model, which_indices):
+    Description:
+        Helper function to determine which dimensions should be plotted based on the relevance weights.
+
+    Args:
+        model: Model object to be assessed.
+
+    Returns:
+        Integer indicating the most descriptive dimension and an integer indicating the second most descriptive dimension.
     """
-    Determine which dimensions should be plotted based on the relevance weights.
-    """
-    if which_indices is None:
-        if model.input_dim == 1:
-            input_1 = 0
-            input_2 = None
-        if model.input_dim == 2:
-            input_1, input_2 = 0, 1
-        else:
-            try:
-                input_1, input_2 = np.argsort(model.input_sensitivity())[::-1][:2]
-            except:
-                raise ValueError("cannot automatically determine which dimensions to plot, please pass 'which_indices'")
+    if model.input_dim == 1:
+        input_1 = 0
+        input_2 = None
+    if model.input_dim == 2:
+        input_1, input_2 = 0, 1
     else:
-        input_1, input_2 = which_indices
+        try:
+            input_1, input_2 = np.argsort(model.input_sensitivity())[::-1][:2]
+        except:
+            raise ValueError("cannot automatically determine which dimensions to plot, please pass 'which_indices'")
+
     return input_1, input_2
-
-
-def latent_cluster_estimate(SAMObject, n_components=10, X=None, plot=True, alpha=10, covariance_type='diag',which_indices=(0,1)):
-    """
-    Use Dirichlet Process GMMs to cluster the latent space by automatically estimating an effective number of clusters.
-    ARG SAMObject: The SAMObject to operate on.
-    ARG n_components: The number of DPGMM commponents to use (ie max number of clusters). Some components will switch off.
-    ARG X: If None, we'll use the SAMObject's latent space, otherwise the provided one.
-    ARG plot: Whether to plot the result or not.
-    ARG alpha: The parameter for the stick-breaking process. In theory, large alpha encourages more clusters, although in practice I haven't seen such behaviour.
-    ARG covariance_type: See DPGMM from scikit-learn.
-    ARG which_indices: If plotting, which indices to plot.
-    RETURN Y_: The cluster assignments for each component in the latent space. This is not (0,1,...,n_clusters), but instead it is
-               (0,1,...,n_components), so that switched off components will not appear in Y_.
-    """
-    from sklearn import mixture
-
-    if X is None:
-        X = SAMObject._get_latent()
-    # Fit a Dirichlet process mixture of Gaussians using five components
-    dpgmm = mixture.DPGMM(n_components=n_components, covariance_type=covariance_type, n_iter=5000,alpha=alpha)
-    dpgmm.fit(X)
-    Y_ = dpgmm.predict(X)
-
-    if plot:
-        from scipy import linalg
-        import matplotlib as mpl
-        import itertools
-
-        color_iter = colors = cm.rainbow(np.linspace(0, 1, 20))
-        myperm = np.random.permutation(color_iter.shape[0])
-        color_iter = color_iter[myperm, :]
-        marker_iter = itertools.cycle((',', '+', '.', 'o', '*','v','x','>')) 
-        splot = pb.subplot(1, 1, 1)
-
-        for i, (mean, covar, color,marker) in enumerate(zip(dpgmm.means_, dpgmm._get_covars(), color_iter,marker_iter)):
-            # as the method will not use every component it has access to
-            # unless it needs it, we shouldn't plot the redundant components.
-            # if not np.any(Y_ == i):
-            #    continue
-            pb.scatter(X[Y_ == i, which_indices[0]], X[Y_ == i, which_indices[1]], s=40, color=color,marker=marker)
-
-        pb.legend(np.unique(Y_))
-        pb.show()
-        pb.draw()
-        pb.show()
-    return Y_
-
-
-def latent_cluster(SAMObject, n_clusters=10, X=None, plot=True, which_indices=(0,1)):
-    """
-    Use Anglomerative clustering to cluster the latent space by having a given number of clusters.
-    ARG SAMObject: The SAMObject to operate on.
-    ARG n_clusters: The number of clusters to find.
-    ARG X: If None, we'll use the SAMObject's latent space, otherwise the provided one.
-    ARG plot: Whether to plot the result or not.
-    ARG which_indices: If plotting, which indices to plot.
-    RETURN Y_: The cluster assignments for each component in the latent space. 
-    """
-    from sklearn.cluster import AgglomerativeClustering
-
-    if X is None:
-        X = SAMObject._get_latent()
-
-    # Define the structure A of the data. Here a 10 nearest neighbors
-    from sklearn.neighbors import kneighbors_graph
-    connectivity = kneighbors_graph(X, n_neighbors=10, include_self=False)
-
-    # Compute clustering
-    print("Compute structured hierarchical clustering...")
-    ward = AgglomerativeClustering(n_clusters=n_clusters, connectivity=connectivity, linkage='ward',
-                                   compute_full_tree=True).fit(X)
-    # ward = AgglomerativeClustering(n_clusters=8,linkage='ward',compute_full_tree=True).fit(X)
-    Y_ = ward.labels_
-
-    if plot:
-        color_iter = colors = cm.rainbow(np.linspace(0, 1, 20))
-
-        # ---- a silly way to get maximal separation in colors for the n_cluster first elements...
-        # move to separate function
-        index_all = np.linspace(0, 19, 20).astype(int)
-        space = np.floor(color_iter.shape[0]/float(n_clusters)).astype(int)
-        index_first = index_all[::space][:n_clusters]
-        index_rest = np.array(list(set(index_all)-set(index_first)))
-        myperm = np.random.permutation(index_rest.shape[0])
-        index_rest = index_rest[myperm]
-        inds = np.hstack((index_first, index_rest))
-
-        color_iter = color_iter[inds,:]
-
-        marker_iter = itertools.cycle((',', '+', '.', 'o', '*','v','x','>')) 
-        splot = pb.subplot(1, 1, 1)
-
-        for i, (color, marker) in enumerate(zip(color_iter, marker_iter)):
-            # as the method will not use every component it has access to unless it needs it,
-            # we shouldn't plot the redundant components.
-            # if not np.any(Y_ == i):
-            #    continue
-            # ##### tmp
-            # cc = ['b','g','r']
-            # mm = ['<','^','>']
-            # pb.scatter(X[Y_ == i, which_indices[0]], X[Y_ == i, which_indices[1]], s=40, color=cc[i],marker=mm[i])
-            # ######
-            pb.scatter(X[Y_ == i, which_indices[0]], X[Y_ == i, which_indices[1]], s=40, color=color,marker=marker) #UNCOMMENT
-            if i >= n_clusters:
-                break
-
-        pb.legend(np.unique(Y_))
-        pb.show()
-        pb.draw()
-        pb.show()
-    return Y_
-
-
-def util_plot_cov_ellipse(pos, cov, volume=.5, ax=None, fc='none', ec=[0,0,0], a=1, lw=2, which_indices=(0,1)):
-    """
-    SEE: http://www.nhsilbert.net/source/2014/06/bivariate-normal-ellipse-plotting-in-python/
-    #
-    Plots an ellipse enclosing *volume* based on the specified covariance
-    matrix (*cov*) and location (*pos*). Additional keyword arguments are passed on to the 
-    ellipse patch artist.
-
-    Parameters
-    ----------
-        cov : The 2x2 covariance matrix to base the ellipse on
-        pos : The location of the center of the ellipse. Expects a 2-element
-            sequence of [x0, y0].
-        volume : The volume inside the ellipse; defaults to 0.5
-        ax : The axis that the ellipse will be plotted on. Defaults to the 
-            current axis.
-    """
-
-    import numpy as np
-    from scipy.stats import chi2
-    import matplotlib.pyplot as plt
-    from matplotlib.patches import Ellipse
-
-    if ax is None:
-        ax = plt.gca()
-
-    vals, vecs = np.linalg.eigh(cov)
-    order = vals.argsort()[::-1]
-    vals = vals[order]
-    vecs = vecs[:, order]
-    angle = np.degrees(np.arctan2(*vecs[:, 0][::-1]))
-
-    kwrg = {'facecolor': fc, 'edgecolor': ec, 'alpha': a, 'linewidth': lw}
-
-    # Width and height are "full" widths, not radius
-    width, height = 2 * np.sqrt(chi2.ppf(volume,2)) * np.sqrt(vals)
-    posOrder = [which_indices[0], which_indices[1]]
-    ellip = Ellipse(xy=pos[posOrder], width=width, height=height, angle=angle, **kwrg)
-    ax.add_artist(ellip)
-
-    plt.draw()
-    plt.show()
-    plt.draw()
-    plt.plot(pos[which_indices[0]], pos[which_indices[1]], 'k+', markersize=15, mew=2)
-
-
-#def util_plot_cov_ellipse(mean,covar,ax=None):
-#     from matplotlib.patches import Ellipse
-#     import matplotlib as mpl
-#     import matplotlib.pyplot as plt
-
-#     import numpy as np
-
-#     v, w = np.linalg.eigh(covar)
-#     #order = v.argsort()[::-1]
-#     #v=v[order]
-#     #w=w[:,order]
-#     u = w[0] / np.linalg.norm(w[0])
-
-#     if ax is None:
-#         ax = plt.gca()
-
-#     # Plot an ellipse to show the Gaussian component
-#     angle = np.arctan(u[1] / u[0])
-#     angle = 180 * angle / np.pi  # convert to degrees
-#     ell = mpl.patches.Ellipse(mean, v[0], v[1], 180 + angle, color=color)
-#     ell.set_clip_box(splot.bbox)
-#     ell.set_alpha(0.5)
-#     ax.add_artist(ell)
-#     plt.draw()
-#     plt.show()
-#     plt.draw()
-
-#     ---
-#     theta = np.degrees(np.arctan2(*vecs[:,0][::-1]))
-
-#     kwrg = {'facecolor':fc, 'edgecolor':ec, 'alpha':a, 'linewidth':lw}
-
-#     # Width and height are "full" widths, not radius
-#     width, height = 2 * np.sqrt(chi2.ppf(volume,2)) * np.sqrt(vals)
-#     ellip = Ellipse(xy=pos, width=width, height=height, angle=theta, **kwrg)
-
-
-def latent_cluster_centers(SAMObject, X=None, labels=None, center='gaussian', plot=True, which_indices=(0,1), randSeed=None, ax=None):
-    """
-    Find centers for the clusters identified in param. labels for the latent space. Centers can be a gaussian density (so, mean and covar.)
-    or (not implemented yet) mean and median, as controlled by the param. center.
-    """
-    from sklearn import mixture
-
-    assert(labels is not None)
-
-    if X is None:
-        X = SAMObject._get_latent()
-
-    cluster_labels = np.unique(labels)
-    K = len(cluster_labels)
-    Q = X.shape[1]
-
-    cntr = np.zeros((K, Q))*np.nan
-    if center == 'gaussian':
-        covars = np.zeros((K, Q, Q))*np.nan
-    else:
-        covars = None
-
-    for i in range(K):
-        if center == 'gaussian':
-            g = mixture.GMM(covariance_type='full', init_params='wmc', min_covar=0.001,
-                            n_components=1, n_init=1, n_iter=300, params='wmc',
-                            random_state=randSeed, thresh=None, tol=0.001, verbose=0)
-            g.fit(X[labels == cluster_labels[i], :])
-            cntr[i, :] = g.means_
-            covars[i] = g.covars_
-        elif center == 'median':
-            raise NotImplementedError("This is not implemented yet")
-        elif center == 'mean':
-            raise NotImplementedError("This is not implemented yet")
-        else:
-            print('Not known center type')
-            raise
-
-    if plot:
-        color_iter = colors = cm.rainbow(np.linspace(0, 1, 20))
-        myperm = np.random.permutation(color_iter.shape[0])
-        color_iter = color_iter[myperm, :]
-        marker_iter = itertools.cycle((',', '+', '.', 'o', '*', 'v', 'x', '>'))
-        splot = pb.subplot(1, 1, 1)
-
-        for i, (color, marker) in enumerate(zip(color_iter,marker_iter)):
-            pb.scatter(X[labels == cluster_labels[i], which_indices[0]],
-                       X[labels == cluster_labels[i], which_indices[1]], s=40, color=color, marker=marker)
-
-            if i == K-1:
-                break
-        if ax is None:
-            ax = pb.gca()
-        for i in range(K):
-            util_plot_cov_ellipse(cntr[i, :], covars[i], ax=ax, which_indices=which_indices)
-    return cntr, covars
-## @}

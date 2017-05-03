@@ -7,5 +7,6 @@
 *.pyc
 CMakeLists.txt.user
 src/modules/samRelated/SAM/.idea/
+/src/modules/SAM/SAM_Tests
 doxygen/doc
 doxygen/generated-from-xml
