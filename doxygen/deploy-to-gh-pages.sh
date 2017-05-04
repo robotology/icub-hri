@@ -10,7 +10,7 @@ git rebase master
 cd doxygen
 bash ./doc-compile.sh
 git add -u .
-git commit --amend --no-edit
+GIT_COMMITTER_DATE="`date`" git commit --amend --no-edit --date "`date`"
 git push --force-with-lease --quiet "https://${GITHUB_TOKEN}@$github.com/${GITHUB_REPO}.git" master:gh-pages > /dev/null 2>&1
 git checkout master
 
