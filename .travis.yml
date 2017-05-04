@@ -31,7 +31,7 @@ install:
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get --quiet --yes update; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get --quiet --yes install icub-common libeigen3-dev; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get --quiet --yes install doxygen xsltproc graphviz; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo pip install doxypypy; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo pip2 install doxypypy; fi
 
   # OS X dependencies
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew tap robotology/cask; fi
