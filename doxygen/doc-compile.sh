@@ -17,4 +17,4 @@ do
    xsltproc --output $DESTINATION/$doxyfile.dox $YARP_ROOT/scripts/yarp-module.xsl $i
 done
 
-doxygen ./generate.txt
+doxygen ./generate.txt > /dev/null 2>&1
