@@ -89,7 +89,7 @@ script:
 
 after_success:
   - cd ../
-  - if [ "$TRAVIS_OS_NAME" = "linux" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master"]; then bash ./doxygen/deploy-to-gh-pages.sh; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master" ]; then bash ./doxygen/deploy-to-gh-pages.sh; fi
 
 notifications:
   email:
