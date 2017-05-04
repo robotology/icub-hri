@@ -19,6 +19,11 @@ branches:
   - master
   - devel
 
+env:
+  global:
+    - GITHUB_REPO: "robotology/icub-client"
+    - secure: "HHGNmZJbLaw2OyT3KUnGdTimIjiVJjb/u1UiD2fiI69V1lXtFVACIP+AGmuE9nHvj2+RmHm3C/S/VX8F9lej96RcG4SSgGT+IT43b05WMgmyy9xE+ke4Z/jtSvb2LNU1K1CloXUOinmm1v+fHjINsluOgxFib0yUFJyRDRCCBHEGfeRw6NSDlFXwYdTvQEGcEcBssFUI5gYXzcYeK69+EXLcAVAAfCDATxY9z+EdyAhICr/ux5p7/iueUEEQ9E7WXQia/jUorr8C/huL8MXF9Hhh1ojvZ0nnR0awEKGMpbuNOU85j6ggXbmkl34GYrHVqowhGYHARQ0MT72HnfdBgB2EOif0C4V0KXZZr1hisKkFmgNoz1cRXfdoVki7Lj/HARB+uFgjrRGl43DXc+uCrm9ZwGALgVSjeZcnKKKI3hYQexPALmzH5LHM+1UPt0f1yFabDsr0CvU8tvv9wooULHNKBeWWVkgxdP8e75DvpcyR8JUhcTlMQ5xwcbzGktwyZnkpqB4RemQGCjw31syupL22x9L3LjPHETmz4xEz3/AMxhkwr7NlCqUuqkMPlN1f5c8zN0TTgfJZsmXm0EmC5tw8deLTQu4nBuJf6mHTtvJkdkZ8meCn1Fj19R1/hWETQwlkhyU3n93GPtThRhonMG3p/p2FU3uVlcW2Dd3CBx4="  # <-- from travis-encrypt
+
 install:
   # Ubuntu dependencies
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo sh -c 'echo "deb http://www.icub.org/ubuntu trusty contrib/science" > /etc/apt/sources.list.d/icub.list'; fi
@@ -41,6 +46,7 @@ install:
   - pwd
   - git clone https://github.com/robotology/yarp.git
   - cd yarp
+  - export YARP_ROOT=$(pwd)
   - mkdir build
   - cd build
   - cmake -DCMAKE_BUILD_TYPE=Release -DCREATE_LIB_MATH=TRUE ..
@@ -80,6 +86,10 @@ before_script:
 
 script:
   - make
+
+after_success:
+  - cd ../
+  - if [ "$TRAVIS_OS_NAME" = "linux" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master"]; then bash ./doxygen/deploy-to-gh-pages.sh; fi
 
 notifications:
   email:

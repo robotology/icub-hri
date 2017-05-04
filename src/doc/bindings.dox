@@ -2,7 +2,7 @@
 *
 * \defgroup icubclient_bindings Bindings
 *
-* Instructions on how to compile the Python bindings for the iCub-Client.
+* Instructions for compiling the Python bindings for the iCub-Client.
 * 
 * First, follow the instructions to compile the <a href="http://www.yarp.it/yarp_swig.html">YARP bindings for Python</a> (see sections "Yarp for Python" and "Compiling YARP language bindings" and make sure they work correctly. For better compatibility, set the `YARP_USE_PYTHON_VERSION` variable, and use SWIG version 3 or newer (SWIG version 2 will not work for the iCub-Client due to the C++11 dependency).
 * 
