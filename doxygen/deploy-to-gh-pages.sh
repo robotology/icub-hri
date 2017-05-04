@@ -10,6 +10,6 @@ cd doxygen
 bash ./doc-compile.sh
 git add -f doc
 git commit --message "Travis build: $TRAVIS_BUILD_NUMBER provided doxygen documentation"
-git remote add origin-pages https://${GITHUB_TOKEN}@$github.com/${GITHUB_REPO}.git > /dev/null 2>&1
+git remote add origin-pages https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git > /dev/null 2>&1
 git push --force --quiet --set-upstream origin-pages gh-pages > /dev/null 2>&1
 
