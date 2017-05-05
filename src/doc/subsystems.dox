@@ -1,6 +1,6 @@
 /**
 *
-* \defgroup icubclient_subsytems Create a new Subsystem
+* \defgroup icubclient_subsystems Create a new Subsystem
 *
 A new subsystem can be created as follows:
 
