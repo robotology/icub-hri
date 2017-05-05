@@ -1,6 +1,6 @@
 /**
 *
-* \defgroup icubclient_bindings Bindings
+* \defgroup icubclient_bindings Compile and use Python bindings
 *
 * Instructions for compiling the Python bindings for the iCub-Client.
 * 

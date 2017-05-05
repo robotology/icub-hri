@@ -1,0 +1,8 @@
+/**
+*
+* \defgroup icubclient_subsytems Create a new Subsystem
+*
+A new subsystem can be created as follows:
+
+* (This page can be edited at src/doc/subsystems.dox)
+*/
