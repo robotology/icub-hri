@@ -25,7 +25,6 @@ matplotlib.use('TkAgg')
 #========================
 from . import SAM_Core
 from . import SAM_Drivers
-from . import SAM_Tests
 ## @}
 
 # plt.ion()

@@ -1,0 +1,27 @@
+#!/usr/bin/expect -f
+
+set user [lindex $argv 0];
+set cmd [lindex $argv 1];
+set extra [lindex $argv 2];
+
+# Get a Bash shell
+spawn -noecho bash
+
+# Wait for a prompt
+expect "$ "
+
+if {[string compare $user  "daniel-beast"]  != 0} {
+	spawn ssh $user
+	expect "$ "
+}
+
+if {[string compare $extra  "execute"]  == 0} {
+	spawn $cmd
+} else {
+	send $cmd
+}
+
+# Hand over control to the user
+interact
+
+exit
