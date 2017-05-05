@@ -90,6 +90,7 @@ script:
 after_success:
   - cd ../
   - if [ "$TRAVIS_OS_NAME" = "linux" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master" -a "$CXX" = "g++" ]; then bash ./doxygen/deploy-to-gh-pages.sh; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" -a "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master" -a "$CXX" = "g++" ]; then python2 -m doxypypy.doxypypy -a -c src/modules/SAM/SAM_Core/SAMCore.py; fi
 
 notifications:
   email:
