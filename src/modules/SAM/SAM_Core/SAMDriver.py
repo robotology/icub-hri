@@ -26,7 +26,7 @@ import logging
 ##\brief@{
 ## Drivers folder containing driver classes that inherit from SAMDriver to implement custom functionality
 ## @{
-## @ingroup icubclient_modules
+## @ingroup icubclient_SAM_Core
 #\details@{
 
 class SAMDriver:
