@@ -10,7 +10,6 @@ class Tagging: public Behavior
 {
 private:
     void run(const yarp::os::Bottle &args);
-    yarp::os::Bottle bKS1, bKS2;
     
 public:
     Tagging(yarp::os::Mutex* mut, yarp::os::ResourceFinder &rf, std::string behaviorName): Behavior(mut, rf, behaviorName) {

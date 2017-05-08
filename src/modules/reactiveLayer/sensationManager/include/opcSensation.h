@@ -31,7 +31,7 @@ private:
 public:
 
     Bottle u_entities, k_entities, up_entities, kp_entities, p_entities, o_positions;
-    void configure(yarp::os::ResourceFinder &rf);
+    void configure();
     void publish();
     int get_property(string name, string property);
     

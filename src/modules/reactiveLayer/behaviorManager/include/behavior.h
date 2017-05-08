@@ -49,7 +49,7 @@ public:
             behavior_start_stop_port.write();
 
             run(args);
-            
+
             msg = behavior_start_stop_port.prepare();
             msg.clear();
             msg.addString("stop");

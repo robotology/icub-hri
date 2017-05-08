@@ -1,7 +1,7 @@
 #include <algorithm>    // std::random_shuffle
 #include "opcSensation.h"
 
-void OpcSensation::configure(yarp::os::ResourceFinder &rf)
+void OpcSensation::configure()
 {
     bool isRFVerbose = false;
     iCub = new ICubClient("opcSensation","sensation","client.ini",isRFVerbose);

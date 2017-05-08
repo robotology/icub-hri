@@ -7,12 +7,6 @@ using namespace icubclient;
 void Tagging::configure() {
     external_port_name = "/proactiveTagging/rpc";
     from_sensation_port_name = "/opcSensation/unknown_entities:o";
-
-    Bottle bFollowingOrder = rf.findGroup("followingOrder");
-    bKS1.clear();
-    bKS2.clear();
-    bKS1 = *bFollowingOrder.find("ks1").asList();
-    bKS2 = *bFollowingOrder.find("ks2").asList();
 }
 
 void Tagging::run(const Bottle &args) {
@@ -52,7 +46,7 @@ void Tagging::run(const Bottle &args) {
             rpc_out_port.write(cmd,rply);
             yDebug() << rply.toString();
         } else {
-            yDebug()<<"ERRORRRR!!!!! Input not valid!!";
+            yError()<<"[Tagging::run]! Input not valid!!";
         }
     } else {
         Bottle *sensation = sensation_port_in.read();
@@ -73,14 +67,14 @@ void Tagging::run(const Bottle &args) {
         target=sensation->get(id).asList()->get(1).asString();
         yDebug() << "Object selected: " << target << "Type: "<<type;
         //If there is an unknown object (to see with agents and objects), add it to the rpc_command bottle, and return true
-        
+
         cmd.clear();
         cmd.addString("exploreUnknownEntity");
         cmd.addString(type);
         cmd.addString(target);
         yInfo() << "Proactively tagging:" << cmd.toString();
     }
-    
+
     rpc_out_port.write(cmd, rply);
 
     if(type=="bodypart" && target.find("unknown_self") == 0) {

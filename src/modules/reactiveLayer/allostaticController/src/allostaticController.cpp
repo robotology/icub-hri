@@ -156,7 +156,6 @@ void AllostaticController::configureAllostatic(yarp::os::ResourceFinder &rf)
     drivesList = *grpAllostatic.find("drives").asList();
     Bottle cmd;
 
-    priority_sum = 0.;
     double priority;
     for (int d = 0; d<drivesList.size(); d++)
     {
@@ -215,7 +214,6 @@ void AllostaticController::configureAllostatic(yarp::os::ResourceFinder &rf)
 
         // set drive priorities. Default to 1.
         priority = grpAllostatic.check((driveName + "-priority"), Value(1.)).asDouble();
-        priority_sum += priority;
         drivePriorities.push_back(priority);
 
         //Under effects

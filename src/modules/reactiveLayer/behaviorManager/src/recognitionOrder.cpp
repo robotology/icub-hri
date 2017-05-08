@@ -17,7 +17,7 @@ void RecognitionOrder::configure() {
     manual = true;
 }
 
-void RecognitionOrder::run(const Bottle &args) {
+void RecognitionOrder::run(const Bottle &/*args*/) {
     yInfo() << "recognitionOrder::run";
 
     if (!Network::isConnected(port_to_homeo_name,homeoPort)){

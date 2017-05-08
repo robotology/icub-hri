@@ -33,10 +33,10 @@ bool SensationManager::configure(yarp::os::ResourceFinder &rf)
             } else if (sensation_name == "test") {
                 sensations.push_back(new TestSensation());
             } else{
-                yDebug() << "Sensation " + sensation_name + " not implemented";
+                yError() << "Sensation " + sensation_name + " not implemented";
                 return false;
             }
-            sensations.back()->configure(rf);
+            sensations.back()->configure();
         }
     }else{
         yError()<<"Didn't find any sensation. Please revise your configuration files...";

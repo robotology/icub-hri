@@ -1,7 +1,7 @@
 #include <algorithm>    // std::random_shuffle
 #include "test.h"
 
-void TestSensation::configure(yarp::os::ResourceFinder &rf)
+void TestSensation::configure()
 {
     on = false;
     in.open("/Sensation/test/in");
