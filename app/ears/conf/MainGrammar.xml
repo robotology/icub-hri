@@ -6,7 +6,9 @@
     <ID NAME="predicateBodypart"  VAL="4"/>
     <ID NAME="bodypart" VAL="5"/>
   </DEFINE>
-
+  <RULE NAME="SENTENCERECOGNISE"  TOPLEVEL="ACTIVE" EXPORT="1">
+     <P>How do you call this action?</P>
+  </RULE>
   <RULE NAME="SENTENCEDONE"  TOPLEVEL="ACTIVE" EXPORT="1">
      <P>Thank you for the nice demonstration. It is now time to sleep.</P>
   </RULE>

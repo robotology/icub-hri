@@ -373,29 +373,9 @@ bool AllostaticController::updateAllostatic()
         yInfo() << "Drive " + activeDrive.name + " out of CZ." ;
     }
 
-    // Create relation for the drive
-
-    /*iCub->opc->addOrRetrieveEntity<Agent>("icub");
-    iCub->opc->addOrRetrieveEntity<Action>("want");
-    iCub->opc->addOrRetrieveEntity<Action>(activeDrive.name);
-
-    Relation Rel;
-    Rel.m_subject = "icub";
-    Rel.m_verb = "want";
-    Rel.m_object = activeDrive.name;*/
-
     if (allostaticDrives[activeDrive.name].active) {
         yInfo() << "Trigerring " + activeDrive.name;
-
-        // commiting drive as relation
-        /*iCub->opc->addRelation(Rel);
-        iCub->opc->commit();*/
-
         allostaticDrives[activeDrive.name].triggerBehavior(activeDrive.level);
-
-        // remove the relation once the drive is fulfilled
-        /*iCub->opc->removeRelation(Rel);
-        iCub->opc->commit();*/
     }
     else {
         yInfo() << "Drive " + activeDrive.name + " is not active";
