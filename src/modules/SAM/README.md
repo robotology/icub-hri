@@ -5,38 +5,36 @@ email:   d.camilleri@sheffield.ac.uk
 
 A Synthetic Autobiographical Memory for the iCub robot. This module contains the core, which implements the high-level functionality, and the drivers which act as middleware between the perceptual system and the core.
 
-Pre-trained Action Recognition model and data can be found at the following link:
-https://drive.google.com/open?id=0B6fkkRLTYjNLbjFFSEZtUmtHNk0
+Pre-trained Action Recognition model and data can be downloaded [here](https://drive.google.com/open?id=0B6fkkRLTYjNLbjFFSEZtUmtHNk0).
 
 ## Features
 
-`samSupervisor` can manage multiple models with great flexibility in training and interacting with models. 
+* `samSupervisor` can manage multiple models with great flexibility in training and interacting with models. 
 
-`trainSAMModel` allows for the training of multiple, single or temporal models by simply changing the value in the config.ini of the particular model and automates testing of the different types of models.
+* `trainSAMModel` allows for the training of multiple, single or temporal models by simply changing the value in the config.ini of the particular model and automates testing of the different types of models.
 
-`interactionSAMModel` also allows for great flexibility in the method of data collection. 3 Methods are currently supported.
-
-1. `continuous` : 	Data is continuously classified by the driver with a buffer of classifications being kept. Each time a classification is queried, the classification buffer decreases in size until it reaches 0 and returns None
-2. `buffered` :		In this case, a buffer of the latest n data points are kept and when the classification command is sent, these data points are sent to the driver for classification which is returned immediately. 
-3. `future_buffered` : 	In this case, when a classification request is sent, the future n data points are collected, classified and a classification returned.
+* `interactionSAMModel` also allows for great flexibility in the method of data collection. 3 Methods are currently supported.
+    1. `continuous` : 	Data is continuously classified by the driver with a buffer of classifications being kept. Each time a classification is queried, the classification buffer decreases in size until it reaches 0 and returns None
+    2. `buffered` :		In this case, a buffer of the latest n data points are kept and when the classification command is sent, these data points are sent to the driver for classification which is returned immediately. 
+    3. `future_buffered` : 	In this case, when a classification request is sent, the future n data points are collected, classified and a classification returned.
 
 Setting a model to any one of these data collection methods and also specifying the buffer lengths is done within `sensory_level_config.ini`
 
 ## PreRequisites
 
 1. GPy dependency from https://github.com/SheffieldML/GPy. The best way to include this is:
-  1. clone the GPy repository https://github.com/SheffieldML/GPy.git
-  2. switch to branch "devel"
-  3. Include the directory where you cloned GPy in your PYTHONPATH.
-  4. Move to the GPy directory and run: "python setup.py install" (try "python setup.py build_ext --inplace" if you want to do the installation in the same directory).
-  
+    1. clone the GPy repository https://github.com/SheffieldML/GPy.git
+    2. switch to branch "devel"
+    3. Include the directory where you cloned GPy in your PYTHONPATH.
+    4. Move to the GPy directory and run: "python setup.py install" (try "python setup.py build_ext --inplace" if you want to do the installation in the same directory).
+
 2. GPyOpt dependency from https://github.com/SheffieldML/GPy. The best way to include this is:
-  1. sudo apt-get install python-pip
-  2. pip install gpyopt
-  If this does not work:
-  1. clone the GPyOpt repository https://github.com/SheffieldML/GPy.git
-  2. Include the directory where you cloned GPyOpt in your PYTHONPATH.
-  3. Move to the GPyOpt directory and run: "python setup.py develop"
+    1. sudo apt-get install python-pip
+    2. pip install gpyopt
+    If this does not work:
+    1. clone the GPyOpt repository https://github.com/SheffieldML/GPy.git
+    2. Include the directory where you cloned GPyOpt in your PYTHONPATH.
+    3. Move to the GPyOpt directory and run: "python setup.py develop"
 
 ## How to use:
 
@@ -89,9 +87,9 @@ Where `<model1Name>` and `<model2Name>` will be modelled as a single model while
 6. Finally, modify `default.ini` in **samSupervisor** context to point to your `<FolderName>` and comment out models within `sensory_level_conf.ini` also found in the **samSupervisor** context which you do not require to run automatically when launching samSupervisor 
 
 7. `default.ini` has 3 options. 
-  1. persisitence: which defines if windows opened should remain open or close auomatically upo termination. Set to true this is useful to debug training or interaction algorithms.
-  2. windowed:     which defines if training and interaction functions should spawn a window or not
-  3. verbose:      defines the level of verbosity of samSupervisor
+    1. persistence: which defines if windows opened should remain open or close auomatically upon termination. Set to true this is useful to debug training or interaction algorithms.
+    2. windowed:     which defines if training and interaction functions should spawn a window or not
+    3. verbose:      defines the level of verbosity of samSupervisor
 
 8. `sensory_level_conf.ini` specifies which models should be loaded as sections, the names of their respective input/output ports as well as the callsigns which will trigger recall or recognition of that particular model
 
