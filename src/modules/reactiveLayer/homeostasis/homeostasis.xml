@@ -5,25 +5,65 @@
 
    <name>homeostasis</name>
    <doxygen-group>icubclient_modules</doxygen-group>
-   <description>Module integrating an interface for dealing with homeostatic drives</description>
+   <description>Module integrating an interface for dealing with homeostatic needs</description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>
    
-   <description-long>
-     - contains the core drive/needs engine.
-     - Defines the class drive and the methods for generating and loading them from files
+   <authors>
+       <author email="jordiysard.puigbo@upf.edu"> Jordi-Ysard Puigbò </author>
+       <author email="clement.moulin-frier@upf.edu"> Clément Moulin-Frier </author>
+   </authors>
+
+   <description-long> Module that internally handles the dynamics of the defined needs. Needs are internal variables linked to external measurements (or sensations) and associated drives (e.g. the drive to ask satisfies the need of acquiring new knowledge). Needs are tipically defined by some dynamics (i.e. a decay or a direct dependence to a variable), their internal value (i.e. current state of the need) and an upper and lower boundaries, limiting a zone of confort where an action is not required. 
+    This module is strongly dependent on the allostaticController and sensationsManager. An example of how to create a drive can be found in app/reactiveLayer/homeostasis/conf/example.ini
    </description-long>
 
    <arguments>
+    <param default="homeostasis" desc="name of the module"> name </param>
+    <param default="false" desc="change degree of verbosity of the module"> verbose </param>
+    <param default="0.1" desc="change the update rate of this module"> period </param>
    </arguments>
-
-   <authors>
-       <author email="jordiysard@gmail.com"> Jordi-Ysard Puigbo </author>
-   </authors>
 
    <data>
       <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/homeostasis/rpc</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Response port. Supported commands:
+                        - help
+                        - ['par'] ['drive'] ['val'/'min'/'max'/'dec'] [value]   : Assigns a value to a specific parameter
+                        - ['delta'] ['drive'] ['val'/'min'/'max'/'dec'] [value] : Adds a value to a specific parameter
+                        - ['ask'] ['drive'] ['val'/'min'/'max'/'dec'] [value]   : Returns a value to a specific parameter
+                        - ['add'] ['conf'] [drive Bottle]                       : Adds a drive to the manager as a drive directly read from conf-file
+                        - ['add'] ['botl'] [drive Bottle]                       : Adds a drive to the manager as a Bottle of values of shape
+                        - ['add'] ['new'] [drive name]                          : Adds a default drive to the manager
+                        - ['rm'] [drive name]                                   : removes a drive from the manager
+                        - ['sleep'] [drive name] [time]                         : prevent drive update for a certain time (in seconds)
+                        - [freeze'/'unfreeze'] [drive name]                         : prevent / allow drive to update 
+                        - ['sleep'] ['all'] [time]                              : prevent all drive updates for a certain time (in seconds)
+                        - [freeze'/'unfreeze'] ['all'] [time]                              : prevent / allow all drive updates
+                        - ['names']                                             : returns an ordered list of the drives in the manager
+                        - ['verbose'] [true/false]                              : change verbosity
+        </description>
       </input>
+      <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/homeostasis/fromSensations:i</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Communication port to sensations to adapt needs accordingly.</description>
+      </input>
+      <output>
+        <type>Bottle</type>
+        <port carrier="tcp">/homeostasis/drive_name/min:o</port>
+        <description>Communication port to allostaticController.</description>
+      </output>
+      <output>
+        <type>Bottle</type>
+        <port carrier="tcp">/homeostasis/drive_name/max:o</port>
+        <description>Communication port to allostaticController.</description>
+      </output>
    </data>
 
 </module>
