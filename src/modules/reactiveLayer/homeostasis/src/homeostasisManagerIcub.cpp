@@ -46,7 +46,6 @@ bool HomeostaticModule::addNewDrive(string driveName)
 int HomeostaticModule::openPorts(string driveName)
 {
     //Create Ports
-    string portName;
     string pn;
     outputm_ports.push_back(new BufferedPort<Bottle>());
     outputM_ports.push_back(new BufferedPort<Bottle>());
@@ -55,7 +54,7 @@ int HomeostaticModule::openPorts(string driveName)
     {
         yInfo() << getName() << ": Unable to open port " << "/"<<moduleName<<"/fromSensations:i" ;
     }
-
+    string portName = "/" + moduleName + "/" + driveName;
 
     pn = portName + "/min:o";
     yInfo() << "Configuring port " << " : "<< pn << " ..." ;
@@ -71,7 +70,7 @@ int HomeostaticModule::openPorts(string driveName)
         yInfo() << getName() << ": Unable to open port " << pn ;
     }
 
-    return 42;
+    return true;
 }
 
 bool HomeostaticModule::configure(yarp::os::ResourceFinder &rf)
