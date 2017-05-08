@@ -18,9 +18,6 @@ void OpcSensation::configure()
     known_entities_port.open( "/opcSensation/known_entities:o");
     is_touched_port.open("/opcSensation/is_touched:o"); //needed?
 
-    u_entities.clear();
-    k_entities.clear();
-
     yInfo() << "Configuration done.";
 
 }
@@ -59,18 +56,6 @@ void OpcSensation::publish()
     has_ag.clear();
     has_ag.addInt(int(res.get(4).asInt()));
     opc_has_agent_port.write();
-    
-    handleTouch();       
- 
-}
-
-void OpcSensation::handleTouch()
-{
-    list<Relation> tactileRelations = iCub->opc->getRelationsMatching("icub","is","any","touchLocation");
-    Bottle& out = is_touched_port.prepare();
-    out.clear();
-    out.addInt(int(tactileRelations.size() > 0));  // is touched
-    is_touched_port.write();
 }
 
 void OpcSensation::addToEntityList(Bottle& list, string type, string name) {
