@@ -129,7 +129,6 @@ bool ears::respond(const Bottle& command, Bottle& reply) {
     }
     else if (command.get(0).asString() == "listen")
     {
-        // yInfo() <<
         if (command.size() == 2)
         {
             if (command.get(1).asString() == "on")
@@ -194,7 +193,6 @@ bool ears::updateModule() {
         if(bAnswer.get(1).asList()->get(1).isList()) {
             bSemantic = *(*bAnswer.get(1).asList()).get(1).asList();
         }
-        //yDebug() << bSemantic.toString();
         string sObject, sAction;
         string sQuestionKind = bAnswer.get(1).asList()->get(0).toString();
 
@@ -218,7 +216,6 @@ bool ears::updateModule() {
                 }
             sObjectType = "object";
             sObject = bSemantic.check("object", Value("none")).asString();
-            //sCommand = "followingOrder";
         } else if(sQuestionKind == "SENTENCEBODYPART") {
             sAction = bSemantic.check("predicateBodypart", Value("none")).asString();
             sObject = bSemantic.check("bodypart", Value("none")).asString();
