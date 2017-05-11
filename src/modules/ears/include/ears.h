@@ -11,12 +11,9 @@ protected:
     Port        rpc;
     Port        portToBehavior;
     Port        portToSpeechRecognizer;
-    BufferedPort<Bottle>        portTarget;
-    bool onPlannerMode;
-    Mutex m;
-    bool bShouldListen;
-
-    std::string      MainGrammar;
+    Mutex       m;
+    bool        bShouldListen;
+    std::string MainGrammar;
 
 public:
     bool configure(yarp::os::ResourceFinder &rf);
@@ -31,13 +28,6 @@ public:
     }
 
     bool    updateModule();
-    bool    populateSpecific1(Bottle bInput);
-
-    bool    addUnknownEntity(Bottle bInput);
-    bool    setSaliencyEntity(Bottle bInput);
-
-    bool    populateABM(Bottle bInput);
-
 
     //RPC & scenarios
     bool respond(const Bottle& cmd, Bottle& reply);

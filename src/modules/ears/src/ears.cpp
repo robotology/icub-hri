@@ -6,8 +6,6 @@ bool ears::configure(yarp::os::ResourceFinder &rf)
 {
     string moduleName = rf.check("name", Value("ears")).asString().c_str();
     setName(moduleName.c_str());
-    onPlannerMode = rf.check("plans",Value("false")).asBool();
-    yDebug()<< "PLANS ENABLED: " << onPlannerMode;
 
     yInfo() << moduleName << " : finding configuration files...";
     period = rf.check("period", Value(0.1)).asDouble();
@@ -22,15 +20,12 @@ bool ears::configure(yarp::os::ResourceFinder &rf)
         Time::delay(1.0);
     }
 
-    portTarget.open("/" + moduleName + "/target:o");
     portToSpeechRecognizer.open("/" + moduleName + "/speech:o");
 
     MainGrammar = rf.findFileByName(rf.check("MainGrammar", Value("MainGrammar.xml")).toString());
     bShouldListen = true;
 
-
     portToBehavior.open("/" + moduleName + "/behavior:o");
-
 
     rpc.open(("/" + moduleName + "/rpc").c_str());
     attach(rpc);
@@ -59,7 +54,6 @@ bool ears::interruptModule() {
     yDebug() << "interrupted speech recognizer";
     portToSpeechRecognizer.interrupt();
     portToBehavior.interrupt();
-    portTarget.interrupt();
     rpc.interrupt();
 
     yDebug() << "interrupt done";
@@ -80,13 +74,8 @@ bool ears::close() {
     portToSpeechRecognizer.interrupt();
     portToSpeechRecognizer.close();
 
-    portTarget.interrupt();
-    portTarget.close();
-
-    if (!onPlannerMode) {
-        portToBehavior.interrupt();
-        portToBehavior.close();
-    }
+    portToBehavior.interrupt();
+    portToBehavior.close();
 
     yDebug() << "closing rpc port";
     rpc.interrupt();
@@ -107,25 +96,6 @@ bool ears::respond(const Bottle& command, Bottle& reply) {
     if (command.get(0).asString() == "quit") {
         reply.addString("quitting");
         return false;
-    }
-    else if (command.get(0).asString() == "dummy")
-    {
-        // sends a test bottle to planner
-        Bottle &bToTarget = portTarget.prepare();
-        bToTarget.clear();
-        Bottle bAux;
-        bAux.clear();
-        Bottle bAux2;
-        bAux2.clear();
-        bToTarget.addString("new");
-        bAux.addString("dummy2");
-        bAux.addInt(1);
-        bAux2.addString("sObjectType");
-        bAux2.addString("sObject");
-        bAux.addList()=bAux2;
-        bToTarget.addList()=bAux;
-        portTarget.write();
-        yDebug() << "Sending " + bToTarget.toString();
     }
     else if (command.get(0).asString() == "listen")
     {
