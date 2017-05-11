@@ -99,8 +99,8 @@ bool ears::close() {
 
 bool ears::respond(const Bottle& command, Bottle& reply) {
     string helpMessage = string(getName().c_str()) +
-        " commands are: \n" +
-        "quit \n";
+            " commands are: \n" +
+            "quit \n";
 
     reply.clear();
 
@@ -171,8 +171,8 @@ bool ears::updateModule() {
         LockGuard lg(m);
         yDebug() << "bListen";
         Bottle bRecognized, //received FROM speech recog with transfer information (1/0 (bAnswer))
-        bAnswer, //response from speech recog without transfer information, including raw sentence
-        bSemantic; // semantic information of the content of the recognition
+                bAnswer, //response from speech recog without transfer information, including raw sentence
+                bSemantic; // semantic information of the content of the recognition
         bRecognized = iCub->getRecogClient()->recogFromGrammarLoop(grammarToString(MainGrammar), 1, true, true);
 
         if (bRecognized.get(0).asInt() == 0)
@@ -199,21 +199,18 @@ bool ears::updateModule() {
         string sObjectType, sCommand;
         if(sQuestionKind == "SENTENCEOBJECT") {
             sAction = bSemantic.check("predicateObject", Value("none")).asString();
-            if (sAction == "please take")
-                {
-                    sAction = "back";
-                    sCommand = "moveObject";
-                }
-            else if (sAction == "give me")
-                {
-                    sAction = "front";
-                    sCommand = "moveObject";
-                }
-            else if (sAction == "point")
-                {
-                    sAction = "pointing";
-                    sCommand = "pointing";
-                }
+            if (sAction == "please take") {
+                sAction = "back";
+                sCommand = "moveObject";
+            }
+            else if (sAction == "give me") {
+                sAction = "front";
+                sCommand = "moveObject";
+            }
+            else if (sAction == "point") {
+                sAction = "pointing";
+                sCommand = "pointing";
+            }
             sObjectType = "object";
             sObject = bSemantic.check("object", Value("none")).asString();
         } else if(sQuestionKind == "SENTENCEBODYPART") {
@@ -231,31 +228,26 @@ bool ears::updateModule() {
             return true;
         }
 
-            //freeze
-
-            Bottle bAction,bArgs;
-            if (sObject!="") {
-                bAction.addString("tagging");
-                bArgs.addString(sObject);
-                bArgs.addString(sAction);
-                bArgs.addString(sObjectType);
-                bAction.addList()=bArgs;
-                portToBehavior.write(bAction);
-                yDebug() << "Sending " + bAction.toString();
-            }
-            //wait for BM
-
-            bAction.clear();
-            bAction.addString(sCommand);
+        Bottle bAction,bArgs;
+        // object might not be known yet, tag it first
+        if (sObject!="") {
+            bAction.addString("tagging");
             bArgs.addString(sObject);
             bArgs.addString(sAction);
             bArgs.addString(sObjectType);
             bAction.addList()=bArgs;
             portToBehavior.write(bAction);
             yDebug() << "Sending " + bAction.toString();
+        }
 
-            //wait for bm
-            //unfreeze
+        bAction.clear();
+        bAction.addString(sCommand);
+        bArgs.addString(sObject);
+        bArgs.addString(sAction);
+        bArgs.addString(sObjectType);
+        bAction.addList()=bArgs;
+        portToBehavior.write(bAction);
+        yDebug() << "Sending " + bAction.toString();
     } else {
         yDebug() << "Not bShouldListen";
         yarp::os::Time::delay(0.5);
