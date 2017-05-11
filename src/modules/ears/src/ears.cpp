@@ -213,11 +213,6 @@ bool ears::updateModule() {
             }
             sObjectType = "object";
             sObject = bSemantic.check("object", Value("none")).asString();
-        } else if(sQuestionKind == "SENTENCEBODYPART") {
-            sAction = bSemantic.check("predicateBodypart", Value("none")).asString();
-            sObject = bSemantic.check("bodypart", Value("none")).asString();
-            sObjectType = "bodypart";
-            sCommand = "followingOrder";
         } else if (sQuestionKind == "SENTENCERECOGNISE") {
             sCommand = "recognitionOrder";
             sAction = "recognitionOrder";

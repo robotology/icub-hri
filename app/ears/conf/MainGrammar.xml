@@ -3,8 +3,6 @@
   <DEFINE>
     <ID NAME="predicateObject"  VAL="2"/>
     <ID NAME="object" VAL="3"/>
-    <ID NAME="predicateBodypart"  VAL="4"/>
-    <ID NAME="bodypart" VAL="5"/>
   </DEFINE>
   <RULE NAME="SENTENCERECOGNISE"  TOPLEVEL="ACTIVE" EXPORT="1">
      <P>How do you call this action?</P>
