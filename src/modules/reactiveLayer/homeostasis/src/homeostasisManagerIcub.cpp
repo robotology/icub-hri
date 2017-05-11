@@ -11,10 +11,12 @@ bool HomeostaticModule::addNewDrive(string driveName, yarp::os::Bottle& grpHomeo
     drv->setDecay(grpHomeostatic.check((driveName + "-decay"), Value(drv->decay)).asDouble());
     drv->setValue((drv->homeostasisMax + drv->homeostasisMin) / 2.);
     drv->setGradient(grpHomeostatic.check((driveName + "-gradient"), Value(drv->gradient)).asInt());
+    drv->setKey(grpHomeostatic.check((driveName + "-key"), Value(drv->key)).asString());
     
     manager->addDrive(drv);
    
     openPorts(driveName);
+    yInfo() << "new drive created successfully!";
 
     return true;
 }
@@ -30,32 +32,30 @@ bool HomeostaticModule::addNewDrive(string driveName)
     drv->setDecay(drv->decay);
     drv->setValue((drv->homeostasisMax + drv->homeostasisMin) / 2.);
     drv->setGradient(false);
+    drv->setKey(drv->key);
     
     manager->addDrive(drv);
     
-    yDebug() << "default drive added. Opening ports...";//;
+    yDebug() << "default drive added. Opening ports...";
     openPorts(driveName);
-    yInfo() << "new drive created successfuly!";//;
-
+    yInfo() << "new drive created successfully!";
+    
     return true;
 }
 
 int HomeostaticModule::openPorts(string driveName)
 {
     //Create Ports
-    string portName = "/" + moduleName + "/" + driveName;
-    
-    string pn = portName + ":i";
-    input_ports.push_back(new BufferedPort<Bottle>());
+    string pn;
     outputm_ports.push_back(new BufferedPort<Bottle>());
     outputM_ports.push_back(new BufferedPort<Bottle>());
-
-    yInfo() << "Configuring port " << " : " << pn << " ..." ;
-    if (!input_ports.back()->open(pn)) 
-    {
-        yInfo() << getName() << ": Unable to open port " << pn ;
-    }
     
+    if (!input_port.open("/"+moduleName+"/fromSensations:i")) 
+    {
+        yInfo() << getName() << ": Unable to open port " << "/"<<moduleName<<"/fromSensations:i" ;
+    }
+    string portName = "/" + moduleName + "/" + driveName;
+
     pn = portName + "/min:o";
     yInfo() << "Configuring port " << " : "<< pn << " ..." ;
     if (!outputm_ports.back()->open(pn)) 
@@ -70,7 +70,7 @@ int HomeostaticModule::openPorts(string driveName)
         yInfo() << getName() << ": Unable to open port " << pn ;
     }
 
-    return 42;
+    return true;
 }
 
 bool HomeostaticModule::configure(yarp::os::ResourceFinder &rf)
@@ -100,11 +100,6 @@ bool HomeostaticModule::configure(yarp::os::ResourceFinder &rf)
             
         }
     }
-    stress_k = rf.check("stress-k",Value("15.")).asDouble();
-    stress_th = rf.check("stress-th",Value("0.55")).asDouble();
-    //stress=0;
-
-    stressPort.open("/"+moduleName+"/stress:o");
 
     yInfo() << "Opening RPC...";
      
@@ -209,15 +204,15 @@ bool HomeostaticModule::respond(const Bottle& cmd, Bottle& reply)
                 {
                     manager->drives[d]->deltaValue(cmd.get(3).asDouble());
                 }
-                else if (cmd.get(2)=="min")
+                else if (cmd.get(2).asString()=="min")
                 {
                     manager->drives[d]->deltaHomeostasisMin(cmd.get(3).asDouble());
                 }
-                else if (cmd.get(2)=="max")
+                else if (cmd.get(2).asString()=="max")
                 {
                     manager->drives[d]->deltaHomeostasisMax(cmd.get(3).asDouble());
                 }
-                else if (cmd.get(2)=="dec")
+                else if (cmd.get(2).asString()=="dec")
                 {
                     manager->drives[d]->deltaDecay(cmd.get(3).asDouble());
                 }
@@ -236,9 +231,9 @@ bool HomeostaticModule::respond(const Bottle& cmd, Bottle& reply)
         {
             Bottle *ga = cmd.get(2).asList();
             Bottle grpAllostatic = ga->findGroup("ALLOSTATIC");
-
             addNewDrive(cmd.get(2).check("name",yarp::os::Value("")).asString(), grpAllostatic);
             reply.addString("add drive from config bottle: ack");
+            
         }
         else if (cmd.get(1).asString()=="botl")
         {
@@ -394,56 +389,40 @@ bool HomeostaticModule::respond(const Bottle& cmd, Bottle& reply)
 }
 
 bool HomeostaticModule::updateModule()
-{
-    double stress = 0;
-    for(unsigned int d = 0; d<manager->drives.size();d++)
-    {
-        if (verbose)
+{    
+    yarp::os::Bottle* sens_input = input_port.read(false);
+    if (sens_input == 0)
+        yDebug()<<"Waiting for sensations";
+    else{
+    
+        for(unsigned int d = 0; d<manager->drives.size();d++)
         {
-            yInfo() << "Going by drive #"<<d << " with name "<< manager->drives[d]->name ;
-        }
-
-        yarp::os::Bottle* inp;
-        inp = input_ports[d]->read(false);
-        
-        if(manager->drives[d]->gradient == true)
-        {
-            if (inp)
-            {
-                if (manager->drives[d]->name == "avoidance")
-                    {
-                        processAvoidance(d,inp);
-                    }
-                else
-                {
-                    manager->drives[d]->setValue(inp->get(0).asDouble());
-                }
-            }else{
-                //manager->drives[d]->setValue(inp->get(0).asDouble());
-            }
-        }
-        manager->drives[d]->update();
-        yarp::os::Bottle &out1 = outputm_ports[d]->prepare();// = output_ports[d]->prepare();
-        out1.clear();
-        yarp::os::Bottle &out2 = outputM_ports[d]->prepare();
-        out2.clear();
-        if (manager->drives[d]->name == "avoidance")
-        {
-            out1.addDouble(-manager->drives[d]->getValue()+manager->drives[d]->homeostasisMin);
-            outputm_ports[d]->write();
-
-            double aux = +manager->drives[d]->getValue()-manager->drives[d]->homeostasisMax;
-            if (aux<0)
-            {
-                aux=0;
-            }else{
-                aux=1;
-                //aux = 0-aux;
-            }
-            out2.addDouble(aux);
-            outputM_ports[d]->write();
-        }else{
             
+            if (verbose)
+            {
+                yInfo() << "Going by drive #"<<d << " with name "<< manager->drives[d]->name ;
+            }
+
+            double inp;
+            inp = sens_input->check(manager->drives[d]->key,Value("None")).asDouble();
+            // [CLEANUP/] should we keep this?
+            if(manager->drives[d]->gradient == true)
+            {
+                if (inp)
+                {
+                    manager->drives[d]->setValue(inp);
+                }else{
+                    //manager->drives[d]->setValue(inp->get(0).asDouble());
+                }
+            }
+            // [/CLEANUP]
+            
+            manager->drives[d]->update();
+            
+            yarp::os::Bottle &out1 = outputm_ports[d]->prepare();
+            out1.clear();
+            yarp::os::Bottle &out2 = outputM_ports[d]->prepare();
+            out2.clear();
             out1.addDouble(-manager->drives[d]->getValue()+manager->drives[d]->homeostasisMin);
             outputm_ports[d]->write();
             if (verbose)
@@ -456,43 +435,14 @@ bool HomeostaticModule::updateModule()
                 yInfo() <<"Drive period: " << manager->drives[d]->period;
                 yInfo()<<out1.get(0).asDouble();
             }
+            
 
             out2.addDouble(+manager->drives[d]->getValue()-manager->drives[d]->homeostasisMax);
             outputM_ports[d]->write();
+
         }
-        stress += pow(out2.get(0).asDouble(),3) + pow(out1.get(0).asDouble(),3);
-        
     }
-    Bottle& output=stressPort.prepare();
-    output.clear();
-
-    stress = 1./(1.+exp(-stress_k*(-stress+stress_th)));
-   
-    output.addDouble(stress);
-    stressPort.write();
-
     return true;
-}
-
-//Hardcoded function. This must go outside!!!
-bool HomeostaticModule::processAvoidance(int d, Bottle* avoidanceBottle)
-{
-    // double intensity=0;
-    // for (int i =0;i<avoidanceBottle->size();i++)
-    // {
-    //     Bottle* aux = avoidanceBottle->get(i).asList();
-    //     if (aux->size() < 8)
-    //     {
-    //         intensity +=0.5;
-    //     }
-    //     else
-    //     {
-    //         intensity += aux->get(7).asDouble();
-    //     }
-    // }
-    // manager->drives[d]->setValue(intensity);
-    return true;
-
 }
 
 bool HomeostaticModule::close()
@@ -513,8 +463,6 @@ bool HomeostaticModule::close()
 
         delete manager->drives[d];
     }
-    stressPort.interrupt();
-    stressPort.close();
 
     input_ports.clear();
     outputM_ports.clear();

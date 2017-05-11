@@ -2,11 +2,6 @@
 
 bool AllostaticController::interruptModule()
 {
-    if(iCub) {
-        iCub->close();
-        delete iCub;
-    }
-
     yDebug() << "Interrupt rpc port";
     rpc_in_port.interrupt();
 
@@ -15,7 +10,6 @@ bool AllostaticController::interruptModule()
     to_behavior_rpc.interrupt();
     for (auto& outputm_port : outputm_ports)
     {
-        // yDebug() << "Closing port " + itoa(i) + " to homeo min/max";
         outputm_port->interrupt();
     }
 
@@ -47,7 +41,6 @@ bool AllostaticController::close()
 
     for (auto& outputm_port : outputm_ports)
     {
-        // yDebug() << "Closing port " + itoa(i) + " to homeo min/max";
         outputm_port->interrupt();
         outputm_port->close();
         delete outputm_port;
@@ -127,18 +120,8 @@ bool AllostaticController::configure(yarp::os::ResourceFinder &rf)
     moduleName = rf.check("name",Value("AllostaticController")).asString();
     setName(moduleName.c_str());
 
-    yDebug()<<moduleName<<": finding configuration files...";//<<endl;
+    yDebug()<<moduleName<<": finding configuration files...";
     period = rf.check("period",Value(0.5)).asDouble();
-
-    bool isRFVerbose = true;
-    iCub = new ICubClient(moduleName, "allostaticController", "client.ini", isRFVerbose);
-    iCub->opc->isVerbose &= true;
-
-    if (!iCub->connect())
-    {
-        yInfo() << "iCubClient : Some dependencies are not running...";
-        Time::delay(1.0);
-    }
 
     configureAllostatic(rf);
 
@@ -167,13 +150,12 @@ void AllostaticController::configureAllostatic(yarp::os::ResourceFinder &rf)
         yarp::os::Time::delay(0.2);
     }
 
-    yInfo() << "Initializing drives...";//<<endl;
+    yInfo() << "Initializing drives...";
     Bottle grpAllostatic = rf.findGroup("ALLOSTATIC");
+
     drivesList = *grpAllostatic.find("drives").asList();
-    
     Bottle cmd;
 
-    priority_sum = 0.;
     double priority;
     for (int d = 0; d<drivesList.size(); d++)
     {
@@ -224,17 +206,14 @@ void AllostaticController::configureAllostatic(yarp::os::ResourceFinder &rf)
 
         openPorts(driveName);
 
-        string sensationPort = grpAllostatic.check((driveName + "-sensation-port"), Value("None")).asString();
-        string pn = "/" + moduleName + "/" + driveName + "/sensation:i";
-        while(!Network::connect(sensationPort, pn)) {
-            yDebug()<<"Connecting " << sensationPort << " to " << pn;
+        while(!Network::connect("/opcSensation/toHomeo:o", "/homeostasis/fromSensations:i")) {
+            yDebug()<<"Connecting " << "/opcSensation/toHomeo:o" << " to " << "/homeostasis/fromSensations:i";
             yarp::os::Time::delay(0.5);
         }
 
 
         // set drive priorities. Default to 1.
         priority = grpAllostatic.check((driveName + "-priority"), Value(1.)).asDouble();
-        priority_sum += priority;
         drivePriorities.push_back(priority);
 
         //Under effects
@@ -392,29 +371,9 @@ bool AllostaticController::updateAllostatic()
         yInfo() << "Drive " + activeDrive.name + " out of CZ." ;
     }
 
-    // Create relation for the drive
-
-    iCub->opc->addOrRetrieveEntity<Agent>("icub");
-    iCub->opc->addOrRetrieveEntity<Action>("want");
-    iCub->opc->addOrRetrieveEntity<Action>(activeDrive.name);
-
-    Relation Rel;
-    Rel.m_subject = "icub";
-    Rel.m_verb = "want";
-    Rel.m_object = activeDrive.name;
-
     if (allostaticDrives[activeDrive.name].active) {
         yInfo() << "Trigerring " + activeDrive.name;
-
-        // commiting drive as relation
-        iCub->opc->addRelation(Rel);
-        iCub->opc->commit();
-
         allostaticDrives[activeDrive.name].triggerBehavior(activeDrive.level);
-
-        // remove the relation once the drive is fulfilled
-        iCub->opc->removeRelation(Rel);
-        iCub->opc->commit();
     }
     else {
         yInfo() << "Drive " + activeDrive.name + " is not active";

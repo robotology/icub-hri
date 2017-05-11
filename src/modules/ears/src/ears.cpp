@@ -28,9 +28,9 @@ bool ears::configure(yarp::os::ResourceFinder &rf)
     MainGrammar = rf.findFileByName(rf.check("MainGrammar", Value("MainGrammar.xml")).toString());
     bShouldListen = true;
 
-    if (!onPlannerMode) {
-        portToBehavior.open("/" + moduleName + "/behavior:o");
-    }
+
+    portToBehavior.open("/" + moduleName + "/behavior:o");
+
 
     rpc.open(("/" + moduleName + "/rpc").c_str());
     attach(rpc);
@@ -99,8 +99,8 @@ bool ears::close() {
 
 bool ears::respond(const Bottle& command, Bottle& reply) {
     string helpMessage = string(getName().c_str()) +
-        " commands are: \n" +
-        "quit \n";
+            " commands are: \n" +
+            "quit \n";
 
     reply.clear();
 
@@ -129,7 +129,6 @@ bool ears::respond(const Bottle& command, Bottle& reply) {
     }
     else if (command.get(0).asString() == "listen")
     {
-        // yInfo() <<
         if (command.size() == 2)
         {
             if (command.get(1).asString() == "on")
@@ -172,8 +171,8 @@ bool ears::updateModule() {
         LockGuard lg(m);
         yDebug() << "bListen";
         Bottle bRecognized, //received FROM speech recog with transfer information (1/0 (bAnswer))
-        bAnswer, //response from speech recog without transfer information, including raw sentence
-        bSemantic; // semantic information of the content of the recognition
+                bAnswer, //response from speech recog without transfer information, including raw sentence
+                bSemantic; // semantic information of the content of the recognition
         bRecognized = iCub->getRecogClient()->recogFromGrammarLoop(grammarToString(MainGrammar), 1, true, true);
 
         if (bRecognized.get(0).asInt() == 0)
@@ -194,99 +193,56 @@ bool ears::updateModule() {
         if(bAnswer.get(1).asList()->get(1).isList()) {
             bSemantic = *(*bAnswer.get(1).asList()).get(1).asList();
         }
-        yDebug() << bSemantic.toString();
         string sObject, sAction;
         string sQuestionKind = bAnswer.get(1).asList()->get(0).toString();
 
         string sObjectType, sCommand;
         if(sQuestionKind == "SENTENCEOBJECT") {
             sAction = bSemantic.check("predicateObject", Value("none")).asString();
-            if (sAction == "please take")
-                sAction = "take";
-            else if (sAction == "give me")
-                sAction = "give";
+            if (sAction == "please take") {
+                sAction = "back";
+                sCommand = "moveObject";
+            }
+            else if (sAction == "give me") {
+                sAction = "front";
+                sCommand = "moveObject";
+            }
+            else if (sAction == "point") {
+                sAction = "pointing";
+                sCommand = "pointing";
+            }
             sObjectType = "object";
             sObject = bSemantic.check("object", Value("none")).asString();
-            sCommand = "followingOrder";
-        } else if(sQuestionKind == "SENTENCEBODYPART") {
-            sAction = bSemantic.check("predicateBodypart", Value("none")).asString();
-            sObject = bSemantic.check("bodypart", Value("none")).asString();
-            sObjectType = "bodypart";
-            sCommand = "followingOrder";
-        } else if(sQuestionKind == "SENTENCENARRATIVE") {
-            sAction = "narrate";
-            sObjectType = "";
-            sObject = "";
-            sCommand = "followingOrder";
-        } else if (sQuestionKind == "SENTENCEKS") {
-            sCommand = "followingOrder";
-            sAction = "showks";
-            sObjectType = "kinematic structure";
-            sObject = "";
-        } else if (sQuestionKind == "SENTENCEKSC") {
-            sCommand = "followingOrder";
-            sAction = "showksc";
-            sObjectType = "kinematic structure correspondence";
-            sObject = "";
         } else if (sQuestionKind == "SENTENCERECOGNISE") {
             sCommand = "recognitionOrder";
             sAction = "recognitionOrder";
             sObjectType = "";
             sObject = "";
-        } else if (sQuestionKind == "SENTENCEDONE") {
-            sCommand = "followingOrder";
-            sAction = "end";
-            sObjectType = "";
-            sObject = "";
-        } else if (sQuestionKind == "SENTENCEGAMESTART") {
-            sCommand = "followingOrder";
-            sAction = "game";
-            sObjectType = "start";
-            sObject = "";
-        } else if (sQuestionKind == "SENTENCEGAMEEND") {
-            sCommand = "followingOrder";
-            sAction = "game";
-            sObjectType = "end";
-            sObject = "";
         } else {
             yError() << "[ears] Unknown predicate: " << sQuestionKind;
             return true;
         }
-        //send rpc data to planner
-        if (onPlannerMode) {
-            Bottle &bToTarget = portTarget.prepare();
-            bToTarget.clear();
-            Bottle bAux;
-            bAux.clear();
-            Bottle bAux2;
-            bAux2.clear();
-            bToTarget.addString("new");
-            bAux.addString(sAction);
-            bAux.addInt(1);
-            bAux2.addString(sObjectType);
-            bAux2.addString(sObject);
-            bAux.addList()=bAux2;
-            bToTarget.addList()=bAux;
-            portTarget.write();
-            yDebug() << "Sending " + bToTarget.toString();
-        } else {
-            Bottle &bToTarget = portTarget.prepare();
-            bToTarget.clear();
-            bToTarget.addString(sAction);
-            bToTarget.addString(sObjectType);
-            bToTarget.addString(sObject);
-            portTarget.write();
 
-            Bottle bCondition;
-            bCondition.addString(sCommand);
-            bCondition.addString(sAction);
-            bCondition.addString(sObjectType);
-            bCondition.addString(sObject);
-
-            portToBehavior.write(bCondition);
-     
-            yDebug() << "Sending " + bCondition.toString();
+        Bottle bAction,bArgs;
+        // object might not be known yet, tag it first
+        if (sObject!="") {
+            bAction.addString("tagging");
+            bArgs.addString(sObject);
+            bArgs.addString(sAction);
+            bArgs.addString(sObjectType);
+            bAction.addList()=bArgs;
+            portToBehavior.write(bAction);
+            yDebug() << "Sending " + bAction.toString();
         }
+
+        bAction.clear();
+        bAction.addString(sCommand);
+        bArgs.addString(sObject);
+        bArgs.addString(sAction);
+        bArgs.addString(sObjectType);
+        bAction.addList()=bArgs;
+        portToBehavior.write(bAction);
+        yDebug() << "Sending " + bAction.toString();
     } else {
         yDebug() << "Not bShouldListen";
         yarp::os::Time::delay(0.5);

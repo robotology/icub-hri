@@ -41,6 +41,7 @@ public:
         behaviorUnderPort = nullptr;
         behaviorOverPort = nullptr;
         homeoPort = nullptr;
+        inputSensationPort = nullptr;
     }
 
     bool interrupt_ports() {
@@ -50,7 +51,9 @@ public:
         if (behaviorOverPort!=nullptr) {
             behaviorOverPort->interrupt();
         }
-        inputSensationPort->interrupt();
+        if (inputSensationPort!=nullptr) {
+            inputSensationPort->interrupt();
+        }
         return true;
     }
 
@@ -67,10 +70,12 @@ public:
             delete behaviorOverPort;
             behaviorOverPort=nullptr;
         }
-        inputSensationPort->interrupt();
-        inputSensationPort->close();
-        delete inputSensationPort;
-        inputSensationPort=nullptr;
+        if(inputSensationPort!=nullptr) {
+            inputSensationPort->interrupt();
+            inputSensationPort->close();
+            delete inputSensationPort;
+            inputSensationPort=nullptr;
+        }
         return true;
     }
 
@@ -90,12 +95,10 @@ public:
                 break;
         }
         Bottle rplies;
-        rplies.clear();
         for (int i=0; i<cmds.size(); i++){
             Bottle rply;
-            rply.clear();
             Bottle cmd = *cmds.get(i).asList();
-            if ( ! manualMode) {
+            if (! manualMode) {
                 homeoPort->write(cmd,rply);
             }
             rplies.addList() = rply;
@@ -107,7 +110,7 @@ public:
     {
         Bottle cmd, rply, rplies;
         // before trigger command
-        if ( ! beforeTriggerCmd.isNull() && ! manualMode) {
+        if (! beforeTriggerCmd.isNull() && !manualMode) {
             cmd.clear();
             rply.clear();
             rplies.clear();
@@ -120,7 +123,7 @@ public:
             }        
         }
 
-        Port* port = NULL;
+        Port* port = nullptr;
         switch (mode) {
             case UNDER:
                 cmd = behaviorUnderCmd;
@@ -131,9 +134,9 @@ public:
                 port = behaviorOverPort;
                 break;   
             default:
-                yDebug() << "Trigger mode not implemented";
-                yDebug() << to_string(mode);
-                break;
+                yWarning() << "Trigger mode not implemented";
+                yWarning() << to_string(mode);
+                return;
         }
         
         yInfo() << "Drive " + name + " to be triggered via " << port->getName();
@@ -154,20 +157,12 @@ public:
 
             }        
         }
-
-        // record event in ABM
-        // string moduleName = rf.check("name",Value("AllostaticController")).asString();
-        // setName(moduleName.c_str());
- 
-        
     }
 };
 
 class AllostaticController: public RFModule
 {
 private:
-    ICubClient  *iCub;
-
     Bottle drivesList;
     
     Port to_homeo_rpc, rpc_in_port, to_behavior_rpc;
@@ -180,7 +175,6 @@ private:
 
 
     vector<double> drivePriorities;
-    double priority_sum;
 
     vector< yarp::os::BufferedPort<Bottle>* > outputM_ports;
     vector< yarp::os::BufferedPort<Bottle>* > outputm_ports;

@@ -3,43 +3,12 @@
   <DEFINE>
     <ID NAME="predicateObject"  VAL="2"/>
     <ID NAME="object" VAL="3"/>
-    <ID NAME="predicateBodypart"  VAL="4"/>
-    <ID NAME="bodypart" VAL="5"/>
   </DEFINE>
-
-  <RULE NAME="SENTENCENARRATIVE" TOPLEVEL="ACTIVE" EXPORT="1">
-    <P>what have you done the other day</P>
-  </RULE>
-
-  <RULE NAME="SENTENCEBODYPART" TOPLEVEL="ACTIVE" EXPORT="1">
-    <RULEREF  NAME="predicateBodypart"/>
-    <O>
-      <L>
-        <P>the</P>
-        <P>your</P>
-      </L>
-    </O>
-    <RULEREF  NAME="bodypart"/>
-  </RULE>
-
-  <RULE NAME="SENTENCEKS" TOPLEVEL="ACTIVE" EXPORT="1">
-     <P>What have you learned from your arm babbling?</P>
-  </RULE>
-
-  <RULE NAME="SENTENCEKSC"  TOPLEVEL="ACTIVE" EXPORT="1">
-     <P>Can you find similar parts from my body?</P>
-  </RULE>
-
   <RULE NAME="SENTENCERECOGNISE"  TOPLEVEL="ACTIVE" EXPORT="1">
      <P>How do you call this action?</P>
   </RULE>
-
   <RULE NAME="SENTENCEDONE"  TOPLEVEL="ACTIVE" EXPORT="1">
      <P>Thank you for the nice demonstration. It is now time to sleep.</P>
-  </RULE>
-
-  <RULE NAME="SENTENCEGAMEEND"  TOPLEVEL="ACTIVE" EXPORT="1">
-     <P>The game is finished.</P>
   </RULE>
 
   <RULE NAME="SENTENCEOBJECT" TOPLEVEL="ACTIVE" EXPORT="1">
@@ -59,13 +28,6 @@
       <P>point</P>
       <P>please take</P>
       <P>give me</P>
-      <P>look at</P>
-    </L>
-  </RULE>
-
-  <RULE NAME="predicateBodypart" DYNAMIC="TRUE">
-    <L>
-      <P>move</P>
     </L>
   </RULE>
   
@@ -77,13 +39,4 @@
     </L>
   </RULE>
 
-  <RULE NAME="bodypart" DYNAMIC="TRUE">
-    <L>
-      <P>thumb</P>
-      <P>index</P>
-      <P>middle</P>
-      <P>ring</P>
-      <P>little</P>
-    </L>
-  </RULE> 
 </GRAMMAR>

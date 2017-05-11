@@ -12,7 +12,7 @@ class Dummy: public Behavior
 private:
     static int n_instances;
 
-    void run(const yarp::os::Bottle &args) {
+    void run(const yarp::os::Bottle &/*args*/) {
         yDebug() << "Dummy::run start " + behaviorName;
         yarp::os::Time::delay(4);
         yDebug() << "Dummy::run stop " + behaviorName;

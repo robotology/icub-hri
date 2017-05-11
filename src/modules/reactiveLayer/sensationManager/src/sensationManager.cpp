@@ -28,24 +28,21 @@ bool SensationManager::configure(yarp::os::ResourceFinder &rf)
         for (int i = 0; i < sensationList.size(); i++)
         {
             string sensation_name = sensationList.get(i).asString();
-            // behavior_names.push_back(behavior_name);
             if (sensation_name == "opcSensation") {
                 sensations.push_back(new OpcSensation());
             } else if (sensation_name == "test") {
                 sensations.push_back(new TestSensation());
             } else{
-                yDebug() << "Sensation " + sensation_name + " not implemented";
+                yError() << "Sensation " + sensation_name + " not implemented";
                 return false;
             }
-            sensations.back()->configure(rf);
+            sensations.back()->configure();
         }
     }else{
         yError()<<"Didn't find any sensation. Please revise your configuration files...";
         return 0;
     }
 
-    // for(std::vector<Behavior*>::iterator it = behaviors.begin(); it != behaviors.end(); ++it) {
-    // }
     rpc_in_port.open("/" + moduleName + "/rpc");
     attach(rpc_in_port);
     yInfo("Init done");
@@ -78,7 +75,6 @@ bool SensationManager::respond(const Bottle& cmd, Bottle& reply)
         for (int i = 0; i < sensationList.size(); i++)
         {
             string sensation_name = sensationList.get(i).asString();
-            // behavior_names.push_back(behavior_name);
             if (sensation_name == "opcSensation") {
                 rpl = dynamic_cast<OpcSensation*>(sensations[i])->get_property(cmd.get(1).asString(),cmd.get(2).asString());
                 reply.addString("ack");

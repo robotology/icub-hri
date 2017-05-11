@@ -23,7 +23,7 @@ private:
 
 
 public:
-    void configure(yarp::os::ResourceFinder &rf);
+    void configure();
     void publish();
     void close_ports() {
         in.interrupt();

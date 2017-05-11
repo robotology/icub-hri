@@ -7,15 +7,15 @@ yarp.Network.init()
 
 # Open the RPC port
 toHomeo = yarp.Port()
-homeoPortName="/manager/toHomeostasis/rpc"+":o"#"/NNsound:i"    
+homeoPortName="/manager/toHomeostasis/rpc"+":o" 
 toHomeo.open(homeoPortName)
 
 toAllo = yarp.Port()
-alloPortName="/manager/toAllostasis/rpc"+":o"#"/NNsound:i"    
+alloPortName="/manager/toAllostasis/rpc"+":o"
 toAllo.open(alloPortName)
 
 toBM = yarp.Port()
-BMPortName="/manager/BehaviorManager/rpc"+":o"#"/NNsound:i"    
+BMPortName="/manager/BehaviorManager/rpc"+":o"  
 toBM.open(BMPortName)
 
 toPlanner = yarp.Port()

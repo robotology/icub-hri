@@ -3,13 +3,6 @@
 #include "dummy.h"
 #include "tagging.h"
 #include "pointing.h"
-#include "reactions.h"
-#include "narrate.h"
-#include "followingOrder.h"
-#include "recognitionOrder.h"
-#include "speech.h"
-#include "greeting.h"
-#include "ask.h"
 #include "moveObject.h"
 
 using namespace std;
@@ -67,21 +60,7 @@ bool BehaviorManager::configure(yarp::os::ResourceFinder &rf)
             behaviors.push_back(new Dummy(&mut, rf, "dummy"));
         } else if (behavior_name == "dummy2") {
             behaviors.push_back(new Dummy(&mut, rf, "dummy2"));
-        }  else if (behavior_name == "reactions") {
-            behaviors.push_back(new Reactions(&mut, rf, "reactions"));
-        }  else if (behavior_name == "followingOrder") {
-            behaviors.push_back(new FollowingOrder(&mut, rf, "followingOrder"));
-        }  else if (behavior_name == "narrate") {
-            behaviors.push_back(new Narrate(&mut, rf, "narrate"));
-        }  else if (behavior_name == "recognitionOrder") {
-            behaviors.push_back(new RecognitionOrder(&mut, rf, "recognitionOrder"));
-        }  else if (behavior_name == "greeting") {
-            behaviors.push_back(new Greeting(&mut, rf, "greeting"));
-        }  else if (behavior_name == "ask") {
-            behaviors.push_back(new Ask(&mut, rf, "ask"));
-        }  else if (behavior_name == "speech") {
-            behaviors.push_back(new Speech(&mut, rf, "speech"));
-        } else if (behavior_name == "moveObject") {
+        }  else if (behavior_name == "moveObject") {
             behaviors.push_back(new MoveObject(&mut, rf, "moveObject"));
             // other behaviors here
         }  else {
@@ -99,18 +78,12 @@ bool BehaviorManager::configure(yarp::os::ResourceFinder &rf)
         yInfo() << "iCubClient : Some dependencies are not running...";
         Time::delay(1.0);
     }
-    if (rf.check("use_ears",Value("false")).asBool())
-    {
-        yDebug()<<"using ears";
-        while (!Network::connect("/ears/behavior:o", rpc_in_port.getName())) {
-            yWarning() << "Ears is not reachable";
-            yarp::os::Time::delay(0.5);
-        }
-    }else{
-        yDebug()<<"not using ears";
-    }
 
-    // id = 0;
+    while (!Network::connect("/ears/behavior:o", rpc_in_port.getName())) {
+        yWarning() << "Ears is not reachable";
+        yarp::os::Time::delay(0.5);
+        }
+
     for(auto& beh : behaviors) {
         beh->configure();
         beh->openPorts(moduleName);
@@ -156,29 +129,7 @@ bool BehaviorManager::respond(const Bottle& cmd, Bottle& reply)
         help += " ['behavior_name']  : Triggers corresponding behavior \n";
         reply.addString(help);
     }
-    else if (cmd.get(0).asString() == "manual") {
-        for(auto& beh : behaviors) {
-            if (beh->behaviorName == "followingOrder") {
-                if (cmd.get(1).asString() == "on") {
-                    yInfo() << "followingOrder behavior manual mode on";
-                    dynamic_cast<FollowingOrder *>(beh)->manual = true;
-                } else if (cmd.get(1).asString() == "off") {
-                    yInfo() << "followingOrder behavior manual mode off";
-                    dynamic_cast<FollowingOrder *>(beh)->manual = false;
-                }
-            }
-            else if (beh->behaviorName == "recognitionOrder") {
-                if (cmd.get(1).asString() == "on") {
-                    yInfo() << "recognitionOrder behavior manual mode on";
-                    dynamic_cast<RecognitionOrder *>(beh)->manual = true;
-                } else if (cmd.get(1).asString() == "off") {
-                    yInfo() << "recognitionOrder behavior manual mode off";
-                    dynamic_cast<RecognitionOrder *>(beh)->manual = false;
-                }
-            }
-        }
-        reply.addString("ack");
-    } else if (cmd.get(0).asString() == "names" ) {
+    else if (cmd.get(0).asString() == "names" ) {
         Bottle names;
         for(auto& beh : behaviors) {
             names.addString(beh->behaviorName);
@@ -197,12 +148,6 @@ bool BehaviorManager::respond(const Bottle& cmd, Bottle& reply)
         bool behavior_triggered = false;
         for(auto& beh : behaviors) {
             if (cmd.get(0).asString() == beh->behaviorName) {
-        //         Bottle args;
-        //         args.clear();
-        //         for (int a = 1; a < cmd.size(); a++)
-        //         {
-        //             args.add(&cmd.get(a));
-        //         }
                 bool aux;
                 if (beh->from_sensation_port_name != "None") {
                     if (!Network::isConnected(beh->from_sensation_port_name, beh->sensation_port_in.getName())) {
@@ -222,7 +167,6 @@ bool BehaviorManager::respond(const Bottle& cmd, Bottle& reply)
                     args = cmd.tail();
                 }
                 yDebug() << "arguments are " << args.toString().c_str();
-                // beh->trigger(args);
                 behavior_triggered = beh->trigger(args);
             }
         }

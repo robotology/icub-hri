@@ -34,11 +34,6 @@ class AllostaticPlotModule(yarp.RFModule):
             a = rf.find(attr)
             val = a.asInt() if not a.isNull() else default_geometry[attr]
             setattr(self, attr, val)
-        # self.xpos = rf.find("xpos").asInt();
-        # self.ypos = rf.find("ypos").asInt();
-        # self.width = rf.find("width").asInt();
-        # self.height = rf.find("height").asInt();
-        # time window size (= win_size * 0.1s)
         self.win_size = 600
 
         self.module_name = "allostatic_plot"
@@ -112,8 +107,8 @@ class AllostaticPlotModule(yarp.RFModule):
         min_val = min(self.homeo_mins)
         max_val = max(self.homeo_maxs)
         center_val = (max_val - min_val) / 2.
-        self.y_min = -0.1  # ((min_val - center_val) * 1.25) + center_val
-        self.y_max = 1.1  # ((max_val - center_val) * 1.25) + center_val
+        self.y_min = -0.1  
+        self.y_max = 1.1  
         self.fig = plt.figure()
         thismanager = get_current_fig_manager()
         thismanager.window.setGeometry(self.xpos, self.ypos, self.width, self.height)
@@ -209,10 +204,6 @@ class AllostaticPlotModule(yarp.RFModule):
                     plotitem[1].remove()
                     plotitem_list.pop(0)
 
-        # if len(self.behaviors_to_plot)>0 and -(self.behaviors_to_plot[0][1].get_x()+self.behaviors_to_plot[0][1].get_width()) > self.win_size:
-        #     self.behaviors_to_plot[0][2].remove()
-        #     self.behaviors_to_plot.pop(0)
-
         for name, port in zip(self.behaviors, self.behavior_ports):
             res = port.read(False)
             if res is not None:
@@ -225,7 +216,6 @@ class AllostaticPlotModule(yarp.RFModule):
                     self.behaviors_to_plot[name].append((new_rectangle, new_text))
                     print "Behavior " + name + " starts"
                 elif msg == "stop":
-                    # print "TEST ", self.behaviors_to_plot
                     self.behaviors_to_plot[name][-1][0].set_width(-self.behaviors_to_plot[name][-1][0].get_x())
                     print "Behavior " + name + " stops"
                 print "number of behaviors to plot = ", sum([len(behs) for behs in self.behaviors_to_plot.values()]), self.behaviors_to_plot
@@ -234,7 +224,6 @@ class AllostaticPlotModule(yarp.RFModule):
         plt.pause(0.1)
 
     def updateModule(self):
-        # Don't forget the following:
         self.one_step(self.t)
         self.t += 1
         return True
@@ -247,6 +236,5 @@ if __name__ == '__main__':
     mod = AllostaticPlotModule()
     rf = yarp.ResourceFinder()
     rf.configure(sys.argv)
-#    mod.configure(rf)
 
     mod.runModule(rf)

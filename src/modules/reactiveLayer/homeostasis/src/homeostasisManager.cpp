@@ -1,7 +1,7 @@
 #include "homeostasisManager.h"
 #include <cmath>
 
-bool HomeostasisManager::updateDrives(double t)
+bool HomeostasisManager::updateDrives()
 {
     for (unsigned int i = 0; i < drives.size(); i++)
     {

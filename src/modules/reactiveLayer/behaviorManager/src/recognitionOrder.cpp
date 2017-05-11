@@ -7,8 +7,7 @@ void RecognitionOrder::configure() {
     // Todo: set the value beow from a config file (but we are not in a module here)
     external_port_name = "/sam/rpc:i";
     from_sensation_port_name = "None";
-    //this could be a port that sends a command 
-    //describing what to classify e.g action/face/emotion...
+
 
     homeoPort = "/homeostasis/rpc";
 
@@ -18,7 +17,7 @@ void RecognitionOrder::configure() {
     manual = true;
 }
 
-void RecognitionOrder::run(const Bottle &args) {
+void RecognitionOrder::run(const Bottle &/*args*/) {
     yInfo() << "recognitionOrder::run";
 
     if (!Network::isConnected(port_to_homeo_name,homeoPort)){
@@ -37,7 +36,6 @@ void RecognitionOrder::run(const Bottle &args) {
     }
 
     yDebug() << "send rpc to SAM";
-    //Bottle *order = sensation_port_in.read();
     
     Bottle cmd;
     Bottle rply;

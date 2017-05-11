@@ -11,6 +11,7 @@ class Drive
 {
 public:
     std::string name;
+    std::string key;
     double period;
     double value, homeostasisMin, homeostasisMax, decay, valueMin, valueMax, default_value, decay_multiplier;
     bool gradient;
@@ -18,9 +19,10 @@ public:
     bool is_sleeping;
     double time_to_sleep;
 
-    Drive(std::string d_name, double _period, double d_value=0.5, double d_homeo_min=0.25, double d_homeo_max=0.75, double d_decay = 0.05, double d_value_min=numeric_limits<double>::min(), double d_value_max=numeric_limits<double>::max(), bool d_gradient = false)
+    Drive(std::string d_name, double _period, string d_key="default", double d_value=0.5, double d_homeo_min=0.25, double d_homeo_max=0.75, double d_decay = 0.05, double d_value_min=numeric_limits<double>::min(), double d_value_max=numeric_limits<double>::max(), bool d_gradient = false)
     {
         name = d_name;
+        key = d_key;
         period = _period;
         value = d_value;
         homeostasisMin = d_homeo_min;
@@ -48,13 +50,17 @@ public:
     {
         cout << "Drive created using the default constructor, you should not do this" << endl;
         name = "defaultDrive";
+        key="default";
         value = 0.5;
         homeostasisMin = 0.25;
         homeostasisMax = 0.75;
         decay = 0.0;
         gradient = true;
     }
-
+    void setKey(string d_key)
+    {
+        this->key=d_key;
+    }
     void setValue(double d_value)
     {
         this->value=d_value;
