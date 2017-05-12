@@ -19,7 +19,7 @@ void icubclient::SubSystem_agentDetector::Close() {
     portRPC.close();
 }
 
-bool icubclient::SubSystem_agentDetector::changeDefaultName(std::string new_name) { // need to be extended for several agents
+bool icubclient::SubSystem_agentDetector::changeDefaultName(const std::string &new_name) { // need to be extended for several agents
     yarp::os::Bottle bReq, bResp;
     bReq.addString("change_partner_name");
     bReq.addString(new_name);

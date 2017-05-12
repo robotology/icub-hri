@@ -3,7 +3,10 @@
 
 #include <yarp/os/RFModule.h>
 #include <yarp/os/Port.h>
-#include "icubclient/clients/icubClient.h"
+
+namespace icubclient {
+ class ICubClient;
+}
 
 class ears : public yarp::os::RFModule {
 protected:

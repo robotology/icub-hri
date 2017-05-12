@@ -6,10 +6,11 @@
 #include <yarp/os/all.h>
 #include <yarp/sig/all.h>
 
-#include "icubclient/clients/icubClient.h"
-#include "icubclient/clients/opcClient.h"
-
 #include "sensation.h"
+
+namespace icubclient {
+    class ICubClient;
+}
 
 class OpcSensation: public Sensation
 {
@@ -19,7 +20,6 @@ private:
     yarp::os::BufferedPort<yarp::os::Bottle> homeoPort;
     yarp::os::BufferedPort<yarp::os::Bottle> known_entities_port;
     yarp::os::BufferedPort<yarp::os::Bottle> opc_has_agent_port;
-    yarp::os::BufferedPort<yarp::os::Bottle> is_touched_port;
     void addToEntityList(yarp::os::Bottle& list, std::string type, std::string name);
     yarp::os::Bottle handleEntities();
 

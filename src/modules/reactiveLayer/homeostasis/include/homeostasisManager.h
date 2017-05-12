@@ -4,11 +4,6 @@
 #include <vector>
 #include "homeostasis.h"
 
-using namespace std;
-
-
-
-
 class HomeostasisManager
 {
 

@@ -17,8 +17,12 @@
 
 #include "proactiveTagging.h"
 
+#include "icubclient/clients/icubClient.h"
+#include "icubclient/clients/opcClient.h"
+#include "icubclient/subsystems/subSystem_recog.h"
+#include "icubclient/subsystems/subSystem_speech.h"
+
 using namespace yarp::os;
-using namespace yarp::sig;
 using namespace icubclient;
 using namespace std;
 

@@ -1,5 +1,6 @@
-#include <algorithm>    // std::random_shuffle
 #include "opcSensation.h"
+#include "icubclient/clients/icubClient.h"
+#include "icubclient/clients/opcClient.h"
 
 using namespace icubclient;
 using namespace yarp::os;
@@ -20,7 +21,6 @@ void OpcSensation::configure()
     unknown_entities_port.open("/opcSensation/unknown_entities:o");
     opc_has_agent_port.open("/opcSensation/hasAgent:o");
     known_entities_port.open( "/opcSensation/known_entities:o");
-    is_touched_port.open("/opcSensation/is_touched:o"); //needed?
 
     yInfo() << "Configuration done.";
 
@@ -210,8 +210,6 @@ void OpcSensation::close_ports() {
     known_entities_port.close();
     opc_has_agent_port.interrupt();
     opc_has_agent_port.close();
-    is_touched_port.interrupt();
-    is_touched_port.close();
     iCub->close();
     delete iCub;
 }

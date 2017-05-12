@@ -1,4 +1,3 @@
-#include <algorithm>    // std::random_shuffle
 #include "test.h"
 
 void TestSensation::configure()

@@ -7,14 +7,9 @@
 #include <map>
 #include <vector>
 
-using namespace std;
-using namespace yarp::os;
-using namespace yarp::sig;
-using namespace yarp::math;
-
 #include "homeostasisManager.h"
 
-class HomeostaticModule: public RFModule
+class HomeostaticModule: public yarp::os::RFModule
 {
 private:
 
@@ -22,12 +17,12 @@ private:
     double period;
 
 
-    vector< yarp::os::BufferedPort<Bottle> * > input_ports;
-    vector< yarp::os::BufferedPort<Bottle> * > outputM_ports;
-    vector< yarp::os::BufferedPort<Bottle> * > outputm_ports;
+    std::vector< yarp::os::BufferedPort<yarp::os::Bottle> * > input_ports;
+    std::vector< yarp::os::BufferedPort<yarp::os::Bottle> * > outputM_ports;
+    std::vector< yarp::os::BufferedPort<yarp::os::Bottle> * > outputm_ports;
     HomeostasisManager* manager;
-    yarp::os::BufferedPort<Bottle> input_port;
-    Port    rpc;
+    yarp::os::BufferedPort<yarp::os::Bottle> input_port;
+    yarp::os::Port    rpc;
 
     bool addNewDrive(string driveName, yarp::os::Bottle& grpHomeostatic);
     bool addNewDrive(string driveName);
@@ -42,7 +37,7 @@ public:
         return d;
     }
 
-    int openPorts(string driveName);
+    int openPorts(std::string driveName);
 
     bool configure(yarp::os::ResourceFinder &rf);
 
@@ -61,8 +56,8 @@ public:
 
     bool updateAllostatic();
 
-    bool processAvoidance(int d, Bottle* avoidanceBottle);
+    bool processAvoidance(int d, yarp::os::Bottle* avoidanceBottle);
 
     //RPC & scenarios
-    bool respond(const Bottle& cmd, Bottle& reply);
+    bool respond(const yarp::os::Bottle& cmd, yarp::os::Bottle& reply);
 };

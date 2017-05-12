@@ -1,7 +1,11 @@
 #include <functional>
 
 #include <yarp/os/all.h>
-#include "icubclient/clients/icubClient.h"
+
+namespace icubclient {
+    class ICubClient;
+    class Object;
+}
 
 class opcPopulater : public yarp::os::RFModule {
 protected:

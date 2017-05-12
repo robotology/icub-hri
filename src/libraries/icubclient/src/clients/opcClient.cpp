@@ -20,8 +20,6 @@
 #include "icubclient/clients/opcClient.h"
 
 #include <yarp/os/all.h>
-#include <yarp/sig/all.h>
-#include <yarp/dev/all.h>
 #include <iostream>
 #include <string>
 #include <map>
@@ -29,8 +27,6 @@
 
 using namespace std;
 using namespace yarp::os;
-using namespace yarp::sig;
-using namespace yarp::dev;
 using namespace icubclient;
 
 OPCClient::OPCClient(const string &moduleName)

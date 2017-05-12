@@ -1,6 +1,8 @@
 #include "homeostasisManagerIcub.h"
 #include <cmath>
 
+using namespace yarp::os;
+
 bool HomeostaticModule::addNewDrive(string driveName, yarp::os::Bottle& grpHomeostatic)
 {    
     yDebug() << "Add drive " + driveName;

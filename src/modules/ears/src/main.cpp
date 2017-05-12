@@ -15,7 +15,7 @@
  * Public License for more details
  */
 
-
+#include <yarp/os/Network.h>
 #include <yarp/os/LogStream.h>
 #include "ears.h"
 

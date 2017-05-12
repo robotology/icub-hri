@@ -29,8 +29,6 @@
 
 #include <yarp/sig/Vector.h>
 
-//#include "icubclient/clients/opcClient.h"
-
 /**
 * @defgroup icubclient_clients Clients
 * \ingroup icubclient_libraries

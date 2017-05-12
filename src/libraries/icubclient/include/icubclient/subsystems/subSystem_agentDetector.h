@@ -44,7 +44,7 @@ protected:
      * @return true if successful, false otherwise
      */
 
-    bool changeDefaultName(std::string new_name);
+    bool changeDefaultName(const std::string& new_name);
 
 public:
 

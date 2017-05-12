@@ -1,5 +1,6 @@
 #include <yarp/os/all.h>
 #include "ears.h"
+#include "icubclient/clients/icubClient.h"
 #include "icubclient/clients/opcClient.h"
 #include "icubclient/functions.h"
 #include "icubclient/subsystems/subSystem_recog.h"

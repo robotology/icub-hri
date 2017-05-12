@@ -1,5 +1,6 @@
 #include <functional>
 #include "opcPopulater.h"
+#include "icubclient/clients/icubClient.h"
 #include "icubclient/subsystems/subSystem_ARE.h"
 
 using namespace std;
