@@ -107,7 +107,7 @@ bool faceTrackerModule::configure(yarp::os::ResourceFinder &rf) {
     x_buf = 0;
     y_buf = 0;
 
-    mode = 0; // 0: going to a set position, 1: face searching, 2: face tracking, 3: face stuck,
+    mode = Mode::GO_DEFAULT;
     setpos_counter = 0;
     panning_counter = 0;
     stuck_counter = 0;
@@ -158,10 +158,15 @@ bool faceTrackerModule::respond(const Bottle& command, Bottle& reply) {
     if (command.get(0).asString()=="quit") {
         reply.addString("quitting");
         return false;
-    }
-    else if (command.get(0).asString()=="help") {
+    } else if (command.get(0).asString()=="help") {
         yInfo() << helpMessage;
         reply.addString("ok");
+    } else if (command.get(0).asString()=="pause") {
+        reply.addString("ack");
+        mode = Mode::PAUSED;
+    } else if (command.get(0).asString()=="resume") {
+        reply.addString("ack");
+        mode = Mode::FACE_SEARCHING;
     }
 
     return true;
@@ -194,7 +199,7 @@ void faceTrackerModule::moveToDefaultPosition() {
         velocity_command[4] = 0;
 
         yInfo() << "Switch to face searching mode!";
-        mode = 1;
+        mode = Mode::FACE_SEARCHING;
         setpos_counter = 0;
     }
     vel->velocityMove(velocity_command.data());
@@ -204,7 +209,7 @@ void faceTrackerModule::faceSearching(bool face_found) {
     if(face_found > 0)
     {
         yInfo() << "I found a face! Switch to face tracking mode";
-        mode = 2;
+        mode = Mode::FACE_TRACKING;
         panning_counter++;
     }
     else
@@ -293,18 +298,18 @@ void faceTrackerModule::faceTracking(const std::vector<cv::Rect> &faces_left, in
             if(panning_counter > 5)
             {
                 yDebug() << "Switch to default position mode!";
-                mode = 0;
+                mode = Mode::GO_DEFAULT;
                 stuck_counter = 0;
             }
             else
             {
                 yDebug() << "Switch to face searching mode!";
-                mode = 1;
+                mode = Mode::FACE_SEARCHING;
                 stuck_counter = 0;
             }
         }
         else { // for now, stay in face tracking mode
-            mode = 2;
+            mode = Mode::FACE_TRACKING;
         }
     }
     vel->velocityMove(velocity_command.data());
@@ -370,17 +375,16 @@ bool faceTrackerModule::updateModule() {
         prev_encoders = cur_encoders;
         enc->getEncoders(cur_encoders.data());
 
-        if (mode == 0) {
+        if (mode == Mode::GO_DEFAULT) {
             moveToDefaultPosition();
-        } else if (mode == 1) {
+        } else if (mode == Mode::FACE_SEARCHING) {
             faceSearching(faces_left.size());
-        } else if (mode == 2) {
+        } else if (mode == Mode::FACE_TRACKING) {
             faceTracking(faces_left, biggest_face_left_idx);
+        } else if (mode == Mode::PAUSED) {
+            yInfo() << "Not doing anything as module is paused";
         }
-        cv::imshow("cvImage_Left", cvMatImageLeft);
     }
-
-    cv::waitKey(1);
 
     return true;
 }

@@ -29,6 +29,8 @@
         <required>no</required>
         <priority>no</priority>
         <description>Response port. Supported commands:
+                        - pause
+                        - resume
                         - help
                         - quit
         </description>

@@ -56,7 +56,8 @@ protected:
     double x_buf;
     double y_buf;
 
-    int mode; //!< 0: going to default position, 1: face searching, 2: face tracking
+    enum class Mode {GO_DEFAULT, FACE_SEARCHING, FACE_TRACKING, PAUSED}; //!< 0: going to default position, 1: face searching, 2: face tracking
+    Mode mode;
     int counter_no_face_found; //!< if in face tracking mode, for how many iterations was no face found
     int setpos_counter; //!< how many iterations have we spend in default position mode
     int panning_counter; //!< how many times have we spend in face searching mode. If >5, go back to default position
