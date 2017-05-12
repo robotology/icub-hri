@@ -18,11 +18,10 @@
 
 
 #include "icubclient/knowledge/action.h"
+#include "icubclient/functions.h"
 
 using namespace std;
 using namespace yarp::os;
-using namespace yarp::sig;
-using namespace yarp::dev;
 using namespace icubclient;
 
 Action::Action():Entity()

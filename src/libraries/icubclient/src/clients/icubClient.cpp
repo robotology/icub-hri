@@ -152,6 +152,13 @@ void ICubClient::close()
     closed = true;
 }
 
+ICubClient::~ICubClient() {
+    close();
+    if(opc) {
+        delete opc;
+    }
+}
+
 
 void ICubClient::updateAgent()
 {

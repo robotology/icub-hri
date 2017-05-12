@@ -21,7 +21,7 @@
 
 #include "entity.h"
 #include "relation.h"
-#include "icubclient/functions.h"
+#include "icubclient/tags.h"
 
 namespace icubclient{
 

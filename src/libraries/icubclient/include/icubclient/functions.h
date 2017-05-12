@@ -19,7 +19,6 @@
 #include <yarp/os/Bottle.h>
 #include <string>
 #include <vector>
-#include "icubclient/tags.h"
 
 /**
  * @defgroup icubclient_helpers Helper Routines

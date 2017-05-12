@@ -39,14 +39,14 @@ void icubclient::SubSystem_ARE::selectHandCorrectTarget(yarp::os::Bottle &option
     }
 
     // apply 3D correction
-    if (calibPort.getOutputCount()>0)
+    if (portCalib.getOutputCount()>0)
     {
         yarp::os::Bottle cmd,reply;
         cmd.addString("get_location");
         cmd.addString(hand);
         cmd.addString(objName);
         cmd.addString("iol-"+hand);
-        calibPort.write(cmd,reply);
+        portCalib.write(cmd,reply);
         target[0]=reply.get(1).asDouble();
         target[1]=reply.get(2).asDouble();
         target[2]=reply.get(3).asDouble();
@@ -65,7 +65,7 @@ bool icubclient::SubSystem_ARE::sendCmd(const yarp::os::Bottle &cmd)
 
     yDebug() << "Send to ARE: " << cmd.toString();
     yarp::os::Bottle bReply;
-    if (cmdPort.write(const_cast<yarp::os::Bottle&>(cmd),bReply))
+    if (portCmd.write(const_cast<yarp::os::Bottle&>(cmd),bReply))
         ret=(bReply.get(0).asVocab()==yarp::os::Vocab::encode("ack"));
 
     yDebug() << "Reply from ARE: " << bReply.toString();
@@ -75,8 +75,8 @@ bool icubclient::SubSystem_ARE::sendCmd(const yarp::os::Bottle &cmd)
 
 bool icubclient::SubSystem_ARE::connect()
 {
-    if (!yarp::os::Network::isConnected(calibPort.getName(),"/iolReachingCalibration/rpc")) {
-        if (yarp::os::Network::connect(calibPort.getName(),"/iolReachingCalibration/rpc")) {
+    if (!yarp::os::Network::isConnected(portCalib.getName(),"/iolReachingCalibration/rpc")) {
+        if (yarp::os::Network::connect(portCalib.getName(),"/iolReachingCalibration/rpc")) {
             yInfo()<<"ARE connected to calibrator";
         } else {
             yWarning()<<"ARE didn't connect to calibrator";
@@ -84,14 +84,14 @@ bool icubclient::SubSystem_ARE::connect()
     }
 
     bool ret=true;
-    if(!yarp::os::Network::isConnected(cmdPort.getName(),"/actionsRenderingEngine/cmd:io")) {
-        ret&=yarp::os::Network::connect(cmdPort.getName(),"/actionsRenderingEngine/cmd:io");
+    if(!yarp::os::Network::isConnected(portCmd.getName(),"/actionsRenderingEngine/cmd:io")) {
+        ret&=yarp::os::Network::connect(portCmd.getName(),"/actionsRenderingEngine/cmd:io");
     }
-    if(!yarp::os::Network::isConnected(rpcPort.getName(),"/actionsRenderingEngine/rpc")) {
-        ret&=yarp::os::Network::connect(rpcPort.getName(),"/actionsRenderingEngine/rpc");
+    if(!yarp::os::Network::isConnected(portRPC.getName(),"/actionsRenderingEngine/rpc")) {
+        ret&=yarp::os::Network::connect(portRPC.getName(),"/actionsRenderingEngine/rpc");
     }
-    if(!yarp::os::Network::isConnected(getPort.getName(),"/actionsRenderingEngine/get:io")) {
-        ret&=yarp::os::Network::connect(getPort.getName(),"/actionsRenderingEngine/get:io");
+    if(!yarp::os::Network::isConnected(portGet.getName(),"/actionsRenderingEngine/get:io")) {
+        ret&=yarp::os::Network::connect(portGet.getName(),"/actionsRenderingEngine/get:io");
     }
 
     opc->connect("OPC");
@@ -101,10 +101,10 @@ bool icubclient::SubSystem_ARE::connect()
 
 icubclient::SubSystem_ARE::SubSystem_ARE(const std::string &masterName) : SubSystem(masterName)
 {
-    cmdPort.open(("/" + masterName + "/" + SUBSYSTEM_ARE + "/cmd:io").c_str());
-    rpcPort.open(("/" + masterName + "/" + SUBSYSTEM_ARE + "/rpc").c_str());
-    getPort.open(("/" + masterName + "/" + SUBSYSTEM_ARE + "/get:io").c_str());
-    calibPort.open(("/" + masterName + "/" + SUBSYSTEM_ARE + "/calib:io").c_str());
+    portCmd.open(("/" + masterName + "/" + SUBSYSTEM_ARE + "/cmd:io").c_str());
+    portRPC.open(("/" + masterName + "/" + SUBSYSTEM_ARE + "/rpc").c_str());
+    portGet.open(("/" + masterName + "/" + SUBSYSTEM_ARE + "/get:io").c_str());
+    portCalib.open(("/" + masterName + "/" + SUBSYSTEM_ARE + "/calib:io").c_str());
     m_type = SUBSYSTEM_ARE;
     lastlyUsedHand="";
 
@@ -116,15 +116,15 @@ void icubclient::SubSystem_ARE::Close()
     opc->interrupt();
     opc->close();
 
-    cmdPort.interrupt();
-    rpcPort.interrupt();
-    getPort.interrupt();
-    calibPort.interrupt();
+    portCmd.interrupt();
+    portRPC.interrupt();
+    portGet.interrupt();
+    portCalib.interrupt();
 
-    cmdPort.close();
-    rpcPort.close();
-    getPort.close();
-    calibPort.close();
+    portCmd.close();
+    portRPC.close();
+    portGet.close();
+    portCalib.close();
 }
 
 bool icubclient::SubSystem_ARE::getTableHeight(double &height)
@@ -132,7 +132,7 @@ bool icubclient::SubSystem_ARE::getTableHeight(double &height)
     yarp::os::Bottle bCmd, bReply;
     bCmd.addVocab(yarp::os::Vocab::encode("get"));
     bCmd.addVocab(yarp::os::Vocab::encode("table"));
-    getPort.write(bCmd, bReply);
+    portGet.write(bCmd, bReply);
 
     yarp::os::Value vHeight = bReply.find("table_height");
     if (vHeight.isNull()) {
@@ -365,7 +365,7 @@ bool icubclient::SubSystem_ARE::waving(const bool sw)
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("waveing"));
     bCmd.addString(sw ? "on" : "off");
-    bool bReturn = rpcPort.asPort().write(bCmd);
+    bool bReturn = portRPC.asPort().write(bCmd);
     std::string status;
     bReturn ? status = "success" : status = "failed";
 
@@ -406,7 +406,7 @@ bool icubclient::SubSystem_ARE::impedance(const bool sw)
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("impedance"));
     bCmd.addString(sw ? "on" : "off");
-    return rpcPort.asPort().write(bCmd);
+    return portRPC.asPort().write(bCmd);
 }
 
 bool icubclient::SubSystem_ARE::setExecTime(const double execTime)
@@ -414,7 +414,7 @@ bool icubclient::SubSystem_ARE::setExecTime(const double execTime)
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("time"));
     bCmd.addDouble(execTime);
-    return rpcPort.asPort().write(bCmd);
+    return portRPC.asPort().write(bCmd);
 }
 
 icubclient::SubSystem_ARE::~SubSystem_ARE()

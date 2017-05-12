@@ -27,7 +27,6 @@
 #include <algorithm>
 
 #include "icubclient/subsystems/subSystem.h"
-#include "icubclient/clients/opcClient.h"
 #include "icubclient/functions.h"
 
 namespace icubclient{
@@ -40,7 +39,6 @@ class SubSystem_Speech : public SubSystem
 {
 protected:
     yarp::os::Port tts; /**< Port to /iSpeak */
-    yarp::os::RpcClient ttsRpc; /**< Port to /iSpeak/rpc */
 
 public:
     /**
@@ -105,7 +103,7 @@ public:
         param.addString("set");
         param.addString("opt");
         param.addString(ss.str().c_str());
-        ttsRpc.write(param);
+        portRPC.write(param);
     }
 };
 }//Namespace

@@ -1,17 +1,18 @@
+#ifndef EARS_H
+#define EARS_H
+
+#include <yarp/os/RFModule.h>
+#include <yarp/os/Port.h>
 #include "icubclient/clients/icubClient.h"
 
-using namespace std;
-using namespace yarp::os;
-using namespace icubclient;
-
-class ears : public RFModule {
+class ears : public yarp::os::RFModule {
 protected:
-    ICubClient *iCub;
+    icubclient::ICubClient *iCub;
     double      period;
-    Port        rpc;
-    Port        portToBehavior;
-    Port        portToSpeechRecognizer;
-    Mutex       m;
+    yarp::os::Port        rpc;
+    yarp::os::Port        portToBehavior;
+    yarp::os::Port        portToSpeechRecognizer;
+    yarp::os::Mutex       m;
     bool        bShouldListen;
     std::string MainGrammar;
 
@@ -30,5 +31,7 @@ public:
     bool    updateModule();
 
     //RPC & scenarios
-    bool respond(const Bottle& cmd, Bottle& reply);
+    bool respond(const yarp::os::Bottle& cmd, yarp::os::Bottle& reply);
 };
+
+#endif

@@ -1,5 +1,6 @@
 #include <functional>
 
+#include <yarp/os/all.h>
 #include "icubclient/clients/icubClient.h"
 
 class opcPopulater : public yarp::os::RFModule {

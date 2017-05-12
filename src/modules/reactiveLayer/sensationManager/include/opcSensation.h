@@ -1,50 +1,34 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
-#include <yarp/os/all.h>
-#include <yarp/sig/all.h>
-#include "icubclient/clients/icubClient.h"
 #include <map>
 
-#include "sensation.h"
+#include <yarp/os/all.h>
+#include <yarp/sig/all.h>
 
-using namespace std;
-using namespace yarp::os;
-using namespace yarp::sig;
-using namespace icubclient;
+#include "icubclient/clients/icubClient.h"
+#include "icubclient/clients/opcClient.h"
+
+#include "sensation.h"
 
 class OpcSensation: public Sensation
 {
 private:
-    ICubClient *iCub;
-    yarp::os::BufferedPort<Bottle> unknown_entities_port;
-    yarp::os::BufferedPort<Bottle> homeoPort;
-    yarp::os::BufferedPort<Bottle> known_entities_port;
-    yarp::os::BufferedPort<Bottle> opc_has_agent_port;
-    yarp::os::BufferedPort<Bottle> is_touched_port;
+    icubclient::ICubClient *iCub;
+    yarp::os::BufferedPort<yarp::os::Bottle> unknown_entities_port;
+    yarp::os::BufferedPort<yarp::os::Bottle> homeoPort;
+    yarp::os::BufferedPort<yarp::os::Bottle> known_entities_port;
+    yarp::os::BufferedPort<yarp::os::Bottle> opc_has_agent_port;
+    yarp::os::BufferedPort<yarp::os::Bottle> is_touched_port;
     void addToEntityList(yarp::os::Bottle& list, std::string type, std::string name);
-    Bottle handleEntities(); 
+    yarp::os::Bottle handleEntities();
 
 public:
 
-    Bottle u_entities, k_entities, up_entities, kp_entities, p_entities, o_positions;
+    yarp::os::Bottle u_entities, k_entities, up_entities, kp_entities, p_entities, o_positions;
     void configure();
     void publish();
-    int get_property(string name, string property);
-    
+    int get_property(std::string name, std::string property);
 
-    void close_ports() {
-        unknown_entities_port.interrupt();
-        unknown_entities_port.close();
-        homeoPort.interrupt();
-        homeoPort.close();    
-        known_entities_port.interrupt();
-        known_entities_port.close(); 
-        opc_has_agent_port.interrupt();
-        opc_has_agent_port.close();
-        is_touched_port.interrupt();
-        is_touched_port.close();
-        iCub->close();
-        delete iCub;
-    }
+    void close_ports();
 };

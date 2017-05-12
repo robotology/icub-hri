@@ -1,6 +1,10 @@
 #include <algorithm>    // std::random_shuffle
 #include "opcSensation.h"
 
+using namespace icubclient;
+using namespace yarp::os;
+using namespace std;
+
 void OpcSensation::configure()
 {
     bool isRFVerbose = false;
@@ -197,3 +201,17 @@ int OpcSensation::get_property(string name,string property)
     }
 }
 
+void OpcSensation::close_ports() {
+    unknown_entities_port.interrupt();
+    unknown_entities_port.close();
+    homeoPort.interrupt();
+    homeoPort.close();
+    known_entities_port.interrupt();
+    known_entities_port.close();
+    opc_has_agent_port.interrupt();
+    opc_has_agent_port.close();
+    is_touched_port.interrupt();
+    is_touched_port.close();
+    iCub->close();
+    delete iCub;
+}

@@ -22,6 +22,7 @@
 #include <memory>
 #include "icubclient/knowledge/representations.h"
 #include "icubclient/tags.h"
+
 namespace icubclient{
 
 /**

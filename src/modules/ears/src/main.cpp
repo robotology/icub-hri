@@ -16,7 +16,7 @@
  */
 
 
-
+#include <yarp/os/LogStream.h>
 #include "ears.h"
 
 using namespace std;

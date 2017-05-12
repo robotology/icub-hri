@@ -22,7 +22,6 @@
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
-using namespace yarp::dev;
 using namespace icubclient;
 
 bool ICubClient::home(const string &part)

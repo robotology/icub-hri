@@ -24,6 +24,7 @@
 #include <iostream>
 #include <iterator>
 #include <algorithm>
+#include <yarp/os/RpcClient.h>
 
 /**
 * @defgroup icubclient_subsystems Subsystems
@@ -44,6 +45,8 @@ namespace icubclient{
     protected:
         std::string m_masterName;
         std::string m_type;
+        yarp::os::RpcClient portRPC;
+
         virtual bool connect() = 0;
 
     public:

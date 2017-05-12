@@ -20,14 +20,11 @@
 #define __ICUBCLIENT_ENTITY_H__
 
 #include <yarp/os/all.h>
-#include <yarp/sig/all.h>
-#include <yarp/dev/all.h>
 #include <string>
 #include <map>
 #include <list>
 #include <iostream>
 #include <sstream>
-#include "icubclient/tags.h"
 
 namespace icubclient{
 

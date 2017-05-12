@@ -22,6 +22,7 @@
 #include <yarp/os/all.h>
 #include <yarp/sig/all.h>
 #include "icubclient/clients/icubClient.h"
+#include "icubclient/clients/opcClient.h"
 
 using namespace std;
 using namespace yarp::os;

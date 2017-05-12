@@ -43,10 +43,10 @@ namespace icubclient {
     protected:
         OPCClient *opc;
 
-        yarp::os::RpcClient cmdPort; /**< Port to /ARE/cmd:io */
-        yarp::os::RpcClient rpcPort; /**< Port to /ARE/rpc */
-        yarp::os::RpcClient getPort; /**< Port to /ARE/get:io */
-        yarp::os::RpcClient calibPort; /**< Port to iolReachingCalibration */
+        yarp::os::RpcClient portCmd; /**< Port to /ARE/cmd:io */
+        yarp::os::RpcClient portRPC; /**< Port to /ARE/rpc */
+        yarp::os::RpcClient portGet; /**< Port to /ARE/get:io */
+        yarp::os::RpcClient portCalib; /**< Port to iolReachingCalibration */
 
         std::string lastlyUsedHand; /**< The hand which was used for the last action */
 

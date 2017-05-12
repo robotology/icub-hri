@@ -3,6 +3,7 @@
 
 #include <string>
 #include <yarp/os/all.h>
+#include "icubclient/clients/opcClient.h"
 #include "icubclient/clients/icubClient.h"
 
 class Behavior

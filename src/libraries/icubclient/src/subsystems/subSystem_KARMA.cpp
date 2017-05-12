@@ -49,14 +49,14 @@ void icubclient::SubSystem_KARMA::selectHandCorrectTarget(yarp::os::Bottle &opti
     }
 
     // apply 3D correction
-    if (calibPort.getOutputCount()>0)
+    if (portCalib.getOutputCount()>0)
     {
         yarp::os::Bottle cmd,reply;
         cmd.addString("get_location");
         cmd.addString(hand);
         cmd.addString(targetName);
         cmd.addString("iol-"+hand);
-        calibPort.write(cmd,reply);
+        portCalib.write(cmd,reply);
         target[0]=reply.get(1).asDouble();
         target[1]=reply.get(2).asDouble();
         target[2]=reply.get(3).asDouble();
@@ -74,7 +74,7 @@ bool icubclient::SubSystem_KARMA::sendCmd(yarp::os::Bottle &cmd)
     bool ret=false;
 
     yarp::os::Bottle bReply;
-    if (rpcPort.write(cmd,bReply))
+    if (portRPC.write(cmd,bReply))
         ret=(bReply.get(0).asVocab()==yarp::os::Vocab::encode("ack"));
 
     return ret;
@@ -89,29 +89,22 @@ bool icubclient::SubSystem_KARMA::connect()
         yWarning()<<"KARMA didn't connect to ARE";
 
     bool ret=true;
-    if(!yarp::os::Network::isConnected(stopPort.getName(),"/karmaMotor/stop:i")) {
-        ret&=yarp::os::Network::connect(stopPort.getName(),"/karmaMotor/stop:i");
+    if(!yarp::os::Network::isConnected(portStop.getName(),"/karmaMotor/stop:i")) {
+        ret&=yarp::os::Network::connect(portStop.getName(),"/karmaMotor/stop:i");
     }
-    if(!yarp::os::Network::isConnected(rpcPort.getName(),"/karmaMotor/rpc")) {
-        ret&=yarp::os::Network::connect(rpcPort.getName(),"/karmaMotor/rpc");
+    if(!yarp::os::Network::isConnected(portRPC.getName(),"/karmaMotor/rpc")) {
+        ret&=yarp::os::Network::connect(portRPC.getName(),"/karmaMotor/rpc");
     }
 
-    if(!yarp::os::Network::isConnected(visionPort.getName(),"/karmaMotor/vision:i")) {
-        if (yarp::os::Network::connect(visionPort.getName(),"/karmaMotor/vision:i"))
+    if(!yarp::os::Network::isConnected(portVision.getName(),"/karmaMotor/vision:i")) {
+        if (yarp::os::Network::connect(portVision.getName(),"/karmaMotor/vision:i"))
             yInfo()<<"KARMA connected to tool tip vision";
         else
             yWarning()<<"KARMA didn't connect to tool tip vision";
     }
 
-    if(!yarp::os::Network::isConnected(finderPort.getName(),"/karmaMotor/finder:rpc")) {
-        if (yarp::os::Network::connect(finderPort.getName(),"/karmaMotor/finder:rpc"))
-            yInfo()<<"KARMA connected to tool dimensions solver";
-        else
-            yWarning()<<"KARMA didn't connect to tool dimensions solver";
-    }
-
-    if(!yarp::os::Network::isConnected(calibPort.getName(),"/iolReachingCalibration/rpc")) {
-        if (yarp::os::Network::connect(calibPort.getName(),"/iolReachingCalibration/rpc"))
+    if(!yarp::os::Network::isConnected(portCalib.getName(),"/iolReachingCalibration/rpc")) {
+        if (yarp::os::Network::connect(portCalib.getName(),"/iolReachingCalibration/rpc"))
             yInfo()<<"KARMA connected to calibrator";
         else
             yWarning()<<"KARMA didn't connect to calibrator";
@@ -143,11 +136,11 @@ icubclient::SubSystem_KARMA::SubSystem_KARMA(const std::string &masterName, cons
 
     this->robot = robot;
 
-    stopPort.open(("/" + masterName + "/" + SUBSYSTEM_KARMA + "/stop:i").c_str());
-    rpcPort.open(("/" + masterName + "/" + SUBSYSTEM_KARMA + "/rpc").c_str());
-    visionPort.open(("/" + masterName + "/" + SUBSYSTEM_KARMA + "/vision:i").c_str());
-    finderPort.open(("/" + masterName + "/" + SUBSYSTEM_KARMA + "/finder:rpc").c_str());
-    calibPort.open(("/" + masterName + "/" + SUBSYSTEM_KARMA + "/calib:io").c_str());
+    portStop.open(("/" + masterName + "/" + SUBSYSTEM_KARMA + "/stop:i").c_str());
+    portRPC.open(("/" + masterName + "/" + SUBSYSTEM_KARMA + "/rpc").c_str());
+    portVision.open(("/" + masterName + "/" + SUBSYSTEM_KARMA + "/vision:i").c_str());
+    portFinder.open(("/" + masterName + "/" + SUBSYSTEM_KARMA + "/finder:rpc").c_str());
+    portCalib.open(("/" + masterName + "/" + SUBSYSTEM_KARMA + "/calib:io").c_str());
     m_type = SUBSYSTEM_KARMA;
 
     hasTable = false;
@@ -159,11 +152,10 @@ icubclient::SubSystem_KARMA::SubSystem_KARMA(const std::string &masterName, cons
 
 void icubclient::SubSystem_KARMA::Close()
 {
-    stopPort.interrupt();
-    rpcPort.interrupt();
-    visionPort.interrupt();
-    finderPort.interrupt();
-    calibPort.interrupt();
+    portStop.interrupt();
+    portRPC.interrupt();
+    portVision.interrupt();
+    portCalib.interrupt();
 
     SubARE->Close();
 
@@ -172,11 +164,10 @@ void icubclient::SubSystem_KARMA::Close()
     driverHL.close();
     driverHR.close();
 
-    stopPort.close();
-    rpcPort.close();
-    visionPort.close();
-    finderPort.close();
-    calibPort.close();
+    portStop.close();
+    portRPC.close();
+    portVision.close();
+    portCalib.close();
 }
 
 yarp::sig::Vector icubclient::SubSystem_KARMA::applySafetyMargins(const yarp::sig::Vector &in)

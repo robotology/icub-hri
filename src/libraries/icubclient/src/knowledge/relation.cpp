@@ -18,11 +18,10 @@
 
 
 #include "icubclient/knowledge/relation.h"
+#include "icubclient/tags.h"
 
 using namespace std;
 using namespace yarp::os;
-using namespace yarp::sig;
-using namespace yarp::dev;
 using namespace icubclient;
 
 Relation::Relation(

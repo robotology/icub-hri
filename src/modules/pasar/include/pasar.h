@@ -23,6 +23,7 @@
 
 #include <utility>
 #include "icubclient/clients/icubClient.h"
+#include "icubclient/clients/opcClient.h"
 
 /**
  * @ingroup pasar

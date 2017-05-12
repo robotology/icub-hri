@@ -1,6 +1,12 @@
+#include <yarp/os/all.h>
 #include "ears.h"
+#include "icubclient/clients/opcClient.h"
 #include "icubclient/functions.h"
 #include "icubclient/subsystems/subSystem_recog.h"
+
+using namespace std;
+using namespace icubclient;
+using namespace yarp::os;
 
 bool ears::configure(yarp::os::ResourceFinder &rf)
 {

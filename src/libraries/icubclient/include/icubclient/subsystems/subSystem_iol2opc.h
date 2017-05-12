@@ -45,8 +45,6 @@ protected:
      */
     bool changeName(const std::string &old_name, const std::string &new_name);
 
-    yarp::os::RpcClient portRPC;
-
 public:
 
     /**

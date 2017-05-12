@@ -18,7 +18,6 @@
 #ifndef BODYPART_H
 #define BODYPART_H
 
-#include <yarp/sig/Vector.h>
 #include "object.h"
 
 namespace icubclient{

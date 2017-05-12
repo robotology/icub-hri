@@ -24,11 +24,12 @@
 #include <fstream>
 #include <tuple>
 #include <typeindex>
+#include <map>
+#include <list>
 
-#include <yarp/os/Network.h>
+#include <yarp/sig/Vector.h>
 
-#include "icubclient/clients/opcClient.h"
-#include "icubclient/subsystems/subSystem.h"
+//#include "icubclient/clients/opcClient.h"
 
 /**
 * @defgroup icubclient_clients Clients
@@ -40,6 +41,9 @@
 
 namespace icubclient{
     // forward declarations
+    class OPCClient;
+
+    class SubSystem;
     class SubSystem_agentDetector;
     class SubSystem_ARE;
     class SubSystem_babbling;
@@ -47,6 +51,11 @@ namespace icubclient{
     class SubSystem_KARMA;
     class SubSystem_Recog;
     class SubSystem_Speech;
+
+    class Action;
+    class Agent;
+    class Entity;
+    class Object;
 
     /**
     * \ingroup icubclient_clients
@@ -439,12 +448,7 @@ namespace icubclient{
         /**
         * Destructor.
         */
-        virtual ~ICubClient() {
-            close();
-            if(opc) {
-                delete opc;
-            }
-        }
+        virtual ~ICubClient();
     };
 }//Namespace
 #endif

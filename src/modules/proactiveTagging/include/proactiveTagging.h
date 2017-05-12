@@ -15,7 +15,9 @@
  * Public License for more details
 */
 
+#include <yarp/os/all.h>
 #include "icubclient/clients/icubClient.h"
+#include "icubclient/clients/opcClient.h"
 #include "icubclient/subsystems/subSystem_recog.h"
 #include "icubclient/subsystems/subSystem_speech.h"
 

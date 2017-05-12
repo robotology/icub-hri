@@ -50,11 +50,10 @@ protected:
     double tableHeight;
     bool hasTable;
 
-    yarp::os::RpcClient stopPort;
-    yarp::os::RpcClient rpcPort;
-    yarp::os::RpcClient visionPort;
-    yarp::os::RpcClient finderPort;
-    yarp::os::RpcClient calibPort;
+    yarp::os::RpcClient portStop;
+    yarp::os::RpcClient portVision;
+    yarp::os::RpcClient portFinder;
+    yarp::os::RpcClient portCalib;
 
     //testing Cartesian interface
     yarp::dev::PolyDriver driverL;

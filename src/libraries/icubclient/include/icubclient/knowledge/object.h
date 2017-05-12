@@ -19,7 +19,9 @@
 #ifndef __ICUBCLIENT_OBJECT_H__
 #define __ICUBCLIENT_OBJECT_H__
 
+#include <yarp/sig/all.h>
 #include "entity.h"
+#include "icubclient/tags.h"
 
 namespace icubclient{
 

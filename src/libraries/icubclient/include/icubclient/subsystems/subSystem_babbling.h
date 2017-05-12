@@ -35,8 +35,6 @@ class SubSystem_babbling : public SubSystem
 protected:
     virtual bool connect();
 
-    yarp::os::RpcClient portRPC; /**< Port to /babbling/rpc */
-
 public:
 
     /**
