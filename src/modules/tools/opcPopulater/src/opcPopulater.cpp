@@ -26,32 +26,23 @@ bool opcPopulater::configure(yarp::os::ResourceFinder &rf)
     rpc.open(("/" + moduleName + "/rpc").c_str());
     attach(rpc);
 
-    Bottle &bRFInfo = rf.findGroup("populateSpecific2");
+    Bottle &bRFInfo = rf.findGroup("populateSpecific");
 
     X_obj = bRFInfo.check("X_obj", Value(-0.4)).asDouble();
-    Y_obj = bRFInfo.check("Y_obj", Value(0.4)).asDouble();
-    Z_obj = bRFInfo.check("Z_obj", Value(0.0)).asDouble();
+    Y_obj = bRFInfo.check("Y_obj", Value(0.5)).asDouble();
+    Z_obj = bRFInfo.check("Z_obj", Value(0.1)).asDouble();
     X_ag = bRFInfo.check("X_ag", Value(-0.4)).asDouble();
-    Y_ag = bRFInfo.check("Y_ag", Value(0.4)).asDouble();
-    Z_ag = bRFInfo.check("Z_ag", Value(0.3)).asDouble();
-    noise = bRFInfo.check("noise", Value(0.0)).asDouble();
+    Y_ag = bRFInfo.check("Y_ag", Value(0.5)).asDouble();
+    Z_ag = bRFInfo.check("Z_ag", Value(0.5)).asDouble();
+    noise = bRFInfo.check("noise", Value(5.1)).asDouble();
 
-    cout << "X_obj " << X_obj << endl;
-    cout << "Y_obj " << Y_obj << endl;
-    cout << "Z_obj " << Z_obj << endl;
-    cout << "X_ag " << X_ag << endl;
-    cout << "Y_ag " << Y_ag << endl;
-    cout << "Z_ag " << Z_ag << endl;
-    cout << "noise " << noise << endl;
-
-    move = false;
-    spd1.push_back(0.);
-    spd1.push_back(0.);
-    spd1.push_back(0.);
-    spd2.push_back(0.);
-    spd2.push_back(0.);
-    spd2.push_back(0.);
-    iter = 0;
+    yInfo() << "X_obj " << X_obj;
+    yInfo() << "Y_obj " << Y_obj;
+    yInfo() << "Z_obj " << Z_obj;
+    yInfo() << "X_ag " << X_ag;
+    yInfo() << "Y_ag " << Y_ag;
+    yInfo() << "Z_ag " << Z_ag;
+    yInfo() << "noise " << noise;
 
     iCub->home();
 
@@ -75,13 +66,13 @@ bool opcPopulater::respond(const Bottle& command, Bottle& reply) {
         " commands are: \n" +
         "help \n" +
         "quit \n" +
-        "populateSpecific1 entity_type entity_name \n" +
-        "populateSpecific2 \n" +
-        "populateSpecific3 \n" +
+        "populateEntityRandom entity_type entity_name \n" +
+        "populateSpecific \n" +
+        "populateTwoUnknowns \n" +
         "populateRedBall \n" +
-        "populateMoving \n" +
         "addUnknownEntity entity_type\n" +
-        "setSaliencyEntity entity_name saliency_name\n";
+        "setSaliencyEntity entity_name saliency_value\n" +
+        "setValueEntity entity_name value_value\n";
 
     reply.clear();
 
@@ -90,25 +81,21 @@ bool opcPopulater::respond(const Bottle& command, Bottle& reply) {
         reply.addString("quitting");
         return false;
     }
-    else if (command.get(0).asString() == "populateMoving") {
-        yInfo() << " populateMoving";
-        (populateMoving()) ? reply.addString("populateMoving done !") : reply.addString("populateMoving failed !");
-    }
     else if (command.get(0).asString() == "populateRedBall") {
         yInfo() << " populateRedBall";
         (populateRedBall()) ? reply.addString("populateRedBall done !") : reply.addString("populateRedBall failed !");
     }
-    else if (command.get(0).asString() == "populateSpecific1") {
-        yInfo() << " populateSpecific1";
+    else if (command.get(0).asString() == "populateEntityRandom") {
+        yInfo() << " populateEntityRandom";
         (populateEntityRandom(command)) ? reply.addString("populateSpecific done !") : reply.addString("populateSpecific failed !");
     }
-    else if (command.get(0).asString() == "populateSpecific2") {
-        yInfo() << " populateSpecific2";
+    else if (command.get(0).asString() == "populateSpecific") {
+        yInfo() << " populateSpecific";
         (populateSpecific()) ? reply.addString("populateSpecific done !") : reply.addString("populateSpecific failed !");
     }
-    else if (command.get(0).asString() == "populateSpecific3") {
-        yInfo() << " populateSpecific3";
-        (populateSpecific3()) ? reply.addString("populated 2 objects !") : reply.addString("populateSpecific failed !");
+    else if (command.get(0).asString() == "populateTwoUnknowns") {
+        yInfo() << " populateTwoUnknowns";
+        (populateTwoUnknowns()) ? reply.addString("populated 2 objects !") : reply.addString("populateSpecific failed !");
     }
     else if (command.get(0).asString() == "addUnknownEntity") {
         yInfo() << " addUnknownEntity";
@@ -139,50 +126,6 @@ bool opcPopulater::respond(const Bottle& command, Bottle& reply) {
 
 /* Called periodically every getPeriod() seconds */
 bool opcPopulater::updateModule() {
-    //Just for testing: 
-    if (move == true)
-    {
-        //double speed = 1./10.;
-        iCub->opc->checkout();
-
-        Object* obj1 = iCub->opc->addOrRetrieveEntity<Object>("moving_1");
-        Object* obj2 = iCub->opc->addOrRetrieveEntity<Object>("moving_2");
-
-        if (iter % 30 == 0)
-        {
-            spd1[0] = (rand() % 100)*pow(-1., (rand() % 2) + 1);
-            spd1[1] = (rand() % 100)*pow(-1., (rand() % 2) + 1);
-            spd1[2] = (rand() % 100)*pow(-1., (rand() % 2) + 1);
-            spd2[0] = (rand() % 100)*pow(-1., (rand() % 2) + 1);
-            spd2[1] = (rand() % 100)*pow(-1., (rand() % 2) + 1);
-            spd2[2] = (rand() % 100)*pow(-1., (rand() % 2) + 1);
-            double av1 = sqrt(pow(spd1[0], 2) + pow(spd1[1], 2) + pow(spd1[2], 2));
-            double av2 = sqrt(pow(spd2[0], 2) + pow(spd2[1], 2) + pow(spd2[2], 2));
-            spd1[0] /= av1;
-            spd1[1] /= av1;
-            spd1[2] /= av1;
-            spd2[0] /= av2;
-            spd2[1] /= av2;
-            spd2[2] /= av2;
-        }
-        /* obj1->m_ego_position[0] = min(max(obj1->m_ego_position[0]+spd1[0]*period*speed,-0.2),-0.5);
-         obj1->m_ego_position[1] = min(max(obj1->m_ego_position[1]+spd1[1]*period*speed,0.0),0.5);
-         obj1->m_ego_position[2] = min(max(obj1->m_ego_position[2]+spd1[2]*period*speed,0.0),0.5);
-         obj2->m_ego_position[0] = min(max(obj2->m_ego_position[0]+spd2[0]*period*speed,-0.2),-0.5);
-         obj2->m_ego_position[1] = min(max(obj2->m_ego_position[1]+spd2[1]*period*speed,0.0),0.5);
-         obj2->m_ego_position[2] = min(max(obj2->m_ego_position[2]+spd2[2]*period*speed,0.0),0.5);*/
-        obj1->m_ego_position[0] = -0.18;
-        obj1->m_ego_position[1] = 0.10;
-        obj1->m_ego_position[2] = 0.1;
-        obj2->m_ego_position[0] = -0.18;
-        obj2->m_ego_position[1] = -0.10;
-        obj2->m_ego_position[2] = 0.1;
-
-        iCub->opc->commit(obj1);
-        iCub->opc->commit(obj2);
-
-        iter += 1;
-    }
     return true;
 }
 
@@ -190,7 +133,7 @@ bool opcPopulater::populateEntityRandom(const Bottle& bInput){
 
     if (bInput.size() != 3)
     {
-        yWarning() << " in opcPopulater::populateSpecific | wrong number of input";
+        yWarning() << " in opcPopulater::populateEntityRandom | wrong number of input";
         return false;
     }
     string sName = bInput.get(2).toString();
@@ -206,10 +149,7 @@ bool opcPopulater::populateEntityRandom(const Bottle& bInput){
         agent->m_color[1] = Random::uniform(180, 250);
         agent->m_color[2] = Random::uniform(80, 180);
         iCub->opc->commit(agent);
-
-        agent = nullptr;
     }
-
     else if (bInput.get(1).toString() == ICUBCLIENT_OPC_ENTITY_OBJECT)
     {
         Object* obj = iCub->opc->addOrRetrieveEntity<Object>(sName);
@@ -223,8 +163,11 @@ bool opcPopulater::populateEntityRandom(const Bottle& bInput){
         obj->m_value = 1.5;
         yDebug() << "value: " << obj->m_value;
         iCub->opc->commit(obj);
-
-        obj = nullptr;
+    }
+    else
+    {
+        yError() << "Entity type not supported";
+        return false;
     }
 
     return true;
@@ -255,10 +198,7 @@ bool opcPopulater::addUnknownEntity(const Bottle &bInput){
         agent->m_color[1] = Random::uniform(180, 250);
         agent->m_color[2] = Random::uniform(80, 180);
         iCub->opc->commit(agent);
-
-        agent = nullptr;
     }
-
     else if (bInput.get(1).toString() == ICUBCLIENT_OPC_ENTITY_OBJECT)
     {
         Object* obj = iCub->opc->addEntity<Object>(sName);
@@ -270,14 +210,13 @@ bool opcPopulater::addUnknownEntity(const Bottle &bInput){
         obj->m_color[1] = Random::uniform(0, 80);
         obj->m_color[2] = Random::uniform(180, 250);
         iCub->opc->commit(obj);
-
-        obj = nullptr;
     }
     else
     {
-        yInfo() << " " << bInput.get(1).toString() << " unknown kind of entity";
+        yError() << bInput.get(1).toString() << " unknown kind of entity";
         return false;
     }
+
     return true;
 }
 
@@ -298,7 +237,7 @@ bool opcPopulater::setAttributeEntity(const Bottle& bInput, std::function<void(O
         f_setter(dynamic_cast<Object*>(e), target);
         iCub->opc->commit();
     } else{
-        yWarning() << "Trying to change value of the non-object entity: " << sName << ". Please check!";
+        yError() << "Cannot change value of the non-object entity: " << sName;
         return false;
     }
 
@@ -306,10 +245,10 @@ bool opcPopulater::setAttributeEntity(const Bottle& bInput, std::function<void(O
 }
 
 
-bool opcPopulater::populateSpecific(){
+bool opcPopulater::populateSpecific() {
+    iCub->opc->clear();
 
     double errorMargin = noise;
-    iCub->opc->clear();
 
     Object* obj1 = iCub->opc->addOrRetrieveEntity<Object>("bottom_left");
     obj1->m_ego_position[0] = X_obj + errorMargin * (Random::uniform() - 0.5);
@@ -341,7 +280,6 @@ bool opcPopulater::populateSpecific(){
     obj3->m_color[2] = Random::uniform(0, 80);
     iCub->opc->commit(obj3);
 
-
     Object* obj4 = iCub->opc->addOrRetrieveEntity<Object>("bottom_right");
     obj4->m_ego_position[0] = X_obj + errorMargin * (Random::uniform() - 0.5);
     obj4->m_ego_position[1] = Y_obj + errorMargin * (Random::uniform() - 0.5);
@@ -352,13 +290,11 @@ bool opcPopulater::populateSpecific(){
     obj4->m_color[2] = Random::uniform(180, 250);
     iCub->opc->commit(obj4);
 
-
     return true;
 }
 
 
-bool opcPopulater::populateSpecific3(){
-
+bool opcPopulater::populateTwoUnknowns() {
     iCub->opc->clear();
 
     Object* obj1 = iCub->opc->addOrRetrieveEntity<Object>("unknown_1");
@@ -381,44 +317,9 @@ bool opcPopulater::populateSpecific3(){
     obj2->m_color[2] = Random::uniform(180, 250);
     iCub->opc->commit(obj2);
 
-
     return true;
 }
 
-
-bool opcPopulater::populateMoving(){
-
-    iCub->opc->clear();
-
-    Object* obj1 = iCub->opc->addOrRetrieveEntity<Object>("moving_1");
-    obj1->m_ego_position[0] = -0.18;
-    obj1->m_ego_position[1] = 0.10;
-    obj1->m_ego_position[2] = 0.1;
-
-    obj1->m_present = 1.0;
-    obj1->m_color[0] = 20;
-    obj1->m_color[1] = 20;
-    obj1->m_color[2] = 20;
-    obj1->m_value = 0.0;
-    iCub->opc->commit(obj1);
-
-    Object* obj2 = iCub->opc->addOrRetrieveEntity<Object>("moving_2");
-    obj2->m_ego_position[0] = -0.18;
-    obj2->m_ego_position[1] = -0.10;
-    obj2->m_ego_position[2] = 0.1;
-
-    obj2->m_present = 1.0;
-    obj2->m_color[0] = 200;
-    obj2->m_color[1] = 20;
-    obj2->m_color[2] = 20;
-    obj2->m_value = -1.0;
-    iCub->opc->commit(obj2);
-
-    //move=true;
-
-
-    return true;
-}
 
 bool opcPopulater::populateRedBall(){
 

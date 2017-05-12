@@ -16,10 +16,6 @@ protected:
     double Y_ag;
     double Z_ag;
     double noise;
-    std::vector<double> spd1;
-    std::vector<double> spd2;
-    bool move;
-    int iter;
 
 public:
     bool configure(yarp::os::ResourceFinder &rf);
@@ -39,11 +35,8 @@ public:
     bool updateModule();
     bool    populateEntityRandom(const yarp::os::Bottle &bInput);
     bool    populateRedBall();
-    bool    populateMoving();
     bool    populateSpecific();
-    bool    populateSpecific1(const yarp::os::Bottle &bInput);
-    bool    populateSpecific2();
-    bool    populateSpecific3();
+    bool    populateTwoUnknowns();
 
     bool    addUnknownEntity(const yarp::os::Bottle &bInput);
     bool    setAttributeEntity(const yarp::os::Bottle &bInput, std::function<void(icubclient::Object*, double)> f_setter);
