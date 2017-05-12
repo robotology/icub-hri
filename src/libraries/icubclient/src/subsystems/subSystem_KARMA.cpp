@@ -42,14 +42,15 @@ void icubclient::SubSystem_KARMA::selectHandCorrectTarget(yarp::os::Bottle &opti
         if (handToUse.empty())
         {
             hand=(target[1]>0.0?"right":"left");
-//            options.addString(hand.c_str());
         }
         else
+        {
             hand=handToUse;
+        }
     }
 
     // apply 3D correction
-    if (portCalib.getOutputCount()>0)
+    if (portCalib.getOutputCount()>0 && targetName!="")
     {
         yarp::os::Bottle cmd,reply;
         cmd.addString("get_location");
@@ -65,8 +66,6 @@ void icubclient::SubSystem_KARMA::selectHandCorrectTarget(yarp::os::Bottle &opti
         opt.addString("fixate");
         SubARE->look(target,opt);
     }
-
-//    lastlyUsedHand=hand;
 }
 
 bool icubclient::SubSystem_KARMA::sendCmd(yarp::os::Bottle &cmd)
@@ -425,7 +424,7 @@ bool icubclient::SubSystem_KARMA::draw(const yarp::sig::Vector &targetCenter,
     return sendCmd(bCmd);
 }
 
-bool icubclient::SubSystem_KARMA::vdraw(const std::string &targetName,
+bool icubclient::SubSystem_KARMA::vdraw(const std::string &objName,
                                         const yarp::sig::Vector &targetCenter,
                                         const double theta, const double radius,
                                         const double dist,
@@ -436,7 +435,7 @@ bool icubclient::SubSystem_KARMA::vdraw(const std::string &targetName,
 
     yarp::sig::Vector target=targetCenter;
     yarp::os::Bottle opt=options;
-    selectHandCorrectTarget(opt,targetName,target);
+    selectHandCorrectTarget(opt,objName,target);
     target=applySafetyMargins(target);
     appendTarget(bCmd,target);
     appendDouble(bCmd,theta);

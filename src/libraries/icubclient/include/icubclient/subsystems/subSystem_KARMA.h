@@ -119,7 +119,7 @@ public:
 
     /**
      * @brief pushAside (KARMA): push an object to a certain location along y-axis of robot RoF
-     * @param objName: name of object
+     * @param objName: name of object (can be empty, in this case no correction is applied by iolReachingCalibration)
      * @param objCenter: coordinate of object
      * @param targetPosY: y coordinate of location to push object to
      * @param theta: angle to define pushing left (0) or right (180)
@@ -135,7 +135,7 @@ public:
 
     /**
      * @brief pushFront (KARMA): push an object to a certain location along x-axis of robot RoF
-     * @param objName: name of object
+     * @param objName: name of object (can be empty, in this case no correction is applied by iolReachingCalibration)
      * @param objCenter: coordinate of object
      * @param targetPosXFront: x coordinate of location to push object to
      * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
@@ -160,7 +160,7 @@ public:
 
     /**
      * @brief pullBack (KARMA): pull an object to a certain location along x-axis of robot RoF
-     * @param objName: name of object to pull
+     * @param objName: name of object to pull (can be empty, in this case no correction is applied by iolReachingCalibration)
      * @param objCenter: coordinate of object
      * @param targetPosXBack: x coordinate of location to pull object to
      * @param armType: "left" or "right" arm to conduct action, otherwise arm will be chosen by KARMA
@@ -191,10 +191,10 @@ public:
      * @param radius: radius of the circle with center at @see targetCenter
      * @param dist: moving distance of draw action
      * @param options to be passed to KARMA
-     * @param targetName: name of object to push
+     * @param targetName: name of object to push (can be empty, in this case no correction is applied by iolReachingCalibration)
      * @return true in case of success release, false otherwise
      */
-    bool vdraw(const std::string &targetName,
+    bool vdraw(const std::string &objName,
                const yarp::sig::Vector &targetCenter, const double theta,
                const double radius, const double dist,
                const yarp::os::Bottle &options = yarp::os::Bottle());
