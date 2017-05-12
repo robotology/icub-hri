@@ -383,6 +383,7 @@ bool faceTrackerModule::updateModule() {
             faceTracking(faces_left, biggest_face_left_idx);
         } else if (mode == Mode::PAUSED) {
             yInfo() << "Not doing anything as module is paused";
+            yarp::os::Time::delay(0.5);
         }
     }
 
