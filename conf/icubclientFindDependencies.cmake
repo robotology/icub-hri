@@ -20,10 +20,8 @@ endmacro(checkandset_dependency)
 
 find_package(OpenCV)
 find_package(kinectWrapper QUIET)
-find_package(Boost COMPONENTS chrono thread system QUIET)
 
 message(STATUS "I have found the following libraries:")
 checkandset_dependency(OpenCV)
-checkandset_dependency(Boost)
 checkandset_dependency(kinectWrapper)
 
