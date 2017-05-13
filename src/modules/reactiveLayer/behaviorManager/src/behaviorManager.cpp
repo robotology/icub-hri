@@ -49,26 +49,6 @@ bool BehaviorManager::configure(yarp::os::ResourceFinder &rf)
     rpc_in_port.open("/" + moduleName + "/trigger:i");
     yInfo() << "RPC_IN : " << rpc_in_port.getName();
 
-    for (int i = 0; i<behaviorList.size(); i++)
-    {
-        behavior_name = behaviorList.get(i).asString();
-        if (behavior_name == "tagging") {
-            behaviors.push_back(new Tagging(&mut, rf, "tagging"));
-        } else if (behavior_name == "pointing") {
-            behaviors.push_back(new Pointing(&mut, rf, "pointing"));
-        } else if (behavior_name == "dummy") {
-            behaviors.push_back(new Dummy(&mut, rf, "dummy"));
-        } else if (behavior_name == "dummy2") {
-            behaviors.push_back(new Dummy(&mut, rf, "dummy2"));
-        }  else if (behavior_name == "moveObject") {
-            behaviors.push_back(new MoveObject(&mut, rf, "moveObject"));
-            // other behaviors here
-        }  else {
-            yDebug() << "Behavior " + behavior_name + " not implemented";
-            return false;
-        }
-    }
-
     //Create an iCub Client and check that all dependencies are here before starting
     bool isRFVerbose = false;
     iCub = new icubclient::ICubClient(moduleName, "behaviorManager","client.ini",isRFVerbose);
@@ -79,15 +59,34 @@ bool BehaviorManager::configure(yarp::os::ResourceFinder &rf)
         Time::delay(1.0);
     }
 
+    for (int i = 0; i<behaviorList.size(); i++)
+    {
+        behavior_name = behaviorList.get(i).asString();
+        if (behavior_name == "tagging") {
+            behaviors.push_back(new Tagging(&mut, rf, iCub, "tagging"));
+        } else if (behavior_name == "pointing") {
+            behaviors.push_back(new Pointing(&mut, rf, iCub, "pointing"));
+        } else if (behavior_name == "dummy") {
+            behaviors.push_back(new Dummy(&mut, rf, iCub, "dummy"));
+        } else if (behavior_name == "dummy2") {
+            behaviors.push_back(new Dummy(&mut, rf, iCub, "dummy2"));
+        }  else if (behavior_name == "moveObject") {
+            behaviors.push_back(new MoveObject(&mut, rf, iCub, "moveObject"));
+            // other behaviors here
+        }  else {
+            yDebug() << "Behavior " + behavior_name + " not implemented";
+            return false;
+        }
+    }
+
     while (!Network::connect("/ears/behavior:o", rpc_in_port.getName())) {
         yWarning() << "Ears is not reachable";
         yarp::os::Time::delay(0.5);
-        }
+    }
 
     for(auto& beh : behaviors) {
         beh->configure();
         beh->openPorts(moduleName);
-        beh->iCub = iCub;
 
         if (beh->from_sensation_port_name != "None") {
             while (!Network::connect(beh->from_sensation_port_name, beh->sensation_port_in.getName())) {

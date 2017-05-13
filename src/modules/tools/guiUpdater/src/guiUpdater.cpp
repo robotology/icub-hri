@@ -203,6 +203,10 @@ void GuiUpdater::deleteObject(const string &opcTag, Object* o)
     {
         unsigned int i = 0;
         Agent* a = dynamic_cast<Agent*>(o);
+        if(a == nullptr) {
+            yError() << "Could not cast to agent";
+            return;
+        }
         while (i < a->m_body.m_parts.size()) // remove all body parts of the agent
         {
             ostringstream opcTagPart;

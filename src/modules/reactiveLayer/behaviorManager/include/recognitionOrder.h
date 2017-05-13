@@ -16,7 +16,7 @@ private:
     std::string homeoPort;
 
 public:
-    RecognitionOrder(yarp::os::Mutex* mut, yarp::os::ResourceFinder &rf, std::string behaviorName): Behavior(mut, rf, behaviorName) {
+    RecognitionOrder(yarp::os::Mutex* mut, yarp::os::ResourceFinder &rf, icubclient::ICubClient* iCub, std::string behaviorName): Behavior(mut, rf, iCub, behaviorName) {
         ;
     }
        

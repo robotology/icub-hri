@@ -11,7 +11,9 @@
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
-using namespace icubclient;class SensationManager: public RFModule
+using namespace icubclient;
+
+class SensationManager: public RFModule
 {
 private:
     vector<Sensation*> sensations;

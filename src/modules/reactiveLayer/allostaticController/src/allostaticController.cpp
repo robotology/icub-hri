@@ -320,7 +320,7 @@ DriveOutCZ AllostaticController::chooseDrive() {
     vector<double> min_diff; 
     vector<double> max_diff; 
 
-    for ( int i =0;i<drivesList.size();i++) {
+    for (int i =0;i<drivesList.size();i++) {
         names.push_back(drivesList.get(i).asString());
         min_diff.push_back(outputm_ports[i]->read()->get(0).asDouble());
         max_diff.push_back(outputM_ports[i]->read()->get(0).asDouble());

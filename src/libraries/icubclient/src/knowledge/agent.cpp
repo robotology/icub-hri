@@ -153,7 +153,7 @@ bool Agent::removeBelief(Relation r)
     return false;
 }
 
-bool Agent::checkBelief(Relation r)
+bool Agent::checkBelief(const Relation& r)
 {
     return (find(m_belief.begin(),m_belief.end(),r) != m_belief.end());
 }

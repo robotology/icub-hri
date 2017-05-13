@@ -130,7 +130,7 @@ public:
     * Check if some relation is believed by an agent.
     * @param r a relation to check
     */
-    bool                checkBelief(Relation r);
+    bool                checkBelief(const Relation &r);
 
     /**
     * Get a read-only copy of the agent believes.

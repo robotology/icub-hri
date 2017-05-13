@@ -13,7 +13,7 @@ private:
     void run(const yarp::os::Bottle &args);
     
 public:
-    Pointing(yarp::os::Mutex* mut, yarp::os::ResourceFinder &rf, std::string behaviorName): Behavior(mut, rf, behaviorName) {
+    Pointing(yarp::os::Mutex* mut, yarp::os::ResourceFinder &rf, icubclient::ICubClient* iCub, std::string behaviorName): Behavior(mut, rf, iCub, behaviorName) {
         ;
     }
         

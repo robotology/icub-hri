@@ -42,6 +42,7 @@ public:
         behaviorOverPort = nullptr;
         homeoPort = nullptr;
         inputSensationPort = nullptr;
+        active = false;
     }
 
     bool interrupt_ports() {

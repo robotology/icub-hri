@@ -11,7 +11,6 @@ void TestSensation::configure()
 
 void TestSensation::publish()
 {
-
     Bottle *res = in.read(false);
     if (res != NULL) {
         on = (res->get(0).asString() == "ON");
@@ -22,6 +21,5 @@ void TestSensation::publish()
     tosend.clear();
     tosend.addInt(int(on));
     out.write();
-
 }
 
