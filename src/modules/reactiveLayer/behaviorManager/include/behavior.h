@@ -12,11 +12,11 @@ private:
     yarp::os::Mutex* mut;
     yarp::os::BufferedPort<yarp::os::Bottle> behavior_start_stop_port;
 
-    virtual void run(const yarp::os::Bottle &args) = 0;
-
 protected:
     icubclient::ICubClient *iCub;
     yarp::os::ResourceFinder& rf;
+    virtual void run(const yarp::os::Bottle &args) = 0;
+    virtual void close_extra_ports() = 0;
 
 public:
     yarp::os::Port rpc_out_port;
@@ -65,7 +65,6 @@ public:
     }
 
     virtual void configure() = 0;
-    virtual void close_extra_ports() = 0;
 
     void interrupt_ports() {
         sensation_port_in.interrupt();

@@ -10,10 +10,16 @@
 class RecognitionOrder: public Behavior
 {
 private:
-    void run(const yarp::os::Bottle &args);
     yarp::os::Port port_to_homeo;
     std::string port_to_homeo_name;
     std::string homeoPort;
+
+protected:
+    void run(const yarp::os::Bottle &args);
+    void close_extra_ports() {
+        port_to_homeo.interrupt();
+        port_to_homeo.close();
+    }
 
 public:
     RecognitionOrder(yarp::os::Mutex* mut, yarp::os::ResourceFinder &rf, icubclient::ICubClient* iCub, std::string behaviorName): Behavior(mut, rf, iCub, behaviorName) {
@@ -21,11 +27,6 @@ public:
     }
        
     void configure();
-
-    void close_extra_ports() {
-        port_to_homeo.interrupt();
-        port_to_homeo.close();
-    }
     bool manual;
 };
 

@@ -84,16 +84,16 @@ public:
     {
         Bottle cmds;
         switch (mode) {
-            case SENSATION_ON:
-                cmds = sensationOnCmd;
-                break;
-            case SENSATION_OFF:
-                cmds = sensationOffCmd;
-                break;
-            default:
-                yDebug() << "Update mode not implemented";
-                yDebug() << to_string(mode);
-                break;
+        case SENSATION_ON:
+            cmds = sensationOnCmd;
+            break;
+        case SENSATION_OFF:
+            cmds = sensationOffCmd;
+            break;
+        default:
+            yDebug() << "Update mode not implemented";
+            yDebug() << to_string(mode);
+            break;
         }
         Bottle rplies;
         for (int i=0; i<cmds.size(); i++){
@@ -117,27 +117,27 @@ public:
             rplies.clear();
             for (int i=0; i<beforeTriggerCmd.size(); i++){
                 rply.clear();
-                Bottle cmd = *beforeTriggerCmd.get(i).asList();   
-                yDebug() << cmd.toString();     
+                Bottle cmd = *beforeTriggerCmd.get(i).asList();
+                yDebug() << cmd.toString();
                 homeoPort->write(cmd,rply);
                 rplies.addList() = rply;
-            }        
+            }
         }
 
         Port* port = nullptr;
         switch (mode) {
-            case UNDER:
-                cmd = behaviorUnderCmd;
-                port = behaviorUnderPort;
-                break;
-            case OVER:
-                cmd = behaviorOverCmd;
-                port = behaviorOverPort;
-                break;   
-            default:
-                yWarning() << "Trigger mode not implemented";
-                yWarning() << to_string(mode);
-                return;
+        case UNDER:
+            cmd = behaviorUnderCmd;
+            port = behaviorUnderPort;
+            break;
+        case OVER:
+            cmd = behaviorOverCmd;
+            port = behaviorOverPort;
+            break;
+        default:
+            yWarning() << "Trigger mode not implemented";
+            yWarning() << to_string(mode);
+            return;
         }
         
         yInfo() << "Drive " + name + " to be triggered via " << port->getName();
@@ -150,13 +150,12 @@ public:
             rplies.clear();
             for (int i=0; i<afterTriggerCmd.size(); i++){
                 rply.clear();
-                Bottle cmd = *afterTriggerCmd.get(i).asList();   
-                yDebug() << cmd.toString();     
+                Bottle cmd = *afterTriggerCmd.get(i).asList();
+                yDebug() << cmd.toString();
                 homeoPort->write(cmd,rply);
                 rplies.addList() = rply;
-            yDebug() << "triggerBehavior completed.";
-
-            }        
+                yDebug() << "triggerBehavior completed.";
+            }
         }
     }
 };

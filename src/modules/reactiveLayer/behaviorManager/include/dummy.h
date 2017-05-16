@@ -11,13 +11,18 @@ class Dummy: public Behavior
 {
 private:
     static int n_instances;
+    int id;
 
+protected:
     void run(const yarp::os::Bottle &/*args*/) {
         yDebug() << "Dummy::run start " + behaviorName;
         yarp::os::Time::delay(4);
         yDebug() << "Dummy::run stop " + behaviorName;
     }
-    int id;
+
+    void close_extra_ports() {
+        ;
+    }
 
 public:
     Dummy(yarp::os::Mutex* mut, yarp::os::ResourceFinder &rf, icubclient::ICubClient* iCub, std::string behaviorName): Behavior(mut, rf, iCub, behaviorName) {
@@ -28,12 +33,6 @@ public:
     void configure() {
         ;
     }
-
-
-    void close_extra_ports() {
-        ;
-    }
-
 };
 
 #endif
