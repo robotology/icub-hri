@@ -398,82 +398,81 @@ ARG karmaWYSIWYDHash=e14488ffc7fcca750db54122174fe8c06fa397a0
 RUN cd karmaWYSIWYD && git checkout -b localBranch $karmaWYSIWYDHash && mkdir build && cd build && 	\
 	cmake .. 	-DCMAKE_BUILD_TYPE=RELEASE 															\
 				-DCMAKE_INSTALL_PREFIX=$CMAKE_PREFIX_PATH 											\
-				-DOpenCV_DIR=$SRC_FOLDER/opencv3/build/install/share/OpenCV 					
-				# && 	\
-	# make -j$cores && make -j$cores install
+				-DOpenCV_DIR=$SRC_FOLDER/opencv3/build/install/share/OpenCV 					&& 	\
+	make -j$cores && make -j$cores install
 
-#Git clone GPY and WYSIWYD
-# ARG GPYHash=845168af3bb5e61dafed4dd860644546e9c4666a
-# RUN cd GPy && git checkout -b localBranch $GPYHash && python setup.py build_ext --inplace 
-# ENV GPY_ROOT=$SRC_FOLDER/GPy \
-# 	GPY_DIR=$SRC_FOLDER/GPy/build
+# Git clone GPY and WYSIWYD
+ARG GPYHash=845168af3bb5e61dafed4dd860644546e9c4666a
+RUN cd GPy && git checkout -b localBranch $GPYHash && python setup.py build_ext --inplace 
+ENV GPY_ROOT=$SRC_FOLDER/GPy \
+	GPY_DIR=$SRC_FOLDER/GPy/build
 
-# ENV PYTHONPATH=$PYTHONPATH:$YARP_PYTHONLIB:$OPENCV_PYTHONLIB:$GPY_DIR:$GPY_ROOT
+ENV PYTHONPATH=$PYTHONPATH:$YARP_PYTHONLIB:$OPENCV_PYTHONLIB:$GPY_DIR:$GPY_ROOT
 
-# ARG GPYOPTHash=dd1438023e9d133af0c861a9a3c3fd24a5fa07bd
-# RUN cd GPyOpt && git checkout -b localBranch $GPYOPTHash && python setup.py develop
-# ENV GPY_ROOT=$SRC_FOLDER/GPyOpt \
-# 	GPY_DIR=$SRC_FOLDER/GPyOpt/build
-# ENV PYTHONPATH=$PYTHONPATH:$GPYOPT_DIR:$GPYOPT_ROOT
+ARG GPYOPTHash=dd1438023e9d133af0c861a9a3c3fd24a5fa07bd
+RUN cd GPyOpt && git checkout -b localBranch $GPYOPTHash && python setup.py develop
+ENV GPY_ROOT=$SRC_FOLDER/GPyOpt \
+	GPY_DIR=$SRC_FOLDER/GPyOpt/build
+ENV PYTHONPATH=$PYTHONPATH:$GPYOPT_DIR:$GPYOPT_ROOT
 
-# #Install dlib
-# RUN wget http://dlib.net/files/dlib-19.2.tar.bz2 && tar xvfj dlib-19.2.tar.bz2 && \
-# 	cd dlib-19.2/examples && mkdir build && cd build && \
-# 	cmake .. -DOpenCV_DIR=$SRC_FOLDER/opencv3/build/install/share/OpenCV && make -j$cores && rm $SRC_FOLDER/dlib-19.2.tar.bz2
+#Install dlib
+RUN wget http://dlib.net/files/dlib-19.2.tar.bz2 && tar xvfj dlib-19.2.tar.bz2 && \
+	cd dlib-19.2/examples && mkdir build && cd build && \
+	cmake .. -DOpenCV_DIR=$SRC_FOLDER/opencv3/build/install/share/OpenCV && make -j$cores && rm $SRC_FOLDER/dlib-19.2.tar.bz2
 
-# #Human Sensing SAM
-# RUN cd human-sensing-SAM && mkdir build && cd build 							&& 	\
-# 	cmake .. -DCMAKE_BUILD_TYPE=Release												\
-# 			-DOpenCV_DIR=/usr/local/src/robot/opencv/build/install/share/OpenCV && 	\
-# 	make -j6 && make install
+#Human Sensing SAM
+RUN cd human-sensing-SAM && mkdir build && cd build 							&& 	\
+	cmake .. -DCMAKE_BUILD_TYPE=Release												\
+			-DOpenCV_DIR=/usr/local/src/robot/opencv/build/install/share/OpenCV && 	\
+	make -j6 && make install
 
-# COPY CLMYarp.ini $SRC_FOLDER/human-sensing-SAM/app/CLM_Yarp/conf
-# ENV CLM_MODEL_DIR=$SRC_FOLDER/human-sensing-SAM/app/CLM_Yarp/conf
-# ENV PATH=$CLM_MODEL_DIR:$PATH
+COPY CLMYarp.ini $SRC_FOLDER/human-sensing-SAM/app/CLM_Yarp/conf
+ENV CLM_MODEL_DIR=$SRC_FOLDER/human-sensing-SAM/app/CLM_Yarp/conf
+ENV PATH=$CLM_MODEL_DIR:$PATH
 
-# # Comment this section if postgres initialisation is not required
-# COPY ABM_backup.backup .
+# Comment this section if postgres initialisation is not required
+COPY ABM_backup.backup .
 
-# RUN echo "postgres:postgres" | chpasswd
+RUN echo "postgres:postgres" | chpasswd
 
-# USER postgres
+USER postgres
 
-# RUN /etc/init.d/postgresql start &&\
-#     psql --command "alter user postgres with password 'postgres'" && \
-#     echo "postgres" | createdb -h localhost -p 5432 -U postgres ABM && \
-#     echo "postgres" | /usr/bin/pg_restore 	--host localhost --port 5432 --username "postgres" \
-# 											--dbname "ABM" --section pre-data --section data \
-# 											--section post-data --verbose "/usr/local/src/robot/ABM_backup.backup"
-# # Comment this section if postgres initialisation is not required
+RUN /etc/init.d/postgresql start &&\
+    psql --command "alter user postgres with password 'postgres'" && \
+    echo "postgres" | createdb -h localhost -p 5432 -U postgres ABM && \
+    echo "postgres" | /usr/bin/pg_restore 	--host localhost --port 5432 --username "postgres" \
+											--dbname "ABM" --section pre-data --section data \
+											--section post-data --verbose "/usr/local/src/robot/ABM_backup.backup"
+# Comment this section if postgres initialisation is not required
 
-# USER root
+USER root
 
-# #ICUB CLIENT
-# ARG icubClientHash=f720428148690306abc0d1b1dc1503467cc5ad02
-# RUN git clone https://github.com/robotology/icub-client.git
-# RUN cd icub-client && git checkout -b localBranch $icubClientHash && mkdir build && cd build && \
-#  	cmake ..	-DCMAKE_INSTALL_PREFIX=./install 													\
-#  				-DCMAKE_BUILD_TYPE=Release															\
-#  				-DOpenCV_DIR=$SRC_FOLDER/opencv3/build/install/share/OpenCV 						\
-#  				-DICUBCLIENT_COMPILE_TESTS=ON 													&& 	\
-# 	make -j$cores && make -j$cores install
+#ICUB CLIENT
+ARG icubClientHash=f720428148690306abc0d1b1dc1503467cc5ad02
+RUN git clone https://github.com/robotology/icub-client.git
+RUN cd icub-client && git checkout -b localBranch $icubClientHash && mkdir build && cd build && \
+ 	cmake ..	-DCMAKE_INSTALL_PREFIX=./install 													\
+ 				-DCMAKE_BUILD_TYPE=Release															\
+ 				-DOpenCV_DIR=$SRC_FOLDER/opencv3/build/install/share/OpenCV 						\
+ 				-DICUBCLIENT_COMPILE_TESTS=ON 													&& 	\
+	make -j$cores && make -j$cores install
 
-# ENV ICUBCLIENT_ROOT=$SRC_FOLDER/icub-client/build 
-# ENV ICUBCLIENT_DIR=$ICUBCLIENT_ROOT/install 									\
-# 	ICUBCLIENT_BIN=$ICUBCLIENT_ROOT/install/bin 								\
-# 	ICUBCLIENT_LIB=$ICUBCLIENT_ROOT/install/lib 								
-# ENV LD_LIBRARY_PATH=$ICUBCLIENT_LIB:$LD_LIBRARY_PATH 						\
-# 	PATH=$ICUBCLIENT_BIN:$PATH
+ENV ICUBCLIENT_ROOT=$SRC_FOLDER/icub-client/build 
+ENV ICUBCLIENT_DIR=$ICUBCLIENT_ROOT/install 									\
+	ICUBCLIENT_BIN=$ICUBCLIENT_ROOT/install/bin 								\
+	ICUBCLIENT_LIB=$ICUBCLIENT_ROOT/install/lib 								
+ENV LD_LIBRARY_PATH=$ICUBCLIENT_LIB:$LD_LIBRARY_PATH 						\
+	PATH=$ICUBCLIENT_BIN:$PATH
 
-# RUN cd icub-client/bindings && mkdir build && cd build && \
-# 	cmake .. 	-DCMAKE_INSTALL_PREFIX=./install 													\
-#  				-DCMAKE_BUILD_TYPE=Release															\
-#  				-DICUBCLIENT_USE_PYTHON_VERSION=2		&& 	\
-#  	make -j$cores && make -j$cores install												
+RUN cd icub-client/bindings && mkdir build && cd build && \
+	cmake .. 	-DCMAKE_INSTALL_PREFIX=./install 													\
+ 				-DCMAKE_BUILD_TYPE=Release															\
+ 				-DICUBCLIENT_USE_PYTHON_VERSION=2		&& 	\
+ 	make -j$cores && make -j$cores install												
 
-# ENV SAM_ROOT=$SRC_FOLDER/icub-client/src/modules \
-# 	ICUBCLIENT_BINDINGS=$SRC_FOLDER/icub-client/bindings/build/install/lib/python2.7/site-packages
-# ENV PYTHONPATH=$PYTHONPATH:$SAM_ROOT:$ICUBCLIENT_BINDINGS
+ENV SAM_ROOT=$SRC_FOLDER/icub-client/src/modules \
+	ICUBCLIENT_BINDINGS=$SRC_FOLDER/icub-client/bindings/build/install/lib/python2.7/site-packages
+ENV PYTHONPATH=$PYTHONPATH:$SAM_ROOT:$ICUBCLIENT_BINDINGS
 
 WORKDIR /home/icub/
 COPY startup.sh .
