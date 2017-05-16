@@ -21,7 +21,7 @@ clean:
 	-@docker rm -f $(containerName) >/dev/null || true
 
 configure:
-	sudo apt-get install -y libopenni-dev squid-deb-proxy
+	sudo apt-get install -y libopenni-dev squid-deb-proxy net-tools netcat
 
 first_run: makeContainer buildBashrc
 
