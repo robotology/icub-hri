@@ -2,6 +2,7 @@ FROM nvidia/cuda:8.0-cudnn5-devel-ubuntu16.04
 
 # If host is running squid-deb-proxy on port 8000, populate /etc/apt/apt.conf.d/30proxy
 # By default, squid-deb-proxy 403s unknown sources, so apt shouldn't proxy ppa.launchpad.net
+# this will cache apt-get update results for the rest of the dockerfile allowing docker to cache apt-get install commands
 RUN route -n | awk '/^0.0.0.0/ {print $2}' > /tmp/host_ip.txt
 RUN echo "HEAD /" | nc `cat /tmp/host_ip.txt` 8000 | grep squid-deb-proxy \
   && (echo "Acquire::http::Proxy \"http://$(cat /tmp/host_ip.txt):8000\";" > /etc/apt/apt.conf.d/30proxy) \
