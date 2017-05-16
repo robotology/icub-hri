@@ -390,10 +390,6 @@ RUN cd kinect-wrapper && git checkout -b localBranch $kinectHash && mkdir build 
 				-DOpenCV_DIR=$SRC_FOLDER/opencv3/build/install/share/OpenCV 				&& 	\
 	make -j$cores && make -j$cores install
 
-COPY ABM_backup.backup .
-
-RUN echo "postgres:postgres" | chpasswd
-
 USER root
 RUN pip install --upgrade pip && pip install paramz && conda install ipyparallel -y && conda install 'pyqt<5' -y
 
@@ -426,6 +422,11 @@ COPY CLMYarp.ini $SRC_FOLDER/human-sensing-SAM/app/CLM_Yarp/conf
 ENV CLM_MODEL_DIR=$SRC_FOLDER/human-sensing-SAM/app/CLM_Yarp/conf
 ENV PATH=$CLM_MODEL_DIR:$PATH
 
+# Comment this section if postgres initialisation is not required
+COPY ABM_backup.backup .
+
+RUN echo "postgres:postgres" | chpasswd
+
 USER postgres
 
 RUN /etc/init.d/postgresql start &&\
@@ -434,6 +435,8 @@ RUN /etc/init.d/postgresql start &&\
     echo "postgres" | /usr/bin/pg_restore 	--host localhost --port 5432 --username "postgres" \
 											--dbname "ABM" --section pre-data --section data \
 											--section post-data --verbose "/usr/local/src/robot/ABM_backup.backup"
+# Comment this section if postgres initialisation is not required
+
 USER root
 
 #ICUB CLIENT
@@ -481,4 +484,9 @@ RUN chown -R icub /home/icub && chown -R icub $SRC_FOLDER
 
 USER icub
 
+# Uncomment this line if postgresql is not required
+# ENTRYPOINT sudo service ssh start && bash
+
+#Comment this line if postgresql is not required
 ENTRYPOINT sudo service ssh start && sudo service postgresql start && bash
+

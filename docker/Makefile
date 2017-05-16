@@ -1,7 +1,7 @@
 .PHONY: build first_run run clean docker build_image configure makeContainer buildBashrc
 
-tagName := dcamilleri13/pepper-gazebo:kinetic
-containerName := pepper-gazebo-kinetic
+tagName := dcamilleri13/icub-client
+containerName := icub-client
 #scan parts directory
 INPUTS := $(wildcard ${DOCKERPARTS}/*.part)
 HOST=$(shell hostname)
