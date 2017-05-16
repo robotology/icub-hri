@@ -19,7 +19,7 @@ set_target_properties(${LIBRARY_TARGET_NAME} PROPERTIES DEBUG_POSTFIX "d"
                                                         VERSION       ${${PROJECT_NAME}_VERSION}
                                                         LINKER_LANGUAGE CXX)
 
-target_include_directories(${LIBRARY_TARGET_NAME} SYSTEM PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${YARP_INCLUDE_DIRS};${IDL_GENERATED_CODE_DIR}/include>"
+target_include_directories(${LIBRARY_TARGET_NAME} SYSTEM PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR};${YARP_INCLUDE_DIRS};${IDL_GENERATED_CODE_DIR}/include>"
                                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
 # Specify installation targets, typology and destination folders.
