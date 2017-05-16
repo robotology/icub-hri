@@ -209,6 +209,64 @@ bool IOL2OPCBridge::getClickPosition(CvPoint &pos)
             (clickLocation.y!=RET_INVALID));
 }
 
+/**********************************************************/
+bool IOL2OPCBridge::getSuperQuadric(const CvPoint &point, Vector &pos, Vector &dim)
+{
+    Bottle cmd, reply;
+    cmd.addString("get_superq");
+
+    Bottle &in1=cmd.addList();
+
+//    in.addDouble(point.x);
+//    in.addDouble(point.y);
+
+    Bottle &in=in1.addList();
+    in.addDouble(point.x);
+    in.addDouble(point.y);
+    //0 is for getting the estimated superquadric, 1 is for getting the filtered estimated superquadric
+    cmd.addInt(0);
+
+    (rpcGetSPQ.write(cmd, reply));
+    // read reply to get position and dimension of point
+    if (reply.size()>0)
+    {
+        yDebug("[iol2opc] check 1");
+        if (Bottle *b=reply.get(0).asList())
+        {
+            yDebug("[iol2opc] check 2");
+            if (Bottle *b1=b->find("dimensions").asList())
+            {
+                yDebug("[iol2opc] check 3");
+                yDebug("b1: %s",b1->toString().c_str());
+                for (int i=0; i<3; i++)
+                {
+                    pos[i]=b1->get(i).asDouble();
+                }
+
+            }
+            else if(Bottle *b1=b->find("center").asList())
+            {
+                for (int i=0; i<3; i++)
+                {
+                    dim[i]=b1->get(i).asDouble();
+                }
+
+            }
+        }
+        else
+        {
+            yDebug("[iol2opc] getSuperQuadric receives wrong format");
+            return false;
+        }
+    }
+    else
+    {
+        yDebug("[iol2opc] getSuperQuadric with wrong cmd");
+        return false;
+    }
+    return true;
+
+}
 
 /**********************************************************/
 bool IOL2OPCBridge::get3DPosition(const CvPoint &point, Vector &x)
@@ -781,6 +839,10 @@ void IOL2OPCBridge::updateOPC()
                 // find 3d position
                 Vector dim(3,0.05);
                 Vector x;
+                // get dim and x directly from superquadric
+                // reading should be here
+                getSuperQuadric(cog, x, dim);
+                yInfo("dim from superquadratic %s",dim.toString(3,3).c_str());
 
                 //if (get3DPositionAndDimensions(bbox,x,dim))
                 if (get3DPosition(cog,x))
@@ -905,6 +967,12 @@ bool IOL2OPCBridge::configure(ResourceFinder &rf)
     rpcClassifier.open(("/"+name+"/classify:rpc").c_str());
     rpcGet3D.open(("/"+name+"/get3d:rpc").c_str());
     getClickPort.open(("/"+name+"/getClick:i").c_str());
+
+    if (rpcGetSPQ.open(("/"+name+"/superquadric-model/rpc").c_str()))
+        yInfo("[%s] Open port rpcGetSPQ to connect to superquadric-model rpc port", name.c_str());
+    std::string SPQrpc = "/superquadric-model/rpc";
+    if (!yarp::os::Network::connect(rpcGetSPQ.getName().c_str(),SPQrpc))
+        yError("[%s] Unable to connect to superquadric-model rpc port", name.c_str());
 
     setBounds(rf, skim_blobs_x_bounds,  "skim_blobs_x_bounds",  -0.70, -0.10);
     setBounds(rf, skim_blobs_y_bounds,  "skim_blobs_y_bounds",  -0.30, -0.30);

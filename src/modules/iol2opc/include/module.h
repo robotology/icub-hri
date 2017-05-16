@@ -223,6 +223,7 @@ protected:
     RpcClient  rpcClassifier;                           //!< rpc client port to send requests to himrepClassifier
     RpcClient  rpcGet3D;                                //!< rpc client port to send requests to SFM
     OPCClient *opc;                                     //!< OPC client object
+    RpcClient  rpcGetSPQ;                               //!< rpc cleint port to send requests to superquadric-model and receive superquadric parameters
 
     BufferedPort<Bottle>             blobExtractor;     //!< buffered port of input of received blobs from lbpExtract
     BufferedPort<Bottle>             histObjLocPort;    //!< buffered port of input of localized objects from iol localizer
@@ -323,6 +324,8 @@ protected:
      * @return A CvPoint containing x, y coordinate of the blob center
      */
     CvPoint getBlobCOG(const Bottle &blobs, const int i);
+
+    bool    getSuperQuadric(const CvPoint &point, Vector &pos, Vector &dim);
 
     /**
      * @brief get3DPosition Get the 3D point coordinate in Root frame through SFM
