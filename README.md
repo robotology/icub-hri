@@ -78,8 +78,15 @@ Using `icub-client` in your project is straightforward. Simply `find_package(icu
 
 The docker folder contains the dockerfile used to build a fully compiled dopcker image for icub-client including all extras such as opencv3, iol, kinect and karmaWysiwyd. You can either download a pre-compiled image at https://hub.docker.com/r/dcamilleri13/icub-client or compile it using the provided files.
 
+Prerequisites:
+1. Install docker: https://docs.docker.com/engine/installation/linux/ubuntulinux/
+2. Add permissions to user for convenience: http://askubuntu.com/questions/477551/how-can-i-use-docker-without-sudo
+3. Install nvidia-docker. https://github.com/NVIDIA/nvidia-docker
+
 To compile and run the image:
 1. Run `make configure`. This will install any required libraries on the host system
 2. Run `make build`. This will compile the dockerfile into a docker image. All required files are present in the folder except for `ABM_backup.backup`. This is a postgresql backup image which can be used to transfer the contents of an already available backup image. If you want do not want to initialise with a backup image, comment or remove the indicated sections within the Dockerfile with a `#`
 3. Run `make first_run`. This will run the dockerimage for the first time while setting up permissions, audio and video access. At this point the image is not ready to use because environment variables set by the dockerfile are not accessible via ssh. Thus at this point, type `exit` into the command line to close the image at which point a bashrc_iCub is created with all the required paths.
 4. Run `make run` to launch and attach the docker image
+
+Note: This image was compiled with an Nvidia card present. It has not been tested on cpu only.
