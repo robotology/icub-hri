@@ -36,6 +36,8 @@ Setting a model to any one of these data collection methods and also specifying 
     2. Include the directory where you cloned GPyOpt in your PYTHONPATH.
     3. Move to the GPyOpt directory and run: "python setup.py develop"
 
+3. Include the directory **ICUBCLIENT_ROOT/src/modules** in your PYTHONPATH.
+
 ## How to use:
 
 Everything is accessed via **samSupervisor** which is installed to **ICUBCLIENT_DIR**.
