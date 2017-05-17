@@ -36,6 +36,8 @@ Setting a model to any one of these data collection methods and also specifying 
     2. Include the directory where you cloned GPyOpt in your PYTHONPATH.
     3. Move to the GPyOpt directory and run: "python setup.py develop"
 
+3. Include the directory **ICUBCLIENT_ROOT/src/modules** in your PYTHONPATH.
+
 ## How to use:
 
 Everything is accessed via **samSupervisor** which is installed to **ICUBCLIENT_DIR**.
@@ -82,7 +84,7 @@ Where `<model1Name>` and `<model2Name>` will be modelled as a single model while
 
 4. `<FolderName>/Models` is left empty and is used by samSupervisor to store trained models. 
 
-5. You can get an example `<FolderName>` from ______ which contains data, config.ini and pre-trained models for ______
+5. You can get an example `<FolderName>` from [here](https://drive.google.com/open?id=0B6fkkRLTYjNLbjFFSEZtUmtHNk0) which contains data and config.ini for Faces and Actions and pre-trained models for Actions
 
 6. Finally, modify `default.ini` in **samSupervisor** context to point to your `<FolderName>` and comment out models within `sensory_level_conf.ini` also found in the **samSupervisor** context which you do not require to run automatically when launching samSupervisor 
 

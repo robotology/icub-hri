@@ -64,6 +64,8 @@ namespace icubclient{
             Entity* complement_manner = nullptr
             );
 
+        virtual ~Relation() {}
+
         yarp::os::Bottle asBottle(bool ignoreID = false) const;
         /**
         * Return the relation as a bottle without the argument to "none"

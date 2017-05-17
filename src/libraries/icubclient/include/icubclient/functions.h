@@ -16,6 +16,9 @@
  * Public License for more details
  */
 
+#ifndef _FUNCTIONS_H
+#define _FUNCTIONS_H
+
 #include <yarp/os/Bottle.h>
 #include <string>
 #include <vector>
@@ -66,3 +69,5 @@ void replace_all(std::string & in, const std::string & plain, const std::string 
  */
 std::string grammarToString(const std::string& sPath);
 }
+
+#endif

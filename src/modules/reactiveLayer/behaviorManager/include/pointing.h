@@ -9,18 +9,19 @@
 
 class Pointing: public Behavior
 {
-private:
+protected:
     void run(const yarp::os::Bottle &args);
-    
+
+    void close_extra_ports() {
+        ;
+    }
+
 public:
     Pointing(yarp::os::Mutex* mut, yarp::os::ResourceFinder &rf, icubclient::ICubClient* iCub, std::string behaviorName): Behavior(mut, rf, iCub, behaviorName) {
         ;
     }
         
     void configure();
-    void close_extra_ports() {
-        ;
-    }
 };
 
 #endif

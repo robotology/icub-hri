@@ -2,6 +2,7 @@ FROM nvidia/cuda:8.0-cudnn5-devel-ubuntu16.04
 
 # If host is running squid-deb-proxy on port 8000, populate /etc/apt/apt.conf.d/30proxy
 # By default, squid-deb-proxy 403s unknown sources, so apt shouldn't proxy ppa.launchpad.net
+# this will cache apt-get update results for the rest of the dockerfile allowing docker to cache apt-get install commands
 RUN route -n | awk '/^0.0.0.0/ {print $2}' > /tmp/host_ip.txt
 RUN echo "HEAD /" | nc `cat /tmp/host_ip.txt` 8000 | grep squid-deb-proxy \
   && (echo "Acquire::http::Proxy \"http://$(cat /tmp/host_ip.txt):8000\";" > /etc/apt/apt.conf.d/30proxy) \
@@ -43,6 +44,7 @@ RUN git clone https://github.com/robotology/kinect-wrapper.git
 RUN git clone https://github.com/SheffieldML/GPyOpt.git
 RUN git clone https://github.com/avin2/SensorKinect.git
 RUN git clone https://github.com/pitzer/SiftGPU.git
+RUN git clone https://github.com/towardthesea/karmaWYSIWYD.git
 
 # Install icub ppa
 RUN sh -c 'echo "deb http://www.icub.org/ubuntu xenial contrib/science" > /etc/apt/sources.list.d/icub.list'
@@ -389,14 +391,17 @@ RUN cd kinect-wrapper && git checkout -b localBranch $kinectHash && mkdir build 
 				-DOpenCV_DIR=$SRC_FOLDER/opencv3/build/install/share/OpenCV 				&& 	\
 	make -j$cores && make -j$cores install
 
-COPY ABM_backup.backup .
-
-RUN echo "postgres:postgres" | chpasswd
-
 USER root
 RUN pip install --upgrade pip && pip install paramz && conda install ipyparallel -y && conda install 'pyqt<5' -y
 
-#Git clone GPY and WYSIWYD
+ARG karmaWYSIWYDHash=e14488ffc7fcca750db54122174fe8c06fa397a0
+RUN cd karmaWYSIWYD && git checkout -b localBranch $karmaWYSIWYDHash && mkdir build && cd build && 	\
+	cmake .. 	-DCMAKE_BUILD_TYPE=RELEASE 															\
+				-DCMAKE_INSTALL_PREFIX=$CMAKE_PREFIX_PATH 											\
+				-DOpenCV_DIR=$SRC_FOLDER/opencv3/build/install/share/OpenCV 					&& 	\
+	make -j$cores && make -j$cores install
+
+# Git clone GPY and WYSIWYD
 ARG GPYHash=845168af3bb5e61dafed4dd860644546e9c4666a
 RUN cd GPy && git checkout -b localBranch $GPYHash && python setup.py build_ext --inplace 
 ENV GPY_ROOT=$SRC_FOLDER/GPy \
@@ -425,6 +430,11 @@ COPY CLMYarp.ini $SRC_FOLDER/human-sensing-SAM/app/CLM_Yarp/conf
 ENV CLM_MODEL_DIR=$SRC_FOLDER/human-sensing-SAM/app/CLM_Yarp/conf
 ENV PATH=$CLM_MODEL_DIR:$PATH
 
+# Comment this section if postgres initialisation is not required
+COPY ABM_backup.backup .
+
+RUN echo "postgres:postgres" | chpasswd
+
 USER postgres
 
 RUN /etc/init.d/postgresql start &&\
@@ -433,6 +443,8 @@ RUN /etc/init.d/postgresql start &&\
     echo "postgres" | /usr/bin/pg_restore 	--host localhost --port 5432 --username "postgres" \
 											--dbname "ABM" --section pre-data --section data \
 											--section post-data --verbose "/usr/local/src/robot/ABM_backup.backup"
+# Comment this section if postgres initialisation is not required
+
 USER root
 
 #ICUB CLIENT
@@ -480,4 +492,9 @@ RUN chown -R icub /home/icub && chown -R icub $SRC_FOLDER
 
 USER icub
 
+# Uncomment this line if postgresql is not required
+# ENTRYPOINT sudo service ssh start && bash
+
+#Comment this line if postgresql is not required
 ENTRYPOINT sudo service ssh start && sudo service postgresql start && bash
+
