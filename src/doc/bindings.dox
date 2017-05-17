@@ -24,8 +24,11 @@ To use the bindings, make sure to run the same version of Python as you specifie
 import yarp
 import icubclient
 yarp.Network.init()
+iCub = icubclient.ICubClient("pythontest")
+iCub.close()
+yarp.Network.fini()
 \endverbatim
-* Then, using the iCub-Client is straightforward and works as expected, nicely interplaying with YARP objects like `Bottle`.
+* Then, using the iCub-Client is straightforward and works as expected, nicely interplaying with YARP objects like `Bottle`. Examples for ARE and KARMA can be found in the `icub-client/bindings` folder.
 * 
 * (This page can be edited at src/doc/bindings.dox)
 */
