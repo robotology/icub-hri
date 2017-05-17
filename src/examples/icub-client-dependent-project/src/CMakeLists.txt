@@ -3,7 +3,7 @@
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
 project(exampledependency)
-include_directories(${icubclient_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+include_directories(${YARP_INCLUDE_DIRS})
 add_executable(${PROJECT_NAME} main.cpp)
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER tools)
 target_link_libraries(${PROJECT_NAME} ${icubclient_LIBRARIES} ${YARP_LIBRARIES})
