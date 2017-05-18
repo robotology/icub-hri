@@ -973,6 +973,8 @@ bool IOL2OPCBridge::configure(ResourceFinder &rf)
     std::string SPQrpc = "/superquadric-model/rpc";
     if (!yarp::os::Network::connect(rpcGetSPQ.getName().c_str(),SPQrpc))
         yError("[%s] Unable to connect to superquadric-model rpc port", name.c_str());
+    else
+        yInfo("[%s] Connected to superquadric-model rpc port", name.c_str());
 
     setBounds(rf, skim_blobs_x_bounds,  "skim_blobs_x_bounds",  -0.70, -0.10);
     setBounds(rf, skim_blobs_y_bounds,  "skim_blobs_y_bounds",  -0.30, -0.30);
