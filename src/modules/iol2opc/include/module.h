@@ -223,7 +223,8 @@ protected:
     RpcClient  rpcClassifier;                           //!< rpc client port to send requests to himrepClassifier
     RpcClient  rpcGet3D;                                //!< rpc client port to send requests to SFM
     OPCClient *opc;                                     //!< OPC client object
-    RpcClient  rpcGetSPQ;                               //!< rpc cleint port to send requests to superquadric-model and receive superquadric parameters
+    RpcClient  rpcGetSPQ;                               //!< rpc client port to send requests to superquadric-model and receive superquadric parameters
+    RpcClient  rpcGetBlobPoints;                        //!< rpc client port to send requests to lbpExtract and receive all points of a blob
 
     BufferedPort<Bottle>             blobExtractor;     //!< buffered port of input of received blobs from lbpExtract
     BufferedPort<Bottle>             histObjLocPort;    //!< buffered port of input of localized objects from iol localizer
@@ -245,11 +246,14 @@ protected:
     Mutex mutexResources;
     Mutex mutexResourcesOpc;
     Mutex mutexResourcesSFM;
+    Mutex mutexResourcesSPQ;
 
     double period;
     bool verbose;
     bool empty;
     bool object_persistence;
+    bool useSPQ;                                        //!< boolean flag to enable/disable using Superquadric-model for object pose, size estimation
+    bool connectedSPQ;                                  //!< boolean flag to check internal connection to Superquadric-model
 
     double presence_timeout;
     string tracker_type;
@@ -324,6 +328,8 @@ protected:
      * @return A CvPoint containing x, y coordinate of the blob center
      */
     CvPoint getBlobCOG(const Bottle &blobs, const int i);
+
+    bool    getBlobPoints(const CvPoint &cog, deque<CvPoint> &blobPoints);
 
     bool    getSuperQuadric(const CvPoint &point, Vector &pos, Vector &dim);
 
