@@ -252,7 +252,7 @@ protected:
     bool verbose;
     bool empty;
     bool object_persistence;
-    bool useSPQ;                                        //!< boolean flag to enable/disable using Superquadric-model for object pose, size estimation
+    bool useSPQ;                                        //!< boolean flag to enable/disable using Superquadric-model for object pose and size estimation
     bool connectedSPQ;                                  //!< boolean flag to check internal connection to Superquadric-model
 
     double presence_timeout;

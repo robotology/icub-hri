@@ -230,20 +230,20 @@ bool IOL2OPCBridge::getBlobPoints(const CvPoint &cog, deque<CvPoint> &blobPoints
                 }
                 else
                 {
-                    yError("[iol2opc] Some problems in blob pixels!");
+                    yError("[iol2opc] getBlobPoints: Some problems in blob pixels!");
                     return false;
                 }
             }
         }
         else
         {
-            yError("[iol2opc] Some problem  in object blob!");
+            yError("[iol2opc] getBlobPoints: Some problem in object blob!");
             return false;
         }
     }
     else
     {
-        yError("[iol2opc] lbpExtract query is fail!");
+        yError("[iol2opc] lbpExtract query failed!");
         return false;
     }
     return true;
