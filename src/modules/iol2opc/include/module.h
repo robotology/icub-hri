@@ -329,8 +329,21 @@ protected:
      */
     CvPoint getBlobCOG(const Bottle &blobs, const int i);
 
+    /**
+     * @brief getBlobPoints Obtain CvPoints belonging to a blob defined by cog, from lbpExtract
+     * @param cog CvPoint of center of mass of the blob
+     * @param blobPoints A set of CvPoints of the blob
+     * @return True if can get result from lbpExtract, False otherwise
+     */
     bool    getBlobPoints(const CvPoint &cog, deque<CvPoint> &blobPoints);
 
+    /**
+     * @brief getSuperQuadric Obtain superquadric-model of an object, defined by point
+     * @param point CvPoint of center of mass of the blob
+     * @param pos A Yarp Vector of the object pose estimation, calculated by the superquadric-model
+     * @param dim A Yarp Vector of the object dimension estimation, calculated by the superquadric-model
+     * @return True if can get result from superquadric-model, False otherwise
+     */
     bool    getSuperQuadric(const CvPoint &point, Vector &pos, Vector &dim);
 
     /**
