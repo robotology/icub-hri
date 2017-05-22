@@ -35,6 +35,8 @@ First, follow the [installation instructions](http://wiki.icub.org/wiki/Linux:In
 ### iol (object tracking; optional)
 For the object tracking, we rely on the `iol` pipeline. Please follow the [installation instructions](https://github.com/robotology/iol). For `icub-client`, not the full list of dependencies is needed. Only install the following dependencies: `segmentation`, `Hierarchical Image Representation`, and `stereo-vision`. Within `Hierarchical Image Representation`, we don't need `SiftGPU`.
 
+To estimate the size and pose of objects, we rely on the `superquadric-model`. Please follow the [installation instructions](https://github.com/robotology/superquadric-model) if you want to use the `superquadric-model` (optional).
+
 The compilation can be disabled using the `ICUBCLIENT_BUILD_IOL2OPC` cmake flag.
 
 ### kinect-wrapper (skeleton tracking; optional)

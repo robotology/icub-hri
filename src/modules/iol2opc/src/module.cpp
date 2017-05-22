@@ -210,6 +210,130 @@ bool IOL2OPCBridge::getClickPosition(CvPoint &pos)
 }
 
 
+bool IOL2OPCBridge::getBlobPoints(const CvPoint &cog, deque<CvPoint> &blobPoints)
+{
+    Bottle cmd,reply;
+    blobPoints.clear();
+
+    cmd.addString("get_component_around");
+    cmd.addInt(cog.x); cmd.addInt(cog.y);
+
+    if (rpcGetBlobPoints.write(cmd,reply))
+    {
+        if (Bottle *blob_list=reply.get(0).asList())
+        {
+            for (int i=0; i<blob_list->size();i++)
+            {
+                if (Bottle *blob_pair=blob_list->get(i).asList())
+                {
+                    blobPoints.push_back(cv::Point(blob_pair->get(0).asInt(),blob_pair->get(1).asInt()));
+                }
+                else
+                {
+                    yError("[iol2opc] getBlobPoints: Some problems in blob pixels!");
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            yError("[iol2opc] getBlobPoints: Some problem in object blob!");
+            return false;
+        }
+    }
+    else
+    {
+        yError("[iol2opc] lbpExtract query failed!");
+        return false;
+    }
+    return true;
+}
+
+
+/**********************************************************/
+bool IOL2OPCBridge::getSuperQuadric(const CvPoint &cog, Vector &pos, Vector &dim)
+{
+    pos.resize(3,0.0);
+    dim.resize(3,0.0);
+    Vector orientation(4,0.0);
+
+    // Get points of a blob, defined by cog
+    deque<CvPoint> blobPoints;
+    if (!getBlobPoints(cog, blobPoints))
+    {
+        yDebug("[iol2opc] getSuperQuadric can't get points from blob of cog point");
+        return false;
+    }
+
+    Bottle cmd, reply;
+    cmd.addString("get_superq");
+
+    Bottle &in1=cmd.addList();
+
+    for (size_t i=0; i<blobPoints.size(); i++)
+    {
+        Bottle &in=in1.addList();
+        in.addDouble(blobPoints[i].x);
+        in.addDouble(blobPoints[i].y);
+    }
+    cmd.addInt(0);  //0 is for getting the estimated superquadric, 1 is for getting the filtered estimated superquadric
+
+    mutexResourcesSPQ.lock();
+    rpcGetSPQ.write(cmd, reply);
+    mutexResourcesSPQ.unlock();
+    // read reply to get position and dimension of blob by cog
+    if (reply.size()>0)
+    {
+        if (Bottle *b=reply.get(0).asList())
+        {
+            if (Bottle *b1=b->find("dimensions").asList())
+            {
+                yDebug("[iol2opc] b1 dim: %s",b1->toString().c_str());
+                for (int i=0; i<3; i++)
+                {
+                    dim[i]=b1->get(i).asDouble();
+                }
+            }
+            if(Bottle *b1=b->find("center").asList())
+            {
+                yDebug("[iol2opc] b1 center: %s",b1->toString().c_str());
+                for (int i=0; i<3; i++)
+                {
+                    pos[i]=b1->get(i).asDouble();
+                }
+            }
+            if(Bottle *b1=b->find("orientation").asList())
+            {
+                yDebug("[iol2opc] b1 orientation: %s",b1->toString().c_str());
+                for (int i=0; i<4; i++)
+                {
+                    orientation[i]=b1->get(i).asDouble();
+                }
+            }
+            Matrix orientMatrix = axis2dcm(orientation);
+            Vector dimTemp = dim;
+            dimTemp.push_back(1.0);
+            dimTemp = orientMatrix*dimTemp;
+            dim = dimTemp.subVector(0,2);
+            for (uint8_t i=0; i<dim.size();i++)
+                dim[i] = fabs(dim[i]);  // This is due to the disTemp computation can generate negative value
+            dim = dim*2.0;  // This is due to the outputs from superquadric are semi-axis lengths
+        }
+        else
+        {
+            yError("[iol2opc] getSuperQuadric receives wrong format");
+            return false;
+        }
+    }
+    else
+    {
+        yError("[iol2opc] getSuperQuadric with wrong cmd");
+        return false;
+    }
+    return true;
+
+}
+
 /**********************************************************/
 bool IOL2OPCBridge::get3DPosition(const CvPoint &point, Vector &x)
 {
@@ -779,11 +903,26 @@ void IOL2OPCBridge::updateOPC()
                 cog.y=bbox.y+(bbox.height>>1);
 
                 // find 3d position
-                Vector dim(3,0.05);
-                Vector x;
+                Vector  dim(3,0.05);
+                Vector  x;
+                bool    foundObj = false;
 
-                //if (get3DPositionAndDimensions(bbox,x,dim))
-                if (get3DPosition(cog,x))
+                if (useSPQ && connectedSPQ)
+                {
+                    // get dim and x directly from superquadric
+                    // reading should be here
+                    yInfo("CvPoint [%d, %d]",cog.x,cog.y);
+                    foundObj = getSuperQuadric(cog, x, dim);
+                    yInfo("dim from superquadratic %s",dim.toString(3,3).c_str());
+                    yInfo("pos from superquadratic %s",x.toString(3,3).c_str());
+                }
+                else
+                {
+                    // otherwise use SFM only
+                    foundObj = get3DPosition(cog,x);
+                }
+
+                if (foundObj)
                 {
                     Bottle bObjNameLoc;
                     Vector x_filtered,dim_filtered;
@@ -880,6 +1019,11 @@ bool IOL2OPCBridge::configure(ResourceFinder &rf)
     verbose=rf.check("verbose");
     empty=rf.check("empty");
     object_persistence=(rf.check("object_persistence",Value("off")).asString()=="on");
+    useSPQ=(rf.check("use_superquadric",Value("off")).asString()=="on");
+    if (useSPQ)
+        yInfo("[%s] useSPQ set on",name.c_str());
+    else
+        yInfo("[%s] useSPQ set off",name.c_str());
 
     opc=new OPCClient(name);
     if (!opc->connect(rf.check("opcName",Value("OPC")).asString().c_str()))
@@ -905,6 +1049,26 @@ bool IOL2OPCBridge::configure(ResourceFinder &rf)
     rpcClassifier.open(("/"+name+"/classify:rpc").c_str());
     rpcGet3D.open(("/"+name+"/get3d:rpc").c_str());
     getClickPort.open(("/"+name+"/getClick:i").c_str());
+
+    // new port connections for superqudric-model
+    if (rpcGetBlobPoints.open(("/"+name+"/blob/rpc").c_str()))
+        yInfo("[%s] Open port rpcGetBlobPoints to connect to lbpExtract rpc port", name.c_str());
+    std::string blobrpc = "/lbpExtract/rpc:i";
+    connectedSPQ = yarp::os::Network::connect(rpcGetBlobPoints.getName().c_str(),blobrpc);
+    if (!connectedSPQ)
+        yError("[%s] Unable to connect to lbpExtract rpc port", name.c_str());
+    else
+        yInfo("[%s] Connected to lbpExtract rpc port", name.c_str());
+
+    if (rpcGetSPQ.open(("/"+name+"/superquadric-model/rpc").c_str()))
+        yInfo("[%s] Open port rpcGetSPQ to connect to superquadric-model rpc port", name.c_str());
+    std::string SPQrpc = "/superquadric-model/rpc";
+    connectedSPQ &= yarp::os::Network::connect(rpcGetSPQ.getName().c_str(),SPQrpc);
+    if (!connectedSPQ)
+        yError("[%s] Unable to connect to superquadric-model rpc port", name.c_str());
+    else
+        yInfo("[%s] Connected to superquadric-model rpc port", name.c_str());
+
 
     setBounds(rf, skim_blobs_x_bounds,  "skim_blobs_x_bounds",  -0.70, -0.10);
     setBounds(rf, skim_blobs_y_bounds,  "skim_blobs_y_bounds",  -0.30, -0.30);
@@ -998,6 +1162,8 @@ bool IOL2OPCBridge::interruptModule()
     rpcClassifier.interrupt();
     getClickPort.interrupt();
     rpcGet3D.interrupt();
+    rpcGetBlobPoints.interrupt();
+    rpcGetSPQ.interrupt();
     opc->interrupt();
     yDebug() << "Interrupt finished";
 
@@ -1038,6 +1204,10 @@ bool IOL2OPCBridge::close()
     rpcClassifier.close();
     getClickPort.interrupt();
     getClickPort.close();
+    rpcGetBlobPoints.interrupt();
+    rpcGetBlobPoints.close();
+    rpcGetSPQ.interrupt();
+    rpcGetSPQ.close();
     rpcGet3D.interrupt();
     rpcGet3D.close();
     opc->interrupt();

@@ -126,6 +126,16 @@
 
     <!-- iol2opc related start -->
     <module>
+       <name>superquadric-model</name>
+       <node>icubVulcan</node>
+    </module>
+    <module>
+       <name>yarpview</name>
+       <parameters>--name /dispSuperq --out /dispBlobs/out --x 1600 --y 370 --w 600 --h 600 --p 200</parameters>
+       <node>icubVulcan</node>
+    </module>
+
+    <module>
         <name>himrepClassifier</name>
         <parameters></parameters>
         <node>icubVulcan</node>
@@ -528,6 +538,21 @@
         <from>/agentDetector/kinect/skeletonPort:o</from>
         <to>/viewer/skeleton</to>
         <protocol>udp</protocol>
+    </connection>
+    <connection>
+        <from>/superquadric-model/SFM:rpc</from>
+        <to>/SFM/rpc</to>
+        <protocol>tcp</protocol>
+    </connection>
+    <connection>
+        <from>/superquadric-model/img:o</from>
+        <to>/dispSuperq</to>
+        <protocol>tcp</protocol>
+    </connection>
+    <connection>
+        <from>/icub/camcalib/left/out</from>
+        <to>/superquadric-model/img:i</to>
+        <protocol>tcp</protocol>
     </connection>
 
     <!-- skin related start -->

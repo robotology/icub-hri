@@ -223,6 +223,8 @@ protected:
     RpcClient  rpcClassifier;                           //!< rpc client port to send requests to himrepClassifier
     RpcClient  rpcGet3D;                                //!< rpc client port to send requests to SFM
     OPCClient *opc;                                     //!< OPC client object
+    RpcClient  rpcGetSPQ;                               //!< rpc client port to send requests to superquadric-model and receive superquadric parameters
+    RpcClient  rpcGetBlobPoints;                        //!< rpc client port to send requests to lbpExtract and receive all points of a blob
 
     BufferedPort<Bottle>             blobExtractor;     //!< buffered port of input of received blobs from lbpExtract
     BufferedPort<Bottle>             histObjLocPort;    //!< buffered port of input of localized objects from iol localizer
@@ -244,11 +246,14 @@ protected:
     Mutex mutexResources;
     Mutex mutexResourcesOpc;
     Mutex mutexResourcesSFM;
+    Mutex mutexResourcesSPQ;
 
     double period;
     bool verbose;
     bool empty;
     bool object_persistence;
+    bool useSPQ;                                        //!< boolean flag to enable/disable using Superquadric-model for object pose and size estimation
+    bool connectedSPQ;                                  //!< boolean flag to check internal connection to Superquadric-model
 
     double presence_timeout;
     string tracker_type;
@@ -323,6 +328,23 @@ protected:
      * @return A CvPoint containing x, y coordinate of the blob center
      */
     CvPoint getBlobCOG(const Bottle &blobs, const int i);
+
+    /**
+     * @brief getBlobPoints Obtain CvPoints belonging to a blob defined by cog, from lbpExtract
+     * @param cog CvPoint of center of mass of the blob
+     * @param blobPoints A set of CvPoints of the blob
+     * @return True if can get result from lbpExtract, False otherwise
+     */
+    bool    getBlobPoints(const CvPoint &cog, deque<CvPoint> &blobPoints);
+
+    /**
+     * @brief getSuperQuadric Obtain superquadric-model of an object, defined by point
+     * @param point CvPoint of center of mass of the blob
+     * @param pos A Yarp Vector of the object pose estimation, calculated by the superquadric-model
+     * @param dim A Yarp Vector of the object dimension estimation, calculated by the superquadric-model
+     * @return True if can get result from superquadric-model, False otherwise
+     */
+    bool    getSuperQuadric(const CvPoint &point, Vector &pos, Vector &dim);
 
     /**
      * @brief get3DPosition Get the 3D point coordinate in Root frame through SFM
