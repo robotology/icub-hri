@@ -1,7 +1,7 @@
 .PHONY: build first_run run clean docker build_image configure makeContainer buildBashrc
 
-tagName := dcamilleri13/icub-client
-containerName := icub-client
+tagName := dcamilleri13/wysiwydinstall:year2demo
+containerName := wysiwydYr2
 #scan parts directory
 INPUTS := $(wildcard ${DOCKERPARTS}/*.part)
 HOST=$(shell hostname)
@@ -10,7 +10,6 @@ build: clean build_image
 
 build_image:
 	nvidia-docker build -t $(tagName) .
-	paplay ${BEEP}
 
 run:
 	nvidia-docker start $(containerName)
