@@ -311,11 +311,12 @@ bool IOL2OPCBridge::getSuperQuadric(const CvPoint &cog, Vector &pos, Vector &dim
                 }
             }
             Matrix orientMatrix = axis2dcm(orientation);
-            yDebug("orientMatrix: %s",orientMatrix.toString(3,3).c_str());
             Vector dimTemp = dim;
             dimTemp.push_back(1.0);
             dimTemp = orientMatrix*dimTemp;
             dim = dimTemp.subVector(0,2);
+            for (uint8_t i=0; i<dim.size();i++)
+                dim[i] = fabs(dim[i]);  // This is due to the disTemp computation can generate negative value
             dim = dim*2.0;  // This is due to the outputs from superquadric are semi-axis lengths
         }
         else
