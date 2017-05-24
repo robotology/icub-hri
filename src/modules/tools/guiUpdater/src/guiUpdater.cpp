@@ -136,6 +136,7 @@ bool GuiUpdater::updateModule()
     if (opc->isConnected())
     {
         opc->checkout(); //Retrieve all entities
+        iCub = opc->addOrRetrieveEntity<Agent>("icub");
 
         //Display the iCub specifics
         addiCub(iCub);
