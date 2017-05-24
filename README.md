@@ -86,9 +86,9 @@ Prerequisites:
 3. Install nvidia-docker. https://github.com/NVIDIA/nvidia-docker
 
 To compile and run the image:
-1. Run `make configure`. This will install any required libraries on the host system
-2. Run `make build`. This will compile the dockerfile into a docker image. All required files are present in the folder except for `ABM_backup.backup`. This is a postgresql backup image which can be used to transfer the contents of an already available backup image. If you want do not want to initialise with a backup image, comment or remove the indicated sections within the Dockerfile with a `#`
+1. Run `make configure`. This will install any required libraries on the host system.
+2. Run `make build`. This will compile the dockerfile into a docker image.
 3. Run `make first_run`. This will run the dockerimage for the first time while setting up permissions, audio and video access. At this point the image is not ready to use because environment variables set by the dockerfile are not accessible via ssh. Thus at this point, type `exit` into the command line to close the image at which point a bashrc_iCub is created with all the required paths.
-4. Run `make run` to launch and attach the docker image
+4. Run `make run` to launch and attach the docker image.
 
-Note: This image was compiled with an Nvidia card present. It has not been tested on cpu only. Also please note that when running the docker image using docker run, ssh service is disabled on the host machine. This is due to the docker container mirroring the host's network configuration, the requirement for an ssh server to run inside of the container to communicate with pc104 and allow modules to be run via yarpmanager and the requirement for a single ssh server to be running on localhost.
+Note: This image was compiled with an Nvidia card present. It has not been tested on CPU only. Also please note that when running the docker image using docker run, ssh service is disabled on the host machine. This is due to the docker container mirroring the host's network configuration, the requirement for an ssh server to run inside of the container to communicate with pc104 and allow modules to be run via yarpmanager and the requirement for a single ssh server to be running on localhost.
