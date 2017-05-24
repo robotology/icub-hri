@@ -430,23 +430,6 @@ COPY CLMYarp.ini $SRC_FOLDER/human-sensing-SAM/app/CLM_Yarp/conf
 ENV CLM_MODEL_DIR=$SRC_FOLDER/human-sensing-SAM/app/CLM_Yarp/conf
 ENV PATH=$CLM_MODEL_DIR:$PATH
 
-# Comment this section if postgres initialisation is not required
-COPY ABM_backup.backup .
-
-RUN echo "postgres:postgres" | chpasswd
-
-USER postgres
-
-RUN /etc/init.d/postgresql start &&\
-    psql --command "alter user postgres with password 'postgres'" && \
-    echo "postgres" | createdb -h localhost -p 5432 -U postgres ABM && \
-    echo "postgres" | /usr/bin/pg_restore 	--host localhost --port 5432 --username "postgres" \
-											--dbname "ABM" --section pre-data --section data \
-											--section post-data --verbose "/usr/local/src/robot/ABM_backup.backup"
-# Comment this section if postgres initialisation is not required
-
-USER root
-
 #ICUB CLIENT
 ARG icubClientHash=f720428148690306abc0d1b1dc1503467cc5ad02
 RUN git clone https://github.com/robotology/icub-client.git
