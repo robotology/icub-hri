@@ -7,6 +7,7 @@
 *  - \ref icubclient_bindings
 *  - \ref icubclient_create_subsystem
 *  - \ref icubclient_tagging
+*  - \ref icubclient_facerecog
 *
 * (This page can be edited at src/doc/tutorials.dox)
 */
