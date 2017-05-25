@@ -60,7 +60,7 @@ Push and pull actions require the high-level motor primitives generator [karmaWY
 If you want to use `karmaWYSIWYD`, you must install `iol` / `iol2opc`. Then, start `iol2opc` and its dependencies as well as `iolReachingCalibration` and follow the instructions for [iolReachingCalibration](https://robotology.github.io/iol/doxygen/doc/html/group__iolReachingCalibration.html) to calibrate the arms before issuing any commands to `karmaWYSIWYD`.
 
 ### human-sensing-SAM (face recognition; optional)
-The recognition of faces with SAM requires [humanSensing-SAM](https://github.com/dcam0050/human-sensing-SAM), to detect and output cropped faces for SAM to classify. Please follow the installation instructions in the [readme](https://github.com/dcam0050/human-sensing-SAM/blob/master/README.md).
+The recognition of faces with SAM requires [human-sensing-SAM](https://github.com/dcam0050/human-sensing-SAM), to detect and output cropped faces for SAM to classify. Please follow the installation instructions in the [readme](https://github.com/dcam0050/human-sensing-SAM/blob/master/README.md).
 
 ## Build icub-client
 
