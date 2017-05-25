@@ -93,9 +93,9 @@ class TouchDetectorThread : public yarp::os::RateThread
 
         /**
          * @brief processPort Process port of body part to receive activations to that body part
-         * @param bodyPart An integer value of body part ID to count
-         * @param data YARP bottle contains data from the port of the body part
-         * @param activations An integer value for number of activations
+         * @param portNum An integer value of body part ID to count
+         * @param activations A vector of integer values for number of activations
+         * @param port The port from which to process data from
          * @see countActivations();
          */
         void processPort(int portNum, yarp::os::BufferedPort<yarp::os::Bottle> *port, std::vector<int> &activations);

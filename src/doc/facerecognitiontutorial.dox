@@ -7,7 +7,7 @@
 
 To follow this tutorial you need to have:
 
-- A `SAM_Data_Models` folder set up with the structure indicated in \ref md__home_daniel_WYSIWYD_PROJECT_icub-client_src_modules_SAM_README README.
+- A `SAM_Data_Models` folder set up with the structure indicated in <a href="https://github.com/robotology/icub-client/blob/master/src/modules/SAM/README.md">SAM README</a>.
 
 - You also need human-sensing-SAM installed and running. Follow the instructions in <a href="https://github.com/dcam0050/human-sensing-SAM/blob/master/README.md">human-Sensing-SAM git repo</a> 
 

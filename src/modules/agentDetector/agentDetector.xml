@@ -5,14 +5,14 @@
 
   <name>agentDetector</name>
   <doxygen-group>icubclient_modules</doxygen-group>
-  <description>%Module based on \ref kinectClient "Kinect Wrapper Client" that track and recognize people.</description>
+  <description>%Module based on kinectClient "Kinect Wrapper Client" that track and recognize people.</description>
   <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
   <version>1.0</version>
 
   <description-long>
-    Module based on \ref kinectClient "Kinect Wrapper Client" that tracks people.
-    This module receives information from the Kinect wrapper, and convert joints to the iCub referential.
-    It requires the \ref kinectServer, OPC and RFH running.
+    Module based on kinectClient "Kinect Wrapper Client" that tracks people.
+    This module receives information from the <a href="https://github.com/robotology/kinect-wrapper">Kinect Wrapper</a>, and convert joints to the iCub referential.
+    It requires the kinectServer, OPC and RFH running.
   </description-long>
 
   <arguments>
