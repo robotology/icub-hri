@@ -33,7 +33,7 @@ void RecognitionOrder::run(const Bottle &/*args*/) {
     }
 
     yDebug() << "send rpc to SAM";
-    
+    string toSay;
     if (iCub->getSAMClient() && iCub->getSAMClient()->askXLabel("action"))
     {
         toSay = iCub->getSAMClient()->classification;
