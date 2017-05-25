@@ -19,14 +19,52 @@ void icubclient::SubSystem_SAM::Close() {
     portRPC.close();
 }
 
-void icubclient::SubSystem_SAM::pause() {
-    yarp::os::Bottle bReq, bResp;
-    bReq.addString("pause");
-    portRPC.write(bReq, bResp);
+bool icubclient::SubSystem_SAM::attentionModulation(const std::string &mode) {
+    if (mode == "stop" || mode == "continue")
+    {
+        yarp::os::Bottle bReq, bResp;
+        bReq.addString("attentionModulation " + mode);
+        portRPC.write(bReq, bResp);
+        if (bResp.toString() == "ack")
+        {   
+            if (mode == "stop")
+            {
+                attentionSAM = false;
+                yInfo()<<"Received ack. Attention off";
+            }
+            else if(mode == "continue")
+            {
+                attentionSAM = true;
+                yInfo()<<"Received ack. Attention on";
+            }
+            return true;
+        }
+        else
+        {
+            yError()<<bResp.toString();
+            return false;
+        }
+    }
+    else
+    {
+        yError()<<"mode can be 'stop' or 'continue'. Received: "+ mode;
+        return false;
+    }
 }
 
-void icubclient::SubSystem_SAM::resume() {
+bool icubclient::SubSystem_SAM::askXLabel(const std::string &model) {
     yarp::os::Bottle bReq, bResp;
-    bReq.addString("resume");
+    bReq.addString("ask_" + model + "_label");
     portRPC.write(bReq, bResp);
+    if (bResp.get(0).toString() == "ack")
+    {   
+        classification = bResp.get(1).toString();
+        yInfo()<<model + " Classification = " + classification;
+        return true;
+    }
+    else
+    {
+        yError()<<bResp.toString();
+        return false;
+    }
 }

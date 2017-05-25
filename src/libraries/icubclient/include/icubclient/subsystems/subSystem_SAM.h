@@ -36,6 +36,8 @@ class SubSystem_SAM : public SubSystem
 
 protected:
     virtual bool connect();
+    bool attentionSAM;
+    std::string classification;
 
 public:
 
@@ -48,14 +50,17 @@ public:
     virtual void Close();
 
     /**
-     * @brief Resume continuous classifications
+     * @brief Method to switch attention modes for SAM. 
+     * @param mode Allowed modes are `stop` and `continue`.
      */
-    void pause();
+    bool attentionModulation(const std::string &mode);
 
     /**
-     * @brief Pause continuous classifications
+     * @brief Method to trigger a classification from SAM.
+     * @param model Model name to trigger a classification for
      */
-    void resume();
+    bool askXLabel(const std::string &model);
+
 };
 }//Namespace
 

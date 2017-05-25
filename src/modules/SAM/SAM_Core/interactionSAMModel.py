@@ -453,6 +453,7 @@ class interactionSAMModel(yarp.RFModule):
                     reply.addString('nack')
                 else:
                     logging.debug('correct reply')
+                    reply.addString('ack')
                     reply.addString(thisClass)
                 logging.debug('finish reply')
                     # reply.addDouble(probClass)
@@ -558,6 +559,7 @@ class interactionSAMModel(yarp.RFModule):
                 if thisClass is None or dataList is None:
                     reply.addString('nack')
                 else:
+                    reply.addString('ack')
                     reply.addString(thisClass)
                     # reply.addDouble(probClass)
         else:

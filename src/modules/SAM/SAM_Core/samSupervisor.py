@@ -576,9 +576,9 @@ class SamSupervisorModule(yarp.RFModule):
             Returns:
                 Boolean indicating success or no success in responding to external requests.
         """
-        helpMessage = ["Commands are: ", "\taskOPC", "\tattentionModulation", "\tcheck_all", "\tcheck modelName",
+        helpMessage = ["Commands are: ", "\taskOPC", "\tattentionModulation mode", "\tcheck_all", "\tcheck modelName",
                        "\tclose modelName", "\tconfig modelName", "\tdataDir modelName", "\tdelete modelName", "\thelp",
-                       "\tload modelName", "\toptimise modelName", "\tquit", "\treport modelName", "\ttrain modelName",
+                       "\tlistModels mode", "\tload modelName", "\toptimise modelName", "\tquit", "\treport modelName", "\ttrain modelName",
                        "\tlist_callSigns"]
         b = yarp.Bottle()
         self.checkAvailabilities(b)
@@ -592,6 +592,8 @@ class SamSupervisorModule(yarp.RFModule):
             self.checkAvailabilities(reply)
         elif command.get(0).asString() == "check":
             self.checkModel(reply, command)
+        elif command.get(0).asString() == "listModels":
+            self.listModels(reply, command)
         elif command.get(0).asString() == "close":
             self.closeModel(reply, command, True)
         elif command.get(0).asString() == "delete":
@@ -673,6 +675,47 @@ class SamSupervisorModule(yarp.RFModule):
 
             Returns : Boolean indicating success of logic or not.
         """
+        return True
+
+    def listModels(self, reply, command):
+        """ Returns lists of models for train or interaction categpories.
+
+            Args:
+                command : Yarp bottle with command. Example valid commands below.
+                reply   : Yarp bottle for the reply from the model.
+
+            Returns :
+                Boolean indicating success or not.
+
+            Example :
+                listModels train - returns list of models that require training\n
+                listModels interaction - returns list of interaction ready models\n
+                listModels all - returns a list of all models
+
+        """
+        logging.info(command.toString())
+        b = yarp.Bottle()
+        self.checkAvailabilities(b)
+
+        reply.clear()
+        if command.size() < 2:
+            reply.addString("nack")
+            reply.addString("'train', 'interaction' or `all` required. eg listModels train")
+        elif command.get(1).asString() not in ["train", "interaction", "all"]:
+            reply.addString("nack")
+            reply.addString("'train', 'interaction' or `all` required. eg listModels train")
+        else:
+            if command.get(1).asString() == "train":
+                listOfModels =  self.updateModelsNames + self.noModelsNames
+            elif command.get(1).asString() == "interaction":
+                listOfModels = self.updateModelsNames + self.uptodateModelsNames
+            elif command.get(1).asString() == "all":
+                listOfModels =  self.updateModelsNames + self.noModelsNames + self.uptodateModelsNames
+
+            reply.addString("ack")
+            for j in listOfModels:
+                reply.addString(j)
+
         return True
 
     def attentionModulation(self, reply, command):
