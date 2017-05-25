@@ -25,6 +25,7 @@
 #include "icubclient/subsystems/subSystem_speech.h"
 #include "icubclient/subsystems/subSystem_recog.h"
 #include "icubclient/subsystems/subSystem_KARMA.h"
+#include "icubclient/subsystems/subSystem_SAM.h"
 
 using namespace std;
 using namespace yarp::os;
@@ -90,6 +91,8 @@ ICubClient::ICubClient(const std::string &moduleName, const std::string &context
                 subSystems[SUBSYSTEM_BABBLING] = new SubSystem_babbling(fullName);
             else if (currentSS == SUBSYSTEM_KARMA)
                 subSystems[SUBSYSTEM_KARMA] = new SubSystem_KARMA(fullName, robot);
+            else if (currentSS == SUBSYSTEM_SAM)
+                subSystems[SUBSYSTEM_SAM] = new SubSystem_SAM(fullName);
             else
                 yError() << "Unknown subsystem!";
         }
@@ -482,4 +485,9 @@ SubSystem_Speech* ICubClient::getSpeechClient()
     } else {
         return s;
     }
+}
+
+SubSystem_SAM* ICubClient::getSAMClient()
+{
+    return getSubSystem<SubSystem_SAM>(SUBSYSTEM_SAM);
 }

@@ -18,6 +18,7 @@ set(${LIBRARY_TARGET_NAME}_SRC src/functions.cpp
                   src/subsystems/subSystem_recog.cpp
                   src/subsystems/subSystem_speech.cpp
                   src/subsystems/subSystem_KARMA.cpp
+                  src/subsystems/subSystem_SAM.cpp
                   src/clients/icubClient.cpp
                   src/clients/icubClient_ARErelated.cpp
                   src/clients/icubClient_KARMArelated.cpp
@@ -43,7 +44,8 @@ set(${LIBRARY_TARGET_NAME}_HDR include/${LIBRARY_TARGET_NAME}/all.h
                   include/${LIBRARY_TARGET_NAME}/subsystems/subSystem_iol2opc.h
                   include/${LIBRARY_TARGET_NAME}/subsystems/subSystem_recog.h
                   include/${LIBRARY_TARGET_NAME}/subsystems/subSystem_speech.h
-                  include/${LIBRARY_TARGET_NAME}/subsystems/subSystem_KARMA.h)
+                  include/${LIBRARY_TARGET_NAME}/subsystems/subSystem_KARMA.h
+                  include/${LIBRARY_TARGET_NAME}/subsystems/subSystem_SAM.h)
 
 add_library(${LIBRARY_TARGET_NAME} ${${LIBRARY_TARGET_NAME}_SRC} ${${LIBRARY_TARGET_NAME}_HDR})
 target_link_libraries(${LIBRARY_TARGET_NAME} ${YARP_LIBRARIES} icubclientIDLClients)

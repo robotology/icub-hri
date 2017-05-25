@@ -13,6 +13,7 @@
 #include "icubclient/subsystems/subSystem_KARMA.h"
 #include "icubclient/subsystems/subSystem_recog.h"
 #include "icubclient/subsystems/subSystem_speech.h"
+#include "icubclient/subsystems/subSystem_SAM.h"
 
 // others
 #include "icubclient/functions.h"

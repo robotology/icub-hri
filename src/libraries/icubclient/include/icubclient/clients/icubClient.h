@@ -49,6 +49,7 @@ namespace icubclient{
     class SubSystem_KARMA;
     class SubSystem_Recog;
     class SubSystem_Speech;
+    class SubSystem_SAM;
 
     class Action;
     class Agent;
@@ -104,6 +105,7 @@ namespace icubclient{
         SubSystem_KARMA* getKARMA();
         SubSystem_Recog* getRecogClient();
         SubSystem_Speech* getSpeechClient();
+        SubSystem_SAM* getSAMClient();
 
         OPCClient*                  opc;
         Agent*                      icubAgent;
