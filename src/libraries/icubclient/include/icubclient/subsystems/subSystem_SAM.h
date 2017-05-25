@@ -36,11 +36,10 @@ class SubSystem_SAM : public SubSystem
 
 protected:
     virtual bool connect();
-    bool attentionSAM;
-    std::string classification;
 
 public:
-
+    bool attentionSAM;
+    std::string classification;
     /**
     * Default constructor.
     * @param masterName stem-name used to open up ports.

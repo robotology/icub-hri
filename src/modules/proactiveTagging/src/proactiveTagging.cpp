@@ -21,6 +21,7 @@
 #include "icubclient/clients/opcClient.h"
 #include "icubclient/subsystems/subSystem_recog.h"
 #include "icubclient/subsystems/subSystem_speech.h"
+#include "icubclient/subsystems/subSystem_SAM.h"
 
 using namespace yarp::os;
 using namespace icubclient;
@@ -63,15 +64,6 @@ bool proactiveTagging::configure(yarp::os::ResourceFinder &rf) {
     }
 
     //--------------------------------------------- output ports
-    //out to SAM
-    portToSAM.open(("/" + moduleName + "/toSAM:o").c_str());
-    SAMRpc = rf.check("SAMRpc", Value("/sam/rpc:i")).asString().c_str();
-
-    if (!Network::connect(portToSAM.getName().c_str(), SAMRpc.c_str())) {
-        yDebug() << "SAM NOT CONNECTED: face recognition will not work";
-        iCub->say("SAM NOT CONNECTED");
-    }
-
     // out to pasar
     portToPasar.open(("/" + moduleName + "/pasar:o").c_str());
     if (!Network::connect(portToPasar.getName().c_str(), "/pasar/rpc")) {
@@ -108,7 +100,6 @@ bool proactiveTagging::configure(yarp::os::ResourceFinder &rf) {
 
 bool proactiveTagging::interruptModule() {
     portFromTouchDetector.interrupt();
-    portToSAM.interrupt();
     portToPasar.interrupt();
     rpcPort.interrupt();
 
@@ -123,9 +114,6 @@ bool proactiveTagging::close() {
 
     portFromTouchDetector.interrupt();
     portFromTouchDetector.close();
-
-    portToSAM.interrupt();
-    portToSAM.close();
 
     portToPasar.interrupt();
     portToPasar.close();
@@ -231,42 +219,46 @@ bool proactiveTagging::updateModule() {
 Bottle proactiveTagging::getNameFromSAM(string sNameTarget, string currentEntityType) {
     iCub->say("Have we met before?", false);
     Bottle bOutput;
-    Bottle bToSam, bReplySam;
-    bToSam.addString("ask_face_label");
+    if (iCub->getSAMClient())
+    {
+        if (iCub->getSAMClient()->askXLabel("face"))
+        {
+            string sNameSAM = iCub->getSAMClient()->classification;
 
-    yDebug() << "Request to SAM: " << bToSam.toString();
-    portToSAM.write(bToSam, bReplySam);
-    yDebug() << "Reply from SAM: " << bReplySam.toString();
-    string sNameSAM = bReplySam.get(0).asString();
-    if(sNameSAM != "nack" && sNameSAM != "unknown" && sNameSAM != "" && sNameSAM != "None") {
-        Entity* e = iCub->opc->getEntity(sNameTarget);
-        if(e) {
-            Agent* TARGET = dynamic_cast<Agent*>(e);
-            if(TARGET) {
-                yDebug() << "Changing name from " << TARGET->name() << " to " << sNameSAM;
-                iCub->changeName(TARGET,sNameSAM);
-                iCub->opc->commit(TARGET);
+            if(sNameSAM != "unknown" && sNameSAM != "" && sNameSAM != "None") 
+            {
+                Entity* e = iCub->opc->getEntity(sNameTarget);
+                if(e) {
+                    Agent* TARGET = dynamic_cast<Agent*>(e);
+                    if(TARGET) {
+                        yDebug() << "Changing name from " << TARGET->name() << " to " << sNameSAM;
+                        iCub->changeName(TARGET,sNameSAM);
+                        iCub->opc->commit(TARGET);
 
-                iCub->say("Yes, I remember. Nice to see you, " + sNameSAM);
-                yarp::os::Time::delay(0.2);
-                iCub->home();
+                        iCub->say("Yes, I remember. Nice to see you, " + sNameSAM);
+                        yarp::os::Time::delay(0.2);
+                        iCub->home();
 
-                bOutput.addString("success");
-                bOutput.addString(currentEntityType);
+                        bOutput.addString("success");
+                        bOutput.addString(currentEntityType);
+                    } else {
+                        bOutput.addString("nack");
+                        yError() << "Could not cast" << e->name() << "to Agent";
+                    }
+                } else {
+                    yError() << sNameTarget << "is not an entity";
+                    bOutput.addString("nack");
+                }
             } else {
+                yError() << "Classification not recognised";
                 bOutput.addString("nack");
-                yError() << "Could not cast" << e->name() << "to Agent";
             }
         } else {
+            yError() << "askXlabel failed";
             bOutput.addString("nack");
-            yError() << sNameTarget << "is not an entity";
         }
-    }
-    else {
-        if(sNameSAM == "nack") {
-             yError() << "[getNameFromSAM]" << bReplySam.get(1).asString();
-        }
-        
+    } else {
+        yError() << "getSAMClient returned false";
         bOutput.addString("nack");
     }
     return bOutput;
@@ -386,10 +378,7 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput) {
         iCub->lookAtPartner();
 
         // try to do face recognition with SAM
-        if (!Network::connect(portToSAM.getName().c_str(), SAMRpc.c_str())) {
-            yWarning() << " SAM NOT CONNECTED: face recognition will not work";
-        }
-        if(portToSAM.getOutputCount()>0) {
+        if(iCub->getSAMClient()) {
            Bottle recogFromSAM = getNameFromSAM(sNameTarget, currentEntityType);
 
            if (recogFromSAM.get(0).toString() == "nack" ){ // SAM responded but could not recognize face
