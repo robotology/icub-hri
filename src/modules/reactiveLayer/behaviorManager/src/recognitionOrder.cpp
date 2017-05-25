@@ -4,10 +4,7 @@ using namespace std;
 using namespace yarp::os;
 
 void RecognitionOrder::configure() {
-    // Todo: set the value beow from a config file (but we are not in a module here)
-    external_port_name = "/sam/rpc:i";
     from_sensation_port_name = "None";
-
 
     homeoPort = "/homeostasis/rpc";
 
@@ -37,22 +34,10 @@ void RecognitionOrder::run(const Bottle &/*args*/) {
 
     yDebug() << "send rpc to SAM";
     
-    Bottle cmd;
-    Bottle rply;
-    cmd.clear();
-    cmd.addString("ask_action_label");
-    yInfo() << "Recognising...";
-    
-    string toSay;
-
-    rpc_out_port.write(cmd, rply);
-
-    if(rply.get(0).asString() == "ack")
+    if (iCub->getSAMClient() && iCub->getSAMClient()->askXLabel("action"))
     {
-        toSay = rply.get(1).asString();
-    }
-    else
-    {
+        toSay = iCub->getSAMClient()->classification;
+    } else {
         toSay = "Sorry. I did not recognise that action";
     }
     iCub->lookAtPartner();

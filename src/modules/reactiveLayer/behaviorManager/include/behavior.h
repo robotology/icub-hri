@@ -5,6 +5,7 @@
 #include <yarp/os/all.h>
 #include "icubclient/clients/opcClient.h"
 #include "icubclient/clients/icubClient.h"
+#include "icubclient/subsystems/subSystem_SAM.h"
 
 class Behavior
 {
