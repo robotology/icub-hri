@@ -34,11 +34,16 @@ void RecognitionOrder::run(const Bottle &/*args*/) {
 
     yDebug() << "send rpc to SAM";
     string toSay;
-    if (iCub->getSAMClient() && iCub->getSAMClient()->askXLabel("action"))
+    if (iCub->getSAMClient())
     {
-        toSay = iCub->getSAMClient()->classification;
+        auto SAMreply = iCub->getSAMClient()->askXLabel("action");
+        if(std::get<0>(SAMreply)) {
+            toSay = std::get<1>(SAMreply);
+        } else {
+            toSay = "Sorry. I did not recognise that action.";
+        }
     } else {
-        toSay = "Sorry. I did not recognise that action";
+        toSay = "Sorry. It seems like I have difficulties recognising actions today.";
     }
     iCub->lookAtPartner();
     iCub->say(toSay);

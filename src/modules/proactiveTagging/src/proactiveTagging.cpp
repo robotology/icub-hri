@@ -221,9 +221,10 @@ Bottle proactiveTagging::getNameFromSAM(string sNameTarget, string currentEntity
     Bottle bOutput;
     if (iCub->getSAMClient())
     {
-        if (iCub->getSAMClient()->askXLabel("face"))
+        auto SAMreply = iCub->getSAMClient()->askXLabel("face");
+        if(std::get<0>(SAMreply))
         {
-            string sNameSAM = iCub->getSAMClient()->classification;
+            string sNameSAM = std::get<1>(SAMreply);
 
             if(sNameSAM != "unknown" && sNameSAM != "" && sNameSAM != "None") 
             {

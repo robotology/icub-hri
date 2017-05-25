@@ -39,7 +39,6 @@ protected:
 
 public:
     bool attentionSAM;
-    std::string classification;
     /**
     * Default constructor.
     * @param masterName stem-name used to open up ports.
@@ -51,14 +50,16 @@ public:
     /**
      * @brief Method to switch attention modes for SAM. 
      * @param mode Allowed modes are `stop` and `continue`.
+     * @return true if command was send successful.
      */
     bool attentionModulation(const std::string &mode);
 
     /**
      * @brief Method to trigger a classification from SAM.
      * @param model Model name to trigger a classification for
+     * @return tuple of <bool, std::string> with success as bool and classification as std::string
      */
-    bool askXLabel(const std::string &model);
+    std::tuple<bool, std::string> askXLabel(const std::string &model);
 
 };
 }//Namespace

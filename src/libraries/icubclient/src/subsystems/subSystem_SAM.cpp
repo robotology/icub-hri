@@ -1,3 +1,4 @@
+#include <tuple>
 #include <yarp/os/all.h>
 #include "icubclient/subsystems/subSystem_SAM.h"
 
@@ -52,19 +53,19 @@ bool icubclient::SubSystem_SAM::attentionModulation(const std::string &mode) {
     }
 }
 
-bool icubclient::SubSystem_SAM::askXLabel(const std::string &model) {
+std::tuple<bool, std::string> icubclient::SubSystem_SAM::askXLabel(const std::string &model) {
     yarp::os::Bottle bReq, bResp;
     bReq.addString("ask_" + model + "_label");
     portRPC.write(bReq, bResp);
     if (bResp.get(0).toString() == "ack")
     {   
-        classification = bResp.get(1).toString();
+        std::string classification = bResp.get(1).toString();
         yInfo()<<model + " Classification = " + classification;
-        return true;
+        return std::make_tuple(true, classification);
     }
     else
     {
         yError()<<bResp.toString();
-        return false;
+        return std::make_tuple(false, "nack");
     }
 }
