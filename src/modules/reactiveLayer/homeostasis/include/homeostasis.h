@@ -1,3 +1,6 @@
+#ifndef HOMEOSTASIS_H
+#define HOMEOSTASIS_H
+
 #include <string>
 #include <iostream>
 #include <iomanip>
@@ -43,8 +46,6 @@ public:
             valueMin = d_value_min;
             valueMax = d_value_max;
         }
-             
-
     }
 
     Drive()
@@ -58,6 +59,7 @@ public:
         decay = 0.0;
         gradient = true;
     }
+
     void setKey(string d_key)
     {
         this->key=d_key;
@@ -166,3 +168,4 @@ public:
 
 };
 
+#endif

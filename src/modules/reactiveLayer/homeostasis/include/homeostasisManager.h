@@ -1,3 +1,6 @@
+#ifndef HOMEO_MANAGER
+#define HOMEO_MANAGER
+
 #include <string>
 #include <iostream>
 #include <iomanip>
@@ -26,3 +29,5 @@ public:
     
 
 };
+
+#endif

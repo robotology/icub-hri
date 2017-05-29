@@ -419,3 +419,117 @@ bool AllostaticController::respond(const Bottle& cmd, Bottle& reply)
     }
     return true;
 }
+
+bool AllostaticDrive::interrupt_ports() {
+    if (behaviorUnderPort!=nullptr) {
+        behaviorUnderPort->interrupt();
+    }
+    if (behaviorOverPort!=nullptr) {
+        behaviorOverPort->interrupt();
+    }
+    if (inputSensationPort!=nullptr) {
+        inputSensationPort->interrupt();
+    }
+    return true;
+}
+
+bool AllostaticDrive::close_ports() {
+    if (behaviorUnderPort!=nullptr) {
+        behaviorUnderPort->interrupt();
+        behaviorUnderPort->close();
+        delete behaviorUnderPort;
+        behaviorUnderPort=nullptr;
+    }
+    if (behaviorOverPort!=nullptr) {
+        behaviorOverPort->interrupt();
+        behaviorOverPort->close();
+        delete behaviorOverPort;
+        behaviorOverPort=nullptr;
+    }
+    if(inputSensationPort!=nullptr) {
+        inputSensationPort->interrupt();
+        inputSensationPort->close();
+        delete inputSensationPort;
+        inputSensationPort=nullptr;
+    }
+    return true;
+}
+
+Bottle AllostaticDrive::update(DriveUpdateMode mode)
+{
+    Bottle cmds;
+    switch (mode) {
+    case SENSATION_ON:
+        cmds = sensationOnCmd;
+        break;
+    case SENSATION_OFF:
+        cmds = sensationOffCmd;
+        break;
+    default:
+        yDebug() << "Update mode not implemented";
+        yDebug() << to_string(mode);
+        break;
+    }
+    Bottle rplies;
+    for (int i=0; i<cmds.size(); i++){
+        Bottle rply;
+        Bottle cmd = *cmds.get(i).asList();
+        if (! manualMode) {
+            homeoPort->write(cmd,rply);
+        }
+        rplies.addList() = rply;
+    }
+    return rplies;
+}
+
+void AllostaticDrive::triggerBehavior(OutCZ mode)
+{
+    Bottle cmd, rply, rplies;
+    // before trigger command
+    if (! beforeTriggerCmd.isNull() && !manualMode) {
+        cmd.clear();
+        rply.clear();
+        rplies.clear();
+        for (int i=0; i<beforeTriggerCmd.size(); i++){
+            rply.clear();
+            Bottle cmd = *beforeTriggerCmd.get(i).asList();
+            yDebug() << cmd.toString();
+            homeoPort->write(cmd,rply);
+            rplies.addList() = rply;
+        }
+    }
+
+    Port* port = nullptr;
+    switch (mode) {
+    case UNDER:
+        cmd = behaviorUnderCmd;
+        port = behaviorUnderPort;
+        break;
+    case OVER:
+        cmd = behaviorOverCmd;
+        port = behaviorOverPort;
+        break;
+    default:
+        yWarning() << "Trigger mode not implemented";
+        yWarning() << to_string(mode);
+        return;
+    }
+
+    yInfo() << "Drive " + name + " to be triggered via " << port->getName();
+    port->write(cmd, rply);
+
+    // after trigger command
+    if ( ! afterTriggerCmd.isNull() && ! manualMode) {
+        cmd.clear();
+        rply.clear();
+        rplies.clear();
+        for (int i=0; i<afterTriggerCmd.size(); i++){
+            rply.clear();
+            Bottle cmd = *afterTriggerCmd.get(i).asList();
+            yDebug() << cmd.toString();
+            homeoPort->write(cmd,rply);
+            rplies.addList() = rply;
+            yDebug() << "triggerBehavior completed.";
+        }
+    }
+}

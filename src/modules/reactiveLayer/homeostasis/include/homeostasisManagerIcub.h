@@ -1,3 +1,6 @@
+#ifndef HOMEO_MANAGER_ICUB
+#define HOMEO_MANAGER_ICUB
+
 #include <string>
 #include <iostream>
 #include <iomanip>
@@ -61,3 +64,5 @@ public:
     //RPC & scenarios
     bool respond(const yarp::os::Bottle& cmd, yarp::os::Bottle& reply);
 };
+
+#endif

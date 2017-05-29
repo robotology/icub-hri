@@ -1,3 +1,6 @@
+#ifndef HOMEO_TEST
+#define HOMEO_TEST
+
 #include <string>
 #include <iostream>
 #include <iomanip>
@@ -33,3 +36,5 @@ public:
     }
 
 };
+
+#endif

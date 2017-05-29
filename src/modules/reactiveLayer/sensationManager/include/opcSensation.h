@@ -1,3 +1,6 @@
+#ifndef OPCSENSATION
+#define OPCSENSATION
+
 #include <string>
 #include <iostream>
 #include <iomanip>
@@ -32,3 +35,5 @@ public:
 
     void close_ports();
 };
+
+#endif
