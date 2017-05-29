@@ -5,20 +5,50 @@
 
    <name>ears</name>
    <doxygen-group>icubclient_modules</doxygen-group>
-   <description>listen the Human if needed</description>
+   <description>Listen to humans when not doing something else</description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>
    
    <description-long>
-   
+   Module that loads a default grammar for the speech recognizer in the background. This grammar can be safely interrupted by other modules that require parallel access to speech recognition functionalities. 
+   This module parses any order given by the human and triggers the corresponding behaviour in behaviorManager. 
    </description-long>
 
    <arguments>
+    <param default="ears" desc="name of the module"> name </param>
+    <param default="0.1" desc="change the update rate of this module"> period </param>
    </arguments>
 
    <authors>
        <author email="greg.pointeau@gmail.com"> Grégoire Pointeau </author>
+       <author email="jordiysard@gmail.com"> Jordi-Ysard Puigbò </author>
    </authors>
+
+   <data>
+      <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/ears/rpc</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Response port. Supported commands:
+                        - help
+                        - ['quit']: Closes ears
+                        - ['listen'] ['on'/'off'/offShouldWait] : Turns default grammar from the speech recognizer on / off / off (safely)
+        </description>
+      </input>
+      <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/ears/speech:o</port>
+        <required>yes</required>
+        <priority>yes</priority>
+        <description>Communication port to speech recognizer. </description>
+      </input>
+      <output>
+        <type>Bottle</type>
+        <port carrier="tcp">/ears/behavior:o</port>
+        <description>Communication port to behaviorManager.</description>
+      </output>
+   </data>
    
 </module>
 
