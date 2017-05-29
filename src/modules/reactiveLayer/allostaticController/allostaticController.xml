@@ -5,24 +5,65 @@
 
    <name>reactiveLayer</name>
    <doxygen-group>icubclient_modules</doxygen-group>
-   <description>Reactive Layer for the iCub</description>
+   <description>Drive scheduler for the reactiveLayer</description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>
    
    <description-long>
-     - contains the core drive/emotion engine.
-     - interpret input from tactile stimulation and responds accordingly
+     On top of the homeostasis module, the allostatic controller monitors all needs in homeostasis and triggers corresponding behaviors in function of which need requires to be addressed sooner. We call this pre-defined sensory-motor association a drive. This module creates needs in homeostasis from a config file or RPC command, and provides an interface to freeze them and change their parameters depending on their internal values. This module is strongly dependent on sensationManager, homeostasis and behaviorManager and is the core of the reactiveLayer. 
+     See the default.ini config file to see an example on how to define a new drive. 
    </description-long>
 
    <arguments>
+    <param default="AllostaticController" desc="name of the module"> name </param>
+    <param default="0.1" desc="change the update rate of this module"> period </param>
    </arguments>
 
    <authors>
+       <author email="jordiysard@gmail.com"> Jordi-Ysard Puigbò </author>
+       <author email="clement.moulin-frier@upf.edu"> Clément Moulin-Frier </author>
+
        <author email="stephane.lallee@gmail.com"> Stéphane Lallée </author>
    </authors>
 
    <data>
       <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/AllostaticController/rpc</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Response port. Supported commands:
+                        - help
+                        - ['manual'] ['on'/'off'] : sets the allostaticController in manual mode. It the drives needs are frozen and behaviors can be triggered through rpc commands or a gui
+        </description>
+      </input>
+      <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/AllostaticController/toHomeoRPC:o</port>
+        <required>yes</required>
+        <priority>yes</priority>
+        <description>Communication port to create and manage homeostatic needs.</description>
+      </input>
+      <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/AllostaticController/toBehaviorManager:o</port>
+        <required>yes</required>
+        <priority>yes</priority>
+        <description>Communication port to trigger behaviors.</description>
+      </input>
+      <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/AllostaticController/driveName/min:o</port>
+        <required>yes</required>
+        <priority>yes</priority>
+        <description>Port to quickly read when a need crosses its lower boundary.</description>
+      </input>
+      <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/AllostaticController/driveName/max:o</port>
+        <required>yes</required>
+        <priority>yes</priority>
+        <description>Port to quickly read when a need crosses its upper boundary.</description>
       </input>
    </data>
 
