@@ -3,25 +3,44 @@
  
 <module>
 
-   <name>behavior</name>
+   <name>behaviorManager</name>
    <doxygen-group>icubclient_modules</doxygen-group>
-   <description>Behaviors module for reactive layer</description>
+   <description>Module for quick control of default complex behaviors. </description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>
    
    <description-long>
-     - Contains behaviors at the reactive level
+     This module contains an interface to easily schedule behaviors. The interface allows the creation of default complex behaviors (e.g. asking for the name of an object while pointing to it and looking to a human partner). It allows to easily define this behaviors through calls to the icub-client library or other modules. This behaviours can receive arguments with additional metadata (e.g. internal ID of the object to ask for) or obtain this information from sensationManager. The behaviours are scheduled in order to avoid conflicts, only allowing one behaviour to run at the same time. Moreover, all drives can be called by an RPC command with the name and the corresponding arguments. 
+     Additionally, through a config file, the user can select which drives will be available at every execution. 
+     In the context of the reactiveLayer, behaviorManager exists to execute behaviors triggered by the drives in the allostaticController. 
+     - Find an example of a behavior in behaviorManager/src/tagging.cpp. 
+
+     * All necessary ports must be defined at the behavior creation and are connected automatically at the start of the behaviorManager instance. 
+     
    </description-long>
 
    <arguments>
+    <param default="BehaviorManager" desc="name of the module"> name </param>
+    <param default="0.1" desc="change the update rate of this module"> period </param>
    </arguments>
 
    <authors>
-       <author email="clement.moulinfrier@gmail.com"> Clï¿½ment Moulin-Frier </author>
-   </authors>
+      <author email="clement.moulinfrier@gmail.com">  Clément Moulin-Frier </author>
+      <author email="jordiysard.puigbo@upf.edu">  Jordi-Ysard Puigbò </author>  
+    </authors>
 
    <data>
       <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/BehaviorManager/trigger:i</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Response port. Supported commands:
+                        - help
+                        - ['behavior_name'] [arguments]: Triggers a behavior
+                        - ['is_available'] : Replies behaviorManager availability
+                        - ['names'] : Returns a list of all available behaviors
+        </description>
       </input>
    </data>
 
