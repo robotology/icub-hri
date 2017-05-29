@@ -5,19 +5,24 @@
 
    <name>behavior</name>
    <doxygen-group>icubclient_modules</doxygen-group>
-   <description>Sensation module for reactive layer</description>
+   <description>Reactive layer module to monitor basic sensations. </description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>
    
    <description-long>
-     - Contains sensations at the reactive level
+     This module is designed to pre-process all sensory requirements for the reactiveLayer modules (allostaticController and behaviorManager). It's main module (opcSensation) parses the OPC for entities and relays the relevant information to the corresponding modules (e.g. quantity of people or objects to allostaticController for internal variable decay, name and entity type to behaviorManager for interaction). 
+     This module can parse the data independently but behaviorManager and allostaticController strongly depend on it. 
+     Each sensation module to be used must be listed in the config file (see default.ini as an example with opcSensation). 
    </description-long>
 
    <arguments>
+    <param default="SensationManager" desc="name of the module"> name </param>
+    <param default="0.1" desc="change the update rate of this module"> period </param>    
    </arguments>
 
    <authors>
-       <author email="clement.moulinfrier@gmail.com"> Clément Moulin-Frier </author>
+       <author email="clement.moulinfrier@gmail.com">  Clément Moulin-Frier </author>
+       <author email="jordiysard.puigbò@upf.edu">  Jordi-Ysard Puigbò </author>
    </authors>
 
    <data>
