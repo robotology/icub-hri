@@ -13,6 +13,7 @@
      This module is designed to pre-process all sensory requirements for the reactiveLayer modules (allostaticController and behaviorManager). It's main module (opcSensation) parses the OPC for entities and relays the relevant information to the corresponding modules (e.g. quantity of people or objects to allostaticController for internal variable decay, name and entity type to behaviorManager for interaction). 
      This module can parse the data independently but behaviorManager and allostaticController strongly depend on it. 
      Each sensation module to be used must be listed in the config file (see default.ini as an example with opcSensation). 
+     Jordi and Clement contributed equally to the development of this module. 
    </description-long>
 
    <arguments>
@@ -26,7 +27,15 @@
    </authors>
 
    <data>
-      <input>
+    <input>
+        <type>Bottle</type>
+        <port carrier="tcp">/SensationManager/rpc</port>
+        <required>no</required>
+        <priority>no</priority>
+        <description>Response port. Supported commands:
+                        - help
+                        - ['is'] [entity name] [state]: Returns true or false if the entity is in the state requested (e.g. present)
+        </description>
       </input>
    </data>
 
