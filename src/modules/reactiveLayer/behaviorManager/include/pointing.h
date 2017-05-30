@@ -20,7 +20,7 @@ public:
     Pointing(yarp::os::Mutex* mut, yarp::os::ResourceFinder &rf, icubclient::ICubClient* iCub, std::string behaviorName): Behavior(mut, rf, iCub, behaviorName) {
         ;
     }
-        
+       
     void configure();
 };
 

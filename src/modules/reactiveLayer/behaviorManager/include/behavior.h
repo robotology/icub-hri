@@ -30,6 +30,11 @@ public:
     }
     virtual ~Behavior() {}
 
+    /**
+     * @brief openPorts open ports defined for a behavior
+     * @param port_name_prefix unique prefix name for the port
+     * @return void
+     */
     void openPorts(std::string port_name_prefix) {
         if (from_sensation_port_name != "None") {
             sensation_port_in.open("/" + port_name_prefix +"/" + behaviorName + "/sensation:i");
@@ -39,11 +44,16 @@ public:
         }
         behavior_start_stop_port.open("/" + port_name_prefix +"/" + behaviorName + "/start_stop:o");
     }
-
+   
+    /**
+     * @brief trigger triggers this behavior and blocks the mutex
+     * @param args bottle with arguments for this behaviours if not provided, taken from sensations or return error
+     * @return bool false if not triggered because of mutex blocked
+     */
     bool trigger(const yarp::os::Bottle& args) {
-        yDebug() << behaviorName << "::trigger starts"; 
+        yDebug() << behaviorName << "::trigger starts";
         if (mut->tryLock()) {
-            yDebug() << behaviorName << "::trigger mutex locked"; 
+            yDebug() << behaviorName << "::trigger mutex locked";
             yarp::os::Bottle & msg = behavior_start_stop_port.prepare();
             msg.clear();
             msg.addString("start");
@@ -56,7 +66,7 @@ public:
             msg.addString("stop");
             behavior_start_stop_port.write();
             mut->unlock();
-            yDebug() << behaviorName << "::trigger mutex unlocked"; 
+            yDebug() << behaviorName << "::trigger mutex unlocked";
             yDebug() << behaviorName << "::trigger ends";
             return true;
         }
@@ -82,7 +92,7 @@ public:
         behavior_start_stop_port.interrupt();
         behavior_start_stop_port.close();
     }
-    
+   
 };
 
 #endif
