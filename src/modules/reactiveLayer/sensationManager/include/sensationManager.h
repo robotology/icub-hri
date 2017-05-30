@@ -16,6 +16,9 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace icubclient;
 
+/**
+ * \ingroup sensationManager
+ */
 class SensationManager: public RFModule
 {
 private:

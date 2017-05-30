@@ -61,7 +61,7 @@ bool BehaviorManager::configure(yarp::os::ResourceFinder &rf)
 
     for (int i = 0; i<behaviorList.size(); i++)
     {
-        behavior_name = behaviorList.get(i).asString();
+        std::string behavior_name = behaviorList.get(i).asString();
         if (behavior_name == "tagging") {
             behaviors.push_back(new Tagging(&mut, rf, iCub, "tagging"));
         } else if (behavior_name == "pointing") {

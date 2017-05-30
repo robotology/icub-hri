@@ -6,7 +6,9 @@
 
 #include "behavior.h"
 
-
+/**
+ * \ingroup behaviorManager
+ */
 class Dummy: public Behavior
 {
 private:

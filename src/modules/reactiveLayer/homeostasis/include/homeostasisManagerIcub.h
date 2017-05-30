@@ -12,6 +12,9 @@
 
 #include "homeostasisManager.h"
 
+/**
+ * \ingroup homeostasis
+ */
 class HomeostaticModule: public yarp::os::RFModule
 {
 private:
@@ -19,27 +22,26 @@ private:
     std::string moduleName;
     double period;
 
-
     std::vector< yarp::os::BufferedPort<yarp::os::Bottle> * > input_ports;
     std::vector< yarp::os::BufferedPort<yarp::os::Bottle> * > outputM_ports;
     std::vector< yarp::os::BufferedPort<yarp::os::Bottle> * > outputm_ports;
     HomeostasisManager* manager;
     yarp::os::BufferedPort<yarp::os::Bottle> input_port;
-    yarp::os::Port    rpc;
+    yarp::os::Port rpc;
 
     /**
      * @brief addNewDrive add new  drive with default dynamics
      * @param  driveName name of the drive
      * @return bool success
      */
-    bool addNewDrive(string driveName);
+    bool addNewDrive(std::string driveName);
 
     /**
      * @brief addNewDrive add new drive from bottle
      * @param  grpHomeostatic bottle from config file or port
      * @return bool success
      */
-    bool addNewDrive(string driveName, yarp::os::Bottle& grpHomeostatic);
+    bool addNewDrive(std::string driveName, yarp::os::Bottle& grpHomeostatic);
    
     /**
      * @brief removeDrive removes drive
@@ -51,10 +53,14 @@ private:
 
 public:
 
+    /**
+     * @brief bDrive Create Drive from Bottle
+     * @param b Bottle from which to create drive from
+     * @return Drive newly created Drive
+     */
     Drive bDrive(yarp::os::Bottle* b)
     {
-        Drive d = Drive(b->get(0).asString(),b->get(1).asDouble(),b->get(2).asString(),b->get(3).asDouble(),b->get(4).asDouble(),b->get(5).asDouble(),b->get(6).asBool());
-        return d;
+        return Drive(b->get(0).asString(),b->get(1).asDouble(),b->get(2).asString(),b->get(3).asDouble(),b->get(4).asDouble(),b->get(5).asDouble(),b->get(6).asBool());
     }
 
     /**

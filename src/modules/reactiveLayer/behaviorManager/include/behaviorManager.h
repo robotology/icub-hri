@@ -5,10 +5,14 @@
 #include <yarp/os/all.h>
 #include "behavior.h"
 
+
+/**
+ * \ingroup behaviorManager
+ */
 class BehaviorManager: public yarp::os::RFModule
 {
 private:
-    std::vector<Behavior*> behaviors;
+    std::vector<Behavior*> behaviors; //!< List of all behaviors
 
     std::string moduleName;
 
@@ -19,7 +23,6 @@ private:
     icubclient::ICubClient *iCub;
 
     yarp::os::Mutex mut;
-    std::string behavior_name;
 
 public:
     bool configure(yarp::os::ResourceFinder &rf);

@@ -3,7 +3,9 @@
 
 #include "behavior.h"
 
-
+/**
+ * \ingroup behaviorManager
+ */
 class MoveObject: public Behavior
 {
 protected:

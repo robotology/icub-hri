@@ -1,6 +1,7 @@
 #include "homeostasisManagerIcub.h"
 #include <cmath>
 
+using namespace std;
 using namespace yarp::os;
 
 bool HomeostaticModule::addNewDrive(string driveName, yarp::os::Bottle& grpHomeostatic)
@@ -152,8 +153,7 @@ bool HomeostaticModule::respond(const Bottle& cmd, Bottle& reply)
         
     }    
     else if (cmd.get(0).asString() == "par" )
-    {
-        
+    { 
         if (cmd.get(1).asString() == "all") {
             all_drives = true;
         }
@@ -374,7 +374,8 @@ bool HomeostaticModule::respond(const Bottle& cmd, Bottle& reply)
             }
 
         }
-    }else if (cmd.get(0).asString() == "verbose")
+    }
+    else if (cmd.get(0).asString() == "verbose")
     {
         if (cmd.size()!=2)
             yWarning()<<"The command should be 'verbose true/false'";
@@ -393,13 +394,14 @@ bool HomeostaticModule::respond(const Bottle& cmd, Bottle& reply)
 bool HomeostaticModule::updateModule()
 {    
     yarp::os::Bottle* sens_input = input_port.read(false);
-    if (sens_input == 0)
+    if (sens_input == 0) {
         yDebug()<<"Waiting for sensations";
-    else{
+    }
+    else
+    {
     
         for(unsigned int d = 0; d<manager->drives.size();d++)
         {
-            
             if (verbose)
             {
                 yInfo() << "Going by drive #"<<d << " with name "<< manager->drives[d]->name ;
@@ -423,10 +425,14 @@ bool HomeostaticModule::updateModule()
             
             yarp::os::Bottle &out1 = outputm_ports[d]->prepare();
             out1.clear();
-            yarp::os::Bottle &out2 = outputM_ports[d]->prepare();
-            out2.clear();
             out1.addDouble(-manager->drives[d]->getValue()+manager->drives[d]->homeostasisMin);
             outputm_ports[d]->write();
+
+            yarp::os::Bottle &out2 = outputM_ports[d]->prepare();
+            out2.clear();
+            out2.addDouble(+manager->drives[d]->getValue()-manager->drives[d]->homeostasisMax);
+            outputM_ports[d]->write();
+
             if (verbose)
             {
                 yInfo() <<"Drive value: " << manager->drives[d]->value;
@@ -435,13 +441,8 @@ bool HomeostaticModule::updateModule()
                 yInfo() <<"Drive homeostasisMax: " << manager->drives[d]->homeostasisMax;
                 yInfo() <<"Drive gradient: " << manager->drives[d]->gradient;
                 yInfo() <<"Drive period: " << manager->drives[d]->period;
-                yInfo()<<out1.get(0).asDouble();
+                yInfo() << out1.get(0).asDouble();
             }
-            
-
-            out2.addDouble(+manager->drives[d]->getValue()-manager->drives[d]->homeostasisMax);
-            outputM_ports[d]->write();
-
         }
     }
     return true;

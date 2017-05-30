@@ -15,27 +15,27 @@ namespace icubclient {
     class ICubClient;
 }
 
+/**
+ * \ingroup sensationManager
+ */
 class OpcSensation: public Sensation
 {
 private:
     icubclient::ICubClient *iCub;
-    yarp::os::BufferedPort<yarp::os::Bottle> unknown_entities_port;
-    yarp::os::BufferedPort<yarp::os::Bottle> homeoPort;
-    yarp::os::BufferedPort<yarp::os::Bottle> known_entities_port;
-    yarp::os::BufferedPort<yarp::os::Bottle> opc_has_agent_port;
+    yarp::os::BufferedPort<yarp::os::Bottle> known_entities_port; //!< Output port to stream all known entities
+    yarp::os::BufferedPort<yarp::os::Bottle> unknown_entities_port; //!< Output port to stream all unknown entities
+    yarp::os::BufferedPort<yarp::os::Bottle> homeoPort; //!< Port to communicate with homeostasis
    
     /**
      * @brief fills an entity list with entities that follow a specific condition
      * @param list list to be added to
      * @param type entity type
      * @param name entity name
-     * @return void
      */
     void addToEntityList(yarp::os::Bottle& list, std::string type, std::string name);
+
     /**
-     * @brief handleEntities parses the OPC to identify entities following some condition
-     * @param none
-     * @return void
+     * @brief handleEntities parses the OPC to identify entities following some condition, i.e. whether they are known or unknown
      */
     yarp::os::Bottle handleEntities();
 

@@ -3,7 +3,7 @@
  
 <module>
 
-   <name>behavior</name>
+   <name>sensationManager</name>
    <doxygen-group>icubclient_modules</doxygen-group>
    <description>Reactive layer module to monitor basic sensations. </description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
@@ -23,7 +23,7 @@
 
    <authors>
        <author email="clement.moulinfrier@gmail.com">  Clément Moulin-Frier </author>
-       <author email="jordiysard.puigbò@upf.edu">  Jordi-Ysard Puigbò </author>
+       <author email="jordiysard.puigbo@upf.edu">  Jordi-Ysard Puigbò </author>
    </authors>
 
    <data>

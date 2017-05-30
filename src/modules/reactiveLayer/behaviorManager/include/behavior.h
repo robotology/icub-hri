@@ -7,11 +7,14 @@
 #include "icubclient/clients/icubClient.h"
 #include "icubclient/subsystems/subSystem_SAM.h"
 
+/**
+ * \ingroup behaviorManager
+ */
 class Behavior
 {
 private:
-    yarp::os::Mutex* mut;
-    yarp::os::BufferedPort<yarp::os::Bottle> behavior_start_stop_port;
+    yarp::os::Mutex* mut; //!< Mutex so that only one instance of the behavior runs at any time
+    yarp::os::BufferedPort<yarp::os::Bottle> behavior_start_stop_port; //!< Port indicating when the behavior starts and stops
 
 protected:
     icubclient::ICubClient *iCub;
@@ -20,9 +23,9 @@ protected:
     virtual void close_extra_ports() = 0;
 
 public:
-    yarp::os::Port rpc_out_port;
+    yarp::os::Port rpc_out_port; //!< Port to external module
     std::string behaviorName, from_sensation_port_name, external_port_name;
-    yarp::os::BufferedPort<yarp::os::Bottle> sensation_port_in;
+    yarp::os::BufferedPort<yarp::os::Bottle> sensation_port_in; //!< Input port from sensationManager
 
     Behavior(yarp::os::Mutex* _mut, yarp::os::ResourceFinder &_rf, icubclient::ICubClient* _iCub, std::string _behaviorName) : mut(_mut), iCub(_iCub), rf(_rf), behaviorName(_behaviorName){
         from_sensation_port_name = "None";
@@ -77,12 +80,18 @@ public:
 
     virtual void configure() = 0;
 
+    /**
+     * @brief interrupt_ports interrupt ports defined for a behavior
+     */
     void interrupt_ports() {
         sensation_port_in.interrupt();
         rpc_out_port.interrupt();
         behavior_start_stop_port.interrupt();
     }
 
+    /**
+     * @brief close_ports close ports defined for a behavior
+     */
     void close_ports() {
         close_extra_ports();
         sensation_port_in.interrupt();

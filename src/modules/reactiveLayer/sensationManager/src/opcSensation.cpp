@@ -19,7 +19,6 @@ void OpcSensation::configure()
 
     homeoPort.open("/opcSensation/toHomeo:o");
     unknown_entities_port.open("/opcSensation/unknown_entities:o");
-    opc_has_agent_port.open("/opcSensation/hasAgent:o");
     known_entities_port.open( "/opcSensation/known_entities:o");
 
     yInfo() << "Configuration done.";
@@ -55,11 +54,6 @@ void OpcSensation::publish()
     kn.clear();
     kn.append(*res.get(3).asList());
     known_entities_port.write();
-
-    yarp::os::Bottle &has_ag = opc_has_agent_port.prepare();
-    has_ag.clear();
-    has_ag.addInt(int(res.get(4).asInt()));
-    opc_has_agent_port.write();
 }
 
 void OpcSensation::addToEntityList(Bottle& list, string type, string name) {
@@ -74,9 +68,7 @@ Bottle OpcSensation::handleEntities()
     iCub->opc->checkout();
     list<Entity*> lEntities = iCub->opc->EntitiesCache();
 
-    bool agentPresent = false;
     //Bottle u_entities, k_entities, up_entities, kp_entities, p_entities, o_positions;
-    Bottle objects;
 
     for (auto& entity : lEntities)
     {
@@ -85,8 +77,6 @@ Bottle OpcSensation::handleEntities()
                 if(o) {
                     addToEntityList(o_positions, o->objectAreaAsString(), entity->name());
                 }
-        
-
         }
 
         if (entity->name().find("unknown") == 0) {
@@ -129,7 +119,6 @@ Bottle OpcSensation::handleEntities()
     out.addList()=up_entities;
     out.addInt(kp_entities.size());
     out.addList()=kp_entities;
-    out.addInt(int(agentPresent));
 
     return out;
 }
@@ -208,8 +197,6 @@ void OpcSensation::close_ports() {
     homeoPort.close();
     known_entities_port.interrupt();
     known_entities_port.close();
-    opc_has_agent_port.interrupt();
-    opc_has_agent_port.close();
     iCub->close();
     delete iCub;
 }

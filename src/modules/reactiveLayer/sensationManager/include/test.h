@@ -16,6 +16,9 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace icubclient;
 
+/**
+ * \ingroup sensationManager
+ */
 class TestSensation: public Sensation
 {
 private:
@@ -34,7 +37,6 @@ public:
         out.interrupt();
         out.close();
     }
-
 };
 
 #endif

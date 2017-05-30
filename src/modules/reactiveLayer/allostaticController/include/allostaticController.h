@@ -16,27 +16,40 @@ using namespace yarp::sig;
 using namespace yarp::math;
 using namespace icubclient;
 
+
+/**
+ * \ingroup allostaticController
+ */
 enum OutCZ {UNDER, OVER};
 
+/**
+ * \ingroup allostaticController
+ */
 struct DriveOutCZ {
     string name;
     OutCZ level;
 
 };
 
+/**
+ * \ingroup allostaticController
+ */
 enum DriveUpdateMode {SENSATION_ON, SENSATION_OFF};
 
+/**
+ * \ingroup allostaticController
+ */
 class AllostaticDrive
 {
 public:
-    string name;
+    string name; //!< Name of the drive
     bool active, manualMode;
-    Port *behaviorUnderPort;
-    Port *behaviorOverPort;
-    Port *homeoPort;
-    BufferedPort<Bottle> *inputSensationPort;
-    Bottle behaviorUnderCmd;
-    Bottle behaviorOverCmd;
+    Port *behaviorUnderPort; //!< Port to be used when drive falls below homeostatic level
+    Port *behaviorOverPort; //!< Port to be used when drive hits upper threshold of homeostatic level
+    Port *homeoPort; //!< Port to homeostasis module
+    BufferedPort<Bottle> *inputSensationPort; //!< Port from sensationManager
+    Bottle behaviorUnderCmd; //!< Command to be send to behaviorUnderPort when drive falls below homeostatic level
+    Bottle behaviorOverCmd; //!< Command to be send to behaviorOverPort when drive hits upper threshold of homeostatic level
     Bottle sensationOnCmd, sensationOffCmd, beforeTriggerCmd, afterTriggerCmd;
    
     AllostaticDrive() {
@@ -48,8 +61,14 @@ public:
         active = false;
     }
 
+    /**
+     * @brief Interrupt ports of the drive
+     */
     bool interrupt_ports();
 
+    /**
+     * @brief Close ports of the drive
+     */
     bool close_ports();
 
     Bottle update(DriveUpdateMode mode);
@@ -57,11 +76,13 @@ public:
     /**
      * @brief triggers a behavior if needs are out of threshold
      * @param mode under or below threshold
-     * @return void
      */
     void triggerBehavior(OutCZ mode);
 };
 
+/**
+ * \ingroup allostaticController
+ */
 class AllostaticController: public RFModule
 {
 private:
@@ -110,21 +131,19 @@ public:
 
     /**
      * @brief updateAllostatic Update the drives accordingly to the stimuli
-     * @param none
      * @return bool success
      */
     bool updateAllostatic();
 
     /**
      * @brief Normalize normalize drive priorities
-     * @param vector list of priorities for each drive
+     * @param vec list of priorities for each drive
      * @return bool false if no priority, true otherwise
      */
     bool Normalize(vector<double>& vec);
 
     /**
      * @brief chooseDrive Choose a drive out of CZ, according to drive priorities
-     * @param none
      * @return bool success
      */
     DriveOutCZ chooseDrive();

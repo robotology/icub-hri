@@ -7,6 +7,9 @@
 #include <vector>
 #include "homeostasis.h"
 
+/**
+ * \ingroup homeostasis
+ */
 class HomeostasisManager
 {
 
@@ -19,7 +22,6 @@ public:
         Homeostasis manager will take care of updating it.
         Input must be a drive and its position
      * @param D drive instance to add
-     * @return VOID
      */
     void addDrive(Drive* D);
 
@@ -29,7 +31,6 @@ public:
         removed. This is specially useful for temporal
         needs or subgoals.
      * @param  D drive ID to remove
-     * @return VOID
      */
     void removeDrive(int D);
 
@@ -37,13 +38,11 @@ public:
      * @brief sleep cancels update function for a time
      * @param  D ID drive to add
      * @param  time time to sleep
-     * @return VOID
      */
     void sleep(int D, double time);
 
     /**
      * @brief updateDrives updates all internal values
-     * @param  none
      * @return bool success
      */
     bool updateDrives();

@@ -86,7 +86,7 @@ bool ICubClient::waving(const bool sw) {
 }
 
 
-bool ICubClient::point(const Vector &target, const Bottle &options)
+bool icubclient::ICubClient::point(const yarp::sig::Vector &target, const yarp::os::Bottle &options)
 {
     SubSystem_ARE *are = getARE();
     if (are == nullptr)
@@ -101,7 +101,7 @@ bool ICubClient::point(const Vector &target, const Bottle &options)
 }
 
 
-bool ICubClient::point(const string &sName, const Bottle &options)
+bool icubclient::ICubClient::point(const std::string &sName, const yarp::os::Bottle &options)
 {
     Entity *target = opc->getEntity(sName, true);
     if (!target || (!target->isType(ICUBCLIENT_OPC_ENTITY_OBJECT) && !target->isType(ICUBCLIENT_OPC_ENTITY_BODYPART)))

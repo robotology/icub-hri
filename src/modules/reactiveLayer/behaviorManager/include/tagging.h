@@ -6,6 +6,10 @@
 
 #include "behavior.h"
 
+
+/**
+ * \ingroup behaviorManager
+ */
 class Tagging: public Behavior
 {
 protected:
