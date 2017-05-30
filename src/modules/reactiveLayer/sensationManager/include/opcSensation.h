@@ -23,7 +23,7 @@ private:
     yarp::os::BufferedPort<yarp::os::Bottle> homeoPort;
     yarp::os::BufferedPort<yarp::os::Bottle> known_entities_port;
     yarp::os::BufferedPort<yarp::os::Bottle> opc_has_agent_port;
-    
+   
     /**
      * @brief fills an entity list with entities that follow a specific condition
      * @param list list to be added to
