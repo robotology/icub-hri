@@ -36,7 +36,6 @@ Action::Action(const Action &b):Entity(b)
     this->estimatedDriveEffects = b.estimatedDriveEffects;
 }
 
-
 Bottle Action::asBottle() const
 {
     Bottle b = this->Entity::asBottle();
@@ -52,7 +51,7 @@ Bottle Action::asBottle() const
         subs.addList()=subAction.asBottle();
     }
     b.addList() = bSub;
-        
+
     bSub.clear();
     bSub.addString("estimatedDriveEffects");
     Bottle &subss = bSub.addList();
@@ -122,7 +121,7 @@ Action Action::express(const Relation& r) const
     return a;
 }
 
-Relation Action::description()
+Relation Action::description() const
 {
     Relation r;
     r.fromBottle(this->initialDescription.asBottle());
@@ -187,7 +186,3 @@ string Action::toString(const Relation& newRelation) const
     }
     return oss.str();
 }
-
-
-
-

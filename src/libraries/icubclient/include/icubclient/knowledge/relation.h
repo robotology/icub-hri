@@ -67,11 +67,21 @@ namespace icubclient{
         virtual ~Relation() {}
 
         yarp::os::Bottle asBottle(bool ignoreID = false) const;
+
         /**
         * Return the relation as a bottle without the argument to "none"
         */
         yarp::os::Bottle    asLightBottle() const;
+
+        /**
+        * Create a Relation from a Bottle
+        * @param b The Bottle representation of a Relation
+        */
         void fromBottle(const yarp::os::Bottle &b);
+
+        /**
+        * Return string representation of this Relation
+        */
         virtual std::string toString() const;
 
         /**

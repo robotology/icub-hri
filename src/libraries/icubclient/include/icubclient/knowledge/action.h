@@ -55,7 +55,7 @@ namespace icubclient{
         }
 
         void setInitialDescription(const Relation &r);
-        Relation    description();
+        Relation    description() const; //!< Return initialDescription as Relation
         Action      express(const Relation &r) const;
 
         /**
@@ -85,6 +85,9 @@ namespace icubclient{
         */ 
         int size(){ return subActions.size(); }
 
+        /**
+        * Number of subactions composing this one
+        */
         virtual yarp::os::Bottle asBottle() const;
         virtual bool             fromBottle(const yarp::os::Bottle &b);
         virtual std::string      toString() const;

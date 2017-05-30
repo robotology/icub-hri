@@ -289,6 +289,3 @@ bool Relation::operator==(const Relation &b)
         this->m_complement_manner == b.m_complement_manner
         );
 }
-
-
-
