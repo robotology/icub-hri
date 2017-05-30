@@ -27,8 +27,25 @@ private:
     yarp::os::BufferedPort<yarp::os::Bottle> input_port;
     yarp::os::Port    rpc;
 
-    bool addNewDrive(string driveName, yarp::os::Bottle& grpHomeostatic);
+    /**
+     * @brief addNewDrive add new  drive with default dynamics 
+     * @param  driveName name of the drive
+     * @return bool success
+     */
     bool addNewDrive(string driveName);
+
+    /**
+     * @brief addNewDrive add new drive from bottle
+     * @param  grpHomeostatic bottle from config file or port
+     * @return bool success
+     */
+    bool addNewDrive(string driveName, yarp::os::Bottle& grpHomeostatic);
+    
+    /**
+     * @brief removeDrive removes drive
+     * @param  d ID number of the drive
+     * @return bool success
+     */
     bool removeDrive(int d);
     bool verbose;
 
@@ -40,6 +57,11 @@ public:
         return d;
     }
 
+    /**
+     * @brief openPorts opens default ports for external communication
+     * @param  driveName name of the drive
+     * @return int success
+     */
     int openPorts(std::string driveName);
 
     bool configure(yarp::os::ResourceFinder &rf);
@@ -56,10 +78,6 @@ public:
         return period;
     }
     bool updateModule();
-
-    bool updateAllostatic();
-
-    bool processAvoidance(int d, yarp::os::Bottle* avoidanceBottle);
 
     //RPC & scenarios
     bool respond(const yarp::os::Bottle& cmd, yarp::os::Bottle& reply);

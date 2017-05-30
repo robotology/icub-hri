@@ -105,16 +105,6 @@ public:
         this->decay_multiplier = mult;
     }
 
-    // double sigDecay()
-    // {
-    //     double aux = (1/(1+exp(-this->value)))-0.5;
-    //     if (aux<0)
-    //         aux=-aux;
-    //     //yDebug() << "sig function: "<< aux;// << endl;
-    //     return this->decay*(aux-1);
-
-    // }
-
     void sleep(double t) {
         start_sleep = time(NULL);
         is_sleeping = true;
@@ -145,10 +135,6 @@ public:
         else if (! ((this->value > valueMax && this->decay<0) || (this->value < valueMin && this->decay>0))) {
             this->value -= (this->decay * this->decay_multiplier * period);           
         }
-
-
-        //yDebug()<<"real decay: "<<this->sigDecay();//<<endl;
-        //this->value -= this->sigDecay();
     }
 
     double getValue()
