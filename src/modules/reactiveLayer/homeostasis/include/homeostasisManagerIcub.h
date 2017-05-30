@@ -28,7 +28,7 @@ private:
     yarp::os::Port    rpc;
 
     /**
-     * @brief addNewDrive add new  drive with default dynamics 
+     * @brief addNewDrive add new  drive with default dynamics
      * @param  driveName name of the drive
      * @return bool success
      */
@@ -40,7 +40,7 @@ private:
      * @return bool success
      */
     bool addNewDrive(string driveName, yarp::os::Bottle& grpHomeostatic);
-    
+   
     /**
      * @brief removeDrive removes drive
      * @param  d ID number of the drive

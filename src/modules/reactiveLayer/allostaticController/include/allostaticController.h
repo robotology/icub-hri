@@ -28,7 +28,7 @@ enum DriveUpdateMode {SENSATION_ON, SENSATION_OFF};
 
 class AllostaticDrive
 {
-public: 
+public:
     string name;
     bool active, manualMode;
     Port *behaviorUnderPort;
@@ -38,7 +38,7 @@ public:
     Bottle behaviorUnderCmd;
     Bottle behaviorOverCmd;
     Bottle sensationOnCmd, sensationOffCmd, beforeTriggerCmd, afterTriggerCmd;
-    
+   
     AllostaticDrive() {
         manualMode = true;
         behaviorUnderPort = nullptr;
@@ -53,7 +53,7 @@ public:
     bool close_ports();
 
     Bottle update(DriveUpdateMode mode);
-    
+   
     /**
      * @brief triggers a behavior if needs are out of threshold
      * @param mode under or below threshold
@@ -66,7 +66,7 @@ class AllostaticController: public RFModule
 {
 private:
     Bottle drivesList;
-    
+   
     Port to_homeo_rpc, rpc_in_port, to_behavior_rpc;
     string moduleName;
     string homeo_name;

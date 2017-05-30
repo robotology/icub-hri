@@ -5,7 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include <math.h>
-#include <limits> 
+#include <limits>
 #include <time.h>
 
 using namespace std;
@@ -90,7 +90,7 @@ public:
     {
         this->homeostasisMax += d_homeo_max;
     }
-    
+   
     void setDecay(double d_decay)
     {
         this->decay = d_decay;
@@ -133,7 +133,7 @@ public:
             }
         }
         else if (! ((this->value > valueMax && this->decay<0) || (this->value < valueMin && this->decay>0))) {
-            this->value -= (this->decay * this->decay_multiplier * period);           
+            this->value -= (this->decay * this->decay_multiplier * period);          
         }
     }
 
