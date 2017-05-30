@@ -8,16 +8,19 @@ namespace icubclient {
  class ICubClient;
 }
 
+/**
+ * \ingroup ears
+ */
 class ears : public yarp::os::RFModule {
 protected:
     icubclient::ICubClient *iCub;
     double      period;
-    yarp::os::Port        rpc;
-    yarp::os::Port        portToBehavior;
-    yarp::os::Port        portToSpeechRecognizer;
-    yarp::os::Mutex       m;
-    bool        bShouldListen;
-    std::string MainGrammar;
+    yarp::os::Port        rpc; //!< Response port
+    yarp::os::Port        portToBehavior; //!< Port to behaviorManager
+    yarp::os::Port        portToSpeechRecognizer; //!< Port to speechRecognizer
+    yarp::os::Mutex       m; //!< Mutex indicating whether ears is listening to speechRecognizer
+    bool        bShouldListen; //!< Whether ears should listen to speechRecognizer. Can be set via RPC port.
+    std::string MainGrammar; //!< Name of grammar to be loaded
 
 public:
     bool configure(yarp::os::ResourceFinder &rf);

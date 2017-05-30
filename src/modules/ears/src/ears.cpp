@@ -173,6 +173,7 @@ bool ears::updateModule() {
         string sObject, sAction;
         string sQuestionKind = bAnswer.get(1).asList()->get(0).toString();
 
+        // forward command appropriately to behaviorManager
         string sObjectType, sCommand;
         if(sQuestionKind == "SENTENCEOBJECT") {
             sAction = bSemantic.check("predicateObject", Value("none")).asString();
@@ -212,6 +213,7 @@ bool ears::updateModule() {
             yDebug() << "Sending " + bAction.toString();
         }
 
+        // now execute actual behavior
         bAction.clear();
         bAction.addString(sCommand);
         bArgs.addString(sObject);

@@ -22,6 +22,7 @@
    <authors>
        <author email="greg.pointeau@gmail.com"> Grégoire Pointeau </author>
        <author email="jordiysard@gmail.com"> Jordi-Ysard Puigbò </author>
+       <author email="t.fischer@imperial.ac.uk"> Tobias Fischer </author>
    </authors>
 
    <data>
@@ -33,16 +34,14 @@
         <description>Response port. Supported commands:
                         - help
                         - ['quit']: Closes ears
-                        - ['listen'] ['on'/'off'/offShouldWait] : Turns default grammar from the speech recognizer on / off / off (safely)
+                        - ['listen'] ['on'/'off'/offShouldWait] : Turns default grammar from the speech recognizer on / off / off (safely, wait for another recognition)
         </description>
       </input>
-      <input>
+      <output>
         <type>Bottle</type>
         <port carrier="tcp">/ears/speech:o</port>
-        <required>yes</required>
-        <priority>yes</priority>
-        <description>Communication port to speech recognizer. </description>
-      </input>
+        <description>Communication port to speech recognizer to interrupt the speech recognizer.</description>
+      </output>
       <output>
         <type>Bottle</type>
         <port carrier="tcp">/ears/behavior:o</port>
