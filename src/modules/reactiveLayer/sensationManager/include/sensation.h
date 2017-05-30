@@ -7,17 +7,19 @@
 using namespace std;
 using namespace yarp::os;
 
-class Sensation : public BufferedPort<Bottle> 
+class Sensation : public BufferedPort<Bottle>
 {
 public:
 
     virtual void configure() = 0;
+    /**
+     * @brief publish send sensation data to port
+     * @param none
+     * @return void
+     */
     virtual void publish() = 0;
     virtual void close_ports() = 0;
 
-// protected:
-//     string manager_name;
-    
 };
 
 #endif
