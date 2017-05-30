@@ -53,7 +53,12 @@ public:
     bool close_ports();
 
     Bottle update(DriveUpdateMode mode);
-
+    
+    /**
+     * @brief triggers a behavior if needs are out of threshold
+     * @param mode under or below threshold
+     * @return void
+     */
     void triggerBehavior(OutCZ mode);
 };
 
@@ -77,9 +82,18 @@ private:
     vector< yarp::os::BufferedPort<Bottle>* > outputm_ports;
 
 
-    //Configuration
+    /**
+     * @brief configureAllostatic creates drives from a config file
+     * @param rf drives and config parameters
+     * @return bool success
+     */
     void configureAllostatic(yarp::os::ResourceFinder &rf);
 
+    /**
+     * @brief openPorts opens ports for homeostasis-allostatiController communication
+     * @param driveName name of the drive to configure
+     * @return bool success
+     */
     bool openPorts(string driveName);
 public:
     bool configure(yarp::os::ResourceFinder &rf);
@@ -94,12 +108,25 @@ public:
 
     bool updateModule();
 
-    //Update the drives accordingly to the stimuli
+    /**
+     * @brief updateAllostatic Update the drives accordingly to the stimuli
+     * @param none
+     * @return bool success
+     */
     bool updateAllostatic();
 
+    /**
+     * @brief Normalize normalize drive priorities
+     * @param vector list of priorities for each drive
+     * @return bool false if no priority, true otherwise
+     */
     bool Normalize(vector<double>& vec);
 
-    // Choose a drive out of CZ, according to drive priorities
+    /**
+     * @brief chooseDrive Choose a drive out of CZ, according to drive priorities
+     * @param none
+     * @return bool success
+     */
     DriveOutCZ chooseDrive();
 
     bool respond(const Bottle& cmd, Bottle& reply);
