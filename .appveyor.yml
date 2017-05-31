@@ -5,7 +5,7 @@ branches:
   - master
   - devel
 
-clone_folder: c:\dev\icub-client
+clone_folder: c:\dev\icub-hri
 
 environment:
   ACE_ROOT:          c:/Program Files (x86)/robotology/ace-6.3.4_v12_x86
@@ -62,7 +62,7 @@ install:
 build:
 
 build_script:
-  - cd c:\dev\icub-client\
+  - cd c:\dev\icub-hri\
   - md build
   - cd build
   - cmake -G"Visual Studio 12" -DICUBCLIENT_BUILD_IOL2OPC=FALSE -DCOMPILE_TESTS=TRUE ..
