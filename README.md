@@ -13,8 +13,8 @@ The full text of the license agreement can be found in: [./LICENSE](https://gith
 Please read this license carefully before using the `icub-hri` code.
 
 ## CI Build
-- Linux / Mac OS: [![Build Status](https://travis-ci.org/robotology/icub-hri.png?branch=master)](https://travis-ci.org/robotology/icub-hri)
-- Windows: [![Build status](https://ci.appveyor.com/api/projects/status/mfxm27it64yycmff?svg=true)](https://ci.appveyor.com/project/robotology/icub-hri)
+- Linux / Mac OS: [![Build Status](https://travis-ci.org/robotology/icub-client.png?branch=master)](https://travis-ci.org/robotology/icub-client)
+- Windows: [![Build status](https://ci.appveyor.com/api/projects/status/mfxm27it64yycmff?svg=true)](https://ci.appveyor.com/project/robotology/icub-client)
 
 ## Build dependencies
 `icub-hri` depends on the following projects which need to be installed prior to building `icub-hri`:
