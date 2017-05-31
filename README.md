@@ -1,23 +1,23 @@
-icub-client: A coherent framework for complex HRI scenarios on the iCub
+iCub-HRI: A coherent framework for complex HRI scenarios on the iCub
 =======
 
-Generating a complex, human-like behaviour in a humanoid robot such as the iCub requires the integration of a wide range of open source components and a scalable cognitive architecture. Hence, we present the `icub-client` library which provides convenience wrappers for components related to perception (object recognition, agent tracking, speech recognition, touch detection), object manipulation (various basic and complex motor actions), and social interaction (speech synthesis, joint attention). Communication between those components is orchestrated by a working memory, and a long-term memory allows the iCub to re-visit and reason about earlier interactions. In addition to previously integrated components, the library allows for simple extension to new components, and rapid prototyping by adapting to changes in interfaces between components. We also provide a set of modules which make use of the library, such as a high-level planner and an action recognition module. The proposed architecture has been successfully employed for a complex human robot interaction scenario involving the acquisition of language capabilities, execution of goal-oriented behaviour and expression of a verbal narrative of the robot’s experience in the world. The architecture is aimed at researchers familiarising themselves with the iCub ecosystem, as well as expert users.
+Generating complex, human-like behaviour in a humanoid robot like the iCub requires the integration of a wide range of open source components and a scalable cognitive architecture. Hence, we present the iCub-HRI library which provides convenience wrappers for components related to perception (object recognition, agent tracking, speech recognition, touch detection), object manipulation (basic and complex motor actions) and social interaction (speech synthesis, joint attention) exposed as C++ library with bindings for Python and Java (Matlab). In addition to previously integrated components, the library allows for simple extension to new components and rapid prototyping by adapting to changes in interfaces between components. We also provide a set of modules which make use of the library, such as a high-level knowledge acquisition module and an action recognition module. The proposed architecture has been successfully employed for a complex human-robot interaction scenario involving the acquisition of language capabilities, execution of goal-oriented behaviour and expression of a verbal narrative of the robot's experience in the world. Accompanying this paper is a tutorial which allows a subset of this interaction to be reproduced. The architecture is aimed at researchers familiarising themselves with the iCub ecosystem, as well as expert users, and we expect the library to be widely used in the iCub community. 
 
 ## Documentation
-Visit the official [project documentation](http://robotology.github.com/icub-client).
+Visit the official [project documentation](http://robotology.github.com/icub-hri).
 
 ## License
-The `icub-client` library and documentation are distributed under the GPL-2.0.
-The full text of the license agreement can be found in: [./LICENSE](https://github.com/robotology/icub-client/blob/master/LICENSE).
+The `icub-hri` library and documentation are distributed under the GPL-2.0.
+The full text of the license agreement can be found in: [./LICENSE](https://github.com/robotology/icub-hri/blob/master/LICENSE).
 
-Please read this license carefully before using the `icub-client` code.
+Please read this license carefully before using the `icub-hri` code.
 
 ## CI Build
-- Linux / Mac OS: [![Build Status](https://travis-ci.org/robotology/icub-client.png?branch=master)](https://travis-ci.org/robotology/icub-client)
-- Windows: [![Build status](https://ci.appveyor.com/api/projects/status/mfxm27it64yycmff?svg=true)](https://ci.appveyor.com/project/robotology/icub-client)
+- Linux / Mac OS: [![Build Status](https://travis-ci.org/robotology/icub-hri.png?branch=master)](https://travis-ci.org/robotology/icub-hri)
+- Windows: [![Build status](https://ci.appveyor.com/api/projects/status/mfxm27it64yycmff?svg=true)](https://ci.appveyor.com/project/robotology/icub-hri)
 
 ## Build dependencies
-`icub-client` depends on the following projects which need to be installed prior to building `icub-client`:
+`icub-hri` depends on the following projects which need to be installed prior to building `icub-hri`:
 
 ### YARP, icub-main and icub-contrib-common
 First, follow the [installation instructions](http://wiki.icub.org/wiki/Linux:Installation_from_sources) for `yarp` and `icub-main`. If you want to use `iol`, `speech` or the `kinect-wrapper` (which are all optional), also install `icub-contrib-common`.
@@ -33,7 +33,7 @@ First, follow the [installation instructions](http://wiki.icub.org/wiki/Linux:In
 6. Compile `OpenCV`.
 
 ### iol (object tracking; optional)
-For the object tracking, we rely on the `iol` pipeline. Please follow the [installation instructions](https://github.com/robotology/iol). For `icub-client`, not the full list of dependencies is needed. Only install the following dependencies: `segmentation`, `Hierarchical Image Representation`, and `stereo-vision`. Within `Hierarchical Image Representation`, we don't need `SiftGPU`.
+For the object tracking, we rely on the `iol` pipeline. Please follow the [installation instructions](https://github.com/robotology/iol). For `icub-hri`, not the full list of dependencies is needed. Only install the following dependencies: `segmentation`, `Hierarchical Image Representation`, and `stereo-vision`. Within `Hierarchical Image Representation`, we don't need `SiftGPU`.
 
 To estimate the size and pose of objects, we rely on the `superquadric-model`. Please follow the [installation instructions](https://github.com/robotology/superquadric-model) if you want to use the `superquadric-model` (optional).
 
@@ -62,26 +62,26 @@ If you want to use `karmaWYSIWYD`, you must install `iol` / `iol2opc`. Then, sta
 ### human-sensing-SAM (face recognition; optional)
 The recognition of faces with SAM requires [human-sensing-SAM](https://github.com/dcam0050/human-sensing-SAM), to detect and output cropped faces for SAM to classify. Please follow the installation instructions in the [readme](https://github.com/dcam0050/human-sensing-SAM/blob/master/README.md).
 
-## Build icub-client
+## Build icub-hri
 
-Once all desired dependencies are installed, building the `icub-client` is straightforward:
+Once all desired dependencies are installed, building the `icub-hri` is straightforward:
 
-1. Download `icub-client`: `git clone https://github.com/robotology/icub-client.git`.
-2. `cd icub-client`
+1. Download `icub-hri`: `git clone https://github.com/robotology/icub-hri.git`.
+2. `cd icub-hri`
 3. `mkdir build`
 4. `cd build`
 5. `ccmake ..` and fill in the cmake var **`OpenCV_DIR`** with the path to the `OpenCV-3.2.0` build.
-6. Compile `icub-client` using `make`.
+6. Compile `icub-hri` using `make`.
 
 ## Update software script
-We provide a [Python script](https://github.com/robotology/icub-client/blob/master/update-software.py) to easily update all dependencies of `icub-client` and `icub-client` itself.
+We provide a [Python script](https://github.com/robotology/icub-hri/blob/master/update-software.py) to easily update all dependencies of `icub-hri` and `icub-hri` itself.
 
-## Using icub-client in your project
-Using `icub-client` in your project is straightforward. Simply `find_package(icubclient REQUIRED)` in your main `CMakeLists.txt`, and use the `${icubclient_INCLUDE_DIRS}` and `${icubclient_LIBRARIES}` cmake variables as you would expect. A working example project can be found [here](https://github.com/robotology/icub-client/tree/master/src/examples/icub-client-dependent-project).
+## Using icub-hri in your project
+Using `icub-hri` in your project is straightforward. Simply `find_package(icubclient REQUIRED)` in your main `CMakeLists.txt`, and use the `${icubclient_INCLUDE_DIRS}` and `${icubclient_LIBRARIES}` cmake variables as you would expect. A working example project can be found [here](https://github.com/robotology/icub-hri/tree/master/src/examples/icub-client-dependent-project).
 
-## Using icub-client docker
+## Docker image
 
-The docker folder contains the dockerfile used to build a fully compiled dopcker image for icub-client including all extras such as opencv3, iol, kinect and karmaWysiwyd. You can either download a pre-compiled image at https://hub.docker.com/r/dcamilleri13/icub-client or compile it using the provided files.
+The `docker` folder contains the dockerfile used to build a fully compiled dopcker image for icub-hri including all extras such as opencv3, iol, kinect and karmaWysiwyd. You can either download a pre-compiled image at https://hub.docker.com/r/dcamilleri13/icub-client or compile it using the provided files.
 
 Prerequisites:
 1. Install docker: https://docs.docker.com/engine/installation/linux/ubuntulinux/
