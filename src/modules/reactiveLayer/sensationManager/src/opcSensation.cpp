@@ -88,7 +88,6 @@ Bottle OpcSensation::handleEntities()
             if (entity->entity_type() == "object")
             {
                 Object* o = dynamic_cast<Object*>(entity);
-                
                 if(o && (o->m_present==1.0)) {
                     addToEntityList(up_entities, entity->entity_type(), entity->name());
                 }
@@ -98,6 +97,14 @@ Bottle OpcSensation::handleEntities()
                 addToEntityList(u_entities, entity->entity_type(), entity->name());
                 addToEntityList(up_entities, entity->entity_type(), entity->name());
             }
+        }
+        else if (entity->entity_type() == "object")
+        {
+            Object* o = dynamic_cast<Object*>(entity);
+            if(o && (o->m_present==1.0)) {
+                addToEntityList(kp_entities, entity->entity_type(), entity->name());
+            }
+            addToEntityList(k_entities, entity->entity_type(), entity->name());
         }
         else if (entity->name() == "partner" && entity->entity_type() == "agent") {
             Agent* a = dynamic_cast<Agent*>(entity);
