@@ -37,15 +37,16 @@ class Recorder : public RFModule
 {
     Stamp dumpStamp;                    //!< Time stamp of data
     BufferedPort<Bottle> dumpPort;      //!< Output Yarp Buffered Port of Bottle contains formatted data
-    RpcServer rpcPort;                  //!< Yarp RPC port
-    Mutex mutex;                        
+    RpcServer rpcPort;                  //!< Response port
+    Mutex mutex;                        //!< Mutex for respond() method
+    ICubClient icubclient;
 
     string agentName;                   //!< Name of current agent retrieved from OPC
     string actionTag;                   //!< Name of action retrieved from OPC
     string objectTag;                   //!< Name of object retrieved from OPC
     double period;                      //!< Sampling rate in milliseconds
     int gate;                           //!< Gating variable
-    int logcounter;                     //!< Log Counter
+    int logcounter;                     //!< Log Counter, only log every 20 iterations
 
 public:
     /*******************************************************/

@@ -29,7 +29,7 @@
          </description>
      </input>
       <output>
-          <type>yarp::os::Port</type>
+          <type>yarp::os::BufferedPort&lt;yarp::os::Bottle&gt;</type>
           <port carrier="tcp">/actionRecogDataDumper/data/dump:o</port>
           <description>
              Data output port transmitting formatted raw data.
