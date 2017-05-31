@@ -68,7 +68,12 @@ Bottle OpcSensation::handleEntities()
     iCub->opc->checkout();
     list<Entity*> lEntities = iCub->opc->EntitiesCache();
 
-    //Bottle u_entities, k_entities, up_entities, kp_entities, p_entities, o_positions;
+    k_entities.clear();
+    kp_entities.clear();
+    u_entities.clear();
+    up_entities.clear();
+    o_positions.clear():
+    p_entities.clear();
 
     for (auto& entity : lEntities)
     {
