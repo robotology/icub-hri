@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="yarpmanifest.xsl"?>
+
+<module>
+
+   <name>actionRecogDataDumper</name>
+   <doxygen-group>icubclient_modules</doxygen-group>
+   <description>Module responsible for polling the OPC for objects and skeletons and format the data into a bottle to be used for action recognition with SAM.</description>
+   <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
+   <version>1.0</version>
+   
+   <description-long>
+     The purpose of this module is to retrieve information from the online database implemented by the objectsPropertiesCollector 
+     module (OPC), specifically the data about object locations, object names, skeleton joint locations and names and format/transmit this information as a structured bottle. This module creates the input data stream for the SAM based action recognition model.
+   </description-long>
+
+   <authors>
+       <author email="ugo.pattacini@iit.it"> Ugo Pattacini </author>
+   </authors>
+
+   <data>
+     <input>
+         <type>Bottle</type>
+         <port carrier="tcp">/actionRecogDataDumper/icubClient/world/opc:rpc</port>
+         <description>Response port. Supported commands:
+                         - start
+                         - stop
+                         - get
+         </description>
+     </input>
+      <output>
+          <type>yarp::os::Port</type>
+          <port carrier="tcp">/actionRecogDataDumper/data/dump:o</port>
+          <description>
+             Data output port transmitting formatted raw data.
+          </description>
+      </output>
+  </data>
+</module>

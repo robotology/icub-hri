@@ -28,22 +28,24 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace icubclient;
 
+/**
+ * \ingroup actionRecogDataDumper
+ */
+
 /*******************************************************/
 class Recorder : public RFModule
 {
-    Stamp dumpStamp;
-    BufferedPort<Bottle> dumpPort;
-    RpcServer rpcPort;
+    Stamp dumpStamp;                    //!< Time stamp of data
+    BufferedPort<Bottle> dumpPort;      //!< Output Yarp Buffered Port of Bottle contains formatted data
+    RpcServer rpcPort;                  //!< Yarp RPC port
+    Mutex mutex;                        
 
-    ICubClient icubclient;
-    Mutex mutex;
-
-    string agentName;
-    string actionTag;
-    string objectTag;
-    double period;
-    int gate;
-    int logcounter;
+    string agentName;                   //!< Name of current agent retrieved from OPC
+    string actionTag;                   //!< Name of action retrieved from OPC
+    string objectTag;                   //!< Name of object retrieved from OPC
+    double period;                      //!< Sampling rate in milliseconds
+    int gate;                           //!< Gating variable
+    int logcounter;                     //!< Log Counter
 
 public:
     /*******************************************************/
