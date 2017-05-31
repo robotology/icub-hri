@@ -3,11 +3,11 @@
 import matplotlib
 matplotlib.use('TkAgg')
 
-## \defgroup icubclient_SAM_source SAM
+## \defgroup icubhri_SAM_source SAM
 ##\brief@{
 ## Synthetic Autobiographical Memory for face recognition and action recognition
 ## @{
-## @ingroup icubclient_modules
+## @ingroup icubhri_modules
 #\details@{
 ##\copyright Released under the terms of the GNU GPL v2.0
 ##\version Version 1.0

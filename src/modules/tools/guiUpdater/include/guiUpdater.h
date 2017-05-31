@@ -21,12 +21,12 @@
 #include <string>
 #include <yarp/os/all.h>
 #include <yarp/sig/all.h>
-#include "icubclient/clients/opcClient.h"
+#include "icubhri/clients/opcClient.h"
 
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
-using namespace icubclient;
+using namespace icubhri;
 
 /**
  * \ingroup guiUpdater

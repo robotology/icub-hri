@@ -24,9 +24,9 @@ import logging
 
 np.set_printoptions(precision=2)
 
-## \defgroup icubclient_SAM_utils SAM Utils
+## \defgroup icubhri_SAM_utils SAM Utils
 ## @{Utility class for functions required by both interactionSAMModel.py and trainSAMModel.py
-## \ingroup icubclient_SAM_source
+## \ingroup icubhri_SAM_source
 
 
 def initialiseModels(argv, update, initMode='training'):

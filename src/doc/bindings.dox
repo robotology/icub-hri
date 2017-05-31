@@ -1,34 +1,34 @@
 /**
 *
-* \defgroup icubclient_bindings Compile and use Python bindings
+* \defgroup icubhri_bindings Compile and use Python bindings
 *
-* Instructions for compiling the Python bindings for the iCub-Client.
+* Instructions for compiling the Python bindings for iCub-HRI.
 * 
-* First, follow the instructions to compile the <a href="http://www.yarp.it/yarp_swig.html">YARP bindings for Python</a> (see sections "Yarp for Python" and "Compiling YARP language bindings" and make sure they work correctly. For better compatibility, set the `YARP_USE_PYTHON_VERSION` variable, and use SWIG version 3 or newer (SWIG version 2 will not work for the iCub-Client due to the C++11 dependency).
+* First, follow the instructions to compile the <a href="http://www.yarp.it/yarp_swig.html">YARP bindings for Python</a> (see sections "Yarp for Python" and "Compiling YARP language bindings" and make sure they work correctly. For better compatibility, set the `YARP_USE_PYTHON_VERSION` variable, and use SWIG version 3 or newer (SWIG version 2 will not work for iCub-HRI due to the C++11 dependency).
 * 
-* To compile the Python bindings for the iCub-Client, follow these instructions:
+* To compile the Python bindings for iCub-HRI, follow these instructions:
 \verbatim
-cd /path/to/icub-client/bindings
+cd /path/to/icub-hri/bindings
 mkdir build
 cd build
 ccmake ..
-set `ICUBCLIENT_USE_PYTHON_VERSION` to the same value as `YARP_USE_PYTHON_VERSION` and configure + generate
+set `ICUBHRI_USE_PYTHON_VERSION` to the same value as `YARP_USE_PYTHON_VERSION` and configure + generate
 make
 \endverbatim
 * You can then append the path of the bindings, the same as you did for YARP (you might want to add this to your `.bashrc`:
 \verbatim
-export PYTHONPATH=$PYTHONPATH:/path/to/icub-client/bindings/build
+export PYTHONPATH=$PYTHONPATH:/path/to/icub-hri/bindings/build
 \endverbatim
-To use the bindings, make sure to run the same version of Python as you specified using the `YARP_USE_PYTHON_VERSION` / ICUBCLIENT_USE_PYTHON_VERSION` variables. Then, you can
+To use the bindings, make sure to run the same version of Python as you specified using the `YARP_USE_PYTHON_VERSION` / ICUBHRI_USE_PYTHON_VERSION` variables. Then, you can
 \verbatim
 import yarp
-import icubclient
+import icubhri
 yarp.Network.init()
-iCub = icubclient.ICubClient("pythontest")
+iCub = icubhri.ICubClient("pythontest")
 iCub.close()
 yarp.Network.fini()
 \endverbatim
-* Then, using the iCub-Client is straightforward and works as expected, nicely interplaying with YARP objects like `Bottle`. Examples for ARE and KARMA can be found in the `icub-client/bindings` folder.
+* Then, using the iCub-HRI is straightforward and works as expected, nicely interplaying with YARP objects like `Bottle`. Examples for ARE and KARMA can be found in the `icub-hri/bindings` folder.
 * 
 * (This page can be edited at src/doc/bindings.dox)
 */

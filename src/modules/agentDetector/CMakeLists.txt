@@ -10,10 +10,10 @@ set(docs ${PROJECT_NAME}.xml)
 source_group("Source Files" FILES ${folder_source})
 source_group("DOC Files"    FILES ${docs})
 
-include_directories(${kinectWrapper_INCLUDE_DIRS} ${icubclient_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+include_directories(${kinectWrapper_INCLUDE_DIRS} ${icubhri_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
 add_executable(${PROJECT_NAME} ${folder_source} ${docs})
-target_link_libraries(${PROJECT_NAME} kinectWrapper icubclient ${YARP_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} kinectWrapper icubhri ${YARP_LIBRARIES})
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER humanUnderstanding)
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-yarp_install(FILES ${docs} DESTINATION ${ICUBCLIENT_MODULES_INSTALL_DIR})
+yarp_install(FILES ${docs} DESTINATION ${ICUBHRI_MODULES_INSTALL_DIR})
 

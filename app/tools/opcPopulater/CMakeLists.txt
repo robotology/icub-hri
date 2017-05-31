@@ -6,5 +6,5 @@ set(appname opcPopulater)
 file(GLOB ini      ${CMAKE_CURRENT_SOURCE_DIR}/conf/*.*)
 file(GLOB template ${CMAKE_CURRENT_SOURCE_DIR}/scripts/*.template)
 
-yarp_install(FILES ${ini}      DESTINATION ${ICUBCLIENT_CONTEXTS_INSTALL_DIR}/${appname})
-yarp_install(FILES ${template} DESTINATION ${ICUBCLIENT_APPLICATIONS_TEMPLATES_INSTALL_DIR})
+yarp_install(FILES ${ini}      DESTINATION ${ICUBHRI_CONTEXTS_INSTALL_DIR}/${appname})
+yarp_install(FILES ${template} DESTINATION ${ICUBHRI_APPLICATIONS_TEMPLATES_INSTALL_DIR})

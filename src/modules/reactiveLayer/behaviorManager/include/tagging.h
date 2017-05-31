@@ -19,7 +19,7 @@ protected:
     }
 
 public:
-    Tagging(yarp::os::Mutex* mut, yarp::os::ResourceFinder &rf, icubclient::ICubClient* iCub, std::string behaviorName): Behavior(mut, rf, iCub, behaviorName) {
+    Tagging(yarp::os::Mutex* mut, yarp::os::ResourceFinder &rf, icubhri::ICubClient* iCub, std::string behaviorName): Behavior(mut, rf, iCub, behaviorName) {
         ;
     }
        

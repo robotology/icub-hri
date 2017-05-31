@@ -6,7 +6,7 @@
 #include <iomanip>
 #include <yarp/os/all.h>
 #include <yarp/sig/all.h>
-#include "icubclient/clients/icubClient.h"
+#include "icubhri/clients/icubClient.h"
 #include <map>
 
 #include "sensation.h"
@@ -14,7 +14,7 @@
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
-using namespace icubclient;
+using namespace icubhri;
 
 /**
  * \ingroup sensationManager

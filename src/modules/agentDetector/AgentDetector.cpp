@@ -54,7 +54,7 @@ bool AgentDetector::configure(ResourceFinder &rf)
 
     list<shared_ptr<Entity>> entityList = opc->EntitiesCacheCopy();
     for(auto e : entityList) {
-        if(e->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT && e->name() != "icub") {
+        if(e->entity_type() == ICUBHRI_OPC_ENTITY_AGENT && e->name() != "icub") {
             partner_default_name = e->name();
         }
     }
@@ -299,7 +299,7 @@ bool AgentDetector::updateModule()
     if (handleMultiplePlayers)
         tracked=client.getJoints(joints);
     else
-        tracked=client.getJoints(joint, ICUBCLIENT_KINECT_CLOSEST_PLAYER);
+        tracked=client.getJoints(joint, ICUBHRI_KINECT_CLOSEST_PLAYER);
 
     if (tracked)
     {
@@ -384,12 +384,12 @@ bool AgentDetector::updateModule()
             Bottle bCond;
             Bottle bObject;
 
-            bObject.addString(ICUBCLIENT_OPC_ENTITY_TAG);
+            bObject.addString(ICUBHRI_OPC_ENTITY_TAG);
             bObject.addString("==");
-            bObject.addString(ICUBCLIENT_OPC_ENTITY_OBJECT);
+            bObject.addString(ICUBHRI_OPC_ENTITY_OBJECT);
 
             Bottle bPresent;
-            bPresent.addString(ICUBCLIENT_OPC_OBJECT_PRESENT_TAG);
+            bPresent.addString(ICUBHRI_OPC_OBJECT_PRESENT_TAG);
             bPresent.addString("==");
             bPresent.addDouble(1.0);
 
@@ -524,7 +524,7 @@ bool AgentDetector::updateModule()
 
                         yarp::os::Bottle &skeleton = outputSkeletonPort.prepare();
                         skeleton.clear();
-                        //Convert the skeleton into ICUBCLIENTHelpers body. We loose orientation in the process...
+                        //Convert the skeleton into ICUBHRIHelpers body. We loose orientation in the process...
                         for(map<string,Joint>::iterator jnt = p->skeleton.begin() ; jnt != p->skeleton.end() ; jnt++)
                         {
                             Bottle bBodyPartLoc;
@@ -549,7 +549,7 @@ bool AgentDetector::updateModule()
                                 skeleton.addList() = jntBtl;
                             }
 
-                            if (jnt->first == ICUBCLIENT_OPC_BODY_PART_TYPE_HEAD)
+                            if (jnt->first == ICUBHRI_OPC_BODY_PART_TYPE_HEAD)
                             {
                                 partner->m_ego_position = irPos;
                             }
@@ -593,11 +593,11 @@ Vector AgentDetector::getSkeletonPattern(Player p)
     //Create the skeleton pattern
     Vector pattern(5);
 
-    pattern[0] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_ELBOW_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_L]);
-    pattern[1] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_L], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C]);
-    pattern[2] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_R]);
-    pattern[3] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SPINE]);
-    pattern[4] = distanceVector(p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[ICUBCLIENT_OPC_BODY_PART_TYPE_HEAD]);
+    pattern[0] = distanceVector(p.skeleton[ICUBHRI_OPC_BODY_PART_TYPE_ELBOW_L], p.skeleton[ICUBHRI_OPC_BODY_PART_TYPE_SHOULDER_L]);
+    pattern[1] = distanceVector(p.skeleton[ICUBHRI_OPC_BODY_PART_TYPE_SHOULDER_L], p.skeleton[ICUBHRI_OPC_BODY_PART_TYPE_SHOULDER_C]);
+    pattern[2] = distanceVector(p.skeleton[ICUBHRI_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[ICUBHRI_OPC_BODY_PART_TYPE_SHOULDER_R]);
+    pattern[3] = distanceVector(p.skeleton[ICUBHRI_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[ICUBHRI_OPC_BODY_PART_TYPE_SPINE]);
+    pattern[4] = distanceVector(p.skeleton[ICUBHRI_OPC_BODY_PART_TYPE_SHOULDER_C], p.skeleton[ICUBHRI_OPC_BODY_PART_TYPE_HEAD]);
 
     return pattern;
 }

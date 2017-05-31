@@ -2,7 +2,7 @@
 
 using namespace std;
 using namespace yarp::os;
-using namespace icubclient;
+using namespace icubhri;
 
 void Tagging::configure() {
     external_port_name = "/proactiveTagging/rpc";
@@ -57,7 +57,7 @@ void Tagging::run(const Bottle &args) {
             string type = sensation->get(i).asList()->get(0).asString();
             string target = sensation->get(i).asList()->get(1).asString();
 
-            if ((type == ICUBCLIENT_OPC_ENTITY_AGENT) && (target == "partner"))
+            if ((type == ICUBHRI_OPC_ENTITY_AGENT) && (target == "partner"))
             {
                 id = i;
                 break;
@@ -79,7 +79,7 @@ void Tagging::run(const Bottle &args) {
 
     if(type=="bodypart" && target.find("unknown_self") == 0) {
         iCub->opc->checkout();
-        yarp::sig::Vector lHandVec = iCub->getPartnerBodypartLoc(ICUBCLIENT_OPC_BODY_PART_TYPE_HAND_L);
+        yarp::sig::Vector lHandVec = iCub->getPartnerBodypartLoc(ICUBHRI_OPC_BODY_PART_TYPE_HAND_L);
 
         iCub->lookAtPartner();
         if(lHandVec.size()==0) {

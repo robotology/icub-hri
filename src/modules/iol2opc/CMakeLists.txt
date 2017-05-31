@@ -2,8 +2,8 @@
 # Authors: Ugo Pattacini, Tobias Fischer
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-set(ICUBCLIENT_BUILD_IOL2OPC TRUE CACHE BOOL "Enable compilation of iol2opc")
-if(ICUBCLIENT_BUILD_IOL2OPC)
+set(ICUBHRI_BUILD_IOL2OPC TRUE CACHE BOOL "Enable compilation of iol2opc")
+if(ICUBHRI_BUILD_IOL2OPC)
    if(ICUB_FOUND AND (NOT (OpenCV_VERSION LESS 3)))
         project(iol2opc)
 
@@ -31,18 +31,18 @@ if(ICUBCLIENT_BUILD_IOL2OPC)
 
         include_directories(${PROJECT_SOURCE_DIR}/include
                            ${IDL_GENERATED_CODE_DIR}/include
-                           ${icubclient_INCLUDE_DIRS}
+                           ${icubhri_INCLUDE_DIRS}
                            ${OpenCV_INCLUDE_DIRS}
                            ${YARP_INCLUDE_DIRS}
                            ${ICUB_INCLUDE_DIRS} )
 
         add_executable(${PROJECT_NAME} ${idl_files} ${folder_header} ${folder_source} ${docs})
-        target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBRARIES} ctrlLib ${YARP_LIBRARIES} icubclient)
+        target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBRARIES} ctrlLib ${YARP_LIBRARIES} icubhri)
 
         set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER systemVisual)
         install(TARGETS ${PROJECT_NAME} DESTINATION bin)
   else()
-    message(WARNING "ICUBCLIENT_BUILD_IOL2OPC is ON but ICUB is not found or OpenCV3 is not installed. Will not compile iol2opc.")
+    message(WARNING "ICUBHRI_BUILD_IOL2OPC is ON but ICUB is not found or OpenCV3 is not installed. Will not compile iol2opc.")
   endif()
 endif()
 

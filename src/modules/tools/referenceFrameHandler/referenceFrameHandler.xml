@@ -4,7 +4,7 @@
 <module>
 
    <name>referenceFrameHandler</name>
-   <doxygen-group>icubclient_modules</doxygen-group>
+   <doxygen-group>icubhri_modules</doxygen-group>
    <description>Reference Frame Handler</description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>

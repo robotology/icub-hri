@@ -3,7 +3,7 @@
 
 \image html logo.png ""
 
-\section icubclient_software_documentation The iCub-Client Software Repository
+\section icubhri_software_documentation The iCub-Client Software Repository
 
 This is the iCub-Client software repository documentation.
 This is the documentation extracted from
@@ -11,9 +11,9 @@ the software repository of the iCub-Client project.
 
 Topics:
 
- - \ref icubclient_libraries - a list of documented libraries
- - \ref icubclient_modules - a list of documented modules
- - \ref icubclient_tutorials - a list of tutorials
+ - \ref icubhri_libraries - a list of documented libraries
+ - \ref icubhri_modules - a list of documented modules
+ - \ref icubhri_tutorials - a list of tutorials
 
  - Reference material:
   - The <a href="http://wysiwyd.upf.edu">WYSIWYD project website</a>.

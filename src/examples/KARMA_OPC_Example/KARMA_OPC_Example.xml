@@ -3,7 +3,7 @@
  
 <module>
    <name>KARMA_OPC_Example</name>
-   <doxygen-group>icubclient_examples</doxygen-group>
+   <doxygen-group>icubhri_examples</doxygen-group>
    <description>Use case of the iCubClient using KARMAa and OPC for motor actions with real objects</description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>

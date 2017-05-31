@@ -27,7 +27,7 @@
 #include <yarp/math/Math.h>
 #include <yarp/math/Rand.h>
 #include <iCub/ctrl/filters.h>
-#include "icubclient/clients/opcClient.h"
+#include "icubhri/clients/opcClient.h"
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/tracking.hpp>
@@ -43,7 +43,7 @@ using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::math;
 using namespace iCub::ctrl;
-using namespace icubclient;
+using namespace icubhri;
 
 
 /**

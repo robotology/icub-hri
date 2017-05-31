@@ -3,9 +3,9 @@
 
 #include <string>
 #include <yarp/os/all.h>
-#include "icubclient/clients/opcClient.h"
-#include "icubclient/clients/icubClient.h"
-#include "icubclient/subsystems/subSystem_SAM.h"
+#include "icubhri/clients/opcClient.h"
+#include "icubhri/clients/icubClient.h"
+#include "icubhri/subsystems/subSystem_SAM.h"
 
 /**
  * \ingroup behaviorManager
@@ -17,7 +17,7 @@ private:
     yarp::os::BufferedPort<yarp::os::Bottle> behavior_start_stop_port; //!< Port indicating when the behavior starts and stops
 
 protected:
-    icubclient::ICubClient *iCub;
+    icubhri::ICubClient *iCub;
     yarp::os::ResourceFinder& rf;
     virtual void run(const yarp::os::Bottle &args) = 0;
     virtual void close_extra_ports() = 0;
@@ -27,7 +27,7 @@ public:
     std::string behaviorName, from_sensation_port_name, external_port_name;
     yarp::os::BufferedPort<yarp::os::Bottle> sensation_port_in; //!< Input port from sensationManager
 
-    Behavior(yarp::os::Mutex* _mut, yarp::os::ResourceFinder &_rf, icubclient::ICubClient* _iCub, std::string _behaviorName) : mut(_mut), iCub(_iCub), rf(_rf), behaviorName(_behaviorName){
+    Behavior(yarp::os::Mutex* _mut, yarp::os::ResourceFinder &_rf, icubhri::ICubClient* _iCub, std::string _behaviorName) : mut(_mut), iCub(_iCub), rf(_rf), behaviorName(_behaviorName){
         from_sensation_port_name = "None";
         external_port_name = "None";
     }

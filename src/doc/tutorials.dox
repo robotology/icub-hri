@@ -1,13 +1,13 @@
 /**
 *
-* \defgroup icubclient_tutorials Tutorials
+* \defgroup icubhri_tutorials Tutorials
 *
 * A list of all tutorials related to the iCub-Client.
 *
-*  - \ref icubclient_bindings
-*  - \ref icubclient_create_subsystem
-*  - \ref icubclient_tagging
-*  - \ref icubclient_facerecog
+*  - \ref icubhri_bindings
+*  - \ref icubhri_create_subsystem
+*  - \ref icubhri_tagging
+*  - \ref icubhri_facerecog
 *
 * (This page can be edited at src/doc/tutorials.dox)
 */

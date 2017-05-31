@@ -9,7 +9,7 @@ else()
 endif()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-project(icubclient
+project(icubhri
         LANGUAGES CXX
         VERSION 0.0.0.1)
 
@@ -62,8 +62,8 @@ set(IDL_GENERATED_CODE_DIR ${PROJECT_SOURCE_DIR}/src/idl_generated_code)
 mark_as_advanced(IDL_GENERATED_CODE_DIR)
 message(STATUS "IDL generated files go to ${IDL_GENERATED_CODE_DIR}")
 
-include(icubclientFindDependencies)
-include(icubclientOptions)
+include(icubhriFindDependencies)
+include(icubhriOptions)
 
 add_subdirectory(src)
 add_subdirectory(app)
@@ -80,9 +80,9 @@ include(AddUninstallTarget)
 
 #### install cmake scripts
 message(STATUS "Installing cmake scripts")
-set(ICUBCLIENT_CMAKE_SCRIPTS icubclientOptions.cmake)
+set(ICUBHRI_CMAKE_SCRIPTS icubhriOptions.cmake)
 
-foreach(conf_i ${ICUBCLIENT_CMAKE_SCRIPTS})
+foreach(conf_i ${ICUBHRI_CMAKE_SCRIPTS})
     configure_file(${CMAKE_SOURCE_DIR}/conf/${conf_i}
                    ${CMAKE_BINARY_DIR}/conf/${conf_i} COPYONLY IMMEDIATE)
     install(FILES conf/${conf_i} DESTINATION share/${PROJECT_NAME}/conf/ COMPONENT Development)

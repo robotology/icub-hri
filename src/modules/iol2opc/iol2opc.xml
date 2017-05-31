@@ -4,7 +4,7 @@
 <module>
 
   <name>iol2opc</name>
-  <doxygen-group>icubclient_modules</doxygen-group>
+  <doxygen-group>icubhri_modules</doxygen-group>
   <description>%Bridge module between the interactive object learning and recognition system (iol) and yarp database of object properties</description>
   <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
   <version>1.0</version>

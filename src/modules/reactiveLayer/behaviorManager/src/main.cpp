@@ -1,5 +1,5 @@
 /* 
-* Copyright (C) 2011 ICUBCLIENT Consortium, European Commission FP7 Project IST-270490
+* Copyright (C) 2011 WYSIWYD Consortium, European Commission FP7 Project IST-270490
 * Authors: Stephane Lallee
 * email:   stephane.lallee@gmail.com
 * website: https://github.com/robotology/icub-client/ 
@@ -8,7 +8,7 @@
 * later version published by the Free Software Foundation.
 *
 * A copy of the license can be found at
-* $ICUBCLIENT_ROOT/license/gpl.txt
+* $ICUBHRI_ROOT/license/gpl.txt
 *
 * This program is distributed in the hope that it will be useful, but
 * WITHOUT ANY WARRANTY; without even the implied warranty of

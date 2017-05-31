@@ -8,13 +8,13 @@
 #include <yarp/sig/all.h>
 #include <yarp/math/Rand.h>
 #include <map>
-#include "icubclient/clients/icubClient.h"
+#include "icubhri/clients/icubClient.h"
 
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::math;
-using namespace icubclient;
+using namespace icubhri;
 
 
 /**

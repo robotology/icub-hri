@@ -1,8 +1,8 @@
 #include "opcSensation.h"
-#include "icubclient/clients/icubClient.h"
-#include "icubclient/clients/opcClient.h"
+#include "icubhri/clients/icubClient.h"
+#include "icubhri/clients/opcClient.h"
 
-using namespace icubclient;
+using namespace icubhri;
 using namespace yarp::os;
 using namespace std;
 

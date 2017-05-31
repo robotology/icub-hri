@@ -22,15 +22,15 @@
 #include <yarp/os/RFModule.h>
 #include <yarp/math/Math.h>
 #include <kinectWrapper/kinectWrapper_client.h>
-#include "icubclient/clients/opcClient.h"
-#include "icubclient/knowledge/agent.h"
+#include "icubhri/clients/opcClient.h"
+#include "icubhri/knowledge/agent.h"
 
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace yarp::math;
 using namespace kinectWrapper;
-using namespace icubclient;
+using namespace icubhri;
 
 /**
  * @ingroup agentDetector

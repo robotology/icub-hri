@@ -1,13 +1,13 @@
 /**
 *
-* \defgroup icubclient_create_subsystem Create a new Subsystem
+* \defgroup icubhri_create_subsystem Create a new Subsystem
 *
-* \brief This provides a tutorial on how to create your own subsystem for icub-client.
-Subsystems provide a centralised way to control the different modules available to icub-client. What follows is a description of the steps required to create a custom subsystem providing centralised access to a specific module. From here on in we will be referring to the specific module as `<newSub>`.
+* \brief This provides a tutorial on how to create your own subsystem for icub-HRI.
+Subsystems provide a centralised way to control the different modules available to icub-HRI. What follows is a description of the steps required to create a custom subsystem providing centralised access to a specific module. From here on in we will be referring to the specific module as `<newSub>`.
 
-__Step 1__  Go to __icub-client/src/libraries/icubclient/include/icubclient/subsystems__, add a new file `subsystem_<newSub>.h` and open it for editing.
+__Step 1__  Go to __icub-hri/src/libraries/icubhri/include/icubhri/subsystems__, add a new file `subsystem_<newSub>.h` and open it for editing.
 
-__Step 2__  Go to __icub-client/src/libraries/icubclient/src/subsystems__ and add a new file `subsystem_<newSub>.cpp` and open it for editing.
+__Step 2__  Go to __icub-hri/src/libraries/icubhri/src/subsystems__ and add a new file `subsystem_<newSub>.cpp` and open it for editing.
 
 __Step 3__ : Write the subsystem functions to your .h and .cpp files using `subSystem_agentDector.h` and `subSystem_agentDector.cpp` as a guideline. The principal functions that must be carried out are:
 - __SubSystem_<newSub>(const std::string &masterName)__ : This function creates an RPC port having the base name specified by string `masterName`
@@ -16,7 +16,7 @@ __Step 3__ : Write the subsystem functions to your .h and .cpp files using `subS
 
 Additional functions can also be added to your subsystem to provide custom functionality.
 
-__Step 4__ : Open __icub-client/src/libraries/icubclient/CMakeLists.txt__ and to the _set(${LIBRARY_TARGET_NAME}_SRC_ section, add :
+__Step 4__ : Open __icub-hri/src/libraries/icubhri/CMakeLists.txt__ and to the _set(${LIBRARY_TARGET_NAME}_SRC_ section, add :
 \verbatim src/subsystems/subSystem_<newSub>.cpp \endverbatim
 
  Also to the _set(${LIBRARY_TARGET_NAME}_HDR_ section add :
@@ -24,19 +24,19 @@ __Step 4__ : Open __icub-client/src/libraries/icubclient/CMakeLists.txt__ and to
 
  This will enable compilation of your subsystem.
 
-__Step 5__ : Open __icub-client/src/libraries/icubclient/include/icubclient/all.h__ for editing and add :
+__Step 5__ : Open __icub-hri/src/libraries/icubhri/include/icubhri/all.h__ for editing and add :
 
-\verbatim #include "icubclient/subsystems/subSystem_<newSub>.h"\endverbatim 
+\verbatim #include "icubhri/subsystems/subSystem_<newSub>.h"\endverbatim 
 to the section marked as _subsystems_.
 
-__Step 6__ : Open __icub-client/src/libraries/icubclient/include/icubclient/clients/icubClient.h__ for editing and add:
+__Step 6__ : Open __icub-hri/src/libraries/icubhri/include/icubhri/clients/icubClient.h__ for editing and add:
 \verbatim class SubSystem_<newSub>;\endverbatim 
 to the other subsystem class definitions at line 53 and 
 \verbatim SubSystem_<newSub>* get<newSub>Client(); \endverbatim 
 at line 109.
 
-__Step 7__ : Open __icub-client/src/libraries/icubclient/src/clients/icubClient.cpp__ for editing and add
-\verbatim #include "icubclient/subsystems/subSystem_<newSub>.h" \endverbatim at line 29.
+__Step 7__ : Open __icub-hri/src/libraries/icubhri/src/clients/icubClient.cpp__ for editing and add
+\verbatim #include "icubhri/subsystems/subSystem_<newSub>.h" \endverbatim at line 29.
 
 Add \verbatim else if (currentSS == SUBSYSTEM_<newSub>)
 	subSystems[SUBSYSTEM_<newSub>] = new SubSystem_<newSub>(fullName); \endverbatim at line 96.
@@ -48,9 +48,9 @@ Add \verbatim SubSystem_<newSub>* ICubClient::get<newSub>Client()
 
 If you additionally want to compile python bindings for the subsytem you must also perform the following steps:
 
-__Step 8__: Open __icub-client/bindings/icubclient.i__ for editing.
+__Step 8__: Open __icub-hri/bindings/icubhri.i__ for editing.
 
-__Step 9__: Add \verbatim #include <icubclient/subsystems/subSystem_<newSub>.h> \endverbatim to line 28 and \verbatim %include <icubclient/subsystems/subSystem_<newSub>.h> \endverbatim to line 52.
+__Step 9__: Add \verbatim #include <icubhri/subsystems/subSystem_<newSub>.h> \endverbatim to line 28 and \verbatim %include <icubhri/subsystems/subSystem_<newSub>.h> \endverbatim to line 52.
 
 * (This page can be edited at src/doc/subsystems.dox)
 */

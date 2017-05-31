@@ -1,6 +1,6 @@
 /**
 *
-* \defgroup icubclient_facerecog Face Recognition Tutorial: Collecting data and training
+* \defgroup icubhri_facerecog Face Recognition Tutorial: Collecting data and training
 * \brief This provides a tutorial on how to create your own face recognition model with SAM
 
 ##Prerequisites

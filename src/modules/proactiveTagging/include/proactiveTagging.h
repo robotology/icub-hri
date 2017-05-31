@@ -17,7 +17,7 @@
 
 #include <yarp/os/all.h>
 
-namespace icubclient {
+namespace icubhri {
     class ICubClient;
 }
 
@@ -27,7 +27,7 @@ namespace icubclient {
 class proactiveTagging : public yarp::os::RFModule {
 protected:
 
-    icubclient::ICubClient  *iCub; //!< icubclient
+    icubhri::ICubClient  *iCub; //!< icubclient
 
     double      period;
 
@@ -95,7 +95,7 @@ public:
 
     /**
      * @brief Loop through all objects in the OPC, and check their saliency. Return the name of the object with the highest saliency
-     * @param sTypeTarget - type of the target. For now, only #ICUBCLIENT_OPC_ENTITY_OBJECT is supported
+     * @param sTypeTarget - type of the target. For now, only #ICUBHRI_OPC_ENTITY_OBJECT is supported
      * @return Name of the most salient object
      */
     std::string getBestEntity(std::string sTypeTarget);
@@ -104,7 +104,7 @@ public:
     /**
      * @brief Send request to SAM to use its face recognition to recognise partner
      * @param sNameTarget: name of the entity to detect, typically "partner"
-     * @param currentEntityType: type of the entity, typically #ICUBCLIENT_OPC_ENTITY_AGENT
+     * @param currentEntityType: type of the entity, typically #ICUBHRI_OPC_ENTITY_AGENT
      * @return Bottle. In case of success: (success entityType) where entityType = agent, in case of failure: (nack)
      */
     yarp::os::Bottle getNameFromSAM(std::string sNameTarget, std::string currentEntityType);

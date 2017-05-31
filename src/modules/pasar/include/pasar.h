@@ -1,7 +1,7 @@
 // -*- mode:C++; tab-width:4; c-basic-offset:4; indent-tabs-mode:nil -*-
 
 /*
-* Copyright (C) 2014 ICUBCLIENT Consortium, European Commission FP7 Project IST-270490
+* Copyright (C) 2014 WYSIWYD Consortium, European Commission FP7 Project IST-270490
 * Authors: Stéphane Lallée, Grégoire Pointeau
 * email:   stephane.lallee@gmail.com, gregoire.pointeau@inserm.fr
 * website: https://github.com/robotology/icub-client/
@@ -22,15 +22,15 @@
 #define _PASAR_MODULE_H_
 
 #include <utility>
-#include "icubclient/clients/icubClient.h"
-#include "icubclient/clients/opcClient.h"
+#include "icubhri/clients/icubClient.h"
+#include "icubhri/clients/opcClient.h"
 
 /**
  * @ingroup pasar
  */
 struct ObjectModel
 {
-    icubclient::Object o;
+    icubhri::Object o;
     double speed;
     double acceleration;
     int restingSteps;
@@ -64,7 +64,7 @@ protected:
 
     bool checkWaving;                       //!< whether to detect waving of an agent
     bool checkPointing;                     //!< whether to detect pointing of an agent
-    icubclient::ICubClient  *iCub;
+    icubhri::ICubClient  *iCub;
 
     yarp::os::Port handlerPort;             //!< a port to handle messages
 

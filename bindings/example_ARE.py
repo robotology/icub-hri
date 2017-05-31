@@ -1,5 +1,5 @@
 import yarp
-import icubclient
+import icubhri
 import sys
 
 
@@ -7,7 +7,7 @@ if __name__ == '__main__':
     yarp.Network.init()
 
     logger = yarp.Log()
-    iCub = icubclient.ICubClient("AREiCubClientExample", "icubClient", "example_ARE.ini")
+    iCub = icubhri.ICubClient("AREiCubClientExample", "icubClient", "example_ARE.ini")
 
     rfClient = yarp.ResourceFinder()
     rfClient.setVerbose(True)
@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     # we connect to both ARE and OPC
     if not iCub.connect():
-        logger.error() << "[ARE_KARMAiCubClientExample] ARE and/or OPC seems unavailabe!"
+        logger.error() << "ARE and/or OPC seems unavailabe!"
 
     if rfClient.check("target"):
         target = rfClient.find("target").asString()
@@ -58,6 +58,6 @@ if __name__ == '__main__':
         iCub.release(x)
         iCub.home()
 
-    logger.info() << "AREiCubClientExample shutting down ... "
+    logger.info() << "Shutting down ... "
     iCub.close()
     yarp.Network.fini()

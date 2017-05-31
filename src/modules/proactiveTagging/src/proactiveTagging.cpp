@@ -17,14 +17,14 @@
 
 #include "proactiveTagging.h"
 
-#include "icubclient/clients/icubClient.h"
-#include "icubclient/clients/opcClient.h"
-#include "icubclient/subsystems/subSystem_recog.h"
-#include "icubclient/subsystems/subSystem_speech.h"
-#include "icubclient/subsystems/subSystem_SAM.h"
+#include "icubhri/clients/icubClient.h"
+#include "icubhri/clients/opcClient.h"
+#include "icubhri/subsystems/subSystem_recog.h"
+#include "icubhri/subsystems/subSystem_speech.h"
+#include "icubhri/subsystems/subSystem_SAM.h"
 
 using namespace yarp::os;
-using namespace icubclient;
+using namespace icubhri;
 using namespace std;
 
 bool proactiveTagging::configure(yarp::os::ResourceFinder &rf) {
@@ -164,7 +164,7 @@ bool proactiveTagging::respond(const Bottle& command, Bottle& reply) {
         string name = command.get(2).toString();
         yDebug() << "exploreUnknownEntity with name = " << name;
 
-        if ((type == ICUBCLIENT_OPC_ENTITY_BODYPART) && (name.find("unknown") == std::string::npos)) { //type is bodypart and it already has a name
+        if ((type == ICUBHRI_OPC_ENTITY_BODYPART) && (name.find("unknown") == std::string::npos)) { //type is bodypart and it already has a name
             iCub->opc->checkout();
             Bodypart* bp = dynamic_cast<Bodypart*>(iCub->opc->getEntity(name));
             if(!bp) {
@@ -178,14 +178,14 @@ bool proactiveTagging::respond(const Bottle& command, Bottle& reply) {
                     yWarning("Not sure what to do, name and tactile information already known");
                 }
             }
-        } else if (type == ICUBCLIENT_OPC_ENTITY_BODYPART) {
+        } else if (type == ICUBHRI_OPC_ENTITY_BODYPART) {
             yInfo() << "Going to tag bodypart (include babbling)";
             reply = exploreUnknownEntity(command);
         }
-        else if (type == ICUBCLIENT_OPC_ENTITY_OBJECT) {
+        else if (type == ICUBHRI_OPC_ENTITY_OBJECT) {
             yInfo() << "Going to tag object (include a pointing)";
             reply = exploreUnknownEntity(command);
-        } else if (type == ICUBCLIENT_OPC_ENTITY_AGENT) {
+        } else if (type == ICUBHRI_OPC_ENTITY_AGENT) {
             yInfo() << "Going to tag an agent (face recog)";
             reply = exploreUnknownEntity(command);
         } else {
@@ -375,7 +375,7 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput) {
 
     //Ask question for the human, or ask to pay attention (if action to focus attention after)
     string sQuestion;
-    if (currentEntityType == ICUBCLIENT_OPC_ENTITY_AGENT) {
+    if (currentEntityType == ICUBHRI_OPC_ENTITY_AGENT) {
         iCub->lookAtPartner();
 
         // try to do face recognition with SAM
@@ -394,11 +394,11 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput) {
             sQuestion = " Hello, I don't know you. Who are you?";
         }
     }
-    else if (currentEntityType == ICUBCLIENT_OPC_ENTITY_OBJECT) {
+    else if (currentEntityType == ICUBHRI_OPC_ENTITY_OBJECT) {
         iCub->look(sNameTarget);
         sQuestion = " Hum, what is this object?";
     }
-    else if (currentEntityType == ICUBCLIENT_OPC_ENTITY_BODYPART) {
+    else if (currentEntityType == ICUBHRI_OPC_ENTITY_BODYPART) {
         iCub->lookAtPartner();
         sQuestion = " Watch please, I will move a part of my body";
     }
@@ -433,7 +433,7 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput) {
         yInfo() << sQuestion;
         iCub->say(sQuestion, false);
     }
-    else if (currentEntityType == ICUBCLIENT_OPC_ENTITY_OBJECT) {
+    else if (currentEntityType == ICUBHRI_OPC_ENTITY_OBJECT) {
         yDebug() << "Going to point to " << sNameTarget;
         iCub->point(sNameTarget);
     }
@@ -455,13 +455,13 @@ Bottle proactiveTagging::exploreUnknownEntity(const Bottle& bInput) {
     iCub->changeName(e, sName);
 
     iCub->lookAtPartner();
-    if (currentEntityType == ICUBCLIENT_OPC_ENTITY_AGENT) {
+    if (currentEntityType == ICUBHRI_OPC_ENTITY_AGENT) {
         sReply = " Nice to meet you " + sName;
     }
-    else if (currentEntityType == ICUBCLIENT_OPC_ENTITY_OBJECT) {
+    else if (currentEntityType == ICUBHRI_OPC_ENTITY_OBJECT) {
         sReply = " I get it, this is a " + sName;
     }
-    else if (currentEntityType == ICUBCLIENT_OPC_ENTITY_BODYPART) {
+    else if (currentEntityType == ICUBHRI_OPC_ENTITY_BODYPART) {
         sReply = " Nice, I know that I have a " + getBodyPartNameForSpeech(sName);
     } else {
         iCub->say("I do not know this entity type");
@@ -552,9 +552,9 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput) {
     // if there are several objects unknown
     string sSentence;
     if(verboseSearch) {
-        if(sTypeTarget == ICUBCLIENT_OPC_ENTITY_OBJECT) {
+        if(sTypeTarget == ICUBHRI_OPC_ENTITY_OBJECT) {
             sSentence = "I don't known which of these objects is a " + sNameTarget + ". Can you show me the " + sNameTarget;
-        } else if (sTypeTarget == ICUBCLIENT_OPC_ENTITY_BODYPART) {
+        } else if (sTypeTarget == ICUBHRI_OPC_ENTITY_BODYPART) {
             sSentence = "I don't known my " + sNameTarget + ". Can you please touch my " + sNameTarget;
         }
 
@@ -562,7 +562,7 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput) {
         iCub->say(sSentence);
     }
 
-    if(sTypeTarget == ICUBCLIENT_OPC_ENTITY_OBJECT) { // activate pointing detection in pasar if it's an object
+    if(sTypeTarget == ICUBHRI_OPC_ENTITY_OBJECT) { // activate pointing detection in pasar if it's an object
         iCub->home();
 
         bool success = setPasarPointing(true);
@@ -585,7 +585,7 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput) {
 
     // change name
     Object* TARGET = dynamic_cast<Object*>(iCub->opc->getEntity(sNameBestEntity));
-    if(sTypeTarget == ICUBCLIENT_OPC_ENTITY_OBJECT) {
+    if(sTypeTarget == ICUBHRI_OPC_ENTITY_OBJECT) {
         iCub->look(TARGET->name());
     }
 
@@ -596,7 +596,7 @@ Bottle proactiveTagging::searchingEntity(const Bottle &bInput) {
     iCub->say("Now I know the " + sNameTarget, false);
 
     // de-activate pointing detection in pasar
-    if(sTypeTarget == ICUBCLIENT_OPC_ENTITY_OBJECT) {
+    if(sTypeTarget == ICUBHRI_OPC_ENTITY_OBJECT) {
         bool success = setPasarPointing(false);
         if(!success) {
             yError() << "Problem with pasar when setPasarPointing(false)";

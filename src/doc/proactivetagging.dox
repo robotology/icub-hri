@@ -1,6 +1,6 @@
 /**
 *
-* \defgroup icubclient_tagging Run the proactive tagging demo
+* \defgroup icubhri_tagging Run the proactive tagging demo
 * \brief This provides a brief tutorial on how to run the proactive tagging demo described in the paper.
 To run the proactive tagging demo, first install all modules as described in the README. Then, adapt the `proactiveTagging.xml` within `icub-client/app/demos` to match your system setup (modify the node names). For the role of the individual components, we refer to our paper.
 

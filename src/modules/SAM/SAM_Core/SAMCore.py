@@ -29,11 +29,11 @@ import os
 
 
 ## @{
-## \defgroup icubclient_SAM_Core SAM Core
+## \defgroup icubhri_SAM_Core SAM Core
 ## This Module implements the core functionality to create Gaussian Process Latent Feature Models
-## \ingroup icubclient_SAM_source
+## \ingroup icubhri_SAM_source
 ## @}
-## \ingroup icubclient_SAM_Core
+## \ingroup icubhri_SAM_Core
 class LFM(object):
     """
     SAM based on Latent Feature Models.
@@ -480,7 +480,7 @@ class LFM(object):
         return numLatentDimensions
 
 
-## \ingroup icubclient_SAM_Core
+## \ingroup icubhri_SAM_Core
 def save_model(mm, fileName='m_serialized.txt'):
     """ Save serialised model.
 
@@ -496,7 +496,7 @@ def save_model(mm, fileName='m_serialized.txt'):
     pickle.dump(mm, output)
     output.close()
 
-## \ingroup icubclient_SAM_Core
+## \ingroup icubhri_SAM_Core
 def load_model(fileName='m_serialized.txt'):
     """ Load serialised model.
 
@@ -508,7 +508,7 @@ def load_model(fileName='m_serialized.txt'):
     mm = pickle.load(open(fileName, 'r'))
     return mm
 
-## \ingroup icubclient_SAM_Core
+## \ingroup icubhri_SAM_Core
 def save_pruned_model(mm, fileName='m_pruned', economy=False, extraDict=dict()):
     """Save a pruned model
 
@@ -566,7 +566,7 @@ def save_pruned_model(mm, fileName='m_pruned', economy=False, extraDict=dict()):
     pickle.dump(SAMObjPruned, output)
     output.close()
 
-## \ingroup icubclient_SAM_Core
+## \ingroup icubhri_SAM_Core
 def load_pruned_model(fileName='m_pruned', economy=False, m=None):
     """Load a pruned model
 
@@ -613,7 +613,7 @@ def load_pruned_model(fileName='m_pruned', economy=False, m=None):
 
     return SAMObject
 
-## \ingroup icubclient_SAM_Core
+## \ingroup icubhri_SAM_Core
 def most_significant_input_dimensions(model):
     """ Determine the most descriptive output dimensions.
 

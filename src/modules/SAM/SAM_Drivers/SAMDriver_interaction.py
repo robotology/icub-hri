@@ -19,7 +19,7 @@ from SAM.SAM_Core import SAMDriver
 from SAM.SAM_Core import SAMTesting
 import logging
 
-## @ingroup icubclient_SAM_Drivers
+## @ingroup icubhri_SAM_Drivers
 class SAMDriver_interaction(SAMDriver):
     """
     Class developed for the implementation of face recognition.

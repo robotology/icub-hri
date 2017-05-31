@@ -11,7 +11,7 @@ project(ears)
 include_directories(
     ${PROJECT_SOURCE_DIR}/include
     ${YARP_INCLUDE_DIRS}
-    ${icubclient_INCLUDE_DIRS}
+    ${icubhri_INCLUDE_DIRS}
 )
 
 # Search for source code.
@@ -25,7 +25,7 @@ source_group("Header Files" FILES ${headers})
 source_group("DOC Files"    FILES ${docs})
 
 add_executable(${PROJECT_NAME} ${headers} ${sources} ${docs})
-target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES} icubclient)
+target_link_libraries(${PROJECT_NAME} ${YARP_LIBRARIES} icubhri)
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER attentionRelated)
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-yarp_install(FILES ${docs} DESTINATION ${ICUBCLIENT_MODULES_INSTALL_DIR})
+yarp_install(FILES ${docs} DESTINATION ${ICUBHRI_MODULES_INSTALL_DIR})

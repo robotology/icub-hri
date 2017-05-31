@@ -24,7 +24,7 @@ protected:
     }
 
 public:
-    RecognitionOrder(yarp::os::Mutex* mut, yarp::os::ResourceFinder &rf, icubclient::ICubClient* iCub, std::string behaviorName): Behavior(mut, rf, iCub, behaviorName) {
+    RecognitionOrder(yarp::os::Mutex* mut, yarp::os::ResourceFinder &rf, icubhri::ICubClient* iCub, std::string behaviorName): Behavior(mut, rf, iCub, behaviorName) {
         ;
     }
       

@@ -10,14 +10,14 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../conf)
 include(CMakeDependentOption)
 include(CheckCXXCompilerFlag)
 include(GNUInstallDirs)
-include(icubclientOptions)
+include(icubhriOptions)
 
 find_package(SWIG REQUIRED 3)
-find_package(icubclient REQUIRED)
+find_package(icubhri REQUIRED)
 find_package(YARP REQUIRED)
 
-get_target_property(icubclient_includes icubclient::icubclient INTERFACE_INCLUDE_DIRECTORIES)
-set(icubclient_BASE_DIR ${CMAKE_CURRENT_BINARY_DIR})
+get_target_property(icubhri_includes icubhri::icubhri INTERFACE_INCLUDE_DIRECTORIES)
+set(icubhri_BASE_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
 foreach(lang "Java"
              "Python")
@@ -35,37 +35,37 @@ include(${SWIG_USE_FILE})
 message(STATUS "${SWIG_USE_FILE}")
 
 include_directories(SYSTEM ${YARP_INCLUDE_DIRS})
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${icubclient_includes})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${icubhri_includes})
 
-set_source_files_properties(icubclient.i PROPERTIES CPLUSPLUS ON)
-set_source_files_properties(icubclient.i PROPERTIES SWIG_FLAGS "-c++")
+set_source_files_properties(icubhri.i PROPERTIES CPLUSPLUS ON)
+set_source_files_properties(icubhri.i PROPERTIES SWIG_FLAGS "-c++")
 
 if(CREATE_PYTHON)
-    set(ICUBCLIENT_USE_PYTHON_VERSION "" CACHE STRING "Specify python version to use" )
-    find_package(PythonInterp ${ICUBCLIENT_USE_PYTHON_VERSION} REQUIRED)
-    set(ICUBCLIENT_USE_PYTHON_VERSION_ARGS)
-    if(NOT ICUBCLIENT_USE_PYTHON_VERSION)
-      set (ICUBCLIENT_USE_PYTHON_VERSION ${PYTHON_VERSION_STRING})
+    set(ICUBHRI_USE_PYTHON_VERSION "" CACHE STRING "Specify python version to use" )
+    find_package(PythonInterp ${ICUBHRI_USE_PYTHON_VERSION} REQUIRED)
+    set(ICUBHRI_USE_PYTHON_VERSION_ARGS)
+    if(NOT ICUBHRI_USE_PYTHON_VERSION)
+      set (ICUBHRI_USE_PYTHON_VERSION ${PYTHON_VERSION_STRING})
     endif()
 
-    find_package(PythonLibs ${ICUBCLIENT_USE_PYTHON_VERSION} EXACT)
+    find_package(PythonLibs ${ICUBHRI_USE_PYTHON_VERSION} EXACT)
 
-    set(target_name icubclient)
+    set(target_name icubhri)
 
     include_directories(SYSTEM ${PYTHON_INCLUDE_PATH})
 
     set(CMAKE_SWIG_FLAGS "-module;${target_name};-threads")
 
-    swig_add_module(${target_name} python icubclient.i)
-    target_link_libraries(_${target_name} ${PYTHON_LIBRARIES} ${YARP_LIBRARIES} ${icubclient_LIBRARIES})
-    set_target_properties(_${target_name} PROPERTIES OUTPUT_NAME "_icubclient")
+    swig_add_module(${target_name} python icubhri.i)
+    target_link_libraries(_${target_name} ${PYTHON_LIBRARIES} ${YARP_LIBRARIES} ${icubhri_LIBRARIES})
+    set_target_properties(_${target_name} PROPERTIES OUTPUT_NAME "_icubhri")
 
     # installation path is determined reliably on most platforms using distutils
     execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "from distutils import sysconfig; print(sysconfig.get_python_lib(1,0,prefix=''))"
                     OUTPUT_VARIABLE PYTHON_INSTDIR
                     OUTPUT_STRIP_TRAILING_WHITESPACE )
 
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/icubclient.py DESTINATION ${PYTHON_INSTDIR})
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/icubhri.py DESTINATION ${PYTHON_INSTDIR})
 
     set(_CMAKE_INSTALL_PYTHONDIR "${PYTHON_INSTDIR}")
     set(CMAKE_INSTALL_PYTHONDIR ${_CMAKE_INSTALL_PYTHONDIR} CACHE PATH "python bindings (${_CMAKE_INSTALL_PYTHONDIR})")
@@ -98,35 +98,35 @@ if(CREATE_JAVA)
   option(PREPARE_CLASS_FILES "Prepare class files" OFF)
   set(JAVA_TARGET_VERSION 1.6 CACHE STRING "Java target version")
   set(CMAKE_SWIG_OUTDIR_SAVE ${CMAKE_SWIG_OUTDIR})
-  set(CMAKE_SWIG_OUTDIR "${icubclient_BASE_DIR}/generated_src/java")
-  set(CMAKE_SWIG_FLAGS "-package;icubclient;-Wall;-module;icubclient;${SWIG_COMMON_FLAGS}")
+  set(CMAKE_SWIG_OUTDIR "${icubhri_BASE_DIR}/generated_src/java")
+  set(CMAKE_SWIG_FLAGS "-package;icubhri;-Wall;-module;icubhri;${SWIG_COMMON_FLAGS}")
   set(TARGET_DIR generated_src/java)
-  file(MAKE_DIRECTORY "${icubclient_BASE_DIR}/${TARGET_DIR}")
+  file(MAKE_DIRECTORY "${icubhri_BASE_DIR}/${TARGET_DIR}")
   if(NOT BINDINGS_SRC_DIR)
     set(BINDINGS_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
   endif()
-  set(JAVA_SRCS Loadicubclient.java)
+  set(JAVA_SRCS Loadicubhri.java)
   include_directories(SYSTEM ${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
-  set(target_name jicubclient)
-  swig_add_module(${target_name} java icubclient.i)
-  target_link_libraries(${target_name} ${JAVA_LIBRARIES} ${YARP_LIBRARIES} ${icubclient_LIBRARIES})
+  set(target_name jicubhri)
+  swig_add_module(${target_name} java icubhri.i)
+  target_link_libraries(${target_name} ${JAVA_LIBRARIES} ${YARP_LIBRARIES} ${icubhri_LIBRARIES})
   if(PREPARE_CLASS_FILES)
     set(CLASS_FILES)
     foreach(java_file ${JAVA_SRCS})
       string(REPLACE ".java" ".class" class_file ${java_file})
       list(APPEND JAVA_FILES "${BINDINGS_SRC_DIR}/${java_file}")
-      list(APPEND CLASS_FILES "${icubclient_BASE_DIR}/${class_file}")
+      list(APPEND CLASS_FILES "${icubhri_BASE_DIR}/${class_file}")
     endforeach()
     add_custom_command(OUTPUT ${CLASS_FILES}
                        COMMAND ${JAVA_JAVAC_EXECUTABLE} -source ${JAVA_TARGET_VERSION}
                                                         -target ${JAVA_TARGET_VERSION}
-                                                        -d "${icubclient_BASE_DIR}"
-                                                        "${icubclient_BASE_DIR}/${TARGET_DIR}/*.java"
+                                                        -d "${icubhri_BASE_DIR}"
+                                                        "${icubhri_BASE_DIR}/${TARGET_DIR}/*.java"
                        COMMAND ${JAVA_JAVAC_EXECUTABLE} -source ${JAVA_TARGET_VERSION}
                                                         -target ${JAVA_TARGET_VERSION}
-                                                        -d "${icubclient_BASE_DIR}/"
+                                                        -d "${icubhri_BASE_DIR}/"
                                                         "${BINDINGS_SRC_DIR}/*.java"
-                       WORKING_DIRECTORY ${icubclient_BASE_DIR}
+                       WORKING_DIRECTORY ${icubhri_BASE_DIR}
                        DEPENDS ${JAVA_FILES} ${target_name})
     add_custom_target(${target_name}_classes ALL DEPENDS ${CLASS_FILES})
   endif()

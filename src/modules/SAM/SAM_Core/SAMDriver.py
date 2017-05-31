@@ -20,13 +20,13 @@ import numpy
 import os
 import logging
 
-## \defgroup icubclient_SAM_Drivers SAM Drivers
+## \defgroup icubhri_SAM_Drivers SAM Drivers
 ## @{
-## \ingroup icubclient_SAM_source
+## \ingroup icubhri_SAM_source
 ##\brief@{
 ## Drivers folder containing driver classes that inherit from SAMDriver to implement custom functionality
 ## @{
-## @ingroup icubclient_SAM_Core
+## @ingroup icubhri_SAM_Core
 #\details@{
 
 class SAMDriver:

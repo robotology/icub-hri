@@ -33,9 +33,9 @@ np.set_printoptions(threshold=np.nan, precision=2)
 
 
 # thisModel = None
-## \defgroup icubclient_SAM_Tests SAM Tests
+## \defgroup icubhri_SAM_Tests SAM Tests
 ## @{
-## \ingroup icubclient_SAM_source
+## \ingroup icubhri_SAM_source
 ##\brief@{
 ## Collection of methods for testing and calibrating recall for SAM Models
 

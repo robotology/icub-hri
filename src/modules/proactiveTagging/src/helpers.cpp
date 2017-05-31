@@ -17,20 +17,20 @@
 
 #include "proactiveTagging.h"
 
-#include "icubclient/clients/icubClient.h"
-#include "icubclient/clients/opcClient.h"
-#include "icubclient/subsystems/subSystem_recog.h"
-#include "icubclient/subsystems/subSystem_speech.h"
+#include "icubhri/clients/icubClient.h"
+#include "icubhri/clients/opcClient.h"
+#include "icubhri/subsystems/subSystem_recog.h"
+#include "icubhri/subsystems/subSystem_speech.h"
 
 using namespace std;
 using namespace yarp::os;
-using namespace icubclient;
+using namespace icubhri;
 
 void proactiveTagging::subPopulateObjects(Bottle* objectList, bool addOrRetrieve) {
     if (objectList) {
         for (int d = 0; d < objectList->size(); d++) {
             std::string name = objectList->get(d).asString().c_str();
-            icubclient::Object* o;
+            icubhri::Object* o;
             if(addOrRetrieve) {
                 o = iCub->opc->addOrRetrieveEntity<Object>(name);
             } else {
@@ -82,7 +82,7 @@ std::string proactiveTagging::getBestEntity(std::string sTypeTarget) {
 
         for (auto& entity : lEntities) {
             if (entity->name().find("unknown")==0) {
-                if (sTypeTarget == ICUBCLIENT_OPC_ENTITY_OBJECT && (entity->entity_type() == ICUBCLIENT_OPC_ENTITY_OBJECT)) {
+                if (sTypeTarget == ICUBHRI_OPC_ENTITY_OBJECT && (entity->entity_type() == ICUBHRI_OPC_ENTITY_OBJECT)) {
                     Object* temp = dynamic_cast<Object*>(entity.get());
                     if(!temp) {
                         yError() << "Could not cast " << entity->name() << " to an object";
@@ -143,15 +143,15 @@ Bottle proactiveTagging::recogName(std::string entityType) {
 
     yDebug() << "Going to load grammar.";
     string grammar, expectedresponse="error", semanticfield="error";
-    if (entityType == ICUBCLIENT_OPC_ENTITY_AGENT) {
+    if (entityType == ICUBHRI_OPC_ENTITY_AGENT) {
         grammar = GrammarAskNameAgent;
         expectedresponse = "SENTENCEAGENT";
         semanticfield = "agent";
-    } else if (entityType == ICUBCLIENT_OPC_ENTITY_OBJECT) {
+    } else if (entityType == ICUBHRI_OPC_ENTITY_OBJECT) {
         grammar = GrammarAskNameObject;
         expectedresponse = "SENTENCEOBJECT";
         semanticfield = "object";
-    } else if (entityType == ICUBCLIENT_OPC_ENTITY_BODYPART) {
+    } else if (entityType == ICUBHRI_OPC_ENTITY_BODYPART) {
         grammar = GrammarAskNameBodypart;
         expectedresponse = "SENTENCEBODYPART";
         semanticfield = "fingerName";
@@ -214,7 +214,7 @@ void proactiveTagging::subPopulateBodyparts(Bottle* bodyPartList, Bottle* bodyPa
                 continue;
             }
             std::string name = bodyPartList->get(d).asString().c_str();
-            icubclient::Bodypart* o;
+            icubhri::Bodypart* o;
             if(addOrRetrieve) {
                 o = iCub->opc->addOrRetrieveEntity<Bodypart>(name);
             } else {

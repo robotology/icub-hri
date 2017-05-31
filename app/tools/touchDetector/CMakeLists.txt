@@ -8,7 +8,7 @@ file(GLOB conf ${CMAKE_CURRENT_SOURCE_DIR}/conf/*.ini)
 file(GLOB lua  ${CMAKE_CURRENT_SOURCE_DIR}/lua/*.lua)
 file(GLOB template  ${CMAKE_CURRENT_SOURCE_DIR}/scripts/*.xml.template)
 
-yarp_install(FILES ${conf} DESTINATION ${ICUBCLIENT_CONTEXTS_INSTALL_DIR}/${appname})
-yarp_install(FILES ${lua}  DESTINATION ${ICUBCLIENT_CONTEXTS_INSTALL_DIR}/${appname})
-yarp_install(FILES ${template} DESTINATION ${ICUBCLIENT_APPLICATIONS_TEMPLATES_INSTALL_DIR})
+yarp_install(FILES ${conf} DESTINATION ${ICUBHRI_CONTEXTS_INSTALL_DIR}/${appname})
+yarp_install(FILES ${lua}  DESTINATION ${ICUBHRI_CONTEXTS_INSTALL_DIR}/${appname})
+yarp_install(FILES ${template} DESTINATION ${ICUBHRI_APPLICATIONS_TEMPLATES_INSTALL_DIR})
 

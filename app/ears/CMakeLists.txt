@@ -6,5 +6,5 @@ set(appname ears)
 
 file(GLOB conf ${CMAKE_CURRENT_SOURCE_DIR}/conf/*.*)
 
-yarp_install(FILES ${conf} DESTINATION ${ICUBCLIENT_CONTEXTS_INSTALL_DIR}/${appname})
+yarp_install(FILES ${conf} DESTINATION ${ICUBHRI_CONTEXTS_INSTALL_DIR}/${appname})
 

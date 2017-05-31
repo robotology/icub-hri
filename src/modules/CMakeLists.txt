@@ -12,12 +12,12 @@ add_subdirectory(SAM)
 add_subdirectory(tools)
 
 #Add modules with dependencies here
-if(ICUBCLIENT_USE_OpenCV)
+if(ICUBHRI_USE_OpenCV)
     add_subdirectory(faceTracker)
     add_subdirectory(iol2opc)
 endif()
 
-if(ICUBCLIENT_USE_kinectWrapper)
+if(ICUBHRI_USE_kinectWrapper)
     add_subdirectory(agentDetector)
 endif()
 

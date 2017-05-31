@@ -13,11 +13,11 @@ source_group("Header Files" FILES ${folder_header})
 source_group("Source Files" FILES ${folder_source})
 source_group("DOC Files"    FILES ${doc_files})
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${icubclient_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${icubhri_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
 
 add_executable(${PROJECT_NAME} ${folder_header} ${folder_source} ${doc_files})
-target_link_libraries(${PROJECT_NAME} icubclient ${YARP_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} icubhri ${YARP_LIBRARIES})
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER tools)
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-yarp_install(FILES ${doc_files} DESTINATION ${ICUBCLIENT_MODULES_INSTALL_DIR})
+yarp_install(FILES ${doc_files} DESTINATION ${ICUBHRI_MODULES_INSTALL_DIR})
 

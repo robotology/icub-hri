@@ -27,8 +27,8 @@
 
 #include <iCub/ctrl/math.h>
 #include <iCub/optimization/calibReference.h>
-#include "icubclient/tags.h"
-#include "icubclient/functions.h"
+#include "icubhri/tags.h"
+#include "icubhri/functions.h"
 
 using namespace std;
 using namespace yarp::os;
@@ -36,7 +36,7 @@ using namespace yarp::sig;
 using namespace yarp::math;
 using namespace iCub::ctrl;
 using namespace iCub::optimization;
-using namespace icubclient;
+using namespace icubhri;
 
 /**
  * \ingroup referenceFrameHandler
@@ -223,7 +223,7 @@ public:
         Bottle opcCmd,opcReply;
         opcCmd.addVocab(Vocab::encode("ask"));
         Bottle &query=opcCmd.addList();
-        query.addList().addString(ICUBCLIENT_OPC_FRAME_NAME);
+        query.addList().addString(ICUBHRI_OPC_FRAME_NAME);
         opc.write(opcCmd,opcReply);
 
         Bottle ids=opcGetIdsFromAsk(opcReply);
@@ -239,9 +239,9 @@ public:
             Bottle &propSet=query.addList();
             propSet.addString("propSet");
             Bottle &props=propSet.addList();
-            props.addString(ICUBCLIENT_OPC_FRAME_NAME);
-            props.addString(ICUBCLIENT_OPC_FRAME_MATRIX);
-            props.addString(ICUBCLIENT_OPC_FRAME_SCALE);
+            props.addString(ICUBHRI_OPC_FRAME_NAME);
+            props.addString(ICUBHRI_OPC_FRAME_MATRIX);
+            props.addString(ICUBHRI_OPC_FRAME_SCALE);
             
             Bottle reply;
             reply.clear();
@@ -251,8 +251,8 @@ public:
             {
                 if (Bottle *propList=reply.get(1).asList())
                 {
-                    string currentFrame = propList->find(ICUBCLIENT_OPC_FRAME_NAME).asString().c_str();
-                    Bottle *bH = propList->find(ICUBCLIENT_OPC_FRAME_MATRIX).asList();
+                    string currentFrame = propList->find(ICUBHRI_OPC_FRAME_NAME).asString().c_str();
+                    Bottle *bH = propList->find(ICUBHRI_OPC_FRAME_MATRIX).asList();
                     Matrix H(4,4);
                     for(int i=0;i<4;i++)
                     {
@@ -262,7 +262,7 @@ public:
                         }
                     }
                                 
-                    Bottle *bS = propList->find(ICUBCLIENT_OPC_FRAME_SCALE).asList();
+                    Bottle *bS = propList->find(ICUBHRI_OPC_FRAME_SCALE).asList();
                     Matrix S(4,4);
                     for(int i=0;i<4;i++)
                     {
@@ -303,7 +303,7 @@ public:
                 opcCmd.addVocab(Vocab::encode("ask"));
                 Bottle &query=opcCmd.addList();
                 Bottle& checkName = query.addList();
-                checkName.addString(ICUBCLIENT_OPC_FRAME_NAME);
+                checkName.addString(ICUBHRI_OPC_FRAME_NAME);
                 checkName.addString("==");
                 checkName.addString(it->second.name.c_str());
 
@@ -325,11 +325,11 @@ public:
                 }
 
                 Bottle &name = content.addList();
-                name.addString(ICUBCLIENT_OPC_FRAME_NAME);
+                name.addString(ICUBHRI_OPC_FRAME_NAME);
                 name.addString(it->second.name.c_str());
                                 
                 Bottle &matrix = content.addList();
-                matrix.addString(ICUBCLIENT_OPC_FRAME_MATRIX);
+                matrix.addString(ICUBHRI_OPC_FRAME_MATRIX);
                 Bottle &bMat = matrix.addList();
 
                 for(int i=0;i<4;i++)
@@ -341,7 +341,7 @@ public:
                 }
 
                 Bottle &scale = content.addList();
-                scale.addString(ICUBCLIENT_OPC_FRAME_SCALE);
+                scale.addString(ICUBHRI_OPC_FRAME_SCALE);
                 Bottle &bSca = matrix.addList();
                 for(int i=0;i<4;i++)
                 {

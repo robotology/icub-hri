@@ -2,7 +2,7 @@
 
 #include <yarp/os/all.h>
 
-namespace icubclient {
+namespace icubhri {
     class ICubClient;
     class Object;
 }
@@ -13,7 +13,7 @@ namespace icubclient {
 class opcPopulater : public yarp::os::RFModule {
 protected:
 
-    icubclient::ICubClient *iCub;
+    icubhri::ICubClient *iCub;
     double period;
     yarp::os::Port rpc;
 
@@ -76,10 +76,10 @@ public:
     /**
      * @brief setAttributeEntity set an attribute of an object
      * @param bInput Bottle with format "setAttributeEntity name targetValue" where name defines the object and targetValue defines the new value
-     * @param f_setter function pointer to function to be called, e.g. to icubclient::Object::setSaliency()
+     * @param f_setter function pointer to function to be called, e.g. to icubhri::Object::setSaliency()
      * @return true if successful
      */
-    bool setAttributeEntity(const yarp::os::Bottle &bInput, std::function<void(icubclient::Object*, double)> f_setter);
+    bool setAttributeEntity(const yarp::os::Bottle &bInput, std::function<void(icubhri::Object*, double)> f_setter);
 
     //RPC & scenarios
     bool respond(const yarp::os::Bottle& cmd, yarp::os::Bottle& reply);

@@ -20,7 +20,7 @@ private:
 
     yarp::os::Port rpc_in_port;
 
-    icubclient::ICubClient *iCub;
+    icubhri::ICubClient *iCub;
 
     yarp::os::Mutex mut;
 

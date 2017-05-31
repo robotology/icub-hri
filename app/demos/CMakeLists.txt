@@ -4,5 +4,5 @@
 
 set(appname demos)
 file(GLOB templates ${CMAKE_CURRENT_SOURCE_DIR}/scripts/*.xml)
-yarp_install(FILES ${templates} DESTINATION ${ICUBCLIENT_APPLICATIONS_TEMPLATES_INSTALL_DIR})
+yarp_install(FILES ${templates} DESTINATION ${ICUBHRI_APPLICATIONS_TEMPLATES_INSTALL_DIR})
 

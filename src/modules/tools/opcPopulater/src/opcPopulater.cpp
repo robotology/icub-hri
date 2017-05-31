@@ -1,11 +1,11 @@
 #include <functional>
 #include "opcPopulater.h"
-#include "icubclient/clients/icubClient.h"
-#include "icubclient/subsystems/subSystem_ARE.h"
+#include "icubhri/clients/icubClient.h"
+#include "icubhri/subsystems/subSystem_ARE.h"
 
 using namespace std;
 using namespace yarp::os;
-using namespace icubclient;
+using namespace icubhri;
 
 bool opcPopulater::configure(yarp::os::ResourceFinder &rf)
 {
@@ -139,7 +139,7 @@ bool opcPopulater::populateEntityRandom(const Bottle& bInput){
     }
     string sName = bInput.get(2).toString();
 
-    if (bInput.get(1).toString() == ICUBCLIENT_OPC_ENTITY_AGENT)
+    if (bInput.get(1).toString() == ICUBHRI_OPC_ENTITY_AGENT)
     {
         Agent* agent = iCub->opc->addOrRetrieveEntity<Agent>(sName);
         agent->m_ego_position[0] = (-1.5) * (Random::uniform()) - 0.5;
@@ -151,7 +151,7 @@ bool opcPopulater::populateEntityRandom(const Bottle& bInput){
         agent->m_color[2] = Random::uniform(80, 180);
         iCub->opc->commit(agent);
     }
-    else if (bInput.get(1).toString() == ICUBCLIENT_OPC_ENTITY_OBJECT)
+    else if (bInput.get(1).toString() == ICUBHRI_OPC_ENTITY_OBJECT)
     {
         Object* obj = iCub->opc->addOrRetrieveEntity<Object>(sName);
         obj->m_ego_position[0] = (-1.5) * (Random::uniform()) - 0.2;
@@ -187,7 +187,7 @@ bool opcPopulater::addUnknownEntity(const Bottle &bInput){
     string sName = "unknown";
     yInfo() << " to be added: " << bInput.get(1).toString() << " called " << sName;
 
-    if (bInput.get(1).toString() == ICUBCLIENT_OPC_ENTITY_AGENT)
+    if (bInput.get(1).toString() == ICUBHRI_OPC_ENTITY_AGENT)
     {
         sName = "partner";
         Agent* agent = iCub->opc->addEntity<Agent>(sName);
@@ -200,7 +200,7 @@ bool opcPopulater::addUnknownEntity(const Bottle &bInput){
         agent->m_color[2] = Random::uniform(80, 180);
         iCub->opc->commit(agent);
     }
-    else if (bInput.get(1).toString() == ICUBCLIENT_OPC_ENTITY_OBJECT)
+    else if (bInput.get(1).toString() == ICUBHRI_OPC_ENTITY_OBJECT)
     {
         Object* obj = iCub->opc->addEntity<Object>(sName);
         obj->m_ego_position[0] = (-1.5) * (Random::uniform()) - 0.2;
@@ -234,7 +234,7 @@ bool opcPopulater::setAttributeEntity(const Bottle& bInput, std::function<void(O
     iCub->opc->checkout();
 
     Entity *e = iCub->opc->getEntity(sName);
-    if (e && (e->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT || e->entity_type() == ICUBCLIENT_OPC_ENTITY_OBJECT)) {
+    if (e && (e->entity_type() == ICUBHRI_OPC_ENTITY_AGENT || e->entity_type() == ICUBHRI_OPC_ENTITY_OBJECT)) {
         f_setter(dynamic_cast<Object*>(e), target);
         iCub->opc->commit();
     } else{

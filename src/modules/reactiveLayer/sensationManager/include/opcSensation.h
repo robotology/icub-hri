@@ -11,7 +11,7 @@
 
 #include "sensation.h"
 
-namespace icubclient {
+namespace icubhri {
     class ICubClient;
 }
 
@@ -21,7 +21,7 @@ namespace icubclient {
 class OpcSensation: public Sensation
 {
 private:
-    icubclient::ICubClient *iCub;
+    icubhri::ICubClient *iCub;
     yarp::os::BufferedPort<yarp::os::Bottle> known_entities_port; //!< Output port to stream all known entities
     yarp::os::BufferedPort<yarp::os::Bottle> unknown_entities_port; //!< Output port to stream all unknown entities
     yarp::os::BufferedPort<yarp::os::Bottle> homeoPort; //!< Port to communicate with homeostasis

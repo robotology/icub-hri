@@ -19,7 +19,7 @@
 
 #include "pasar.h"
 
-using namespace icubclient;
+using namespace icubhri;
 using namespace yarp::os;
 using namespace yarp::sig;
 using namespace std;
@@ -211,7 +211,7 @@ bool PasarModule::respond(const Bottle& command, Bottle& reply)
 bool PasarModule::updateModule()
 {
     iCub->opc->checkout();
-    std::list<std::shared_ptr<icubclient::Entity>> entities = iCub->opc->EntitiesCacheCopy();
+    std::list<std::shared_ptr<icubhri::Entity>> entities = iCub->opc->EntitiesCacheCopy();
 
     presentLastSpeed = presentCurrentSpeed;
     presentCurrentSpeed.clear();
@@ -220,7 +220,7 @@ bool PasarModule::updateModule()
     {
         if (entity->name() != "icub")
         {
-            if (entity->isType(ICUBCLIENT_OPC_ENTITY_AGENT) || entity->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
+            if (entity->isType(ICUBHRI_OPC_ENTITY_AGENT) || entity->isType(ICUBHRI_OPC_ENTITY_OBJECT))
             {
                 Object * ob = dynamic_cast<Object*>(entity.get());
                 OPCEntities[entity->opc_id()].o = *ob;
@@ -313,7 +313,7 @@ void PasarModule::saliencyTopDown()
                 it.second.present = false;
             }
 
-            if (it.second.o.entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT){
+            if (it.second.o.entity_type() == ICUBHRI_OPC_ENTITY_AGENT){
                 if (acceleration > thresholdMovementAccelAgent)
                 {
                     it.second.o.m_saliency += pTopDownAccelerationCoef;
@@ -384,7 +384,7 @@ bool PasarModule::saliencyPointing()
     // founding the agent:
     Vector vec;
     for (auto &it : OPCEntities){
-        if (it.second.o.entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT
+        if (it.second.o.entity_type() == ICUBHRI_OPC_ENTITY_AGENT
                 && it.second.present
                 && (it.second.o.name() != "iCub")
                 && (it.second.o.name() != "icub")){
@@ -464,7 +464,7 @@ bool PasarModule::saliencyWaving()
     Agent *ag = nullptr;
     // find the agent:
     for (auto &it : OPCEntities){
-        if (it.second.o.entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT
+        if (it.second.o.entity_type() == ICUBHRI_OPC_ENTITY_AGENT
                 && it.second.present
                 && (it.second.o.name() != "iCub")
                 && (it.second.o.name() != "icub")){
@@ -589,7 +589,7 @@ void PasarModule::initializeMapTiming()
     isPointing = false;
 
     iCub->opc->checkout();
-    std::list<std::shared_ptr<icubclient::Entity>> entities = iCub->opc->EntitiesCacheCopy();
+    std::list<std::shared_ptr<icubhri::Entity>> entities = iCub->opc->EntitiesCacheCopy();
     double now = yarp::os::Time::now() - initTime;
     OPCEntities.clear();
 
@@ -602,7 +602,7 @@ void PasarModule::initializeMapTiming()
         {
             //!!! ONLY OBJECTS and AGENTS ARE TRACKED !!!
 
-            if (entity->isType(ICUBCLIENT_OPC_ENTITY_AGENT) || entity->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
+            if (entity->isType(ICUBHRI_OPC_ENTITY_AGENT) || entity->isType(ICUBHRI_OPC_ENTITY_OBJECT))
             {
                 Object * ob = dynamic_cast<Object*>(entity.get());
                 OPCEntities[entity->opc_id()].o = *ob;

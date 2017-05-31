@@ -21,7 +21,7 @@ import SAM.SAM_Core.SAM_utils as utils
 import logging
 import copy
 
-## @ingroup icubclient_SAM_Core
+## @ingroup icubhri_SAM_Core
 class SamSupervisorModule(yarp.RFModule):
     """Model management and supervisor
 
@@ -216,7 +216,7 @@ class SamSupervisorModule(yarp.RFModule):
             self.modelPath = self.rootPath + '/Models'
             self.dataPath = self.rootPath + '/Data' 
             # OLD
-            # self.trainingFunctionsPath = os.environ.get("ICUBCLIENT_DIR")+"/bin"
+            # self.trainingFunctionsPath = os.environ.get("ICUBHRI_DIR")+"/bin"
             # NEW
             self.trainingFunctionsPath = SAM.SAM_Drivers.__path__
             self.trainingListHandles = dict()

@@ -31,7 +31,7 @@ except:
     optNotFound = True
     pass
 
-## @ingroup icubclient_SAM_Core
+## @ingroup icubhri_SAM_Core
 class modelOptClass(object):
     """
         Class to perform optimisation of SAM Models.

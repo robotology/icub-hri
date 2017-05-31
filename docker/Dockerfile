@@ -448,31 +448,31 @@ ENV PATH=$CLM_MODEL_DIR:$PATH
 USER root
 
 #ICUB CLIENT
-ARG icubClientHash=f720428148690306abc0d1b1dc1503467cc5ad02
+ARG icubhriHash=f720428148690306abc0d1b1dc1503467cc5ad02
 RUN git clone https://github.com/robotology/icub-client.git
-RUN cd icub-client && git checkout -b localBranch $icubClientHash && mkdir build && cd build && \
+RUN cd icub-client && git checkout -b localBranch $icubhriHash && mkdir build && cd build && \
  	cmake ..	-DCMAKE_INSTALL_PREFIX=./install 													\
  				-DCMAKE_BUILD_TYPE=Release															\
  				-DOpenCV_DIR=$SRC_FOLDER/opencv3/build/install/share/OpenCV 						\
- 				-DICUBCLIENT_COMPILE_TESTS=ON 													&& 	\
+ 				-DICUBHRI_COMPILE_TESTS=ON 													&& 	\
 	make -j$cores && make -j$cores install
 
-ENV ICUBCLIENT_ROOT=$SRC_FOLDER/icub-client/build 
-ENV ICUBCLIENT_DIR=$ICUBCLIENT_ROOT/install 									\
-	ICUBCLIENT_BIN=$ICUBCLIENT_ROOT/install/bin 								\
-	ICUBCLIENT_LIB=$ICUBCLIENT_ROOT/install/lib 								
-ENV LD_LIBRARY_PATH=$ICUBCLIENT_LIB:$LD_LIBRARY_PATH 						\
-	PATH=$ICUBCLIENT_BIN:$PATH
+ENV ICUBHRI_ROOT=$SRC_FOLDER/icub-client/build 
+ENV ICUBHRI_DIR=$ICUBHRI_ROOT/install 									\
+	ICUBHRI_BIN=$ICUBHRI_ROOT/install/bin 								\
+	ICUBHRI_LIB=$ICUBHRI_ROOT/install/lib 								
+ENV LD_LIBRARY_PATH=$ICUBHRI_LIB:$LD_LIBRARY_PATH 						\
+	PATH=$ICUBHRI_BIN:$PATH
 
 RUN cd icub-client/bindings && mkdir build && cd build && \
 	cmake .. 	-DCMAKE_INSTALL_PREFIX=./install 													\
  				-DCMAKE_BUILD_TYPE=Release															\
- 				-DICUBCLIENT_USE_PYTHON_VERSION=2		&& 	\
+ 				-DICUBHRI_USE_PYTHON_VERSION=2		&& 	\
  	make -j$cores && make -j$cores install												
 
 ENV SAM_ROOT=$SRC_FOLDER/icub-client/src/modules \
-	ICUBCLIENT_BINDINGS=$SRC_FOLDER/icub-client/bindings/build/install/lib/python2.7/site-packages
-ENV PYTHONPATH=$PYTHONPATH:$SAM_ROOT:$ICUBCLIENT_BINDINGS
+	ICUBHRI_BINDINGS=$SRC_FOLDER/icub-client/bindings/build/install/lib/python2.7/site-packages
+ENV PYTHONPATH=$PYTHONPATH:$SAM_ROOT:$ICUBHRI_BINDINGS
 
 WORKDIR /home/icub/
 COPY startup.sh .

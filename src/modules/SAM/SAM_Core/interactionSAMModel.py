@@ -20,7 +20,7 @@ import thread
 warnings.simplefilter("ignore")
 np.set_printoptions(precision=2)
 
-## @ingroup icubclient_SAM_Core
+## @ingroup icubhri_SAM_Core
 class interactionSAMModel(yarp.RFModule):
     """Generic interaction function
 

@@ -11,7 +11,7 @@
 # @author: Daniel Camilleri
 #
 # """"""""""""""""""""""""""""""""""""""""""""""
-## \defgroup icubclient_SAM_source SAM
+## \defgroup icubhri_SAM_source SAM
 import warnings
 import sys
 import numpy
@@ -25,7 +25,7 @@ from os.path import join
 np.set_printoptions(threshold=numpy.nan, precision=2)
 warnings.simplefilter("ignore")
 
-## \ingroup icubclient_SAM_Core
+## \ingroup icubhri_SAM_Core
 ##\brief@{
 ## Generic training function
 #\details@{

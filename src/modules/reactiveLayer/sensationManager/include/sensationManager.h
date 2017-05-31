@@ -14,7 +14,7 @@
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
-using namespace icubclient;
+using namespace icubhri;
 
 /**
  * \ingroup sensationManager

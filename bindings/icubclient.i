@@ -1,4 +1,4 @@
-%module icubclient
+%module icubhri
 
 %include <stl.i>
 %include <std_string.i>
@@ -7,49 +7,49 @@
 %include <std_except.i>
 
 %{
-#include <icubclient/tags.h>
-#include <icubclient/functions.h>
+#include <icubhri/tags.h>
+#include <icubhri/functions.h>
 
-#include <icubclient/knowledge/entity.h>
-#include <icubclient/knowledge/object.h>
-#include <icubclient/knowledge/action.h>
-#include <icubclient/knowledge/relation.h>
-#include <icubclient/knowledge/agent.h>
+#include <icubhri/knowledge/entity.h>
+#include <icubhri/knowledge/object.h>
+#include <icubhri/knowledge/action.h>
+#include <icubhri/knowledge/relation.h>
+#include <icubhri/knowledge/agent.h>
 
-#include <icubclient/subsystems/subSystem.h>
-#include <icubclient/subsystems/subSystem_agentDetector.h>
-#include <icubclient/subsystems/subSystem_ARE.h>
-#include <icubclient/subsystems/subSystem_babbling.h>
-#include <icubclient/subsystems/subSystem_iol2opc.h>
-#include <icubclient/subsystems/subSystem_KARMA.h>
-#include <icubclient/subsystems/subSystem_recog.h>
-#include <icubclient/subsystems/subSystem_speech.h>
-#include <icubclient/subsystems/subSystem_SAM.h>
+#include <icubhri/subsystems/subSystem.h>
+#include <icubhri/subsystems/subSystem_agentDetector.h>
+#include <icubhri/subsystems/subSystem_ARE.h>
+#include <icubhri/subsystems/subSystem_babbling.h>
+#include <icubhri/subsystems/subSystem_iol2opc.h>
+#include <icubhri/subsystems/subSystem_KARMA.h>
+#include <icubhri/subsystems/subSystem_recog.h>
+#include <icubhri/subsystems/subSystem_speech.h>
+#include <icubhri/subsystems/subSystem_SAM.h>
 
-#include <icubclient/clients/opcClient.h>
-#include <icubclient/clients/icubClient.h>
+#include <icubhri/clients/opcClient.h>
+#include <icubhri/clients/icubClient.h>
 
 %}
 
-%include <icubclient/tags.h>
-%include <icubclient/functions.h>
+%include <icubhri/tags.h>
+%include <icubhri/functions.h>
 
-%include <icubclient/knowledge/entity.h>
-%include <icubclient/knowledge/object.h>
-%include <icubclient/knowledge/action.h>
-%include <icubclient/knowledge/relation.h>
-%include <icubclient/knowledge/agent.h>
+%include <icubhri/knowledge/entity.h>
+%include <icubhri/knowledge/object.h>
+%include <icubhri/knowledge/action.h>
+%include <icubhri/knowledge/relation.h>
+%include <icubhri/knowledge/agent.h>
 
-%include <icubclient/subsystems/subSystem.h>
-%include <icubclient/subsystems/subSystem_agentDetector.h>
-%include <icubclient/subsystems/subSystem_ARE.h>
-%include <icubclient/subsystems/subSystem_babbling.h>
-%include <icubclient/subsystems/subSystem_iol2opc.h>
-%include <icubclient/subsystems/subSystem_KARMA.h>
-%include <icubclient/subsystems/subSystem_recog.h>
-%include <icubclient/subsystems/subSystem_speech.h>
-%include <icubclient/subsystems/subSystem_SAM.h>
+%include <icubhri/subsystems/subSystem.h>
+%include <icubhri/subsystems/subSystem_agentDetector.h>
+%include <icubhri/subsystems/subSystem_ARE.h>
+%include <icubhri/subsystems/subSystem_babbling.h>
+%include <icubhri/subsystems/subSystem_iol2opc.h>
+%include <icubhri/subsystems/subSystem_KARMA.h>
+%include <icubhri/subsystems/subSystem_recog.h>
+%include <icubhri/subsystems/subSystem_speech.h>
+%include <icubhri/subsystems/subSystem_SAM.h>
 
-%include <icubclient/clients/opcClient.h>
-%include <icubclient/clients/icubClient.h>
+%include <icubhri/clients/opcClient.h>
+%include <icubhri/clients/icubClient.h>
 

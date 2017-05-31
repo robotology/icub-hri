@@ -19,12 +19,12 @@
 #include <list>
 
 #include <yarp/os/all.h>
-#include "icubclient/clients/icubClient.h"
-#include "icubclient/clients/opcClient.h"
+#include "icubhri/clients/icubClient.h"
+#include "icubhri/clients/opcClient.h"
 
 using namespace std;
 using namespace yarp::os;
-using namespace icubclient;
+using namespace icubhri;
 
 
 /*******************************************************/
@@ -110,7 +110,7 @@ public:
         {
             string entityName=(*itEnt)->name();
             string entityType=(*itEnt)->entity_type();
-            if (entityType==ICUBCLIENT_OPC_ENTITY_OBJECT)
+            if (entityType==ICUBHRI_OPC_ENTITY_OBJECT)
             {
                 if (Object *object=dynamic_cast<Object*>(*itEnt))
                 {

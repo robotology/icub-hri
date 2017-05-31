@@ -173,7 +173,7 @@ bool GuiUpdater::updateModule()
                     deleteObject(guiTag.str(), o);
                 } else {
                     if (o->name() != "icub") {
-                        if (o->isType(ICUBCLIENT_OPC_ENTITY_AGENT)) {
+                        if (o->isType(ICUBHRI_OPC_ENTITY_AGENT)) {
                             addAgent(dynamic_cast<Agent*>(o));
                         } else {
                             addObject(o);
@@ -189,7 +189,7 @@ bool GuiUpdater::updateModule()
 
 bool GuiUpdater::isDisplayable(Entity* entity)
 {
-    return entity->isType(ICUBCLIENT_OPC_ENTITY_OBJECT);
+    return entity->isType(ICUBHRI_OPC_ENTITY_OBJECT);
 }
 
 void GuiUpdater::deleteObject(const string &opcTag, Object* o)
@@ -200,7 +200,7 @@ void GuiUpdater::deleteObject(const string &opcTag, Object* o)
     toGui.write(cmd);
 
     //Delete all the body parts
-    if (o != nullptr && o->entity_type() == ICUBCLIENT_OPC_ENTITY_AGENT && displaySkeleton)
+    if (o != nullptr && o->entity_type() == ICUBHRI_OPC_ENTITY_AGENT && displaySkeleton)
     {
         unsigned int i = 0;
         Agent* a = dynamic_cast<Agent*>(o);

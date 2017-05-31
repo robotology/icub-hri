@@ -4,7 +4,7 @@
 #include <yarp/os/RFModule.h>
 #include <yarp/os/Port.h>
 
-namespace icubclient {
+namespace icubhri {
  class ICubClient;
 }
 
@@ -13,7 +13,7 @@ namespace icubclient {
  */
 class ears : public yarp::os::RFModule {
 protected:
-    icubclient::ICubClient *iCub;
+    icubhri::ICubClient *iCub;
     double      period;
     yarp::os::Port        rpc; //!< Response port
     yarp::os::Port        portToBehavior; //!< Port to behaviorManager

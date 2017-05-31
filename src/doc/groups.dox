@@ -1,6 +1,6 @@
 /**
 *
-* \defgroup icubclient_software_all Software
+* \defgroup icubhri_software_all Software
 *
 * A container for all software. For clarity this is further divided in groups.
 *
@@ -8,8 +8,8 @@
 */
 
 /**
-* @defgroup icubclient_modules iCub-Client modules
-* @ingroup icubclient_software_all
+* @defgroup icubhri_modules iCub-Client modules
+* @ingroup icubhri_software_all
 *
 *
 * This is the list of iCub-Client modules in the src/modules directory.
@@ -19,8 +19,8 @@
 \verbatim
   /**
    *
-   * @defgroup icubclient_your_module_name your_module_name
-   * @ingroup icubclient_modules
+   * @defgroup icubhri_your_module_name your_module_name
+   * @ingroup icubhri_modules
    *
    */
 \endverbatim
@@ -32,8 +32,8 @@
 
 
 /**
-* @defgroup icubclient_libraries iCub-Client libraries
-* @ingroup icubclient_software_all
+* @defgroup icubhri_libraries iCub-Client libraries
+* @ingroup icubhri_software_all
 *
 *
 * This is the list of iCub-Client libraries in the main/src/libraries directory.
@@ -43,8 +43,8 @@
 \verbatim
   /**
    *
-   * @defgroup icubclient_your_library_name your_library_name
-   * @ingroup icubclient_libraries
+   * @defgroup icubhri_your_library_name your_library_name
+   * @ingroup icubhri_libraries
    *
    */
 \endverbatim

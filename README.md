@@ -37,7 +37,7 @@ For the object tracking, we rely on the `iol` pipeline. Please follow the [insta
 
 To estimate the size and pose of objects, we rely on the `superquadric-model`. Please follow the [installation instructions](https://github.com/robotology/superquadric-model) if you want to use the `superquadric-model` (optional).
 
-The compilation can be disabled using the `ICUBCLIENT_BUILD_IOL2OPC` cmake flag.
+The compilation can be disabled using the `ICUBHRI_BUILD_IOL2OPC` cmake flag.
 
 ### kinect-wrapper (skeleton tracking; optional)
 To detect the human skeleton, we employ the [`kinect-wrapper`](https://github.com/robotology/kinect-wrapper.git) library. Please follow the installation instructions in the [readme](https://github.com/robotology/kinect-wrapper/blob/master/README.md). It might be the case that you have also to build `kinect-wrapper` with the new `OpenCV-3.x.x` library. We have enabled the possibility to build only the client part of the `kinect-wrapper` (see [*updated instructions*](https://github.com/robotology/kinect-wrapper#cmaking-the-project)) which allows to run the `agentDetector` module on a separate machine as the one with the Kinect attached and running `kinectServer`.
@@ -77,7 +77,7 @@ Once all desired dependencies are installed, building the `icub-hri` is straight
 We provide a [Python script](https://github.com/robotology/icub-hri/blob/master/update-software.py) to easily update all dependencies of `icub-hri` and `icub-hri` itself.
 
 ## Using icub-hri in your project
-Using `icub-hri` in your project is straightforward. Simply `find_package(icubclient REQUIRED)` in your main `CMakeLists.txt`, and use the `${icubclient_INCLUDE_DIRS}` and `${icubclient_LIBRARIES}` cmake variables as you would expect. A working example project can be found [here](https://github.com/robotology/icub-hri/tree/master/src/examples/icub-client-dependent-project).
+Using `icub-hri` in your project is straightforward. Simply `find_package(icubhri REQUIRED)` in your main `CMakeLists.txt`, and use the `${icubhri_LIBRARIES}` cmake variable as you would expect. A working example project can be found [here](https://github.com/robotology/icub-hri/tree/master/src/examples/icub-hri-dependent-project).
 
 ## Docker image
 

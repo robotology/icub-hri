@@ -16,12 +16,12 @@
 */
 
 #include <yarp/os/all.h>
-#include "icubclient/clients/icubClient.h"
+#include "icubhri/clients/icubClient.h"
 
 int main() {
     yarp::os::Network yarp;
 
-    icubclient::ICubClient iCub("KARMA_Simple");
+    icubhri::ICubClient iCub("KARMA_Simple");
     if(!iCub.connect()) { // connect to subsystems
         return -1;
     }
