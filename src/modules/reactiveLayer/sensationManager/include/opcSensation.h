@@ -25,6 +25,7 @@ private:
     yarp::os::BufferedPort<yarp::os::Bottle> known_entities_port; //!< Output port to stream all known entities
     yarp::os::BufferedPort<yarp::os::Bottle> unknown_entities_port; //!< Output port to stream all unknown entities
     yarp::os::BufferedPort<yarp::os::Bottle> homeoPort; //!< Port to communicate with homeostasis
+    yarp::os::Mutex m_entity_bottles;
    
     /**
      * @brief fills an entity list with entities that follow a specific condition

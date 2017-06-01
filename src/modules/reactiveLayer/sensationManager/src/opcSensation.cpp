@@ -43,13 +43,13 @@ void OpcSensation::publish()
     key.addInt(res.get(2).asInt());
     bot.addList()=key;
     homeoPort.write();
-        
+
 
     yarp::os::Bottle &unkn = unknown_entities_port.prepare();
     unkn.clear();
     unkn.append(*res.get(1).asList());
     unknown_entities_port.write();
-  
+
     yarp::os::Bottle &kn = known_entities_port.prepare();
     kn.clear();
     kn.append(*res.get(3).asList());
@@ -65,6 +65,7 @@ void OpcSensation::addToEntityList(Bottle& list, string type, string name) {
 
 Bottle OpcSensation::handleEntities()
 {
+    LockGuard lg(m_entity_bottles);
     iCub->opc->checkout();
     list<Entity*> lEntities = iCub->opc->EntitiesCache();
 
@@ -72,16 +73,16 @@ Bottle OpcSensation::handleEntities()
     kp_entities.clear();
     u_entities.clear();
     up_entities.clear();
-    o_positions.clear():
+    o_positions.clear();
     p_entities.clear();
 
     for (auto& entity : lEntities)
     {
         if(entity->entity_type() == "object") {
             Object* o = dynamic_cast<Object*>(entity);
-                if(o) {
-                    addToEntityList(o_positions, o->objectAreaAsString(), entity->name());
-                }
+            if(o) {
+                addToEntityList(o_positions, o->objectAreaAsString(), entity->name());
+            }
         }
 
         if (entity->name().find("unknown") == 0) {
@@ -137,6 +138,7 @@ Bottle OpcSensation::handleEntities()
 
 int OpcSensation::get_property(string name,string property)
 {
+    LockGuard lg(m_entity_bottles);
     Bottle b;
     bool check_position=false;
 
@@ -152,7 +154,7 @@ int OpcSensation::get_property(string name,string property)
     {
         b = p_entities;
     }
-    else 
+    else
     {
         b = o_positions;
         check_position=true;
