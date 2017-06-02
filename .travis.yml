@@ -21,7 +21,7 @@ branches:
 
 env:
   global:
-    - GITHUB_REPO: "robotology/icub-hri"
+    - GITHUB_REPO: "robotology/icub-client"
     - secure: "bIKEliPhu2bxuwBxs1WkvHnpN0pf//1PlCQ/AiQBCEGeUeOo8rHUIv0hKAf2TYxDm+mGUjJS3mpY4JZaQeAXdIZOdORKnqZyuUCGTFzgpnjJl2RiydgmQBMLuFwroPXq6kWZ4DyXmEdddddjb2dDKPYA9g0BD2PoTxZbuha2dbLgV5arGM/wk8aUGGftzp+6Np3b+2R+didtbJQbNofg2fIrBxC9njBcVrzjIZAMBnSGXhxF0eF1C9Q0Ynsep6maeHwHf7hyXL58lGXgUWBeUhHfyPVFtWKqa0Aqb4+qhYcGUkUtFH/zYVrcr/rTmDbyFOX/9Ym5gLO0bmFltWgokdWE0kZ1vrv41XIFLbd7AoGSXpbsVqxH3xoFxuGAsAd4/SYdj1hlIrLQzz33OWU/7gdkMLzPCjjsQ8Ij8at//ZK8nst7vkvmco6ecZWmeXCLJgYhf5mqVGO4Zai1UbM5U0nLSSqVVzxNIr/6VEmILblA6NlTrI3pgIVgmGIKSLB4RxCNutGL7DDHeKgcb9G5Gs8tH58IP8fvbPEi5/KKa51M4TQJpveG76XIMS+wyapDL3QwfPxxBZPmpRwhHd8uCI2Xoimm5U9OSA1HNHOHtmKzldhN8wrLe/9TYw26H9GgCMoPximY2Rm4GcAlOCVNahSuZvdsD5l7MdGWJoKN3iI="  # <-- from travis-encrypt
 
 install:
