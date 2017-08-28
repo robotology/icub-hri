@@ -6,6 +6,9 @@ Generating complex, human-like behaviour in a humanoid robot like the iCub requi
 ## Documentation
 Visit the official [project documentation](http://robotology.github.com/icub-hri).
 
+## Citation
+An article related to this code is currently under review - we will update this section as soon as the article will have been published. For now, if you want to cite this code, please cite [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.852665.svg)](https://doi.org/10.5281/zenodo.852665)
+
 ## License
 The `icub-hri` library and documentation are distributed under the GPL-2.0.
 The full text of the license agreement can be found in: [./LICENSE](https://github.com/robotology/icub-hri/blob/master/LICENSE).
