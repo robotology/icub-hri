@@ -35,7 +35,7 @@ install:
 
   # OS X dependencies
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew tap robotology/cask; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install `brew deps --1 yarp | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'`; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install `brew deps --1 robotology/cask/yarp | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'`; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install eigen goocanvas sdl sdl_gfx sdl_image gsl; fi
   # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install ode --with-double-precision; fi
   # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew tap homebrew/science; fi
