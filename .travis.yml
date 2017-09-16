@@ -31,10 +31,11 @@ install:
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get --quiet --yes update; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get --quiet --yes install icub-common libeigen3-dev; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get --quiet --yes install doxygen xsltproc graphviz; fi
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then pip2 install doxypypy; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo pip2 install doxypypy; fi
 
   # OS X dependencies
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew tap robotology/cask; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew deps --1 robotology/cask/yarp | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install `brew deps --1 robotology/cask/yarp | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'`; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install eigen goocanvas sdl sdl_gfx sdl_image gsl; fi
   # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install ode --with-double-precision; fi
