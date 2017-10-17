@@ -53,7 +53,7 @@ install:
   - export YARP_ROOT=$(pwd)
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=Release -DCREATE_GUIS:BOOL=ON -DCREATE_LIB_MATH:BOOL=ON -DCREATE_OPTIONAL_CARRIERS:BOOL=ON -DENABLE_yarpcar_bayer_carrier:BOOL=ON
+  - cmake -DCMAKE_BUILD_TYPE=Release -DCREATE_GUIS:BOOL=ON -DCREATE_LIB_MATH:BOOL=ON -DCREATE_OPTIONAL_CARRIERS:BOOL=ON -DENABLE_yarpcar_bayer_carrier:BOOL=ON ..
   - sudo make install
   - cd ../../
 
