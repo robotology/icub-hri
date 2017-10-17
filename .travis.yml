@@ -34,28 +34,30 @@ install:
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo pip2 install doxypypy; fi
 
   # OS X dependencies
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew update; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew tap robotology/cask; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew uninstall --ignore-dependencies jpeg; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew deps --1 robotology/cask/yarp | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install `brew deps --1 robotology/cask/yarp | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'`; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install eigen goocanvas sdl sdl_gfx sdl_image gsl; fi
-  # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install ode --with-double-precision; fi
-  # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew tap homebrew/science; fi
-  # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install opencv3; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install --only-dependencies yarp; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install gsl goocanvas sdl sdl_gfx sdl_image homebrew/science/ipopt; fi
+  # Fix for opencv and numpy already installed by system
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then rm '/usr/local/bin/f2py'; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then rm -r '/usr/local/lib/python2.7/site-packages/numpy'; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install opencv; fi
+  # add QT5 to path so that it can be found by CMake
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then export PATH="$PATH:/usr/local/opt/qt/bin"; fi
 
   - cd ..
 
   - pwd
-  - git clone https://github.com/robotology/yarp.git
+  - git clone --depth 1 https://github.com/robotology/yarp.git
   - cd yarp
   - export YARP_ROOT=$(pwd)
   - mkdir build
   - cd build
-  - cmake -DCMAKE_BUILD_TYPE=Release -DCREATE_LIB_MATH=TRUE ..
+  - cmake -DCMAKE_BUILD_TYPE=Release -DCREATE_GUIS:BOOL=ON -DCREATE_LIB_MATH:BOOL=ON -DCREATE_OPTIONAL_CARRIERS:BOOL=ON -DENABLE_yarpcar_bayer_carrier:BOOL=ON
   - sudo make install
   - cd ../../
 
-  - git clone https://github.com/robotology/icub-main.git
+  - git clone --depth 1 https://github.com/robotology/icub-main.git
   - cd icub-main
   - mkdir build
   - cd build
@@ -63,7 +65,7 @@ install:
   - sudo make install
   - cd ../../
 
-  - git clone https://github.com/robotology/icub-contrib-common.git
+  - git clone --depth 1 https://github.com/robotology/icub-contrib-common.git
   - cd icub-contrib-common
   - mkdir build
   - cd build
@@ -71,7 +73,7 @@ install:
   - sudo make install
   - cd ../../
 
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then git clone https://github.com/robotology/kinect-wrapper.git; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then git clone --depth 1 https://github.com/robotology/kinect-wrapper.git; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cd kinect-wrapper; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then mkdir build; fi
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then cd build; fi
