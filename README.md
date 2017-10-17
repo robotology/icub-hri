@@ -3,11 +3,23 @@ iCub-HRI: A coherent framework for complex HRI scenarios on the iCub
 
 Generating complex, human-like behaviour in a humanoid robot like the iCub requires the integration of a wide range of open source components and a scalable cognitive architecture. Hence, we present the iCub-HRI library which provides convenience wrappers for components related to perception (object recognition, agent tracking, speech recognition, touch detection), object manipulation (basic and complex motor actions) and social interaction (speech synthesis, joint attention) exposed as C++ library with bindings for Python and Java (Matlab). In addition to previously integrated components, the library allows for simple extension to new components and rapid prototyping by adapting to changes in interfaces between components. We also provide a set of modules which make use of the library, such as a high-level knowledge acquisition module and an action recognition module. The proposed architecture has been successfully employed for a complex human-robot interaction scenario involving the acquisition of language capabilities, execution of goal-oriented behaviour and expression of a verbal narrative of the robot's experience in the world. Accompanying this paper is a tutorial which allows a subset of this interaction to be reproduced. The architecture is aimed at researchers familiarising themselves with the iCub ecosystem, as well as expert users, and we expect the library to be widely used in the iCub community. 
 
+## Context
+
+The code in this repository corresponds to a refactored and cleaned version of the [original repository](https://github.com/robotology/wysiwyd) produced in the context of the [WYSIWYD project](http://wysiwyd.upf.edu/) ((What You Say Is What You Did project). The research leading to these results has received funding from the European Research Council under the  European Union's Seventh Framework Programme (FP/2007-2013) / ERC Grant Agreement n. FP7-ICT-612139 (What You Say Is What You Did project).
+
 ## Documentation
 Visit the official [project documentation](http://robotology.github.com/icub-hri).
 
 ## Citation
 An article related to this code is currently under review - we will update this section as soon as the article will have been published. For now, if you want to cite this code, please cite [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.852665.svg)](https://doi.org/10.5281/zenodo.852665)
+
+This code-oriented article will complement a previous paper presenting the scientific concepts and results underlying this work:
+
+> Moulin-Frier*, C., Fischer*, T., Petit, M., Pointeau, G., Puigbo, J., Pattacini, U., Low, S.C., Camilleri, D., Nguyen, P., Hoffmann, M., Chang, H.J., Zambelli, M., Mealier, A., Damianou, A., Metta, G., Prescott, T.J., Demiris, Y., Dominey, P.F.Verschure, P. F. M. J. (2017). **DAC-h3: A Proactive Robot Cognitive Architecture to Acquire and Express Knowledge About the World and the Self. IEEE Transactions on Cognitive and Developmental Systems.** http://doi.org/10.1109/TCDS.2017.2754143
+
+(* *The two first authors contributed equally.*)
+
+
 
 ## License
 The `icub-hri` library and documentation are distributed under the GPL-2.0.
