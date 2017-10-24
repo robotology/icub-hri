@@ -297,10 +297,11 @@ void Babbling::babblingCommands(double &t, int j_idx) {
 
         if (part == "right_arm") {
             encodersUsed = encodersRightArm;
+            okEncArm = encsRightArm->getEncoders(encodersUsed.data());
         } else {
             encodersUsed = encodersLeftArm;
+            okEncArm = encsLeftArm->getEncoders(encodersUsed.data());
         }
-        okEncArm = encsLeftArm->getEncoders(encodersUsed.data());
 
         yDebug() << "j_idx: " << j_idx;
 
