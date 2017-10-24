@@ -85,7 +85,7 @@ public:
               filterPos(filter_order), filterDim(10*filter_order),
               init_filters(true), presenceTmo(presenceTmo_),
               trackerType(trackerType_), trackerState(idle),
-              trackerTmo(trackerTmo_), trackerTimer(0.0)              
+              trackerTmo(trackerTmo_), trackerTimer(0.0)
     {
         trackerResult.x=trackerResult.y=0;
         trackerResult.width=trackerResult.height=0;
@@ -180,9 +180,9 @@ public:
             else if(trackerType=="MIL")
                 tracker=cv::TrackerMIL::create();
             else if (trackerType=="TLD")
-                tracker=cv::TrackerTLD::createTracker();
+                tracker=cv::TrackerTLD::create();
             else if (trackerType=="KCF")
-                tracker=cv::TrackerKCF::createTracker();
+                tracker=cv::TrackerKCF::create();
             else
                 throw std::runtime_error("This tracker is not supported. Supported trackers: BOOSTING, MIL, TLD, KCF");
 #endif
@@ -192,7 +192,7 @@ public:
         }
         else if (trackerState==tracking)
         {
-            if (Time::now()-trackerTimer<trackerTmo)                
+            if (Time::now()-trackerTimer<trackerTmo)
             {
                 tracker->update(frame,trackerResult);
                 CvPoint tl=cvPoint((int)trackerResult.x,(int)trackerResult.y);
@@ -201,9 +201,9 @@ public:
 
                 if ((tl.x<5) || (br.x>frame.cols-5) ||
                     (tl.y<5) || (br.y>frame.rows-5))
-                    trackerState=idle;                    
+                    trackerState=idle;
                 else
-                    heartBeat();                    
+                    heartBeat();
             }
             else
                 trackerState=idle;
