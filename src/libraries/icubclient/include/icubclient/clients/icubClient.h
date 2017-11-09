@@ -50,6 +50,7 @@ namespace icubclient{
     class SubSystem_Recog;
     class SubSystem_Speech;
     class SubSystem_SAM;
+    class SubSystem_emotion;
 
     class Action;
     class Agent;
@@ -106,6 +107,7 @@ namespace icubclient{
         SubSystem_Recog* getRecogClient();
         SubSystem_Speech* getSpeechClient();
         SubSystem_SAM* getSAMClient();
+        SubSystem_emotion* getEmotionClient();
 
         OPCClient*                  opc;
         Agent*                      icubAgent;

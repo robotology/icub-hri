@@ -1,5 +1,5 @@
-#ifndef SUBSYSTEM_SAM_H
-#define SUBSYSTEM_SAM_H
+#ifndef SUBSYSTEM_EMOTION_H
+#define SUBSYSTEM_EMOTION_H
 
 /*
  * Copyright (C) 2014 WYSIWYD Consortium, European Commission FP7 Project ICT-612139
@@ -19,7 +19,7 @@
  * Public License for more details
  */
 
-#define SUBSYSTEM_SAM           "SAM"
+#define SUBSYSTEM_EMOTION           "emotion"
 
 #include <iostream>
 #include "icubclient/subsystems/subSystem.h"
@@ -28,9 +28,9 @@ namespace icubclient{
 /**
 * \ingroup icubclient_subsystems
 *
-* SubSystem for SAM
+* SubSystem for emotion
 */
-class SubSystem_SAM : public SubSystem
+class SubSystem_emotion : public SubSystem
 {
     friend class ICubClient;
 
@@ -38,30 +38,34 @@ protected:
     virtual bool connect();
 
 public:
-    bool attentionSAM;
+    std::string currentEmotion;
+    enum class Part {mouth, eyelids, left_eyebrow, right_eyebrow, all};
+    enum class Emotion {neutral, talking, happy, sad, surprised, evil, angry, shy, cunning};
+
     /**
     * Default constructor.
     * @param masterName stem-name used to open up ports.
     */
-    SubSystem_SAM(const std::string &masterName);
+    SubSystem_emotion(const std::string &masterName);
 
     virtual void Close();
 
     /**
-     * @brief Method to switch attention modes for SAM. 
-     * @param mode Allowed modes are `stop` and `continue`.
-     * @return true if command was send successful.
+     * @brief Method to switch iCub emotion for different parts of face.
+     * @param emotion Selection from Emotion enum
+     * @param part Selection from Part enum
+     * @return true if command was sent successful.
      */
-    bool attentionModulation(const std::string &mode);
+    bool setEmotion(Emotion emotion, Part part);
 
     /**
-     * @brief Method to trigger a classification from SAM.
-     * @param model Model name to trigger a classification for
-     * @return tuple of <bool, std::string> with success as bool and classification as std::string
+     * @brief Method to switch iCub emotions for whole face.
+     * @param emotion Selection from Emotion enum
+     * @return true if command was sent successful.
      */
-    yarp::os::Bottle askXLabel(const std::string &model);
+    bool setEmotion(Emotion emotion);
 
 };
 }//Namespace
 
-#endif // SUBSYSTEM_SAM_H
+#endif // SUBSYSTEM_EMOTION_H
