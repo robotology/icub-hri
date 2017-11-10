@@ -49,12 +49,14 @@ bool icubclient::SubSystem_emotion::setEmotion(Emotion emotion, Part part) {
         case Part::right_eyebrow  : spart="reb";   break;
         case Part::all            : spart="all";   break;
     }
-
     bReq.addString("set");
     bReq.addString(spart);
     bReq.addString(semotion);
+
+    yInfo()<<"Sending " << bReq.toString();
+
     portRPC.write(bReq, bResp);
-    if (bResp.toString() == "ack")
+    if (bResp.toString() == "ok")
     {
         return true;
     }

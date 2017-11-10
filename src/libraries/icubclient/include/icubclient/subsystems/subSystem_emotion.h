@@ -39,8 +39,8 @@ protected:
 
 public:
     std::string currentEmotion;
-    enum class Part {mouth, eyelids, left_eyebrow, right_eyebrow, all};
-    enum class Emotion {neutral, talking, happy, sad, surprised, evil, angry, shy, cunning};
+    enum Part {mouth, eyelids, left_eyebrow, right_eyebrow, all};
+    enum Emotion {neutral, talking, happy, sad, surprised, evil, angry, shy, cunning};
 
     /**
     * Default constructor.
