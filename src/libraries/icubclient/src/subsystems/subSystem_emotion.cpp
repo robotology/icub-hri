@@ -1,5 +1,6 @@
 #include <yarp/os/all.h>
 #include <algorithm>
+#include <map>
 #include "icubclient/subsystems/subSystem_emotion.h"
 
 bool icubclient::SubSystem_emotion::connect() {
@@ -20,44 +21,51 @@ void icubclient::SubSystem_emotion::Close() {
     portRPC.close();
 }
 
-bool icubclient::SubSystem_emotion::setEmotion(Emotion emotion) {
-    return setEmotion(emotion, Part::all);
+bool icubclient::SubSystem_emotion::setEmotion(std::string emotion) {
+    return setEmotion(emotion, "all");
 }
 
-bool icubclient::SubSystem_emotion::setEmotion(Emotion emotion, Part part) {
+bool icubclient::SubSystem_emotion::setEmotion(std::string emotion, std::string part) {
+    std::pair<std::string, std::string> emPair;
+
+    if(mapToEmotion.find(emotion) != mapToEmotion.end() &&
+       mapToPart.find(part)       != mapToPart.end())
+    {
+        emPair.first = mapToEmotion.find(emotion)->second;
+        emPair.second = mapToPart.find(part)->second;
+
+        return sendEmotion(emPair);
+    }
+    else if(mapToEmotion.find(emotion) == mapToEmotion.end())
+    {
+        yError() << "Emotion " << emotion << " not found";
+        return false;
+    }
+    else if(mapToPart.find(part) == mapToPart.end())
+    {
+        yError() << "Part " << part << " not found";
+        return false;
+    }
+    else
+    {
+        yError() << "Uncaught error";
+        return false;
+    }
+}
+
+bool ool icubclient::SubSystem_emotion::sendEmotion(std::pair<std::string, std::string> emPair) {
     yarp::os::Bottle bReq, bResp;
-    std::string spart, semotion;
 
-    switch(emotion)
-    {
-        case Emotion::neutral    : semotion="neu";   break;
-        case Emotion::talking    : semotion="tal";   break;
-        case Emotion::happy      : semotion="hap";   break;
-        case Emotion::sad        : semotion="sad";   break;
-        case Emotion::surprised  : semotion="sur";   break;
-        case Emotion::evil       : semotion="evi";   break;
-        case Emotion::angry      : semotion="ang";   break;
-        case Emotion::shy        : semotion="shy";   break;
-        case Emotion::cunning    : semotion="cun";   break;
-    }
-
-    switch(part)
-    {
-        case Part::mouth          : spart="mou";   break;
-        case Part::eyelids        : spart="eli";   break;
-        case Part::left_eyebrow   : spart="leb";   break;
-        case Part::right_eyebrow  : spart="reb";   break;
-        case Part::all            : spart="all";   break;
-    }
     bReq.addString("set");
-    bReq.addString(spart);
-    bReq.addString(semotion);
+    bReq.addString(emPair.second);
+    bReq.addString(emPair.first);
 
     yInfo()<<"Sending " << bReq.toString();
 
     portRPC.write(bReq, bResp);
     if (bResp.toString() == "ok")
     {
+        currentEmotionPair = emPair
         return true;
     }
     else
@@ -65,5 +73,9 @@ bool icubclient::SubSystem_emotion::setEmotion(Emotion emotion, Part part) {
         yError()<<bResp.toString();
         return false;
     }
+}
 
+std::pair<std::string, std::string> icubclient::SubSystem_emotion::getEmotion()
+{
+    return currentEmotionPair;
 }

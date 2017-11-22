@@ -37,10 +37,32 @@ class SubSystem_emotion : public SubSystem
 protected:
     virtual bool connect();
 
+private:
+     /**
+     * @brief Method to send iCub emotion to emotion yarp device.
+     * @param emPair Pair with string emotion and string part
+     * @return true if command was sent successful.
+     */
+    bool sendEmotion(std::pair<std::string, std::string> emPair);
+
 public:
-    std::string currentEmotion;
-    enum Part {mouth, eyelids, left_eyebrow, right_eyebrow, all};
-    enum Emotion {neutral, talking, happy, sad, surprised, evil, angry, shy, cunning};
+    std::pair<std::string, std::string> currentEmotionPair;
+
+    std::map<std::string, std::string> mapToEmotion = {{"neutral",      "neu"},
+                                                       {"talking",      "tal"},
+                                                       {"happy",        "hap"},
+                                                       {"sad",          "sad"},
+                                                       {"surprised",    "sur"},
+                                                       {"evil",         "evi"},
+                                                       {"angry",        "ang"},
+                                                       {"shy",          "shy"},
+                                                       {"cunning",      "cun"}};
+
+    std::map<std::string, std::string> mapToPart =  {{"mouth",          "mou"},
+                                                     {"eyelids",        "eli"},
+                                                     {"left_eyebrow",   "leb"},
+                                                     {"right_eyebrow",  "reb"},
+                                                     {"all",            "all"}};
 
     /**
     * Default constructor.
@@ -52,18 +74,24 @@ public:
 
     /**
      * @brief Method to switch iCub emotion for different parts of face.
-     * @param emotion Selection from Emotion enum
-     * @param part Selection from Part enum
+     * @param emotion String of emotion name
+     * @param part String of part name
      * @return true if command was sent successful.
      */
-    bool setEmotion(Emotion emotion, Part part);
+    bool setEmotion(std::string emotion, std::string part);
 
     /**
      * @brief Method to switch iCub emotions for whole face.
-     * @param emotion Selection from Emotion enum
+     * @param emotion String of emotion name
      * @return true if command was sent successful.
      */
-    bool setEmotion(Emotion emotion);
+    bool setEmotion(std::string emotion);
+
+    /**
+     * @brief Method to get current iCub emotion
+     * @return string with emotion name.
+     */
+    std::pair<std::string, std::string> getEmotion();
 
 };
 }//Namespace
