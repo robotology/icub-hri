@@ -28,6 +28,10 @@ bool icubclient::SubSystem_emotion::setEmotion(std::string emotion) {
 bool icubclient::SubSystem_emotion::setEmotion(std::string emotion, std::string part) {
     std::pair<std::string, std::string> emPair;
 
+    // Converting inputs to lowercase
+    std::transform(emotion.begin(), emotion.end(), emotion.begin(), ::tolower);
+    std::transform(part.begin(), part.end(), part.begin(), ::tolower);
+
     if(mapToEmotion.find(emotion) != mapToEmotion.end() &&
        mapToPart.find(part)       != mapToPart.end())
     {
@@ -53,7 +57,7 @@ bool icubclient::SubSystem_emotion::setEmotion(std::string emotion, std::string 
     }
 }
 
-bool ool icubclient::SubSystem_emotion::sendEmotion(std::pair<std::string, std::string> emPair) {
+bool icubclient::SubSystem_emotion::sendEmotion(std::pair<std::string, std::string> emPair) {
     yarp::os::Bottle bReq, bResp;
 
     bReq.addString("set");
@@ -63,9 +67,9 @@ bool ool icubclient::SubSystem_emotion::sendEmotion(std::pair<std::string, std::
     yInfo()<<"Sending " << bReq.toString();
 
     portRPC.write(bReq, bResp);
-    if (bResp.toString() == "ok")
+    if (bResp.toString() == "[ok]")
     {
-        currentEmotionPair = emPair
+        currentEmotionPair = emPair;
         return true;
     }
     else
