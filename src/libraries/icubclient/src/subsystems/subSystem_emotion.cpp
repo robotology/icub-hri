@@ -21,10 +21,6 @@ void icubclient::SubSystem_emotion::Close() {
     portRPC.close();
 }
 
-bool icubclient::SubSystem_emotion::setEmotion(std::string emotion) {
-    return setEmotion(emotion, "all");
-}
-
 bool icubclient::SubSystem_emotion::setEmotion(std::string emotion, std::string part) {
     std::pair<std::string, std::string> emPair;
 

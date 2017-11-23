@@ -43,27 +43,34 @@ private:
      * @param emPair Pair with string emotion and string part
      * @return true if command was sent successful.
      */
+
+    typedef std::map<std::string, std::string> StringMap;
+
     bool sendEmotion(std::pair<std::string, std::string> emPair);
 
-public:
+    StringMap mapToEmotion = StringMap {
+                                        {"neutral",      "neu"},
+                                        {"talking",      "tal"},
+                                        {"happy",        "hap"},
+                                        {"sad",          "sad"},
+                                        {"surprised",    "sur"},
+                                        {"evil",         "evi"},
+                                        {"angry",        "ang"},
+                                        {"shy",          "shy"},
+                                        {"cunning",      "cun"}
+    };
+
+    StringMap mapToPart =  StringMap {
+                                        {"mouth",          "mou"},
+                                        {"eyelids",        "eli"},
+                                        {"left_eyebrow",   "leb"},
+                                        {"right_eyebrow",  "reb"},
+                                        {"all",            "all"}
+    };
+
     std::pair<std::string, std::string> currentEmotionPair;
 
-    std::map<std::string, std::string> mapToEmotion = {{"neutral",      "neu"},
-                                                       {"talking",      "tal"},
-                                                       {"happy",        "hap"},
-                                                       {"sad",          "sad"},
-                                                       {"surprised",    "sur"},
-                                                       {"evil",         "evi"},
-                                                       {"angry",        "ang"},
-                                                       {"shy",          "shy"},
-                                                       {"cunning",      "cun"}};
-
-    std::map<std::string, std::string> mapToPart =  {{"mouth",          "mou"},
-                                                     {"eyelids",        "eli"},
-                                                     {"left_eyebrow",   "leb"},
-                                                     {"right_eyebrow",  "reb"},
-                                                     {"all",            "all"}};
-
+public:
     /**
     * Default constructor.
     * @param masterName stem-name used to open up ports.
@@ -75,17 +82,10 @@ public:
     /**
      * @brief Method to switch iCub emotion for different parts of face.
      * @param emotion String of emotion name
-     * @param part String of part name
+     * @param part String of part name - if "all", the whole face is affected
      * @return true if command was sent successful.
      */
-    bool setEmotion(std::string emotion, std::string part);
-
-    /**
-     * @brief Method to switch iCub emotions for whole face.
-     * @param emotion String of emotion name
-     * @return true if command was sent successful.
-     */
-    bool setEmotion(std::string emotion);
+    bool setEmotion(std::string emotion, std::string part="all");
 
     /**
      * @brief Method to get current iCub emotion
