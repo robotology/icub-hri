@@ -38,34 +38,33 @@ protected:
     virtual bool connect();
 
 private:
+    typedef std::map<std::string, std::string> StringMap;
+
      /**
      * @brief Method to send iCub emotion to emotion yarp device.
      * @param emPair Pair with string emotion and string part
      * @return true if command was sent successful.
      */
-
-    typedef std::map<std::string, std::string> StringMap;
-
     bool sendEmotion(std::pair<std::string, std::string> emPair);
 
     StringMap mapToEmotion = StringMap {
-                                        {"neutral",      "neu"},
-                                        {"talking",      "tal"},
-                                        {"happy",        "hap"},
-                                        {"sad",          "sad"},
-                                        {"surprised",    "sur"},
-                                        {"evil",         "evi"},
-                                        {"angry",        "ang"},
-                                        {"shy",          "shy"},
-                                        {"cunning",      "cun"}
+                                {"neutral",      "neu"},
+                                {"talking",      "tal"},
+                                {"happy",        "hap"},
+                                {"sad",          "sad"},
+                                {"surprised",    "sur"},
+                                {"evil",         "evi"},
+                                {"angry",        "ang"},
+                                {"shy",          "shy"},
+                                {"cunning",      "cun"}
     };
 
-    StringMap mapToPart =  StringMap {
-                                        {"mouth",          "mou"},
-                                        {"eyelids",        "eli"},
-                                        {"left_eyebrow",   "leb"},
-                                        {"right_eyebrow",  "reb"},
-                                        {"all",            "all"}
+    StringMap mapToPart = StringMap {
+                                {"mouth",          "mou"},
+                                {"eyelids",        "eli"},
+                                {"left_eyebrow",   "leb"},
+                                {"right_eyebrow",  "reb"},
+                                {"all",            "all"}
     };
 
     std::pair<std::string, std::string> currentEmotionPair;

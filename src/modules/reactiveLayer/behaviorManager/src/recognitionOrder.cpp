@@ -37,7 +37,7 @@ void RecognitionOrder::run(const Bottle &/*args*/) {
     if (iCub->getSAMClient())
     {
         Bottle SAMreply = iCub->getSAMClient()->askXLabel("action");
-        if(SAMreply.get(0).asString()  == "true") {
+        if(SAMreply.get(0).asString() == "true") {
             toSay = SAMreply.get(1).asString();
         } else {
             toSay = "Sorry. I did not recognise that action.";
