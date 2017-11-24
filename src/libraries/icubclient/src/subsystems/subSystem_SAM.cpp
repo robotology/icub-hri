@@ -53,19 +53,23 @@ bool icubclient::SubSystem_SAM::attentionModulation(const std::string &mode) {
     }
 }
 
-std::tuple<bool, std::string> icubclient::SubSystem_SAM::askXLabel(const std::string &model) {
-    yarp::os::Bottle bReq, bResp;
+yarp::os::Bottle icubclient::SubSystem_SAM::askXLabel(const std::string &model) {
+    yarp::os::Bottle bReq, bResp, bRet;
     bReq.addString("ask_" + model + "_label");
     portRPC.write(bReq, bResp);
     if (bResp.get(0).toString() == "ack")
     {   
         std::string classification = bResp.get(1).toString();
         yInfo()<<model + " Classification = " + classification;
-        return std::make_tuple(true, classification);
+        bRet.addString("true");
+        bRet.addString(classification);
+        return bRet;
     }
     else
     {
         yError()<<bResp.toString();
-        return std::make_tuple(false, "nack");
+        bRet.addString("false");
+        bRet.addString("nack");
+        return bRet;
     }
 }
