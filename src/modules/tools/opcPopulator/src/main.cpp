@@ -17,7 +17,7 @@
 
 
 
-#include "opcPopulater.h"
+#include "opcPopulator.h"
 
 using namespace std;
 using namespace yarp::os;
@@ -30,11 +30,11 @@ int main(int argc, char * argv[])
         yError()<<"YARP network seems unavailable!";
         return 1;
     }
-    opcPopulater mod;
+    opcPopulator mod;
     ResourceFinder rf;
     rf.setVerbose(true);
-    rf.setDefaultContext("opcPopulater");
-    rf.setDefaultConfigFile("opcPopulater.ini");
+    rf.setDefaultContext("opcPopulator");
+    rf.setDefaultConfigFile("opcPopulator.ini");
     rf.configure(argc, argv);
     return mod.runModule(rf);
 }
