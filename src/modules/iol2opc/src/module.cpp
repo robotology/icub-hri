@@ -7,7 +7,7 @@
  * later version published by the Free Software Foundation.
  *
  * A copy of the license can be found at
- * icub-client/license/gpl.txt
+ * icub-hri/LICENSE
  *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
