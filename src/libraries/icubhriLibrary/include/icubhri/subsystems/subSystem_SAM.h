@@ -57,9 +57,9 @@ public:
     /**
      * @brief Method to trigger a classification from SAM.
      * @param model Model name to trigger a classification for
-     * @return tuple of <bool, std::string> with success as bool and classification as std::string
+     * @return Bottle with success as string as first value and classification as std::string as second value
      */
-    std::tuple<bool, std::string> askXLabel(const std::string &model);
+    yarp::os::Bottle askXLabel(const std::string &model);
 
 };
 }//Namespace

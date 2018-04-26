@@ -25,6 +25,7 @@
 #include <icubhri/subsystems/subSystem_recog.h>
 #include <icubhri/subsystems/subSystem_speech.h>
 #include <icubhri/subsystems/subSystem_SAM.h>
+#include <icubhri/subsystems/subSystem_emotion.h>
 
 #include <icubhri/clients/opcClient.h>
 #include <icubhri/clients/icubClient.h>
@@ -49,6 +50,7 @@
 %include <icubhri/subsystems/subSystem_recog.h>
 %include <icubhri/subsystems/subSystem_speech.h>
 %include <icubhri/subsystems/subSystem_SAM.h>
+%include <icubhri/subsystems/subSystem_emotion.h>
 
 %include <icubhri/clients/opcClient.h>
 %include <icubhri/clients/icubClient.h>

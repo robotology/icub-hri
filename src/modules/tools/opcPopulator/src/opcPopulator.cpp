@@ -1,5 +1,6 @@
 #include <functional>
-#include "opcPopulater.h"
+
+#include "opcPopulator.h"
 #include "icubhri/clients/icubClient.h"
 #include "icubhri/subsystems/subSystem_ARE.h"
 
@@ -7,9 +8,9 @@ using namespace std;
 using namespace yarp::os;
 using namespace icubhri;
 
-bool opcPopulater::configure(yarp::os::ResourceFinder &rf)
+bool opcPopulator::configure(yarp::os::ResourceFinder &rf)
 {
-    string moduleName = rf.check("name", Value("opcPopulater")).asString().c_str();
+    string moduleName = rf.check("name", Value("opcPopulator")).asString().c_str();
     setName(moduleName.c_str());
 
     yInfo() << moduleName << " : finding configuration files...";
@@ -17,7 +18,7 @@ bool opcPopulater::configure(yarp::os::ResourceFinder &rf)
 
     //Create an iCub Client and check that all dependencies are here before starting
     bool isRFVerbose = false;
-    iCub = new ICubClient(moduleName, "opcPopulater", "client.ini", isRFVerbose);
+    iCub = new ICubClient(moduleName, "opcPopulator", "client.ini", isRFVerbose);
     iCub->opc->isVerbose = false;
     if (!iCub->connect())
     {
@@ -54,7 +55,7 @@ bool opcPopulater::configure(yarp::os::ResourceFinder &rf)
 }
 
 
-bool opcPopulater::close() {
+bool opcPopulator::close() {
     iCub->close();
     delete iCub;
 
@@ -62,7 +63,7 @@ bool opcPopulater::close() {
 }
 
 
-bool opcPopulater::respond(const Bottle& command, Bottle& reply) {
+bool opcPopulator::respond(const Bottle& command, Bottle& reply) {
     string helpMessage = string(getName().c_str()) +
         " commands are: \n" +
         "help \n" +
@@ -126,15 +127,15 @@ bool opcPopulater::respond(const Bottle& command, Bottle& reply) {
 }
 
 /* Called periodically every getPeriod() seconds */
-bool opcPopulater::updateModule() {
+bool opcPopulator::updateModule() {
     return true;
 }
 
-bool opcPopulater::populateEntityRandom(const Bottle& bInput){
+bool opcPopulator::populateEntityRandom(const Bottle& bInput){
 
     if (bInput.size() != 3)
     {
-        yWarning() << " in opcPopulater::populateEntityRandom | wrong number of input";
+        yWarning() << " in opcPopulator::populateEntityRandom | wrong number of input";
         return false;
     }
     string sName = bInput.get(2).toString();
@@ -175,11 +176,11 @@ bool opcPopulater::populateEntityRandom(const Bottle& bInput){
 }
 
 
-bool opcPopulater::addUnknownEntity(const Bottle &bInput){
+bool opcPopulator::addUnknownEntity(const Bottle &bInput){
 
     if (bInput.size() != 2)
     {
-        yWarning() << " in opcPopulater::addUnknownEntity | wrong number of input";
+        yWarning() << " in opcPopulator::addUnknownEntity | wrong number of input";
         return false;
     }
 
@@ -221,10 +222,10 @@ bool opcPopulater::addUnknownEntity(const Bottle &bInput){
     return true;
 }
 
-bool opcPopulater::setAttributeEntity(const Bottle& bInput, std::function<void(Object*, double)> f_setter){
+bool opcPopulator::setAttributeEntity(const Bottle& bInput, std::function<void(Object*, double)> f_setter){
 
     if (bInput.size() != 3) {
-        yWarning() << " in opcPopulater::setAttributeEntity| wrong number of input";
+        yWarning() << " in opcPopulator::setAttributeEntity| wrong number of input";
         return false;
     }
 
@@ -246,7 +247,7 @@ bool opcPopulater::setAttributeEntity(const Bottle& bInput, std::function<void(O
 }
 
 
-bool opcPopulater::populateSpecific() {
+bool opcPopulator::populateSpecific() {
     iCub->opc->clear();
 
     double errorMargin = noise;
@@ -295,7 +296,7 @@ bool opcPopulater::populateSpecific() {
 }
 
 
-bool opcPopulater::populateTwoUnknowns() {
+bool opcPopulator::populateTwoUnknowns() {
     iCub->opc->clear();
 
     Object* obj1 = iCub->opc->addOrRetrieveEntity<Object>("unknown_1");
@@ -322,7 +323,7 @@ bool opcPopulater::populateTwoUnknowns() {
 }
 
 
-bool opcPopulater::populateRedBall(){
+bool opcPopulator::populateRedBall(){
 
     Object* obj1 = iCub->opc->addOrRetrieveEntity<Object>("red_ball");
     obj1->m_ego_position[0] = -0.4;
@@ -336,3 +337,4 @@ bool opcPopulater::populateRedBall(){
     iCub->opc->commit(obj1);
     return true;
 }
+

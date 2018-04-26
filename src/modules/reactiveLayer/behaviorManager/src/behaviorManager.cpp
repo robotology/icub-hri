@@ -3,6 +3,7 @@
 #include "dummy.h"
 #include "tagging.h"
 #include "pointing.h"
+#include "recognitionOrder.h"
 #include "moveObject.h"
 
 using namespace std;
@@ -70,6 +71,8 @@ bool BehaviorManager::configure(yarp::os::ResourceFinder &rf)
             behaviors.push_back(new Dummy(&mut, rf, iCub, "dummy"));
         } else if (behavior_name == "dummy2") {
             behaviors.push_back(new Dummy(&mut, rf, iCub, "dummy2"));
+        } else if (behavior_name == "recognitionOrder") {
+            behaviors.push_back(new RecognitionOrder(&mut, rf, iCub, "recognitionOrder"));
         }  else if (behavior_name == "moveObject") {
             behaviors.push_back(new MoveObject(&mut, rf, iCub, "moveObject"));
             // other behaviors here

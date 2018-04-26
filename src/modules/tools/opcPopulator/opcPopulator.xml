@@ -2,10 +2,9 @@
 <?xml-stylesheet type="text/xsl" href="yarpmanifest.xsl"?>
  
 <module>
-
-   <name>opcPopulater</name>
+   <name>opcPopulator</name>
    <doxygen-group>icubhri_modules</doxygen-group>
-   <description>The %opcPopulater can be used to spawn new entities in simulation and control their parameters. This allows testing new functionalities in a controlled environment, without the noise encountered when using the real robot.</description>
+   <description>The %opcPopulator can be used to spawn new entities in simulation and control their parameters. This allows testing new functionalities in a controlled environment, without the noise encountered when using the real robot.</description>
    <copypolicy>Released under the terms of the GNU GPL v2.0</copypolicy>
    <version>1.0</version>
    
@@ -22,3 +21,4 @@
    </authors>
    
 </module>
+

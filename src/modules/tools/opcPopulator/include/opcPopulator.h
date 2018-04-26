@@ -8,9 +8,9 @@ namespace icubhri {
 }
 
 /**
- * \ingroup opcPopulater
+ * \ingroup opcPopulator
  */
-class opcPopulater : public yarp::os::RFModule {
+class opcPopulator : public yarp::os::RFModule {
 protected:
 
     icubhri::ICubClient *iCub;

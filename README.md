@@ -11,15 +11,20 @@ The code in this repository corresponds to a refactored and cleaned version of t
 Visit the official [project documentation](http://robotology.github.com/icub-hri).
 
 ## Citation
-An article related to this code is currently under review - we will update this section as soon as the article will have been published. For now, if you want to cite this code, please cite [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.852665.svg)](https://doi.org/10.5281/zenodo.852665)
+This code has an associated article published in the Frontiers in Robotics and AI. You may download the paper [here](https://www.frontiersin.org/articles/10.3389/frobt.2018.00022). The associated Zenodo repository is [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.852665.svg)](https://doi.org/10.5281/zenodo.852665).
 
-This code-oriented article will complement a previous paper presenting the scientific concepts and results underlying this work:
+The citation is as follows ([bib file](https://www.tobiasfischer.info/publications/2018-Fischer-FRAI.bib)):
+> T. Fischer, J.-Y. Puigbo, D. Camilleri, P. Nguyen, C. Moulin-Frier, S. Lallee, G. Metta, T. J. Prescott, Y. Demiris, and P. F. M. J. Verschure (2018). **iCub-HRI: A software framework for complex human robot interaction scenarios on the iCub humanoid robot. Frontiers in Robotics and AI** https://www.frontiersin.org/articles/10.3389/frobt.2018.00022
+
+This code-oriented article complements a previous paper presenting the scientific concepts and results underlying this work ([bib file](https://www.tobiasfischer.info/publications/2017-MoulinFrier-TCDS.bib)):
 
 > Moulin-Frier*, C., Fischer*, T., Petit, M., Pointeau, G., Puigbo, J., Pattacini, U., Low, S.C., Camilleri, D., Nguyen, P., Hoffmann, M., Chang, H.J., Zambelli, M., Mealier, A., Damianou, A., Metta, G., Prescott, T.J., Demiris, Y., Dominey, P.F.Verschure, P. F. M. J. (2017). **DAC-h3: A Proactive Robot Cognitive Architecture to Acquire and Express Knowledge About the World and the Self. IEEE Transactions on Cognitive and Developmental Systems.** http://doi.org/10.1109/TCDS.2017.2754143
 
 (* *The two first authors contributed equally.*)
 
-
+## Video demonstration
+Please click on the image which refers to a YouTube video.
+[![Video demonstration](http://img.youtube.com/vi/8A48EgPByAA/0.jpg)](http://www.youtube.com/watch?v=8A48EgPByAA "Video demonstration")
 
 ## License
 The `icub-hri` library and documentation are distributed under the GPL-2.0.

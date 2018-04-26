@@ -211,7 +211,7 @@ const char* ParsingException::what() const throw()
 {
     if (line != -1)
     {
-        return "Error parsing line " + line;
+        return ("Error parsing line " + std::to_string(line)).c_str();
     }
     else
     {

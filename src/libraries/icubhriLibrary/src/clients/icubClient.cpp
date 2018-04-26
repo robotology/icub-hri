@@ -17,6 +17,7 @@
  */
 
 #include <yarp/os/LogStream.h>
+
 #include "icubhri/clients/icubClient.h"
 #include "icubhri/subsystems/subSystem_agentDetector.h"
 #include "icubhri/subsystems/subSystem_ARE.h"
@@ -26,6 +27,7 @@
 #include "icubhri/subsystems/subSystem_recog.h"
 #include "icubhri/subsystems/subSystem_KARMA.h"
 #include "icubhri/subsystems/subSystem_SAM.h"
+#include "icubhri/subsystems/subSystem_emotion.h"
 
 using namespace std;
 using namespace yarp::os;
@@ -93,6 +95,8 @@ ICubClient::ICubClient(const std::string &moduleName, const std::string &context
                 subSystems[SUBSYSTEM_KARMA] = new SubSystem_KARMA(fullName, robot);
             else if (currentSS == SUBSYSTEM_SAM)
                 subSystems[SUBSYSTEM_SAM] = new SubSystem_SAM(fullName);
+            else if (currentSS == SUBSYSTEM_EMOTION)
+                subSystems[SUBSYSTEM_EMOTION] = new SubSystem_emotion(fullName);
             else
                 yError() << "Unknown subsystem!";
         }
@@ -490,4 +494,9 @@ SubSystem_Speech* ICubClient::getSpeechClient()
 SubSystem_SAM* ICubClient::getSAMClient()
 {
     return getSubSystem<SubSystem_SAM>(SUBSYSTEM_SAM);
+}
+
+SubSystem_emotion* ICubClient::getEmotionClient()
+{
+    return getSubSystem<SubSystem_emotion>(SUBSYSTEM_EMOTION);
 }

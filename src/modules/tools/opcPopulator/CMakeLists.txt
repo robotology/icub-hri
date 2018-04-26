@@ -2,7 +2,7 @@
 # Authors: Grégoire Pointeau
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-project(opcPopulater)
+project(opcPopulator)
 
 file(GLOB folder_source src/*.cpp src/*.cc src/*.c)
 file(GLOB folder_header include/*.h  )
