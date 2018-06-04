@@ -48,7 +48,7 @@ class faceTrackerModule : public yarp::os::RFModule {
     yarp::sig::Vector cur_encoders;
     yarp::sig::Vector prev_encoders;
 
-    yarp::dev::IControlMode2 *ictrl;
+    yarp::dev::IControlMode *ictrl;
 
     int getBiggestFaceIdx(const cv::Mat& cvMatImageLeft, const std::vector<cv::Rect> &faces_left);
 

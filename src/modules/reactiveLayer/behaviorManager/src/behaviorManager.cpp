@@ -138,7 +138,7 @@ bool BehaviorManager::respond(const Bottle& cmd, Bottle& reply)
         }
         reply.addList() = names;
     } else if (cmd.get(0).asString() == "is_available" ) {
-        if (mut.tryLock()) {
+        if (mut.try_lock()) {
             mut.unlock();
             reply.addInt(1);
         } else {
