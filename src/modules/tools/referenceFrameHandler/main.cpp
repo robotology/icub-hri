@@ -129,7 +129,7 @@ public:
     void LoadMatrices(Property &prop)
     {
         Bottle &bFrames = prop.findGroup("frames");
-        for(int f=1; f<bFrames.size(); f+=3)
+        for(unsigned int f=1; f<bFrames.size(); f+=3)
         {
             string currentFrame = bFrames.get(f).toString().c_str();
             Bottle *bH = bFrames.get(f+1).asList();
@@ -228,7 +228,7 @@ public:
 
         Bottle ids=opcGetIdsFromAsk(opcReply);
 
-        for(int i=0; i<ids.size() ; i++)
+        for(unsigned int i=0; i<ids.size() ; i++)
         {
             opcCmd.clear();
             opcCmd.addVocab(Vocab::encode("get"));

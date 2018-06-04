@@ -12,7 +12,7 @@ void icubclient::SubSystem_ARE::appendCartesianTarget(yarp::os::Bottle &b, const
 void icubclient::SubSystem_ARE::selectHandCorrectTarget(yarp::os::Bottle &options, yarp::sig::Vector &target, const std::string& objName, const std::string handToUse)
 {
     std::string hand="";
-    for (int i=0; i<options.size(); i++)
+    for (unsigned int i=0; i<options.size(); i++)
     {
         yarp::os::Value val=options.get(i);
         if (val.isString())

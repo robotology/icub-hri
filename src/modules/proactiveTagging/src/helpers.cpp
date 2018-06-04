@@ -28,7 +28,7 @@ using namespace icubclient;
 
 void proactiveTagging::subPopulateObjects(Bottle* objectList, bool addOrRetrieve) {
     if (objectList) {
-        for (int d = 0; d < objectList->size(); d++) {
+        for (unsigned int d = 0; d < objectList->size(); d++) {
             std::string name = objectList->get(d).asString().c_str();
             icubclient::Object* o;
             if(addOrRetrieve) {
@@ -199,7 +199,7 @@ void proactiveTagging::subPopulateBodyparts(Bottle* bodyPartList, Bottle* bodyPa
     std::list<std::shared_ptr<Entity>> currentEntitiesList = iCub->opc->EntitiesCacheCopy();
 
     if (bodyPartList) {
-        for (int d = 0; d < bodyPartList->size(); d++) {
+        for (unsigned int d = 0; d < bodyPartList->size(); d++) {
             bool foundSame = false;
             for(auto& e : currentEntitiesList) {
                 if(Bodypart* bp = dynamic_cast<Bodypart*>(e.get())) {

@@ -74,7 +74,7 @@ ICubClient::ICubClient(const std::string &moduleName, const std::string &context
     //Susbsystems
     if (Bottle* bSubsystems = rfClient.find("subsystems").asList())
     {
-        for (int s = 0; s < bSubsystems->size(); s++)
+        for (unsigned int s = 0; s < bSubsystems->size(); s++)
         {
             std::string currentSS = bSubsystems->get(s).asString();
             yInfo() << "Trying to open subsystem : " << currentSS;

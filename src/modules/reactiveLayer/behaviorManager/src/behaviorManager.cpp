@@ -60,7 +60,7 @@ bool BehaviorManager::configure(yarp::os::ResourceFinder &rf)
         Time::delay(1.0);
     }
 
-    for (int i = 0; i<behaviorList.size(); i++)
+    for (unsigned int i = 0; i<behaviorList.size(); i++)
     {
         std::string behavior_name = behaviorList.get(i).asString();
         if (behavior_name == "tagging") {

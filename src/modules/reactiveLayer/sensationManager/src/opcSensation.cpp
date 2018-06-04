@@ -162,7 +162,7 @@ int OpcSensation::get_property(string name,string property)
     if (check_position)
     {
         yDebug()<<"Checking object position"<<name<<property;
-        for (int i=0;i<b.size();i++)
+        for (unsigned int i=0;i<b.size();i++)
         {
             if (name == "any"){
                 if (b.get(i).asList()->get(0).asString()==property)
@@ -190,7 +190,7 @@ int OpcSensation::get_property(string name,string property)
                 return 0;
             }
         }else{
-            for (int i=0;i<b.size();i++)
+            for (unsigned int i=0;i<b.size();i++)
             {
                 if (b.get(i).asList()->get(1).asString()==name)
                 {

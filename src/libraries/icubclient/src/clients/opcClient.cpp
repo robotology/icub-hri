@@ -590,7 +590,7 @@ list<Relation> OPCClient::getRelations()
 
     //yDebug() << reply.toString();
     Bottle* ids = reply.get(1).asList()->get(1).asList();
-    for(int i=0;i<ids->size();i++)
+    for(unsigned int i=0;i<ids->size();i++)
     {
         Bottle getReply;
         int currentID = ids->get(i).asInt();
@@ -684,7 +684,7 @@ std::list<Relation>  OPCClient::getRelationsMatching(std::string subject,std::st
 
     //yDebug() << reply.toString();
     Bottle* ids = reply.get(1).asList()->get(1).asList();
-    for(int i=0;i<ids->size();i++)
+    for(unsigned int i=0;i<ids->size();i++)
     {
         Bottle getReply;
         int currentID = ids->get(i).asInt();
@@ -781,7 +781,7 @@ void OPCClient::checkout(bool updateCache)
     }
 
     Bottle* ids = reply.get(1).asList()->get(1).asList();
-    for(int i=0;i<ids->size();i++)
+    for(unsigned int i=0;i<ids->size();i++)
     {
         int currentID = ids->get(i).asInt();
         getEntity(currentID, updateCache); //Automatically update the dictionnaries
@@ -851,7 +851,7 @@ void OPCClient::commit(Entity *e)
     id.addInt(e->opc_id());
 
     Bottle props=e->asBottleOnlyModifiedProperties();
-    for (int i=0; i<props.size(); i++)
+    for (unsigned int i=0; i<props.size(); i++)
         query.addList()=*props.get(i).asList();
 
     write(cmd,reply,isVerbose);
@@ -879,7 +879,7 @@ std::list<Entity*> OPCClient::Entities(const yarp::os::Bottle &condition)
     }
 
     Bottle* ids = reply.get(1).asList()->get(1).asList();
-    for(int i=0;i<ids->size();i++)
+    for(unsigned int i=0;i<ids->size();i++)
     {
         int currentID = ids->get(i).asInt();
         matchingEntities.push_back(getEntity(currentID)); //Automatically update the dictionnaries

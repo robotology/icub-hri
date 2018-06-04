@@ -157,7 +157,7 @@ void AllostaticController::configureAllostatic(yarp::os::ResourceFinder &rf)
     Bottle cmd;
 
     double priority;
-    for (int d = 0; d<drivesList.size(); d++)
+    for (unsigned int d = 0; d<drivesList.size(); d++)
     {
         cmd.clear();
         string driveName = drivesList.get(d).asString();
@@ -320,7 +320,7 @@ DriveOutCZ AllostaticController::chooseDrive() {
     vector<double> min_diff; 
     vector<double> max_diff; 
 
-    for (int i =0;i<drivesList.size();i++) {
+    for (unsigned int i =0;i<drivesList.size();i++) {
         names.push_back(drivesList.get(i).asString());
         min_diff.push_back(outputm_ports[i]->read()->get(0).asDouble());
         max_diff.push_back(outputM_ports[i]->read()->get(0).asDouble());
@@ -471,7 +471,7 @@ Bottle AllostaticDrive::update(DriveUpdateMode mode)
         break;
     }
     Bottle rplies;
-    for (int i=0; i<cmds.size(); i++){
+    for (unsigned int i=0; i<cmds.size(); i++){
         Bottle rply;
         Bottle cmd = *cmds.get(i).asList();
         if (! manualMode) {
@@ -490,7 +490,7 @@ void AllostaticDrive::triggerBehavior(OutCZ mode)
         cmd.clear();
         rply.clear();
         rplies.clear();
-        for (int i=0; i<beforeTriggerCmd.size(); i++){
+        for (unsigned int i=0; i<beforeTriggerCmd.size(); i++){
             rply.clear();
             Bottle cmd = *beforeTriggerCmd.get(i).asList();
             yDebug() << cmd.toString();
@@ -523,7 +523,7 @@ void AllostaticDrive::triggerBehavior(OutCZ mode)
         cmd.clear();
         rply.clear();
         rplies.clear();
-        for (int i=0; i<afterTriggerCmd.size(); i++){
+        for (unsigned int i=0; i<afterTriggerCmd.size(); i++){
             rply.clear();
             Bottle cmd = *afterTriggerCmd.get(i).asList();
             yDebug() << cmd.toString();

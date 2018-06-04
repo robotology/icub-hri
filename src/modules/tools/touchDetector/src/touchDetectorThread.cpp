@@ -69,11 +69,11 @@ bool TouchDetectorThread::readTaxelsMapping(string filename)
     for (int iPart = 0; iPart < nbBodyParts; ++iPart)
     {
         Bottle clusters = p.findGroup(bodyParts[iPart]).tail();
-        for (int iCluster = 0; iCluster < clusters.size(); ++iCluster)
+        for (unsigned int iCluster = 0; iCluster < clusters.size(); ++iCluster)
         {
             ++clusterId;
             Bottle *c = clusters.get(iCluster).asList();
-            for (int iRange = 0; iRange < c->size(); ++iRange)
+            for (unsigned int iRange = 0; iRange < c->size(); ++iRange)
             {
                 Bottle *range = c->get(iRange).asList();
                 if (range->size() == 1)

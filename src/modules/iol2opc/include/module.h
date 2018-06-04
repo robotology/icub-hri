@@ -340,7 +340,7 @@ protected:
      * @param i integer value to define object
      * @return A CvPoint containing x, y coordinate of the blob center
      */
-    CvPoint getBlobCOG(const Bottle &blobs, const int i);
+    CvPoint getBlobCOG(const Bottle &blobs, const unsigned int i);
 
     /**
      * @brief getBlobPoints Obtain CvPoints belonging to a blob defined by cog, from lbpExtract
@@ -395,7 +395,7 @@ protected:
      * @param i integer value as index of the blob to draw the bounding box
      * @param scores Bottle contains classified results from himrepClassifier, @see classify()
      */
-    void    drawBlobs(const Bottle &blobs, const int i, const Bottle &scores);
+    void    drawBlobs(const Bottle &blobs, const unsigned int i, const Bottle &scores);
 
     /**
      * @brief rotate Create new OpenCV matrix by rotating an original one an angle in 2D, a wrapper of cv::warpAffine

@@ -75,7 +75,7 @@ Bottle Entity::asBottleOnlyModifiedProperties() const
     Bottle current_entity = this->asBottle();
 
     Bottle new_entity;
-    for(int p=0; p<current_entity.size(); p++)
+    for(unsigned int p=0; p<current_entity.size(); p++)
     {
         string currentTag = current_entity.get(p).asList()->get(0).asString();
         Value &currentValue = current_entity.find(currentTag.c_str());
@@ -103,7 +103,7 @@ bool Entity::fromBottle(const Bottle &b)
         
     Bottle* bProperties = b.find("intrinsic_properties").asList();
     
-    for(int i=0; i< bProperties->size() ; i++)
+    for(unsigned int i=0; i< bProperties->size() ; i++)
     {
         std::string pTag = bProperties->get(i).asList()->get(0).asString().c_str();
         std::string pVal = bProperties->get(i).asList()->get(1).asString().c_str();

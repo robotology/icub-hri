@@ -53,7 +53,7 @@ void Tagging::run(const Bottle &args) {
         int id = yarp::os::Random::uniform(0, sensation->size()-1);
 
         // If there are unknown agents, prioritise tagging it.
-        for (int i = 0; i < sensation->size(); i++) {
+        for (unsigned int i = 0; i < sensation->size(); i++) {
             string type = sensation->get(i).asList()->get(0).asString();
             string target = sensation->get(i).asList()->get(1).asString();
 
