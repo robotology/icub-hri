@@ -122,10 +122,10 @@ bool IOL2OPCBridge::thresBBox(CvRect &bbox, const Image &img)
 {
     CvPoint tl=cvPoint(bbox.x,bbox.y);
     CvPoint br=cvPoint(tl.x+bbox.width,tl.y+bbox.height);
-    tl.x=std::min(img.width(),std::max(tl.x,0));
-    tl.y=std::min(img.height(),std::max(tl.y,0));
-    br.x=std::min(img.width(),std::max(br.x,0));
-    br.y=std::min(img.height(),std::max(br.y,0));
+    tl.x=std::min(img.width(),(size_t)std::max(tl.x,0));
+    tl.y=std::min(img.height(),(size_t)std::max(tl.y,0));
+    br.x=std::min(img.width(),(size_t)std::max(br.x,0));
+    br.y=std::min(img.height(),(size_t)std::max(br.y,0));
 
     bbox=cvRect(tl.x,tl.y,br.x-tl.x,br.y-tl.y);
     if ((bbox.width>tracker_min_blob_size[0]) &&
@@ -530,9 +530,9 @@ void IOL2OPCBridge::drawScoresHistogram(const Bottle &blobs,
         if (Bottle *blobScores=scores.find(tag.str().c_str()).asList())
         {
             // set up some variables and constraints
-            int maxHeight=(int)(imgConf.height()*0.8);
-            int minHeight=imgConf.height()-20;
-            int widthStep=(blobScores->size()>0)?(int)(imgConf.width()/blobScores->size()):0;
+            size_t maxHeight=(size_t)(imgConf.height()*0.8);
+            size_t minHeight=imgConf.height()-20;
+            size_t widthStep=(blobScores->size()>0)?(size_t)(imgConf.width()/blobScores->size()):0;
             set<string> gcFilters;
 
             // cycle over classes
