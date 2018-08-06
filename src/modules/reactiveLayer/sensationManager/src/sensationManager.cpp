@@ -24,7 +24,7 @@ bool SensationManager::configure(yarp::os::ResourceFinder &rf)
     Bottle grp = rf.findGroup("SENSATIONS");
     if (!grp.isNull()){
         sensationList = *grp.find("sensations").asList();  
-        for (int i = 0; i < sensationList.size(); i++)
+        for (unsigned int i = 0; i < sensationList.size(); i++)
         {
             string sensation_name = sensationList.get(i).asString();
             if (sensation_name == "opcSensation") {
@@ -71,7 +71,7 @@ bool SensationManager::respond(const Bottle& cmd, Bottle& reply)
         reply.addString(help);
     }
     else if (cmd.get(0).asString() == "is") {
-        for (int i = 0; i < sensationList.size(); i++)
+        for (unsigned int i = 0; i < sensationList.size(); i++)
         {
             string sensation_name = sensationList.get(i).asString();
             if (sensation_name == "opcSensation") {

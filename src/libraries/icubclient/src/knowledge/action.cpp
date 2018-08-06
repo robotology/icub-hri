@@ -78,7 +78,7 @@ bool Action::fromBottle(const Bottle &b)
 
     this->subActions.clear();
     Bottle* bSub = b.find("subactions").asList();
-    for(int i=0; i<bSub->size(); i++)
+    for(unsigned int i=0; i<bSub->size(); i++)
     {
         Action a;
         a.fromBottle(*bSub->get(i).asList());
@@ -87,7 +87,7 @@ bool Action::fromBottle(const Bottle &b)
 
     this->estimatedDriveEffects.clear();
     bSub = b.find("estimatedDriveEffects").asList();
-    for(int i=0; i<bSub->size(); i++)
+    for(unsigned int i=0; i<bSub->size(); i++)
     {
         string driveName = bSub->get(i).asList()->get(0).asString().c_str();
         double driveEffect = bSub->get(i).asList()->get(1).asDouble();

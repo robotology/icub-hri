@@ -7,8 +7,6 @@ if(ICUBCLIENT_BUILD_IOL2OPC)
    if(ICUB_FOUND AND (NOT (OpenCV_VERSION LESS 3)))
         project(iol2opc)
 
-        include(YarpIDL)
-
         set(folder_header include/utils.h
                          include/module.h
                          ${IDL_GENERATED_CODE_DIR}/include/${PROJECT_NAME}_IDL.h)
@@ -33,7 +31,7 @@ if(ICUBCLIENT_BUILD_IOL2OPC)
                            ${IDL_GENERATED_CODE_DIR}/include
                            ${icubclient_INCLUDE_DIRS}
                            ${OpenCV_INCLUDE_DIRS}
-                           ${YARP_INCLUDE_DIRS}
+                          
                            ${ICUB_INCLUDE_DIRS} )
 
         add_executable(${PROJECT_NAME} ${idl_files} ${folder_header} ${folder_source} ${docs})

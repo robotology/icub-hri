@@ -60,7 +60,7 @@ bool BehaviorManager::configure(yarp::os::ResourceFinder &rf)
         Time::delay(1.0);
     }
 
-    for (int i = 0; i<behaviorList.size(); i++)
+    for (unsigned int i = 0; i<behaviorList.size(); i++)
     {
         std::string behavior_name = behaviorList.get(i).asString();
         if (behavior_name == "tagging") {
@@ -138,7 +138,7 @@ bool BehaviorManager::respond(const Bottle& cmd, Bottle& reply)
         }
         reply.addList() = names;
     } else if (cmd.get(0).asString() == "is_available" ) {
-        if (mut.tryLock()) {
+        if (mut.try_lock()) {
             mut.unlock();
             reply.addInt(1);
         } else {

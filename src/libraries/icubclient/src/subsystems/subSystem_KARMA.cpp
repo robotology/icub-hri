@@ -22,7 +22,7 @@ void icubclient::SubSystem_KARMA::selectHandCorrectTarget(yarp::os::Bottle &opti
                                                               yarp::sig::Vector &target, const std::string handToUse)
 {
     std::string hand="";
-    for (int i=0; i<options.size(); i++)
+    for (int unsigned i=0; i<options.size(); i++)
     {
         yarp::os::Value val=options.get(i);
         if (val.isString())

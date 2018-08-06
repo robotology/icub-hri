@@ -43,7 +43,7 @@ bool Babbling::configure(yarp::os::ResourceFinder &rf) {
         start_command_head[1] = -20.0;
         start_command_head[2] = +10.0;
     } else {
-        for (int i = 0; i < b_start_commandHead->size(); i++) {
+        for (unsigned int i = 0; i < b_start_commandHead->size(); i++) {
             start_command_head[i] = b_start_commandHead->get(i).asDouble();
             yDebug() << start_command_head[i];
         }
@@ -58,7 +58,7 @@ bool Babbling::configure(yarp::os::ResourceFinder &rf) {
         start_command_arm[12] = 0.0; start_command_arm[13] = 0.0; start_command_arm[14] = 0.0;
         start_command_arm[15] = 0.0;
     } else {
-        for (int i = 0; i < b_start_command->size(); i++)
+        for (unsigned int i = 0; i < b_start_command->size(); i++)
             start_command_arm[i] = b_start_command->get(i).asDouble();
     }
 

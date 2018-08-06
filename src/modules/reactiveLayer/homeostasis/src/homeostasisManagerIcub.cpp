@@ -95,7 +95,7 @@ bool HomeostaticModule::configure(yarp::os::ResourceFinder &rf)
     if (drivesList)
     {
         yInfo() << "Configuration: Found " << drivesList->size() << " drives. " ;
-        for (int d = 0; d<drivesList->size(); d++)
+        for (unsigned int d = 0; d<drivesList->size(); d++)
         {
             //Read Drive Configuration
             string driveName = drivesList->get(d).asString();

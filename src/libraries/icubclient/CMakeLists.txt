@@ -56,7 +56,7 @@ set_target_properties(${LIBRARY_TARGET_NAME} PROPERTIES VERSION       ${${PROJEC
                                                         DEBUG_POSTFIX "d"
                                                         LINKER_LANGUAGE CXX)
 
-target_include_directories(${LIBRARY_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${icubclientIDLClients_INCLUDE_DIRS};${YARP_INCLUDE_DIRS}>"
+target_include_directories(${LIBRARY_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${icubclientIDLClients_INCLUDE_DIRS}>"
                                                          "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
 if(MSVC)

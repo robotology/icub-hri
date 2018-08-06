@@ -25,14 +25,13 @@ include(GNUInstallDirs)
 # See https://blog.kitware.com/create-dlls-on-windows-without-declspec-using-new-cmake-export-all-feature/
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
-list(APPEND CMAKE_MODULE_PATH ${YARP_MODULE_PATH}
-                              ${CMAKE_CURRENT_SOURCE_DIR}/conf)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/conf)
 
 message(STATUS "YARP is version: ${YARP_VERSION}")
 message(STATUS "iCub is version: ${ICUB_VERSION}")
 
-add_definitions(${YARP_DEFINES})
-include(YarpInstallationHelpers)
+# add_definitions(${YARP_DEFINES})
+# include(YarpInstallationHelpers)
 yarp_configure_external_installation(${PROJECT_NAME})
 
 ### Options

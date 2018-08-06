@@ -81,7 +81,7 @@ bool Agent::fromBottle(const Bottle &b)
 
     m_belief.clear();
     Bottle* beliefs = b.find("belief").asList();
-    for(int i=0; i<beliefs->size() ; i++)
+    for(unsigned int i=0; i<beliefs->size() ; i++)
     {
         Bottle* bRelation = beliefs->get(i).asList();
         Relation r(*bRelation);
@@ -90,7 +90,7 @@ bool Agent::fromBottle(const Bottle &b)
 
     m_emotions_intrinsic.clear();
     Bottle* emotions = b.find("emotions").asList();
-    for(int i=0; i<emotions->size() ; i++)
+    for(unsigned int i=0; i<emotions->size() ; i++)
     {
         Bottle* bEmo = emotions->get(i).asList();
         string emotionName = bEmo->get(0).asString().c_str();

@@ -54,7 +54,7 @@ string IOL2OPCBridge::findName(const Bottle &scores,
         return retName;
 
     // first find the most likely object for the given blob
-    for (int i=0; i<blobScores->size(); i++)
+    for (unsigned int i=0; i<blobScores->size(); i++)
     {
         Bottle *item=blobScores->get(i).asList();
         if (item==nullptr)
@@ -73,7 +73,7 @@ string IOL2OPCBridge::findName(const Bottle &scores,
     // prediction over the remaining blobs
     if (retName!=OBJECT_UNKNOWN)
     {
-        for (int i=0; i<scores.size(); i++)
+        for (unsigned int i=0; i<scores.size(); i++)
         {
             if (Bottle *blob=scores.get(i).asList())
             {
@@ -97,7 +97,7 @@ string IOL2OPCBridge::findName(const Bottle &scores,
 Bottle IOL2OPCBridge::skimBlobs(const Bottle &blobs)
 {
     Bottle skimmedBlobs;
-    for (int i=0; i<blobs.size(); i++)
+    for (unsigned int i=0; i<blobs.size(); i++)
     {
         CvPoint cog=getBlobCOG(blobs,i);
         if ((cog.x==RET_INVALID) || (cog.y==RET_INVALID))
@@ -165,10 +165,10 @@ Bottle IOL2OPCBridge::getBlobs()
 
 
 /**********************************************************/
-CvPoint IOL2OPCBridge::getBlobCOG(const Bottle &blobs, const int i)
+CvPoint IOL2OPCBridge::getBlobCOG(const Bottle &blobs, const unsigned int i)
 {
     CvPoint cog=cvPoint(RET_INVALID,RET_INVALID);
-    if ((i>=0) && (i<blobs.size()))
+    if (i<blobs.size())
     {
         CvPoint tl,br;
         Bottle *item=blobs.get(i).asList();
@@ -222,7 +222,7 @@ bool IOL2OPCBridge::getBlobPoints(const CvPoint &cog, deque<CvPoint> &blobPoints
     {
         if (Bottle *blob_list=reply.get(0).asList())
         {
-            for (int i=0; i<blob_list->size();i++)
+            for (unsigned int i=0; i<blob_list->size();i++)
             {
                 if (Bottle *blob_pair=blob_list->get(i).asList())
                 {
@@ -410,7 +410,7 @@ bool IOL2OPCBridge::get3DPositionAndDimensions(const CvRect &bbox,
 
         // find mean and standard deviation
         Vector tmp(3);
-        for (int i=0; i<reply.size(); i+=3)
+        for (unsigned int i=0; i<reply.size(); i+=3)
         {
             tmp[0]=reply.get(i+0).asDouble();
             tmp[1]=reply.get(i+1).asDouble();
@@ -449,7 +449,7 @@ void IOL2OPCBridge::acquireImage()
 
 
 /**********************************************************/
-void IOL2OPCBridge::drawBlobs(const Bottle &blobs, const int i,
+void IOL2OPCBridge::drawBlobs(const Bottle &blobs, const unsigned int i,
                               const Bottle &scores)
 {
     // grab resources
@@ -462,7 +462,7 @@ void IOL2OPCBridge::drawBlobs(const Bottle &blobs, const int i,
 
         // latch image
         ImageOf<PixelBgr> imgLatch=this->imgRtLoc;
-        for (int j=0; j<blobs.size(); j++)
+        for (unsigned int j=0; j<blobs.size(); j++)
         {
             CvPoint tl,br,txtLoc;
             Bottle *item=blobs.get(j).asList();
@@ -536,7 +536,7 @@ void IOL2OPCBridge::drawScoresHistogram(const Bottle &blobs,
             set<string> gcFilters;
 
             // cycle over classes
-            for (int j=0; j<blobScores->size(); j++)
+            for (unsigned int j=0; j<blobScores->size(); j++)
             {
                 Bottle *item=blobScores->get(j).asList();
                 if (item==nullptr)
@@ -607,7 +607,7 @@ void IOL2OPCBridge::drawScoresHistogram(const Bottle &blobs,
             cvRectangle(imgConf.getIplImage(),cvPoint(0,0),cvPoint(imgTmp2.width(),imgTmp2.height()),cvScalar(255,255,255),3);
 
             // give chance for disposing filters that are no longer used (one at time)
-            if ((int)histFiltersPool.size()>blobScores->size())
+            if (histFiltersPool.size()>blobScores->size())
             {
                 for (auto& it : histFiltersPool)
                 {
@@ -638,7 +638,7 @@ int IOL2OPCBridge::findClosestBlob(const Bottle &blobs,
     int ret=RET_INVALID;
     double min_d2=std::numeric_limits<double>::max();
 
-    for (int i=0; i<blobs.size(); i++)
+    for (unsigned int i=0; i<blobs.size(); i++)
     {
         CvPoint cog=getBlobCOG(blobs,i);
         if ((cog.x==RET_INVALID) || (cog.y==RET_INVALID))
@@ -666,7 +666,7 @@ int IOL2OPCBridge::findClosestBlob(const Bottle &blobs,
     int ret=RET_INVALID;
     double curMinDist=std::numeric_limits<double>::max();
     
-    for (int i=0; i<blobs.size(); i++)
+    for (unsigned int i=0; i<blobs.size(); i++)
     {
         CvPoint cog=getBlobCOG(blobs,i);
         if ((cog.x==RET_INVALID) || (cog.y==RET_INVALID))
@@ -699,7 +699,7 @@ Bottle IOL2OPCBridge::classify(const Bottle &blobs)
     Bottle cmd,reply;
     cmd.addVocab(Vocab::encode("classify"));
     Bottle &options=cmd.addList();
-    for (int i=0; i<blobs.size(); i++)
+    for (unsigned int i=0; i<blobs.size(); i++)
     {
         ostringstream tag;
         tag<<"blob_"<<i;
@@ -830,7 +830,7 @@ void IOL2OPCBridge::updateOPC()
 
         // check detected objects
         bool unknownObjectInScene=false;
-        for (int j=0; j<blobs.size(); j++)
+        for (unsigned int j=0; j<blobs.size(); j++)
         {
             Bottle *item=blobs.get(j).asList();
             if (item==nullptr)
@@ -1244,7 +1244,7 @@ bool IOL2OPCBridge::updateModule()
         if (reply.get(0).asString()=="ack")
         {
             if (Bottle *names=reply.get(1).asList())
-                for (int i=0; i<names->size(); i++)
+                for (unsigned int i=0; i<names->size(); i++)
                     db[names->get(i).asString().c_str()]=IOLObject(opcMedianFilterOrder,presence_timeout,
                                                                    tracker_type,tracker_timeout);
 
@@ -1299,7 +1299,7 @@ bool IOL2OPCBridge::updateModule()
             Bottle scores=opcScores;
             mutexResourcesOpc.unlock();
 
-            for (int j=0; j<blobs.size(); j++)
+            for (unsigned int j=0; j<blobs.size(); j++)
             {
                 ostringstream tag;
                 tag<<"blob_"<<j;
@@ -1453,7 +1453,7 @@ bool IOL2OPCBridge::change_name(const string &old_name,
     LockGuard lg(mutexResources);
 
     Bottle cmdClassifier,replyClassifier;
-    cmdClassifier.addVocab(VOCAB4('c','h','n','a'));
+    cmdClassifier.addVocab(createVocab('c','h','n','a'));
     cmdClassifier.addString(old_name);
     cmdClassifier.addString(new_name);
     yInfoGated("Sending change name request: %s",cmdClassifier.toString().c_str());
