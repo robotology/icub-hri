@@ -142,7 +142,7 @@ bool Agent::addBelief(const Relation& r)
 bool Agent::removeBelief(const Relation& r)
 {
     //Check if this relation is already present
-    list<Relation>::const_iterator it = find(m_belief.begin(),m_belief.end(),r);
+    list<Relation>::iterator it = find(m_belief.begin(),m_belief.end(),r);
     if (it != m_belief.end())
     {
         m_belief.erase(it);
