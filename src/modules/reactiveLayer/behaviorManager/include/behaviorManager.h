@@ -25,6 +25,10 @@ private:
     yarp::os::Mutex mut;
 
 public:
+    BehaviorManager() : period(1.0), iCub(nullptr) {
+        ;
+    }
+
     bool configure(yarp::os::ResourceFinder &rf);
 
     bool interruptModule();

@@ -46,7 +46,6 @@ class faceTrackerModule : public yarp::os::RFModule {
 
     yarp::sig::Vector velocity_command;
     yarp::sig::Vector cur_encoders;
-    yarp::sig::Vector prev_encoders;
 
     yarp::dev::IControlMode *ictrl;
 

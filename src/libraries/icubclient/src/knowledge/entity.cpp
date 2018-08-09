@@ -128,19 +128,19 @@ string Entity::toString() const
 }
 
 
-bool Entity::operator==(const Entity &b)
+bool Entity::operator==(const Entity &b) const
 {
     return (this->m_opc_id == b.m_opc_id);
 }
 
 
-bool Entity::operator<(const Entity &b)
+bool Entity::operator<(const Entity &b) const
 {
     return (this->m_opc_id < b.m_opc_id );
 }
 
 
-bool Entity::operator>(const Entity &b)
+bool Entity::operator>(const Entity &b) const
 {
     return (this->m_opc_id > b.m_opc_id );
 }

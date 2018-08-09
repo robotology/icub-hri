@@ -10,7 +10,7 @@ bool icubclient::SubSystem_SAM::connect() {
     }
 }
 
-icubclient::SubSystem_SAM::SubSystem_SAM(const std::string &masterName) : SubSystem(masterName) {
+icubclient::SubSystem_SAM::SubSystem_SAM(const std::string &masterName) : SubSystem(masterName), attentionSAM(true) {
     portRPC.open(("/" + m_masterName + "/sam:rpc").c_str());
     m_type = SUBSYSTEM_SAM;
 }

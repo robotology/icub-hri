@@ -4,17 +4,14 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
-#include <yarp/os/all.h>
-#include <yarp/sig/all.h>
-#include "icubclient/clients/icubClient.h"
 #include <map>
 
-#include "sensation.h"
+#include <yarp/os/all.h>
+#include <yarp/sig/all.h>
 
-using namespace std;
-using namespace yarp::os;
-using namespace yarp::sig;
-using namespace icubclient;
+#include "icubclient/clients/icubClient.h"
+
+#include "sensation.h"
 
 /**
  * \ingroup sensationManager
@@ -24,11 +21,15 @@ class TestSensation: public Sensation
 private:
     bool on;
     string moduleName, unknown_obj_port_name, confusion_port_name;
-    BufferedPort<Bottle> in;
+    yarp::os::BufferedPort<Bottle> in;
     yarp::os::BufferedPort<Bottle> out;
 
 
 public:
+    TestSensation() : on(false) {
+        ;
+    }
+
     void configure();
     void publish();
     void close_ports() {

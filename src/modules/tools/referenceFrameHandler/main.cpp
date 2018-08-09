@@ -66,6 +66,10 @@ class FrameHandlerModule: public RFModule
 
 public:
     /************************************************************************/
+    FrameHandlerModule() : isVerbose(false) {
+        ;
+    }
+
     bool configure(ResourceFinder &rf)
     {
         setName( rf.check("name",Value("referenceFrameHandler")).asString().c_str() );

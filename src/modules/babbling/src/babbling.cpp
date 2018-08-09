@@ -326,8 +326,8 @@ void Babbling::babblingCommands(double &t, int j_idx) {
                 } else {
                     for (unsigned int l = 0; l < 7; l++) {
                         command[l] = 10 * (ref_command[l] - encodersUsed[l]);
-                        if (command[j_idx] > 20) command[j_idx] = 20;
-                        if (command[j_idx] < -20) command[j_idx] = -20;
+                        if (command[l] > 20) command[l] = 20;
+                        if (command[l] < -20) command[l] = -20;
                     }
                 }
             } else if (part_babbling == "hand") {
@@ -337,8 +337,8 @@ void Babbling::babblingCommands(double &t, int j_idx) {
                 } else {
                     for (unsigned int l = 7; l < command.size(); l++) {
                         command[l] = 10 * (ref_command[l] - encodersUsed[l]);
-                        if (command[j_idx] > 20) command[j_idx] = 20;
-                        if (command[j_idx] < -20) command[j_idx] = -20;
+                        if (command[l] > 20) command[l] = 20;
+                        if (command[l] < -20) command[l] = -20;
                     }
                 }
             } else {

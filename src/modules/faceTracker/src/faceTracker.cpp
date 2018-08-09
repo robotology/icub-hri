@@ -78,7 +78,6 @@ bool faceTrackerModule::configure(yarp::os::ResourceFinder &rf) {
 
     velocity_command.resize(nr_jnts);
     cur_encoders.resize(nr_jnts);
-    prev_encoders.resize(nr_jnts);
 
     /* prepare command */
     for(int i=0;i<nr_jnts;i++)
@@ -372,8 +371,12 @@ bool faceTrackerModule::updateModule() {
 
         int biggest_face_left_idx = getBiggestFaceIdx(cvMatImageLeft, faces_left);
 
-        prev_encoders = cur_encoders;
-        enc->getEncoders(cur_encoders.data());
+        yarp::sig::Vector new_encoder_readings;
+        new_encoder_readings.resize(nr_jnts);
+
+        if(enc->getEncoders(new_encoder_readings.data())) {
+            cur_encoders = new_encoder_readings;
+        }
 
         if (mode == Mode::GO_DEFAULT) {
             moveToDefaultPosition();

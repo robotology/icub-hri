@@ -115,13 +115,19 @@ Bottle OpcSensation::handleEntities()
             addToEntityList(u_entities, entity->entity_type(), entity->name());
         }
         else {
-            if (entity->entity_type() == "bodypart" && (dynamic_cast<Bodypart*>(entity)->m_tactile_number == -1))
+            if (entity->entity_type() == "bodypart")
             {
-                addToEntityList(u_entities, entity->entity_type(), entity->name());
-                addToEntityList(up_entities, entity->entity_type(), entity->name());
+                Bodypart* bp = dynamic_cast<Bodypart*>(entity);
+                if(bp) {
+                    if(bp->m_tactile_number == -1) {
+                        addToEntityList(u_entities, entity->entity_type(), entity->name());
+                        addToEntityList(up_entities, entity->entity_type(), entity->name());
+                    }
+                }
             }
         }
-        if (dynamic_cast<Object*>(entity) && dynamic_cast<Object*>(entity)->m_present == 1.0)
+        Object * o = dynamic_cast<Object*>(entity);
+        if (o && o->m_present == 1.0)
         {
             addToEntityList(p_entities, entity->entity_type(), entity->name());
         }

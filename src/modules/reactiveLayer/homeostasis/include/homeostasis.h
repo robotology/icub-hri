@@ -23,29 +23,28 @@ public:
     bool is_sleeping; //!< Whether drive is sleeping
     double time_to_sleep; //!< Timespan to be sleeping
 
-    Drive(std::string d_name, double _period, std::string d_key="default", double d_value=0.5, double d_homeo_min=0.25, double d_homeo_max=0.75, double d_decay = 0.05, double d_value_min=std::numeric_limits<double>::min(), double d_value_max=std::numeric_limits<double>::max(), bool d_gradient = false)
+    Drive(std::string d_name, double d_period, std::string d_key="default", double d_value=0.5, double d_homeo_min=0.25, double d_homeo_max=0.75, double d_decay = 0.05, double d_value_min=std::numeric_limits<double>::min(), double d_value_max=std::numeric_limits<double>::max(), bool d_gradient = false) :
+        name(d_name),
+        key(d_key),
+        period(d_period),
+        value(d_value),
+        homeostasisMin(d_homeo_min),
+        homeostasisMax(d_homeo_max),
+        decay(d_decay),
+        valueMin(d_value_min),
+        valueMax(d_value_max),
+        default_value((d_homeo_max + d_homeo_min)/2.),
+        decay_multiplier(1),
+        gradient(d_gradient),
+        start_sleep(time(NULL)),
+        is_sleeping(true),
+        time_to_sleep(1e10)
     {
-        name = d_name;
-        key = d_key;
-        period = _period;
-        value = d_value;
-        homeostasisMin = d_homeo_min;
-        homeostasisMax = d_homeo_max;
-        default_value = (d_homeo_max + d_homeo_min)/2.;
-        decay = d_decay;
-        gradient = d_gradient;
-        decay_multiplier = 1;
-        is_sleeping = true;
-        time_to_sleep = 1e10;
-        start_sleep = time(NULL);
         //todo : check the min/max
-        double homeoRange =  homeostasisMax - homeostasisMin;
         if (d_value_min == std::numeric_limits<double>::min() && d_value_max == std::numeric_limits<double>::max()){
+            double homeoRange =  homeostasisMax - homeostasisMin;
             valueMin = homeostasisMin - 0.5 * homeoRange;
             valueMax = homeostasisMax + 0.5 * homeoRange;
-        } else {
-            valueMin = d_value_min;
-            valueMax = d_value_max;
         }
     }
 

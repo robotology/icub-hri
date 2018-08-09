@@ -119,9 +119,9 @@ namespace icubclient{
         */
         std::string        complement_manner() const;
 
-        bool                operator==(const Relation &b);
-        bool                operator<(const Relation &b);
-        bool                operator>(const Relation &b);
+        bool                operator==(const Relation &b) const;
+        bool                operator<(const Relation &b) const;
+        bool                operator>(const Relation &b) const;
     };
 
 } //namespace

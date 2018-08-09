@@ -334,10 +334,12 @@ DriveOutCZ AllostaticController::chooseDrive() {
     }
     if (! numOutCz) {
         result.name = "None";
+        result.level = UNDEFINED;
         return result;
     }
     if ( ! Normalize(outOfCzPriorities)) {
         result.name = "None";
+        result.level = UNDEFINED;
         return result;
     }
     random = Rand::scalar();
@@ -350,8 +352,10 @@ DriveOutCZ AllostaticController::chooseDrive() {
     result.name = names[idx];
     if (min_diff[idx] > 0)
         result.level = UNDER;
-    if (max_diff[idx] > 0)
+    else if (max_diff[idx] > 0)
         result.level = OVER;
+    else
+        result.level = UNDEFINED;
     return result;
 }
 
