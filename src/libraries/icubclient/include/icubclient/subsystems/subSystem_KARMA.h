@@ -67,7 +67,7 @@ protected:
     /**
      * @brief Appends a target vector <b>t</b> to the Bottle <b></b>
      */
-    void appendTarget(yarp::os::Bottle& b, const yarp::sig::Vector &tCenter);
+    void appendTarget(yarp::os::Bottle& b, const yarp::sig::VectorOf<double> &tCenter);
 
     /**
      * @brief Appends a double value <b>v</b> to the Bottle <b></b>
@@ -77,7 +77,7 @@ protected:
     bool returnArmSafely(std::string armType);
 
     void selectHandCorrectTarget(yarp::os::Bottle& options, const std::string &targetName,
-                                 yarp::sig::Vector& target,
+                                 yarp::sig::VectorOf<double>& target,
                                  const std::string handToUse="");
 
     /**
@@ -104,7 +104,7 @@ public:
      * @param in: "Unsafe" vector
      * @return "safe" vector
      */
-    yarp::sig::Vector applySafetyMargins(const yarp::sig::Vector& in);
+    yarp::sig::VectorOf<double> applySafetyMargins(const yarp::sig::VectorOf<double>& in);
 
     /**
      * @brief chooseArm (toolAttach in KARMA): wrapper for tool-attach of KARMA, can be used to choose the arm for actions with KARMA
@@ -128,7 +128,7 @@ public:
      * @return true in case of success release, false otherwise
      */
     bool pushAside(const std::string &objName,
-                   const yarp::sig::Vector &objCenter, const double &targetPosY,
+                   const yarp::sig::VectorOf<double> &objCenter, const double &targetPosY,
                    const double &theta,
                    const std::string &armType = "selectable",
                    const yarp::os::Bottle &options = yarp::os::Bottle());
@@ -143,7 +143,7 @@ public:
      * @return true in case of success release, false otherwise
      */
     bool pushFront(const std::string &objName,
-                   const yarp::sig::Vector &objCenter, const double &targetPosXFront,
+                   const yarp::sig::VectorOf<double> &objCenter, const double &targetPosXFront,
                    const std::string &armType = "selectable",
                    const yarp::os::Bottle &options = yarp::os::Bottle());
 
@@ -155,7 +155,7 @@ public:
      * @param options to be passed to KARMA
      * @return true in case of success release, false otherwise
      */
-    bool push(const yarp::sig::Vector &targetCenter, const double theta, const double radius,
+    bool push(const yarp::sig::VectorOf<double> &targetCenter, const double theta, const double radius,
               const yarp::os::Bottle &options = yarp::os::Bottle());
 
     /**
@@ -168,7 +168,7 @@ public:
      * @return true in case of success release, false otherwise
      */
     bool pullBack(const std::string &objName,
-                  const yarp::sig::Vector &objCenter, const double &targetPosXBack,
+                  const yarp::sig::VectorOf<double> &objCenter, const double &targetPosXBack,
                   const std::string &armType = "selectable",
                   const yarp::os::Bottle &options = yarp::os::Bottle());
     /**
@@ -180,7 +180,7 @@ public:
      * @param options to be passed to KARMA
      * @return true in case of success release, false otherwise
      */
-    bool draw(const yarp::sig::Vector &targetCenter, const double theta,
+    bool draw(const yarp::sig::VectorOf<double> &targetCenter, const double theta,
               const double radius, const double dist,
               const yarp::os::Bottle &options = yarp::os::Bottle());
 
@@ -195,7 +195,7 @@ public:
      * @return true in case of success release, false otherwise
      */
     bool vdraw(const std::string &objName,
-               const yarp::sig::Vector &targetCenter, const double theta,
+               const yarp::sig::VectorOf<double> &targetCenter, const double theta,
                const double radius, const double dist,
                const yarp::os::Bottle &options = yarp::os::Bottle());
 

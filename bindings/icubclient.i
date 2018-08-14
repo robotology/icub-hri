@@ -5,8 +5,15 @@
 %include <std_vector.i>
 %include <std_shared_ptr.i>
 %include <std_except.i>
+%include <yarp.i>
 
 %{
+#include <yarp/dev/Drivers.h>
+#include <yarp/os/all.h>
+#include <yarp/sig/all.h>
+using namespace yarp::os;
+using namespace yarp::sig;
+
 #include <icubclient/tags.h>
 #include <icubclient/functions.h>
 

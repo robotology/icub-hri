@@ -14,7 +14,16 @@ include(icubclientOptions)
 
 find_package(SWIG REQUIRED 3)
 find_package(icubclient REQUIRED)
-find_package(YARP REQUIRED)
+
+# Find YARP for bindings-only builds
+find_package(YARP COMPONENTS conf OS sig dev math gsl REQUIRED)
+foreach(_component conf OS sig dev math gsl)
+  get_property(YARP_${_component}_INCLUDE_DIRS TARGET YARP::YARP_${_component} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+  include_directories(${YARP_${_component}_INCLUDE_DIRS})
+endforeach()
+
+# for yarp.i
+include_directories(${YARP_BINDINGS})
 
 get_target_property(icubclient_includes icubclient::icubclient INTERFACE_INCLUDE_DIRECTORIES)
 set(icubclient_BASE_DIR ${CMAKE_CURRENT_BINARY_DIR})
@@ -34,7 +43,7 @@ endforeach()
 include(${SWIG_USE_FILE})
 message(STATUS "${SWIG_USE_FILE}")
 
-include_directories(SYSTEM ${YARP_INCLUDE_DIRS})
+# include_directories(SYSTEM ${YARP_INCLUDE_DIRS})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${icubclient_includes})
 
 set_source_files_properties(icubclient.i PROPERTIES CPLUSPLUS ON)

@@ -44,8 +44,8 @@ class faceTrackerModule : public yarp::os::RFModule {
 
     yarp::dev::PolyDriver *robotHead;
 
-    yarp::sig::Vector velocity_command;
-    yarp::sig::Vector cur_encoders;
+    yarp::sig::VectorOf<double> velocity_command;
+    yarp::sig::VectorOf<double> cur_encoders;
 
     yarp::dev::IControlMode *ictrl;
 

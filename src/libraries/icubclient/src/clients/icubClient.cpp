@@ -271,7 +271,7 @@ std::string ICubClient::getPartnerName(bool verbose)
     return partnerName;
 }
 
-yarp::sig::Vector ICubClient::getPartnerBodypartLoc(std::string sBodypartName){
+yarp::sig::VectorOf<double> ICubClient::getPartnerBodypartLoc(std::string sBodypartName){
 
     Vector vLoc;
 

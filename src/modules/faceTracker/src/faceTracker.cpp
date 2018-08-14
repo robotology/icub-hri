@@ -371,7 +371,7 @@ bool faceTrackerModule::updateModule() {
 
         int biggest_face_left_idx = getBiggestFaceIdx(cvMatImageLeft, faces_left);
 
-        yarp::sig::Vector new_encoder_readings;
+        yarp::sig::VectorOf<double> new_encoder_readings;
         new_encoder_readings.resize(nr_jnts);
 
         if(enc->getEncoders(new_encoder_readings.data())) {

@@ -1,7 +1,7 @@
 #include <yarp/os/all.h>
 #include "icubclient/subsystems/subSystem_ARE.h"
 
-void icubclient::SubSystem_ARE::appendCartesianTarget(yarp::os::Bottle &b, const yarp::sig::Vector &t)
+void icubclient::SubSystem_ARE::appendCartesianTarget(yarp::os::Bottle &b, const yarp::sig::VectorOf<double> &t)
 {
     yarp::os::Bottle &sub=b.addList();
     sub.addString("cartesian");
@@ -9,7 +9,7 @@ void icubclient::SubSystem_ARE::appendCartesianTarget(yarp::os::Bottle &b, const
         sub.addDouble(t[i]);
 }
 
-void icubclient::SubSystem_ARE::selectHandCorrectTarget(yarp::os::Bottle &options, yarp::sig::Vector &target, const std::string& objName, const std::string handToUse)
+void icubclient::SubSystem_ARE::selectHandCorrectTarget(yarp::os::Bottle &options, yarp::sig::VectorOf<double> &target, const std::string& objName, const std::string handToUse)
 {
     std::string hand="";
     for (unsigned int i=0; i<options.size(); i++)
@@ -145,9 +145,9 @@ bool icubclient::SubSystem_ARE::getTableHeight(double &height)
     }
 }
 
-yarp::sig::Vector icubclient::SubSystem_ARE::applySafetyMargins(const yarp::sig::Vector &in)
+yarp::sig::VectorOf<double> icubclient::SubSystem_ARE::applySafetyMargins(const yarp::sig::VectorOf<double> &in)
 {
-    yarp::sig::Vector out=in;
+    yarp::sig::VectorOf<double> out=in;
     out[0]=std::min(out[0],-0.1);
 
     double height;
@@ -193,7 +193,7 @@ bool icubclient::SubSystem_ARE::take(const std::string &sName, const yarp::os::B
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("take"));
 
-    yarp::sig::Vector target=o->m_ego_position;
+    yarp::sig::VectorOf<double> target=o->m_ego_position;
     yarp::os::Bottle opt=options;
     selectHandCorrectTarget(opt,target,sName);
     target=applySafetyMargins(target);
@@ -229,7 +229,7 @@ bool icubclient::SubSystem_ARE::push(const std::string &sName, const yarp::os::B
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("push"));
 
-    yarp::sig::Vector target=o->m_ego_position;
+    yarp::sig::VectorOf<double> target=o->m_ego_position;
     yarp::os::Bottle opt=options;
     selectHandCorrectTarget(opt,target,sName);
     target=applySafetyMargins(target);
@@ -245,10 +245,10 @@ bool icubclient::SubSystem_ARE::push(const std::string &sName, const yarp::os::B
 
 }
 
-bool icubclient::SubSystem_ARE::point(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options)
+bool icubclient::SubSystem_ARE::point(const yarp::sig::VectorOf<double> &targetUnsafe, const yarp::os::Bottle &options)
 {
     yDebug() << "ARE::point start";
-    yarp::sig::Vector target=applySafetyMargins(targetUnsafe);
+    yarp::sig::VectorOf<double> target=applySafetyMargins(targetUnsafe);
 
     yarp::os::Bottle bCmd;
     if(target[0]<-0.31) { // everything further than 31cm should be pointed at using the "point far" of ARE
@@ -288,7 +288,7 @@ bool icubclient::SubSystem_ARE::drop(const yarp::os::Bottle &options)
     return bReturn;
 }
 
-bool icubclient::SubSystem_ARE::dropOn(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options)
+bool icubclient::SubSystem_ARE::dropOn(const yarp::sig::VectorOf<double> &targetUnsafe, const yarp::os::Bottle &options)
 {
     yDebug() << "ARE::dropOn start";
 
@@ -296,7 +296,7 @@ bool icubclient::SubSystem_ARE::dropOn(const yarp::sig::Vector &targetUnsafe, co
     bCmd.addVocab(yarp::os::Vocab::encode("drop"));
     bCmd.addString("over");
 
-    yarp::sig::Vector target=targetUnsafe;
+    yarp::sig::VectorOf<double> target=targetUnsafe;
     yarp::os::Bottle opt=options;
     selectHandCorrectTarget(opt,target,lastlyUsedHand);
     target=applySafetyMargins(target);
@@ -373,7 +373,7 @@ bool icubclient::SubSystem_ARE::waving(const bool sw)
     return bReturn;
 }
 
-bool icubclient::SubSystem_ARE::look(const yarp::sig::Vector &target, const yarp::os::Bottle &options)
+bool icubclient::SubSystem_ARE::look(const yarp::sig::VectorOf<double> &target, const yarp::os::Bottle &options)
 {
     yDebug() << "ARE::look start";
 
@@ -391,7 +391,7 @@ bool icubclient::SubSystem_ARE::look(const yarp::sig::Vector &target, const yarp
     return bReturn;
 }
 
-bool icubclient::SubSystem_ARE::track(const yarp::sig::Vector &target, const yarp::os::Bottle &options)
+bool icubclient::SubSystem_ARE::track(const yarp::sig::VectorOf<double> &target, const yarp::os::Bottle &options)
 {
     // track() is meant for streaming => no point in gating the activity continuously
     yarp::os::Bottle bCmd;

@@ -1,6 +1,7 @@
 import yarp
 import icubclient
 import sys
+import time
 
 
 if __name__ == '__main__':
@@ -39,8 +40,9 @@ if __name__ == '__main__':
     iCub.home()
     logger.info() << "pointing at the object ... "
     options = yarp.Bottle("right") # force the use of the right hand
+    # iCub.point(-0.35, -0.05, -0.05, options)
     iCub.point(x, options) # automatic selection of the hand
-    yarp.Time.delay(2.0)
+    time.sleep(2.0)
 
     iCub.home()
     logger.info() << "try to grasp "

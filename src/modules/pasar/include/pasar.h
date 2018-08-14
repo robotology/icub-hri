@@ -68,10 +68,10 @@ protected:
 
     yarp::os::Port handlerPort;             //!< a port to handle messages
 
-    yarp::sig::Vector rightHandt1;          //!< position of right at t1
-    yarp::sig::Vector rightHandt2;          //!< position of right at t2
-    yarp::sig::Vector leftHandt1;           //!< position of left hand at t1
-    yarp::sig::Vector leftHandt2;           //!< position of left hand at t2
+    yarp::sig::VectorOf<double> rightHandt1;          //!< position of right at t1
+    yarp::sig::VectorOf<double> rightHandt2;          //!< position of right at t2
+    yarp::sig::VectorOf<double> leftHandt1;           //!< position of left hand at t1
+    yarp::sig::VectorOf<double> leftHandt2;           //!< position of left hand at t2
 
     std::pair<bool, bool> presentRightHand; //!< first: whether right hand was present at t1; second: whether right hand is present at t2
     std::pair<bool, bool> presentLeftHand;  //!< first: whether left hand was present at t1; second: whether left hand is present at t2

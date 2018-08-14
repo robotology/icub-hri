@@ -49,7 +49,7 @@ protected:
     yarp::dev::PolyDriver rightArmDev;
     yarp::dev::PolyDriver headDev;
 
-    yarp::sig::Vector encodersLeftArm, encodersRightArm;
+    yarp::sig::VectorOf<double> encodersLeftArm, encodersRightArm;
 
     std::string part; //!< Should be "left_arm" or "right_arm"
     std::string robot; //!< Should be "icub" or "icubSim"
@@ -61,7 +61,7 @@ protected:
     double duration; //!< Duration for the babbling
     
     double start_command_arm[16]; //!< Start command for the 16 arm joints
-    yarp::sig::Vector start_command_head; //!< Target for head in start position
+    yarp::sig::VectorOf<double> start_command_head; //!< Target for head in start position
 
 public:
     bool configure(yarp::os::ResourceFinder &rf);

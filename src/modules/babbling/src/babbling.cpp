@@ -280,8 +280,8 @@ bool Babbling::doBabbling() {
 
 void Babbling::babblingCommands(double &t, int j_idx) {
     double ref_command[16]; // Reference command for the 16 arm joints
-    yarp::sig::Vector command; // Command after correction
-    yarp::sig::Vector encodersUsed;
+    yarp::sig::VectorOf<double> command; // Command after correction
+    yarp::sig::VectorOf<double> encodersUsed;
     command.resize(16);
 
     for (unsigned int l = 0; l < command.size(); l++) {
@@ -362,7 +362,7 @@ void Babbling::babblingCommands(double &t, int j_idx) {
 }
 
 bool Babbling::moveHeadToStartPos() {
-    yarp::sig::Vector ang = start_command_head;
+    yarp::sig::VectorOf<double> ang = start_command_head;
     if (part == "right_arm") {
         ang[0] = -ang[0];
     }
@@ -378,7 +378,7 @@ bool Babbling::gotoStartPos() {
 
     moveHeadToStartPos();
 
-    yarp::sig::Vector command; // Command after correction
+    yarp::sig::VectorOf<double> command; // Command after correction
     command.resize(16);
 
     /* Move arm to start position */

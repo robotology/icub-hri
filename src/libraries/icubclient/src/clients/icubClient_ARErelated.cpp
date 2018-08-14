@@ -56,7 +56,7 @@ bool ICubClient::release(const std::string &oLocation, const yarp::os::Bottle &o
 }
 
 
-bool ICubClient::release(const yarp::sig::Vector &target, const yarp::os::Bottle &options)
+bool ICubClient::release(const yarp::sig::VectorOf<double> &target, const yarp::os::Bottle &options)
 {
     SubSystem_ARE *are = getARE();
     if (are == nullptr)
@@ -86,7 +86,7 @@ bool ICubClient::waving(const bool sw) {
 }
 
 
-bool icubclient::ICubClient::point(const yarp::sig::Vector &target, const yarp::os::Bottle &options)
+bool icubclient::ICubClient::point(const yarp::sig::VectorOf<double> &target, const yarp::os::Bottle &options)
 {
     SubSystem_ARE *are = getARE();
     if (are == nullptr)
@@ -175,7 +175,7 @@ bool ICubClient::look(const std::string &target, const yarp::os::Bottle &options
     return false;
 }
 
-bool ICubClient::look(const yarp::sig::Vector &target, const yarp::os::Bottle &options)
+bool ICubClient::look(const yarp::sig::VectorOf<double> &target, const yarp::os::Bottle &options)
 {
     if (SubSystem_ARE *are = getARE())
     {

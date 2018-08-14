@@ -32,7 +32,7 @@ namespace icubclient{
 */
 struct Body
 {
-    std::map<std::string, yarp::sig::Vector> m_parts;
+    std::map<std::string, yarp::sig::VectorOf<double>> m_parts;
 
     Body()
     {
@@ -72,7 +72,7 @@ struct Body
 
     bool fromBottle(const yarp::os::Bottle &b)
     {
-        for(std::map<std::string,yarp::sig::Vector>::iterator part = m_parts.begin(); part != m_parts.end(); part++)
+        for(std::map<std::string,yarp::sig::VectorOf<double>>::iterator part = m_parts.begin(); part != m_parts.end(); part++)
         {
             yarp::os::Bottle* position = b.find(part->first.c_str()).asList();
             part->second[0] = position->get(0).asDouble();

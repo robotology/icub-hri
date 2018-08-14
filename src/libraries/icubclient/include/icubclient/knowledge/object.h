@@ -43,22 +43,22 @@ public:
     /**
     * Position of the Object, in the initial ego-centered reference frame of the agent mainting the OPC (initial root of the iCub).
     */
-    yarp::sig::Vector m_ego_position;
+    yarp::sig::VectorOf<double> m_ego_position;
 
     /**
     * Orientation of the Object, in the initial ego-centered reference frame of the agent mainting the OPC (initial root of the iCub).
     */
-    yarp::sig::Vector m_ego_orientation;
+    yarp::sig::VectorOf<double> m_ego_orientation;
 
     /**
     * Dimensions of the Object, in meters.
     */
-    yarp::sig::Vector m_dimensions;
+    yarp::sig::VectorOf<double> m_dimensions;
 
     /**
     * Mean color of the object (r,g,b) used mainly for debugging/displaying purposes in the iCubGUI.
     */
-    yarp::sig::Vector m_color;
+    yarp::sig::VectorOf<double> m_color;
 
     /**
     * Is the object present in the scene
@@ -101,7 +101,7 @@ public:
     *@param vInitialRoot the point to transform
     *@return The transformed vector (x y z)
     */
-    yarp::sig::Vector getSelfRelativePosition(const yarp::sig::Vector &vInitialRoot) const;
+    yarp::sig::VectorOf<double> getSelfRelativePosition(const yarp::sig::VectorOf<double> &vInitialRoot) const;
 
     std::string objectAreaAsString() const {
         return objectAreaAsString(m_objectarea);
