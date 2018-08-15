@@ -2,18 +2,20 @@
 # Authors: Ugo Pattacini, Tobias Fischer
 # CopyPolicy: Released under the terms of the GNU GPL v2.0.
 
-if(WIN32)
-    cmake_minimum_required(VERSION 3.4)
-else()
-    cmake_minimum_required(VERSION 3.0)
-endif()
+cmake_minimum_required(VERSION 3.5)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 project(icubclient
         LANGUAGES CXX
-        VERSION 0.0.0.1)
+        VERSION 3.1.0.0)
 
-find_package(YARP REQUIRED)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+option(ICUBCLIENT_COMPILE_BINDINGS "Compile optional language bindings" FALSE)
+
+find_package(YARP 3.1.0 REQUIRED)
 find_package(ICUB)
 
 # Defines the CMAKE_INSTALL_LIBDIR, CMAKE_INSTALL_BINDIR and many other useful macros
@@ -30,8 +32,6 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/conf)
 message(STATUS "YARP is version: ${YARP_VERSION}")
 message(STATUS "iCub is version: ${ICUB_VERSION}")
 
-# add_definitions(${YARP_DEFINES})
-# include(YarpInstallationHelpers)
 yarp_configure_external_installation(${PROJECT_NAME})
 
 ### Options
@@ -48,14 +48,14 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BIND
                           USE_LINK_PATH)
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
-make_directory(${LIBRARY_OUTPUT_PATH})
-mark_as_advanced(LIBRARY_OUTPUT_PATH)
-message(STATUS "Libraries go to ${LIBRARY_OUTPUT_PATH}")
-
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-make_directory(${EXECUTABLE_OUTPUT_PATH})
-mark_as_advanced(EXECUTABLE_OUTPUT_PATH)
+message(STATUS "Libraries go to ${LIBRARY_OUTPUT_PATH}")
 message(STATUS "Executables go to ${EXECUTABLE_OUTPUT_PATH}")
+make_directory(${LIBRARY_OUTPUT_PATH})
+make_directory(${EXECUTABLE_OUTPUT_PATH})
+mark_as_advanced(LIBRARY_OUTPUT_PATH)
+mark_as_advanced(EXECUTABLE_OUTPUT_PATH)
+
 
 set(IDL_GENERATED_CODE_DIR ${PROJECT_SOURCE_DIR}/src/idl_generated_code)
 mark_as_advanced(IDL_GENERATED_CODE_DIR)
@@ -86,5 +86,11 @@ foreach(conf_i ${ICUBCLIENT_CMAKE_SCRIPTS})
                    ${CMAKE_BINARY_DIR}/conf/${conf_i} COPYONLY IMMEDIATE)
     install(FILES conf/${conf_i} DESTINATION share/${PROJECT_NAME}/conf/ COMPONENT Development)
 endforeach()
+
+
+if(ICUBCLIENT_COMPILE_BINDINGS)
+  add_subdirectory(bindings)
+endif()
+
 ####
 
