@@ -39,7 +39,7 @@ void icubclient::SubSystem_Speech::TTS(const std::string &text, bool shouldWait)
     //double durationS = durationMn *60.0;
     //yarp::os::Time::delay(durationS);
     yarp::os::Bottle cmd, reply;
-    cmd.addVocab(VOCAB('s', 't', 'a', 't'));
+    cmd.addVocab(yarp::os::createVocab('s', 't', 'a', 't'));
     std::string status = "speaking";
     bool speechStarted = false;
 
@@ -69,7 +69,7 @@ void icubclient::SubSystem_Speech::SetOptions(const std::string &custom) {
 
 bool icubclient::SubSystem_Speech::isSpeaking() {
     yarp::os::Bottle cmd, reply;
-    cmd.addVocab(VOCAB('s', 't', 'a', 't'));
+    cmd.addVocab(yarp::os::createVocab('s', 't', 'a', 't'));
     portRPC.write(cmd, reply);
     return (reply.get(0).asString() != "quiet");
 }

@@ -320,7 +320,7 @@ DriveOutCZ AllostaticController::chooseDrive() {
     vector<double> min_diff; 
     vector<double> max_diff; 
 
-    for (unsigned int i =0;i<drivesList.size();i++) {
+    for (unsigned int i=0;i<drivesList.size();i++) {
         names.push_back(drivesList.get(i).asString());
         min_diff.push_back(outputm_ports[i]->read()->get(0).asDouble());
         max_diff.push_back(outputM_ports[i]->read()->get(0).asDouble());
@@ -334,10 +334,12 @@ DriveOutCZ AllostaticController::chooseDrive() {
     }
     if (! numOutCz) {
         result.name = "None";
+        result.level = UNDEFINED;
         return result;
     }
     if ( ! Normalize(outOfCzPriorities)) {
         result.name = "None";
+        result.level = UNDEFINED;
         return result;
     }
     random = Rand::scalar();
@@ -350,8 +352,10 @@ DriveOutCZ AllostaticController::chooseDrive() {
     result.name = names[idx];
     if (min_diff[idx] > 0)
         result.level = UNDER;
-    if (max_diff[idx] > 0)
+    else if (max_diff[idx] > 0)
         result.level = OVER;
+    else
+        result.level = UNDEFINED;
     return result;
 }
 

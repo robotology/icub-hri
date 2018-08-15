@@ -13,7 +13,7 @@ source_group("Header Files" FILES ${folder_header})
 source_group("Source Files" FILES ${folder_source})
 source_group("DOC Files"    FILES ${doc_files})
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${icubclient_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${icubclient_INCLUDE_DIRS})
 
 add_executable(${PROJECT_NAME} ${folder_header} ${folder_source} ${doc_files})
 target_link_libraries(${PROJECT_NAME} icubclient ${YARP_LIBRARIES})

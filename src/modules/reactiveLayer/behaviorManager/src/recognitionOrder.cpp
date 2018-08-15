@@ -10,8 +10,6 @@ void RecognitionOrder::configure() {
 
     port_to_homeo_name = "/"+behaviorName+"/toHomeo:o";
     port_to_homeo.open(port_to_homeo_name);
-
-    manual = true;
 }
 
 void RecognitionOrder::run(const Bottle &/*args*/) {

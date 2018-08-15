@@ -238,7 +238,7 @@ string Relation::complement_manner() const
     return m_complement_manner;
 }
 
-bool Relation::operator>(const Relation &b)
+bool Relation::operator>(const Relation &b) const
 {
     if (this->m_subject != b.m_subject)
     {
@@ -272,12 +272,12 @@ bool Relation::operator>(const Relation &b)
 
 }
 
-bool Relation::operator<(const Relation &b)
+bool Relation::operator<(const Relation &b) const
 {
     return (!(this->operator>(b))&&!(this->operator==(b)));
 }
 
-bool Relation::operator==(const Relation &b)
+bool Relation::operator==(const Relation &b) const
 {
     return ( 
         this->m_opcId == b.m_opcId &&

@@ -459,7 +459,7 @@ protected:
      * @param objpos Vector of object position
      * @return ObjectArea that the object belongs to
      */
-    ObjectArea getReachableArea(const yarp::sig::Vector &objpos);
+    ObjectArea getReachableArea(const yarp::sig::VectorOf<double> &objpos);
 
     bool    configure(ResourceFinder &rf);
 

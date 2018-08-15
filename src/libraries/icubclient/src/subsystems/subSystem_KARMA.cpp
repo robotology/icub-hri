@@ -5,7 +5,7 @@ using namespace yarp::dev;
 using namespace yarp::os;
 using namespace yarp::sig;
 
-void icubclient::SubSystem_KARMA::appendTarget(yarp::os::Bottle &b, const yarp::sig::Vector &t)
+void icubclient::SubSystem_KARMA::appendTarget(yarp::os::Bottle &b, const yarp::sig::VectorOf<double> &t)
 {
     yarp::os::Bottle &sub=b;
     for (size_t i=0; i<t.length(); i++)
@@ -19,7 +19,7 @@ void icubclient::SubSystem_KARMA::appendDouble(yarp::os::Bottle &b, const double
 }
 
 void icubclient::SubSystem_KARMA::selectHandCorrectTarget(yarp::os::Bottle &options, const std::string &targetName,
-                                                              yarp::sig::Vector &target, const std::string handToUse)
+                                                              yarp::sig::VectorOf<double> &target, const std::string handToUse)
 {
     std::string hand="";
     for (unsigned int i=0; i<options.size(); i++)
@@ -169,9 +169,9 @@ void icubclient::SubSystem_KARMA::Close()
     portCalib.close();
 }
 
-yarp::sig::Vector icubclient::SubSystem_KARMA::applySafetyMargins(const yarp::sig::Vector &in)
+yarp::sig::VectorOf<double> icubclient::SubSystem_KARMA::applySafetyMargins(const yarp::sig::VectorOf<double> &in)
 {
-    yarp::sig::Vector out=in;
+    yarp::sig::VectorOf<double> out=in;
     out[0]=std::min(out[0],-0.1);
 
     return out;
@@ -258,7 +258,7 @@ void icubclient::SubSystem_KARMA::chooseArmAuto()
 }
 
 bool icubclient::SubSystem_KARMA::pushAside(const std::string &objName,
-                                            const yarp::sig::Vector &objCenter, const double &targetPosY,
+                                            const yarp::sig::VectorOf<double> &objCenter, const double &targetPosY,
                                             const double &theta,
                                             const std::string &armType,
                                             const yarp::os::Bottle &options)
@@ -301,7 +301,7 @@ bool icubclient::SubSystem_KARMA::pushAside(const std::string &objName,
 }
 
 bool icubclient::SubSystem_KARMA::pushFront(const std::string &objName,
-                                            const yarp::sig::Vector &objCenter, const double &targetPosXFront,
+                                            const yarp::sig::VectorOf<double> &objCenter, const double &targetPosXFront,
                                             const std::string &armType,
                                             const yarp::os::Bottle &options)
 {
@@ -342,14 +342,14 @@ bool icubclient::SubSystem_KARMA::pushFront(const std::string &objName,
     return pushSucceed;
 }
 
-bool icubclient::SubSystem_KARMA::push(const yarp::sig::Vector &targetCenter,
+bool icubclient::SubSystem_KARMA::push(const yarp::sig::VectorOf<double> &targetCenter,
                                        const double theta, const double radius,
                                        const yarp::os::Bottle &options)
 {
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("push"));
 
-    yarp::sig::Vector target=targetCenter;
+    yarp::sig::VectorOf<double> target=targetCenter;
     yarp::os::Bottle opt=options;
 
     target=applySafetyMargins(target);
@@ -363,7 +363,7 @@ bool icubclient::SubSystem_KARMA::push(const yarp::sig::Vector &targetCenter,
 }
 
 bool icubclient::SubSystem_KARMA::pullBack(const std::string &objName,
-                                           const yarp::sig::Vector &objCenter, const double &targetPosXBack,
+                                           const yarp::sig::VectorOf<double> &objCenter, const double &targetPosXBack,
                                            const std::string &armType,
                                            const yarp::os::Bottle &options)
 {
@@ -404,14 +404,14 @@ bool icubclient::SubSystem_KARMA::pullBack(const std::string &objName,
     return drawSucceed;
 }
 
-bool icubclient::SubSystem_KARMA::draw(const yarp::sig::Vector &targetCenter,
+bool icubclient::SubSystem_KARMA::draw(const yarp::sig::VectorOf<double> &targetCenter,
                                        const double theta, const double radius,
                                        const double dist, const yarp::os::Bottle &options)
 {
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("draw"));
 
-    yarp::sig::Vector target=targetCenter;
+    yarp::sig::VectorOf<double> target=targetCenter;
     yarp::os::Bottle opt=options;
 
     target=applySafetyMargins(target);
@@ -425,7 +425,7 @@ bool icubclient::SubSystem_KARMA::draw(const yarp::sig::Vector &targetCenter,
 }
 
 bool icubclient::SubSystem_KARMA::vdraw(const std::string &objName,
-                                        const yarp::sig::Vector &targetCenter,
+                                        const yarp::sig::VectorOf<double> &targetCenter,
                                         const double theta, const double radius,
                                         const double dist,
                                         const yarp::os::Bottle &options)
@@ -433,7 +433,7 @@ bool icubclient::SubSystem_KARMA::vdraw(const std::string &objName,
     yarp::os::Bottle bCmd;
     bCmd.addVocab(yarp::os::Vocab::encode("vdraw"));
 
-    yarp::sig::Vector target=targetCenter;
+    yarp::sig::VectorOf<double> target=targetCenter;
     yarp::os::Bottle opt=options;
     selectHandCorrectTarget(opt,objName,target);
     target=applySafetyMargins(target);

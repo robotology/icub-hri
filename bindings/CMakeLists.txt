@@ -1,9 +1,4 @@
-# This is a CMake example for Python
-if(WIN32)
-    cmake_minimum_required(VERSION 3.4)
-else()
-    cmake_minimum_required(VERSION 3.0)
-endif()
+cmake_minimum_required(VERSION 3.5)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../conf)
 
@@ -12,15 +7,29 @@ include(CheckCXXCompilerFlag)
 include(GNUInstallDirs)
 include(icubclientOptions)
 
-find_package(SWIG REQUIRED 3)
+# Find YARP for bindings-only builds
+find_package(YARP COMPONENTS conf OS sig dev math gsl REQUIRED)
+foreach(_component conf OS sig dev math gsl)
+  get_property(YARP_${_component}_INCLUDE_DIRS TARGET YARP::YARP_${_component} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+  include_directories(${YARP_${_component}_INCLUDE_DIRS})
+endforeach()
+
 find_package(icubclient REQUIRED)
-find_package(YARP REQUIRED)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${icubclient_includes})
+include_directories(${CMAKE_SOURCE_DIR}/src/libraries/icubclient/include)
+include_directories(${CMAKE_SOURCE_DIR}/src/libraries/icubclientIDLClients)
+
+# for yarp.i
+include_directories(${YARP_BINDINGS})
 
 get_target_property(icubclient_includes icubclient::icubclient INTERFACE_INCLUDE_DIRECTORIES)
 set(icubclient_BASE_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
 foreach(lang "Java"
-             "Python")
+             "Python"
+             "Ruby"
+             "Lua"
+             "CSharp")
   string(TOUPPER "${lang}" LANG)
   string(REGEX REPLACE " .+" "" LANG "${LANG}")
   option(CREATE_${LANG} "Do you want to create the ${lang} interface" OFF)
@@ -31,32 +40,38 @@ foreach(lang "Java"
   endif()
 endforeach()
 
+find_package(SWIG REQUIRED 3)
 include(${SWIG_USE_FILE})
 message(STATUS "${SWIG_USE_FILE}")
-
-include_directories(SYSTEM ${YARP_INCLUDE_DIRS})
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${icubclient_includes})
 
 set_source_files_properties(icubclient.i PROPERTIES CPLUSPLUS ON)
 set_source_files_properties(icubclient.i PROPERTIES SWIG_FLAGS "-c++")
 
 if(CREATE_PYTHON)
-    set(ICUBCLIENT_USE_PYTHON_VERSION "" CACHE STRING "Specify python version to use" )
-    find_package(PythonInterp ${ICUBCLIENT_USE_PYTHON_VERSION} REQUIRED)
-    set(ICUBCLIENT_USE_PYTHON_VERSION_ARGS)
-    if(NOT ICUBCLIENT_USE_PYTHON_VERSION)
-      set (ICUBCLIENT_USE_PYTHON_VERSION ${PYTHON_VERSION_STRING})
-    endif()
-
-    find_package(PythonLibs ${ICUBCLIENT_USE_PYTHON_VERSION} EXACT)
-
     set(target_name icubclient)
-
-    include_directories(SYSTEM ${PYTHON_INCLUDE_PATH})
-
     set(CMAKE_SWIG_FLAGS "-module;${target_name};-threads")
 
-    swig_add_module(${target_name} python icubclient.i)
+    set(ICUBCLIENT_USE_PYTHON_VERSION "2" CACHE STRING "Specify python version to use")
+    set_property(CACHE ICUBCLIENT_USE_PYTHON_VERSION PROPERTY STRINGS 2 3)
+
+    if("${ICUBCLIENT_USE_PYTHON_VERSION}" STREQUAL "2")
+      find_package (Python2 COMPONENTS Interpreter Development REQUIRED)
+      SET(PYTHON_INCLUDE_DIRS "${Python2_INCLUDE_DIRS}")
+      SET(PYTHON_LIBRARIES "${Python2_LIBRARIES}")
+      SET(PYTHON_EXECUTABLE "${Python2_EXECUTABLE}")
+    else("${ICUBCLIENT_USE_PYTHON_VERSION}" STREQUAL "3")
+      find_package (Python3 COMPONENTS Interpreter Development REQUIRED)
+      SET(PYTHON_INCLUDE_DIRS "${Python3_INCLUDE_DIRS}")
+      SET(PYTHON_LIBRARIES "${Python3_LIBRARIES}")
+      SET(PYTHON_EXECUTABLE "${Python3_EXECUTABLE}")
+    endif()
+
+    include_directories(SYSTEM ${PYTHON_INCLUDE_DIRS})
+
+    swig_add_library(${target_name}
+                     LANGUAGE python
+                     SOURCES icubclient.i)
+    target_include_directories(_${target_name} SYSTEM PRIVATE ${PYTHON_INCLUDE_DIRS})
     target_link_libraries(_${target_name} ${PYTHON_LIBRARIES} ${YARP_LIBRARIES} ${icubclient_LIBRARIES})
     set_target_properties(_${target_name} PROPERTIES OUTPUT_NAME "_icubclient")
 
@@ -91,7 +106,24 @@ if(CREATE_PYTHON)
     install(TARGETS _${target_name} DESTINATION ${PYTHON_INSTDIR})
 endif(CREATE_PYTHON)
 
+
+if(CREATE_RUBY)
+    find_package(Ruby REQUIRED)
+    set(CMAKE_SWIG_FLAGS "-Wall;-module;icubclient")
+    include_directories(${RUBY_INCLUDE_DIRS})
+    swig_add_library(icubclient_ruby
+                     LANGUAGE ruby
+                     SOURCES icubclient.i)
+    swig_link_libraries(icubclient_ruby ${RUBY_LIBRARY})
+    target_include_directories(${SWIG_MODULE_icubclient_ruby_REAL_NAME} SYSTEM PRIVATE ${RUBY_INCLUDE_DIRS})
+    set_target_properties(${SWIG_MODULE_icubclient_ruby_REAL_NAME} PROPERTIES OUTPUT_NAME "icubclient"
+                                                                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/ruby")
+endif(CREATE_RUBY)
+
+
 if(CREATE_JAVA)
+  set(target_name jicubclient)
+  find_package(Java REQUIRED)
   find_package(JNI REQUIRED)
   find_program(JAVA_JAVAC_EXECUTABLE NAMES javac)
 
@@ -99,7 +131,7 @@ if(CREATE_JAVA)
   set(JAVA_TARGET_VERSION 1.6 CACHE STRING "Java target version")
   set(CMAKE_SWIG_OUTDIR_SAVE ${CMAKE_SWIG_OUTDIR})
   set(CMAKE_SWIG_OUTDIR "${icubclient_BASE_DIR}/generated_src/java")
-  set(CMAKE_SWIG_FLAGS "-package;icubclient;-Wall;-module;icubclient;${SWIG_COMMON_FLAGS}")
+  set(CMAKE_SWIG_FLAGS "-package;yarp;-Wall;-module;icubclient;${SWIG_COMMON_FLAGS}")
   set(TARGET_DIR generated_src/java)
   file(MAKE_DIRECTORY "${icubclient_BASE_DIR}/${TARGET_DIR}")
   if(NOT BINDINGS_SRC_DIR)
@@ -107,8 +139,9 @@ if(CREATE_JAVA)
   endif()
   set(JAVA_SRCS Loadicubclient.java)
   include_directories(SYSTEM ${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
-  set(target_name jicubclient)
-  swig_add_module(${target_name} java icubclient.i)
+  swig_add_library(${target_name}
+                   LANGUAGE java
+                   SOURCES icubclient.i)
   target_link_libraries(${target_name} ${JAVA_LIBRARIES} ${YARP_LIBRARIES} ${icubclient_LIBRARIES})
   if(PREPARE_CLASS_FILES)
     set(CLASS_FILES)
@@ -144,3 +177,27 @@ if(CREATE_JAVA)
   endif(APPLE)
   set(CMAKE_SWIG_OUTDIR ${CMAKE_SWIG_OUTDIR_SAVE})
 endif(CREATE_JAVA)
+
+
+if(CREATE_CSHARP)
+  SET(CMAKE_SWIG_FLAGS "-Wall;-module;icubclient")
+  swig_add_library(icubclient_csharp
+                   LANGUAGE csharp
+                   SOURCES icubclient.i)
+
+  swig_link_libraries(icubclient_csharp ${SWIG_YARP_LIBRARIES})
+  set_target_properties(${SWIG_MODULE_icubclient_csharp_REAL_NAME} PROPERTIES OUTPUT_NAME "icubclient" LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/csharp")
+endif(CREATE_CSHARP)
+
+
+IF (CREATE_LUA)
+  SET(CMAKE_SWIG_FLAGS "-Wall;-module;icubclient")
+  find_package(Lua REQUIRED)
+  include_directories(SYSTEM ${LUA_INCLUDE_DIR})
+  swig_add_library(icubclient_lua
+                   LANGUAGE lua
+                   SOURCES icubclient.i)
+  swig_link_libraries(icubclient_lua ${LUA_LIBRARY})
+  set_target_properties(${SWIG_MODULE_icubclient_lua_REAL_NAME} PROPERTIES OUTPUT_NAME "icubclient" LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/lua")
+ENDIF (CREATE_LUA)
+

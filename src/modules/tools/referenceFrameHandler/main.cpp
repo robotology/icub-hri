@@ -66,6 +66,10 @@ class FrameHandlerModule: public RFModule
 
 public:
     /************************************************************************/
+    FrameHandlerModule() : isVerbose(false) {
+        ;
+    }
+
     bool configure(ResourceFinder &rf)
     {
         setName( rf.check("name",Value("referenceFrameHandler")).asString().c_str() );
@@ -371,7 +375,7 @@ public:
         switch (cmd.get(0).asVocab())
         {
             //Write matrices to opc - not supported!
-            case VOCAB4('o','p','c','w'):
+            case yarp::os::createVocab('o','p','c','w'):
             {
                 SaveMatrices2OPC();
                 reply.addString("ack");
@@ -381,7 +385,7 @@ public:
             }
 
             //read matrices from opc - not supported!
-            case VOCAB4('o','p','c','r'):
+            case yarp::os::createVocab('o','p','c','r'):
             {
                 LoadMatricesFromOPC();
                 reply.addString("ack");
@@ -391,7 +395,7 @@ public:
             }
 
             //save matrices to file
-            case VOCAB4('s','a','v','e'):
+            case yarp::os::createVocab('s','a','v','e'):
             {
                 SaveMatrices(matricesFilePath.c_str());
                 reply.addString("ack");
@@ -401,7 +405,7 @@ public:
             }
                     
             //Clear the list of points used for calibration
-            case VOCAB4('c','l','e','a'):
+            case yarp::os::createVocab('c','l','e','a'):
             {
                 //Format is [clear] <frameName>
                 string frameName = cmd.get(1).asString().c_str();
@@ -430,7 +434,7 @@ public:
             }        
 
             //Add a point to the list of points used for calibration
-            case VOCAB3('a','d','d'):
+            case yarp::os::createVocab('a','d','d'):
             {
                 //Format is [add] <frameName> (x y z) (x' y' z')
                 string frameName = cmd.get(1).asString().c_str();
@@ -462,7 +466,7 @@ public:
             }
 
             //Calibrate a specific frame
-            case VOCAB3('c','a','l'):
+            case yarp::os::createVocab('c','a','l'):
             {
                 string frameName = cmd.get(1).asString().c_str();
 
@@ -498,7 +502,7 @@ public:
             }
 
             //Calibrate a specific frame with scaling option
-            case VOCAB4('s','c','a','l'):
+            case yarp::os::createVocab('s','c','a','l'):
             {
                 string frameName = cmd.get(1).asString().c_str();
 
@@ -539,7 +543,7 @@ public:
             }
 
             //Calibrate a specific frame with isotropic scaling option
-            case VOCAB4('i','c','a','l'):
+            case yarp::os::createVocab('i','c','a','l'):
             {
                 string frameName = cmd.get(1).asString().c_str();
 
@@ -580,7 +584,7 @@ public:
                 break;
             }
             //Transform one point from a specific reference frame to the pivot frame (icub)
-            case VOCAB4('t','r','a','n'):
+            case yarp::os::createVocab('t','r','a','n'):
             {
                 string frameName1 = cmd.get(1).asString().c_str();
                 string frameName2 = cmd.get(2).asString().c_str();
@@ -628,7 +632,7 @@ public:
                 break;
             }
             //Set the transformation matrix from one frame to another, scaling is identity
-            case VOCAB4('s','m','a','t'):
+            case yarp::os::createVocab('s','m','a','t'):
             {                
                 string frameName1 = cmd.get(1).asString().c_str();
                 string frameName2 = cmd.get(2).asString().c_str();
@@ -663,7 +667,7 @@ public:
             }
 
             //Return the transformation matrix from one frame to another, incorporating scaling information
-            case VOCAB3('m','a','t'):
+            case yarp::os::createVocab('m','a','t'):
             {
                 string frameName1 = cmd.get(1).asString().c_str();
                 string frameName2 = cmd.get(2).asString().c_str();

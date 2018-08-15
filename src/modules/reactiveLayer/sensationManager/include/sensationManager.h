@@ -27,9 +27,14 @@ private:
     string moduleName;
     Port rpc_in_port;
 
+protected:
     double period;
 
 public:
+    SensationManager() : period(0.1) {
+        ;
+    }
+
     bool configure(yarp::os::ResourceFinder &rf);
 
     bool interruptModule()

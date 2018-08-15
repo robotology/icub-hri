@@ -48,7 +48,7 @@ bool OPCClient::write(Bottle &cmd, Bottle &reply, bool Verbose)
         if (Verbose)
             yDebug()<<"Receiving from OPC: "<<reply.toString().c_str();
 
-        if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+        if (reply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
             return false;
         else
             return true;
@@ -100,7 +100,7 @@ void OPCClient::addEntity(Entity* e)
     query = e->asBottle();
     write(cmd,reply,isVerbose);
 
-    if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+    if (reply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
     {
         yError() << "Impossible to communicate correctly with OPC";
         return;
@@ -154,7 +154,7 @@ Entity* OPCClient::getEntity(const string &name, bool forceUpdate)
 
     write(cmd,reply,isVerbose);
 
-    if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+    if (reply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
     {
         yError() << "Unable to talk correctly to OPC in getEntity with name";
         yError() << "Command was:" << cmd.toString();
@@ -198,7 +198,7 @@ Entity *OPCClient::getEntity(int id, bool forceUpdate)
     sub.addInt(id);
     write(cmd,reply,isVerbose);
 
-    if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+    if (reply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
     {
         yError() << "Unable to talk correctly to OPC in getEntity with ID";
         yError() << "Command was:" << cmd.toString();
@@ -255,7 +255,7 @@ bool OPCClient::removeEntity(const string &name)
 
         if (write(cmd,reply,isVerbose))
         {
-            if (reply.get(0).asVocab()==VOCAB3('a','c','k')) {
+            if (reply.get(0).asVocab()==yarp::os::createVocab('a','c','k')) {
                 entitiesByID.erase(e->opc_id());
                 return true;
             }
@@ -282,7 +282,7 @@ bool OPCClient::removeEntity(int id)
 
         if (write(cmd,reply,isVerbose))
         {
-            if (reply.get(0).asVocab()==VOCAB3('a','c','k'))
+            if (reply.get(0).asVocab()==yarp::os::createVocab('a','c','k'))
             {
                 entitiesByID.erase(e->opc_id());
                 return true;
@@ -370,7 +370,7 @@ int OPCClient::getRelationID(
 
     write(cmd,reply,isVerbose);
 
-    if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+    if (reply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
     {
         yError()<<"Unable to talk correctly to OPC in getRelationID";
         yError() << "Command was:" << cmd.toString();
@@ -435,7 +435,7 @@ bool OPCClient::addRelation(
 
     write(cmd,reply,isVerbose);
 
-    if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+    if (reply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
     {
         yError() << "Unable to talk correctly to OPC in addRelation";
         yError() << "Command was:" << cmd.toString();
@@ -486,7 +486,7 @@ bool OPCClient::removeRelation(
         cmd.addList().addList() = sub;
 
         write(cmd,reply,isVerbose);
-        if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+        if (reply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
         {
             yError() << "Unable to talk correctly to OPC in removeRelation. Item not deleted.";
             yError() << "Command was:" << cmd.toString();
@@ -557,7 +557,7 @@ bool OPCClient::setLifeTime(int opcID, double lifeTime)
     }
 
     write(cmd,reply,isVerbose);
-    if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+    if (reply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
     {
         yError() << "Unable to talk correctly to OPC in setLifeTime";
         yError() << "Command was:" << cmd.toString();
@@ -582,7 +582,7 @@ list<Relation> OPCClient::getRelations()
     cond.addList() = sub;
     write(cmd,reply,isVerbose);
 
-    if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+    if (reply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
     {
         yError() << "Unable to talk to OPC.";
         return relations;
@@ -601,7 +601,7 @@ list<Relation> OPCClient::getRelations()
         sub.addInt(currentID);
         cmd.addList().addList() = sub;
         write(cmd,getReply,isVerbose);
-        if (getReply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+        if (getReply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
         {
             yError() << "Unable to talk to OPC.";
             return relations;
@@ -676,7 +676,7 @@ std::list<Relation>  OPCClient::getRelationsMatching(std::string subject,std::st
     }
     write(cmd,reply,isVerbose);
 
-    if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+    if (reply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
     {
         yError() << "Unable to talk to OPC.";
         return relations;
@@ -695,7 +695,7 @@ std::list<Relation>  OPCClient::getRelationsMatching(std::string subject,std::st
         sub.addInt(currentID);
         cmd.addList().addList() = sub;
         write(cmd,getReply,isVerbose);
-        if (getReply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+        if (getReply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
         {
             yError() << "Unable to talk to OPC.";
             return relations;
@@ -774,7 +774,7 @@ void OPCClient::checkout(bool updateCache)
     cond.addList() = sub;
 
     write(cmd,reply,isVerbose);
-    if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+    if (reply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
     {
         yError() << "Unable to talk to OPC.";
         return;
@@ -813,7 +813,7 @@ void OPCClient::update(Entity *e)
     write(cmd,reply,isVerbose);
 //    yDebug() << "OPCClient response: " << reply.toString();
 
-    if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+    if (reply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
     {
         yError() << "OPC Client: error while updating " << e->opc_id();
         return;
@@ -855,7 +855,7 @@ void OPCClient::commit(Entity *e)
         query.addList()=*props.get(i).asList();
 
     write(cmd,reply,isVerbose);
-    if (reply.get(0).asVocab()==VOCAB4('n','a','c','k'))
+    if (reply.get(0).asVocab()==yarp::os::createVocab('n','a','c','k'))
     {
         yError() << "OPC Client: error while commiting " << e->opc_id();
         return;
@@ -872,7 +872,7 @@ std::list<Entity*> OPCClient::Entities(const yarp::os::Bottle &condition)
 
     write(cmd,reply,isVerbose);
 
-    if (reply.get(0).asVocab() == VOCAB4('n','a','c','k'))
+    if (reply.get(0).asVocab() == yarp::os::createVocab('n','a','c','k'))
     {
         yError() << "Unable to talk to OPC.";
         return matchingEntities;

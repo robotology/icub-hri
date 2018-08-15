@@ -174,7 +174,9 @@ bool GuiUpdater::updateModule()
                 } else {
                     if (o->name() != "icub") {
                         if (o->isType(ICUBCLIENT_OPC_ENTITY_AGENT)) {
-                            addAgent(dynamic_cast<Agent*>(o));
+                            Agent* a = dynamic_cast<Agent*>(o);
+                            if (a)
+                                addAgent(a);
                         } else {
                             addObject(o);
                         }

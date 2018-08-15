@@ -185,7 +185,7 @@ namespace icubclient{
         * @return true in case of success release, false otherwise
         *         (Entity non existing, impossible to reach, etc.).
         */
-        bool release(const yarp::sig::Vector &target, const yarp::os::Bottle &options = yarp::os::Bottle());
+        bool release(const yarp::sig::VectorOf<double> &target, const yarp::os::Bottle &options = yarp::os::Bottle());
 
         /**
         * Point at a specified location from the iCub.
@@ -198,7 +198,15 @@ namespace icubclient{
         * @return true in case of success release, false otherwise
         *         (Entity non existing, impossible to reach, etc.).
         */
-        bool point(const yarp::sig::Vector &target, const yarp::os::Bottle &options = yarp::os::Bottle());
+        bool point(const yarp::sig::VectorOf<double> &target, const yarp::os::Bottle &options = yarp::os::Bottle());
+
+        bool point(const double x, const double y, const double z, const yarp::os::Bottle &options = yarp::os::Bottle()) {
+            yarp::sig::VectorOf<double> target(3);
+            target[0] = x;
+            target[1] = y;
+            target[2] = z;
+            return point(target, options);
+        }
 
         /**
         * Point at a specified location.
@@ -310,7 +318,7 @@ namespace icubclient{
         * @param options: options to be passed to Karma
         * @return true in case of success release, false otherwise
         */
-        bool pushKarma(const yarp::sig::Vector &targetCenter, const double &theta, const double &radius,
+        bool pushKarma(const yarp::sig::VectorOf<double> &targetCenter, const double &theta, const double &radius,
             const yarp::os::Bottle &options = yarp::os::Bottle());
 
         /**
@@ -323,7 +331,7 @@ namespace icubclient{
         * @param options: options to be passed to Karma
         * @return true in case of success release, false otherwise
         */
-        bool drawKarma(const yarp::sig::Vector &targetCenter, const double &theta,
+        bool drawKarma(const yarp::sig::VectorOf<double> &targetCenter, const double &theta,
             const double &radius, const double &dist,
             const yarp::os::Bottle &options = yarp::os::Bottle());
 
@@ -343,7 +351,7 @@ namespace icubclient{
         * @param options contains options to be passed on the gaze
         *                controller.
         */
-        bool look(const yarp::sig::Vector &target, const yarp::os::Bottle &options = yarp::os::Bottle());
+        bool look(const yarp::sig::VectorOf<double> &target, const yarp::os::Bottle &options = yarp::os::Bottle());
 
         /**
         * Looks at the agent if present in the scene.
@@ -368,7 +376,7 @@ namespace icubclient{
         * @param sBodypartName is the name of the bodypart (kinect skeleton node) to be looked at
         * @return vLoc, the vector of the bodypart localisation
         */
-        yarp::sig::Vector getPartnerBodypartLoc(std::string sBodypartName);
+        yarp::sig::VectorOf<double> getPartnerBodypartLoc(std::string sBodypartName);
 
         /**
         * %Babbling using a single joint.
@@ -439,7 +447,7 @@ namespace icubclient{
         * This can be adjusted using the reachingRangeMin and reachingRangeMax
         * parameters in the configuration file (client.ini)
         */
-        bool isTargetInRange(const yarp::sig::Vector &target) const;
+        bool isTargetInRange(const yarp::sig::VectorOf<double> &target) const;
 
         /**
         * Properly closes all ports which were opened. This is being called automatically

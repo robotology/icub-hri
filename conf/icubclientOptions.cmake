@@ -21,17 +21,6 @@ elseif(CMAKE_COMPILER_IS_GNUCXX OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" O
       set(WARNINGS_STRING "${WARNINGS_STRING} ${WARNING}")
    endforeach(WARNING)
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNINGS_STRING}")
-
-   # require C++11
-   include(CheckCXXCompilerFlag)
-   CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
-   if(COMPILER_SUPPORTS_CXX11)
-       message(STATUS "Enabled C++11 support for compiler ${CMAKE_CXX_COMPILER}.")
-       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-   else()
-       message(SEND_ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler, and welcome to the modern world.")
-   endif()
-
 endif()
 
 if(NOT CMAKE_CONFIGURATION_TYPES)

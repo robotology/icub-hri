@@ -20,7 +20,7 @@ using namespace icubclient;
 /**
  * \ingroup allostaticController
  */
-enum OutCZ {UNDER, OVER};
+enum OutCZ {UNDER, OVER, UNDEFINED};
 
 /**
  * \ingroup allostaticController
@@ -117,6 +117,10 @@ private:
      */
     bool openPorts(string driveName);
 public:
+    AllostaticController() : period(0.5) {
+        ;
+    }
+
     bool configure(yarp::os::ResourceFinder &rf);
     bool interruptModule();
 

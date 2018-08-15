@@ -19,7 +19,7 @@ public:
   std::string name;
   bool _return;
   void init(const std::string& name);
-  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
   virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
@@ -28,7 +28,7 @@ public:
   std::string name;
   bool _return;
   void init(const std::string& name);
-  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
   virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
@@ -36,7 +36,7 @@ class iol2opc_IDL_remove_all : public yarp::os::Portable {
 public:
   bool _return;
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
   virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
@@ -46,7 +46,7 @@ public:
   std::string new_name;
   bool _return;
   void init(const std::string& old_name, const std::string& new_name);
-  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
   virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
@@ -55,7 +55,7 @@ public:
   std::string sw;
   bool _return;
   void init(const std::string& sw);
-  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
   virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
@@ -63,25 +63,25 @@ class iol2opc_IDL_get_object_persistence : public yarp::os::Portable {
 public:
   std::string _return;
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
   virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
 class iol2opc_IDL_pause : public yarp::os::Portable {
 public:
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
   virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
 class iol2opc_IDL_resume : public yarp::os::Portable {
 public:
   void init();
-  virtual bool write(yarp::os::ConnectionWriter& connection) override;
+  virtual bool write(yarp::os::ConnectionWriter& connection) const override;
   virtual bool read(yarp::os::ConnectionReader& connection) override;
 };
 
-bool iol2opc_IDL_train_object::write(yarp::os::ConnectionWriter& connection) {
+bool iol2opc_IDL_train_object::write(yarp::os::ConnectionWriter& connection) const {
   yarp::os::idl::WireWriter writer(connection);
   if (!writer.writeListHeader(3)) return false;
   if (!writer.writeTag("train_object",1,2)) return false;
@@ -104,7 +104,7 @@ void iol2opc_IDL_train_object::init(const std::string& name) {
   this->name = name;
 }
 
-bool iol2opc_IDL_remove_object::write(yarp::os::ConnectionWriter& connection) {
+bool iol2opc_IDL_remove_object::write(yarp::os::ConnectionWriter& connection) const {
   yarp::os::idl::WireWriter writer(connection);
   if (!writer.writeListHeader(3)) return false;
   if (!writer.writeTag("remove_object",1,2)) return false;
@@ -127,7 +127,7 @@ void iol2opc_IDL_remove_object::init(const std::string& name) {
   this->name = name;
 }
 
-bool iol2opc_IDL_remove_all::write(yarp::os::ConnectionWriter& connection) {
+bool iol2opc_IDL_remove_all::write(yarp::os::ConnectionWriter& connection) const {
   yarp::os::idl::WireWriter writer(connection);
   if (!writer.writeListHeader(2)) return false;
   if (!writer.writeTag("remove_all",1,2)) return false;
@@ -148,7 +148,7 @@ void iol2opc_IDL_remove_all::init() {
   _return = false;
 }
 
-bool iol2opc_IDL_change_name::write(yarp::os::ConnectionWriter& connection) {
+bool iol2opc_IDL_change_name::write(yarp::os::ConnectionWriter& connection) const {
   yarp::os::idl::WireWriter writer(connection);
   if (!writer.writeListHeader(4)) return false;
   if (!writer.writeTag("change_name",1,2)) return false;
@@ -173,7 +173,7 @@ void iol2opc_IDL_change_name::init(const std::string& old_name, const std::strin
   this->new_name = new_name;
 }
 
-bool iol2opc_IDL_set_object_persistence::write(yarp::os::ConnectionWriter& connection) {
+bool iol2opc_IDL_set_object_persistence::write(yarp::os::ConnectionWriter& connection) const {
   yarp::os::idl::WireWriter writer(connection);
   if (!writer.writeListHeader(4)) return false;
   if (!writer.writeTag("set_object_persistence",1,3)) return false;
@@ -196,7 +196,7 @@ void iol2opc_IDL_set_object_persistence::init(const std::string& sw) {
   this->sw = sw;
 }
 
-bool iol2opc_IDL_get_object_persistence::write(yarp::os::ConnectionWriter& connection) {
+bool iol2opc_IDL_get_object_persistence::write(yarp::os::ConnectionWriter& connection) const {
   yarp::os::idl::WireWriter writer(connection);
   if (!writer.writeListHeader(3)) return false;
   if (!writer.writeTag("get_object_persistence",1,3)) return false;
@@ -217,7 +217,7 @@ void iol2opc_IDL_get_object_persistence::init() {
   _return = "";
 }
 
-bool iol2opc_IDL_pause::write(yarp::os::ConnectionWriter& connection) {
+bool iol2opc_IDL_pause::write(yarp::os::ConnectionWriter& connection) const {
   yarp::os::idl::WireWriter writer(connection);
   if (!writer.writeListHeader(1)) return false;
   if (!writer.writeTag("pause",1,1)) return false;
@@ -233,7 +233,7 @@ bool iol2opc_IDL_pause::read(yarp::os::ConnectionReader& connection) {
 void iol2opc_IDL_pause::init() {
 }
 
-bool iol2opc_IDL_resume::write(yarp::os::ConnectionWriter& connection) {
+bool iol2opc_IDL_resume::write(yarp::os::ConnectionWriter& connection) const {
   yarp::os::idl::WireWriter writer(connection);
   if (!writer.writeListHeader(1)) return false;
   if (!writer.writeTag("resume",1,1)) return false;

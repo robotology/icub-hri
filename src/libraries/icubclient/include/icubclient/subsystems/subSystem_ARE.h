@@ -55,7 +55,7 @@ namespace icubclient {
          * @param b Bottle to append vector to
          * @param t Vector to be appended
          */
-        void appendCartesianTarget(yarp::os::Bottle& b, const yarp::sig::Vector &t);
+        void appendCartesianTarget(yarp::os::Bottle& b, const yarp::sig::VectorOf<double> &t);
 
         /**
          * @brief Sends a command to ARE's cmdPort
@@ -86,7 +86,7 @@ namespace icubclient {
         bool getTableHeight(double &height);
 
         /********************************************************************************/
-        void selectHandCorrectTarget(yarp::os::Bottle& options, yarp::sig::Vector& target,
+        void selectHandCorrectTarget(yarp::os::Bottle& options, yarp::sig::VectorOf<double>& target,
                                      const std::string& objName, const std::string handToUse="");
 
 
@@ -95,7 +95,7 @@ namespace icubclient {
          * @param in: "Unsafe" vector
          * @return "safe" vector
          */
-        yarp::sig::Vector applySafetyMargins(const yarp::sig::Vector& in);
+        yarp::sig::VectorOf<double> applySafetyMargins(const yarp::sig::VectorOf<double>& in);
 
         /**
         * Put the specified part ih home position.
@@ -143,7 +143,7 @@ namespace icubclient {
         * @return true in case of successful motor command, false
         *         otherwise.
         */
-        bool point(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options = yarp::os::Bottle());
+        bool point(const yarp::sig::VectorOf<double> &targetUnsafe, const yarp::os::Bottle &options = yarp::os::Bottle());
 
         /**
         * If an object is held, bring it over the table and drop it on a
@@ -163,7 +163,7 @@ namespace icubclient {
         * @return true in case of successful motor command, false
         *         otherwise.
         */
-        bool dropOn(const yarp::sig::Vector &targetUnsafe, const yarp::os::Bottle &options = yarp::os::Bottle());
+        bool dropOn(const yarp::sig::VectorOf<double> &targetUnsafe, const yarp::os::Bottle &options = yarp::os::Bottle());
 
         /**
         * Bring the hand in the visual field and move it with the
@@ -211,7 +211,7 @@ namespace icubclient {
         * @return true in case of successful motor command, false
         *         otherwise.
         */
-        bool look(const yarp::sig::Vector &target, const yarp::os::Bottle &options = yarp::os::Bottle());
+        bool look(const yarp::sig::VectorOf<double> &target, const yarp::os::Bottle &options = yarp::os::Bottle());
 
         /**
         * Track the specified [target].
@@ -220,7 +220,7 @@ namespace icubclient {
         * @return true in case of successful motor command, false
         *         otherwise.
         */
-        bool track(const yarp::sig::Vector &target, const yarp::os::Bottle &options = yarp::os::Bottle());
+        bool track(const yarp::sig::VectorOf<double> &target, const yarp::os::Bottle &options = yarp::os::Bottle());
 
         /**
         * Enable/disable impedance control.

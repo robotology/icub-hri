@@ -32,7 +32,7 @@ namespace icubclient{
 */
 struct Body
 {
-    std::map<std::string, yarp::sig::Vector> m_parts;
+    std::map<std::string, yarp::sig::VectorOf<double>> m_parts;
 
     Body()
     {
@@ -72,7 +72,7 @@ struct Body
 
     bool fromBottle(const yarp::os::Bottle &b)
     {
-        for(std::map<std::string,yarp::sig::Vector>::iterator part = m_parts.begin(); part != m_parts.end(); part++)
+        for(std::map<std::string,yarp::sig::VectorOf<double>>::iterator part = m_parts.begin(); part != m_parts.end(); part++)
         {
             yarp::os::Bottle* position = b.find(part->first.c_str()).asList();
             part->second[0] = position->get(0).asDouble();
@@ -118,24 +118,24 @@ public:
     * Add the belief of a relation to the agent.
     * @param r a relation that the agent will believe to be true
     */
-    bool                addBelief(Relation r);
+    bool                addBelief(const Relation &r);
 
     /**
     * Remove the belief of a relation from the agent.
     * @param r a relation that the agent will believe not to be true
     */
-    bool                removeBelief(Relation r);
+    bool                removeBelief(const Relation &r);
     
     /**
     * Check if some relation is believed by an agent.
     * @param r a relation to check
     */
-    bool                checkBelief(const Relation &r);
+    bool                checkBelief(const Relation &r) const;
 
     /**
     * Get a read-only copy of the agent believes.
     */
-    const std::list<Relation> &beliefs();
+    const std::list<Relation> &beliefs() const;
 };
 
 } //namespaces

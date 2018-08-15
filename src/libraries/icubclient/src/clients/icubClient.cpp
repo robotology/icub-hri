@@ -271,7 +271,7 @@ std::string ICubClient::getPartnerName(bool verbose)
     return partnerName;
 }
 
-yarp::sig::Vector ICubClient::getPartnerBodypartLoc(std::string sBodypartName){
+yarp::sig::VectorOf<double> ICubClient::getPartnerBodypartLoc(std::string sBodypartName){
 
     Vector vLoc;
 
@@ -405,11 +405,14 @@ list<Object*> ICubClient::getObjectsInSight()
     {
         if ((*it)->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
         {
-            Vector itemPosition = this->icubAgent->getSelfRelativePosition((dynamic_cast<Object*>(*it))->m_ego_position);
+            Object* o = dynamic_cast<Object*>(*it);
+            if(o) {
+                Vector itemPosition = this->icubAgent->getSelfRelativePosition(o->m_ego_position);
 
-            //For now we just test if the object is in front of the robot
-            if (itemPosition[0] < 0)
-                inSight.push_back(dynamic_cast<Object*>(*it));
+                //For now we just test if the object is in front of the robot
+                if (itemPosition[0] < 0)
+                    inSight.push_back(dynamic_cast<Object*>(*it));
+            }
         }
     }
     return inSight;
@@ -427,10 +430,10 @@ list<Object*> ICubClient::getObjectsInRange()
         {
             Object* o = dynamic_cast<Object*>(*it);
             if(o && o->m_present == 1.0) {
-                Vector itemPosition = this->icubAgent->getSelfRelativePosition((dynamic_cast<Object*>(*it))->m_ego_position);
+                Vector itemPosition = this->icubAgent->getSelfRelativePosition(o->m_ego_position);
     
                 if (isTargetInRange(itemPosition))
-                    inRange.push_back(dynamic_cast<Object*>(*it));
+                    inRange.push_back(o);
             }
         }
     }

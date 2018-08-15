@@ -223,7 +223,8 @@ bool PasarModule::updateModule()
             if (entity->isType(ICUBCLIENT_OPC_ENTITY_AGENT) || entity->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
             {
                 Object * ob = dynamic_cast<Object*>(entity.get());
-                OPCEntities[entity->opc_id()].o = *ob;
+                if(ob)
+                    OPCEntities[entity->opc_id()].o = *ob;
             }
         }
     }
@@ -605,9 +606,11 @@ void PasarModule::initializeMapTiming()
             if (entity->isType(ICUBCLIENT_OPC_ENTITY_AGENT) || entity->isType(ICUBCLIENT_OPC_ENTITY_OBJECT))
             {
                 Object * ob = dynamic_cast<Object*>(entity.get());
-                OPCEntities[entity->opc_id()].o = *ob;
-                OPCEntities[entity->opc_id()].lastTimeSeen = (ob->m_present == 1.0) ? now : now - 10;
-                OPCEntities[entity->opc_id()].present = (ob->m_present == 1.0);
+                if(ob) {
+                    OPCEntities[entity->opc_id()].o = *ob;
+                    OPCEntities[entity->opc_id()].lastTimeSeen = (ob->m_present == 1.0) ? now : now - 10;
+                    OPCEntities[entity->opc_id()].present = (ob->m_present == 1.0);
+                }
             }
         }
     }

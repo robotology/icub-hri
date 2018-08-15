@@ -144,7 +144,7 @@ bool ICubClient::pushKarmaFront(const std::string &objName, const double &target
 }
 
 // Pure push in KARMA
-bool ICubClient::pushKarma(const yarp::sig::Vector &targetCenter, const double &theta, const double &radius,
+bool ICubClient::pushKarma(const yarp::sig::VectorOf<double> &targetCenter, const double &theta, const double &radius,
     const yarp::os::Bottle &options)
 {
     SubSystem_KARMA *karma = getKARMA();
@@ -196,7 +196,7 @@ bool ICubClient::pullKarmaBack(const std::string &objName, const double &targetP
 }
 
 // Pure pull (draw) in KARMA
-bool ICubClient::drawKarma(const yarp::sig::Vector &targetCenter, const double &theta,
+bool ICubClient::drawKarma(const yarp::sig::VectorOf<double> &targetCenter, const double &theta,
     const double &radius, const double &dist,
     const yarp::os::Bottle &options)
 {

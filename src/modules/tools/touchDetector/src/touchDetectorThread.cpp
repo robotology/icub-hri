@@ -15,6 +15,7 @@
  * Public License for more details
 */
 
+#include <cstring>
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -34,7 +35,7 @@ const char* TouchDetectorThread::bodyParts[7] = {"torso", "left_arm", "right_arm
 const int TouchDetectorThread::nbTaxels[7] = {4 * 192, 4 * 192, 4 * 192, 2 * 192, 2 * 192, 192, 192};
 
 TouchDetectorThread::TouchDetectorThread(BufferedPort<Bottle> *torsoPort, BufferedPort<Bottle> *leftArmPort, BufferedPort<Bottle> *rightArmPort, BufferedPort<Bottle> *leftForearmPort, BufferedPort<Bottle> *rightForearmPort, BufferedPort<Bottle> *leftHandPort, BufferedPort<Bottle> *rightHandPort, BufferedPort<Bottle> *touchPort, BufferedPort<Bottle> *touchPortCleaned, int period, string clustersConfFilepath, double threshold, int taxelThreshold)
-    : RateThread(period), threshold(threshold), taxelThreshold(taxelThreshold), clustersConfFilepath(clustersConfFilepath), torsoPort(torsoPort), leftArmPort(leftArmPort), rightArmPort(rightArmPort), leftForearmPort(leftForearmPort), rightForearmPort(rightForearmPort), leftHandPort(leftHandPort), rightHandPort(rightHandPort), touchPort(touchPort), touchPortCleaned(touchPortCleaned)
+    : RateThread(period), nbClusters(0), threshold(threshold), taxelThreshold(taxelThreshold), clustersConfFilepath(clustersConfFilepath), torsoPort(torsoPort), leftArmPort(leftArmPort), rightArmPort(rightArmPort), leftForearmPort(leftForearmPort), rightForearmPort(rightForearmPort), leftHandPort(leftHandPort), rightHandPort(rightHandPort), touchPort(touchPort), touchPortCleaned(touchPortCleaned)
 {
     for (int i = 0; i < nbBodyParts; ++i)
     {
@@ -211,7 +212,10 @@ const char* ParsingException::what() const throw()
 {
     if (line != -1)
     {
-        return ("Error parsing line " + std::to_string(line)).c_str();
+        std::string return_msg = "Error parsing line " + std::to_string(line);
+        char* return_msg_char = new char[return_msg.size() + 1];
+        strcpy(return_msg_char, return_msg.c_str());
+        return return_msg_char;
     }
     else
     {

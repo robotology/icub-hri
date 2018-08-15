@@ -50,7 +50,7 @@ class Recorder : public RFModule
 
 public:
     /*******************************************************/
-    Recorder() : icubclient("actionRecogDataDumper", "actionRecogDataDumper") { }
+    Recorder() : icubclient("actionRecogDataDumper", "actionRecogDataDumper"), period(0.05), gate(0), logcounter(0) { }
 
     /*******************************************************/
     bool configure(ResourceFinder &rf)
@@ -70,8 +70,6 @@ public:
 
         actionTag="none";
         objectTag="none";
-        gate=0;
-        logcounter=0;
 
         return true;
     }

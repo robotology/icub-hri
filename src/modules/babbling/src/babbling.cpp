@@ -280,8 +280,8 @@ bool Babbling::doBabbling() {
 
 void Babbling::babblingCommands(double &t, int j_idx) {
     double ref_command[16]; // Reference command for the 16 arm joints
-    yarp::sig::Vector command; // Command after correction
-    yarp::sig::Vector encodersUsed;
+    yarp::sig::VectorOf<double> command; // Command after correction
+    yarp::sig::VectorOf<double> encodersUsed;
     command.resize(16);
 
     for (unsigned int l = 0; l < command.size(); l++) {
@@ -326,8 +326,8 @@ void Babbling::babblingCommands(double &t, int j_idx) {
                 } else {
                     for (unsigned int l = 0; l < 7; l++) {
                         command[l] = 10 * (ref_command[l] - encodersUsed[l]);
-                        if (command[j_idx] > 20) command[j_idx] = 20;
-                        if (command[j_idx] < -20) command[j_idx] = -20;
+                        if (command[l] > 20) command[l] = 20;
+                        if (command[l] < -20) command[l] = -20;
                     }
                 }
             } else if (part_babbling == "hand") {
@@ -337,8 +337,8 @@ void Babbling::babblingCommands(double &t, int j_idx) {
                 } else {
                     for (unsigned int l = 7; l < command.size(); l++) {
                         command[l] = 10 * (ref_command[l] - encodersUsed[l]);
-                        if (command[j_idx] > 20) command[j_idx] = 20;
-                        if (command[j_idx] < -20) command[j_idx] = -20;
+                        if (command[l] > 20) command[l] = 20;
+                        if (command[l] < -20) command[l] = -20;
                     }
                 }
             } else {
@@ -362,7 +362,7 @@ void Babbling::babblingCommands(double &t, int j_idx) {
 }
 
 bool Babbling::moveHeadToStartPos() {
-    yarp::sig::Vector ang = start_command_head;
+    yarp::sig::VectorOf<double> ang = start_command_head;
     if (part == "right_arm") {
         ang[0] = -ang[0];
     }
@@ -378,7 +378,7 @@ bool Babbling::gotoStartPos() {
 
     moveHeadToStartPos();
 
-    yarp::sig::Vector command; // Command after correction
+    yarp::sig::VectorOf<double> command; // Command after correction
     command.resize(16);
 
     /* Move arm to start position */

@@ -12,7 +12,7 @@ source_group("Source Files" FILES ${sources})
 source_group("Header Files" FILES ${headers})
 source_group("DOC Files"    FILES ${docs})
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${icubclient_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${icubclient_INCLUDE_DIRS})
 add_executable(${PROJECT_NAME} ${headers} ${sources} ${docs})
 target_link_libraries(${PROJECT_NAME} icubclient ${YARP_LIBRARIES})
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER reactiveLayer)

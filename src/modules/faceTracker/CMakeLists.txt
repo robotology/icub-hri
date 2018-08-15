@@ -9,7 +9,7 @@ else()
 
     include_directories(
         ${PROJECT_SOURCE_DIR}/include
-        ${YARP_INCLUDE_DIRS}
+       
         ${icubclient_INCLUDE_DIRS}
     )
 
@@ -26,7 +26,7 @@ else()
 
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include
                         ${icubclient_INCLUDE_DIRS}
-                        ${YARP_INCLUDE_DIRS}
+                       
                         ${OpenCV_INCLUDE_DIRS})
 
     add_executable(${PROJECT_NAME} ${headers} ${sources} ${docs})

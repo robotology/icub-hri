@@ -124,10 +124,10 @@ string Agent::toString() const
     return oss.str();
 }
 
-bool Agent::addBelief(Relation r)
+bool Agent::addBelief(const Relation& r)
 {
     //Check if this relation is already present
-    list<Relation>::iterator it = find(m_belief.begin(),m_belief.end(),r);
+    list<Relation>::const_iterator it = find(m_belief.begin(),m_belief.end(),r);
     if (it != m_belief.end())
     {
         //cout<<"Agent "+name()+" already believes that " + r.toString();
@@ -139,7 +139,7 @@ bool Agent::addBelief(Relation r)
     return true;
 }
 
-bool Agent::removeBelief(Relation r)
+bool Agent::removeBelief(const Relation& r)
 {
     //Check if this relation is already present
     list<Relation>::iterator it = find(m_belief.begin(),m_belief.end(),r);
@@ -153,12 +153,12 @@ bool Agent::removeBelief(Relation r)
     return false;
 }
 
-bool Agent::checkBelief(const Relation& r)
+bool Agent::checkBelief(const Relation& r) const
 {
     return (find(m_belief.begin(),m_belief.end(),r) != m_belief.end());
 }
 
-const std::list<Relation> &Agent::beliefs()
+const std::list<Relation> &Agent::beliefs() const
 {
     return m_belief;
 }

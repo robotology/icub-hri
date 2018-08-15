@@ -123,9 +123,9 @@ public:
     }
 
 
-    bool operator==(const Entity &b);
-    bool operator<(const Entity &b);
-    bool operator>(const Entity &b);
+    bool operator==(const Entity &b) const;
+    bool operator<(const Entity &b) const;
+    bool operator>(const Entity &b) const;
 };
 
 } //namespace

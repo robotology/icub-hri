@@ -31,6 +31,8 @@ public:
         from_sensation_port_name = "None";
         external_port_name = "None";
     }
+    Behavior() = delete; //!< No default constructor!
+
     virtual ~Behavior() {}
 
     /**

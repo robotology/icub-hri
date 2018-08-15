@@ -10,7 +10,7 @@ project(ears)
 
 include_directories(
     ${PROJECT_SOURCE_DIR}/include
-    ${YARP_INCLUDE_DIRS}
+   
     ${icubclient_INCLUDE_DIRS}
 )
 
