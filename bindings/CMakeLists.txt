@@ -1,9 +1,4 @@
-# This is a CMake example for Python
-if(WIN32)
-    cmake_minimum_required(VERSION 3.4)
-else()
-    cmake_minimum_required(VERSION 3.0)
-endif()
+cmake_minimum_required(VERSION 3.5)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../conf)
 
@@ -40,32 +35,38 @@ foreach(lang "Java"
   endif()
 endforeach()
 
+find_package(SWIG REQUIRED 3)
 include(${SWIG_USE_FILE})
 message(STATUS "${SWIG_USE_FILE}")
-
-# include_directories(SYSTEM ${YARP_INCLUDE_DIRS})
-include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${icubclient_includes})
 
 set_source_files_properties(icubclient.i PROPERTIES CPLUSPLUS ON)
 set_source_files_properties(icubclient.i PROPERTIES SWIG_FLAGS "-c++")
 
 if(CREATE_PYTHON)
-    set(ICUBCLIENT_USE_PYTHON_VERSION "" CACHE STRING "Specify python version to use" )
-    find_package(PythonInterp ${ICUBCLIENT_USE_PYTHON_VERSION} REQUIRED)
-    set(ICUBCLIENT_USE_PYTHON_VERSION_ARGS)
-    if(NOT ICUBCLIENT_USE_PYTHON_VERSION)
-      set (ICUBCLIENT_USE_PYTHON_VERSION ${PYTHON_VERSION_STRING})
-    endif()
-
-    find_package(PythonLibs ${ICUBCLIENT_USE_PYTHON_VERSION} EXACT)
-
     set(target_name icubclient)
-
-    include_directories(SYSTEM ${PYTHON_INCLUDE_PATH})
-
     set(CMAKE_SWIG_FLAGS "-module;${target_name};-threads")
 
-    swig_add_module(${target_name} python icubclient.i)
+    set(ICUBCLIENT_USE_PYTHON_VERSION "2" CACHE STRING "Specify python version to use")
+    set_property(CACHE ICUBCLIENT_USE_PYTHON_VERSION PROPERTY STRINGS 2 3)
+
+    if("${ICUBCLIENT_USE_PYTHON_VERSION}" STREQUAL "2")
+      find_package (Python2 COMPONENTS Interpreter Development REQUIRED)
+      SET(PYTHON_INCLUDE_DIRS "${Python2_INCLUDE_DIRS}")
+      SET(PYTHON_LIBRARIES "${Python2_LIBRARIES}")
+      SET(PYTHON_EXECUTABLE "${Python2_EXECUTABLE}")
+    else("${ICUBCLIENT_USE_PYTHON_VERSION}" STREQUAL "3")
+      find_package (Python3 COMPONENTS Interpreter Development REQUIRED)
+      SET(PYTHON_INCLUDE_DIRS "${Python3_INCLUDE_DIRS}")
+      SET(PYTHON_LIBRARIES "${Python3_LIBRARIES}")
+      SET(PYTHON_EXECUTABLE "${Python3_EXECUTABLE}")
+    endif()
+
+    include_directories(SYSTEM ${PYTHON_INCLUDE_DIRS})
+
+    swig_add_library(${target_name}
+                     LANGUAGE python
+                     SOURCES icubclient.i)
+    target_include_directories(_${target_name} SYSTEM PRIVATE ${PYTHON_INCLUDE_DIRS})
     target_link_libraries(_${target_name} ${PYTHON_LIBRARIES} ${YARP_LIBRARIES} ${icubclient_LIBRARIES})
     set_target_properties(_${target_name} PROPERTIES OUTPUT_NAME "_icubclient")
 
