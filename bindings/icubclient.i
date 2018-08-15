@@ -8,7 +8,6 @@
 %include <yarp.i>
 
 %{
-#include <yarp/dev/Drivers.h>
 #include <yarp/os/all.h>
 #include <yarp/sig/all.h>
 using namespace yarp::os;
