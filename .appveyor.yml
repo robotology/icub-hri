@@ -10,9 +10,9 @@ clone_folder: c:\dev\icub-hri
 environment:
   ACE_ROOT:          c:/Program Files (x86)/robotology/ace-6.3.4_v12_x86
   GSL_DIR:           c:/Program Files (x86)/robotology/gsl-1.14
-  IPOPT_DIR:         c:/Program Files (x86)/robotology/ipopt-3.11.7
-  OpenCV_DIR:        c:/Program Files (x86)/robotology/opencv-2.4.9
-  Qt5_DIR:           c:/Program Files (x86)/robotology/Qt-5.4.1_v12_x86
+  IPOPT_DIR:         c:/Program Files (x86)/robotology/ipopt-3.12.7
+  OpenCV_DIR:        c:/Program Files (x86)/robotology/opencv-2.4.13
+  Qt5_DIR:           c:/Program Files (x86)/robotology/Qt-5.6.1_v12_x86
   YARP_DIR:          c:/Program Files (x86)/robotology/yarp-2.3.72
   ICUB_DIR:          c:/Program Files (x86)/robotology/icub-1.10.0
   ICUBcontrib_DIR:   c:/iCubContrib
