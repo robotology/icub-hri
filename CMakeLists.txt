@@ -15,7 +15,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(ICUBCLIENT_COMPILE_BINDINGS "Compile optional language bindings" FALSE)
 
-find_package(YARP 3.1.0 REQUIRED)
+find_package(YARP 3.0.1 REQUIRED)
 find_package(ICUB)
 
 # Defines the CMAKE_INSTALL_LIBDIR, CMAKE_INSTALL_BINDIR and many other useful macros
