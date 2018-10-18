@@ -8,36 +8,20 @@ branches:
 clone_folder: c:\dev\icub-hri
 
 environment:
-  ACE_ROOT:          c:/Program Files (x86)/robotology/ace-6.3.4_v12_x86
+  ACE_ROOT:          c:/Program Files (x86)/robotology/ace-6.5.0_v14_x86
   GSL_DIR:           c:/Program Files (x86)/robotology/gsl-1.14
   IPOPT_DIR:         c:/Program Files (x86)/robotology/ipopt-3.12.7
   OpenCV_DIR:        c:/Program Files (x86)/robotology/opencv-2.4.13
-  Qt5_DIR:           c:/Program Files (x86)/robotology/Qt-5.6.1_v12_x86
-  YARP_DIR:          c:/Program Files (x86)/robotology/yarp-2.3.72
+  Qt5_DIR:           c:/Program Files (x86)/robotology/Qt-5.6.1_v14_x86
+  YARP_DIR:          c:/Program Files (x86)/robotology/yarp-3.0.1
   ICUB_DIR:          c:/Program Files (x86)/robotology/icub-1.10.0
   ICUBcontrib_DIR:   c:/iCubContrib
   CMAKE_PREFIX_PATH: c:/iCubContrib
 
 install:
-  # to install unzipper do: "cinst 7zip.commandline -x86"
-  # the format is: "7z x c:\path-to-archive\archive.zip -oc:\path-where-unzip -y > nul"
-
-  - ps: >-
-      $dwntool = New-Object System.Net.WebClient
-
-      $Stoploop = $false
-
-      do {
-          try {
-            $dwntool.DownloadFile('https://github.com/robotology/yarp/releases/download/v2.3.72/yarp_2.3.72_v12_x86_1.exe','c:\dev\yarp.exe')
-            $dwntool.DownloadFile('https://github.com/robotology/icub-main/releases/download/v1.10.0/iCub_1.10.0_v12_x86_1.exe','c:\dev\icub.exe')
-            $Stoploop = $true
-          }
-          catch {
-            Start-Sleep -Seconds 15
-          }
-      }
-      While ($Stoploop -eq $false)
+  - cmd: md c:\dev
+  - cmd: appveyor DownloadFile "https://github.com/robotology/yarp/releases/download/v3.0.1/yarp_3.0.1_v14_x86_1.exe" -FileName "c:\dev\yarp.exe"
+  - cmd: appveyor DownloadFile "https://github.com/robotology/icub-main/releases/download/v1.10.0/iCub_1.10.0_v14_x86_1.exe" -FileName "c:\dev\icub.exe"
 
   - cmd: start "" /WAIT "c:\dev\yarp.exe" /S
   - cmd: timeout 10
@@ -49,14 +33,14 @@ install:
   - cmd: cd c:\dev\icub-contrib-common
   - cmd: md build
   - cmd: cd build
-  - cmd: cmake -DCMAKE_INSTALL_PREFIX=c:/iCubContrib -G"Visual Studio 12" ..
+  - cmd: cmake -DCMAKE_INSTALL_PREFIX=c:/iCubContrib -G"Visual Studio 14" ..
   - cmd: msbuild /m /p:Configuration=Release /p:Platform="Win32" INSTALL.vcxproj
 
   - cmd: git clone https://github.com/robotology/kinect-wrapper.git c:\dev\kinect-wrapper
   - cmd: cd c:\dev\kinect-wrapper
   - cmd: md build
   - cmd: cd build
-  - cmd: cmake -G"Visual Studio 12" ..
+  - cmd: cmake -G"Visual Studio 14" ..
   - cmd: msbuild /m /p:Configuration=Release /p:Platform="Win32" INSTALL.vcxproj
 
 build:
@@ -65,7 +49,7 @@ build_script:
   - cd c:\dev\icub-hri\
   - md build
   - cd build
-  - cmake -G"Visual Studio 12" -DICUBCLIENT_BUILD_IOL2OPC=FALSE -DCOMPILE_TESTS=TRUE ..
+  - cmake -G"Visual Studio 14" -DICUBCLIENT_BUILD_IOL2OPC=FALSE -DCOMPILE_TESTS=TRUE ..
   - msbuild /m /p:Configuration=Release /p:Platform="Win32" icubclient.sln
 
 notifications:
