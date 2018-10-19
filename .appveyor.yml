@@ -19,7 +19,6 @@ environment:
   CMAKE_PREFIX_PATH: c:/iCubContrib
 
 install:
-  - cmd: md c:\dev
   - cmd: appveyor DownloadFile "https://github.com/robotology/yarp/releases/download/v3.0.1/yarp_3.0.1_v14_x86_1.exe" -FileName "c:\dev\yarp.exe"
   - cmd: appveyor DownloadFile "https://github.com/robotology/icub-main/releases/download/v1.10.0/iCub_1.10.0_v14_x86_1.exe" -FileName "c:\dev\icub.exe"
 
