@@ -11,7 +11,7 @@ environment:
   ACE_ROOT:          c:/Program Files (x86)/robotology/ace-6.5.0_v14_x86
   GSL_DIR:           c:/Program Files (x86)/robotology/gsl-1.14
   IPOPT_DIR:         c:/Program Files (x86)/robotology/ipopt-3.12.7
-  OpenCV_DIR:        c:/Program Files (x86)/robotology/opencv-3.4.2
+  OpenCV_DIR:        c:/Program Files (x86)/robotology/opencv-3.4.2-v14-x86
   Qt5_DIR:           c:/Program Files (x86)/robotology/Qt-5.11.1_v14_x86
   YARP_DIR:          c:/Program Files (x86)/robotology/yarp-3.1.0
   ICUB_DIR:          c:/Program Files (x86)/robotology/icub-1.12.0
