@@ -1,5 +1,8 @@
 version: 1.0.{build}
 
+platform:
+- x64
+
 branches:
   only:
   - master
@@ -8,42 +11,50 @@ branches:
 clone_folder: c:\dev\icub-hri
 
 environment:
-  ACE_ROOT:          c:/Program Files (x86)/robotology/ace-6.5.0_v14_x86
-  GSL_DIR:           c:/Program Files (x86)/robotology/gsl-1.14
-  IPOPT_DIR:         c:/Program Files (x86)/robotology/ipopt-3.12.7
-  OpenCV_DIR:        c:/Program Files (x86)/robotology/opencv-3.4.2-v14-x86
-  Qt5_DIR:           c:/Program Files (x86)/robotology/Qt-5.11.1_v14_x86
-  YARP_DIR:          c:/Program Files (x86)/robotology/yarp-3.1.0
-  ICUB_DIR:          c:/Program Files (x86)/robotology/icub-1.12.0
+  ACE_ROOT:          c:/Program Files/robotology/ACE-6.5.0_v14_x86_amd64
+  GSL_DIR:           c:/Program Files/robotology/gsl-1.14
+  IPOPT_DIR:         c:/Program Files/robotology/ipopt-3.12.7
+  OpenCV_DIR:        C:/Program Files/opencv/build
+  Qt5_DIR:           c:/Program Files/robotology/Qt-5.11.1_v14_x86_amd64
+  YARP_DIR:          c:/Program Files/robotology/yarp-3.1.0
+  ICUB_DIR:          c:/Program Files/robotology/icub-1.12.0
   ICUBcontrib_DIR:   c:/iCubContrib
   CMAKE_PREFIX_PATH: c:/iCubContrib
 
 install:
-  - cmd: appveyor DownloadFile "https://github.com/robotology/yarp/releases/download/v3.1.0/yarp_3.1.0_v14_x86_1.exe" -FileName "c:\dev\yarp.exe"
-  - cmd: appveyor DownloadFile "https://github.com/robotology/icub-main/releases/download/v1.12.0/iCub_1.12.0_v14_x86_1.exe" -FileName "c:\dev\icub.exe"
+  - call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
+  - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
+
+  - cmd: appveyor DownloadFile "https://github.com/robotology/yarp/releases/download/v3.1.0/yarp_3.1.0_v14_x86_amd64_1.exe" -FileName "c:\dev\yarp.exe"
+  - cmd: appveyor DownloadFile "https://github.com/robotology/icub-main/releases/download/v1.12.0/iCub_1.12.0_v14_x86_amd64_1.exe" -FileName "c:\dev\icub.exe"
 
   - cmd: start "" /WAIT "c:\dev\yarp.exe" /S
   - cmd: timeout 10
   - cmd: start "" /WAIT "c:\dev\icub.exe" /S
   - cmd: timeout 10
-  - cmd: dir "c:\Program Files (x86)\robotology"
-  - cmd: dir "c:\Program Files (x86)\robotology\opencv-3.4.2-v14-x86"
-  - cmd: dir "c:\Program Files (x86)\robotology\opencv-3.4.2-v14-x86\x86"
-  - cmd: dir "c:\Program Files (x86)\robotology\opencv-3.4.2-v14-x86\x86\vc14"
+  - cmd: dir "c:\Program Files\robotology"
+
+  # OpenCV
+  - cmd: appveyor DownloadFile "https://sourceforge.net/projects/opencvlibrary/files/3.4.6/opencv-3.4.6-vc14_vc15.exe/download" -FileName "c:\dev\opencv-3.4.6-vc14_vc15.exe"
+  - cmd: dir "c:\dev"
+  - cmd: c:\dev\opencv-3.4.6-vc14_vc15.exe -o"C:\Program Files" -y
+  - ECHO "Installed OpenCV:"
+  - cmd: dir "C:/Program Files/opencv/build"
+  - set PATH=%PATH%;C:\Program Files\opencv\build\x64\vc14\bin
   
   - cmd: git clone https://github.com/robotology/icub-contrib-common.git c:\dev\icub-contrib-common
   - cmd: cd c:\dev\icub-contrib-common
   - cmd: md build
   - cmd: cd build
-  - cmd: cmake -DCMAKE_INSTALL_PREFIX=c:/iCubContrib -G"Visual Studio 14" ..
-  - cmd: msbuild /m /p:Configuration=Release /p:Platform="Win32" INSTALL.vcxproj
+  - cmd: cmake -DCMAKE_INSTALL_PREFIX=c:/iCubContrib -G"Visual Studio 14 2015 Win64" ..
+  - cmd: msbuild /m /p:Configuration=Release /p:Platform="x64" INSTALL.vcxproj
 
   - cmd: git clone https://github.com/robotology/kinect-wrapper.git c:\dev\kinect-wrapper
   - cmd: cd c:\dev\kinect-wrapper
   - cmd: md build
   - cmd: cd build
-  - cmd: cmake -G"Visual Studio 14" ..
-  - cmd: msbuild /m /p:Configuration=Release /p:Platform="Win32" INSTALL.vcxproj
+  - cmd: cmake -G"Visual Studio 14 2015 Win64" ..
+  - cmd: msbuild /m /p:Configuration=Release /p:Platform="x64" INSTALL.vcxproj
 
 build:
 
@@ -51,8 +62,8 @@ build_script:
   - cd c:\dev\icub-hri\
   - md build
   - cd build
-  - cmake -G"Visual Studio 14" -DICUBCLIENT_BUILD_IOL2OPC=FALSE -DCOMPILE_TESTS=TRUE ..
-  - msbuild /m /p:Configuration=Release /p:Platform="Win32" icubclient.sln
+  - cmake -G"Visual Studio 14 2015 Win64" -DICUBCLIENT_BUILD_IOL2OPC=FALSE -DICUBCLIENT_BUILD_RFH=FALSE -DICUBCLIENT_COMPILE_TESTS=TRUE ..
+  - msbuild /m /p:Configuration=Release /p:Platform="x64" icubclient.sln
 
 notifications:
   - provider: Email
