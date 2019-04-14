@@ -42,8 +42,8 @@ install:
   # Fix for opencv and numpy already installed by system
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then rm '/usr/local/bin/f2py'; fi
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then rm -r '/usr/local/lib/python2.7/site-packages/numpy'; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install opencv; fi
-  # add QT5 to path so that it can be found by CMake
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install opencv@3; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew link --force opencv@3; fi  # add QT5 to path so that it can be found by CMake
   - if [ "$TRAVIS_OS_NAME" = "osx" ]; then export PATH="$PATH:/usr/local/opt/qt/bin"; fi
 
   - cd ..
