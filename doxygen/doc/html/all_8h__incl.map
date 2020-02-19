@@ -1,0 +1,22 @@
+<map id="/home/travis/build/robotology/icub&#45;hri/src/libraries/icubclient/include/icubclient/all.h" name="/home/travis/build/robotology/icub&#45;hri/src/libraries/icubclient/include/icubclient/all.h">
+<area shape="rect" id="node2" href="$icubClient_8h.html" title="icubclient/clients\l/icubClient.h" alt="" coords="315,631,447,672"/>
+<area shape="rect" id="node11" href="$opcClient_8h.html" title="icubclient/clients\l/opcClient.h" alt="" coords="1395,303,1527,344"/>
+<area shape="rect" id="node13" href="$representations_8h.html" title="icubclient/knowledge\l/representations.h" alt="" coords="1215,392,1375,433"/>
+<area shape="rect" id="node20" href="$tags_8h.html" title="icubclient/tags.h" alt="" coords="1419,638,1548,665"/>
+<area shape="rect" id="node26" href="$subSystem__agentDetector_8h.html" title="icubclient/subsystems\l/subSystem_agentDetector.h" alt="" coords="97,213,307,255"/>
+<area shape="rect" id="node31" href="$subSystem__ARE_8h.html" title="icubclient/subsystems\l/subSystem_ARE.h" alt="" coords="1496,213,1663,255"/>
+<area shape="rect" id="node32" href="$subSystem__babbling_8h.html" title="icubclient/subsystems\l/subSystem_babbling.h" alt="" coords="713,213,886,255"/>
+<area shape="rect" id="node33" href="$subSystem__iol2opc_8h.html" title="icubclient/subsystems\l/subSystem_iol2opc.h" alt="" coords="331,213,497,255"/>
+<area shape="rect" id="node34" href="$subSystem__KARMA_8h.html" title="icubclient/subsystems\l/subSystem_KARMA.h" alt="" coords="1625,124,1792,165"/>
+<area shape="rect" id="node36" href="$subSystem__recog_8h.html" title="icubclient/subsystems\l/subSystem_recog.h" alt="" coords="521,213,688,255"/>
+<area shape="rect" id="node37" href="$subSystem__speech_8h.html" title="icubclient/subsystems\l/subSystem_speech.h" alt="" coords="1152,213,1319,255"/>
+<area shape="rect" id="node38" href="$functions_8h.html" title="icubclient/functions.h" alt="" coords="1869,310,2031,337"/>
+<area shape="rect" id="node40" href="$subSystem__SAM_8h.html" title="icubclient/subsystems\l/subSystem_SAM.h" alt="" coords="961,213,1128,255"/>
+<area shape="rect" id="node14" href="$action_8h.html" title="action.h" alt="" coords="1087,481,1162,508"/>
+<area shape="rect" id="node15" href="$entity_8h.html" title="entity.h" alt="" coords="1065,638,1136,665"/>
+<area shape="rect" id="node19" href="$relation_8h.html" title="relation.h" alt="" coords="1189,556,1273,583"/>
+<area shape="rect" id="node22" href="$agent_8h.html" title="agent.h" alt="" coords="1237,481,1308,508"/>
+<area shape="rect" id="node23" href="$object_8h.html" title="object.h" alt="" coords="1351,556,1426,583"/>
+<area shape="rect" id="node25" href="$bodypart_8h.html" title="bodypart.h" alt="" coords="1384,481,1476,508"/>
+<area shape="rect" id="node27" href="$subSystem_8h.html" title="icubclient/subsystems\l/subSystem.h" alt="" coords="728,303,895,344"/>
+</map>

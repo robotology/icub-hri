@@ -1,0 +1,16 @@
+<map id="/home/travis/build/robotology/icub&#45;hri/src/modules/ears/src/ears.cpp" name="/home/travis/build/robotology/icub&#45;hri/src/modules/ears/src/ears.cpp">
+<area shape="rect" id="node3" href="$ears_8h.html" title="ears.h" alt="" coords="1837,131,1900,158"/>
+<area shape="rect" id="node6" href="$icubClient_8h.html" title="icubclient/clients\l/icubClient.h" alt="" coords="420,467,552,508"/>
+<area shape="rect" id="node15" href="$opcClient_8h.html" title="icubclient/clients\l/opcClient.h" alt="" coords="1487,124,1619,165"/>
+<area shape="rect" id="node29" href="$functions_8h.html" title="icubclient/functions.h" alt="" coords="1345,474,1507,501"/>
+<area shape="rect" id="node31" href="$subSystem__recog_8h.html" title="icubclient/subsystems\l/subSystem_recog.h" alt="" coords="721,377,888,419"/>
+<area shape="rect" id="node17" href="$representations_8h.html" title="icubclient/knowledge\l/representations.h" alt="" coords="1353,213,1513,255"/>
+<area shape="rect" id="node23" href="$tags_8h.html" title="icubclient/tags.h" alt="" coords="1531,474,1660,501"/>
+<area shape="rect" id="node18" href="$action_8h.html" title="action.h" alt="" coords="1247,303,1322,329"/>
+<area shape="rect" id="node19" href="$entity_8h.html" title="entity.h" alt="" coords="1195,474,1265,501"/>
+<area shape="rect" id="node22" href="$relation_8h.html" title="relation.h" alt="" coords="1373,385,1457,411"/>
+<area shape="rect" id="node25" href="$agent_8h.html" title="agent.h" alt="" coords="1397,303,1468,329"/>
+<area shape="rect" id="node26" href="$object_8h.html" title="object.h" alt="" coords="1518,385,1593,411"/>
+<area shape="rect" id="node28" href="$bodypart_8h.html" title="bodypart.h" alt="" coords="1544,303,1636,329"/>
+<area shape="rect" id="node32" href="$subSystem_8h.html" title="icubclient/subsystems\l/subSystem.h" alt="" coords="721,467,888,508"/>
+</map>

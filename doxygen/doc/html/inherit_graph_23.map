@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$group__icubclient__SAM__Drivers.html#classSAM_1_1SAM__Core_1_1SAMDriver_1_1SAMDriver" title="SAM Driver parent class that defines the methods by which models are initialised, trained and saved..." alt="" coords="5,50,268,77"/>
+<area shape="rect" id="node2" href="$group__icubclient__SAM__Drivers.html#classSAM_1_1SAM__Drivers_1_1SAMDriver__ARWin_1_1SAMDriver__ARWin" title="Class developed for the implementation of windowed real time action recognition. " alt="" coords="316,5,524,47"/>
+<area shape="rect" id="node3" href="$group__icubclient__SAM__Drivers.html#classSAM_1_1SAM__Drivers_1_1SAMDriver__interaction_1_1SAMDriver__interaction" title="Class developed for the implementation of face recognition. " alt="" coords="316,71,524,127"/>
+</map>

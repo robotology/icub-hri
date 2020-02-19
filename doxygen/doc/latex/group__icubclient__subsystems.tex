@@ -1,0 +1,2761 @@
+\hypertarget{group__icubclient__subsystems}{}\section{Subsystems}
+\label{group__icubclient__subsystems}\index{Subsystems@{Subsystems}}
+
+
+Abstract class to handle sub-\/systems of the icub-\/client (speech, action, etc...) and the relevant subclasses.  
+
+
+Collaboration diagram for Subsystems\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{group__icubclient__subsystems}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{icubclient\+::\+Sub\+System}
+\begin{DoxyCompactList}\small\item\em Abstract class to handle sub-\/systems of the icub-\/client.  \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__agentDetector}{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}
+\begin{DoxyCompactList}\small\item\em \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} for agent\+Detector.  \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__agentDetector}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__ARE}{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}
+\begin{DoxyCompactList}\small\item\em \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} to deal with the {\bfseries actions\+Rendering\+Engine} module (a.\+k.\+a.  \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__ARE}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__babbling}{icubclient\+::\+Sub\+System\+\_\+babbling}
+\begin{DoxyCompactList}\small\item\em \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} for babbling.  \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__babbling}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__emotion}{icubclient\+::\+Sub\+System\+\_\+emotion}
+\begin{DoxyCompactList}\small\item\em \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} for emotion.  \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__emotion}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__IOL2OPC}{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}
+\begin{DoxyCompactList}\small\item\em \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} for iol2opc.  \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__IOL2OPC}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__KARMA}{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}
+\begin{DoxyCompactList}\small\item\em \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} to deal with the {\bfseries experimental affordance learning} module (a.\+k.\+a.  \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__KARMA}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__Recog}{icubclient\+::\+Sub\+System\+\_\+\+Recog}
+\begin{DoxyCompactList}\small\item\em Abstract sub\+System for speech recognizer.  \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__Recog}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__SAM}{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}
+\begin{DoxyCompactList}\small\item\em \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} for \hyperlink{namespaceSAM}{S\+AM}.  \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__SAM}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__Speech}{icubclient\+::\+Sub\+System\+\_\+\+Speech}
+\begin{DoxyCompactList}\small\item\em Abstract sub\+System for speech management (Text to Speech)  \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__Speech}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__Speech__eSpeak}{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak}
+\begin{DoxyCompactList}\small\item\em \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} for speech synthesis with emotional tuning of speed and pitch using e\+Speak.  \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__Speech__eSpeak}{More...}\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract class to handle sub-\/systems of the icub-\/client (speech, action, etc...) and the relevant subclasses. 
+
+
+
+\subsection{Class Documentation}
+\index{icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}}\label{classicubclient_1_1SubSystem}
+\Hypertarget{group__icubclient__subsystems_classicubclient_1_1SubSystem}
+\subsubsection{class icubclient\+:\+:Sub\+System}
+Abstract class to handle sub-\/systems of the icub-\/client. 
+
+Definition at line 43 of file sub\+System.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Sub\+System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classicubclient_1_1SubSystem__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__subsystems_a63bf4e6d5805ab7d3f3b209219543477}{Sub\+System} (const std\+::string \&master\+Name)
+\item 
+virtual \hyperlink{group__icubclient__subsystems_aa0f79f798567683b2941858c53959cae}{$\sim$\+Sub\+System} ()
+\item 
+bool \hyperlink{group__icubclient__subsystems_ab0a8208f6d5d178fc3e9931e122c1a87}{Connect} ()
+\begin{DoxyCompactList}\small\item\em Connects the subsystem to its \char`\"{}host\char`\"{}. \end{DoxyCompactList}\item 
+virtual void \hyperlink{group__icubclient__subsystems_af327c56ad0d33aada77f825d96fb47f2}{Close} ()=0
+\begin{DoxyCompactList}\small\item\em Clean up resources. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__subsystems_abdfadf6419f27b88ebc862d41568a896}{get\+Type} () const
+\begin{DoxyCompactList}\small\item\em Return the type of the subsystem as string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{group__icubclient__subsystems_a5fc84b6e51ec56f91323280b7da52dc8}{connect} ()=0
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{group__icubclient__subsystems_adca65267b02a9c622564ef8b8eb6508a}{m\+\_\+master\+Name}
+\item 
+std\+::string \hyperlink{group__icubclient__subsystems_a3f3b0afe9c5bfd0e915eaca30d3507a4}{m\+\_\+type}
+\item 
+yarp\+::os\+::\+Rpc\+Client \hyperlink{group__icubclient__subsystems_a20145cab1bbdc89b0e143e52a66e4760}{port\+R\+PC}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a63bf4e6d5805ab7d3f3b209219543477}\label{group__icubclient__subsystems_a63bf4e6d5805ab7d3f3b209219543477}} 
+\index{icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}!Sub\+System@{Sub\+System}}
+\index{Sub\+System@{Sub\+System}!icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}}
+\subparagraph{\texorpdfstring{Sub\+System()}{SubSystem()}}
+{\footnotesize\ttfamily icubclient\+::\+Sub\+System\+::\+Sub\+System (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{master\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 53 of file sub\+System.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_aa0f79f798567683b2941858c53959cae}\label{group__icubclient__subsystems_aa0f79f798567683b2941858c53959cae}} 
+\index{icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}!````~Sub\+System@{$\sim$\+Sub\+System}}
+\index{````~Sub\+System@{$\sim$\+Sub\+System}!icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}}
+\subparagraph{\texorpdfstring{$\sim$\+Sub\+System()}{~SubSystem()}}
+{\footnotesize\ttfamily virtual icubclient\+::\+Sub\+System\+::$\sim$\+Sub\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 54 of file sub\+System.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_af327c56ad0d33aada77f825d96fb47f2}\label{group__icubclient__subsystems_af327c56ad0d33aada77f825d96fb47f2}} 
+\index{icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}!Close@{Close}}
+\index{Close@{Close}!icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}}
+\subparagraph{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily virtual void icubclient\+::\+Sub\+System\+::\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Clean up resources. 
+
+
+
+Implemented in \hyperlink{group__icubclient__subsystems_acdec5cffb610e7b93d2d51ac22765b21}{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}, \hyperlink{group__icubclient__subsystems_a570bb3cc879e0547a04e82b231a9f57f}{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}, \hyperlink{group__icubclient__subsystems_a44727eb284e1291c193559d9ecc12a50}{icubclient\+::\+Sub\+System\+\_\+emotion}, \hyperlink{group__icubclient__subsystems_a12a3920b40dbabaf9eb7d14d81c172da}{icubclient\+::\+Sub\+System\+\_\+\+Speech}, \hyperlink{group__icubclient__subsystems_ac36d06ae1d94f17a8eb3581664479127}{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}, \hyperlink{group__icubclient__subsystems_a15246d09894da753d1672f58b6af8556}{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}, \hyperlink{group__icubclient__subsystems_a75b9591c2bbd9c20f1cd222d538c8c45}{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}, \hyperlink{group__icubclient__subsystems_a8f41f3c801e0d0b705927dbc56959137}{icubclient\+::\+Sub\+System\+\_\+\+Recog}, and \hyperlink{group__icubclient__subsystems_a9865dd2f02610e3ea80923b7194981ae}{icubclient\+::\+Sub\+System\+\_\+babbling}.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a5fc84b6e51ec56f91323280b7da52dc8}\label{group__icubclient__subsystems_a5fc84b6e51ec56f91323280b7da52dc8}} 
+\index{icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}!connect@{connect}}
+\index{connect@{connect}!icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}}
+\subparagraph{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily virtual bool icubclient\+::\+Sub\+System\+::connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Implemented in \hyperlink{group__icubclient__subsystems_acc63e171efddf99fa1e57ab1cdce3a13}{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}, \hyperlink{group__icubclient__subsystems_ab11c67c801f58eca84e8ef2941d4f2a8}{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}, \hyperlink{group__icubclient__subsystems_abbf3a0069184f64f4999b0e94077b2db}{icubclient\+::\+Sub\+System\+\_\+\+Speech}, \hyperlink{group__icubclient__subsystems_aca0db45f7e3522c954de25f61fd76f7f}{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}, \hyperlink{group__icubclient__subsystems_af55715ece8170cb63fc2546f2bdcfcf1}{icubclient\+::\+Sub\+System\+\_\+emotion}, \hyperlink{group__icubclient__subsystems_a1407547931468f9d704e10e3436ed467}{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}, \hyperlink{group__icubclient__subsystems_ac92b15f98651868bc31dbf4688d50e74}{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}, \hyperlink{group__icubclient__subsystems_a98acf2fdda5a595803ce2e75e045a56f}{icubclient\+::\+Sub\+System\+\_\+\+Recog}, and \hyperlink{group__icubclient__subsystems_a571ba8f32c2ccf03610dd06866749d95}{icubclient\+::\+Sub\+System\+\_\+babbling}.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ab0a8208f6d5d178fc3e9931e122c1a87}\label{group__icubclient__subsystems_ab0a8208f6d5d178fc3e9931e122c1a87}} 
+\index{icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}!Connect@{Connect}}
+\index{Connect@{Connect}!icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}}
+\subparagraph{\texorpdfstring{Connect()}{Connect()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+::\+Connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Connects the subsystem to its \char`\"{}host\char`\"{}. 
+
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 59 of file sub\+System.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_abdfadf6419f27b88ebc862d41568a896}\label{group__icubclient__subsystems_abdfadf6419f27b88ebc862d41568a896}} 
+\index{icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}!get\+Type@{get\+Type}}
+\index{get\+Type@{get\+Type}!icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}}
+\subparagraph{\texorpdfstring{get\+Type()}{getType()}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Sub\+System\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the type of the subsystem as string. 
+
+
+
+Definition at line 71 of file sub\+System.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_adca65267b02a9c622564ef8b8eb6508a}\label{group__icubclient__subsystems_adca65267b02a9c622564ef8b8eb6508a}} 
+\index{icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}!m\+\_\+master\+Name@{m\+\_\+master\+Name}}
+\index{m\+\_\+master\+Name@{m\+\_\+master\+Name}!icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}}
+\subparagraph{\texorpdfstring{m\+\_\+master\+Name}{m\_masterName}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Sub\+System\+::m\+\_\+master\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 46 of file sub\+System.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a3f3b0afe9c5bfd0e915eaca30d3507a4}\label{group__icubclient__subsystems_a3f3b0afe9c5bfd0e915eaca30d3507a4}} 
+\index{icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}!m\+\_\+type@{m\+\_\+type}}
+\index{m\+\_\+type@{m\+\_\+type}!icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}}
+\subparagraph{\texorpdfstring{m\+\_\+type}{m\_type}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Sub\+System\+::m\+\_\+type\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 47 of file sub\+System.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a20145cab1bbdc89b0e143e52a66e4760}\label{group__icubclient__subsystems_a20145cab1bbdc89b0e143e52a66e4760}} 
+\index{icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}!port\+R\+PC@{port\+R\+PC}}
+\index{port\+R\+PC@{port\+R\+PC}!icubclient\+::\+Sub\+System@{icubclient\+::\+Sub\+System}}
+\subparagraph{\texorpdfstring{port\+R\+PC}{portRPC}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Rpc\+Client icubclient\+::\+Sub\+System\+::port\+R\+PC\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 48 of file sub\+System.\+h.
+
+\index{icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}}\label{classicubclient_1_1SubSystem__agentDetector}
+\Hypertarget{group__icubclient__subsystems_classicubclient_1_1SubSystem__agentDetector}
+\subsubsection{class icubclient\+:\+:Sub\+System\+\_\+agent\+Detector}
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} for agent\+Detector. 
+
+Definition at line 33 of file sub\+System\+\_\+agent\+Detector.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Sub\+System\+\_\+agent\+Detector\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classicubclient_1_1SubSystem__agentDetector__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__subsystems_a8f9347c9a72e6e7278bb4e03f74720df}{Sub\+System\+\_\+agent\+Detector} (const std\+::string \&master\+Name)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{group__icubclient__subsystems_ac36d06ae1d94f17a8eb3581664479127}{Close} ()
+\begin{DoxyCompactList}\small\item\em Clean up resources. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__subsystems_a0327f12c73a1903ed310069b61d577ea}{pause} ()
+\begin{DoxyCompactList}\small\item\em Pause the agent\+Detector. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__subsystems_a7fec79d5874e55d2d093c858b70b96bd}{resume} ()
+\begin{DoxyCompactList}\small\item\em The skeleton detection of agent\+Detector will be resumed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{group__icubclient__subsystems_aca0db45f7e3522c954de25f61fd76f7f}{connect} ()
+\item 
+bool \hyperlink{group__icubclient__subsystems_ad8210611c13b45d3b1ec17f18a10bce8}{change\+Default\+Name} (const std\+::string \&new\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Changes the name of the partner within agent\+Detector Internally used by \hyperlink{group__icubclient__clients_a860fb1399bafb125c3955110dc17a42e}{I\+Cub\+Client\+::change\+Name}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__subsystems_a56c42753f30380d8abf4a96bc322b3b0}{I\+Cub\+Client}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a8f9347c9a72e6e7278bb4e03f74720df}\label{group__icubclient__subsystems_a8f9347c9a72e6e7278bb4e03f74720df}} 
+\index{icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}!Sub\+System\+\_\+agent\+Detector@{Sub\+System\+\_\+agent\+Detector}}
+\index{Sub\+System\+\_\+agent\+Detector@{Sub\+System\+\_\+agent\+Detector}!icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}}
+\subparagraph{\texorpdfstring{Sub\+System\+\_\+agent\+Detector()}{SubSystem\_agentDetector()}}
+{\footnotesize\ttfamily icubclient\+::\+Sub\+System\+\_\+agent\+Detector\+::\+Sub\+System\+\_\+agent\+Detector (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{master\+Name }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em master\+Name} & stem-\/name used to open up ports. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 12 of file sub\+System\+\_\+agent\+Detector.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_ad8210611c13b45d3b1ec17f18a10bce8}\label{group__icubclient__subsystems_ad8210611c13b45d3b1ec17f18a10bce8}} 
+\index{icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}!change\+Default\+Name@{change\+Default\+Name}}
+\index{change\+Default\+Name@{change\+Default\+Name}!icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}}
+\subparagraph{\texorpdfstring{change\+Default\+Name()}{changeDefaultName()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+agent\+Detector\+::change\+Default\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{new\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Changes the name of the partner within agent\+Detector Internally used by \hyperlink{group__icubclient__clients_a860fb1399bafb125c3955110dc17a42e}{I\+Cub\+Client\+::change\+Name}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+name} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successful, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 22 of file sub\+System\+\_\+agent\+Detector.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ac36d06ae1d94f17a8eb3581664479127}\label{group__icubclient__subsystems_ac36d06ae1d94f17a8eb3581664479127}} 
+\index{icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}!Close@{Close}}
+\index{Close@{Close}!icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}}
+\subparagraph{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+agent\+Detector\+::\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Clean up resources. 
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_af327c56ad0d33aada77f825d96fb47f2}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 17 of file sub\+System\+\_\+agent\+Detector.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_aca0db45f7e3522c954de25f61fd76f7f}\label{group__icubclient__subsystems_aca0db45f7e3522c954de25f61fd76f7f}} 
+\index{icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}!connect@{connect}}
+\index{connect@{connect}!icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}}
+\subparagraph{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+agent\+Detector\+::connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_a5fc84b6e51ec56f91323280b7da52dc8}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 4 of file sub\+System\+\_\+agent\+Detector.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a0327f12c73a1903ed310069b61d577ea}\label{group__icubclient__subsystems_a0327f12c73a1903ed310069b61d577ea}} 
+\index{icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}!pause@{pause}}
+\index{pause@{pause}!icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}}
+\subparagraph{\texorpdfstring{pause()}{pause()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+agent\+Detector\+::pause (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Pause the agent\+Detector. 
+
+No skeleton information of the human will be updated. 
+
+Definition at line 34 of file sub\+System\+\_\+agent\+Detector.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a7fec79d5874e55d2d093c858b70b96bd}\label{group__icubclient__subsystems_a7fec79d5874e55d2d093c858b70b96bd}} 
+\index{icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}!resume@{resume}}
+\index{resume@{resume}!icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}}
+\subparagraph{\texorpdfstring{resume()}{resume()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+agent\+Detector\+::resume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The skeleton detection of agent\+Detector will be resumed. 
+
+
+
+Definition at line 40 of file sub\+System\+\_\+agent\+Detector.\+cpp.
+
+
+
+\paragraph{Friends And Related Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a56c42753f30380d8abf4a96bc322b3b0}\label{group__icubclient__subsystems_a56c42753f30380d8abf4a96bc322b3b0}} 
+\index{icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}!I\+Cub\+Client@{I\+Cub\+Client}}
+\index{I\+Cub\+Client@{I\+Cub\+Client}!icubclient\+::\+Sub\+System\+\_\+agent\+Detector@{icubclient\+::\+Sub\+System\+\_\+agent\+Detector}}
+\subparagraph{\texorpdfstring{I\+Cub\+Client}{ICubClient}}
+{\footnotesize\ttfamily friend class \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{I\+Cub\+Client}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 35 of file sub\+System\+\_\+agent\+Detector.\+h.
+
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}\label{classicubclient_1_1SubSystem__ARE}
+\Hypertarget{group__icubclient__subsystems_classicubclient_1_1SubSystem__ARE}
+\subsubsection{class icubclient\+:\+:Sub\+System\+\_\+\+A\+RE}
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} to deal with the {\bfseries actions\+Rendering\+Engine} module (a.\+k.\+a. 
+
+{\bfseries A\+RE}) for motor control.
+
+For further details, please refer to the A\+RE main page\+: \href{http://wiki.icub.org/iCub_documentation/group__actionsRenderingEngine.html}{\tt http\+://wiki.\+icub.\+org/i\+Cub\+\_\+documentation/group\+\_\+\+\_\+actions\+Rendering\+Engine.\+html} 
+
+Definition at line 41 of file sub\+System\+\_\+\+A\+R\+E.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Sub\+System\+\_\+\+A\+RE\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{classicubclient_1_1SubSystem__ARE__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__subsystems_a844f5ba28f7944ba14ccecc2801a4824}{Sub\+System\+\_\+\+A\+RE} (const std\+::string \&master\+Name)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__subsystems_a570bb3cc879e0547a04e82b231a9f57f}{Close} ()
+\begin{DoxyCompactList}\small\item\em Clean up resources. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_a192608cd2b7f3956f2a2a2c89ecc9c9f}{get\+Table\+Height} (double \&height)
+\begin{DoxyCompactList}\small\item\em Gets the table height from A\+RE. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__subsystems_acd77a648ae64caad1620ad082e81d481}{select\+Hand\+Correct\+Target} (yarp\+::os\+::\+Bottle \&options, yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target, const std\+::string \&obj\+Name, const std\+::string hand\+To\+Use=\char`\"{}\char`\"{})
+\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__icubclient__subsystems_a773b2a1d25472fe211be01c3b65189a4}{apply\+Safety\+Margins} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&in)
+\begin{DoxyCompactList}\small\item\em Applies safety margins, i.\+e. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_ae328769c62775194ac87a2cb6143d3e2}{home} (const std\+::string \&part=\char`\"{}all\char`\"{})
+\begin{DoxyCompactList}\small\item\em Put the specified part ih home position. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_a7806d075279d1593b7c63fda368aa3f8}{take} (const std\+::string \&s\+Name, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Reach the specified \mbox{[}target\mbox{]} and grasp it. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_a4b1fe9a6c979be5ec739d319ad0e3d94}{push} (const std\+::string \&s\+Name, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Reach the specified \mbox{[}target\mbox{]} from one side and then push it laterally. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_a92fbb5f6c28b6bf9c7dec4ef3737b7c6}{point} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target\+Unsafe, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Point at the specified \mbox{[}target\mbox{]} with the index finger. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_ad54f24f00f6e6db4db644d8f0ec6b278}{drop} (const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em If an object is held, bring it over the table and drop it on a random position. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_aebeca6e5202dc83eaa796c783f5a6e3d}{drop\+On} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target\+Unsafe, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Drop the object on a given target. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_abe9ce03e08fc25290d89d64eee8ec972}{observe} (const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Bring the hand in the visual field and move it with the purpose of visual exploration. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_adab52bf105b04e4e40ab2ce216350648}{expect} (const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Put one hand forward with the palm facing up and wait for an object. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_aca9d66bebcb9a4c81b8523e45a39f693}{give} (const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Put one hand forward with the palm facing up and open the fingers so that the object held in the hand is free to be taken. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_a12374067510db0ffcd01bbea4e7b0ce1}{waving} (const bool sw)
+\begin{DoxyCompactList}\small\item\em Enable/disable arms waving. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_a1063ea28c120fe11f3f42b92f1ac84ea}{look} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Look at the specified \mbox{[}target\mbox{]}. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_adb9f502a08ee0aeb1c22b10b37def763}{track} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Track the specified \mbox{[}target\mbox{]}. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_a3d47ce46a6a31949ad9da3faf1a0ca9f}{impedance} (const bool sw)
+\begin{DoxyCompactList}\small\item\em Enable/disable impedance control. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_a57b41efd7a13037bd383e4cdbd0b11ab}{set\+Exec\+Time} (const double exec\+Time)
+\begin{DoxyCompactList}\small\item\em Change default arm movement execution time. \end{DoxyCompactList}\item 
+\hyperlink{group__icubclient__subsystems_a7ffb007fd4a83e42d5a76d28087728b6}{$\sim$\+Sub\+System\+\_\+\+A\+RE} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__icubclient__subsystems_a3347647fc4edae6ce157586a7ae13ca5}{append\+Cartesian\+Target} (yarp\+::os\+::\+Bottle \&b, const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&t)
+\begin{DoxyCompactList}\small\item\em Appends a target vector {\bfseries t} to the Bottle {\bfseries b} \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_a5e8900944781979714a8cc5fb97f7ad4}{send\+Cmd} (const yarp\+::os\+::\+Bottle \&cmd)
+\begin{DoxyCompactList}\small\item\em Sends a command to A\+RE\textquotesingle{}s cmd\+Port. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_ab11c67c801f58eca84e8ef2941d4f2a8}{connect} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client} $\ast$ \hyperlink{group__icubclient__subsystems_a2df4b6d0c2b2efbe83ab482e362a2755}{opc}
+\item 
+yarp\+::os\+::\+Rpc\+Client \hyperlink{group__icubclient__subsystems_a6871234a45e1bbbb474195d512fbd428}{port\+Cmd}
+\begin{DoxyCompactList}\small\item\em Port to /\+A\+R\+E/cmd\+:io. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Rpc\+Client \hyperlink{group__icubclient__subsystems_abbe5f0e2a29cd9d6cc907e8ef635b3a5}{port\+R\+PC}
+\begin{DoxyCompactList}\small\item\em Port to /\+A\+R\+E/rpc. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Rpc\+Client \hyperlink{group__icubclient__subsystems_a940b01fa144f15cdb9ef8200529e38f9}{port\+Get}
+\begin{DoxyCompactList}\small\item\em Port to /\+A\+R\+E/get\+:io. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Rpc\+Client \hyperlink{group__icubclient__subsystems_ab4c5eb79db5e71a74c9dba6d79249b44}{port\+Calib}
+\begin{DoxyCompactList}\small\item\em Port to iol\+Reaching\+Calibration. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__subsystems_a3c405216a4f5b0c19e497c37902f7f84}{lastly\+Used\+Hand}
+\begin{DoxyCompactList}\small\item\em The hand which was used for the last action. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a844f5ba28f7944ba14ccecc2801a4824}\label{group__icubclient__subsystems_a844f5ba28f7944ba14ccecc2801a4824}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!Sub\+System\+\_\+\+A\+RE@{Sub\+System\+\_\+\+A\+RE}}
+\index{Sub\+System\+\_\+\+A\+RE@{Sub\+System\+\_\+\+A\+RE}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{Sub\+System\+\_\+\+A\+R\+E()}{SubSystem\_ARE()}}
+{\footnotesize\ttfamily icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::\+Sub\+System\+\_\+\+A\+RE (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{master\+Name }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em master\+Name} & stem-\/name used to open up ports. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 102 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a7ffb007fd4a83e42d5a76d28087728b6}\label{group__icubclient__subsystems_a7ffb007fd4a83e42d5a76d28087728b6}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!````~Sub\+System\+\_\+\+A\+RE@{$\sim$\+Sub\+System\+\_\+\+A\+RE}}
+\index{````~Sub\+System\+\_\+\+A\+RE@{$\sim$\+Sub\+System\+\_\+\+A\+RE}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{$\sim$\+Sub\+System\+\_\+\+A\+R\+E()}{~SubSystem\_ARE()}}
+{\footnotesize\ttfamily icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::$\sim$\+Sub\+System\+\_\+\+A\+RE (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+
+
+Definition at line 420 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a3347647fc4edae6ce157586a7ae13ca5}\label{group__icubclient__subsystems_a3347647fc4edae6ce157586a7ae13ca5}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!append\+Cartesian\+Target@{append\+Cartesian\+Target}}
+\index{append\+Cartesian\+Target@{append\+Cartesian\+Target}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{append\+Cartesian\+Target()}{appendCartesianTarget()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::append\+Cartesian\+Target (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Bottle \&}]{b,  }\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Appends a target vector {\bfseries t} to the Bottle {\bfseries b} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & Bottle to append vector to \\
+\hline
+{\em t} & Vector to be appended \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 4 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a773b2a1d25472fe211be01c3b65189a4}\label{group__icubclient__subsystems_a773b2a1d25472fe211be01c3b65189a4}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!apply\+Safety\+Margins@{apply\+Safety\+Margins}}
+\index{apply\+Safety\+Margins@{apply\+Safety\+Margins}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{apply\+Safety\+Margins()}{applySafetyMargins()}}
+{\footnotesize\ttfamily yarp\+::sig\+::\+Vector\+Of$<$ double $>$ icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::apply\+Safety\+Margins (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{in }\end{DoxyParamCaption})}
+
+
+
+Applies safety margins, i.\+e. 
+
+the {\itshape in} vector should be at least table height and at least 0.\+1m in front of the i\+Cub 
+\begin{DoxyParams}{Parameters}
+{\em in} & \char`\"{}\+Unsafe\char`\"{} vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\char`\"{}safe\char`\"{} vector 
+\end{DoxyReturn}
+
+
+Definition at line 148 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a570bb3cc879e0547a04e82b231a9f57f}\label{group__icubclient__subsystems_a570bb3cc879e0547a04e82b231a9f57f}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!Close@{Close}}
+\index{Close@{Close}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Clean up resources. 
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_af327c56ad0d33aada77f825d96fb47f2}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 114 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ab11c67c801f58eca84e8ef2941d4f2a8}\label{group__icubclient__subsystems_ab11c67c801f58eca84e8ef2941d4f2a8}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!connect@{connect}}
+\index{connect@{connect}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_a5fc84b6e51ec56f91323280b7da52dc8}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 76 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ad54f24f00f6e6db4db644d8f0ec6b278}\label{group__icubclient__subsystems_ad54f24f00f6e6db4db644d8f0ec6b278}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!drop@{drop}}
+\index{drop@{drop}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{drop()}{drop()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::drop (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+If an object is held, bring it over the table and drop it on a random position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em options} & Options of A\+RE commands (\char`\"{}no\+\_\+head\char`\"{}, \char`\"{}no\+\_\+gaze\char`\"{}, \char`\"{}no\+\_\+sacc\char`\"{}, \char`\"{}still\char`\"{}, \char`\"{}left\char`\"{}, \char`\"{}right\char`\"{}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful motor command, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 273 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_aebeca6e5202dc83eaa796c783f5a6e3d}\label{group__icubclient__subsystems_aebeca6e5202dc83eaa796c783f5a6e3d}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!drop\+On@{drop\+On}}
+\index{drop\+On@{drop\+On}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{drop\+On()}{dropOn()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::drop\+On (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target\+Unsafe,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Drop the object on a given target. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+Unsafe} & Target where to drop in cartesian coordinates \\
+\hline
+{\em options} & Options of A\+RE commands (\char`\"{}no\+\_\+head\char`\"{}, \char`\"{}no\+\_\+gaze\char`\"{}, \char`\"{}no\+\_\+sacc\char`\"{}, \char`\"{}still\char`\"{}, \char`\"{}left\char`\"{}, \char`\"{}right\char`\"{}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful motor command, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 291 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_adab52bf105b04e4e40ab2ce216350648}\label{group__icubclient__subsystems_adab52bf105b04e4e40ab2ce216350648}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!expect@{expect}}
+\index{expect@{expect}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{expect()}{expect()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::expect (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Put one hand forward with the palm facing up and wait for an object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em options} & Options of A\+RE commands (\char`\"{}no\+\_\+head\char`\"{}, \char`\"{}no\+\_\+gaze\char`\"{}, \char`\"{}no\+\_\+sacc\char`\"{}, \char`\"{}still\char`\"{}, \char`\"{}left\char`\"{}, \char`\"{}right\char`\"{}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful motor command, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 330 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a192608cd2b7f3956f2a2a2c89ecc9c9f}\label{group__icubclient__subsystems_a192608cd2b7f3956f2a2a2c89ecc9c9f}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!get\+Table\+Height@{get\+Table\+Height}}
+\index{get\+Table\+Height@{get\+Table\+Height}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{get\+Table\+Height()}{getTableHeight()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::get\+Table\+Height (\begin{DoxyParamCaption}\item[{double \&}]{height }\end{DoxyParamCaption})}
+
+
+
+Gets the table height from A\+RE. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em height} & -\/ reference to the output double \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on successful communication with A\+RE, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 130 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_aca9d66bebcb9a4c81b8523e45a39f693}\label{group__icubclient__subsystems_aca9d66bebcb9a4c81b8523e45a39f693}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!give@{give}}
+\index{give@{give}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{give()}{give()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::give (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Put one hand forward with the palm facing up and open the fingers so that the object held in the hand is free to be taken. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em options} & Options of A\+RE commands (\char`\"{}no\+\_\+head\char`\"{}, \char`\"{}no\+\_\+gaze\char`\"{}, \char`\"{}no\+\_\+sacc\char`\"{}, \char`\"{}still\char`\"{}, \char`\"{}left\char`\"{}, \char`\"{}right\char`\"{}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful motor command, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 346 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ae328769c62775194ac87a2cb6143d3e2}\label{group__icubclient__subsystems_ae328769c62775194ac87a2cb6143d3e2}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!home@{home}}
+\index{home@{home}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{home()}{home()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::home (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{part = {\ttfamily \char`\"{}all\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Put the specified part ih home position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em part} & the part to be homed (\char`\"{}gaze\char`\"{}, \char`\"{}head\char`\"{}, \char`\"{}arms\char`\"{}, \char`\"{}fingers\char`\"{}, \char`\"{}all\char`\"{}; \char`\"{}all\char`\"{} by default). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful motor command, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 160 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a3d47ce46a6a31949ad9da3faf1a0ca9f}\label{group__icubclient__subsystems_a3d47ce46a6a31949ad9da3faf1a0ca9f}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!impedance@{impedance}}
+\index{impedance@{impedance}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{impedance()}{impedance()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::impedance (\begin{DoxyParamCaption}\item[{const bool}]{sw }\end{DoxyParamCaption})}
+
+
+
+Enable/disable impedance control. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sw} & enable/disable if true/false. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful request, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 404 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a1063ea28c120fe11f3f42b92f1ac84ea}\label{group__icubclient__subsystems_a1063ea28c120fe11f3f42b92f1ac84ea}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!look@{look}}
+\index{look@{look}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{look()}{look()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::look (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Look at the specified \mbox{[}target\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & Target to look at in cartesian coordinates \\
+\hline
+{\em options} & Options of A\+RE commands (\char`\"{}fixate\char`\"{}, \char`\"{}wait\char`\"{}, (block\+\_\+eyes ver)). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful motor command, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 376 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_abe9ce03e08fc25290d89d64eee8ec972}\label{group__icubclient__subsystems_abe9ce03e08fc25290d89d64eee8ec972}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!observe@{observe}}
+\index{observe@{observe}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{observe()}{observe()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::observe (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Bring the hand in the visual field and move it with the purpose of visual exploration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em options} & Options of A\+RE commands (\char`\"{}no\+\_\+head\char`\"{}, \char`\"{}no\+\_\+gaze\char`\"{}, \char`\"{}no\+\_\+sacc\char`\"{}, \char`\"{}still\char`\"{}, \char`\"{}left\char`\"{}, \char`\"{}right\char`\"{}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful motor command, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 314 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a92fbb5f6c28b6bf9c7dec4ef3737b7c6}\label{group__icubclient__subsystems_a92fbb5f6c28b6bf9c7dec4ef3737b7c6}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!point@{point}}
+\index{point@{point}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{point()}{point()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::point (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target\+Unsafe,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Point at the specified \mbox{[}target\mbox{]} with the index finger. 
+
+The target can be far away from the i\+Cub, e.\+g. a body part of the human. If the target is further away than 31cm, use the \char`\"{}pfar\char`\"{} functionality of A\+RE. If it is closer than 31cm, use the \char`\"{}point\char`\"{} functionality of A\+RE. 
+\begin{DoxyParams}{Parameters}
+{\em target\+Unsafe} & Target to point to in cartesian coordinates \\
+\hline
+{\em options} & Options of A\+RE commands (\char`\"{}no\+\_\+head\char`\"{}, \char`\"{}no\+\_\+gaze\char`\"{}, \char`\"{}no\+\_\+sacc\char`\"{}, \char`\"{}still\char`\"{}, \char`\"{}left\char`\"{}, \char`\"{}right\char`\"{}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful motor command, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 248 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a4b1fe9a6c979be5ec739d319ad0e3d94}\label{group__icubclient__subsystems_a4b1fe9a6c979be5ec739d319ad0e3d94}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!push@{push}}
+\index{push@{push}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::push (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s\+Name,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Reach the specified \mbox{[}target\mbox{]} from one side and then push it laterally. 
+
+Optional parameter \char`\"{}away\char`\"{} can be supplied in order to have the robot push the object away from its root reference frame. 
+\begin{DoxyParams}{Parameters}
+{\em s\+Name} & Name of target to push in cartesian coordinates \\
+\hline
+{\em options} & Options of A\+RE commands (\char`\"{}no\+\_\+head\char`\"{}, \char`\"{}no\+\_\+gaze\char`\"{}, \char`\"{}no\+\_\+sacc\char`\"{}, \char`\"{}still\char`\"{}, \char`\"{}left\char`\"{}, \char`\"{}right\char`\"{}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful motor command, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 211 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_acd77a648ae64caad1620ad082e81d481}\label{group__icubclient__subsystems_acd77a648ae64caad1620ad082e81d481}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!select\+Hand\+Correct\+Target@{select\+Hand\+Correct\+Target}}
+\index{select\+Hand\+Correct\+Target@{select\+Hand\+Correct\+Target}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{select\+Hand\+Correct\+Target()}{selectHandCorrectTarget()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::select\+Hand\+Correct\+Target (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Bottle \&}]{options,  }\item[{yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target,  }\item[{const std\+::string \&}]{obj\+Name,  }\item[{const std\+::string}]{hand\+To\+Use = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 12 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a5e8900944781979714a8cc5fb97f7ad4}\label{group__icubclient__subsystems_a5e8900944781979714a8cc5fb97f7ad4}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!send\+Cmd@{send\+Cmd}}
+\index{send\+Cmd@{send\+Cmd}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{send\+Cmd()}{sendCmd()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::send\+Cmd (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{cmd }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Sends a command to A\+RE\textquotesingle{}s cmd\+Port. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & Command to be sent \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful 
+\end{DoxyReturn}
+
+
+Definition at line 62 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a57b41efd7a13037bd383e4cdbd0b11ab}\label{group__icubclient__subsystems_a57b41efd7a13037bd383e4cdbd0b11ab}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!set\+Exec\+Time@{set\+Exec\+Time}}
+\index{set\+Exec\+Time@{set\+Exec\+Time}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{set\+Exec\+Time()}{setExecTime()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::set\+Exec\+Time (\begin{DoxyParamCaption}\item[{const double}]{exec\+Time }\end{DoxyParamCaption})}
+
+
+
+Change default arm movement execution time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec\+Time} & the arm movement execution time given in seconds. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful request, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 412 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a7806d075279d1593b7c63fda368aa3f8}\label{group__icubclient__subsystems_a7806d075279d1593b7c63fda368aa3f8}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!take@{take}}
+\index{take@{take}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{take()}{take()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::take (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s\+Name,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Reach the specified \mbox{[}target\mbox{]} and grasp it. 
+
+Optional parameter \char`\"{}side\char`\"{} or \char`\"{}above\char`\"{} can be supplied to choose the orientation the robot should keep while performing the action (default\+: \char`\"{}above\char`\"{}). 
+\begin{DoxyParams}{Parameters}
+{\em s\+Name} & Name of target to grasp \\
+\hline
+{\em options} & Options of A\+RE commands (\char`\"{}no\+\_\+head\char`\"{}, \char`\"{}no\+\_\+gaze\char`\"{}, \char`\"{}no\+\_\+sacc\char`\"{}, \char`\"{}still\char`\"{}, \char`\"{}left\char`\"{}, \char`\"{}right\char`\"{}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful motor command, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 175 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_adb9f502a08ee0aeb1c22b10b37def763}\label{group__icubclient__subsystems_adb9f502a08ee0aeb1c22b10b37def763}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!track@{track}}
+\index{track@{track}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{track()}{track()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::track (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Track the specified \mbox{[}target\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & Target to look at in cartesian coordinates \\
+\hline
+{\em options} & Options of A\+RE commands (\char`\"{}no\+\_\+sacc\char`\"{}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful motor command, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 394 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a12374067510db0ffcd01bbea4e7b0ce1}\label{group__icubclient__subsystems_a12374067510db0ffcd01bbea4e7b0ce1}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!waving@{waving}}
+\index{waving@{waving}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{waving()}{waving()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::waving (\begin{DoxyParamCaption}\item[{const bool}]{sw }\end{DoxyParamCaption})}
+
+
+
+Enable/disable arms waving. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sw} & enable/disable if true/false. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful request, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 361 of file sub\+System\+\_\+\+A\+R\+E.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a3c405216a4f5b0c19e497c37902f7f84}\label{group__icubclient__subsystems_a3c405216a4f5b0c19e497c37902f7f84}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!lastly\+Used\+Hand@{lastly\+Used\+Hand}}
+\index{lastly\+Used\+Hand@{lastly\+Used\+Hand}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{lastly\+Used\+Hand}{lastlyUsedHand}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::lastly\+Used\+Hand\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The hand which was used for the last action. 
+
+
+
+Definition at line 51 of file sub\+System\+\_\+\+A\+R\+E.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a2df4b6d0c2b2efbe83ab482e362a2755}\label{group__icubclient__subsystems_a2df4b6d0c2b2efbe83ab482e362a2755}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!opc@{opc}}
+\index{opc@{opc}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{opc}{opc}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client}$\ast$ icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::opc\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 44 of file sub\+System\+\_\+\+A\+R\+E.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ab4c5eb79db5e71a74c9dba6d79249b44}\label{group__icubclient__subsystems_ab4c5eb79db5e71a74c9dba6d79249b44}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!port\+Calib@{port\+Calib}}
+\index{port\+Calib@{port\+Calib}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{port\+Calib}{portCalib}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Rpc\+Client icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::port\+Calib\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Port to iol\+Reaching\+Calibration. 
+
+
+
+Definition at line 49 of file sub\+System\+\_\+\+A\+R\+E.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a6871234a45e1bbbb474195d512fbd428}\label{group__icubclient__subsystems_a6871234a45e1bbbb474195d512fbd428}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!port\+Cmd@{port\+Cmd}}
+\index{port\+Cmd@{port\+Cmd}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{port\+Cmd}{portCmd}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Rpc\+Client icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::port\+Cmd\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Port to /\+A\+R\+E/cmd\+:io. 
+
+
+
+Definition at line 46 of file sub\+System\+\_\+\+A\+R\+E.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a940b01fa144f15cdb9ef8200529e38f9}\label{group__icubclient__subsystems_a940b01fa144f15cdb9ef8200529e38f9}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!port\+Get@{port\+Get}}
+\index{port\+Get@{port\+Get}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{port\+Get}{portGet}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Rpc\+Client icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::port\+Get\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Port to /\+A\+R\+E/get\+:io. 
+
+
+
+Definition at line 48 of file sub\+System\+\_\+\+A\+R\+E.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_abbe5f0e2a29cd9d6cc907e8ef635b3a5}\label{group__icubclient__subsystems_abbe5f0e2a29cd9d6cc907e8ef635b3a5}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}!port\+R\+PC@{port\+R\+PC}}
+\index{port\+R\+PC@{port\+R\+PC}!icubclient\+::\+Sub\+System\+\_\+\+A\+RE@{icubclient\+::\+Sub\+System\+\_\+\+A\+RE}}
+\subparagraph{\texorpdfstring{port\+R\+PC}{portRPC}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Rpc\+Client icubclient\+::\+Sub\+System\+\_\+\+A\+R\+E\+::port\+R\+PC\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Port to /\+A\+R\+E/rpc. 
+
+
+
+Definition at line 47 of file sub\+System\+\_\+\+A\+R\+E.\+h.
+
+\index{icubclient\+::\+Sub\+System\+\_\+babbling@{icubclient\+::\+Sub\+System\+\_\+babbling}}\label{classicubclient_1_1SubSystem__babbling}
+\Hypertarget{group__icubclient__subsystems_classicubclient_1_1SubSystem__babbling}
+\subsubsection{class icubclient\+:\+:Sub\+System\+\_\+babbling}
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} for babbling. 
+
+Definition at line 33 of file sub\+System\+\_\+babbling.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Sub\+System\+\_\+babbling\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classicubclient_1_1SubSystem__babbling__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__subsystems_a7a48e0c4846d9f35586d0f5b3cd95ac7}{Sub\+System\+\_\+babbling} (const std\+::string \&master\+Name)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{group__icubclient__subsystems_a9865dd2f02610e3ea80923b7194981ae}{Close} ()
+\begin{DoxyCompactList}\small\item\em Clean up resources. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_ae8183d3b5dd075eaaa16b5a0d3b201e4}{babbling\+Arm} (const std\+::string \&babbling\+Limb, double duration=-\/1.\+0)
+\begin{DoxyCompactList}\small\item\em Whole arm babbling. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_a9baa0d296d355f5e2c83ec972b17cdad}{babbling} (int joint\+Number, const std\+::string \&babbling\+Limb, double duration=-\/1.\+0)
+\begin{DoxyCompactList}\small\item\em Single joint babbling. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{group__icubclient__subsystems_a571ba8f32c2ccf03610dd06866749d95}{connect} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a7a48e0c4846d9f35586d0f5b3cd95ac7}\label{group__icubclient__subsystems_a7a48e0c4846d9f35586d0f5b3cd95ac7}} 
+\index{icubclient\+::\+Sub\+System\+\_\+babbling@{icubclient\+::\+Sub\+System\+\_\+babbling}!Sub\+System\+\_\+babbling@{Sub\+System\+\_\+babbling}}
+\index{Sub\+System\+\_\+babbling@{Sub\+System\+\_\+babbling}!icubclient\+::\+Sub\+System\+\_\+babbling@{icubclient\+::\+Sub\+System\+\_\+babbling}}
+\subparagraph{\texorpdfstring{Sub\+System\+\_\+babbling()}{SubSystem\_babbling()}}
+{\footnotesize\ttfamily icubclient\+::\+Sub\+System\+\_\+babbling\+::\+Sub\+System\+\_\+babbling (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{master\+Name }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em master\+Name} & stem-\/name used to open up ports. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 12 of file sub\+System\+\_\+babbling.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a9baa0d296d355f5e2c83ec972b17cdad}\label{group__icubclient__subsystems_a9baa0d296d355f5e2c83ec972b17cdad}} 
+\index{icubclient\+::\+Sub\+System\+\_\+babbling@{icubclient\+::\+Sub\+System\+\_\+babbling}!babbling@{babbling}}
+\index{babbling@{babbling}!icubclient\+::\+Sub\+System\+\_\+babbling@{icubclient\+::\+Sub\+System\+\_\+babbling}}
+\subparagraph{\texorpdfstring{babbling()}{babbling()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+babbling\+::babbling (\begin{DoxyParamCaption}\item[{int}]{joint\+Number,  }\item[{const std\+::string \&}]{babbling\+Limb,  }\item[{double}]{duration = {\ttfamily -\/1.0} }\end{DoxyParamCaption})}
+
+
+
+Single joint babbling. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em joint\+Number} & Which joint to babble. \\
+\hline
+{\em babbling\+Limb} & The limb to babble. Should be \char`\"{}left\+\_\+arm\char`\"{} or \char`\"{}right\+\_\+arm\char`\"{} \\
+\hline
+{\em duration} & How long to babble for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successful 
+\end{DoxyReturn}
+
+
+Definition at line 36 of file sub\+System\+\_\+babbling.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ae8183d3b5dd075eaaa16b5a0d3b201e4}\label{group__icubclient__subsystems_ae8183d3b5dd075eaaa16b5a0d3b201e4}} 
+\index{icubclient\+::\+Sub\+System\+\_\+babbling@{icubclient\+::\+Sub\+System\+\_\+babbling}!babbling\+Arm@{babbling\+Arm}}
+\index{babbling\+Arm@{babbling\+Arm}!icubclient\+::\+Sub\+System\+\_\+babbling@{icubclient\+::\+Sub\+System\+\_\+babbling}}
+\subparagraph{\texorpdfstring{babbling\+Arm()}{babblingArm()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+babbling\+::babbling\+Arm (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{babbling\+Limb,  }\item[{double}]{duration = {\ttfamily -\/1.0} }\end{DoxyParamCaption})}
+
+
+
+Whole arm babbling. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em babbling\+Limb} & The limb to babble. Should be \char`\"{}left\+\_\+arm\char`\"{} or \char`\"{}right\+\_\+arm\char`\"{} \\
+\hline
+{\em duration} & How long to babble for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successful 
+\end{DoxyReturn}
+
+
+Definition at line 22 of file sub\+System\+\_\+babbling.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a9865dd2f02610e3ea80923b7194981ae}\label{group__icubclient__subsystems_a9865dd2f02610e3ea80923b7194981ae}} 
+\index{icubclient\+::\+Sub\+System\+\_\+babbling@{icubclient\+::\+Sub\+System\+\_\+babbling}!Close@{Close}}
+\index{Close@{Close}!icubclient\+::\+Sub\+System\+\_\+babbling@{icubclient\+::\+Sub\+System\+\_\+babbling}}
+\subparagraph{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+babbling\+::\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Clean up resources. 
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_af327c56ad0d33aada77f825d96fb47f2}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 17 of file sub\+System\+\_\+babbling.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a571ba8f32c2ccf03610dd06866749d95}\label{group__icubclient__subsystems_a571ba8f32c2ccf03610dd06866749d95}} 
+\index{icubclient\+::\+Sub\+System\+\_\+babbling@{icubclient\+::\+Sub\+System\+\_\+babbling}!connect@{connect}}
+\index{connect@{connect}!icubclient\+::\+Sub\+System\+\_\+babbling@{icubclient\+::\+Sub\+System\+\_\+babbling}}
+\subparagraph{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+babbling\+::connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_a5fc84b6e51ec56f91323280b7da52dc8}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 4 of file sub\+System\+\_\+babbling.\+cpp.
+
+\index{icubclient\+::\+Sub\+System\+\_\+emotion@{icubclient\+::\+Sub\+System\+\_\+emotion}}\label{classicubclient_1_1SubSystem__emotion}
+\Hypertarget{group__icubclient__subsystems_classicubclient_1_1SubSystem__emotion}
+\subsubsection{class icubclient\+:\+:Sub\+System\+\_\+emotion}
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} for emotion. 
+
+Definition at line 33 of file sub\+System\+\_\+emotion.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Sub\+System\+\_\+emotion\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classicubclient_1_1SubSystem__emotion__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__subsystems_aa5edf05eb54ad2fe7d8068c8336d902f}{Sub\+System\+\_\+emotion} (const std\+::string \&master\+Name)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{group__icubclient__subsystems_a44727eb284e1291c193559d9ecc12a50}{Close} ()
+\begin{DoxyCompactList}\small\item\em Clean up resources. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_ac16bc529539e92565e0bdf957b3e57c2}{set\+Emotion} (std\+::string emotion, std\+::string part=\char`\"{}all\char`\"{})
+\begin{DoxyCompactList}\small\item\em Method to switch i\+Cub emotion for different parts of face. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::string, std\+::string $>$ \hyperlink{group__icubclient__subsystems_ad90b6e7e287e41f8fcdb70937cf51c37}{get\+Emotion} ()
+\begin{DoxyCompactList}\small\item\em Method to get current i\+Cub emotion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{group__icubclient__subsystems_af55715ece8170cb63fc2546f2bdcfcf1}{connect} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__subsystems_a56c42753f30380d8abf4a96bc322b3b0}{I\+Cub\+Client}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_aa5edf05eb54ad2fe7d8068c8336d902f}\label{group__icubclient__subsystems_aa5edf05eb54ad2fe7d8068c8336d902f}} 
+\index{icubclient\+::\+Sub\+System\+\_\+emotion@{icubclient\+::\+Sub\+System\+\_\+emotion}!Sub\+System\+\_\+emotion@{Sub\+System\+\_\+emotion}}
+\index{Sub\+System\+\_\+emotion@{Sub\+System\+\_\+emotion}!icubclient\+::\+Sub\+System\+\_\+emotion@{icubclient\+::\+Sub\+System\+\_\+emotion}}
+\subparagraph{\texorpdfstring{Sub\+System\+\_\+emotion()}{SubSystem\_emotion()}}
+{\footnotesize\ttfamily icubclient\+::\+Sub\+System\+\_\+emotion\+::\+Sub\+System\+\_\+emotion (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{master\+Name }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em master\+Name} & stem-\/name used to open up ports. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 14 of file sub\+System\+\_\+emotion.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a44727eb284e1291c193559d9ecc12a50}\label{group__icubclient__subsystems_a44727eb284e1291c193559d9ecc12a50}} 
+\index{icubclient\+::\+Sub\+System\+\_\+emotion@{icubclient\+::\+Sub\+System\+\_\+emotion}!Close@{Close}}
+\index{Close@{Close}!icubclient\+::\+Sub\+System\+\_\+emotion@{icubclient\+::\+Sub\+System\+\_\+emotion}}
+\subparagraph{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+emotion\+::\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Clean up resources. 
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_af327c56ad0d33aada77f825d96fb47f2}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 19 of file sub\+System\+\_\+emotion.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_af55715ece8170cb63fc2546f2bdcfcf1}\label{group__icubclient__subsystems_af55715ece8170cb63fc2546f2bdcfcf1}} 
+\index{icubclient\+::\+Sub\+System\+\_\+emotion@{icubclient\+::\+Sub\+System\+\_\+emotion}!connect@{connect}}
+\index{connect@{connect}!icubclient\+::\+Sub\+System\+\_\+emotion@{icubclient\+::\+Sub\+System\+\_\+emotion}}
+\subparagraph{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+emotion\+::connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_a5fc84b6e51ec56f91323280b7da52dc8}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 6 of file sub\+System\+\_\+emotion.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ad90b6e7e287e41f8fcdb70937cf51c37}\label{group__icubclient__subsystems_ad90b6e7e287e41f8fcdb70937cf51c37}} 
+\index{icubclient\+::\+Sub\+System\+\_\+emotion@{icubclient\+::\+Sub\+System\+\_\+emotion}!get\+Emotion@{get\+Emotion}}
+\index{get\+Emotion@{get\+Emotion}!icubclient\+::\+Sub\+System\+\_\+emotion@{icubclient\+::\+Sub\+System\+\_\+emotion}}
+\subparagraph{\texorpdfstring{get\+Emotion()}{getEmotion()}}
+{\footnotesize\ttfamily std\+::pair$<$ std\+::string, std\+::string $>$ icubclient\+::\+Sub\+System\+\_\+emotion\+::get\+Emotion (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Method to get current i\+Cub emotion. 
+
+\begin{DoxyReturn}{Returns}
+string with emotion name. 
+\end{DoxyReturn}
+
+
+Definition at line 78 of file sub\+System\+\_\+emotion.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ac16bc529539e92565e0bdf957b3e57c2}\label{group__icubclient__subsystems_ac16bc529539e92565e0bdf957b3e57c2}} 
+\index{icubclient\+::\+Sub\+System\+\_\+emotion@{icubclient\+::\+Sub\+System\+\_\+emotion}!set\+Emotion@{set\+Emotion}}
+\index{set\+Emotion@{set\+Emotion}!icubclient\+::\+Sub\+System\+\_\+emotion@{icubclient\+::\+Sub\+System\+\_\+emotion}}
+\subparagraph{\texorpdfstring{set\+Emotion()}{setEmotion()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+emotion\+::set\+Emotion (\begin{DoxyParamCaption}\item[{std\+::string}]{emotion,  }\item[{std\+::string}]{part = {\ttfamily \char`\"{}all\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Method to switch i\+Cub emotion for different parts of face. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em emotion} & String of emotion name \\
+\hline
+{\em part} & String of part name -\/ if \char`\"{}all\char`\"{}, the whole face is affected \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if command was sent successful. 
+\end{DoxyReturn}
+
+
+Definition at line 24 of file sub\+System\+\_\+emotion.\+cpp.
+
+
+
+\paragraph{Friends And Related Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a56c42753f30380d8abf4a96bc322b3b0}\label{group__icubclient__subsystems_a56c42753f30380d8abf4a96bc322b3b0}} 
+\index{icubclient\+::\+Sub\+System\+\_\+emotion@{icubclient\+::\+Sub\+System\+\_\+emotion}!I\+Cub\+Client@{I\+Cub\+Client}}
+\index{I\+Cub\+Client@{I\+Cub\+Client}!icubclient\+::\+Sub\+System\+\_\+emotion@{icubclient\+::\+Sub\+System\+\_\+emotion}}
+\subparagraph{\texorpdfstring{I\+Cub\+Client}{ICubClient}}
+{\footnotesize\ttfamily friend class \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{I\+Cub\+Client}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 35 of file sub\+System\+\_\+emotion.\+h.
+
+\index{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}}\label{classicubclient_1_1SubSystem__IOL2OPC}
+\Hypertarget{group__icubclient__subsystems_classicubclient_1_1SubSystem__IOL2OPC}
+\subsubsection{class icubclient\+:\+:Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} for iol2opc. 
+
+Definition at line 33 of file sub\+System\+\_\+iol2opc.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Sub\+System\+\_\+\+I\+O\+L2\+O\+PC\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classicubclient_1_1SubSystem__IOL2OPC__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__subsystems_ae59e5eea9897cea515d5b28a2ad57734}{Sub\+System\+\_\+\+I\+O\+L2\+O\+PC} (const std\+::string \&master\+Name)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{group__icubclient__subsystems_a15246d09894da753d1672f58b6af8556}{Close} ()
+\begin{DoxyCompactList}\small\item\em Clean up resources. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__subsystems_a09c98f6a86748aa507fdb0d28ee1309a}{pause} ()
+\begin{DoxyCompactList}\small\item\em Pause the iol2opc object detection. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__subsystems_a6633b7fcf67e9d7153f8060aab3d9a98}{resume} ()
+\begin{DoxyCompactList}\small\item\em Resume the iol2opc object detection. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{group__icubclient__subsystems_a1407547931468f9d704e10e3436ed467}{connect} ()
+\item 
+bool \hyperlink{group__icubclient__subsystems_a08ccd01433080f2dce96aea13cf6c898}{change\+Name} (const std\+::string \&old\+\_\+name, const std\+::string \&new\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Change the name of an object Internally used by \hyperlink{group__icubclient__clients_a860fb1399bafb125c3955110dc17a42e}{I\+Cub\+Client\+::change\+Name}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__subsystems_a56c42753f30380d8abf4a96bc322b3b0}{I\+Cub\+Client}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_ae59e5eea9897cea515d5b28a2ad57734}\label{group__icubclient__subsystems_ae59e5eea9897cea515d5b28a2ad57734}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}!Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}}
+\index{Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}!icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}}
+\subparagraph{\texorpdfstring{Sub\+System\+\_\+\+I\+O\+L2\+O\+P\+C()}{SubSystem\_IOL2OPC()}}
+{\footnotesize\ttfamily icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+P\+C\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{master\+Name }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em master\+Name} & stem-\/name used to open up ports. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 12 of file sub\+System\+\_\+iol2opc.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a08ccd01433080f2dce96aea13cf6c898}\label{group__icubclient__subsystems_a08ccd01433080f2dce96aea13cf6c898}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}!change\+Name@{change\+Name}}
+\index{change\+Name@{change\+Name}!icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}}
+\subparagraph{\texorpdfstring{change\+Name()}{changeName()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+P\+C\+::change\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{old\+\_\+name,  }\item[{const std\+::string \&}]{new\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Change the name of an object Internally used by \hyperlink{group__icubclient__clients_a860fb1399bafb125c3955110dc17a42e}{I\+Cub\+Client\+::change\+Name}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em old\+\_\+name} & Name of the object to be changed \\
+\hline
+{\em new\+\_\+name} & New name of the object \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 22 of file sub\+System\+\_\+iol2opc.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a15246d09894da753d1672f58b6af8556}\label{group__icubclient__subsystems_a15246d09894da753d1672f58b6af8556}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}!Close@{Close}}
+\index{Close@{Close}!icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}}
+\subparagraph{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+P\+C\+::\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Clean up resources. 
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_af327c56ad0d33aada77f825d96fb47f2}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 17 of file sub\+System\+\_\+iol2opc.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a1407547931468f9d704e10e3436ed467}\label{group__icubclient__subsystems_a1407547931468f9d704e10e3436ed467}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}!connect@{connect}}
+\index{connect@{connect}!icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}}
+\subparagraph{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+P\+C\+::connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_a5fc84b6e51ec56f91323280b7da52dc8}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 4 of file sub\+System\+\_\+iol2opc.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a09c98f6a86748aa507fdb0d28ee1309a}\label{group__icubclient__subsystems_a09c98f6a86748aa507fdb0d28ee1309a}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}!pause@{pause}}
+\index{pause@{pause}!icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}}
+\subparagraph{\texorpdfstring{pause()}{pause()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+P\+C\+::pause (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Pause the iol2opc object detection. 
+
+
+
+Definition at line 32 of file sub\+System\+\_\+iol2opc.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a6633b7fcf67e9d7153f8060aab3d9a98}\label{group__icubclient__subsystems_a6633b7fcf67e9d7153f8060aab3d9a98}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}!resume@{resume}}
+\index{resume@{resume}!icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}}
+\subparagraph{\texorpdfstring{resume()}{resume()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+P\+C\+::resume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Resume the iol2opc object detection. 
+
+
+
+Definition at line 38 of file sub\+System\+\_\+iol2opc.\+cpp.
+
+
+
+\paragraph{Friends And Related Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a56c42753f30380d8abf4a96bc322b3b0}\label{group__icubclient__subsystems_a56c42753f30380d8abf4a96bc322b3b0}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}!I\+Cub\+Client@{I\+Cub\+Client}}
+\index{I\+Cub\+Client@{I\+Cub\+Client}!icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC@{icubclient\+::\+Sub\+System\+\_\+\+I\+O\+L2\+O\+PC}}
+\subparagraph{\texorpdfstring{I\+Cub\+Client}{ICubClient}}
+{\footnotesize\ttfamily friend class \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{I\+Cub\+Client}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 35 of file sub\+System\+\_\+iol2opc.\+h.
+
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}\label{classicubclient_1_1SubSystem__KARMA}
+\Hypertarget{group__icubclient__subsystems_classicubclient_1_1SubSystem__KARMA}
+\subsubsection{class icubclient\+:\+:Sub\+System\+\_\+\+K\+A\+R\+MA}
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} to deal with the {\bfseries experimental affordance learning} module (a.\+k.\+a. 
+
+{\bfseries K\+A\+R\+MA}) for motor control.
+
+For further details, please refer to the K\+A\+R\+MA main page\+: \href{http://robotology.github.io/karma/doxygen/doc/html/group__karmaMotor.html}{\tt http\+://robotology.\+github.\+io/karma/doxygen/doc/html/group\+\_\+\+\_\+karma\+Motor.\+html} 
+
+Definition at line 43 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Sub\+System\+\_\+\+K\+A\+R\+MA\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classicubclient_1_1SubSystem__KARMA__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__subsystems_aaefefc860c78c126fadf0e5a33978ca5}{Sub\+System\+\_\+\+K\+A\+R\+MA} (const std\+::string \&master\+Name, const std\+::string \&\hyperlink{group__icubclient__subsystems_aeeeaf8af66dcee9d7c1173528bc30d7a}{robot})
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__subsystems_acdec5cffb610e7b93d2d51ac22765b21}{Close} ()
+\begin{DoxyCompactList}\small\item\em Clean up resources. \end{DoxyCompactList}\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__icubclient__subsystems_abc4835144a2474b400777fd4045b6045}{apply\+Safety\+Margins} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&in)
+\begin{DoxyCompactList}\small\item\em Applies safety margins, i.\+e. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_a657a8377ba54195005a55811f530f990}{choose\+Arm} (const std\+::string \&arm\+Type)
+\begin{DoxyCompactList}\small\item\em choose\+Arm (tool\+Attach in K\+A\+R\+MA)\+: wrapper for tool-\/attach of K\+A\+R\+MA, can be used to choose the arm for actions with K\+A\+R\+MA \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__subsystems_a90f064b10e6953a42e58b3b623893551}{choose\+Arm\+Auto} ()
+\begin{DoxyCompactList}\small\item\em choose\+Arm\+Auto (tool\+Remove in K\+A\+R\+MA)\+: wrapper for tool-\/remove of Karma, use to clear the arm choise \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_ae831bfd7af1572a65f53b11b9519e473}{push\+Aside} (const std\+::string \&obj\+Name, const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&obj\+Center, const double \&target\+PosY, const double \&theta, const std\+::string \&arm\+Type=\char`\"{}selectable\char`\"{}, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em push\+Aside (K\+A\+R\+MA)\+: push an object to a certain location along y-\/axis of robot RoF \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_ac7835e392d76249294d19c863f88e679}{push\+Front} (const std\+::string \&obj\+Name, const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&obj\+Center, const double \&target\+Pos\+X\+Front, const std\+::string \&arm\+Type=\char`\"{}selectable\char`\"{}, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em push\+Front (K\+A\+R\+MA)\+: push an object to a certain location along x-\/axis of robot RoF \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_aabe8749ad0593a522e8377477d7d3d9b}{push} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target\+Center, const double theta, const double radius, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em push (K\+A\+R\+MA)\+: push to certain position, along a defined direction \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_a956b5bad90e96ca0c2c8f33f306256ac}{pull\+Back} (const std\+::string \&obj\+Name, const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&obj\+Center, const double \&target\+Pos\+X\+Back, const std\+::string \&arm\+Type=\char`\"{}selectable\char`\"{}, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em pull\+Back (K\+A\+R\+MA)\+: pull an object to a certain location along x-\/axis of robot RoF \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_a328d7187887b653399ccc783be8fb56e}{draw} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target\+Center, const double theta, const double radius, const double dist, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em draw (K\+A\+R\+MA)\+: draw action, along the positive direction of the x-\/axis (in robot FoR) \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_aaba06999b553acfd343004d1116b0111}{vdraw} (const std\+::string \&obj\+Name, const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target\+Center, const double theta, const double radius, const double dist, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em vdraw (K\+A\+R\+MA)\+: virtual draw action, along the positive direction of the x-\/axis (in robot FoR) \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_a8b5ae0fcd093f270e5bb4c32c60df252}{open\+Cartesian\+Client} ()
+\item 
+\hyperlink{group__icubclient__subsystems_af71df4017d78d4cebf6ea28ce8e1bbde}{$\sim$\+Sub\+System\+\_\+\+K\+A\+R\+MA} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__icubclient__subsystems_a9dc49c4b5c168366758cd9ee23654a42}{append\+Target} (yarp\+::os\+::\+Bottle \&b, const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&t\+Center)
+\begin{DoxyCompactList}\small\item\em Appends a target vector {\bfseries t} to the Bottle {\bfseries } \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__subsystems_aa401a2dc18c491f11a1ba36ab6811606}{append\+Double} (yarp\+::os\+::\+Bottle \&b, const double \&v)
+\begin{DoxyCompactList}\small\item\em Appends a double value {\bfseries v} to the Bottle {\bfseries } \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_ab965ba9aa2f810b3a026e91fbc3073df}{return\+Arm\+Safely} (std\+::string arm\+Type)
+\item 
+void \hyperlink{group__icubclient__subsystems_a8bfb9f15e37ed16130fb2849142417a8}{select\+Hand\+Correct\+Target} (yarp\+::os\+::\+Bottle \&options, const std\+::string \&target\+Name, yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target, const std\+::string hand\+To\+Use=\char`\"{}\char`\"{})
+\item 
+bool \hyperlink{group__icubclient__subsystems_acf93003113c4db21fe8717a2da168bd5}{send\+Cmd} (yarp\+::os\+::\+Bottle \&cmd)
+\begin{DoxyCompactList}\small\item\em Sends a command to K\+A\+R\+MA\textquotesingle{}s R\+PC port. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_acc63e171efddf99fa1e57ab1cdce3a13}{connect} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__ARE}{Sub\+System\+\_\+\+A\+RE} $\ast$ \hyperlink{group__icubclient__subsystems_a8321840d15271ec9306aea8b88ca166f}{Sub\+A\+RE}
+\item 
+bool \hyperlink{group__icubclient__subsystems_ae8cb5c87396b9f0c2884ceb5706da0cb}{A\+R\+Econnected}
+\item 
+std\+::string \hyperlink{group__icubclient__subsystems_aeeeaf8af66dcee9d7c1173528bc30d7a}{robot}
+\item 
+double \hyperlink{group__icubclient__subsystems_add03e20b9b8be1dad5999fb47e572679}{table\+Height}
+\item 
+bool \hyperlink{group__icubclient__subsystems_a818b2bfd4f80d10f8065bee519cb6529}{has\+Table}
+\item 
+yarp\+::os\+::\+Rpc\+Client \hyperlink{group__icubclient__subsystems_a8718260a66be2d5a3ec02f9065fce749}{port\+Stop}
+\item 
+yarp\+::os\+::\+Rpc\+Client \hyperlink{group__icubclient__subsystems_a90fe9f8b078cfdb1791919968f056e55}{port\+Vision}
+\item 
+yarp\+::os\+::\+Rpc\+Client \hyperlink{group__icubclient__subsystems_a50a8081c5f290dfcbd89707c699475c1}{port\+Finder}
+\item 
+yarp\+::os\+::\+Rpc\+Client \hyperlink{group__icubclient__subsystems_a90197083a8928d56ef80028a9db44dec}{port\+Calib}
+\item 
+yarp\+::dev\+::\+Poly\+Driver \hyperlink{group__icubclient__subsystems_acf3f0af27d083e7e4dc5d63d47419986}{driverL}
+\item 
+yarp\+::dev\+::\+Poly\+Driver \hyperlink{group__icubclient__subsystems_a2b0310b9cf7896d08045e36e52b428fa}{driverR}
+\item 
+yarp\+::dev\+::\+Poly\+Driver \hyperlink{group__icubclient__subsystems_aa013e93b2c134a421130c01f3e95798b}{driver\+HL}
+\item 
+yarp\+::dev\+::\+Poly\+Driver \hyperlink{group__icubclient__subsystems_a5e4aa27bee2286177e8b7916fdc61bfd}{driver\+HR}
+\item 
+yarp\+::dev\+::\+I\+Cartesian\+Control $\ast$ \hyperlink{group__icubclient__subsystems_ac3e11b504080f7e19032973a2719a9a7}{i\+Cart\+CtrlL}
+\item 
+yarp\+::dev\+::\+I\+Cartesian\+Control $\ast$ \hyperlink{group__icubclient__subsystems_ad0fc8e0142ccdb3ebd3777bf1a0e37b6}{i\+Cart\+CtrlR}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_aaefefc860c78c126fadf0e5a33978ca5}\label{group__icubclient__subsystems_aaefefc860c78c126fadf0e5a33978ca5}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!Sub\+System\+\_\+\+K\+A\+R\+MA@{Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\index{Sub\+System\+\_\+\+K\+A\+R\+MA@{Sub\+System\+\_\+\+K\+A\+R\+MA}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{Sub\+System\+\_\+\+K\+A\+R\+M\+A()}{SubSystem\_KARMA()}}
+{\footnotesize\ttfamily icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{master\+Name,  }\item[{const std\+::string \&}]{robot }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em master\+Name} & stem-\/name used to open up ports. \\
+\hline
+{\em robot} & name of the robot ({\ttfamily icub} or {\ttfamily icub\+Sim}) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 132 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_af71df4017d78d4cebf6ea28ce8e1bbde}\label{group__icubclient__subsystems_af71df4017d78d4cebf6ea28ce8e1bbde}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!````~Sub\+System\+\_\+\+K\+A\+R\+MA@{$\sim$\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\index{````~Sub\+System\+\_\+\+K\+A\+R\+MA@{$\sim$\+Sub\+System\+\_\+\+K\+A\+R\+MA}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{$\sim$\+Sub\+System\+\_\+\+K\+A\+R\+M\+A()}{~SubSystem\_KARMA()}}
+{\footnotesize\ttfamily icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::$\sim$\+Sub\+System\+\_\+\+K\+A\+R\+MA (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+
+
+Definition at line 502 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_aa401a2dc18c491f11a1ba36ab6811606}\label{group__icubclient__subsystems_aa401a2dc18c491f11a1ba36ab6811606}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!append\+Double@{append\+Double}}
+\index{append\+Double@{append\+Double}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{append\+Double()}{appendDouble()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::append\+Double (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Bottle \&}]{b,  }\item[{const double \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Appends a double value {\bfseries v} to the Bottle {\bfseries } 
+
+
+
+Definition at line 15 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a9dc49c4b5c168366758cd9ee23654a42}\label{group__icubclient__subsystems_a9dc49c4b5c168366758cd9ee23654a42}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!append\+Target@{append\+Target}}
+\index{append\+Target@{append\+Target}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{append\+Target()}{appendTarget()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::append\+Target (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Bottle \&}]{b,  }\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{t\+Center }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Appends a target vector {\bfseries t} to the Bottle {\bfseries } 
+
+
+
+Definition at line 8 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_abc4835144a2474b400777fd4045b6045}\label{group__icubclient__subsystems_abc4835144a2474b400777fd4045b6045}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!apply\+Safety\+Margins@{apply\+Safety\+Margins}}
+\index{apply\+Safety\+Margins@{apply\+Safety\+Margins}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{apply\+Safety\+Margins()}{applySafetyMargins()}}
+{\footnotesize\ttfamily yarp\+::sig\+::\+Vector\+Of$<$ double $>$ icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::apply\+Safety\+Margins (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{in }\end{DoxyParamCaption})}
+
+
+
+Applies safety margins, i.\+e. 
+
+the {\itshape in} vector should be at least table height and at least 0.\+1m in front of the i\+Cub 
+\begin{DoxyParams}{Parameters}
+{\em in} & \char`\"{}\+Unsafe\char`\"{} vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\char`\"{}safe\char`\"{} vector 
+\end{DoxyReturn}
+
+
+Definition at line 172 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a657a8377ba54195005a55811f530f990}\label{group__icubclient__subsystems_a657a8377ba54195005a55811f530f990}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!choose\+Arm@{choose\+Arm}}
+\index{choose\+Arm@{choose\+Arm}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{choose\+Arm()}{chooseArm()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::choose\+Arm (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{arm\+Type }\end{DoxyParamCaption})}
+
+
+
+choose\+Arm (tool\+Attach in K\+A\+R\+MA)\+: wrapper for tool-\/attach of K\+A\+R\+MA, can be used to choose the arm for actions with K\+A\+R\+MA 
+
+
+\begin{DoxyParams}{Parameters}
+{\em arm\+Type} & string value of \char`\"{}left\char`\"{} or \char`\"{}right\char`\"{} arm \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 236 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a90f064b10e6953a42e58b3b623893551}\label{group__icubclient__subsystems_a90f064b10e6953a42e58b3b623893551}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!choose\+Arm\+Auto@{choose\+Arm\+Auto}}
+\index{choose\+Arm\+Auto@{choose\+Arm\+Auto}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{choose\+Arm\+Auto()}{chooseArmAuto()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::choose\+Arm\+Auto (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+choose\+Arm\+Auto (tool\+Remove in K\+A\+R\+MA)\+: wrapper for tool-\/remove of Karma, use to clear the arm choise 
+
+
+
+Definition at line 248 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_acdec5cffb610e7b93d2d51ac22765b21}\label{group__icubclient__subsystems_acdec5cffb610e7b93d2d51ac22765b21}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!Close@{Close}}
+\index{Close@{Close}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Clean up resources. 
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_af327c56ad0d33aada77f825d96fb47f2}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 152 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_acc63e171efddf99fa1e57ab1cdce3a13}\label{group__icubclient__subsystems_acc63e171efddf99fa1e57ab1cdce3a13}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!connect@{connect}}
+\index{connect@{connect}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_a5fc84b6e51ec56f91323280b7da52dc8}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 82 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a328d7187887b653399ccc783be8fb56e}\label{group__icubclient__subsystems_a328d7187887b653399ccc783be8fb56e}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!draw@{draw}}
+\index{draw@{draw}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::draw (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target\+Center,  }\item[{const double}]{theta,  }\item[{const double}]{radius,  }\item[{const double}]{dist,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+draw (K\+A\+R\+MA)\+: draw action, along the positive direction of the x-\/axis (in robot FoR) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+Center} & center of a circle \\
+\hline
+{\em theta} & angle between the y-\/axis (in robot FoR) and starting position of draw action. \\
+\hline
+{\em radius} & radius of the circle with center at \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+target\+Center 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em dist} & moving distance of draw action \\
+\hline
+{\em options} & to be passed to K\+A\+R\+MA \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 407 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a8b5ae0fcd093f270e5bb4c32c60df252}\label{group__icubclient__subsystems_a8b5ae0fcd093f270e5bb4c32c60df252}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!open\+Cartesian\+Client@{open\+Cartesian\+Client}}
+\index{open\+Cartesian\+Client@{open\+Cartesian\+Client}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{open\+Cartesian\+Client()}{openCartesianClient()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::open\+Cartesian\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 449 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a956b5bad90e96ca0c2c8f33f306256ac}\label{group__icubclient__subsystems_a956b5bad90e96ca0c2c8f33f306256ac}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!pull\+Back@{pull\+Back}}
+\index{pull\+Back@{pull\+Back}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{pull\+Back()}{pullBack()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::pull\+Back (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{obj\+Name,  }\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{obj\+Center,  }\item[{const double \&}]{target\+Pos\+X\+Back,  }\item[{const std\+::string \&}]{arm\+Type = {\ttfamily \char`\"{}selectable\char`\"{}},  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+pull\+Back (K\+A\+R\+MA)\+: pull an object to a certain location along x-\/axis of robot RoF 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj\+Name} & name of object to pull (can be empty, in this case no correction is applied by iol\+Reaching\+Calibration) \\
+\hline
+{\em obj\+Center} & coordinate of object \\
+\hline
+{\em target\+Pos\+X\+Back} & x coordinate of location to pull object to \\
+\hline
+{\em arm\+Type} & \char`\"{}left\char`\"{} or \char`\"{}right\char`\"{} arm to conduct action, otherwise arm will be chosen by K\+A\+R\+MA \\
+\hline
+{\em options} & to be passed to K\+A\+R\+MA \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 365 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_aabe8749ad0593a522e8377477d7d3d9b}\label{group__icubclient__subsystems_aabe8749ad0593a522e8377477d7d3d9b}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!push@{push}}
+\index{push@{push}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::push (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target\+Center,  }\item[{const double}]{theta,  }\item[{const double}]{radius,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+push (K\+A\+R\+MA)\+: push to certain position, along a defined direction 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+Center} & position to push to. \\
+\hline
+{\em theta} & angle between the y-\/axis (in robot FoR) and starting position of push action, defines the direction of push action \\
+\hline
+{\em radius} & radius of the circle with center at \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+target\+Center 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em options} & to be passed to K\+A\+R\+MA \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 345 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ae831bfd7af1572a65f53b11b9519e473}\label{group__icubclient__subsystems_ae831bfd7af1572a65f53b11b9519e473}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!push\+Aside@{push\+Aside}}
+\index{push\+Aside@{push\+Aside}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{push\+Aside()}{pushAside()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::push\+Aside (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{obj\+Name,  }\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{obj\+Center,  }\item[{const double \&}]{target\+PosY,  }\item[{const double \&}]{theta,  }\item[{const std\+::string \&}]{arm\+Type = {\ttfamily \char`\"{}selectable\char`\"{}},  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+push\+Aside (K\+A\+R\+MA)\+: push an object to a certain location along y-\/axis of robot RoF 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj\+Name} & name of object (can be empty, in this case no correction is applied by iol\+Reaching\+Calibration) \\
+\hline
+{\em obj\+Center} & coordinate of object \\
+\hline
+{\em target\+PosY} & y coordinate of location to push object to \\
+\hline
+{\em theta} & angle to define pushing left (0) or right (180) \\
+\hline
+{\em arm\+Type} & \char`\"{}left\char`\"{} or \char`\"{}right\char`\"{} arm to conduct action, otherwise arm will be chosen by K\+A\+R\+MA \\
+\hline
+{\em options} & to be passed to K\+A\+R\+MA \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 260 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ac7835e392d76249294d19c863f88e679}\label{group__icubclient__subsystems_ac7835e392d76249294d19c863f88e679}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!push\+Front@{push\+Front}}
+\index{push\+Front@{push\+Front}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{push\+Front()}{pushFront()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::push\+Front (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{obj\+Name,  }\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{obj\+Center,  }\item[{const double \&}]{target\+Pos\+X\+Front,  }\item[{const std\+::string \&}]{arm\+Type = {\ttfamily \char`\"{}selectable\char`\"{}},  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+push\+Front (K\+A\+R\+MA)\+: push an object to a certain location along x-\/axis of robot RoF 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj\+Name} & name of object (can be empty, in this case no correction is applied by iol\+Reaching\+Calibration) \\
+\hline
+{\em obj\+Center} & coordinate of object \\
+\hline
+{\em target\+Pos\+X\+Front} & x coordinate of location to push object to \\
+\hline
+{\em arm\+Type} & \char`\"{}left\char`\"{} or \char`\"{}right\char`\"{} arm to conduct action, otherwise arm will be chosen by K\+A\+R\+MA \\
+\hline
+{\em options} & to be passed to K\+A\+R\+MA \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 303 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ab965ba9aa2f810b3a026e91fbc3073df}\label{group__icubclient__subsystems_ab965ba9aa2f810b3a026e91fbc3073df}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!return\+Arm\+Safely@{return\+Arm\+Safely}}
+\index{return\+Arm\+Safely@{return\+Arm\+Safely}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{return\+Arm\+Safely()}{returnArmSafely()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::return\+Arm\+Safely (\begin{DoxyParamCaption}\item[{std\+::string}]{arm\+Type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 180 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a8bfb9f15e37ed16130fb2849142417a8}\label{group__icubclient__subsystems_a8bfb9f15e37ed16130fb2849142417a8}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!select\+Hand\+Correct\+Target@{select\+Hand\+Correct\+Target}}
+\index{select\+Hand\+Correct\+Target@{select\+Hand\+Correct\+Target}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{select\+Hand\+Correct\+Target()}{selectHandCorrectTarget()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::select\+Hand\+Correct\+Target (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Bottle \&}]{options,  }\item[{const std\+::string \&}]{target\+Name,  }\item[{yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target,  }\item[{const std\+::string}]{hand\+To\+Use = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 21 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_acf93003113c4db21fe8717a2da168bd5}\label{group__icubclient__subsystems_acf93003113c4db21fe8717a2da168bd5}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!send\+Cmd@{send\+Cmd}}
+\index{send\+Cmd@{send\+Cmd}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{send\+Cmd()}{sendCmd()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::send\+Cmd (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Bottle \&}]{cmd }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Sends a command to K\+A\+R\+MA\textquotesingle{}s R\+PC port. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & Command to be sent \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful 
+\end{DoxyReturn}
+
+
+Definition at line 71 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_aaba06999b553acfd343004d1116b0111}\label{group__icubclient__subsystems_aaba06999b553acfd343004d1116b0111}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!vdraw@{vdraw}}
+\index{vdraw@{vdraw}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{vdraw()}{vdraw()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::vdraw (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{obj\+Name,  }\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target\+Center,  }\item[{const double}]{theta,  }\item[{const double}]{radius,  }\item[{const double}]{dist,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+vdraw (K\+A\+R\+MA)\+: virtual draw action, along the positive direction of the x-\/axis (in robot FoR) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+Center} & center of a circle \\
+\hline
+{\em theta} & angle between the y-\/axis (in robot FoR) and starting position of draw action. \\
+\hline
+{\em radius} & radius of the circle with center at \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+target\+Center 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em dist} & moving distance of draw action \\
+\hline
+{\em options} & to be passed to K\+A\+R\+MA \\
+\hline
+{\em obj\+Name} & name of object to push (can be empty, in this case no correction is applied by iol\+Reaching\+Calibration) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 427 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_ae8cb5c87396b9f0c2884ceb5706da0cb}\label{group__icubclient__subsystems_ae8cb5c87396b9f0c2884ceb5706da0cb}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!A\+R\+Econnected@{A\+R\+Econnected}}
+\index{A\+R\+Econnected@{A\+R\+Econnected}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{A\+R\+Econnected}{AREconnected}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::\+A\+R\+Econnected\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 47 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_aa013e93b2c134a421130c01f3e95798b}\label{group__icubclient__subsystems_aa013e93b2c134a421130c01f3e95798b}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!driver\+HL@{driver\+HL}}
+\index{driver\+HL@{driver\+HL}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{driver\+HL}{driverHL}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+Poly\+Driver icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::driver\+HL\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 61 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a5e4aa27bee2286177e8b7916fdc61bfd}\label{group__icubclient__subsystems_a5e4aa27bee2286177e8b7916fdc61bfd}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!driver\+HR@{driver\+HR}}
+\index{driver\+HR@{driver\+HR}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{driver\+HR}{driverHR}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+Poly\+Driver icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::driver\+HR\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 62 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_acf3f0af27d083e7e4dc5d63d47419986}\label{group__icubclient__subsystems_acf3f0af27d083e7e4dc5d63d47419986}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!driverL@{driverL}}
+\index{driverL@{driverL}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{driverL}{driverL}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+Poly\+Driver icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::driverL\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 59 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a2b0310b9cf7896d08045e36e52b428fa}\label{group__icubclient__subsystems_a2b0310b9cf7896d08045e36e52b428fa}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!driverR@{driverR}}
+\index{driverR@{driverR}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{driverR}{driverR}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+Poly\+Driver icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::driverR\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 60 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a818b2bfd4f80d10f8065bee519cb6529}\label{group__icubclient__subsystems_a818b2bfd4f80d10f8065bee519cb6529}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!has\+Table@{has\+Table}}
+\index{has\+Table@{has\+Table}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{has\+Table}{hasTable}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::has\+Table\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 51 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ac3e11b504080f7e19032973a2719a9a7}\label{group__icubclient__subsystems_ac3e11b504080f7e19032973a2719a9a7}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!i\+Cart\+CtrlL@{i\+Cart\+CtrlL}}
+\index{i\+Cart\+CtrlL@{i\+Cart\+CtrlL}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{i\+Cart\+CtrlL}{iCartCtrlL}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Cartesian\+Control$\ast$ icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::i\+Cart\+CtrlL\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 64 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ad0fc8e0142ccdb3ebd3777bf1a0e37b6}\label{group__icubclient__subsystems_ad0fc8e0142ccdb3ebd3777bf1a0e37b6}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!i\+Cart\+CtrlR@{i\+Cart\+CtrlR}}
+\index{i\+Cart\+CtrlR@{i\+Cart\+CtrlR}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{i\+Cart\+CtrlR}{iCartCtrlR}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Cartesian\+Control$\ast$ icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::i\+Cart\+CtrlR\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 65 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a90197083a8928d56ef80028a9db44dec}\label{group__icubclient__subsystems_a90197083a8928d56ef80028a9db44dec}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!port\+Calib@{port\+Calib}}
+\index{port\+Calib@{port\+Calib}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{port\+Calib}{portCalib}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Rpc\+Client icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::port\+Calib\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 56 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a50a8081c5f290dfcbd89707c699475c1}\label{group__icubclient__subsystems_a50a8081c5f290dfcbd89707c699475c1}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!port\+Finder@{port\+Finder}}
+\index{port\+Finder@{port\+Finder}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{port\+Finder}{portFinder}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Rpc\+Client icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::port\+Finder\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 55 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a8718260a66be2d5a3ec02f9065fce749}\label{group__icubclient__subsystems_a8718260a66be2d5a3ec02f9065fce749}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!port\+Stop@{port\+Stop}}
+\index{port\+Stop@{port\+Stop}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{port\+Stop}{portStop}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Rpc\+Client icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::port\+Stop\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 53 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a90fe9f8b078cfdb1791919968f056e55}\label{group__icubclient__subsystems_a90fe9f8b078cfdb1791919968f056e55}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!port\+Vision@{port\+Vision}}
+\index{port\+Vision@{port\+Vision}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{port\+Vision}{portVision}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Rpc\+Client icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::port\+Vision\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 54 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_aeeeaf8af66dcee9d7c1173528bc30d7a}\label{group__icubclient__subsystems_aeeeaf8af66dcee9d7c1173528bc30d7a}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!robot@{robot}}
+\index{robot@{robot}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{robot}{robot}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::robot\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 49 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a8321840d15271ec9306aea8b88ca166f}\label{group__icubclient__subsystems_a8321840d15271ec9306aea8b88ca166f}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!Sub\+A\+RE@{Sub\+A\+RE}}
+\index{Sub\+A\+RE@{Sub\+A\+RE}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{Sub\+A\+RE}{SubARE}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__ARE}{Sub\+System\+\_\+\+A\+RE}$\ast$ icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::\+Sub\+A\+RE\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 46 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_add03e20b9b8be1dad5999fb47e572679}\label{group__icubclient__subsystems_add03e20b9b8be1dad5999fb47e572679}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}!table\+Height@{table\+Height}}
+\index{table\+Height@{table\+Height}!icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA@{icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+MA}}
+\subparagraph{\texorpdfstring{table\+Height}{tableHeight}}
+{\footnotesize\ttfamily double icubclient\+::\+Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::table\+Height\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 50 of file sub\+System\+\_\+\+K\+A\+R\+M\+A.\+h.
+
+\index{icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}}\label{classicubclient_1_1SubSystem__Recog}
+\Hypertarget{group__icubclient__subsystems_classicubclient_1_1SubSystem__Recog}
+\subsubsection{class icubclient\+:\+:Sub\+System\+\_\+\+Recog}
+Abstract sub\+System for speech recognizer. 
+
+Definition at line 34 of file sub\+System\+\_\+recog.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Sub\+System\+\_\+\+Recog\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classicubclient_1_1SubSystem__Recog__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__subsystems_a34901d18dab1e223997127715c77128a}{Sub\+System\+\_\+\+Recog} (const std\+::string \&master\+Name)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{group__icubclient__subsystems_a8f41f3c801e0d0b705927dbc56959137}{Close} ()
+\begin{DoxyCompactList}\small\item\em Clean up resources. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__subsystems_a7ed85c0ef3ec62ea019c8d8e0f674728}{enable\+Ears} (bool on)
+\begin{DoxyCompactList}\small\item\em Send a command to ears whether it should listen to the speech\+Recognizer. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__subsystems_af1341f293fd5b5e8ec021e31915d5b16}{wait\+For\+Ears} ()
+\begin{DoxyCompactList}\small\item\em Send a command to ears that it should stop listening to the speech\+Recognizer, and wait until it hands back control. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_ae69feadf3793487af1bd5649c387f0c0}{interrupt\+Speech\+Recognizer} ()
+\begin{DoxyCompactList}\small\item\em Interrupt the speech recognizer. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Bottle \hyperlink{group__icubclient__subsystems_a0668882e39bd038825a47a835180e4c6}{recog\+From\+Grammar} (std\+::string \&s\+Input)
+\begin{DoxyCompactList}\small\item\em From one grxml grammar, return the sentence recognized for one timeout This is not supported, use \hyperlink{group__icubclient__subsystems_ab0fdeaa8f84fb8d1062259921407d0f7}{Sub\+System\+\_\+\+Recog\+::recog\+From\+Grammar\+Loop()} instead! \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Bottle \hyperlink{group__icubclient__subsystems_ab0fdeaa8f84fb8d1062259921407d0f7}{recog\+From\+Grammar\+Loop} (std\+::string s\+Input, int i\+Loop=50, bool keep\+Ears\+Enabled=false, bool keep\+Ears\+Disabled\+After\+Recog=false)
+\begin{DoxyCompactList}\small\item\em From one grxml grammar, return the first non-\/empty sentence recognized can last for several timeout (by default 50) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{group__icubclient__subsystems_a98acf2fdda5a595803ce2e75e045a56f}{connect} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+yarp\+::os\+::\+Rpc\+Client \hyperlink{group__icubclient__subsystems_a895230717fd1aa2d6a0ed9d29e0069d7}{ears\+\_\+port}
+\begin{DoxyCompactList}\small\item\em Port to /ears/rpc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a34901d18dab1e223997127715c77128a}\label{group__icubclient__subsystems_a34901d18dab1e223997127715c77128a}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}!Sub\+System\+\_\+\+Recog@{Sub\+System\+\_\+\+Recog}}
+\index{Sub\+System\+\_\+\+Recog@{Sub\+System\+\_\+\+Recog}!icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}}
+\subparagraph{\texorpdfstring{Sub\+System\+\_\+\+Recog()}{SubSystem\_Recog()}}
+{\footnotesize\ttfamily icubclient\+::\+Sub\+System\+\_\+\+Recog\+::\+Sub\+System\+\_\+\+Recog (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{master\+Name }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em master\+Name} & stem-\/name used to open up ports. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 22 of file sub\+System\+\_\+recog.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a8f41f3c801e0d0b705927dbc56959137}\label{group__icubclient__subsystems_a8f41f3c801e0d0b705927dbc56959137}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}!Close@{Close}}
+\index{Close@{Close}!icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}}
+\subparagraph{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+Recog\+::\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Clean up resources. 
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_af327c56ad0d33aada77f825d96fb47f2}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 28 of file sub\+System\+\_\+recog.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a98acf2fdda5a595803ce2e75e045a56f}\label{group__icubclient__subsystems_a98acf2fdda5a595803ce2e75e045a56f}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}!connect@{connect}}
+\index{connect@{connect}!icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}}
+\subparagraph{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+Recog\+::connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_a5fc84b6e51ec56f91323280b7da52dc8}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 4 of file sub\+System\+\_\+recog.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a7ed85c0ef3ec62ea019c8d8e0f674728}\label{group__icubclient__subsystems_a7ed85c0ef3ec62ea019c8d8e0f674728}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}!enable\+Ears@{enable\+Ears}}
+\index{enable\+Ears@{enable\+Ears}!icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}}
+\subparagraph{\texorpdfstring{enable\+Ears()}{enableEars()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+Recog\+::enable\+Ears (\begin{DoxyParamCaption}\item[{bool}]{on }\end{DoxyParamCaption})}
+
+
+
+Send a command to ears whether it should listen to the speech\+Recognizer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em on} & If true, ears will take control of speech\+Recognizer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 35 of file sub\+System\+\_\+recog.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ae69feadf3793487af1bd5649c387f0c0}\label{group__icubclient__subsystems_ae69feadf3793487af1bd5649c387f0c0}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}!interrupt\+Speech\+Recognizer@{interrupt\+Speech\+Recognizer}}
+\index{interrupt\+Speech\+Recognizer@{interrupt\+Speech\+Recognizer}!icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}}
+\subparagraph{\texorpdfstring{interrupt\+Speech\+Recognizer()}{interruptSpeechRecognizer()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+Recog\+::interrupt\+Speech\+Recognizer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Interrupt the speech recognizer. 
+
+This can be used to faster get back control of the speech recognizer if it is used by another module currently (e.\+g. ears). \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 74 of file sub\+System\+\_\+recog.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a0668882e39bd038825a47a835180e4c6}\label{group__icubclient__subsystems_a0668882e39bd038825a47a835180e4c6}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}!recog\+From\+Grammar@{recog\+From\+Grammar}}
+\index{recog\+From\+Grammar@{recog\+From\+Grammar}!icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}}
+\subparagraph{\texorpdfstring{recog\+From\+Grammar()}{recogFromGrammar()}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Bottle icubclient\+::\+Sub\+System\+\_\+\+Recog\+::recog\+From\+Grammar (\begin{DoxyParamCaption}\item[{std\+::string \&}]{s\+Input }\end{DoxyParamCaption})}
+
+
+
+From one grxml grammar, return the sentence recognized for one timeout This is not supported, use \hyperlink{group__icubclient__subsystems_ab0fdeaa8f84fb8d1062259921407d0f7}{Sub\+System\+\_\+\+Recog\+::recog\+From\+Grammar\+Loop()} instead! 
+
+
+
+Definition at line 88 of file sub\+System\+\_\+recog.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ab0fdeaa8f84fb8d1062259921407d0f7}\label{group__icubclient__subsystems_ab0fdeaa8f84fb8d1062259921407d0f7}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}!recog\+From\+Grammar\+Loop@{recog\+From\+Grammar\+Loop}}
+\index{recog\+From\+Grammar\+Loop@{recog\+From\+Grammar\+Loop}!icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}}
+\subparagraph{\texorpdfstring{recog\+From\+Grammar\+Loop()}{recogFromGrammarLoop()}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Bottle icubclient\+::\+Sub\+System\+\_\+\+Recog\+::recog\+From\+Grammar\+Loop (\begin{DoxyParamCaption}\item[{std\+::string}]{s\+Input,  }\item[{int}]{i\+Loop = {\ttfamily 50},  }\item[{bool}]{keep\+Ears\+Enabled = {\ttfamily false},  }\item[{bool}]{keep\+Ears\+Disabled\+After\+Recog = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+From one grxml grammar, return the first non-\/empty sentence recognized can last for several timeout (by default 50) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s\+Input} & the grxml grammar in string form \\
+\hline
+{\em i\+Loop} & Maximum number of loops before giving up to recognize input. If -\/1, loop indefinitely \\
+\hline
+{\em keep\+Ears\+Enabled} & Whether ears should stay in control. This should only be set to true by ears itself \\
+\hline
+{\em keep\+Ears\+Disabled\+After\+Recog} & If false, ears will be enabled again after an input was recognized. This can be set to true if a module wants to recognize several commands in a row without ever handing back control to ears. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 116 of file sub\+System\+\_\+recog.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_af1341f293fd5b5e8ec021e31915d5b16}\label{group__icubclient__subsystems_af1341f293fd5b5e8ec021e31915d5b16}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}!wait\+For\+Ears@{wait\+For\+Ears}}
+\index{wait\+For\+Ears@{wait\+For\+Ears}!icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}}
+\subparagraph{\texorpdfstring{wait\+For\+Ears()}{waitForEars()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+Recog\+::wait\+For\+Ears (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Send a command to ears that it should stop listening to the speech\+Recognizer, and wait until it hands back control. 
+
+
+
+Definition at line 57 of file sub\+System\+\_\+recog.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a895230717fd1aa2d6a0ed9d29e0069d7}\label{group__icubclient__subsystems_a895230717fd1aa2d6a0ed9d29e0069d7}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}!ears\+\_\+port@{ears\+\_\+port}}
+\index{ears\+\_\+port@{ears\+\_\+port}!icubclient\+::\+Sub\+System\+\_\+\+Recog@{icubclient\+::\+Sub\+System\+\_\+\+Recog}}
+\subparagraph{\texorpdfstring{ears\+\_\+port}{ears\_port}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Rpc\+Client icubclient\+::\+Sub\+System\+\_\+\+Recog\+::ears\+\_\+port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Port to /ears/rpc. 
+
+
+
+Definition at line 38 of file sub\+System\+\_\+recog.\+h.
+
+\index{icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}}\label{classicubclient_1_1SubSystem__SAM}
+\Hypertarget{group__icubclient__subsystems_classicubclient_1_1SubSystem__SAM}
+\subsubsection{class icubclient\+:\+:Sub\+System\+\_\+\+S\+AM}
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} for \hyperlink{namespaceSAM}{S\+AM}. 
+
+Definition at line 33 of file sub\+System\+\_\+\+S\+A\+M.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Sub\+System\+\_\+\+S\+AM\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{classicubclient_1_1SubSystem__SAM__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__subsystems_a5ae7520f8397b1ff4e0018a46e6063fb}{Sub\+System\+\_\+\+S\+AM} (const std\+::string \&master\+Name)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual void \hyperlink{group__icubclient__subsystems_a75b9591c2bbd9c20f1cd222d538c8c45}{Close} ()
+\begin{DoxyCompactList}\small\item\em Clean up resources. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_af5822eedc93b555f6004b61e6325e219}{attention\+Modulation} (const std\+::string \&mode)
+\begin{DoxyCompactList}\small\item\em Method to switch attention modes for \hyperlink{namespaceSAM}{S\+AM}. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Bottle \hyperlink{group__icubclient__subsystems_a3191f11027b606edbeaa876606e7cfac}{ask\+X\+Label} (const std\+::string \&model)
+\begin{DoxyCompactList}\small\item\em Method to trigger a classification from \hyperlink{namespaceSAM}{S\+AM}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__icubclient__subsystems_a8caf6370a0094554bf67793add9ca565}{attention\+S\+AM}
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \hyperlink{group__icubclient__subsystems_ac92b15f98651868bc31dbf4688d50e74}{connect} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__subsystems_a56c42753f30380d8abf4a96bc322b3b0}{I\+Cub\+Client}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a5ae7520f8397b1ff4e0018a46e6063fb}\label{group__icubclient__subsystems_a5ae7520f8397b1ff4e0018a46e6063fb}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}!Sub\+System\+\_\+\+S\+AM@{Sub\+System\+\_\+\+S\+AM}}
+\index{Sub\+System\+\_\+\+S\+AM@{Sub\+System\+\_\+\+S\+AM}!icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}}
+\subparagraph{\texorpdfstring{Sub\+System\+\_\+\+S\+A\+M()}{SubSystem\_SAM()}}
+{\footnotesize\ttfamily icubclient\+::\+Sub\+System\+\_\+\+S\+A\+M\+::\+Sub\+System\+\_\+\+S\+AM (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{master\+Name }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em master\+Name} & stem-\/name used to open up ports. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 13 of file sub\+System\+\_\+\+S\+A\+M.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a3191f11027b606edbeaa876606e7cfac}\label{group__icubclient__subsystems_a3191f11027b606edbeaa876606e7cfac}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}!ask\+X\+Label@{ask\+X\+Label}}
+\index{ask\+X\+Label@{ask\+X\+Label}!icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}}
+\subparagraph{\texorpdfstring{ask\+X\+Label()}{askXLabel()}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Bottle icubclient\+::\+Sub\+System\+\_\+\+S\+A\+M\+::ask\+X\+Label (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{model }\end{DoxyParamCaption})}
+
+
+
+Method to trigger a classification from \hyperlink{namespaceSAM}{S\+AM}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & Model name to trigger a classification for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Bottle with success as string as first value and classification as std\+::string as second value 
+\end{DoxyReturn}
+
+
+Definition at line 56 of file sub\+System\+\_\+\+S\+A\+M.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_af5822eedc93b555f6004b61e6325e219}\label{group__icubclient__subsystems_af5822eedc93b555f6004b61e6325e219}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}!attention\+Modulation@{attention\+Modulation}}
+\index{attention\+Modulation@{attention\+Modulation}!icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}}
+\subparagraph{\texorpdfstring{attention\+Modulation()}{attentionModulation()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+S\+A\+M\+::attention\+Modulation (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{mode }\end{DoxyParamCaption})}
+
+
+
+Method to switch attention modes for \hyperlink{namespaceSAM}{S\+AM}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & Allowed modes are {\ttfamily stop} and {\ttfamily continue}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if command was send successful. 
+\end{DoxyReturn}
+
+
+Definition at line 23 of file sub\+System\+\_\+\+S\+A\+M.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a75b9591c2bbd9c20f1cd222d538c8c45}\label{group__icubclient__subsystems_a75b9591c2bbd9c20f1cd222d538c8c45}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}!Close@{Close}}
+\index{Close@{Close}!icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}}
+\subparagraph{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+S\+A\+M\+::\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Clean up resources. 
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_af327c56ad0d33aada77f825d96fb47f2}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 18 of file sub\+System\+\_\+\+S\+A\+M.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ac92b15f98651868bc31dbf4688d50e74}\label{group__icubclient__subsystems_ac92b15f98651868bc31dbf4688d50e74}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}!connect@{connect}}
+\index{connect@{connect}!icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}}
+\subparagraph{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+S\+A\+M\+::connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_a5fc84b6e51ec56f91323280b7da52dc8}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 5 of file sub\+System\+\_\+\+S\+A\+M.\+cpp.
+
+
+
+\paragraph{Friends And Related Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a56c42753f30380d8abf4a96bc322b3b0}\label{group__icubclient__subsystems_a56c42753f30380d8abf4a96bc322b3b0}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}!I\+Cub\+Client@{I\+Cub\+Client}}
+\index{I\+Cub\+Client@{I\+Cub\+Client}!icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}}
+\subparagraph{\texorpdfstring{I\+Cub\+Client}{ICubClient}}
+{\footnotesize\ttfamily friend class \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{I\+Cub\+Client}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 35 of file sub\+System\+\_\+\+S\+A\+M.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a8caf6370a0094554bf67793add9ca565}\label{group__icubclient__subsystems_a8caf6370a0094554bf67793add9ca565}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}!attention\+S\+AM@{attention\+S\+AM}}
+\index{attention\+S\+AM@{attention\+S\+AM}!icubclient\+::\+Sub\+System\+\_\+\+S\+AM@{icubclient\+::\+Sub\+System\+\_\+\+S\+AM}}
+\subparagraph{\texorpdfstring{attention\+S\+AM}{attentionSAM}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+S\+A\+M\+::attention\+S\+AM}
+
+
+
+Definition at line 41 of file sub\+System\+\_\+\+S\+A\+M.\+h.
+
+\index{icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}}\label{classicubclient_1_1SubSystem__Speech}
+\Hypertarget{group__icubclient__subsystems_classicubclient_1_1SubSystem__Speech}
+\subsubsection{class icubclient\+:\+:Sub\+System\+\_\+\+Speech}
+Abstract sub\+System for speech management (Text to Speech) 
+
+Definition at line 38 of file sub\+System\+\_\+speech.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Sub\+System\+\_\+\+Speech\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classicubclient_1_1SubSystem__Speech__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__subsystems_a5a699b6d31d50fec18e5e63adecf5c96}{Sub\+System\+\_\+\+Speech} (const std\+::string \&master\+Name)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{group__icubclient__subsystems_abbf3a0069184f64f4999b0e94077b2db}{connect} ()
+\item 
+virtual void \hyperlink{group__icubclient__subsystems_aec30b053cc477248ac8c50e8b8d16c38}{T\+TS} (const std\+::string \&text, bool should\+Wait=true)
+\begin{DoxyCompactList}\small\item\em Produce text to speech output. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__subsystems_ae6d315e4436bdd157dd6427fa7274999}{Set\+Options} (const std\+::string \&custom)
+\begin{DoxyCompactList}\small\item\em Set the command line options sent by i\+Speak. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__subsystems_acf4c51cc8ebb0373f65ede7f2f2155b6}{is\+Speaking} ()
+\begin{DoxyCompactList}\small\item\em Check if i\+Speak is currently speaking. \end{DoxyCompactList}\item 
+virtual void \hyperlink{group__icubclient__subsystems_a12a3920b40dbabaf9eb7d14d81c172da}{Close} ()
+\begin{DoxyCompactList}\small\item\em Clean up resources. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+yarp\+::os\+::\+Port \hyperlink{group__icubclient__subsystems_a773a18382b36c671d74ab5caaeb873bc}{tts}
+\begin{DoxyCompactList}\small\item\em Port to /i\+Speak. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a5a699b6d31d50fec18e5e63adecf5c96}\label{group__icubclient__subsystems_a5a699b6d31d50fec18e5e63adecf5c96}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}!Sub\+System\+\_\+\+Speech@{Sub\+System\+\_\+\+Speech}}
+\index{Sub\+System\+\_\+\+Speech@{Sub\+System\+\_\+\+Speech}!icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}}
+\subparagraph{\texorpdfstring{Sub\+System\+\_\+\+Speech()}{SubSystem\_Speech()}}
+{\footnotesize\ttfamily icubclient\+::\+Sub\+System\+\_\+\+Speech\+::\+Sub\+System\+\_\+\+Speech (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{master\+Name }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em master\+Name} & stem-\/name used to open up ports. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 4 of file sub\+System\+\_\+speech.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a12a3920b40dbabaf9eb7d14d81c172da}\label{group__icubclient__subsystems_a12a3920b40dbabaf9eb7d14d81c172da}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}!Close@{Close}}
+\index{Close@{Close}!icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}}
+\subparagraph{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+Speech\+::\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Clean up resources. 
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_af327c56ad0d33aada77f825d96fb47f2}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 77 of file sub\+System\+\_\+speech.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_abbf3a0069184f64f4999b0e94077b2db}\label{group__icubclient__subsystems_abbf3a0069184f64f4999b0e94077b2db}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}!connect@{connect}}
+\index{connect@{connect}!icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}}
+\subparagraph{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+Speech\+::connect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__icubclient__subsystems_a5fc84b6e51ec56f91323280b7da52dc8}{icubclient\+::\+Sub\+System}.
+
+
+
+Definition at line 11 of file sub\+System\+\_\+speech.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_acf4c51cc8ebb0373f65ede7f2f2155b6}\label{group__icubclient__subsystems_acf4c51cc8ebb0373f65ede7f2f2155b6}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}!is\+Speaking@{is\+Speaking}}
+\index{is\+Speaking@{is\+Speaking}!icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}}
+\subparagraph{\texorpdfstring{is\+Speaking()}{isSpeaking()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Sub\+System\+\_\+\+Speech\+::is\+Speaking (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Check if i\+Speak is currently speaking. 
+
+
+
+Definition at line 70 of file sub\+System\+\_\+speech.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_ae6d315e4436bdd157dd6427fa7274999}\label{group__icubclient__subsystems_ae6d315e4436bdd157dd6427fa7274999}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}!Set\+Options@{Set\+Options}}
+\index{Set\+Options@{Set\+Options}!icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}}
+\subparagraph{\texorpdfstring{Set\+Options()}{SetOptions()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+Speech\+::\+Set\+Options (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{custom }\end{DoxyParamCaption})}
+
+
+
+Set the command line options sent by i\+Speak. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em custom} & The options as a string \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 58 of file sub\+System\+\_\+speech.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_aec30b053cc477248ac8c50e8b8d16c38}\label{group__icubclient__subsystems_aec30b053cc477248ac8c50e8b8d16c38}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}!T\+TS@{T\+TS}}
+\index{T\+TS@{T\+TS}!icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}}
+\subparagraph{\texorpdfstring{T\+T\+S()}{TTS()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+Speech\+::\+T\+TS (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text,  }\item[{bool}]{should\+Wait = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Produce text to speech output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & The text to be said. \\
+\hline
+{\em should\+Wait} & Is the function blocking until the end of the sentence or not. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 27 of file sub\+System\+\_\+speech.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a773a18382b36c671d74ab5caaeb873bc}\label{group__icubclient__subsystems_a773a18382b36c671d74ab5caaeb873bc}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}!tts@{tts}}
+\index{tts@{tts}!icubclient\+::\+Sub\+System\+\_\+\+Speech@{icubclient\+::\+Sub\+System\+\_\+\+Speech}}
+\subparagraph{\texorpdfstring{tts}{tts}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Port icubclient\+::\+Sub\+System\+\_\+\+Speech\+::tts\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Port to /i\+Speak. 
+
+
+
+Definition at line 41 of file sub\+System\+\_\+speech.\+h.
+
+\index{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak@{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak}}\label{classicubclient_1_1SubSystem__Speech__eSpeak}
+\Hypertarget{group__icubclient__subsystems_classicubclient_1_1SubSystem__Speech__eSpeak}
+\subsubsection{class icubclient\+:\+:Sub\+System\+\_\+\+Speech\+\_\+e\+Speak}
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} for speech synthesis with emotional tuning of speed and pitch using e\+Speak. 
+
+Definition at line 79 of file sub\+System\+\_\+speech.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Sub\+System\+\_\+\+Speech\+\_\+e\+Speak\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classicubclient_1_1SubSystem__Speech__eSpeak__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__subsystems_a09caab114b55db370a0e5d9add29d0c1}{Sub\+System\+\_\+\+Speech\+\_\+e\+Speak} (std\+::string \&master\+Name)
+\item 
+void \hyperlink{group__icubclient__subsystems_ac80be3015aba1e2248f896ac388e6ff6}{Set\+Voice\+Parameters} (int speed=100, int pitch=50, std\+::string voice=\char`\"{}en\char`\"{})
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group__icubclient__subsystems_a471c23d3bf075f53adf10ab1d141b54c}{m\+\_\+speed}
+\item 
+int \hyperlink{group__icubclient__subsystems_ab7ef0d98bc1e7f356ed3d28c4d0c2769}{m\+\_\+pitch}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_a09caab114b55db370a0e5d9add29d0c1}\label{group__icubclient__subsystems_a09caab114b55db370a0e5d9add29d0c1}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak@{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak}!Sub\+System\+\_\+\+Speech\+\_\+e\+Speak@{Sub\+System\+\_\+\+Speech\+\_\+e\+Speak}}
+\index{Sub\+System\+\_\+\+Speech\+\_\+e\+Speak@{Sub\+System\+\_\+\+Speech\+\_\+e\+Speak}!icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak@{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak}}
+\subparagraph{\texorpdfstring{Sub\+System\+\_\+\+Speech\+\_\+e\+Speak()}{SubSystem\_Speech\_eSpeak()}}
+{\footnotesize\ttfamily icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak (\begin{DoxyParamCaption}\item[{std\+::string \&}]{master\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 87 of file sub\+System\+\_\+speech.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_ac80be3015aba1e2248f896ac388e6ff6}\label{group__icubclient__subsystems_ac80be3015aba1e2248f896ac388e6ff6}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak@{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak}!Set\+Voice\+Parameters@{Set\+Voice\+Parameters}}
+\index{Set\+Voice\+Parameters@{Set\+Voice\+Parameters}!icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak@{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak}}
+\subparagraph{\texorpdfstring{Set\+Voice\+Parameters()}{SetVoiceParameters()}}
+{\footnotesize\ttfamily void icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak\+::\+Set\+Voice\+Parameters (\begin{DoxyParamCaption}\item[{int}]{speed = {\ttfamily 100},  }\item[{int}]{pitch = {\ttfamily 50},  }\item[{std\+::string}]{voice = {\ttfamily \char`\"{}en\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 93 of file sub\+System\+\_\+speech.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__subsystems_ab7ef0d98bc1e7f356ed3d28c4d0c2769}\label{group__icubclient__subsystems_ab7ef0d98bc1e7f356ed3d28c4d0c2769}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak@{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak}!m\+\_\+pitch@{m\+\_\+pitch}}
+\index{m\+\_\+pitch@{m\+\_\+pitch}!icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak@{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak}}
+\subparagraph{\texorpdfstring{m\+\_\+pitch}{m\_pitch}}
+{\footnotesize\ttfamily int icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak\+::m\+\_\+pitch\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 83 of file sub\+System\+\_\+speech.\+h.
+
+\mbox{\Hypertarget{group__icubclient__subsystems_a471c23d3bf075f53adf10ab1d141b54c}\label{group__icubclient__subsystems_a471c23d3bf075f53adf10ab1d141b54c}} 
+\index{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak@{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak}!m\+\_\+speed@{m\+\_\+speed}}
+\index{m\+\_\+speed@{m\+\_\+speed}!icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak@{icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak}}
+\subparagraph{\texorpdfstring{m\+\_\+speed}{m\_speed}}
+{\footnotesize\ttfamily int icubclient\+::\+Sub\+System\+\_\+\+Speech\+\_\+e\+Speak\+::m\+\_\+speed\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 82 of file sub\+System\+\_\+speech.\+h.
+

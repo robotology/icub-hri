@@ -1,0 +1,277 @@
+\hypertarget{group__ears}{}\section{ears}
+\label{group__ears}\index{ears@{ears}}
+
+
+Listen to humans when not doing something else Version\+:1.\+0.  
+
+
+Collaboration diagram for ears\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{group__ears}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__ears_classears}{ears}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Listen to humans when not doing something else Version\+:1.\+0. 
+
+\begin{DoxyAuthor}{Author}
+Grégoire Pointeau \href{mailto:greg.pointeau@gmail.com}{\tt greg.\+pointeau@gmail.\+com}, Jordi-\/\+Ysard Puigbò \href{mailto:jordiysard@gmail.com}{\tt jordiysard@gmail.\+com}, Tobias Fischer \href{mailto:t.fischer@imperial.ac.uk}{\tt t.\+fischer@imperial.\+ac.\+uk} ~\newline
+ 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Released under the terms of the G\+NU G\+PL v2.\+0 
+\end{DoxyCopyright}
+\hypertarget{group__touchDetector_intro_sec}{}\subsection{Description}\label{group__touchDetector_intro_sec}
+Module that loads a default grammar for the speech recognizer in the background. This grammar can be safely interrupted by other modules that require parallel access to speech recognition functionalities. This module parses any order given by the human and triggers the corresponding behaviour in behavior\+Manager.\hypertarget{group__touchDetector_parameters_sec}{}\subsection{Parameters}\label{group__touchDetector_parameters_sec}
+
+\begin{DoxyItemize}
+\item -- name \+: name of the module
+\item -- period \+: change the update rate of this module 
+\end{DoxyItemize}\hypertarget{group__touchDetector_inputports_sec}{}\subsection{Input Ports}\label{group__touchDetector_inputports_sec}
+
+\begin{DoxyItemize}
+\item /ears/rpc \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Response port. Supported commands\+:
+\begin{DoxyItemize}
+\item help
+\item \mbox{[}\textquotesingle{}quit\textquotesingle{}\mbox{]}\+: Closes ears
+\item \mbox{[}\textquotesingle{}listen\textquotesingle{}\mbox{]} \mbox{[}\textquotesingle{}on\textquotesingle{}/\textquotesingle{}off\textquotesingle{}/off\+Should\+Wait\mbox{]} \+: Turns default grammar from the speech recognizer on / off / off (safely, wait for another recognition)
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{group__touchDetector_outputports_sec}{}\subsection{Output Ports}\label{group__touchDetector_outputports_sec}
+
+\begin{DoxyItemize}
+\item /ears/speech\+:o \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Communication port to speech recognizer to interrupt the speech recognizer.
+\item /ears/behavior\+:o \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Communication port to behavior\+Manager.
+\end{DoxyItemize}\hypertarget{group__touchDetector_services_sec}{}\subsection{Services}\label{group__touchDetector_services_sec}
+
+
+\subsection{Class Documentation}
+\index{ears@{ears}}\label{classears}
+\Hypertarget{group__ears_classears}
+\subsubsection{class ears}
+
+
+Definition at line 14 of file ears.\+h.
+
+
+
+Inheritance diagram for ears\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=144pt]{classears__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__ears_a359010b7ba800675dcbb4a7cce9e04c6}{configure} (yarp\+::os\+::\+Resource\+Finder \&rf)
+\item 
+bool \hyperlink{group__ears_a99e79a38ed88cd2cd42a43f061e5215c}{interrupt\+Module} ()
+\item 
+bool \hyperlink{group__ears_aec124e2e5bfbcfe1c21f943ec5f502a3}{close} ()
+\item 
+double \hyperlink{group__ears_aed464f8b1ee43113c03237cdffe66dc7}{get\+Period} ()
+\item 
+bool \hyperlink{group__ears_ae6ddc924bc901594ab56603aacb2b95f}{update\+Module} ()
+\item 
+bool \hyperlink{group__ears_a8c7824b28cc3b9ff6c5e367a386d8176}{respond} (const yarp\+::os\+::\+Bottle \&cmd, yarp\+::os\+::\+Bottle \&reply)
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$ \hyperlink{group__ears_aab2fe9913cd3b11ba5f35699de54b952}{i\+Cub}
+\item 
+double \hyperlink{group__ears_a8894096259495df7094cf23907e4b506}{period}
+\item 
+yarp\+::os\+::\+Port \hyperlink{group__ears_a34c5b9cddeaea5b4c086948017d061fa}{rpc}
+\begin{DoxyCompactList}\small\item\em Response port. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Port \hyperlink{group__ears_a75f98651fc0d3b34a0bbb57d24d4e3e9}{port\+To\+Behavior}
+\begin{DoxyCompactList}\small\item\em Port to behavior\+Manager. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Port \hyperlink{group__ears_ac467a7a8fdca6c1c9d17f37a5e149e39}{port\+To\+Speech\+Recognizer}
+\begin{DoxyCompactList}\small\item\em Port to speech\+Recognizer. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Mutex \hyperlink{group__ears_a76979363a7e9407fda301db649b52b25}{m}
+\begin{DoxyCompactList}\small\item\em Mutex indicating whether ears is listening to speech\+Recognizer. \end{DoxyCompactList}\item 
+bool \hyperlink{group__ears_a0b3923719b6591be0e03eb63157c5dfb}{b\+Should\+Listen}
+\begin{DoxyCompactList}\small\item\em Whether ears should listen to speech\+Recognizer. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__ears_adffc2dd061350aa8acbe6f52f4ab8feb}{Main\+Grammar}
+\begin{DoxyCompactList}\small\item\em Name of grammar to be loaded. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__ears_aec124e2e5bfbcfe1c21f943ec5f502a3}\label{group__ears_aec124e2e5bfbcfe1c21f943ec5f502a3}} 
+\index{ears@{ears}!close@{close}}
+\index{close@{close}!ears@{ears}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool ears\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 72 of file ears.\+cpp.
+
+\mbox{\Hypertarget{group__ears_a359010b7ba800675dcbb4a7cce9e04c6}\label{group__ears_a359010b7ba800675dcbb4a7cce9e04c6}} 
+\index{ears@{ears}!configure@{configure}}
+\index{configure@{configure}!ears@{ears}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool ears\+::configure (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf }\end{DoxyParamCaption})}
+
+
+
+Definition at line 12 of file ears.\+cpp.
+
+\mbox{\Hypertarget{group__ears_aed464f8b1ee43113c03237cdffe66dc7}\label{group__ears_aed464f8b1ee43113c03237cdffe66dc7}} 
+\index{ears@{ears}!get\+Period@{get\+Period}}
+\index{get\+Period@{get\+Period}!ears@{ears}}
+\subparagraph{\texorpdfstring{get\+Period()}{getPeriod()}}
+{\footnotesize\ttfamily double ears\+::get\+Period (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 32 of file ears.\+h.
+
+\mbox{\Hypertarget{group__ears_a99e79a38ed88cd2cd42a43f061e5215c}\label{group__ears_a99e79a38ed88cd2cd42a43f061e5215c}} 
+\index{ears@{ears}!interrupt\+Module@{interrupt\+Module}}
+\index{interrupt\+Module@{interrupt\+Module}!ears@{ears}}
+\subparagraph{\texorpdfstring{interrupt\+Module()}{interruptModule()}}
+{\footnotesize\ttfamily bool ears\+::interrupt\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 45 of file ears.\+cpp.
+
+\mbox{\Hypertarget{group__ears_a8c7824b28cc3b9ff6c5e367a386d8176}\label{group__ears_a8c7824b28cc3b9ff6c5e367a386d8176}} 
+\index{ears@{ears}!respond@{respond}}
+\index{respond@{respond}!ears@{ears}}
+\subparagraph{\texorpdfstring{respond()}{respond()}}
+{\footnotesize\ttfamily bool ears\+::respond (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{cmd,  }\item[{yarp\+::os\+::\+Bottle \&}]{reply }\end{DoxyParamCaption})}
+
+
+
+Definition at line 96 of file ears.\+cpp.
+
+\mbox{\Hypertarget{group__ears_ae6ddc924bc901594ab56603aacb2b95f}\label{group__ears_ae6ddc924bc901594ab56603aacb2b95f}} 
+\index{ears@{ears}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!ears@{ears}}
+\subparagraph{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool ears\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 145 of file ears.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__ears_a0b3923719b6591be0e03eb63157c5dfb}\label{group__ears_a0b3923719b6591be0e03eb63157c5dfb}} 
+\index{ears@{ears}!b\+Should\+Listen@{b\+Should\+Listen}}
+\index{b\+Should\+Listen@{b\+Should\+Listen}!ears@{ears}}
+\subparagraph{\texorpdfstring{b\+Should\+Listen}{bShouldListen}}
+{\footnotesize\ttfamily bool ears\+::b\+Should\+Listen\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Whether ears should listen to speech\+Recognizer. 
+
+Can be set via R\+PC port. 
+
+Definition at line 22 of file ears.\+h.
+
+\mbox{\Hypertarget{group__ears_aab2fe9913cd3b11ba5f35699de54b952}\label{group__ears_aab2fe9913cd3b11ba5f35699de54b952}} 
+\index{ears@{ears}!i\+Cub@{i\+Cub}}
+\index{i\+Cub@{i\+Cub}!ears@{ears}}
+\subparagraph{\texorpdfstring{i\+Cub}{iCub}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client}$\ast$ ears\+::i\+Cub\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 16 of file ears.\+h.
+
+\mbox{\Hypertarget{group__ears_a76979363a7e9407fda301db649b52b25}\label{group__ears_a76979363a7e9407fda301db649b52b25}} 
+\index{ears@{ears}!m@{m}}
+\index{m@{m}!ears@{ears}}
+\subparagraph{\texorpdfstring{m}{m}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Mutex ears\+::m\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Mutex indicating whether ears is listening to speech\+Recognizer. 
+
+
+
+Definition at line 21 of file ears.\+h.
+
+\mbox{\Hypertarget{group__ears_adffc2dd061350aa8acbe6f52f4ab8feb}\label{group__ears_adffc2dd061350aa8acbe6f52f4ab8feb}} 
+\index{ears@{ears}!Main\+Grammar@{Main\+Grammar}}
+\index{Main\+Grammar@{Main\+Grammar}!ears@{ears}}
+\subparagraph{\texorpdfstring{Main\+Grammar}{MainGrammar}}
+{\footnotesize\ttfamily std\+::string ears\+::\+Main\+Grammar\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Name of grammar to be loaded. 
+
+
+
+Definition at line 23 of file ears.\+h.
+
+\mbox{\Hypertarget{group__ears_a8894096259495df7094cf23907e4b506}\label{group__ears_a8894096259495df7094cf23907e4b506}} 
+\index{ears@{ears}!period@{period}}
+\index{period@{period}!ears@{ears}}
+\subparagraph{\texorpdfstring{period}{period}}
+{\footnotesize\ttfamily double ears\+::period\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 17 of file ears.\+h.
+
+\mbox{\Hypertarget{group__ears_a75f98651fc0d3b34a0bbb57d24d4e3e9}\label{group__ears_a75f98651fc0d3b34a0bbb57d24d4e3e9}} 
+\index{ears@{ears}!port\+To\+Behavior@{port\+To\+Behavior}}
+\index{port\+To\+Behavior@{port\+To\+Behavior}!ears@{ears}}
+\subparagraph{\texorpdfstring{port\+To\+Behavior}{portToBehavior}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Port ears\+::port\+To\+Behavior\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Port to behavior\+Manager. 
+
+
+
+Definition at line 19 of file ears.\+h.
+
+\mbox{\Hypertarget{group__ears_ac467a7a8fdca6c1c9d17f37a5e149e39}\label{group__ears_ac467a7a8fdca6c1c9d17f37a5e149e39}} 
+\index{ears@{ears}!port\+To\+Speech\+Recognizer@{port\+To\+Speech\+Recognizer}}
+\index{port\+To\+Speech\+Recognizer@{port\+To\+Speech\+Recognizer}!ears@{ears}}
+\subparagraph{\texorpdfstring{port\+To\+Speech\+Recognizer}{portToSpeechRecognizer}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Port ears\+::port\+To\+Speech\+Recognizer\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Port to speech\+Recognizer. 
+
+
+
+Definition at line 20 of file ears.\+h.
+
+\mbox{\Hypertarget{group__ears_a34c5b9cddeaea5b4c086948017d061fa}\label{group__ears_a34c5b9cddeaea5b4c086948017d061fa}} 
+\index{ears@{ears}!rpc@{rpc}}
+\index{rpc@{rpc}!ears@{ears}}
+\subparagraph{\texorpdfstring{rpc}{rpc}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Port ears\+::rpc\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Response port. 
+
+
+
+Definition at line 18 of file ears.\+h.
+

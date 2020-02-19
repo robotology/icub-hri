@@ -1,0 +1,17 @@
+<map id="/home/travis/build/robotology/icub&#45;hri/src/modules/proactiveTagging/src/helpers.cpp" name="/home/travis/build/robotology/icub&#45;hri/src/modules/proactiveTagging/src/helpers.cpp">
+<area shape="rect" id="node2" href="$proactiveTagging_8h.html" title="proactiveTagging.h" alt="" coords="587,131,733,158"/>
+<area shape="rect" id="node4" href="$icubClient_8h.html" title="icubclient/clients\l/icubClient.h" alt="" coords="349,467,481,508"/>
+<area shape="rect" id="node13" href="$opcClient_8h.html" title="icubclient/clients\l/opcClient.h" alt="" coords="891,124,1023,165"/>
+<area shape="rect" id="node27" href="$subSystem__recog_8h.html" title="icubclient/subsystems\l/subSystem_recog.h" alt="" coords="1071,377,1238,419"/>
+<area shape="rect" id="node32" href="$subSystem__speech_8h.html" title="icubclient/subsystems\l/subSystem_speech.h" alt="" coords="1313,377,1479,419"/>
+<area shape="rect" id="node15" href="$representations_8h.html" title="icubclient/knowledge\l/representations.h" alt="" coords="735,213,895,255"/>
+<area shape="rect" id="node21" href="$tags_8h.html" title="icubclient/tags.h" alt="" coords="923,474,1053,501"/>
+<area shape="rect" id="node16" href="$action_8h.html" title="action.h" alt="" coords="703,303,777,329"/>
+<area shape="rect" id="node17" href="$entity_8h.html" title="entity.h" alt="" coords="697,474,767,501"/>
+<area shape="rect" id="node20" href="$relation_8h.html" title="relation.h" alt="" coords="609,385,693,411"/>
+<area shape="rect" id="node23" href="$agent_8h.html" title="agent.h" alt="" coords="607,303,678,329"/>
+<area shape="rect" id="node24" href="$object_8h.html" title="object.h" alt="" coords="852,385,927,411"/>
+<area shape="rect" id="node26" href="$bodypart_8h.html" title="bodypart.h" alt="" coords="903,303,995,329"/>
+<area shape="rect" id="node28" href="$subSystem_8h.html" title="icubclient/subsystems\l/subSystem.h" alt="" coords="1365,467,1531,508"/>
+<area shape="rect" id="node33" href="$functions_8h.html" title="icubclient/functions.h" alt="" coords="1179,474,1341,501"/>
+</map>

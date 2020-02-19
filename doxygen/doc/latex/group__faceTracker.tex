@@ -1,0 +1,466 @@
+\hypertarget{group__faceTracker}{}\section{face\+Tracker}
+\label{group__faceTracker}\index{face\+Tracker@{face\+Tracker}}
+
+
+Face tracking module for i\+Cub head and gaze using Open\+CV functions Version\+:1.\+0.  
+
+
+Collaboration diagram for face\+Tracker\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{group__faceTracker}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__faceTracker_classfaceTrackerModule}{face\+Tracker\+Module}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Face tracking module for i\+Cub head and gaze using Open\+CV functions Version\+:1.\+0. 
+
+\begin{DoxyAuthor}{Author}
+Hyung Jin Chang \href{mailto:hj.chang@imperial.ac.uk}{\tt hj.\+chang@imperial.\+ac.\+uk} ~\newline
+ 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Released under the terms of the G\+NU G\+PL v2.\+0 
+\end{DoxyCopyright}
+\hypertarget{group__touchDetector_intro_sec}{}\subsection{Description}\label{group__touchDetector_intro_sec}
+Using the face detection functions of Open\+CV, the i\+Cub is detecting faces every frame. Then, it tries to follow the located face in the middle of the view by moving the head and eyes simultaneously. Only the images of the left eye are used for tracking (not both eyes). There are several modes which are internally used for the tracking\+: \textquotesingle{}set position mode\textquotesingle{}, \textquotesingle{}face tracking mode, and \textquotesingle{}face searching mode\textquotesingle{}.\hypertarget{group__touchDetector_parameters_sec}{}\subsection{Parameters}\label{group__touchDetector_parameters_sec}
+
+\begin{DoxyItemize}
+\item -- name \+: name of the module
+\item -- image\+Port\+Name \+: name of the port where the images are to be taken from 
+\end{DoxyItemize}\hypertarget{group__touchDetector_inputports_sec}{}\subsection{Input Ports}\label{group__touchDetector_inputports_sec}
+
+\begin{DoxyItemize}
+\item /face\+Tracker/rpc \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Response port. Supported commands\+:
+\begin{DoxyItemize}
+\item pause
+\item resume
+\item help
+\item quit
+\end{DoxyItemize}
+\item /face\+Tracker/image/in \mbox{[}Image\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Feed images to facetracking using this port.
+\end{DoxyItemize}\hypertarget{group__touchDetector_outputports_sec}{}\subsection{Output Ports}\label{group__touchDetector_outputports_sec}
+\hypertarget{group__touchDetector_services_sec}{}\subsection{Services}\label{group__touchDetector_services_sec}
+
+
+\subsection{Class Documentation}
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}}\label{classfaceTrackerModule}
+\Hypertarget{group__faceTracker_classfaceTrackerModule}
+\subsubsection{class face\+Tracker\+Module}
+
+
+Definition at line 38 of file face\+Tracker.\+h.
+
+
+
+Inheritance diagram for face\+Tracker\+Module\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{classfaceTrackerModule__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__faceTracker_af986fddb3c617499c93b0eff039df1a9}{configure} (yarp\+::os\+::\+Resource\+Finder \&rf)
+\begin{DoxyCompactList}\small\item\em configure all the module parameters and return true if successful \end{DoxyCompactList}\item 
+bool \hyperlink{group__faceTracker_ac025eb44b288916aa000917be21d4cb1}{interrupt\+Module} ()
+\begin{DoxyCompactList}\small\item\em interrupt the ports \end{DoxyCompactList}\item 
+bool \hyperlink{group__faceTracker_aef55caa650c48bdd6695194a5f3f3f9d}{close} ()
+\begin{DoxyCompactList}\small\item\em close and shut down the module \end{DoxyCompactList}\item 
+bool \hyperlink{group__faceTracker_a79c16b996d3ea3492323897544085f0a}{respond} (const yarp\+::os\+::\+Bottle \&command, yarp\+::os\+::\+Bottle \&reply)
+\item 
+double \hyperlink{group__faceTracker_a249d0a6adc301a5a1637da1eb79a29c9}{get\+Period} ()
+\item 
+bool \hyperlink{group__faceTracker_a3b4f7abdfcc1c9661c8e8b06d6454bcc}{update\+Module} ()
+\begin{DoxyCompactList}\small\item\em get an image from the robot\textquotesingle{}s camera and decide which mode should be chosen next \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7}{Mode} \{ \newline
+\hyperlink{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7a9f04867dada5f91521c952b43aceb2bb}{Mode\+::\+G\+O\+\_\+\+D\+E\+F\+A\+U\+LT}, 
+\newline
+\hyperlink{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7ae6ad6d5a7508481788415802c33cd070}{Mode\+::\+F\+A\+C\+E\+\_\+\+S\+E\+A\+R\+C\+H\+I\+NG}, 
+\newline
+\hyperlink{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7ac31c9352685fa90547a6abd2d1f30a60}{Mode\+::\+F\+A\+C\+E\+\_\+\+T\+R\+A\+C\+K\+I\+NG}, 
+\newline
+\hyperlink{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7a99b2439e63f73ad515f7ab2447a80673}{Mode\+::\+P\+A\+U\+S\+ED}
+ \}
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__faceTracker_a3e4e9e96b70d461306b5fce25fb4798c}{move\+To\+Default\+Position} ()
+\begin{DoxyCompactList}\small\item\em Move to center position (after being stuck) \end{DoxyCompactList}\item 
+void \hyperlink{group__faceTracker_a3e12158338ec0d4c06eb994a6afb65c3}{face\+Searching} (bool face\+\_\+found)
+\begin{DoxyCompactList}\small\item\em Randomly move around. \end{DoxyCompactList}\item 
+void \hyperlink{group__faceTracker_ae67c3501ac32d99ccf5cd53596472a1b}{face\+Tracking} (const std\+::vector$<$ cv\+::\+Rect $>$ \&faces\+\_\+left, int biggest\+\_\+face\+\_\+left\+\_\+idx)
+\begin{DoxyCompactList}\small\item\em If a face was found, track it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{group__faceTracker_aff8eb6779301cc7c3bacbe3e3759a8ec}{x\+\_\+buf}
+\item 
+double \hyperlink{group__faceTracker_a1118d9567f870e66e7a3f8e8a966c665}{y\+\_\+buf}
+\item 
+\hyperlink{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7}{Mode} \hyperlink{group__faceTracker_a6be4817ecaa63045e44b32b66940807f}{mode}
+\item 
+int \hyperlink{group__faceTracker_a7f20228f4afe88b6712f77e25b2ce30d}{counter\+\_\+no\+\_\+face\+\_\+found}
+\begin{DoxyCompactList}\small\item\em if in face tracking mode, for how many iterations was no face found \end{DoxyCompactList}\item 
+int \hyperlink{group__faceTracker_af571d0f0d12556b700e396d0e3349838}{setpos\+\_\+counter}
+\begin{DoxyCompactList}\small\item\em how many iterations have we spend in default position mode \end{DoxyCompactList}\item 
+int \hyperlink{group__faceTracker_a179f88dc8e3e0db4e7a48cae4ad0cab0}{panning\+\_\+counter}
+\begin{DoxyCompactList}\small\item\em how many times have we spend in face searching mode. \end{DoxyCompactList}\item 
+int \hyperlink{group__faceTracker_a91894c7458dbcc569a7a5504fff41d63}{stuck\+\_\+counter}
+\item 
+int \hyperlink{group__faceTracker_a3b85f3e3df850b4d5a35df4d0791b612}{tilt\+\_\+target}
+\begin{DoxyCompactList}\small\item\em tilt target for face search mode (randomly chosen) \end{DoxyCompactList}\item 
+int \hyperlink{group__faceTracker_a07adeda5fcea9369eef00883acc339ea}{pan\+\_\+target}
+\begin{DoxyCompactList}\small\item\em pan target for face search mode (randomly chosen) \end{DoxyCompactList}\item 
+int \hyperlink{group__faceTracker_ad31a3d4d74070153bf0b271fbd118655}{pan\+\_\+max}
+\begin{DoxyCompactList}\small\item\em maximum pan for the i\+Cub \end{DoxyCompactList}\item 
+int \hyperlink{group__faceTracker_a2a91a704569df23ed22496ded4c5e609}{tilt\+\_\+max}
+\begin{DoxyCompactList}\small\item\em maximum tilt for the i\+Cub \end{DoxyCompactList}\item 
+int \hyperlink{group__faceTracker_afcdd2a0b1f9ca2147af397f8d3caace4}{nr\+\_\+jnts}
+\begin{DoxyCompactList}\small\item\em number of joints of the i\+Cub head \end{DoxyCompactList}\item 
+cv\+::\+Cascade\+Classifier \hyperlink{group__faceTracker_ae779505f75063e72f4ec5389edf6a790}{face\+\_\+classifier\+\_\+left}
+\item 
+Ipl\+Image $\ast$ \hyperlink{group__faceTracker_afb7bf90ce880392e99a6d490c56da597}{cv\+Ipl\+Image\+Left}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Member Enumeration Documentation}
+\mbox{\Hypertarget{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7}\label{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!Mode@{Mode}}
+\index{Mode@{Mode}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{Mode}{Mode}}
+{\footnotesize\ttfamily enum \hyperlink{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7}{face\+Tracker\+Module\+::\+Mode}\hspace{0.3cm}{\ttfamily [strong]}, {\ttfamily [protected]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G\+O\+\_\+\+D\+E\+F\+A\+U\+LT@{G\+O\+\_\+\+D\+E\+F\+A\+U\+LT}!face\+Tracker\+Module@{face\+Tracker\+Module}}\index{face\+Tracker\+Module@{face\+Tracker\+Module}!G\+O\+\_\+\+D\+E\+F\+A\+U\+LT@{G\+O\+\_\+\+D\+E\+F\+A\+U\+LT}}}\mbox{\Hypertarget{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7a9f04867dada5f91521c952b43aceb2bb}\label{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7a9f04867dada5f91521c952b43aceb2bb}} 
+G\+O\+\_\+\+D\+E\+F\+A\+U\+LT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+A\+C\+E\+\_\+\+S\+E\+A\+R\+C\+H\+I\+NG@{F\+A\+C\+E\+\_\+\+S\+E\+A\+R\+C\+H\+I\+NG}!face\+Tracker\+Module@{face\+Tracker\+Module}}\index{face\+Tracker\+Module@{face\+Tracker\+Module}!F\+A\+C\+E\+\_\+\+S\+E\+A\+R\+C\+H\+I\+NG@{F\+A\+C\+E\+\_\+\+S\+E\+A\+R\+C\+H\+I\+NG}}}\mbox{\Hypertarget{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7ae6ad6d5a7508481788415802c33cd070}\label{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7ae6ad6d5a7508481788415802c33cd070}} 
+F\+A\+C\+E\+\_\+\+S\+E\+A\+R\+C\+H\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+A\+C\+E\+\_\+\+T\+R\+A\+C\+K\+I\+NG@{F\+A\+C\+E\+\_\+\+T\+R\+A\+C\+K\+I\+NG}!face\+Tracker\+Module@{face\+Tracker\+Module}}\index{face\+Tracker\+Module@{face\+Tracker\+Module}!F\+A\+C\+E\+\_\+\+T\+R\+A\+C\+K\+I\+NG@{F\+A\+C\+E\+\_\+\+T\+R\+A\+C\+K\+I\+NG}}}\mbox{\Hypertarget{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7ac31c9352685fa90547a6abd2d1f30a60}\label{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7ac31c9352685fa90547a6abd2d1f30a60}} 
+F\+A\+C\+E\+\_\+\+T\+R\+A\+C\+K\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+A\+U\+S\+ED@{P\+A\+U\+S\+ED}!face\+Tracker\+Module@{face\+Tracker\+Module}}\index{face\+Tracker\+Module@{face\+Tracker\+Module}!P\+A\+U\+S\+ED@{P\+A\+U\+S\+ED}}}\mbox{\Hypertarget{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7a99b2439e63f73ad515f7ab2447a80673}\label{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7a99b2439e63f73ad515f7ab2447a80673}} 
+P\+A\+U\+S\+ED&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 58 of file face\+Tracker.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__faceTracker_aef55caa650c48bdd6695194a5f3f3f9d}\label{group__faceTracker_aef55caa650c48bdd6695194a5f3f3f9d}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!close@{close}}
+\index{close@{close}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool face\+Tracker\+Module\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+close and shut down the module 
+
+
+
+Definition at line 137 of file face\+Tracker.\+cpp.
+
+\mbox{\Hypertarget{group__faceTracker_af986fddb3c617499c93b0eff039df1a9}\label{group__faceTracker_af986fddb3c617499c93b0eff039df1a9}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!configure@{configure}}
+\index{configure@{configure}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool face\+Tracker\+Module\+::configure (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf }\end{DoxyParamCaption})}
+
+
+
+configure all the module parameters and return true if successful 
+
+
+
+Definition at line 29 of file face\+Tracker.\+cpp.
+
+\mbox{\Hypertarget{group__faceTracker_a3e12158338ec0d4c06eb994a6afb65c3}\label{group__faceTracker_a3e12158338ec0d4c06eb994a6afb65c3}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!face\+Searching@{face\+Searching}}
+\index{face\+Searching@{face\+Searching}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{face\+Searching()}{faceSearching()}}
+{\footnotesize\ttfamily void face\+Tracker\+Module\+::face\+Searching (\begin{DoxyParamCaption}\item[{bool}]{face\+\_\+found }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Randomly move around. 
+
+
+
+Definition at line 207 of file face\+Tracker.\+cpp.
+
+\mbox{\Hypertarget{group__faceTracker_ae67c3501ac32d99ccf5cd53596472a1b}\label{group__faceTracker_ae67c3501ac32d99ccf5cd53596472a1b}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!face\+Tracking@{face\+Tracking}}
+\index{face\+Tracking@{face\+Tracking}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{face\+Tracking()}{faceTracking()}}
+{\footnotesize\ttfamily void face\+Tracker\+Module\+::face\+Tracking (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ cv\+::\+Rect $>$ \&}]{faces\+\_\+left,  }\item[{int}]{biggest\+\_\+face\+\_\+left\+\_\+idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+If a face was found, track it. 
+
+
+
+Definition at line 235 of file face\+Tracker.\+cpp.
+
+\mbox{\Hypertarget{group__faceTracker_a249d0a6adc301a5a1637da1eb79a29c9}\label{group__faceTracker_a249d0a6adc301a5a1637da1eb79a29c9}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!get\+Period@{get\+Period}}
+\index{get\+Period@{get\+Period}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{get\+Period()}{getPeriod()}}
+{\footnotesize\ttfamily double face\+Tracker\+Module\+::get\+Period (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 175 of file face\+Tracker.\+cpp.
+
+\mbox{\Hypertarget{group__faceTracker_ac025eb44b288916aa000917be21d4cb1}\label{group__faceTracker_ac025eb44b288916aa000917be21d4cb1}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!interrupt\+Module@{interrupt\+Module}}
+\index{interrupt\+Module@{interrupt\+Module}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{interrupt\+Module()}{interruptModule()}}
+{\footnotesize\ttfamily bool face\+Tracker\+Module\+::interrupt\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+interrupt the ports 
+
+
+
+Definition at line 130 of file face\+Tracker.\+cpp.
+
+\mbox{\Hypertarget{group__faceTracker_a3e4e9e96b70d461306b5fce25fb4798c}\label{group__faceTracker_a3e4e9e96b70d461306b5fce25fb4798c}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!move\+To\+Default\+Position@{move\+To\+Default\+Position}}
+\index{move\+To\+Default\+Position@{move\+To\+Default\+Position}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{move\+To\+Default\+Position()}{moveToDefaultPosition()}}
+{\footnotesize\ttfamily void face\+Tracker\+Module\+::move\+To\+Default\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Move to center position (after being stuck) 
+
+
+
+Definition at line 179 of file face\+Tracker.\+cpp.
+
+\mbox{\Hypertarget{group__faceTracker_a79c16b996d3ea3492323897544085f0a}\label{group__faceTracker_a79c16b996d3ea3492323897544085f0a}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!respond@{respond}}
+\index{respond@{respond}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{respond()}{respond()}}
+{\footnotesize\ttfamily bool face\+Tracker\+Module\+::respond (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{command,  }\item[{yarp\+::os\+::\+Bottle \&}]{reply }\end{DoxyParamCaption})}
+
+
+
+Definition at line 149 of file face\+Tracker.\+cpp.
+
+\mbox{\Hypertarget{group__faceTracker_a3b4f7abdfcc1c9661c8e8b06d6454bcc}\label{group__faceTracker_a3b4f7abdfcc1c9661c8e8b06d6454bcc}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool face\+Tracker\+Module\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get an image from the robot\textquotesingle{}s camera and decide which mode should be chosen next 
+
+
+
+Definition at line 340 of file face\+Tracker.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__faceTracker_a7f20228f4afe88b6712f77e25b2ce30d}\label{group__faceTracker_a7f20228f4afe88b6712f77e25b2ce30d}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!counter\+\_\+no\+\_\+face\+\_\+found@{counter\+\_\+no\+\_\+face\+\_\+found}}
+\index{counter\+\_\+no\+\_\+face\+\_\+found@{counter\+\_\+no\+\_\+face\+\_\+found}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{counter\+\_\+no\+\_\+face\+\_\+found}{counter\_no\_face\_found}}
+{\footnotesize\ttfamily int face\+Tracker\+Module\+::counter\+\_\+no\+\_\+face\+\_\+found\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+if in face tracking mode, for how many iterations was no face found 
+
+
+
+Definition at line 60 of file face\+Tracker.\+h.
+
+\mbox{\Hypertarget{group__faceTracker_afb7bf90ce880392e99a6d490c56da597}\label{group__faceTracker_afb7bf90ce880392e99a6d490c56da597}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!cv\+Ipl\+Image\+Left@{cv\+Ipl\+Image\+Left}}
+\index{cv\+Ipl\+Image\+Left@{cv\+Ipl\+Image\+Left}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{cv\+Ipl\+Image\+Left}{cvIplImageLeft}}
+{\footnotesize\ttfamily Ipl\+Image$\ast$ face\+Tracker\+Module\+::cv\+Ipl\+Image\+Left\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 73 of file face\+Tracker.\+h.
+
+\mbox{\Hypertarget{group__faceTracker_ae779505f75063e72f4ec5389edf6a790}\label{group__faceTracker_ae779505f75063e72f4ec5389edf6a790}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!face\+\_\+classifier\+\_\+left@{face\+\_\+classifier\+\_\+left}}
+\index{face\+\_\+classifier\+\_\+left@{face\+\_\+classifier\+\_\+left}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{face\+\_\+classifier\+\_\+left}{face\_classifier\_left}}
+{\footnotesize\ttfamily cv\+::\+Cascade\+Classifier face\+Tracker\+Module\+::face\+\_\+classifier\+\_\+left\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 72 of file face\+Tracker.\+h.
+
+\mbox{\Hypertarget{group__faceTracker_a6be4817ecaa63045e44b32b66940807f}\label{group__faceTracker_a6be4817ecaa63045e44b32b66940807f}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!mode@{mode}}
+\index{mode@{mode}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{mode}{mode}}
+{\footnotesize\ttfamily \hyperlink{group__faceTracker_ac6632cfbb140765f8c5cc507e82b3ec7}{Mode} face\+Tracker\+Module\+::mode\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 59 of file face\+Tracker.\+h.
+
+\mbox{\Hypertarget{group__faceTracker_afcdd2a0b1f9ca2147af397f8d3caace4}\label{group__faceTracker_afcdd2a0b1f9ca2147af397f8d3caace4}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!nr\+\_\+jnts@{nr\+\_\+jnts}}
+\index{nr\+\_\+jnts@{nr\+\_\+jnts}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{nr\+\_\+jnts}{nr\_jnts}}
+{\footnotesize\ttfamily int face\+Tracker\+Module\+::nr\+\_\+jnts\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+number of joints of the i\+Cub head 
+
+
+
+Definition at line 70 of file face\+Tracker.\+h.
+
+\mbox{\Hypertarget{group__faceTracker_ad31a3d4d74070153bf0b271fbd118655}\label{group__faceTracker_ad31a3d4d74070153bf0b271fbd118655}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!pan\+\_\+max@{pan\+\_\+max}}
+\index{pan\+\_\+max@{pan\+\_\+max}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{pan\+\_\+max}{pan\_max}}
+{\footnotesize\ttfamily int face\+Tracker\+Module\+::pan\+\_\+max\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+maximum pan for the i\+Cub 
+
+
+
+Definition at line 68 of file face\+Tracker.\+h.
+
+\mbox{\Hypertarget{group__faceTracker_a07adeda5fcea9369eef00883acc339ea}\label{group__faceTracker_a07adeda5fcea9369eef00883acc339ea}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!pan\+\_\+target@{pan\+\_\+target}}
+\index{pan\+\_\+target@{pan\+\_\+target}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{pan\+\_\+target}{pan\_target}}
+{\footnotesize\ttfamily int face\+Tracker\+Module\+::pan\+\_\+target\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+pan target for face search mode (randomly chosen) 
+
+
+
+Definition at line 67 of file face\+Tracker.\+h.
+
+\mbox{\Hypertarget{group__faceTracker_a179f88dc8e3e0db4e7a48cae4ad0cab0}\label{group__faceTracker_a179f88dc8e3e0db4e7a48cae4ad0cab0}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!panning\+\_\+counter@{panning\+\_\+counter}}
+\index{panning\+\_\+counter@{panning\+\_\+counter}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{panning\+\_\+counter}{panning\_counter}}
+{\footnotesize\ttfamily int face\+Tracker\+Module\+::panning\+\_\+counter\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+how many times have we spend in face searching mode. 
+
+If $>$5, go back to default position 
+
+Definition at line 62 of file face\+Tracker.\+h.
+
+\mbox{\Hypertarget{group__faceTracker_af571d0f0d12556b700e396d0e3349838}\label{group__faceTracker_af571d0f0d12556b700e396d0e3349838}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!setpos\+\_\+counter@{setpos\+\_\+counter}}
+\index{setpos\+\_\+counter@{setpos\+\_\+counter}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{setpos\+\_\+counter}{setpos\_counter}}
+{\footnotesize\ttfamily int face\+Tracker\+Module\+::setpos\+\_\+counter\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+how many iterations have we spend in default position mode 
+
+
+
+Definition at line 61 of file face\+Tracker.\+h.
+
+\mbox{\Hypertarget{group__faceTracker_a91894c7458dbcc569a7a5504fff41d63}\label{group__faceTracker_a91894c7458dbcc569a7a5504fff41d63}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!stuck\+\_\+counter@{stuck\+\_\+counter}}
+\index{stuck\+\_\+counter@{stuck\+\_\+counter}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{stuck\+\_\+counter}{stuck\_counter}}
+{\footnotesize\ttfamily int face\+Tracker\+Module\+::stuck\+\_\+counter\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 63 of file face\+Tracker.\+h.
+
+\mbox{\Hypertarget{group__faceTracker_a2a91a704569df23ed22496ded4c5e609}\label{group__faceTracker_a2a91a704569df23ed22496ded4c5e609}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!tilt\+\_\+max@{tilt\+\_\+max}}
+\index{tilt\+\_\+max@{tilt\+\_\+max}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{tilt\+\_\+max}{tilt\_max}}
+{\footnotesize\ttfamily int face\+Tracker\+Module\+::tilt\+\_\+max\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+maximum tilt for the i\+Cub 
+
+
+
+Definition at line 69 of file face\+Tracker.\+h.
+
+\mbox{\Hypertarget{group__faceTracker_a3b85f3e3df850b4d5a35df4d0791b612}\label{group__faceTracker_a3b85f3e3df850b4d5a35df4d0791b612}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!tilt\+\_\+target@{tilt\+\_\+target}}
+\index{tilt\+\_\+target@{tilt\+\_\+target}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{tilt\+\_\+target}{tilt\_target}}
+{\footnotesize\ttfamily int face\+Tracker\+Module\+::tilt\+\_\+target\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+tilt target for face search mode (randomly chosen) 
+
+
+
+Definition at line 66 of file face\+Tracker.\+h.
+
+\mbox{\Hypertarget{group__faceTracker_aff8eb6779301cc7c3bacbe3e3759a8ec}\label{group__faceTracker_aff8eb6779301cc7c3bacbe3e3759a8ec}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!x\+\_\+buf@{x\+\_\+buf}}
+\index{x\+\_\+buf@{x\+\_\+buf}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{x\+\_\+buf}{x\_buf}}
+{\footnotesize\ttfamily double face\+Tracker\+Module\+::x\+\_\+buf\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 55 of file face\+Tracker.\+h.
+
+\mbox{\Hypertarget{group__faceTracker_a1118d9567f870e66e7a3f8e8a966c665}\label{group__faceTracker_a1118d9567f870e66e7a3f8e8a966c665}} 
+\index{face\+Tracker\+Module@{face\+Tracker\+Module}!y\+\_\+buf@{y\+\_\+buf}}
+\index{y\+\_\+buf@{y\+\_\+buf}!face\+Tracker\+Module@{face\+Tracker\+Module}}
+\subparagraph{\texorpdfstring{y\+\_\+buf}{y\_buf}}
+{\footnotesize\ttfamily double face\+Tracker\+Module\+::y\+\_\+buf\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 56 of file face\+Tracker.\+h.
+

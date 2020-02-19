@@ -1,0 +1,326 @@
+\hypertarget{namespacedrive__control__rpc}{}\section{drive\+\_\+control\+\_\+rpc Namespace Reference}
+\label{namespacedrive__control__rpc}\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacedrive__control__rpc_a086ccfe34cfe1eb3440cadb2f10b0f08}{update\+Drive\+List} ()
+\item 
+def \hyperlink{namespacedrive__control__rpc_aece99fd3dbbafdb0808eb837b038eaa5}{update\+Behavior\+List} ()
+\item 
+def \hyperlink{namespacedrive__control__rpc_a138e6e7b4cd44479e427c0c3dd533e3e}{close\+\_\+ports} ()
+\item 
+def \hyperlink{namespacedrive__control__rpc_a5e7562b93aab63c234f56a91507cf3b0}{trigger\+\_\+behavior} (behavior)
+\item 
+def \hyperlink{namespacedrive__control__rpc_aae666e8d207e9e50bf7129f0c2271874}{launch\+\_\+behavior} (behavior)
+\item 
+def \hyperlink{namespacedrive__control__rpc_a0a92b8da37cc8d9d2d4910ceecf1b508}{freeze\+\_\+all} ()
+\item 
+def \hyperlink{namespacedrive__control__rpc_a27b4d4d77509f5fd0124fc18b0104de9}{unfreeze\+\_\+all} ()
+\item 
+def \hyperlink{namespacedrive__control__rpc_a8f61b938d2a8ea371c72117f123841d3}{reset\+\_\+all} ()
+\item 
+def \hyperlink{namespacedrive__control__rpc_a5f11fca03a0e794d62e61ec5cf1d890c}{narrate} ()
+\item 
+def \hyperlink{namespacedrive__control__rpc_a276bd344b00a65b4a41241ce49cff801}{pointing} ()
+\item 
+def \hyperlink{namespacedrive__control__rpc_abe2d88b19ce544598171e788d121086f}{tagging} ()
+\item 
+def \hyperlink{namespacedrive__control__rpc_af880c1ea22f666df4c3d5fabaec29a80}{test} ()
+\item 
+def \hyperlink{namespacedrive__control__rpc_ae223cba1fab85e14b18fcd496a95bd34}{manual\+\_\+mode} ()
+\item 
+def \hyperlink{namespacedrive__control__rpc_a6ea3bba1adfb89a680efa7ebc81e04ed}{automatic\+\_\+mode} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacedrive__control__rpc_ae6ad8a5770f962e3e8aea3973fd88b00}{to\+Homeo} = yarp.\+Port()
+\item 
+string \hyperlink{namespacedrive__control__rpc_a5b80d44e37ed97451180de56fd8b821c}{homeo\+Port\+Name} = \char`\"{}/manager/to\+Homeostasis/rpc\char`\"{}+\char`\"{}\+:o\char`\"{}
+\item 
+\hyperlink{namespacedrive__control__rpc_a0e43be475c3d74c9ca8920fae92596de}{to\+Allo} = yarp.\+Port()
+\item 
+string \hyperlink{namespacedrive__control__rpc_ab62ff19a86d33c22ab186c85f5699cb6}{allo\+Port\+Name} = \char`\"{}/manager/to\+Allostasis/rpc\char`\"{}+\char`\"{}\+:o\char`\"{}
+\item 
+\hyperlink{namespacedrive__control__rpc_aa4a8cdca551c7850b14c6973b6229e1e}{to\+BM} = yarp.\+Port()
+\item 
+string \hyperlink{namespacedrive__control__rpc_a366fa62e9ed70cee700accf21969cd1e}{B\+M\+Port\+Name} = \char`\"{}/manager/\hyperlink{group__behaviorManager_classBehaviorManager}{Behavior\+Manager}/rpc\char`\"{}+\char`\"{}\+:o\char`\"{}
+\item 
+\hyperlink{namespacedrive__control__rpc_a4b139dc4cf2516862cb2860fc6fdc7b7}{to\+Planner} = yarp.\+Port()
+\item 
+string \hyperlink{namespacedrive__control__rpc_a9b49d423ea4927c8e3d8b555172e4266}{planner\+Port\+Name} = \char`\"{}/manager/\hyperlink{namespacedrive__control__rpc_a4b139dc4cf2516862cb2860fc6fdc7b7}{to\+Planner}/rpc\+:o\char`\"{}
+\item 
+string \hyperlink{namespacedrive__control__rpc_adf4dbbd6ca19ea81bb4d904b4a139d69}{homeo\+R\+PC} = \char`\"{}/homeostasis/rpc\char`\"{}
+\item 
+string \hyperlink{namespacedrive__control__rpc_a2cda3eb73a3944cdfd048d403ce65c74}{allo\+R\+PC} = \char`\"{}/Allostatic\+Controller/rpc\char`\"{}
+\item 
+string \hyperlink{namespacedrive__control__rpc_a420b5de110ae5e208dc1ce957f90711e}{B\+M\+R\+PC} = \char`\"{}/Behavior\+Manager/rpc\char`\"{}
+\item 
+string \hyperlink{namespacedrive__control__rpc_a5040c9c692daba5e981ee0ff844f9202}{planner\+R\+PC} = \char`\"{}/planner/rpc\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacedrive__control__rpc_a6ea3bba1adfb89a680efa7ebc81e04ed}\label{namespacedrive__control__rpc_a6ea3bba1adfb89a680efa7ebc81e04ed}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!automatic\+\_\+mode@{automatic\+\_\+mode}}
+\index{automatic\+\_\+mode@{automatic\+\_\+mode}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{automatic\+\_\+mode()}{automatic\_mode()}}
+{\footnotesize\ttfamily def drive\+\_\+control\+\_\+rpc.\+automatic\+\_\+mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 176 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a138e6e7b4cd44479e427c0c3dd533e3e}\label{namespacedrive__control__rpc_a138e6e7b4cd44479e427c0c3dd533e3e}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!close\+\_\+ports@{close\+\_\+ports}}
+\index{close\+\_\+ports@{close\+\_\+ports}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{close\+\_\+ports()}{close\_ports()}}
+{\footnotesize\ttfamily def drive\+\_\+control\+\_\+rpc.\+close\+\_\+ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 55 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a0a92b8da37cc8d9d2d4910ceecf1b508}\label{namespacedrive__control__rpc_a0a92b8da37cc8d9d2d4910ceecf1b508}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!freeze\+\_\+all@{freeze\+\_\+all}}
+\index{freeze\+\_\+all@{freeze\+\_\+all}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{freeze\+\_\+all()}{freeze\_all()}}
+{\footnotesize\ttfamily def drive\+\_\+control\+\_\+rpc.\+freeze\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 99 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_aae666e8d207e9e50bf7129f0c2271874}\label{namespacedrive__control__rpc_aae666e8d207e9e50bf7129f0c2271874}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!launch\+\_\+behavior@{launch\+\_\+behavior}}
+\index{launch\+\_\+behavior@{launch\+\_\+behavior}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{launch\+\_\+behavior()}{launch\_behavior()}}
+{\footnotesize\ttfamily def drive\+\_\+control\+\_\+rpc.\+launch\+\_\+behavior (\begin{DoxyParamCaption}\item[{}]{behavior }\end{DoxyParamCaption})}
+
+
+
+Definition at line 86 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_ae223cba1fab85e14b18fcd496a95bd34}\label{namespacedrive__control__rpc_ae223cba1fab85e14b18fcd496a95bd34}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!manual\+\_\+mode@{manual\+\_\+mode}}
+\index{manual\+\_\+mode@{manual\+\_\+mode}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{manual\+\_\+mode()}{manual\_mode()}}
+{\footnotesize\ttfamily def drive\+\_\+control\+\_\+rpc.\+manual\+\_\+mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 148 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a5f11fca03a0e794d62e61ec5cf1d890c}\label{namespacedrive__control__rpc_a5f11fca03a0e794d62e61ec5cf1d890c}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!narrate@{narrate}}
+\index{narrate@{narrate}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{narrate()}{narrate()}}
+{\footnotesize\ttfamily def drive\+\_\+control\+\_\+rpc.\+narrate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 136 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a276bd344b00a65b4a41241ce49cff801}\label{namespacedrive__control__rpc_a276bd344b00a65b4a41241ce49cff801}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!pointing@{pointing}}
+\index{pointing@{pointing}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{pointing()}{pointing()}}
+{\footnotesize\ttfamily def drive\+\_\+control\+\_\+rpc.\+pointing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 139 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a8f61b938d2a8ea371c72117f123841d3}\label{namespacedrive__control__rpc_a8f61b938d2a8ea371c72117f123841d3}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!reset\+\_\+all@{reset\+\_\+all}}
+\index{reset\+\_\+all@{reset\+\_\+all}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{reset\+\_\+all()}{reset\_all()}}
+{\footnotesize\ttfamily def drive\+\_\+control\+\_\+rpc.\+reset\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 123 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_abe2d88b19ce544598171e788d121086f}\label{namespacedrive__control__rpc_abe2d88b19ce544598171e788d121086f}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!tagging@{tagging}}
+\index{tagging@{tagging}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{tagging()}{tagging()}}
+{\footnotesize\ttfamily def drive\+\_\+control\+\_\+rpc.\+tagging (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 142 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_af880c1ea22f666df4c3d5fabaec29a80}\label{namespacedrive__control__rpc_af880c1ea22f666df4c3d5fabaec29a80}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!test@{test}}
+\index{test@{test}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{test()}{test()}}
+{\footnotesize\ttfamily def drive\+\_\+control\+\_\+rpc.\+test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 145 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a5e7562b93aab63c234f56a91507cf3b0}\label{namespacedrive__control__rpc_a5e7562b93aab63c234f56a91507cf3b0}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!trigger\+\_\+behavior@{trigger\+\_\+behavior}}
+\index{trigger\+\_\+behavior@{trigger\+\_\+behavior}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{trigger\+\_\+behavior()}{trigger\_behavior()}}
+{\footnotesize\ttfamily def drive\+\_\+control\+\_\+rpc.\+trigger\+\_\+behavior (\begin{DoxyParamCaption}\item[{}]{behavior }\end{DoxyParamCaption})}
+
+
+
+Definition at line 69 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a27b4d4d77509f5fd0124fc18b0104de9}\label{namespacedrive__control__rpc_a27b4d4d77509f5fd0124fc18b0104de9}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!unfreeze\+\_\+all@{unfreeze\+\_\+all}}
+\index{unfreeze\+\_\+all@{unfreeze\+\_\+all}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{unfreeze\+\_\+all()}{unfreeze\_all()}}
+{\footnotesize\ttfamily def drive\+\_\+control\+\_\+rpc.\+unfreeze\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 111 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_aece99fd3dbbafdb0808eb837b038eaa5}\label{namespacedrive__control__rpc_aece99fd3dbbafdb0808eb837b038eaa5}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!update\+Behavior\+List@{update\+Behavior\+List}}
+\index{update\+Behavior\+List@{update\+Behavior\+List}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{update\+Behavior\+List()}{updateBehaviorList()}}
+{\footnotesize\ttfamily def drive\+\_\+control\+\_\+rpc.\+update\+Behavior\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 45 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a086ccfe34cfe1eb3440cadb2f10b0f08}\label{namespacedrive__control__rpc_a086ccfe34cfe1eb3440cadb2f10b0f08}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!update\+Drive\+List@{update\+Drive\+List}}
+\index{update\+Drive\+List@{update\+Drive\+List}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{update\+Drive\+List()}{updateDriveList()}}
+{\footnotesize\ttfamily def drive\+\_\+control\+\_\+rpc.\+update\+Drive\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 35 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespacedrive__control__rpc_ab62ff19a86d33c22ab186c85f5699cb6}\label{namespacedrive__control__rpc_ab62ff19a86d33c22ab186c85f5699cb6}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!allo\+Port\+Name@{allo\+Port\+Name}}
+\index{allo\+Port\+Name@{allo\+Port\+Name}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{allo\+Port\+Name}{alloPortName}}
+{\footnotesize\ttfamily string drive\+\_\+control\+\_\+rpc.\+allo\+Port\+Name = \char`\"{}/manager/to\+Allostasis/rpc\char`\"{}+\char`\"{}\+:o\char`\"{}}
+
+
+
+Definition at line 14 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a2cda3eb73a3944cdfd048d403ce65c74}\label{namespacedrive__control__rpc_a2cda3eb73a3944cdfd048d403ce65c74}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!allo\+R\+PC@{allo\+R\+PC}}
+\index{allo\+R\+PC@{allo\+R\+PC}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{allo\+R\+PC}{alloRPC}}
+{\footnotesize\ttfamily string drive\+\_\+control\+\_\+rpc.\+allo\+R\+PC = \char`\"{}/Allostatic\+Controller/rpc\char`\"{}}
+
+
+
+Definition at line 26 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a366fa62e9ed70cee700accf21969cd1e}\label{namespacedrive__control__rpc_a366fa62e9ed70cee700accf21969cd1e}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!B\+M\+Port\+Name@{B\+M\+Port\+Name}}
+\index{B\+M\+Port\+Name@{B\+M\+Port\+Name}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{B\+M\+Port\+Name}{BMPortName}}
+{\footnotesize\ttfamily string drive\+\_\+control\+\_\+rpc.\+B\+M\+Port\+Name = \char`\"{}/manager/\hyperlink{group__behaviorManager_classBehaviorManager}{Behavior\+Manager}/rpc\char`\"{}+\char`\"{}\+:o\char`\"{}}
+
+
+
+Definition at line 18 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a420b5de110ae5e208dc1ce957f90711e}\label{namespacedrive__control__rpc_a420b5de110ae5e208dc1ce957f90711e}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!B\+M\+R\+PC@{B\+M\+R\+PC}}
+\index{B\+M\+R\+PC@{B\+M\+R\+PC}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{B\+M\+R\+PC}{BMRPC}}
+{\footnotesize\ttfamily string drive\+\_\+control\+\_\+rpc.\+B\+M\+R\+PC = \char`\"{}/Behavior\+Manager/rpc\char`\"{}}
+
+
+
+Definition at line 27 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a5b80d44e37ed97451180de56fd8b821c}\label{namespacedrive__control__rpc_a5b80d44e37ed97451180de56fd8b821c}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!homeo\+Port\+Name@{homeo\+Port\+Name}}
+\index{homeo\+Port\+Name@{homeo\+Port\+Name}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{homeo\+Port\+Name}{homeoPortName}}
+{\footnotesize\ttfamily string drive\+\_\+control\+\_\+rpc.\+homeo\+Port\+Name = \char`\"{}/manager/to\+Homeostasis/rpc\char`\"{}+\char`\"{}\+:o\char`\"{}}
+
+
+
+Definition at line 10 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_adf4dbbd6ca19ea81bb4d904b4a139d69}\label{namespacedrive__control__rpc_adf4dbbd6ca19ea81bb4d904b4a139d69}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!homeo\+R\+PC@{homeo\+R\+PC}}
+\index{homeo\+R\+PC@{homeo\+R\+PC}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{homeo\+R\+PC}{homeoRPC}}
+{\footnotesize\ttfamily string drive\+\_\+control\+\_\+rpc.\+homeo\+R\+PC = \char`\"{}/homeostasis/rpc\char`\"{}}
+
+
+
+Definition at line 25 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a9b49d423ea4927c8e3d8b555172e4266}\label{namespacedrive__control__rpc_a9b49d423ea4927c8e3d8b555172e4266}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!planner\+Port\+Name@{planner\+Port\+Name}}
+\index{planner\+Port\+Name@{planner\+Port\+Name}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{planner\+Port\+Name}{plannerPortName}}
+{\footnotesize\ttfamily string drive\+\_\+control\+\_\+rpc.\+planner\+Port\+Name = \char`\"{}/manager/\hyperlink{namespacedrive__control__rpc_a4b139dc4cf2516862cb2860fc6fdc7b7}{to\+Planner}/rpc\+:o\char`\"{}}
+
+
+
+Definition at line 22 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a5040c9c692daba5e981ee0ff844f9202}\label{namespacedrive__control__rpc_a5040c9c692daba5e981ee0ff844f9202}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!planner\+R\+PC@{planner\+R\+PC}}
+\index{planner\+R\+PC@{planner\+R\+PC}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{planner\+R\+PC}{plannerRPC}}
+{\footnotesize\ttfamily string drive\+\_\+control\+\_\+rpc.\+planner\+R\+PC = \char`\"{}/planner/rpc\char`\"{}}
+
+
+
+Definition at line 28 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a0e43be475c3d74c9ca8920fae92596de}\label{namespacedrive__control__rpc_a0e43be475c3d74c9ca8920fae92596de}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!to\+Allo@{to\+Allo}}
+\index{to\+Allo@{to\+Allo}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{to\+Allo}{toAllo}}
+{\footnotesize\ttfamily drive\+\_\+control\+\_\+rpc.\+to\+Allo = yarp.\+Port()}
+
+
+
+Definition at line 13 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_aa4a8cdca551c7850b14c6973b6229e1e}\label{namespacedrive__control__rpc_aa4a8cdca551c7850b14c6973b6229e1e}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!to\+BM@{to\+BM}}
+\index{to\+BM@{to\+BM}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{to\+BM}{toBM}}
+{\footnotesize\ttfamily drive\+\_\+control\+\_\+rpc.\+to\+BM = yarp.\+Port()}
+
+
+
+Definition at line 17 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_ae6ad8a5770f962e3e8aea3973fd88b00}\label{namespacedrive__control__rpc_ae6ad8a5770f962e3e8aea3973fd88b00}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!to\+Homeo@{to\+Homeo}}
+\index{to\+Homeo@{to\+Homeo}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{to\+Homeo}{toHomeo}}
+{\footnotesize\ttfamily drive\+\_\+control\+\_\+rpc.\+to\+Homeo = yarp.\+Port()}
+
+
+
+Definition at line 9 of file drive\+\_\+control\+\_\+rpc.\+py.
+
+\mbox{\Hypertarget{namespacedrive__control__rpc_a4b139dc4cf2516862cb2860fc6fdc7b7}\label{namespacedrive__control__rpc_a4b139dc4cf2516862cb2860fc6fdc7b7}} 
+\index{drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}!to\+Planner@{to\+Planner}}
+\index{to\+Planner@{to\+Planner}!drive\+\_\+control\+\_\+rpc@{drive\+\_\+control\+\_\+rpc}}
+\subsubsection{\texorpdfstring{to\+Planner}{toPlanner}}
+{\footnotesize\ttfamily drive\+\_\+control\+\_\+rpc.\+to\+Planner = yarp.\+Port()}
+
+
+
+Definition at line 21 of file drive\+\_\+control\+\_\+rpc.\+py.
+

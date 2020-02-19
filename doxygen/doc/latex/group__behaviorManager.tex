@@ -1,0 +1,984 @@
+\hypertarget{group__behaviorManager}{}\section{behavior\+Manager}
+\label{group__behaviorManager}\index{behavior\+Manager@{behavior\+Manager}}
+
+
+Module for quick control of default complex behaviors.  
+
+
+Collaboration diagram for behavior\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{group__behaviorManager}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__behaviorManager_classBehavior}{Behavior}
+\item 
+class \hyperlink{group__behaviorManager_classBehaviorManager}{Behavior\+Manager}
+\item 
+class \hyperlink{group__behaviorManager_classDummy}{Dummy}
+\item 
+class \hyperlink{group__behaviorManager_classMoveObject}{Move\+Object}
+\item 
+class \hyperlink{group__behaviorManager_classPointing}{Pointing}
+\item 
+class \hyperlink{group__behaviorManager_classRecognitionOrder}{Recognition\+Order}
+\item 
+class \hyperlink{group__behaviorManager_classTagging}{Tagging}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module for quick control of default complex behaviors. 
+
+Version\+:1.\+0 \begin{DoxyAuthor}{Author}
+Clément Moulin-\/\+Frier \href{mailto:clement.moulinfrier@gmail.com}{\tt clement.\+moulinfrier@gmail.\+com}, Jordi-\/\+Ysard Puigbò \href{mailto:jordiysard.puigbo@upf.edu}{\tt jordiysard.\+puigbo@upf.\+edu} ~\newline
+ 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Released under the terms of the G\+NU G\+PL v2.\+0 
+\end{DoxyCopyright}
+\hypertarget{group__touchDetector_intro_sec}{}\subsection{Description}\label{group__touchDetector_intro_sec}
+This module contains an interface to easily schedule behaviors. The interface allows the creation of default complex behaviors (e.\+g. asking for the name of an object while pointing to it and looking to a human partner). It allows to easily define this behaviors through calls to the icub-\/client library or other modules. This behaviours can receive arguments with additional metadata (e.\+g. internal ID of the object to ask for) or obtain this information from sensation\+Manager. The behaviours are scheduled in order to avoid conflicts, only allowing one behaviour to run at the same time. Moreover, all drives can be called by an R\+PC command with the name and the corresponding arguments. Additionally, through a config file, the user can select which drives will be available at every execution. In the context of the reactive\+Layer, behavior\+Manager exists to execute behaviors triggered by the drives in the allostatic\+Controller.
+\begin{DoxyItemize}
+\item Find an example of a behavior in \hyperlink{tagging_8cpp}{behavior\+Manager/src/tagging.\+cpp}.
+
+All necessary ports must be defined at the behavior creation and are connected automatically at the start of the behavior\+Manager instance.
+\end{DoxyItemize}\hypertarget{group__touchDetector_parameters_sec}{}\subsection{Parameters}\label{group__touchDetector_parameters_sec}
+
+\begin{DoxyItemize}
+\item -- name \+: name of the module
+\item -- period \+: change the update rate of this module 
+\end{DoxyItemize}\hypertarget{group__touchDetector_inputports_sec}{}\subsection{Input Ports}\label{group__touchDetector_inputports_sec}
+
+\begin{DoxyItemize}
+\item /\+Behavior\+Manager/trigger\+:i \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Response port. Supported commands\+:
+\begin{DoxyItemize}
+\item help
+\item \mbox{[}\textquotesingle{}behavior\+\_\+name\textquotesingle{}\mbox{]} \mbox{[}arguments\mbox{]}\+: Triggers a behavior
+\item \mbox{[}\textquotesingle{}is\+\_\+available\textquotesingle{}\mbox{]} \+: Replies behavior\+Manager availability
+\item \mbox{[}\textquotesingle{}names\textquotesingle{}\mbox{]} \+: Returns a list of all available behaviors
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{group__touchDetector_outputports_sec}{}\subsection{Output Ports}\label{group__touchDetector_outputports_sec}
+\hypertarget{group__touchDetector_services_sec}{}\subsection{Services}\label{group__touchDetector_services_sec}
+
+
+\subsection{Class Documentation}
+\index{Behavior@{Behavior}}\label{classBehavior}
+\Hypertarget{group__behaviorManager_classBehavior}
+\subsubsection{class Behavior}
+
+
+Definition at line 13 of file behavior.\+h.
+
+
+
+Inheritance diagram for Behavior\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBehavior__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__behaviorManager_acd73bfebbe60da8cb7ef41cbde780bec}{Behavior} (yarp\+::os\+::\+Mutex $\ast$\+\_\+mut, yarp\+::os\+::\+Resource\+Finder \&\+\_\+rf, \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$\+\_\+i\+Cub, std\+::string \+\_\+behavior\+Name)
+\item 
+\hyperlink{group__behaviorManager_aab6b9945e55735c64af699fef74b23cf}{Behavior} ()=delete
+\begin{DoxyCompactList}\small\item\em No default constructor! \end{DoxyCompactList}\item 
+virtual \hyperlink{group__behaviorManager_aff31e5c76f8837460f90403381a4a94e}{$\sim$\+Behavior} ()
+\item 
+void \hyperlink{group__behaviorManager_ae3f73b56e5c85cea1e6666c90ef6199c}{open\+Ports} (std\+::string port\+\_\+name\+\_\+prefix)
+\begin{DoxyCompactList}\small\item\em open\+Ports open ports defined for a behavior \end{DoxyCompactList}\item 
+bool \hyperlink{group__behaviorManager_ab335b84ae07048c012ed4baaeea4a5fd}{trigger} (const yarp\+::os\+::\+Bottle \&args)
+\begin{DoxyCompactList}\small\item\em trigger triggers this behavior and blocks the mutex \end{DoxyCompactList}\item 
+virtual void \hyperlink{group__behaviorManager_a30484d4d6de3c0689de4f60da3efbab8}{configure} ()=0
+\item 
+void \hyperlink{group__behaviorManager_af22cc728f8096912bb394db4b105bf05}{interrupt\+\_\+ports} ()
+\begin{DoxyCompactList}\small\item\em interrupt\+\_\+ports interrupt ports defined for a behavior \end{DoxyCompactList}\item 
+void \hyperlink{group__behaviorManager_adf37f264e178c929b5935f546d268f34}{close\+\_\+ports} ()
+\begin{DoxyCompactList}\small\item\em close\+\_\+ports close ports defined for a behavior \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+yarp\+::os\+::\+Port \hyperlink{group__behaviorManager_a69c34f66f1d96b686e3c220822d42a66}{rpc\+\_\+out\+\_\+port}
+\begin{DoxyCompactList}\small\item\em Port to external module. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__behaviorManager_aad9d5bf2f1f1e9c6902a4f40b03c4e67}{behavior\+Name}
+\item 
+std\+::string \hyperlink{group__behaviorManager_aad1469e84c8de8732b4ebaa7652237a7}{from\+\_\+sensation\+\_\+port\+\_\+name}
+\item 
+std\+::string \hyperlink{group__behaviorManager_abcacbd31fe67bf4dcded47b2c839128c}{external\+\_\+port\+\_\+name}
+\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ \hyperlink{group__behaviorManager_a06324ef0ea01ca50b74f6e3231063482}{sensation\+\_\+port\+\_\+in}
+\begin{DoxyCompactList}\small\item\em Input port from sensation\+Manager. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{group__behaviorManager_a7dfd81b30f9ddf1864093626650751c3}{run} (const yarp\+::os\+::\+Bottle \&args)=0
+\item 
+virtual void \hyperlink{group__behaviorManager_affd22d1516cd32ff4f42694a1e6f9ab1}{close\+\_\+extra\+\_\+ports} ()=0
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$ \hyperlink{group__behaviorManager_a5ab3f49bb3a40d79fe2b4aeb76e12196}{i\+Cub}
+\item 
+yarp\+::os\+::\+Resource\+Finder \& \hyperlink{group__behaviorManager_a789254580a094846e91a9892fa2bc4cd}{rf}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__behaviorManager_acd73bfebbe60da8cb7ef41cbde780bec}\label{group__behaviorManager_acd73bfebbe60da8cb7ef41cbde780bec}} 
+\index{Behavior@{Behavior}!Behavior@{Behavior}}
+\index{Behavior@{Behavior}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{Behavior()}{Behavior()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Behavior\+::\+Behavior (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Mutex $\ast$}]{\+\_\+mut,  }\item[{yarp\+::os\+::\+Resource\+Finder \&}]{\+\_\+rf,  }\item[{\hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$}]{\+\_\+i\+Cub,  }\item[{std\+::string}]{\+\_\+behavior\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 30 of file behavior.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_aab6b9945e55735c64af699fef74b23cf}\label{group__behaviorManager_aab6b9945e55735c64af699fef74b23cf}} 
+\index{Behavior@{Behavior}!Behavior@{Behavior}}
+\index{Behavior@{Behavior}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{Behavior()}{Behavior()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Behavior\+::\+Behavior (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+No default constructor! 
+
+\mbox{\Hypertarget{group__behaviorManager_aff31e5c76f8837460f90403381a4a94e}\label{group__behaviorManager_aff31e5c76f8837460f90403381a4a94e}} 
+\index{Behavior@{Behavior}!````~Behavior@{$\sim$\+Behavior}}
+\index{````~Behavior@{$\sim$\+Behavior}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{$\sim$\+Behavior()}{~Behavior()}}
+{\footnotesize\ttfamily virtual Behavior\+::$\sim$\+Behavior (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 36 of file behavior.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__behaviorManager_affd22d1516cd32ff4f42694a1e6f9ab1}\label{group__behaviorManager_affd22d1516cd32ff4f42694a1e6f9ab1}} 
+\index{Behavior@{Behavior}!close\+\_\+extra\+\_\+ports@{close\+\_\+extra\+\_\+ports}}
+\index{close\+\_\+extra\+\_\+ports@{close\+\_\+extra\+\_\+ports}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{close\+\_\+extra\+\_\+ports()}{close\_extra\_ports()}}
+{\footnotesize\ttfamily virtual void Behavior\+::close\+\_\+extra\+\_\+ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Implemented in \hyperlink{group__behaviorManager_aebfb66e2a5a0088968bf792f3adb1942}{Dummy}, \hyperlink{group__behaviorManager_aa5b70feb16d8c7b5eb883f503c96f9fa}{Recognition\+Order}, \hyperlink{group__behaviorManager_a98277199c0056a8062184b7c969da0a5}{Move\+Object}, \hyperlink{group__behaviorManager_a28ede20962e35d2ec2680f66ba371a0f}{Pointing}, and \hyperlink{group__behaviorManager_a2a90e7eda70017f01de96080c05b316c}{Tagging}.
+
+\mbox{\Hypertarget{group__behaviorManager_adf37f264e178c929b5935f546d268f34}\label{group__behaviorManager_adf37f264e178c929b5935f546d268f34}} 
+\index{Behavior@{Behavior}!close\+\_\+ports@{close\+\_\+ports}}
+\index{close\+\_\+ports@{close\+\_\+ports}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{close\+\_\+ports()}{close\_ports()}}
+{\footnotesize\ttfamily void Behavior\+::close\+\_\+ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+close\+\_\+ports close ports defined for a behavior 
+
+
+
+Definition at line 97 of file behavior.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a30484d4d6de3c0689de4f60da3efbab8}\label{group__behaviorManager_a30484d4d6de3c0689de4f60da3efbab8}} 
+\index{Behavior@{Behavior}!configure@{configure}}
+\index{configure@{configure}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily virtual void Behavior\+::configure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \hyperlink{group__behaviorManager_a493f3a2d8faa22b3175946e13b8dfe88}{Dummy}, \hyperlink{group__behaviorManager_a5e068840a2d5f5fbeafc61b075f63804}{Move\+Object}, \hyperlink{group__behaviorManager_a617221425cec2b16576e02797b788b9f}{Recognition\+Order}, \hyperlink{group__behaviorManager_a1681f79ff201a977a2d9124026d6cac8}{Pointing}, and \hyperlink{group__behaviorManager_a6a67413f90a70012ffc2e67074728c0a}{Tagging}.
+
+\mbox{\Hypertarget{group__behaviorManager_af22cc728f8096912bb394db4b105bf05}\label{group__behaviorManager_af22cc728f8096912bb394db4b105bf05}} 
+\index{Behavior@{Behavior}!interrupt\+\_\+ports@{interrupt\+\_\+ports}}
+\index{interrupt\+\_\+ports@{interrupt\+\_\+ports}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{interrupt\+\_\+ports()}{interrupt\_ports()}}
+{\footnotesize\ttfamily void Behavior\+::interrupt\+\_\+ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+interrupt\+\_\+ports interrupt ports defined for a behavior 
+
+
+
+Definition at line 88 of file behavior.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_ae3f73b56e5c85cea1e6666c90ef6199c}\label{group__behaviorManager_ae3f73b56e5c85cea1e6666c90ef6199c}} 
+\index{Behavior@{Behavior}!open\+Ports@{open\+Ports}}
+\index{open\+Ports@{open\+Ports}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{open\+Ports()}{openPorts()}}
+{\footnotesize\ttfamily void Behavior\+::open\+Ports (\begin{DoxyParamCaption}\item[{std\+::string}]{port\+\_\+name\+\_\+prefix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+open\+Ports open ports defined for a behavior 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port\+\_\+name\+\_\+prefix} & unique prefix name for the port \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line 43 of file behavior.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a7dfd81b30f9ddf1864093626650751c3}\label{group__behaviorManager_a7dfd81b30f9ddf1864093626650751c3}} 
+\index{Behavior@{Behavior}!run@{run}}
+\index{run@{run}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily virtual void Behavior\+::run (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Implemented in \hyperlink{group__behaviorManager_a0a095aa1af770bac92f30042cee21e3a}{Recognition\+Order}, \hyperlink{group__behaviorManager_a49b398f1050441b1a2f63da63420a6f1}{Dummy}, \hyperlink{group__behaviorManager_a8427d7f479b580bbf54030015b506374}{Tagging}, \hyperlink{group__behaviorManager_a6f1a7b52f3c846009e6b510dbb728011}{Pointing}, and \hyperlink{group__behaviorManager_a2e242410f34618b2ff73f9106732470b}{Move\+Object}.
+
+\mbox{\Hypertarget{group__behaviorManager_ab335b84ae07048c012ed4baaeea4a5fd}\label{group__behaviorManager_ab335b84ae07048c012ed4baaeea4a5fd}} 
+\index{Behavior@{Behavior}!trigger@{trigger}}
+\index{trigger@{trigger}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{trigger()}{trigger()}}
+{\footnotesize\ttfamily bool Behavior\+::trigger (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+trigger triggers this behavior and blocks the mutex 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & bottle with arguments for this behaviours if not provided, taken from sensations or return error \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool false if not triggered because of mutex blocked 
+\end{DoxyReturn}
+
+
+Definition at line 58 of file behavior.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__behaviorManager_aad9d5bf2f1f1e9c6902a4f40b03c4e67}\label{group__behaviorManager_aad9d5bf2f1f1e9c6902a4f40b03c4e67}} 
+\index{Behavior@{Behavior}!behavior\+Name@{behavior\+Name}}
+\index{behavior\+Name@{behavior\+Name}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{behavior\+Name}{behaviorName}}
+{\footnotesize\ttfamily std\+::string Behavior\+::behavior\+Name}
+
+
+
+Definition at line 27 of file behavior.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_abcacbd31fe67bf4dcded47b2c839128c}\label{group__behaviorManager_abcacbd31fe67bf4dcded47b2c839128c}} 
+\index{Behavior@{Behavior}!external\+\_\+port\+\_\+name@{external\+\_\+port\+\_\+name}}
+\index{external\+\_\+port\+\_\+name@{external\+\_\+port\+\_\+name}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{external\+\_\+port\+\_\+name}{external\_port\_name}}
+{\footnotesize\ttfamily std\+::string Behavior\+::external\+\_\+port\+\_\+name}
+
+
+
+Definition at line 27 of file behavior.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_aad1469e84c8de8732b4ebaa7652237a7}\label{group__behaviorManager_aad1469e84c8de8732b4ebaa7652237a7}} 
+\index{Behavior@{Behavior}!from\+\_\+sensation\+\_\+port\+\_\+name@{from\+\_\+sensation\+\_\+port\+\_\+name}}
+\index{from\+\_\+sensation\+\_\+port\+\_\+name@{from\+\_\+sensation\+\_\+port\+\_\+name}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{from\+\_\+sensation\+\_\+port\+\_\+name}{from\_sensation\_port\_name}}
+{\footnotesize\ttfamily std\+::string Behavior\+::from\+\_\+sensation\+\_\+port\+\_\+name}
+
+
+
+Definition at line 27 of file behavior.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a5ab3f49bb3a40d79fe2b4aeb76e12196}\label{group__behaviorManager_a5ab3f49bb3a40d79fe2b4aeb76e12196}} 
+\index{Behavior@{Behavior}!i\+Cub@{i\+Cub}}
+\index{i\+Cub@{i\+Cub}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{i\+Cub}{iCub}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client}$\ast$ Behavior\+::i\+Cub\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 20 of file behavior.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a789254580a094846e91a9892fa2bc4cd}\label{group__behaviorManager_a789254580a094846e91a9892fa2bc4cd}} 
+\index{Behavior@{Behavior}!rf@{rf}}
+\index{rf@{rf}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{rf}{rf}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Resource\+Finder\& Behavior\+::rf\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 21 of file behavior.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a69c34f66f1d96b686e3c220822d42a66}\label{group__behaviorManager_a69c34f66f1d96b686e3c220822d42a66}} 
+\index{Behavior@{Behavior}!rpc\+\_\+out\+\_\+port@{rpc\+\_\+out\+\_\+port}}
+\index{rpc\+\_\+out\+\_\+port@{rpc\+\_\+out\+\_\+port}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{rpc\+\_\+out\+\_\+port}{rpc\_out\_port}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Port Behavior\+::rpc\+\_\+out\+\_\+port}
+
+
+
+Port to external module. 
+
+
+
+Definition at line 26 of file behavior.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a06324ef0ea01ca50b74f6e3231063482}\label{group__behaviorManager_a06324ef0ea01ca50b74f6e3231063482}} 
+\index{Behavior@{Behavior}!sensation\+\_\+port\+\_\+in@{sensation\+\_\+port\+\_\+in}}
+\index{sensation\+\_\+port\+\_\+in@{sensation\+\_\+port\+\_\+in}!Behavior@{Behavior}}
+\subparagraph{\texorpdfstring{sensation\+\_\+port\+\_\+in}{sensation\_port\_in}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$ Behavior\+::sensation\+\_\+port\+\_\+in}
+
+
+
+Input port from sensation\+Manager. 
+
+
+
+Definition at line 28 of file behavior.\+h.
+
+\index{Behavior\+Manager@{Behavior\+Manager}}\label{classBehaviorManager}
+\Hypertarget{group__behaviorManager_classBehaviorManager}
+\subsubsection{class Behavior\+Manager}
+
+
+Definition at line 12 of file behavior\+Manager.\+h.
+
+
+
+Inheritance diagram for Behavior\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=189pt]{classBehaviorManager__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__behaviorManager_aa699ec477e97bfc1088696ab605c3fcc}{Behavior\+Manager} ()
+\item 
+bool \hyperlink{group__behaviorManager_a862cc13dc0d23fdddafda20b98f965f9}{configure} (yarp\+::os\+::\+Resource\+Finder \&rf)
+\item 
+bool \hyperlink{group__behaviorManager_a892731d599c983a1a5b16d6fde6a1a38}{interrupt\+Module} ()
+\item 
+bool \hyperlink{group__behaviorManager_adb54b3d9d7627ae53f611e0e3bba2baa}{close} ()
+\item 
+double \hyperlink{group__behaviorManager_a29421476007fe6bfd5b3ee388e51fdaa}{get\+Period} ()
+\item 
+bool \hyperlink{group__behaviorManager_ad46e6bb61e754f6a33e73ac3ce656fbb}{update\+Module} ()
+\item 
+bool \hyperlink{group__behaviorManager_a79cbdf143299a44a1c391e385846bb04}{respond} (const yarp\+::os\+::\+Bottle \&cmd, yarp\+::os\+::\+Bottle \&reply)
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__behaviorManager_aa699ec477e97bfc1088696ab605c3fcc}\label{group__behaviorManager_aa699ec477e97bfc1088696ab605c3fcc}} 
+\index{Behavior\+Manager@{Behavior\+Manager}!Behavior\+Manager@{Behavior\+Manager}}
+\index{Behavior\+Manager@{Behavior\+Manager}!Behavior\+Manager@{Behavior\+Manager}}
+\subparagraph{\texorpdfstring{Behavior\+Manager()}{BehaviorManager()}}
+{\footnotesize\ttfamily Behavior\+Manager\+::\+Behavior\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 28 of file behavior\+Manager.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__behaviorManager_adb54b3d9d7627ae53f611e0e3bba2baa}\label{group__behaviorManager_adb54b3d9d7627ae53f611e0e3bba2baa}} 
+\index{Behavior\+Manager@{Behavior\+Manager}!close@{close}}
+\index{close@{close}!Behavior\+Manager@{Behavior\+Manager}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool Behavior\+Manager\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 22 of file behavior\+Manager.\+cpp.
+
+\mbox{\Hypertarget{group__behaviorManager_a862cc13dc0d23fdddafda20b98f965f9}\label{group__behaviorManager_a862cc13dc0d23fdddafda20b98f965f9}} 
+\index{Behavior\+Manager@{Behavior\+Manager}!configure@{configure}}
+\index{configure@{configure}!Behavior\+Manager@{Behavior\+Manager}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool Behavior\+Manager\+::configure (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf }\end{DoxyParamCaption})}
+
+
+
+Definition at line 40 of file behavior\+Manager.\+cpp.
+
+\mbox{\Hypertarget{group__behaviorManager_a29421476007fe6bfd5b3ee388e51fdaa}\label{group__behaviorManager_a29421476007fe6bfd5b3ee388e51fdaa}} 
+\index{Behavior\+Manager@{Behavior\+Manager}!get\+Period@{get\+Period}}
+\index{get\+Period@{get\+Period}!Behavior\+Manager@{Behavior\+Manager}}
+\subparagraph{\texorpdfstring{get\+Period()}{getPeriod()}}
+{\footnotesize\ttfamily double Behavior\+Manager\+::get\+Period (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 38 of file behavior\+Manager.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a892731d599c983a1a5b16d6fde6a1a38}\label{group__behaviorManager_a892731d599c983a1a5b16d6fde6a1a38}} 
+\index{Behavior\+Manager@{Behavior\+Manager}!interrupt\+Module@{interrupt\+Module}}
+\index{interrupt\+Module@{interrupt\+Module}!Behavior\+Manager@{Behavior\+Manager}}
+\subparagraph{\texorpdfstring{interrupt\+Module()}{interruptModule()}}
+{\footnotesize\ttfamily bool Behavior\+Manager\+::interrupt\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 12 of file behavior\+Manager.\+cpp.
+
+\mbox{\Hypertarget{group__behaviorManager_a79cbdf143299a44a1c391e385846bb04}\label{group__behaviorManager_a79cbdf143299a44a1c391e385846bb04}} 
+\index{Behavior\+Manager@{Behavior\+Manager}!respond@{respond}}
+\index{respond@{respond}!Behavior\+Manager@{Behavior\+Manager}}
+\subparagraph{\texorpdfstring{respond()}{respond()}}
+{\footnotesize\ttfamily bool Behavior\+Manager\+::respond (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{cmd,  }\item[{yarp\+::os\+::\+Bottle \&}]{reply }\end{DoxyParamCaption})}
+
+
+
+Definition at line 122 of file behavior\+Manager.\+cpp.
+
+\mbox{\Hypertarget{group__behaviorManager_ad46e6bb61e754f6a33e73ac3ce656fbb}\label{group__behaviorManager_ad46e6bb61e754f6a33e73ac3ce656fbb}} 
+\index{Behavior\+Manager@{Behavior\+Manager}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!Behavior\+Manager@{Behavior\+Manager}}
+\subparagraph{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool Behavior\+Manager\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 116 of file behavior\+Manager.\+cpp.
+
+\index{Dummy@{Dummy}}\label{classDummy}
+\Hypertarget{group__behaviorManager_classDummy}
+\subsubsection{class Dummy}
+
+
+Definition at line 12 of file dummy.\+h.
+
+
+
+Inheritance diagram for Dummy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=140pt]{classDummy__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__behaviorManager_ab859dd9c4a1d1ca5a3e452bd277b9ee3}{Dummy} (yarp\+::os\+::\+Mutex $\ast$mut, yarp\+::os\+::\+Resource\+Finder \&\hyperlink{group__behaviorManager_a789254580a094846e91a9892fa2bc4cd}{rf}, \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$\hyperlink{group__behaviorManager_a5ab3f49bb3a40d79fe2b4aeb76e12196}{i\+Cub}, std\+::string \hyperlink{group__behaviorManager_aad9d5bf2f1f1e9c6902a4f40b03c4e67}{behavior\+Name})
+\item 
+void \hyperlink{group__behaviorManager_a493f3a2d8faa22b3175946e13b8dfe88}{configure} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__behaviorManager_a49b398f1050441b1a2f63da63420a6f1}{run} (const yarp\+::os\+::\+Bottle \&)
+\item 
+void \hyperlink{group__behaviorManager_aebfb66e2a5a0088968bf792f3adb1942}{close\+\_\+extra\+\_\+ports} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__behaviorManager_ab859dd9c4a1d1ca5a3e452bd277b9ee3}\label{group__behaviorManager_ab859dd9c4a1d1ca5a3e452bd277b9ee3}} 
+\index{Dummy@{Dummy}!Dummy@{Dummy}}
+\index{Dummy@{Dummy}!Dummy@{Dummy}}
+\subparagraph{\texorpdfstring{Dummy()}{Dummy()}}
+{\footnotesize\ttfamily Dummy\+::\+Dummy (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Mutex $\ast$}]{mut,  }\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf,  }\item[{\hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$}]{i\+Cub,  }\item[{std\+::string}]{behavior\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 30 of file dummy.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__behaviorManager_aebfb66e2a5a0088968bf792f3adb1942}\label{group__behaviorManager_aebfb66e2a5a0088968bf792f3adb1942}} 
+\index{Dummy@{Dummy}!close\+\_\+extra\+\_\+ports@{close\+\_\+extra\+\_\+ports}}
+\index{close\+\_\+extra\+\_\+ports@{close\+\_\+extra\+\_\+ports}!Dummy@{Dummy}}
+\subparagraph{\texorpdfstring{close\+\_\+extra\+\_\+ports()}{close\_extra\_ports()}}
+{\footnotesize\ttfamily void Dummy\+::close\+\_\+extra\+\_\+ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_affd22d1516cd32ff4f42694a1e6f9ab1}{Behavior}.
+
+
+
+Definition at line 25 of file dummy.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a493f3a2d8faa22b3175946e13b8dfe88}\label{group__behaviorManager_a493f3a2d8faa22b3175946e13b8dfe88}} 
+\index{Dummy@{Dummy}!configure@{configure}}
+\index{configure@{configure}!Dummy@{Dummy}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily void Dummy\+::configure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_a30484d4d6de3c0689de4f60da3efbab8}{Behavior}.
+
+
+
+Definition at line 35 of file dummy.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a49b398f1050441b1a2f63da63420a6f1}\label{group__behaviorManager_a49b398f1050441b1a2f63da63420a6f1}} 
+\index{Dummy@{Dummy}!run@{run}}
+\index{run@{run}!Dummy@{Dummy}}
+\subparagraph{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void Dummy\+::run (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_a7dfd81b30f9ddf1864093626650751c3}{Behavior}.
+
+
+
+Definition at line 19 of file dummy.\+h.
+
+\index{Move\+Object@{Move\+Object}}\label{classMoveObject}
+\Hypertarget{group__behaviorManager_classMoveObject}
+\subsubsection{class Move\+Object}
+
+
+Definition at line 9 of file move\+Object.\+h.
+
+
+
+Inheritance diagram for Move\+Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=154pt]{classMoveObject__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__behaviorManager_a3b1bea83b099178491e8f82ec99497b3}{Move\+Object} (yarp\+::os\+::\+Mutex $\ast$mut, yarp\+::os\+::\+Resource\+Finder \&\hyperlink{group__behaviorManager_a789254580a094846e91a9892fa2bc4cd}{rf}, \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$\hyperlink{group__behaviorManager_a5ab3f49bb3a40d79fe2b4aeb76e12196}{i\+Cub}, std\+::string \hyperlink{group__behaviorManager_aad9d5bf2f1f1e9c6902a4f40b03c4e67}{behavior\+Name})
+\item 
+void \hyperlink{group__behaviorManager_a5e068840a2d5f5fbeafc61b075f63804}{configure} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__behaviorManager_a2e242410f34618b2ff73f9106732470b}{run} (const yarp\+::os\+::\+Bottle \&args)
+\item 
+void \hyperlink{group__behaviorManager_a98277199c0056a8062184b7c969da0a5}{close\+\_\+extra\+\_\+ports} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{group__behaviorManager_af15f2e56d8d27f8534f3d34cc2ad48cd}{target\+\_\+pullback}
+\item 
+double \hyperlink{group__behaviorManager_a066b8e89a77ee162e63d08e9efdba98d}{target\+\_\+pushfront}
+\item 
+double \hyperlink{group__behaviorManager_a778488ee5c597654f7c19f949fe268fa}{target\+\_\+pushleft}
+\item 
+double \hyperlink{group__behaviorManager_aa6797d5e798ae11c3ecd7c8cb6f3691c}{target\+\_\+pushright}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__behaviorManager_a3b1bea83b099178491e8f82ec99497b3}\label{group__behaviorManager_a3b1bea83b099178491e8f82ec99497b3}} 
+\index{Move\+Object@{Move\+Object}!Move\+Object@{Move\+Object}}
+\index{Move\+Object@{Move\+Object}!Move\+Object@{Move\+Object}}
+\subparagraph{\texorpdfstring{Move\+Object()}{MoveObject()}}
+{\footnotesize\ttfamily Move\+Object\+::\+Move\+Object (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Mutex $\ast$}]{mut,  }\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf,  }\item[{\hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$}]{i\+Cub,  }\item[{std\+::string}]{behavior\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 24 of file move\+Object.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__behaviorManager_a98277199c0056a8062184b7c969da0a5}\label{group__behaviorManager_a98277199c0056a8062184b7c969da0a5}} 
+\index{Move\+Object@{Move\+Object}!close\+\_\+extra\+\_\+ports@{close\+\_\+extra\+\_\+ports}}
+\index{close\+\_\+extra\+\_\+ports@{close\+\_\+extra\+\_\+ports}!Move\+Object@{Move\+Object}}
+\subparagraph{\texorpdfstring{close\+\_\+extra\+\_\+ports()}{close\_extra\_ports()}}
+{\footnotesize\ttfamily void Move\+Object\+::close\+\_\+extra\+\_\+ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_affd22d1516cd32ff4f42694a1e6f9ab1}{Behavior}.
+
+
+
+Definition at line 19 of file move\+Object.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a5e068840a2d5f5fbeafc61b075f63804}\label{group__behaviorManager_a5e068840a2d5f5fbeafc61b075f63804}} 
+\index{Move\+Object@{Move\+Object}!configure@{configure}}
+\index{configure@{configure}!Move\+Object@{Move\+Object}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily void Move\+Object\+::configure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_a30484d4d6de3c0689de4f60da3efbab8}{Behavior}.
+
+
+
+Definition at line 6 of file move\+Object.\+cpp.
+
+\mbox{\Hypertarget{group__behaviorManager_a2e242410f34618b2ff73f9106732470b}\label{group__behaviorManager_a2e242410f34618b2ff73f9106732470b}} 
+\index{Move\+Object@{Move\+Object}!run@{run}}
+\index{run@{run}!Move\+Object@{Move\+Object}}
+\subparagraph{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void Move\+Object\+::run (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_a7dfd81b30f9ddf1864093626650751c3}{Behavior}.
+
+
+
+Definition at line 14 of file move\+Object.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__behaviorManager_af15f2e56d8d27f8534f3d34cc2ad48cd}\label{group__behaviorManager_af15f2e56d8d27f8534f3d34cc2ad48cd}} 
+\index{Move\+Object@{Move\+Object}!target\+\_\+pullback@{target\+\_\+pullback}}
+\index{target\+\_\+pullback@{target\+\_\+pullback}!Move\+Object@{Move\+Object}}
+\subparagraph{\texorpdfstring{target\+\_\+pullback}{target\_pullback}}
+{\footnotesize\ttfamily double Move\+Object\+::target\+\_\+pullback\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 14 of file move\+Object.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a066b8e89a77ee162e63d08e9efdba98d}\label{group__behaviorManager_a066b8e89a77ee162e63d08e9efdba98d}} 
+\index{Move\+Object@{Move\+Object}!target\+\_\+pushfront@{target\+\_\+pushfront}}
+\index{target\+\_\+pushfront@{target\+\_\+pushfront}!Move\+Object@{Move\+Object}}
+\subparagraph{\texorpdfstring{target\+\_\+pushfront}{target\_pushfront}}
+{\footnotesize\ttfamily double Move\+Object\+::target\+\_\+pushfront\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 15 of file move\+Object.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a778488ee5c597654f7c19f949fe268fa}\label{group__behaviorManager_a778488ee5c597654f7c19f949fe268fa}} 
+\index{Move\+Object@{Move\+Object}!target\+\_\+pushleft@{target\+\_\+pushleft}}
+\index{target\+\_\+pushleft@{target\+\_\+pushleft}!Move\+Object@{Move\+Object}}
+\subparagraph{\texorpdfstring{target\+\_\+pushleft}{target\_pushleft}}
+{\footnotesize\ttfamily double Move\+Object\+::target\+\_\+pushleft\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 16 of file move\+Object.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_aa6797d5e798ae11c3ecd7c8cb6f3691c}\label{group__behaviorManager_aa6797d5e798ae11c3ecd7c8cb6f3691c}} 
+\index{Move\+Object@{Move\+Object}!target\+\_\+pushright@{target\+\_\+pushright}}
+\index{target\+\_\+pushright@{target\+\_\+pushright}!Move\+Object@{Move\+Object}}
+\subparagraph{\texorpdfstring{target\+\_\+pushright}{target\_pushright}}
+{\footnotesize\ttfamily double Move\+Object\+::target\+\_\+pushright\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 17 of file move\+Object.\+h.
+
+\index{Pointing@{Pointing}}\label{classPointing}
+\Hypertarget{group__behaviorManager_classPointing}
+\subsubsection{class Pointing}
+
+
+Definition at line 12 of file pointing.\+h.
+
+
+
+Inheritance diagram for Pointing\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=140pt]{classPointing__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__behaviorManager_a9c8ff6e312704973cd3fac5b955bf613}{Pointing} (yarp\+::os\+::\+Mutex $\ast$mut, yarp\+::os\+::\+Resource\+Finder \&\hyperlink{group__behaviorManager_a789254580a094846e91a9892fa2bc4cd}{rf}, \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$\hyperlink{group__behaviorManager_a5ab3f49bb3a40d79fe2b4aeb76e12196}{i\+Cub}, std\+::string \hyperlink{group__behaviorManager_aad9d5bf2f1f1e9c6902a4f40b03c4e67}{behavior\+Name})
+\item 
+void \hyperlink{group__behaviorManager_a1681f79ff201a977a2d9124026d6cac8}{configure} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__behaviorManager_a6f1a7b52f3c846009e6b510dbb728011}{run} (const yarp\+::os\+::\+Bottle \&args)
+\item 
+void \hyperlink{group__behaviorManager_a28ede20962e35d2ec2680f66ba371a0f}{close\+\_\+extra\+\_\+ports} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__behaviorManager_a9c8ff6e312704973cd3fac5b955bf613}\label{group__behaviorManager_a9c8ff6e312704973cd3fac5b955bf613}} 
+\index{Pointing@{Pointing}!Pointing@{Pointing}}
+\index{Pointing@{Pointing}!Pointing@{Pointing}}
+\subparagraph{\texorpdfstring{Pointing()}{Pointing()}}
+{\footnotesize\ttfamily Pointing\+::\+Pointing (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Mutex $\ast$}]{mut,  }\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf,  }\item[{\hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$}]{i\+Cub,  }\item[{std\+::string}]{behavior\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 22 of file pointing.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__behaviorManager_a28ede20962e35d2ec2680f66ba371a0f}\label{group__behaviorManager_a28ede20962e35d2ec2680f66ba371a0f}} 
+\index{Pointing@{Pointing}!close\+\_\+extra\+\_\+ports@{close\+\_\+extra\+\_\+ports}}
+\index{close\+\_\+extra\+\_\+ports@{close\+\_\+extra\+\_\+ports}!Pointing@{Pointing}}
+\subparagraph{\texorpdfstring{close\+\_\+extra\+\_\+ports()}{close\_extra\_ports()}}
+{\footnotesize\ttfamily void Pointing\+::close\+\_\+extra\+\_\+ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_affd22d1516cd32ff4f42694a1e6f9ab1}{Behavior}.
+
+
+
+Definition at line 17 of file pointing.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a1681f79ff201a977a2d9124026d6cac8}\label{group__behaviorManager_a1681f79ff201a977a2d9124026d6cac8}} 
+\index{Pointing@{Pointing}!configure@{configure}}
+\index{configure@{configure}!Pointing@{Pointing}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily void Pointing\+::configure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_a30484d4d6de3c0689de4f60da3efbab8}{Behavior}.
+
+
+
+Definition at line 7 of file pointing.\+cpp.
+
+\mbox{\Hypertarget{group__behaviorManager_a6f1a7b52f3c846009e6b510dbb728011}\label{group__behaviorManager_a6f1a7b52f3c846009e6b510dbb728011}} 
+\index{Pointing@{Pointing}!run@{run}}
+\index{run@{run}!Pointing@{Pointing}}
+\subparagraph{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void Pointing\+::run (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_a7dfd81b30f9ddf1864093626650751c3}{Behavior}.
+
+
+
+Definition at line 12 of file pointing.\+cpp.
+
+\index{Recognition\+Order@{Recognition\+Order}}\label{classRecognitionOrder}
+\Hypertarget{group__behaviorManager_classRecognitionOrder}
+\subsubsection{class Recognition\+Order}
+
+
+Definition at line 12 of file recognition\+Order.\+h.
+
+
+
+Inheritance diagram for Recognition\+Order\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{classRecognitionOrder__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__behaviorManager_a465b3e91f617df73f606e4ec24c6e12b}{Recognition\+Order} (yarp\+::os\+::\+Mutex $\ast$mut, yarp\+::os\+::\+Resource\+Finder \&\hyperlink{group__behaviorManager_a789254580a094846e91a9892fa2bc4cd}{rf}, \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$\hyperlink{group__behaviorManager_a5ab3f49bb3a40d79fe2b4aeb76e12196}{i\+Cub}, std\+::string \hyperlink{group__behaviorManager_aad9d5bf2f1f1e9c6902a4f40b03c4e67}{behavior\+Name})
+\item 
+void \hyperlink{group__behaviorManager_a617221425cec2b16576e02797b788b9f}{configure} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__behaviorManager_a8c7cf2790adc7f55a3013450659973f8}{manual}
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__behaviorManager_a0a095aa1af770bac92f30042cee21e3a}{run} (const yarp\+::os\+::\+Bottle \&args)
+\item 
+void \hyperlink{group__behaviorManager_aa5b70feb16d8c7b5eb883f503c96f9fa}{close\+\_\+extra\+\_\+ports} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__behaviorManager_a465b3e91f617df73f606e4ec24c6e12b}\label{group__behaviorManager_a465b3e91f617df73f606e4ec24c6e12b}} 
+\index{Recognition\+Order@{Recognition\+Order}!Recognition\+Order@{Recognition\+Order}}
+\index{Recognition\+Order@{Recognition\+Order}!Recognition\+Order@{Recognition\+Order}}
+\subparagraph{\texorpdfstring{Recognition\+Order()}{RecognitionOrder()}}
+{\footnotesize\ttfamily Recognition\+Order\+::\+Recognition\+Order (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Mutex $\ast$}]{mut,  }\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf,  }\item[{\hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$}]{i\+Cub,  }\item[{std\+::string}]{behavior\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 27 of file recognition\+Order.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__behaviorManager_aa5b70feb16d8c7b5eb883f503c96f9fa}\label{group__behaviorManager_aa5b70feb16d8c7b5eb883f503c96f9fa}} 
+\index{Recognition\+Order@{Recognition\+Order}!close\+\_\+extra\+\_\+ports@{close\+\_\+extra\+\_\+ports}}
+\index{close\+\_\+extra\+\_\+ports@{close\+\_\+extra\+\_\+ports}!Recognition\+Order@{Recognition\+Order}}
+\subparagraph{\texorpdfstring{close\+\_\+extra\+\_\+ports()}{close\_extra\_ports()}}
+{\footnotesize\ttfamily void Recognition\+Order\+::close\+\_\+extra\+\_\+ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_affd22d1516cd32ff4f42694a1e6f9ab1}{Behavior}.
+
+
+
+Definition at line 21 of file recognition\+Order.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a617221425cec2b16576e02797b788b9f}\label{group__behaviorManager_a617221425cec2b16576e02797b788b9f}} 
+\index{Recognition\+Order@{Recognition\+Order}!configure@{configure}}
+\index{configure@{configure}!Recognition\+Order@{Recognition\+Order}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily void Recognition\+Order\+::configure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_a30484d4d6de3c0689de4f60da3efbab8}{Behavior}.
+
+
+
+Definition at line 6 of file recognition\+Order.\+cpp.
+
+\mbox{\Hypertarget{group__behaviorManager_a0a095aa1af770bac92f30042cee21e3a}\label{group__behaviorManager_a0a095aa1af770bac92f30042cee21e3a}} 
+\index{Recognition\+Order@{Recognition\+Order}!run@{run}}
+\index{run@{run}!Recognition\+Order@{Recognition\+Order}}
+\subparagraph{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void Recognition\+Order\+::run (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_a7dfd81b30f9ddf1864093626650751c3}{Behavior}.
+
+
+
+Definition at line 15 of file recognition\+Order.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__behaviorManager_a8c7cf2790adc7f55a3013450659973f8}\label{group__behaviorManager_a8c7cf2790adc7f55a3013450659973f8}} 
+\index{Recognition\+Order@{Recognition\+Order}!manual@{manual}}
+\index{manual@{manual}!Recognition\+Order@{Recognition\+Order}}
+\subparagraph{\texorpdfstring{manual}{manual}}
+{\footnotesize\ttfamily bool Recognition\+Order\+::manual}
+
+
+
+Definition at line 32 of file recognition\+Order.\+h.
+
+\index{Tagging@{Tagging}}\label{classTagging}
+\Hypertarget{group__behaviorManager_classTagging}
+\subsubsection{class Tagging}
+
+
+Definition at line 13 of file tagging.\+h.
+
+
+
+Inheritance diagram for Tagging\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=140pt]{classTagging__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__behaviorManager_a2441c0398c83ebf013147225930acf1e}{Tagging} (yarp\+::os\+::\+Mutex $\ast$mut, yarp\+::os\+::\+Resource\+Finder \&\hyperlink{group__behaviorManager_a789254580a094846e91a9892fa2bc4cd}{rf}, \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$\hyperlink{group__behaviorManager_a5ab3f49bb3a40d79fe2b4aeb76e12196}{i\+Cub}, std\+::string \hyperlink{group__behaviorManager_aad9d5bf2f1f1e9c6902a4f40b03c4e67}{behavior\+Name})
+\item 
+void \hyperlink{group__behaviorManager_a6a67413f90a70012ffc2e67074728c0a}{configure} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__behaviorManager_a8427d7f479b580bbf54030015b506374}{run} (const yarp\+::os\+::\+Bottle \&args)
+\item 
+void \hyperlink{group__behaviorManager_a2a90e7eda70017f01de96080c05b316c}{close\+\_\+extra\+\_\+ports} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__behaviorManager_a2441c0398c83ebf013147225930acf1e}\label{group__behaviorManager_a2441c0398c83ebf013147225930acf1e}} 
+\index{Tagging@{Tagging}!Tagging@{Tagging}}
+\index{Tagging@{Tagging}!Tagging@{Tagging}}
+\subparagraph{\texorpdfstring{Tagging()}{Tagging()}}
+{\footnotesize\ttfamily Tagging\+::\+Tagging (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Mutex $\ast$}]{mut,  }\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf,  }\item[{\hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$}]{i\+Cub,  }\item[{std\+::string}]{behavior\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 22 of file tagging.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__behaviorManager_a2a90e7eda70017f01de96080c05b316c}\label{group__behaviorManager_a2a90e7eda70017f01de96080c05b316c}} 
+\index{Tagging@{Tagging}!close\+\_\+extra\+\_\+ports@{close\+\_\+extra\+\_\+ports}}
+\index{close\+\_\+extra\+\_\+ports@{close\+\_\+extra\+\_\+ports}!Tagging@{Tagging}}
+\subparagraph{\texorpdfstring{close\+\_\+extra\+\_\+ports()}{close\_extra\_ports()}}
+{\footnotesize\ttfamily void Tagging\+::close\+\_\+extra\+\_\+ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_affd22d1516cd32ff4f42694a1e6f9ab1}{Behavior}.
+
+
+
+Definition at line 17 of file tagging.\+h.
+
+\mbox{\Hypertarget{group__behaviorManager_a6a67413f90a70012ffc2e67074728c0a}\label{group__behaviorManager_a6a67413f90a70012ffc2e67074728c0a}} 
+\index{Tagging@{Tagging}!configure@{configure}}
+\index{configure@{configure}!Tagging@{Tagging}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily void Tagging\+::configure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_a30484d4d6de3c0689de4f60da3efbab8}{Behavior}.
+
+
+
+Definition at line 7 of file tagging.\+cpp.
+
+\mbox{\Hypertarget{group__behaviorManager_a8427d7f479b580bbf54030015b506374}\label{group__behaviorManager_a8427d7f479b580bbf54030015b506374}} 
+\index{Tagging@{Tagging}!run@{run}}
+\index{run@{run}!Tagging@{Tagging}}
+\subparagraph{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void Tagging\+::run (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__behaviorManager_a7dfd81b30f9ddf1864093626650751c3}{Behavior}.
+
+
+
+Definition at line 12 of file tagging.\+cpp.
+

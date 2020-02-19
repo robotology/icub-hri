@@ -1,0 +1,532 @@
+\hypertarget{group__sensationManager}{}\section{sensation\+Manager}
+\label{group__sensationManager}\index{sensation\+Manager@{sensation\+Manager}}
+
+
+Reactive layer module to monitor basic sensations.  
+
+
+Collaboration diagram for sensation\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{group__sensationManager}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__sensationManager_classOpcSensation}{Opc\+Sensation}
+\item 
+class \hyperlink{group__sensationManager_classSensation}{Sensation}
+\item 
+class \hyperlink{group__sensationManager_classSensationManager}{Sensation\+Manager}
+\item 
+class \hyperlink{group__sensationManager_classTestSensation}{Test\+Sensation}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Reactive layer module to monitor basic sensations. 
+
+Version\+:1.\+0 \begin{DoxyAuthor}{Author}
+Clément Moulin-\/\+Frier \href{mailto:clement.moulinfrier@gmail.com}{\tt clement.\+moulinfrier@gmail.\+com}, Jordi-\/\+Ysard Puigbò \href{mailto:jordiysard.puigbo@upf.edu}{\tt jordiysard.\+puigbo@upf.\+edu} ~\newline
+ 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Released under the terms of the G\+NU G\+PL v2.\+0 
+\end{DoxyCopyright}
+\hypertarget{group__touchDetector_intro_sec}{}\subsection{Description}\label{group__touchDetector_intro_sec}
+This module is designed to pre-\/process all sensory requirements for the reactive\+Layer modules (allostatic\+Controller and behavior\+Manager). It\textquotesingle{}s main module (opc\+Sensation) parses the O\+PC for entities and relays the relevant information to the corresponding modules (e.\+g. quantity of people or objects to allostatic\+Controller for internal variable decay, name and entity type to behavior\+Manager for interaction). This module can parse the data independently but behavior\+Manager and allostatic\+Controller strongly depend on it. Each sensation module to be used must be listed in the config file (see default.\+ini as an example with opc\+Sensation). Jordi and Clement contributed equally to the development of this module.\hypertarget{group__touchDetector_parameters_sec}{}\subsection{Parameters}\label{group__touchDetector_parameters_sec}
+
+\begin{DoxyItemize}
+\item -- name \+: name of the module
+\item -- period \+: change the update rate of this module 
+\end{DoxyItemize}\hypertarget{group__touchDetector_inputports_sec}{}\subsection{Input Ports}\label{group__touchDetector_inputports_sec}
+
+\begin{DoxyItemize}
+\item /\+Sensation\+Manager/rpc \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Response port. Supported commands\+:
+\begin{DoxyItemize}
+\item help
+\item \mbox{[}\textquotesingle{}is\textquotesingle{}\mbox{]} \mbox{[}entity name\mbox{]} \mbox{[}state\mbox{]}\+: Returns true or false if the entity is in the state requested (e.\+g. present)
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{group__touchDetector_outputports_sec}{}\subsection{Output Ports}\label{group__touchDetector_outputports_sec}
+\hypertarget{group__touchDetector_services_sec}{}\subsection{Services}\label{group__touchDetector_services_sec}
+
+
+\subsection{Class Documentation}
+\index{Opc\+Sensation@{Opc\+Sensation}}\label{classOpcSensation}
+\Hypertarget{group__sensationManager_classOpcSensation}
+\subsubsection{class Opc\+Sensation}
+
+
+Definition at line 21 of file opc\+Sensation.\+h.
+
+
+
+Inheritance diagram for Opc\+Sensation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{classOpcSensation__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__sensationManager_a644655ff11acd5918b0ca3ac465c8528}{Opc\+Sensation} ()
+\item 
+void \hyperlink{group__sensationManager_accf106fa56c11f31095bfb2258feea03}{configure} ()
+\item 
+void \hyperlink{group__sensationManager_aeec83c521a72fcc52558f6f3df2f48c9}{publish} ()
+\begin{DoxyCompactList}\small\item\em send sensation data to port \end{DoxyCompactList}\item 
+int \hyperlink{group__sensationManager_a95124152fdd2d312222a9cf53115f87c}{get\+\_\+property} (std\+::string name, std\+::string property)
+\begin{DoxyCompactList}\small\item\em get\+\_\+property quickly answers a boolean query \end{DoxyCompactList}\item 
+void \hyperlink{group__sensationManager_a53a2ff62e9cecdeeef5f62a23dba8afc}{close\+\_\+ports} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+yarp\+::os\+::\+Bottle \hyperlink{group__sensationManager_af6c950377f1c046dd2d2ff4d62e82951}{u\+\_\+entities}
+\item 
+yarp\+::os\+::\+Bottle \hyperlink{group__sensationManager_ad235e03d016e8914a98df4da71538d1f}{k\+\_\+entities}
+\item 
+yarp\+::os\+::\+Bottle \hyperlink{group__sensationManager_a89d9a34431cd7948ac619bfd1f4734eb}{up\+\_\+entities}
+\item 
+yarp\+::os\+::\+Bottle \hyperlink{group__sensationManager_a195c83623e253d043f79d4818471190c}{kp\+\_\+entities}
+\item 
+yarp\+::os\+::\+Bottle \hyperlink{group__sensationManager_a876e783362e316f887cb602cbc34c87d}{p\+\_\+entities}
+\item 
+yarp\+::os\+::\+Bottle \hyperlink{group__sensationManager_a2b4d31782a277654808d319b177d516d}{o\+\_\+positions}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__sensationManager_a644655ff11acd5918b0ca3ac465c8528}\label{group__sensationManager_a644655ff11acd5918b0ca3ac465c8528}} 
+\index{Opc\+Sensation@{Opc\+Sensation}!Opc\+Sensation@{Opc\+Sensation}}
+\index{Opc\+Sensation@{Opc\+Sensation}!Opc\+Sensation@{Opc\+Sensation}}
+\subparagraph{\texorpdfstring{Opc\+Sensation()}{OpcSensation()}}
+{\footnotesize\ttfamily Opc\+Sensation\+::\+Opc\+Sensation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 44 of file opc\+Sensation.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__sensationManager_a53a2ff62e9cecdeeef5f62a23dba8afc}\label{group__sensationManager_a53a2ff62e9cecdeeef5f62a23dba8afc}} 
+\index{Opc\+Sensation@{Opc\+Sensation}!close\+\_\+ports@{close\+\_\+ports}}
+\index{close\+\_\+ports@{close\+\_\+ports}!Opc\+Sensation@{Opc\+Sensation}}
+\subparagraph{\texorpdfstring{close\+\_\+ports()}{close\_ports()}}
+{\footnotesize\ttfamily void Opc\+Sensation\+::close\+\_\+ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__sensationManager_a432fd7cefc45b46a5b4316be787c8e4b}{Sensation}.
+
+
+
+Definition at line 213 of file opc\+Sensation.\+cpp.
+
+\mbox{\Hypertarget{group__sensationManager_accf106fa56c11f31095bfb2258feea03}\label{group__sensationManager_accf106fa56c11f31095bfb2258feea03}} 
+\index{Opc\+Sensation@{Opc\+Sensation}!configure@{configure}}
+\index{configure@{configure}!Opc\+Sensation@{Opc\+Sensation}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily void Opc\+Sensation\+::configure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__sensationManager_a118f1c62b03a665c9f80496dcf3124f6}{Sensation}.
+
+
+
+Definition at line 9 of file opc\+Sensation.\+cpp.
+
+\mbox{\Hypertarget{group__sensationManager_a95124152fdd2d312222a9cf53115f87c}\label{group__sensationManager_a95124152fdd2d312222a9cf53115f87c}} 
+\index{Opc\+Sensation@{Opc\+Sensation}!get\+\_\+property@{get\+\_\+property}}
+\index{get\+\_\+property@{get\+\_\+property}!Opc\+Sensation@{Opc\+Sensation}}
+\subparagraph{\texorpdfstring{get\+\_\+property()}{get\_property()}}
+{\footnotesize\ttfamily int Opc\+Sensation\+::get\+\_\+property (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{std\+::string}]{property }\end{DoxyParamCaption})}
+
+
+
+get\+\_\+property quickly answers a boolean query 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & entity name \\
+\hline
+{\em property} & entity property (e.\+g. present or known) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 1 if entity has the given property 
+\end{DoxyReturn}
+
+
+Definition at line 145 of file opc\+Sensation.\+cpp.
+
+\mbox{\Hypertarget{group__sensationManager_aeec83c521a72fcc52558f6f3df2f48c9}\label{group__sensationManager_aeec83c521a72fcc52558f6f3df2f48c9}} 
+\index{Opc\+Sensation@{Opc\+Sensation}!publish@{publish}}
+\index{publish@{publish}!Opc\+Sensation@{Opc\+Sensation}}
+\subparagraph{\texorpdfstring{publish()}{publish()}}
+{\footnotesize\ttfamily void Opc\+Sensation\+::publish (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+send sensation data to port 
+
+
+
+Implements \hyperlink{group__sensationManager_ad37c802d993694d36f6794e597b35c8c}{Sensation}.
+
+
+
+Definition at line 28 of file opc\+Sensation.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__sensationManager_ad235e03d016e8914a98df4da71538d1f}\label{group__sensationManager_ad235e03d016e8914a98df4da71538d1f}} 
+\index{Opc\+Sensation@{Opc\+Sensation}!k\+\_\+entities@{k\+\_\+entities}}
+\index{k\+\_\+entities@{k\+\_\+entities}!Opc\+Sensation@{Opc\+Sensation}}
+\subparagraph{\texorpdfstring{k\+\_\+entities}{k\_entities}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Bottle Opc\+Sensation\+::k\+\_\+entities}
+
+
+
+Definition at line 48 of file opc\+Sensation.\+h.
+
+\mbox{\Hypertarget{group__sensationManager_a195c83623e253d043f79d4818471190c}\label{group__sensationManager_a195c83623e253d043f79d4818471190c}} 
+\index{Opc\+Sensation@{Opc\+Sensation}!kp\+\_\+entities@{kp\+\_\+entities}}
+\index{kp\+\_\+entities@{kp\+\_\+entities}!Opc\+Sensation@{Opc\+Sensation}}
+\subparagraph{\texorpdfstring{kp\+\_\+entities}{kp\_entities}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Bottle Opc\+Sensation\+::kp\+\_\+entities}
+
+
+
+Definition at line 48 of file opc\+Sensation.\+h.
+
+\mbox{\Hypertarget{group__sensationManager_a2b4d31782a277654808d319b177d516d}\label{group__sensationManager_a2b4d31782a277654808d319b177d516d}} 
+\index{Opc\+Sensation@{Opc\+Sensation}!o\+\_\+positions@{o\+\_\+positions}}
+\index{o\+\_\+positions@{o\+\_\+positions}!Opc\+Sensation@{Opc\+Sensation}}
+\subparagraph{\texorpdfstring{o\+\_\+positions}{o\_positions}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Bottle Opc\+Sensation\+::o\+\_\+positions}
+
+
+
+Definition at line 48 of file opc\+Sensation.\+h.
+
+\mbox{\Hypertarget{group__sensationManager_a876e783362e316f887cb602cbc34c87d}\label{group__sensationManager_a876e783362e316f887cb602cbc34c87d}} 
+\index{Opc\+Sensation@{Opc\+Sensation}!p\+\_\+entities@{p\+\_\+entities}}
+\index{p\+\_\+entities@{p\+\_\+entities}!Opc\+Sensation@{Opc\+Sensation}}
+\subparagraph{\texorpdfstring{p\+\_\+entities}{p\_entities}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Bottle Opc\+Sensation\+::p\+\_\+entities}
+
+
+
+Definition at line 48 of file opc\+Sensation.\+h.
+
+\mbox{\Hypertarget{group__sensationManager_af6c950377f1c046dd2d2ff4d62e82951}\label{group__sensationManager_af6c950377f1c046dd2d2ff4d62e82951}} 
+\index{Opc\+Sensation@{Opc\+Sensation}!u\+\_\+entities@{u\+\_\+entities}}
+\index{u\+\_\+entities@{u\+\_\+entities}!Opc\+Sensation@{Opc\+Sensation}}
+\subparagraph{\texorpdfstring{u\+\_\+entities}{u\_entities}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Bottle Opc\+Sensation\+::u\+\_\+entities}
+
+
+
+Definition at line 48 of file opc\+Sensation.\+h.
+
+\mbox{\Hypertarget{group__sensationManager_a89d9a34431cd7948ac619bfd1f4734eb}\label{group__sensationManager_a89d9a34431cd7948ac619bfd1f4734eb}} 
+\index{Opc\+Sensation@{Opc\+Sensation}!up\+\_\+entities@{up\+\_\+entities}}
+\index{up\+\_\+entities@{up\+\_\+entities}!Opc\+Sensation@{Opc\+Sensation}}
+\subparagraph{\texorpdfstring{up\+\_\+entities}{up\_entities}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Bottle Opc\+Sensation\+::up\+\_\+entities}
+
+
+
+Definition at line 48 of file opc\+Sensation.\+h.
+
+\index{Sensation@{Sensation}}\label{classSensation}
+\Hypertarget{group__sensationManager_classSensation}
+\subsubsection{class Sensation}
+
+
+Definition at line 13 of file sensation.\+h.
+
+
+
+Inheritance diagram for Sensation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{classSensation__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{group__sensationManager_a118f1c62b03a665c9f80496dcf3124f6}{configure} ()=0
+\item 
+virtual void \hyperlink{group__sensationManager_ad37c802d993694d36f6794e597b35c8c}{publish} ()=0
+\begin{DoxyCompactList}\small\item\em send sensation data to port \end{DoxyCompactList}\item 
+virtual void \hyperlink{group__sensationManager_a432fd7cefc45b46a5b4316be787c8e4b}{close\+\_\+ports} ()=0
+\end{DoxyCompactItemize}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__sensationManager_a432fd7cefc45b46a5b4316be787c8e4b}\label{group__sensationManager_a432fd7cefc45b46a5b4316be787c8e4b}} 
+\index{Sensation@{Sensation}!close\+\_\+ports@{close\+\_\+ports}}
+\index{close\+\_\+ports@{close\+\_\+ports}!Sensation@{Sensation}}
+\subparagraph{\texorpdfstring{close\+\_\+ports()}{close\_ports()}}
+{\footnotesize\ttfamily virtual void Sensation\+::close\+\_\+ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \hyperlink{group__sensationManager_a53a2ff62e9cecdeeef5f62a23dba8afc}{Opc\+Sensation}, and \hyperlink{group__sensationManager_adfca7f97bb5a9c16c172f43462a7b762}{Test\+Sensation}.
+
+\mbox{\Hypertarget{group__sensationManager_a118f1c62b03a665c9f80496dcf3124f6}\label{group__sensationManager_a118f1c62b03a665c9f80496dcf3124f6}} 
+\index{Sensation@{Sensation}!configure@{configure}}
+\index{configure@{configure}!Sensation@{Sensation}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily virtual void Sensation\+::configure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \hyperlink{group__sensationManager_accf106fa56c11f31095bfb2258feea03}{Opc\+Sensation}, and \hyperlink{group__sensationManager_aa09c7e493d895039e889bc7c3c92ee52}{Test\+Sensation}.
+
+\mbox{\Hypertarget{group__sensationManager_ad37c802d993694d36f6794e597b35c8c}\label{group__sensationManager_ad37c802d993694d36f6794e597b35c8c}} 
+\index{Sensation@{Sensation}!publish@{publish}}
+\index{publish@{publish}!Sensation@{Sensation}}
+\subparagraph{\texorpdfstring{publish()}{publish()}}
+{\footnotesize\ttfamily virtual void Sensation\+::publish (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+send sensation data to port 
+
+
+
+Implemented in \hyperlink{group__sensationManager_aeec83c521a72fcc52558f6f3df2f48c9}{Opc\+Sensation}, and \hyperlink{group__sensationManager_ab97ecc34efb14126e76b70446a9d5866}{Test\+Sensation}.
+
+\index{Sensation\+Manager@{Sensation\+Manager}}\label{classSensationManager}
+\Hypertarget{group__sensationManager_classSensationManager}
+\subsubsection{class Sensation\+Manager}
+
+
+Definition at line 22 of file sensation\+Manager.\+h.
+
+
+
+Inheritance diagram for Sensation\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{classSensationManager__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__sensationManager_a908b06fc7a13bd4efc8de99aa01d48d3}{Sensation\+Manager} ()
+\item 
+bool \hyperlink{group__sensationManager_ac005ae91278f6a5b2f93c472d364d99a}{configure} (yarp\+::os\+::\+Resource\+Finder \&rf)
+\item 
+bool \hyperlink{group__sensationManager_a8dc43f39792154ea23b5421d24e05cf1}{interrupt\+Module} ()
+\item 
+double \hyperlink{group__sensationManager_a09c431b25b3fabfafcefac5d7bea019b}{get\+Period} ()
+\item 
+bool \hyperlink{group__sensationManager_aa3d9294b7413c080bab7e516373e33ae}{update\+Module} ()
+\item 
+bool \hyperlink{group__sensationManager_a3df7a41b8c463ba9756d6910be0f64f2}{respond} (const Bottle \&cmd, Bottle \&reply)
+\item 
+bool \hyperlink{group__sensationManager_a7b02a2d08626e41d67825ebd14972760}{close} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{group__sensationManager_accc331f6981ef5aed03e61203a3d801f}{period}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__sensationManager_a908b06fc7a13bd4efc8de99aa01d48d3}\label{group__sensationManager_a908b06fc7a13bd4efc8de99aa01d48d3}} 
+\index{Sensation\+Manager@{Sensation\+Manager}!Sensation\+Manager@{Sensation\+Manager}}
+\index{Sensation\+Manager@{Sensation\+Manager}!Sensation\+Manager@{Sensation\+Manager}}
+\subparagraph{\texorpdfstring{Sensation\+Manager()}{SensationManager()}}
+{\footnotesize\ttfamily Sensation\+Manager\+::\+Sensation\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 34 of file sensation\+Manager.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__sensationManager_a7b02a2d08626e41d67825ebd14972760}\label{group__sensationManager_a7b02a2d08626e41d67825ebd14972760}} 
+\index{Sensation\+Manager@{Sensation\+Manager}!close@{close}}
+\index{close@{close}!Sensation\+Manager@{Sensation\+Manager}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool Sensation\+Manager\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file sensation\+Manager.\+cpp.
+
+\mbox{\Hypertarget{group__sensationManager_ac005ae91278f6a5b2f93c472d364d99a}\label{group__sensationManager_ac005ae91278f6a5b2f93c472d364d99a}} 
+\index{Sensation\+Manager@{Sensation\+Manager}!configure@{configure}}
+\index{configure@{configure}!Sensation\+Manager@{Sensation\+Manager}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool Sensation\+Manager\+::configure (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf }\end{DoxyParamCaption})}
+
+
+
+Definition at line 17 of file sensation\+Manager.\+cpp.
+
+\mbox{\Hypertarget{group__sensationManager_a09c431b25b3fabfafcefac5d7bea019b}\label{group__sensationManager_a09c431b25b3fabfafcefac5d7bea019b}} 
+\index{Sensation\+Manager@{Sensation\+Manager}!get\+Period@{get\+Period}}
+\index{get\+Period@{get\+Period}!Sensation\+Manager@{Sensation\+Manager}}
+\subparagraph{\texorpdfstring{get\+Period()}{getPeriod()}}
+{\footnotesize\ttfamily double Sensation\+Manager\+::get\+Period (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 45 of file sensation\+Manager.\+h.
+
+\mbox{\Hypertarget{group__sensationManager_a8dc43f39792154ea23b5421d24e05cf1}\label{group__sensationManager_a8dc43f39792154ea23b5421d24e05cf1}} 
+\index{Sensation\+Manager@{Sensation\+Manager}!interrupt\+Module@{interrupt\+Module}}
+\index{interrupt\+Module@{interrupt\+Module}!Sensation\+Manager@{Sensation\+Manager}}
+\subparagraph{\texorpdfstring{interrupt\+Module()}{interruptModule()}}
+{\footnotesize\ttfamily bool Sensation\+Manager\+::interrupt\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 40 of file sensation\+Manager.\+h.
+
+\mbox{\Hypertarget{group__sensationManager_a3df7a41b8c463ba9756d6910be0f64f2}\label{group__sensationManager_a3df7a41b8c463ba9756d6910be0f64f2}} 
+\index{Sensation\+Manager@{Sensation\+Manager}!respond@{respond}}
+\index{respond@{respond}!Sensation\+Manager@{Sensation\+Manager}}
+\subparagraph{\texorpdfstring{respond()}{respond()}}
+{\footnotesize\ttfamily bool Sensation\+Manager\+::respond (\begin{DoxyParamCaption}\item[{const Bottle \&}]{cmd,  }\item[{Bottle \&}]{reply }\end{DoxyParamCaption})}
+
+
+
+Definition at line 61 of file sensation\+Manager.\+cpp.
+
+\mbox{\Hypertarget{group__sensationManager_aa3d9294b7413c080bab7e516373e33ae}\label{group__sensationManager_aa3d9294b7413c080bab7e516373e33ae}} 
+\index{Sensation\+Manager@{Sensation\+Manager}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!Sensation\+Manager@{Sensation\+Manager}}
+\subparagraph{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool Sensation\+Manager\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 53 of file sensation\+Manager.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__sensationManager_accc331f6981ef5aed03e61203a3d801f}\label{group__sensationManager_accc331f6981ef5aed03e61203a3d801f}} 
+\index{Sensation\+Manager@{Sensation\+Manager}!period@{period}}
+\index{period@{period}!Sensation\+Manager@{Sensation\+Manager}}
+\subparagraph{\texorpdfstring{period}{period}}
+{\footnotesize\ttfamily double Sensation\+Manager\+::period\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 31 of file sensation\+Manager.\+h.
+
+\index{Test\+Sensation@{Test\+Sensation}}\label{classTestSensation}
+\Hypertarget{group__sensationManager_classTestSensation}
+\subsubsection{class Test\+Sensation}
+
+
+Definition at line 19 of file test.\+h.
+
+
+
+Inheritance diagram for Test\+Sensation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{classTestSensation__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__sensationManager_a8ae3442345d6ef38860588c9f04a4632}{Test\+Sensation} ()
+\item 
+void \hyperlink{group__sensationManager_aa09c7e493d895039e889bc7c3c92ee52}{configure} ()
+\item 
+void \hyperlink{group__sensationManager_ab97ecc34efb14126e76b70446a9d5866}{publish} ()
+\begin{DoxyCompactList}\small\item\em send sensation data to port \end{DoxyCompactList}\item 
+void \hyperlink{group__sensationManager_adfca7f97bb5a9c16c172f43462a7b762}{close\+\_\+ports} ()
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__sensationManager_a8ae3442345d6ef38860588c9f04a4632}\label{group__sensationManager_a8ae3442345d6ef38860588c9f04a4632}} 
+\index{Test\+Sensation@{Test\+Sensation}!Test\+Sensation@{Test\+Sensation}}
+\index{Test\+Sensation@{Test\+Sensation}!Test\+Sensation@{Test\+Sensation}}
+\subparagraph{\texorpdfstring{Test\+Sensation()}{TestSensation()}}
+{\footnotesize\ttfamily Test\+Sensation\+::\+Test\+Sensation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 29 of file test.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__sensationManager_adfca7f97bb5a9c16c172f43462a7b762}\label{group__sensationManager_adfca7f97bb5a9c16c172f43462a7b762}} 
+\index{Test\+Sensation@{Test\+Sensation}!close\+\_\+ports@{close\+\_\+ports}}
+\index{close\+\_\+ports@{close\+\_\+ports}!Test\+Sensation@{Test\+Sensation}}
+\subparagraph{\texorpdfstring{close\+\_\+ports()}{close\_ports()}}
+{\footnotesize\ttfamily void Test\+Sensation\+::close\+\_\+ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__sensationManager_a432fd7cefc45b46a5b4316be787c8e4b}{Sensation}.
+
+
+
+Definition at line 35 of file test.\+h.
+
+\mbox{\Hypertarget{group__sensationManager_aa09c7e493d895039e889bc7c3c92ee52}\label{group__sensationManager_aa09c7e493d895039e889bc7c3c92ee52}} 
+\index{Test\+Sensation@{Test\+Sensation}!configure@{configure}}
+\index{configure@{configure}!Test\+Sensation@{Test\+Sensation}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily void Test\+Sensation\+::configure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{group__sensationManager_a118f1c62b03a665c9f80496dcf3124f6}{Sensation}.
+
+
+
+Definition at line 8 of file test.\+cpp.
+
+\mbox{\Hypertarget{group__sensationManager_ab97ecc34efb14126e76b70446a9d5866}\label{group__sensationManager_ab97ecc34efb14126e76b70446a9d5866}} 
+\index{Test\+Sensation@{Test\+Sensation}!publish@{publish}}
+\index{publish@{publish}!Test\+Sensation@{Test\+Sensation}}
+\subparagraph{\texorpdfstring{publish()}{publish()}}
+{\footnotesize\ttfamily void Test\+Sensation\+::publish (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+send sensation data to port 
+
+
+
+Implements \hyperlink{group__sensationManager_ad37c802d993694d36f6794e597b35c8c}{Sensation}.
+
+
+
+Definition at line 15 of file test.\+cpp.
+

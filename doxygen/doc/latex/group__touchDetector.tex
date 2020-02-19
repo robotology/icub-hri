@@ -1,0 +1,995 @@
+\hypertarget{group__touchDetector}{}\section{touch\+Detector}
+\label{group__touchDetector}\index{touch\+Detector@{touch\+Detector}}
+
+
+Module to detect touch activations to robot\textquotesingle{}s body parts Version\+:1.\+0  
+
+
+Collaboration diagram for touch\+Detector\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{group__touchDetector}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__touchDetector_classTouchDetectorModule}{Touch\+Detector\+Module}
+\item 
+class \hyperlink{group__touchDetector_classTouchDetectorThread}{Touch\+Detector\+Thread}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module to detect touch activations to robot\textquotesingle{}s body parts Version\+:1.\+0 
+
+\begin{DoxyAuthor}{Author}
+Bertrand Higy \href{mailto:bertrand.higy@iit.it}{\tt bertrand.\+higy@iit.\+it} ~\newline
+ 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Released under the terms of the G\+NU G\+PL v2.\+0 
+\end{DoxyCopyright}
+\hypertarget{group__touchDetector_intro_sec}{}\subsection{Description}\label{group__touchDetector_intro_sec}
+This module provides wrappers of procedures to count the number of activations to robot \textquotesingle{}s body parts through some yarp ports.\hypertarget{group__touchDetector_parameters_sec}{}\subsection{Parameters}\label{group__touchDetector_parameters_sec}
+
+\begin{DoxyItemize}
+\item -- name \+: name of the module 
+\end{DoxyItemize}\hypertarget{group__touchDetector_inputports_sec}{}\subsection{Input Ports}\label{group__touchDetector_inputports_sec}
+
+\begin{DoxyItemize}
+\item /touch\+Detector/torso\+:i \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: Get touch activation from torso
+\item /touch\+Detector/left\+\_\+arm\+:i \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: Get touch activation from left arm
+\item /touch\+Detector/right\+\_\+arm\+:i \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: Get touch activation from right arm
+\item /touch\+Detector/left\+\_\+forearm\+:i \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: Get touch activation from left forearm
+\item /touch\+Detector/right\+\_\+forearm\+:i \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: Get touch activation from right forearm
+\item /touch\+Detector/left\+\_\+hand\+:i \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: Get touch activation from left hand
+\item /touch\+Detector/right\+\_\+hand\+:i \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: Get touch activation from right hand
+\end{DoxyItemize}\hypertarget{group__touchDetector_outputports_sec}{}\subsection{Output Ports}\label{group__touchDetector_outputports_sec}
+
+\begin{DoxyItemize}
+\item /touch\+Detector/touch\+:o \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: Stream out the number of activations
+\item /touch\+Detector/touch\+Clean\+:o \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: Stream out the touched taxel ID
+\end{DoxyItemize}\hypertarget{group__touchDetector_services_sec}{}\subsection{Services}\label{group__touchDetector_services_sec}
+
+
+\subsection{Class Documentation}
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}}\label{classTouchDetectorModule}
+\Hypertarget{group__touchDetector_classTouchDetectorModule}
+\subsubsection{class Touch\+Detector\+Module}
+
+
+Definition at line 31 of file touch\+Detector\+Module.\+h.
+
+
+
+Inheritance diagram for Touch\+Detector\+Module\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{classTouchDetectorModule__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__touchDetector_a1a5c65d2f0a5ae991ccfeffaeef9c6da}{configure} (yarp\+::os\+::\+Resource\+Finder \&rf)
+\item 
+bool \hyperlink{group__touchDetector_a76c20d89ce3e6b39b17ea7d0d8f37f0b}{interrupt\+Module} ()
+\item 
+bool \hyperlink{group__touchDetector_a51c73b35562b816cc3f2bf830f803e8b}{close} ()
+\item 
+bool \hyperlink{group__touchDetector_af4e0e9b987ca4acc22f28120e8dc2ad5}{update\+Module} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__touchDetector_ae9d686d64051b28eef130873349ef574}{initialize\+Parameters} (yarp\+::os\+::\+Resource\+Finder \&rf)
+\item 
+bool \hyperlink{group__touchDetector_a3d6655dced4f57eb35e80a20afe6036b}{open\+Ports} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group__touchDetector_a580ee85bb0155647e5cf90442006da48}{period}
+\item 
+double \hyperlink{group__touchDetector_af9e4938a7f5c9d643efd7ba6cdf752e4}{threshold}
+\item 
+int \hyperlink{group__touchDetector_a7eb052be91e2b3525a3656c5d3bb350b}{taxel\+Threshold}
+\item 
+std\+::string \hyperlink{group__touchDetector_aeb11d25fee00f8a83cc3c77ea5f42454}{module\+Name}
+\item 
+std\+::string \hyperlink{group__touchDetector_abf46b79365acac4d65f126ca2af506a6}{torso\+Port\+Name}
+\begin{DoxyCompactList}\small\item\em name of torso port \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__touchDetector_acae3d6cccb0a789e8abb71d70eed9bc8}{left\+Arm\+Port\+Name}
+\begin{DoxyCompactList}\small\item\em name of left arm port \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__touchDetector_a7aa8558ce23f4f46b0ff536e5283b0a5}{right\+Arm\+Port\+Name}
+\begin{DoxyCompactList}\small\item\em name of right arm port \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__touchDetector_a38f40c16f5969f69e305c89699c0d8af}{left\+Forearm\+Port\+Name}
+\begin{DoxyCompactList}\small\item\em name of left forearm port \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__touchDetector_a907d6a20fce66d9f5b2ae0030a01b46c}{right\+Forearm\+Port\+Name}
+\begin{DoxyCompactList}\small\item\em name of right forearm port \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__touchDetector_a012e5f95cfbf2494430c5f1aaa60ad20}{left\+Hand\+Port\+Name}
+\begin{DoxyCompactList}\small\item\em name of left hand port \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__touchDetector_ac32ed48b960b2370acee3388df631c79}{right\+Hand\+Port\+Name}
+\begin{DoxyCompactList}\small\item\em name of right hand port \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__touchDetector_ab0eb1712b7c3a8c0d8c9b89fb42a2b60}{touch\+Port\+Name}
+\begin{DoxyCompactList}\small\item\em name of touchport \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__touchDetector_a8abc1c42a1824678d6d496ce7a211f03}{touch\+Port\+Clean\+Name}
+\begin{DoxyCompactList}\small\item\em name of touchport\+Clean \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__touchDetector_ab6acec6890dac5d002a1c81e088c9e10}{clusters\+Conf\+Filepath}
+\begin{DoxyCompactList}\small\item\em string for path to cluster configure file \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ \hyperlink{group__touchDetector_aeecd6f5796dd35d24c045237358b0d18}{torso\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for input torso activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ \hyperlink{group__touchDetector_a75b343ad7b457e3b1898df99e0da9b5e}{left\+Arm\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for input left arm activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ \hyperlink{group__touchDetector_af16da0a663e6630d242c31219a0f0625}{right\+Arm\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for input right arm activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ \hyperlink{group__touchDetector_a2b47dd0c495d1c6fddf8021c9fa1f2f0}{left\+Forearm\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for input left forearm activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ \hyperlink{group__touchDetector_ac75d232aa9a909bcff0579539662dd2a}{right\+Forearm\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for input right forearm activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ \hyperlink{group__touchDetector_a5ce89302b0d1691947fc15e4ac7ea46f}{left\+Hand\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for input left hand activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ \hyperlink{group__touchDetector_a35c9f995e79e66735b24f79a6c3b4584}{right\+Hand\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for input right hand activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ \hyperlink{group__touchDetector_a190764b1dba056d0f5b5264a1e471746}{touch\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for output touched activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ \hyperlink{group__touchDetector_a6e84947d95f4c06fc49d45794cf73bed}{touch\+Port\+Cleaned}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for output touched taxel. \end{DoxyCompactList}\item 
+\hyperlink{group__touchDetector_classTouchDetectorThread}{Touch\+Detector\+Thread} $\ast$ \hyperlink{group__touchDetector_aa797aa84cfcb94ea9444877bd7d76ea8}{thread}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__touchDetector_a51c73b35562b816cc3f2bf830f803e8b}\label{group__touchDetector_a51c73b35562b816cc3f2bf830f803e8b}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!close@{close}}
+\index{close@{close}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool Touch\+Detector\+Module\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 60 of file touch\+Detector\+Module.\+cpp.
+
+\mbox{\Hypertarget{group__touchDetector_a1a5c65d2f0a5ae991ccfeffaeef9c6da}\label{group__touchDetector_a1a5c65d2f0a5ae991ccfeffaeef9c6da}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!configure@{configure}}
+\index{configure@{configure}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool Touch\+Detector\+Module\+::configure (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf }\end{DoxyParamCaption})}
+
+
+
+Definition at line 24 of file touch\+Detector\+Module.\+cpp.
+
+\mbox{\Hypertarget{group__touchDetector_ae9d686d64051b28eef130873349ef574}\label{group__touchDetector_ae9d686d64051b28eef130873349ef574}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!initialize\+Parameters@{initialize\+Parameters}}
+\index{initialize\+Parameters@{initialize\+Parameters}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{initialize\+Parameters()}{initializeParameters()}}
+{\footnotesize\ttfamily void Touch\+Detector\+Module\+::initialize\+Parameters (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 80 of file touch\+Detector\+Module.\+cpp.
+
+\mbox{\Hypertarget{group__touchDetector_a76c20d89ce3e6b39b17ea7d0d8f37f0b}\label{group__touchDetector_a76c20d89ce3e6b39b17ea7d0d8f37f0b}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!interrupt\+Module@{interrupt\+Module}}
+\index{interrupt\+Module@{interrupt\+Module}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{interrupt\+Module()}{interruptModule()}}
+{\footnotesize\ttfamily bool Touch\+Detector\+Module\+::interrupt\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 46 of file touch\+Detector\+Module.\+cpp.
+
+\mbox{\Hypertarget{group__touchDetector_a3d6655dced4f57eb35e80a20afe6036b}\label{group__touchDetector_a3d6655dced4f57eb35e80a20afe6036b}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!open\+Ports@{open\+Ports}}
+\index{open\+Ports@{open\+Ports}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{open\+Ports()}{openPorts()}}
+{\footnotesize\ttfamily bool Touch\+Detector\+Module\+::open\+Ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 111 of file touch\+Detector\+Module.\+cpp.
+
+\mbox{\Hypertarget{group__touchDetector_af4e0e9b987ca4acc22f28120e8dc2ad5}\label{group__touchDetector_af4e0e9b987ca4acc22f28120e8dc2ad5}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool Touch\+Detector\+Module\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 41 of file touch\+Detector\+Module.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__touchDetector_ab6acec6890dac5d002a1c81e088c9e10}\label{group__touchDetector_ab6acec6890dac5d002a1c81e088c9e10}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!clusters\+Conf\+Filepath@{clusters\+Conf\+Filepath}}
+\index{clusters\+Conf\+Filepath@{clusters\+Conf\+Filepath}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{clusters\+Conf\+Filepath}{clustersConfFilepath}}
+{\footnotesize\ttfamily std\+::string Touch\+Detector\+Module\+::clusters\+Conf\+Filepath\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+string for path to cluster configure file 
+
+
+
+Definition at line 55 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a75b343ad7b457e3b1898df99e0da9b5e}\label{group__touchDetector_a75b343ad7b457e3b1898df99e0da9b5e}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!left\+Arm\+Port@{left\+Arm\+Port}}
+\index{left\+Arm\+Port@{left\+Arm\+Port}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{left\+Arm\+Port}{leftArmPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$ Touch\+Detector\+Module\+::left\+Arm\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for input left arm activations. 
+
+
+
+Definition at line 59 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_acae3d6cccb0a789e8abb71d70eed9bc8}\label{group__touchDetector_acae3d6cccb0a789e8abb71d70eed9bc8}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!left\+Arm\+Port\+Name@{left\+Arm\+Port\+Name}}
+\index{left\+Arm\+Port\+Name@{left\+Arm\+Port\+Name}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{left\+Arm\+Port\+Name}{leftArmPortName}}
+{\footnotesize\ttfamily std\+::string Touch\+Detector\+Module\+::left\+Arm\+Port\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+name of left arm port 
+
+
+
+Definition at line 47 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a2b47dd0c495d1c6fddf8021c9fa1f2f0}\label{group__touchDetector_a2b47dd0c495d1c6fddf8021c9fa1f2f0}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!left\+Forearm\+Port@{left\+Forearm\+Port}}
+\index{left\+Forearm\+Port@{left\+Forearm\+Port}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{left\+Forearm\+Port}{leftForearmPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$ Touch\+Detector\+Module\+::left\+Forearm\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for input left forearm activations. 
+
+
+
+Definition at line 61 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a38f40c16f5969f69e305c89699c0d8af}\label{group__touchDetector_a38f40c16f5969f69e305c89699c0d8af}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!left\+Forearm\+Port\+Name@{left\+Forearm\+Port\+Name}}
+\index{left\+Forearm\+Port\+Name@{left\+Forearm\+Port\+Name}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{left\+Forearm\+Port\+Name}{leftForearmPortName}}
+{\footnotesize\ttfamily std\+::string Touch\+Detector\+Module\+::left\+Forearm\+Port\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+name of left forearm port 
+
+
+
+Definition at line 49 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a5ce89302b0d1691947fc15e4ac7ea46f}\label{group__touchDetector_a5ce89302b0d1691947fc15e4ac7ea46f}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!left\+Hand\+Port@{left\+Hand\+Port}}
+\index{left\+Hand\+Port@{left\+Hand\+Port}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{left\+Hand\+Port}{leftHandPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$ Touch\+Detector\+Module\+::left\+Hand\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for input left hand activations. 
+
+
+
+Definition at line 63 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a012e5f95cfbf2494430c5f1aaa60ad20}\label{group__touchDetector_a012e5f95cfbf2494430c5f1aaa60ad20}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!left\+Hand\+Port\+Name@{left\+Hand\+Port\+Name}}
+\index{left\+Hand\+Port\+Name@{left\+Hand\+Port\+Name}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{left\+Hand\+Port\+Name}{leftHandPortName}}
+{\footnotesize\ttfamily std\+::string Touch\+Detector\+Module\+::left\+Hand\+Port\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+name of left hand port 
+
+
+
+Definition at line 51 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_aeb11d25fee00f8a83cc3c77ea5f42454}\label{group__touchDetector_aeb11d25fee00f8a83cc3c77ea5f42454}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!module\+Name@{module\+Name}}
+\index{module\+Name@{module\+Name}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{module\+Name}{moduleName}}
+{\footnotesize\ttfamily std\+::string Touch\+Detector\+Module\+::module\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 45 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a580ee85bb0155647e5cf90442006da48}\label{group__touchDetector_a580ee85bb0155647e5cf90442006da48}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!period@{period}}
+\index{period@{period}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{period}{period}}
+{\footnotesize\ttfamily int Touch\+Detector\+Module\+::period\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 42 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_af16da0a663e6630d242c31219a0f0625}\label{group__touchDetector_af16da0a663e6630d242c31219a0f0625}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!right\+Arm\+Port@{right\+Arm\+Port}}
+\index{right\+Arm\+Port@{right\+Arm\+Port}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{right\+Arm\+Port}{rightArmPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$ Touch\+Detector\+Module\+::right\+Arm\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for input right arm activations. 
+
+
+
+Definition at line 60 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a7aa8558ce23f4f46b0ff536e5283b0a5}\label{group__touchDetector_a7aa8558ce23f4f46b0ff536e5283b0a5}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!right\+Arm\+Port\+Name@{right\+Arm\+Port\+Name}}
+\index{right\+Arm\+Port\+Name@{right\+Arm\+Port\+Name}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{right\+Arm\+Port\+Name}{rightArmPortName}}
+{\footnotesize\ttfamily std\+::string Touch\+Detector\+Module\+::right\+Arm\+Port\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+name of right arm port 
+
+
+
+Definition at line 48 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_ac75d232aa9a909bcff0579539662dd2a}\label{group__touchDetector_ac75d232aa9a909bcff0579539662dd2a}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!right\+Forearm\+Port@{right\+Forearm\+Port}}
+\index{right\+Forearm\+Port@{right\+Forearm\+Port}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{right\+Forearm\+Port}{rightForearmPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$ Touch\+Detector\+Module\+::right\+Forearm\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for input right forearm activations. 
+
+
+
+Definition at line 62 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a907d6a20fce66d9f5b2ae0030a01b46c}\label{group__touchDetector_a907d6a20fce66d9f5b2ae0030a01b46c}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!right\+Forearm\+Port\+Name@{right\+Forearm\+Port\+Name}}
+\index{right\+Forearm\+Port\+Name@{right\+Forearm\+Port\+Name}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{right\+Forearm\+Port\+Name}{rightForearmPortName}}
+{\footnotesize\ttfamily std\+::string Touch\+Detector\+Module\+::right\+Forearm\+Port\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+name of right forearm port 
+
+
+
+Definition at line 50 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a35c9f995e79e66735b24f79a6c3b4584}\label{group__touchDetector_a35c9f995e79e66735b24f79a6c3b4584}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!right\+Hand\+Port@{right\+Hand\+Port}}
+\index{right\+Hand\+Port@{right\+Hand\+Port}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{right\+Hand\+Port}{rightHandPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$ Touch\+Detector\+Module\+::right\+Hand\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for input right hand activations. 
+
+
+
+Definition at line 64 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_ac32ed48b960b2370acee3388df631c79}\label{group__touchDetector_ac32ed48b960b2370acee3388df631c79}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!right\+Hand\+Port\+Name@{right\+Hand\+Port\+Name}}
+\index{right\+Hand\+Port\+Name@{right\+Hand\+Port\+Name}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{right\+Hand\+Port\+Name}{rightHandPortName}}
+{\footnotesize\ttfamily std\+::string Touch\+Detector\+Module\+::right\+Hand\+Port\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+name of right hand port 
+
+
+
+Definition at line 52 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a7eb052be91e2b3525a3656c5d3bb350b}\label{group__touchDetector_a7eb052be91e2b3525a3656c5d3bb350b}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!taxel\+Threshold@{taxel\+Threshold}}
+\index{taxel\+Threshold@{taxel\+Threshold}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{taxel\+Threshold}{taxelThreshold}}
+{\footnotesize\ttfamily int Touch\+Detector\+Module\+::taxel\+Threshold\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 44 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_aa797aa84cfcb94ea9444877bd7d76ea8}\label{group__touchDetector_aa797aa84cfcb94ea9444877bd7d76ea8}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!thread@{thread}}
+\index{thread@{thread}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{thread}{thread}}
+{\footnotesize\ttfamily \hyperlink{group__touchDetector_classTouchDetectorThread}{Touch\+Detector\+Thread}$\ast$ Touch\+Detector\+Module\+::thread\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 67 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_af9e4938a7f5c9d643efd7ba6cdf752e4}\label{group__touchDetector_af9e4938a7f5c9d643efd7ba6cdf752e4}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!threshold@{threshold}}
+\index{threshold@{threshold}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{threshold}{threshold}}
+{\footnotesize\ttfamily double Touch\+Detector\+Module\+::threshold\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 43 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_aeecd6f5796dd35d24c045237358b0d18}\label{group__touchDetector_aeecd6f5796dd35d24c045237358b0d18}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!torso\+Port@{torso\+Port}}
+\index{torso\+Port@{torso\+Port}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{torso\+Port}{torsoPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$ Touch\+Detector\+Module\+::torso\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for input torso activations. 
+
+
+
+Definition at line 58 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_abf46b79365acac4d65f126ca2af506a6}\label{group__touchDetector_abf46b79365acac4d65f126ca2af506a6}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!torso\+Port\+Name@{torso\+Port\+Name}}
+\index{torso\+Port\+Name@{torso\+Port\+Name}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{torso\+Port\+Name}{torsoPortName}}
+{\footnotesize\ttfamily std\+::string Touch\+Detector\+Module\+::torso\+Port\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+name of torso port 
+
+
+
+Definition at line 46 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a190764b1dba056d0f5b5264a1e471746}\label{group__touchDetector_a190764b1dba056d0f5b5264a1e471746}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!touch\+Port@{touch\+Port}}
+\index{touch\+Port@{touch\+Port}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{touch\+Port}{touchPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$ Touch\+Detector\+Module\+::touch\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for output touched activations. 
+
+
+
+Definition at line 65 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a6e84947d95f4c06fc49d45794cf73bed}\label{group__touchDetector_a6e84947d95f4c06fc49d45794cf73bed}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!touch\+Port\+Cleaned@{touch\+Port\+Cleaned}}
+\index{touch\+Port\+Cleaned@{touch\+Port\+Cleaned}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{touch\+Port\+Cleaned}{touchPortCleaned}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$ Touch\+Detector\+Module\+::touch\+Port\+Cleaned\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for output touched taxel. 
+
+
+
+Definition at line 66 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a8abc1c42a1824678d6d496ce7a211f03}\label{group__touchDetector_a8abc1c42a1824678d6d496ce7a211f03}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!touch\+Port\+Clean\+Name@{touch\+Port\+Clean\+Name}}
+\index{touch\+Port\+Clean\+Name@{touch\+Port\+Clean\+Name}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{touch\+Port\+Clean\+Name}{touchPortCleanName}}
+{\footnotesize\ttfamily std\+::string Touch\+Detector\+Module\+::touch\+Port\+Clean\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+name of touchport\+Clean 
+
+
+
+Definition at line 54 of file touch\+Detector\+Module.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_ab0eb1712b7c3a8c0d8c9b89fb42a2b60}\label{group__touchDetector_ab0eb1712b7c3a8c0d8c9b89fb42a2b60}} 
+\index{Touch\+Detector\+Module@{Touch\+Detector\+Module}!touch\+Port\+Name@{touch\+Port\+Name}}
+\index{touch\+Port\+Name@{touch\+Port\+Name}!Touch\+Detector\+Module@{Touch\+Detector\+Module}}
+\subparagraph{\texorpdfstring{touch\+Port\+Name}{touchPortName}}
+{\footnotesize\ttfamily std\+::string Touch\+Detector\+Module\+::touch\+Port\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+name of touchport 
+
+
+
+Definition at line 53 of file touch\+Detector\+Module.\+h.
+
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}\label{classTouchDetectorThread}
+\Hypertarget{group__touchDetector_classTouchDetectorThread}
+\subsubsection{class Touch\+Detector\+Thread}
+
+
+Definition at line 32 of file touch\+Detector\+Thread.\+h.
+
+
+
+Inheritance diagram for Touch\+Detector\+Thread\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{classTouchDetectorThread__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__touchDetector_a5c835c3a119e45a9a7c1853b11d50775}{Touch\+Detector\+Thread} (yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$\hyperlink{group__touchDetector_a40c56d22bab1fdb6876c5ff7ea06e9e8}{torso\+Port}, yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$\hyperlink{group__touchDetector_a975fc42c10d903e8006cb49800bf9589}{left\+Arm\+Port}, yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$\hyperlink{group__touchDetector_a8522b0d27f973b9a8c8b2e10c656f9b3}{right\+Arm\+Port}, yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$\hyperlink{group__touchDetector_ac34d0d0c972146971c59c9150b2fcbc4}{left\+Forearm\+Port}, yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$\hyperlink{group__touchDetector_a905ee0fe0ed60104b941d044386856a5}{right\+Forearm\+Port}, yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$\hyperlink{group__touchDetector_a6b373d5f8e235c68ce5526909c44074f}{left\+Hand\+Port}, yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$\hyperlink{group__touchDetector_af6585ff213a437baa0b232304f0f9a68}{right\+Hand\+Port}, yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$\hyperlink{group__touchDetector_aba1732a9b24e61da4ad3ed1650a214ea}{touch\+Port}, yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$\hyperlink{group__touchDetector_aefc680e659906e2a9b7e870d8ea837be}{touch\+Port\+Cleaned}, int period, std\+::string \hyperlink{group__touchDetector_af4ffe4e72ec3978af45f63f5f1721ff0}{clusters\+Conf\+Filepath}, double \hyperlink{group__touchDetector_a876e80882e9772d72a1062f1bd67aca6}{threshold}, int \hyperlink{group__touchDetector_a2d699150315f222848ecf5e2d2a345f7}{taxel\+Threshold})
+\item 
+void \hyperlink{group__touchDetector_a82ba0ba5951f718245a271e2a7689703}{run} ()
+\item 
+bool \hyperlink{group__touchDetector_ae3198aedd09c06b63b68f98fe58cc382}{thread\+Init} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__touchDetector_a4f791998bc682a7c798acc52a955b893}{read\+Taxels\+Mapping} (std\+::string filename)
+\begin{DoxyCompactList}\small\item\em read\+Taxels\+Mapping Read taxels map from configure file, which relates to nb\+Body\+Parts and body\+Parts \end{DoxyCompactList}\item 
+int \hyperlink{group__touchDetector_adf2f44c74c144b80973bd626b3d7dfb0}{get\+Body\+Part\+Id} (std\+::string body\+Part\+Name)
+\begin{DoxyCompactList}\small\item\em get\+Body\+Part\+Id Obtain the ID of body parts, which are \char`\"{}torso\char`\"{}, \char`\"{}left\+\_\+arm\char`\"{}, \char`\"{}right\+\_\+arm\char`\"{}, \char`\"{}left\+\_\+forearm\char`\"{}, \char`\"{}right\+\_\+forearm\char`\"{}, \char`\"{}left\+\_\+hand\char`\"{}, \char`\"{}right\+\_\+hand\char`\"{} \end{DoxyCompactList}\item 
+void \hyperlink{group__touchDetector_a5c469380b1121fe2f21c5836cfcb3cac}{update\+Mapping} (int body\+Part, int first\+Taxel, int last\+Taxel, int cluster)
+\begin{DoxyCompactList}\small\item\em update\+Mapping Change all taxels of a body part to cluster\+ID \end{DoxyCompactList}\item 
+void \hyperlink{group__touchDetector_ae291de595b3d48923598f305a77b68f1}{count\+Activations} (int body\+Part, yarp\+::os\+::\+Bottle $\ast$data, std\+::vector$<$ int $>$ \&activations)
+\begin{DoxyCompactList}\small\item\em count\+Activations Counts number of activations to a body part through a buffered port of that part \end{DoxyCompactList}\item 
+void \hyperlink{group__touchDetector_a9ce7b3cf367b16ecf074655ccd882194}{process\+Port} (int port\+Num, yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$port, std\+::vector$<$ int $>$ \&activations)
+\begin{DoxyCompactList}\small\item\em process\+Port Process port of body part to receive activations to that body part \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group__touchDetector_aa04ee21c0927d0520223ecd59be4fd29}{nb\+Clusters}
+\item 
+double \hyperlink{group__touchDetector_a876e80882e9772d72a1062f1bd67aca6}{threshold}
+\item 
+int \hyperlink{group__touchDetector_a2d699150315f222848ecf5e2d2a345f7}{taxel\+Threshold}
+\begin{DoxyCompactList}\small\item\em integer value of touched threshold \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__touchDetector_af4ffe4e72ec3978af45f63f5f1721ff0}{clusters\+Conf\+Filepath}
+\begin{DoxyCompactList}\small\item\em string value of the path to configure file of clusters \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \hyperlink{group__touchDetector_a0e1cb59b32d06c38053bf97c2c11290b}{taxels2\+Clusters} \mbox{[}7\mbox{]}
+\begin{DoxyCompactList}\small\item\em standard vector of integer containing the taxel I\+Ds in form of cluster ID \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$ \hyperlink{group__touchDetector_a40c56d22bab1fdb6876c5ff7ea06e9e8}{torso\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for input torso activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$ \hyperlink{group__touchDetector_a975fc42c10d903e8006cb49800bf9589}{left\+Arm\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for input left arm activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$ \hyperlink{group__touchDetector_a8522b0d27f973b9a8c8b2e10c656f9b3}{right\+Arm\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for input right arm activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$ \hyperlink{group__touchDetector_ac34d0d0c972146971c59c9150b2fcbc4}{left\+Forearm\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for input left forearm activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$ \hyperlink{group__touchDetector_a905ee0fe0ed60104b941d044386856a5}{right\+Forearm\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for input right forearm activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$ \hyperlink{group__touchDetector_a6b373d5f8e235c68ce5526909c44074f}{left\+Hand\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for input left hand activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$ \hyperlink{group__touchDetector_af6585ff213a437baa0b232304f0f9a68}{right\+Hand\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for input right hand activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$ \hyperlink{group__touchDetector_aba1732a9b24e61da4ad3ed1650a214ea}{touch\+Port}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for output touched activations. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$ \hyperlink{group__touchDetector_aefc680e659906e2a9b7e870d8ea837be}{touch\+Port\+Cleaned}
+\begin{DoxyCompactList}\small\item\em Yarp Buffered\+Port of bottle for output touched taxel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const int \hyperlink{group__touchDetector_ae172aa9ba20fca535350d3c61d21e329}{no\+Cluster} = -\/1
+\item 
+static const int \hyperlink{group__touchDetector_af2e69c2ccd1b3a837c6c2647f830377f}{nb\+Body\+Parts} = 7
+\item 
+static const char $\ast$ \hyperlink{group__touchDetector_ad6dc756a8cda3b2ae8effda5f5db8b60}{body\+Parts} \mbox{[}7\mbox{]} = \{\char`\"{}torso\char`\"{}, \char`\"{}left\+\_\+arm\char`\"{}, \char`\"{}right\+\_\+arm\char`\"{}, \char`\"{}left\+\_\+forearm\char`\"{}, \char`\"{}right\+\_\+forearm\char`\"{}, \char`\"{}left\+\_\+hand\char`\"{}, \char`\"{}right\+\_\+hand\char`\"{}\}
+\item 
+static const int \hyperlink{group__touchDetector_a2f529960e33051588b398f964cd0176e}{nb\+Taxels} \mbox{[}7\mbox{]} = \{4 $\ast$ 192, 4 $\ast$ 192, 4 $\ast$ 192, 2 $\ast$ 192, 2 $\ast$ 192, 192, 192\}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__touchDetector_a5c835c3a119e45a9a7c1853b11d50775}\label{group__touchDetector_a5c835c3a119e45a9a7c1853b11d50775}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{Touch\+Detector\+Thread()}{TouchDetectorThread()}}
+{\footnotesize\ttfamily Touch\+Detector\+Thread\+::\+Touch\+Detector\+Thread (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$}]{torso\+Port,  }\item[{yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$}]{left\+Arm\+Port,  }\item[{yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$}]{right\+Arm\+Port,  }\item[{yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$}]{left\+Forearm\+Port,  }\item[{yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$}]{right\+Forearm\+Port,  }\item[{yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$}]{left\+Hand\+Port,  }\item[{yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$}]{right\+Hand\+Port,  }\item[{yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$}]{touch\+Port,  }\item[{yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$}]{touch\+Port\+Cleaned,  }\item[{int}]{period,  }\item[{std\+::string}]{clusters\+Conf\+Filepath,  }\item[{double}]{threshold,  }\item[{int}]{taxel\+Threshold }\end{DoxyParamCaption})}
+
+
+
+Definition at line 37 of file touch\+Detector\+Thread.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__touchDetector_ae291de595b3d48923598f305a77b68f1}\label{group__touchDetector_ae291de595b3d48923598f305a77b68f1}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!count\+Activations@{count\+Activations}}
+\index{count\+Activations@{count\+Activations}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{count\+Activations()}{countActivations()}}
+{\footnotesize\ttfamily void Touch\+Detector\+Thread\+::count\+Activations (\begin{DoxyParamCaption}\item[{int}]{body\+Part,  }\item[{yarp\+::os\+::\+Bottle $\ast$}]{data,  }\item[{std\+::vector$<$ int $>$ \&}]{activations }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+count\+Activations Counts number of activations to a body part through a buffered port of that part 
+
+
+\begin{DoxyParams}{Parameters}
+{\em body\+Part} & An integer value of body part ID to count \\
+\hline
+{\em data} & Y\+A\+RP bottle contains data from the port of the body part \\
+\hline
+{\em activations} & An integer value for number of activations \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 186 of file touch\+Detector\+Thread.\+cpp.
+
+\mbox{\Hypertarget{group__touchDetector_adf2f44c74c144b80973bd626b3d7dfb0}\label{group__touchDetector_adf2f44c74c144b80973bd626b3d7dfb0}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!get\+Body\+Part\+Id@{get\+Body\+Part\+Id}}
+\index{get\+Body\+Part\+Id@{get\+Body\+Part\+Id}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{get\+Body\+Part\+Id()}{getBodyPartId()}}
+{\footnotesize\ttfamily int Touch\+Detector\+Thread\+::get\+Body\+Part\+Id (\begin{DoxyParamCaption}\item[{std\+::string}]{body\+Part\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+get\+Body\+Part\+Id Obtain the ID of body parts, which are \char`\"{}torso\char`\"{}, \char`\"{}left\+\_\+arm\char`\"{}, \char`\"{}right\+\_\+arm\char`\"{}, \char`\"{}left\+\_\+forearm\char`\"{}, \char`\"{}right\+\_\+forearm\char`\"{}, \char`\"{}left\+\_\+hand\char`\"{}, \char`\"{}right\+\_\+hand\char`\"{} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em body\+Part\+Name} & String value of the name of body part to get ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Integer value of ID 
+\end{DoxyReturn}
+
+
+Definition at line 100 of file touch\+Detector\+Thread.\+cpp.
+
+\mbox{\Hypertarget{group__touchDetector_a9ce7b3cf367b16ecf074655ccd882194}\label{group__touchDetector_a9ce7b3cf367b16ecf074655ccd882194}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!process\+Port@{process\+Port}}
+\index{process\+Port@{process\+Port}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{process\+Port()}{processPort()}}
+{\footnotesize\ttfamily void Touch\+Detector\+Thread\+::process\+Port (\begin{DoxyParamCaption}\item[{int}]{port\+Num,  }\item[{yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ $\ast$}]{port,  }\item[{std\+::vector$<$ int $>$ \&}]{activations }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+process\+Port Process port of body part to receive activations to that body part 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port\+Num} & An integer value of body part ID to count \\
+\hline
+{\em activations} & A vector of integer values for number of activations \\
+\hline
+{\em port} & The port from which to process data from \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__touchDetector_ae291de595b3d48923598f305a77b68f1}{count\+Activations()}; 
+\end{DoxySeeAlso}
+
+
+Definition at line 173 of file touch\+Detector\+Thread.\+cpp.
+
+\mbox{\Hypertarget{group__touchDetector_a4f791998bc682a7c798acc52a955b893}\label{group__touchDetector_a4f791998bc682a7c798acc52a955b893}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!read\+Taxels\+Mapping@{read\+Taxels\+Mapping}}
+\index{read\+Taxels\+Mapping@{read\+Taxels\+Mapping}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{read\+Taxels\+Mapping()}{readTaxelsMapping()}}
+{\footnotesize\ttfamily bool Touch\+Detector\+Thread\+::read\+Taxels\+Mapping (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+read\+Taxels\+Mapping Read taxels map from configure file, which relates to nb\+Body\+Parts and body\+Parts 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Name of configure file of taxels \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True for all case 
+\end{DoxyReturn}
+
+
+Definition at line 65 of file touch\+Detector\+Thread.\+cpp.
+
+\mbox{\Hypertarget{group__touchDetector_a82ba0ba5951f718245a271e2a7689703}\label{group__touchDetector_a82ba0ba5951f718245a271e2a7689703}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!run@{run}}
+\index{run@{run}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void Touch\+Detector\+Thread\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 127 of file touch\+Detector\+Thread.\+cpp.
+
+\mbox{\Hypertarget{group__touchDetector_ae3198aedd09c06b63b68f98fe58cc382}\label{group__touchDetector_ae3198aedd09c06b63b68f98fe58cc382}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!thread\+Init@{thread\+Init}}
+\index{thread\+Init@{thread\+Init}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{thread\+Init()}{threadInit()}}
+{\footnotesize\ttfamily bool Touch\+Detector\+Thread\+::thread\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 50 of file touch\+Detector\+Thread.\+cpp.
+
+\mbox{\Hypertarget{group__touchDetector_a5c469380b1121fe2f21c5836cfcb3cac}\label{group__touchDetector_a5c469380b1121fe2f21c5836cfcb3cac}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!update\+Mapping@{update\+Mapping}}
+\index{update\+Mapping@{update\+Mapping}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{update\+Mapping()}{updateMapping()}}
+{\footnotesize\ttfamily void Touch\+Detector\+Thread\+::update\+Mapping (\begin{DoxyParamCaption}\item[{int}]{body\+Part,  }\item[{int}]{first\+Taxel,  }\item[{int}]{last\+Taxel,  }\item[{int}]{cluster }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+update\+Mapping Change all taxels of a body part to cluster\+ID 
+
+
+\begin{DoxyParams}{Parameters}
+{\em body\+Part} & An integer value of body part ID \\
+\hline
+{\em first\+Taxel} & An integer value of the 1st taxel of the body part \\
+\hline
+{\em last\+Taxel} & An integer value of the last taxel of the body part \\
+\hline
+{\em cluster} & An integer value of the cluster ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__touchDetector_a0e1cb59b32d06c38053bf97c2c11290b}{taxels2\+Clusters} 
+\end{DoxySeeAlso}
+
+
+Definition at line 119 of file touch\+Detector\+Thread.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__touchDetector_ad6dc756a8cda3b2ae8effda5f5db8b60}\label{group__touchDetector_ad6dc756a8cda3b2ae8effda5f5db8b60}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!body\+Parts@{body\+Parts}}
+\index{body\+Parts@{body\+Parts}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{body\+Parts}{bodyParts}}
+{\footnotesize\ttfamily const char $\ast$ Touch\+Detector\+Thread\+::body\+Parts = \{\char`\"{}torso\char`\"{}, \char`\"{}left\+\_\+arm\char`\"{}, \char`\"{}right\+\_\+arm\char`\"{}, \char`\"{}left\+\_\+forearm\char`\"{}, \char`\"{}right\+\_\+forearm\char`\"{}, \char`\"{}left\+\_\+hand\char`\"{}, \char`\"{}right\+\_\+hand\char`\"{}\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 42 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_af4ffe4e72ec3978af45f63f5f1721ff0}\label{group__touchDetector_af4ffe4e72ec3978af45f63f5f1721ff0}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!clusters\+Conf\+Filepath@{clusters\+Conf\+Filepath}}
+\index{clusters\+Conf\+Filepath@{clusters\+Conf\+Filepath}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{clusters\+Conf\+Filepath}{clustersConfFilepath}}
+{\footnotesize\ttfamily std\+::string Touch\+Detector\+Thread\+::clusters\+Conf\+Filepath\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+string value of the path to configure file of clusters 
+
+
+
+Definition at line 48 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a975fc42c10d903e8006cb49800bf9589}\label{group__touchDetector_a975fc42c10d903e8006cb49800bf9589}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!left\+Arm\+Port@{left\+Arm\+Port}}
+\index{left\+Arm\+Port@{left\+Arm\+Port}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{left\+Arm\+Port}{leftArmPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$$\ast$ Touch\+Detector\+Thread\+::left\+Arm\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for input left arm activations. 
+
+
+
+Definition at line 53 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_ac34d0d0c972146971c59c9150b2fcbc4}\label{group__touchDetector_ac34d0d0c972146971c59c9150b2fcbc4}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!left\+Forearm\+Port@{left\+Forearm\+Port}}
+\index{left\+Forearm\+Port@{left\+Forearm\+Port}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{left\+Forearm\+Port}{leftForearmPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$$\ast$ Touch\+Detector\+Thread\+::left\+Forearm\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for input left forearm activations. 
+
+
+
+Definition at line 55 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a6b373d5f8e235c68ce5526909c44074f}\label{group__touchDetector_a6b373d5f8e235c68ce5526909c44074f}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!left\+Hand\+Port@{left\+Hand\+Port}}
+\index{left\+Hand\+Port@{left\+Hand\+Port}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{left\+Hand\+Port}{leftHandPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$$\ast$ Touch\+Detector\+Thread\+::left\+Hand\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for input left hand activations. 
+
+
+
+Definition at line 57 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_af2e69c2ccd1b3a837c6c2647f830377f}\label{group__touchDetector_af2e69c2ccd1b3a837c6c2647f830377f}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!nb\+Body\+Parts@{nb\+Body\+Parts}}
+\index{nb\+Body\+Parts@{nb\+Body\+Parts}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{nb\+Body\+Parts}{nbBodyParts}}
+{\footnotesize\ttfamily const int Touch\+Detector\+Thread\+::nb\+Body\+Parts = 7\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 41 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_aa04ee21c0927d0520223ecd59be4fd29}\label{group__touchDetector_aa04ee21c0927d0520223ecd59be4fd29}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!nb\+Clusters@{nb\+Clusters}}
+\index{nb\+Clusters@{nb\+Clusters}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{nb\+Clusters}{nbClusters}}
+{\footnotesize\ttfamily int Touch\+Detector\+Thread\+::nb\+Clusters\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 45 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a2f529960e33051588b398f964cd0176e}\label{group__touchDetector_a2f529960e33051588b398f964cd0176e}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!nb\+Taxels@{nb\+Taxels}}
+\index{nb\+Taxels@{nb\+Taxels}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{nb\+Taxels}{nbTaxels}}
+{\footnotesize\ttfamily const int Touch\+Detector\+Thread\+::nb\+Taxels = \{4 $\ast$ 192, 4 $\ast$ 192, 4 $\ast$ 192, 2 $\ast$ 192, 2 $\ast$ 192, 192, 192\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 43 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_ae172aa9ba20fca535350d3c61d21e329}\label{group__touchDetector_ae172aa9ba20fca535350d3c61d21e329}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!no\+Cluster@{no\+Cluster}}
+\index{no\+Cluster@{no\+Cluster}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{no\+Cluster}{noCluster}}
+{\footnotesize\ttfamily const int Touch\+Detector\+Thread\+::no\+Cluster = -\/1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 40 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a8522b0d27f973b9a8c8b2e10c656f9b3}\label{group__touchDetector_a8522b0d27f973b9a8c8b2e10c656f9b3}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!right\+Arm\+Port@{right\+Arm\+Port}}
+\index{right\+Arm\+Port@{right\+Arm\+Port}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{right\+Arm\+Port}{rightArmPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$$\ast$ Touch\+Detector\+Thread\+::right\+Arm\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for input right arm activations. 
+
+
+
+Definition at line 54 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a905ee0fe0ed60104b941d044386856a5}\label{group__touchDetector_a905ee0fe0ed60104b941d044386856a5}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!right\+Forearm\+Port@{right\+Forearm\+Port}}
+\index{right\+Forearm\+Port@{right\+Forearm\+Port}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{right\+Forearm\+Port}{rightForearmPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$$\ast$ Touch\+Detector\+Thread\+::right\+Forearm\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for input right forearm activations. 
+
+
+
+Definition at line 56 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_af6585ff213a437baa0b232304f0f9a68}\label{group__touchDetector_af6585ff213a437baa0b232304f0f9a68}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!right\+Hand\+Port@{right\+Hand\+Port}}
+\index{right\+Hand\+Port@{right\+Hand\+Port}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{right\+Hand\+Port}{rightHandPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$$\ast$ Touch\+Detector\+Thread\+::right\+Hand\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for input right hand activations. 
+
+
+
+Definition at line 58 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a0e1cb59b32d06c38053bf97c2c11290b}\label{group__touchDetector_a0e1cb59b32d06c38053bf97c2c11290b}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!taxels2\+Clusters@{taxels2\+Clusters}}
+\index{taxels2\+Clusters@{taxels2\+Clusters}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{taxels2\+Clusters}{taxels2Clusters}}
+{\footnotesize\ttfamily std\+::vector$<$int$>$ Touch\+Detector\+Thread\+::taxels2\+Clusters\mbox{[}7\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+standard vector of integer containing the taxel I\+Ds in form of cluster ID 
+
+
+
+Definition at line 49 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a2d699150315f222848ecf5e2d2a345f7}\label{group__touchDetector_a2d699150315f222848ecf5e2d2a345f7}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!taxel\+Threshold@{taxel\+Threshold}}
+\index{taxel\+Threshold@{taxel\+Threshold}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{taxel\+Threshold}{taxelThreshold}}
+{\footnotesize\ttfamily int Touch\+Detector\+Thread\+::taxel\+Threshold\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+integer value of touched threshold 
+
+
+
+Definition at line 47 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a876e80882e9772d72a1062f1bd67aca6}\label{group__touchDetector_a876e80882e9772d72a1062f1bd67aca6}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!threshold@{threshold}}
+\index{threshold@{threshold}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{threshold}{threshold}}
+{\footnotesize\ttfamily double Touch\+Detector\+Thread\+::threshold\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 46 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_a40c56d22bab1fdb6876c5ff7ea06e9e8}\label{group__touchDetector_a40c56d22bab1fdb6876c5ff7ea06e9e8}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!torso\+Port@{torso\+Port}}
+\index{torso\+Port@{torso\+Port}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{torso\+Port}{torsoPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$$\ast$ Touch\+Detector\+Thread\+::torso\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for input torso activations. 
+
+
+
+Definition at line 52 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_aba1732a9b24e61da4ad3ed1650a214ea}\label{group__touchDetector_aba1732a9b24e61da4ad3ed1650a214ea}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!touch\+Port@{touch\+Port}}
+\index{touch\+Port@{touch\+Port}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{touch\+Port}{touchPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$$\ast$ Touch\+Detector\+Thread\+::touch\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for output touched activations. 
+
+
+
+Definition at line 59 of file touch\+Detector\+Thread.\+h.
+
+\mbox{\Hypertarget{group__touchDetector_aefc680e659906e2a9b7e870d8ea837be}\label{group__touchDetector_aefc680e659906e2a9b7e870d8ea837be}} 
+\index{Touch\+Detector\+Thread@{Touch\+Detector\+Thread}!touch\+Port\+Cleaned@{touch\+Port\+Cleaned}}
+\index{touch\+Port\+Cleaned@{touch\+Port\+Cleaned}!Touch\+Detector\+Thread@{Touch\+Detector\+Thread}}
+\subparagraph{\texorpdfstring{touch\+Port\+Cleaned}{touchPortCleaned}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$$\ast$ Touch\+Detector\+Thread\+::touch\+Port\+Cleaned\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Buffered\+Port of bottle for output touched taxel. 
+
+
+
+Definition at line 60 of file touch\+Detector\+Thread.\+h.
+

@@ -1,0 +1,797 @@
+\hypertarget{group__pasar}{}\section{pasar}
+\label{group__pasar}\index{pasar@{pasar}}
+
+
+A module that gets the objects present in the O\+PC, and change their top down saliency according to their acceleration, appereance and disappereance.  
+
+
+Collaboration diagram for pasar\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{group__pasar}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{group__pasar_structObjectModel}{Object\+Model}
+\item 
+class \hyperlink{group__pasar_classPasarModule}{Pasar\+Module}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A module that gets the objects present in the O\+PC, and change their top down saliency according to their acceleration, appereance and disappereance. 
+
+~\newline
+The Bottom Up saliency is based on lumicroma and will integrate the visual component. Version\+:1.\+0 \begin{DoxyAuthor}{Author}
+Grégoire Pointeau \href{mailto:greg.pointeau@gmail.com}{\tt greg.\+pointeau@gmail.\+com}, Stéphane Lallée \href{mailto:stephane.lallee@gmail.com}{\tt stephane.\+lallee@gmail.\+com} ~\newline
+ 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Released under the terms of the G\+NU G\+PL v2.\+0 
+\end{DoxyCopyright}
+\hypertarget{group__touchDetector_intro_sec}{}\subsection{Description}\label{group__touchDetector_intro_sec}
+A module that gets the objects present in the O\+PC, and change their top down saliency according to their acceleration, appereance and disappereance.~\newline
+ The Bottom Up saliency is based on lumicroma and will integrate the visual component.\hypertarget{group__touchDetector_parameters_sec}{}\subsection{Parameters}\label{group__touchDetector_parameters_sec}
+
+\begin{DoxyItemize}
+\item --name\+: name of the module
+\item --parameter\+Top\+Down\+Appearance\+Burst\+: score of saliency for an appereance
+\item --parameter\+Top\+Down\+Disppearance\+Burst\+: score of saliency for an diappereance
+\item --parameter\+Top\+Down\+Acceleration\+Coef\+: score of saliency for an acceleration detected
+\item --threshold\+Movement\+Accel\+: threshold of an acceleration detection
+\item --threshold\+Saliency\+: under this threshlod, saliency is considered as 0
+\item --p\+Exponential\+Decrease\+: Speed of the decrease of the saliency over the time (should be less than 1) 
+\end{DoxyItemize}\hypertarget{group__touchDetector_inputports_sec}{}\subsection{Input Ports}\label{group__touchDetector_inputports_sec}
+
+\begin{DoxyItemize}
+\item /pasar/rpc \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Response port. Supported commands\+:
+\begin{DoxyItemize}
+\item pointing on/off\+: launch or stop pointing detection
+\item waving on/off\+: launch or stop waving detection
+\item help
+\item quit
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{group__touchDetector_outputports_sec}{}\subsection{Output Ports}\label{group__touchDetector_outputports_sec}
+\hypertarget{group__touchDetector_services_sec}{}\subsection{Services}\label{group__touchDetector_services_sec}
+
+
+\subsection{Class Documentation}
+\index{Object\+Model@{Object\+Model}}\label{structObjectModel}
+\Hypertarget{group__pasar_structObjectModel}
+\subsubsection{struct Object\+Model}
+
+
+Definition at line 31 of file pasar.\+h.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{group__pasar_a52ec98a5bb9ea8a10113d22eb21bd16b}\label{group__pasar_a52ec98a5bb9ea8a10113d22eb21bd16b}} 
+double&
+acceleration&
+\\
+\hline
+
+\mbox{\Hypertarget{group__pasar_ab94c4a5cd18511058abb9694e86fe073}\label{group__pasar_ab94c4a5cd18511058abb9694e86fe073}} 
+double&
+lastTimeSeen&
+\\
+\hline
+
+\mbox{\Hypertarget{group__pasar_a0491f1d15866f477f411c652f11b222b}\label{group__pasar_a0491f1d15866f477f411c652f11b222b}} 
+Object&
+o&
+\\
+\hline
+
+\mbox{\Hypertarget{group__pasar_a9ab092cc2809502ac69974bfcd107b55}\label{group__pasar_a9ab092cc2809502ac69974bfcd107b55}} 
+bool&
+present&
+\\
+\hline
+
+\mbox{\Hypertarget{group__pasar_ab190bf59bc185f03d1f39063e49daa8a}\label{group__pasar_ab190bf59bc185f03d1f39063e49daa8a}} 
+int&
+restingSteps&
+\\
+\hline
+
+\mbox{\Hypertarget{group__pasar_a73fdba6ab7f8bde4657064dfca1c9dca}\label{group__pasar_a73fdba6ab7f8bde4657064dfca1c9dca}} 
+double&
+speed&
+\\
+\hline
+
+\end{DoxyFields}
+\index{Pasar\+Module@{Pasar\+Module}}\label{classPasarModule}
+\Hypertarget{group__pasar_classPasarModule}
+\subsubsection{class Pasar\+Module}
+
+
+Definition at line 45 of file pasar.\+h.
+
+
+
+Inheritance diagram for Pasar\+Module\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=158pt]{classPasarModule__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__pasar_a6d5b29ca73e8cc6c01412ed727c0f1c1}{configure} (yarp\+::os\+::\+Resource\+Finder \&rf)
+\item 
+bool \hyperlink{group__pasar_a4eac5ebe37b69e5806561310bafb9698}{interrupt\+Module} ()
+\item 
+bool \hyperlink{group__pasar_a06c1d515126a37d8b241ce64eb04aabe}{close} ()
+\item 
+bool \hyperlink{group__pasar_ae281b878aee48592dd4c2d75dcb44fa9}{respond} (const yarp\+::os\+::\+Bottle \&command, yarp\+::os\+::\+Bottle \&reply)
+\item 
+double \hyperlink{group__pasar_ad65081730e9591e95fdc39ee42c2622e}{get\+Period} ()
+\item 
+bool \hyperlink{group__pasar_ae58e47bc057d67d97f4727584f30c0b1}{update\+Module} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__pasar_a8b6edeeb377af6f56cf8636c7a5471f3}{saliency\+Top\+Down} ()
+\begin{DoxyCompactList}\small\item\em saliency\+Top\+Down Update the salience according to the informations contained in the O\+PC (acceleration, appareance, disappareance) \end{DoxyCompactList}\item 
+void \hyperlink{group__pasar_aecae0bd601883938d95be10c5f6990af}{saliency\+Normalize} ()
+\begin{DoxyCompactList}\small\item\em saliency\+Normalize Normalize salience such that maximum salience = 1 \end{DoxyCompactList}\item 
+void \hyperlink{group__pasar_af3892b35d0d3ee7cbc24a9db8d6709c7}{saliency\+Leaky\+Integration} ()
+\begin{DoxyCompactList}\small\item\em saliency\+Leaky\+Integration Decrease of the salience through time. \end{DoxyCompactList}\item 
+bool \hyperlink{group__pasar_a8c64b45d628f72c5a944f1952a5947b0}{saliency\+Pointing} ()
+\begin{DoxyCompactList}\small\item\em saliency\+Pointing Increase the salience of the closest object from the right hand \end{DoxyCompactList}\item 
+bool \hyperlink{group__pasar_a19ed41388e9bfb8f64f3b797212bdedb}{saliency\+Waving} ()
+\begin{DoxyCompactList}\small\item\em saliency\+Waving Increase the saliency of the agent waving \end{DoxyCompactList}\item 
+void \hyperlink{group__pasar_aa26ef95a5127bb6b5004ce879f8d43be}{initialize\+Map\+Timing} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{group__pasar_a036e6eefa05f5d54c446b410a20dad94}{p\+Top\+Down\+Appearance\+Burst}
+\begin{DoxyCompactList}\small\item\em score of saliency for an appereance \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_a1ffee40c8bbcbeab1e4a3e06fcb69f74}{p\+Top\+Down\+Disappearance\+Burst}
+\begin{DoxyCompactList}\small\item\em score of saliency for an diappereance \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_a6cd0031d0976255163c72374d085cd68}{p\+Top\+Down\+Acceleration\+Coef}
+\begin{DoxyCompactList}\small\item\em score of saliency for an acceleration detected \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_a911cdea1fc39d0c2e1dc30fa8b29f10b}{p\+Exponential\+Decrease}
+\begin{DoxyCompactList}\small\item\em Speed of the decrease of the saliency over the time (should be less than 1) \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_a8ac28563deb0e11e7389023ed3e7af83}{p\+Top\+Down\+Waving}
+\begin{DoxyCompactList}\small\item\em increase of saliency if waving \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_a21daf3a3c5d5b52887083f56a5370262}{threshold\+Movement\+Accel\+Agent}
+\begin{DoxyCompactList}\small\item\em minimum acceleration to detect an agent \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_aaee66528c2e631dda1539ac530092229}{threshold\+Movement\+Accel\+Object}
+\begin{DoxyCompactList}\small\item\em minimum acceleration to detect an object \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_af58bfaa1d774a864584a76da4d57be4e}{threshold\+Waving}
+\begin{DoxyCompactList}\small\item\em minimum waving detected \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_a291feefbe67ed3e29994c73c4e185948}{threshold\+Pointing}
+\begin{DoxyCompactList}\small\item\em maximum distance between hand and object to detect pointing \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_af0ed238a5d456b0ca04f75b3b2576f14}{threshold\+Saliency}
+\begin{DoxyCompactList}\small\item\em if object saliency is below this value, it is set to 0 \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_a94cc40d7d4e86e835b05c46d2a4ecea0}{dthreshold\+Appear}
+\begin{DoxyCompactList}\small\item\em minimum time an object has to be present before it is detected as appeared \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_a1ac4c61e385a04fc07e764d5f09e9ce4}{dthreshold\+Disappear}
+\begin{DoxyCompactList}\small\item\em minimum time an object has to be absent before it is detected as disappeared \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_a55005305cce26c9b3ace35b7a7cd6d99}{d\+Burst\+Of\+Pointing}
+\begin{DoxyCompactList}\small\item\em how much to increase saliency if object is pointed at \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_a679e9095d786c28375abe7f87420783b}{last\+Time\+Waving}
+\begin{DoxyCompactList}\small\item\em last time point when the agent was waving \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_a0b488dc62d174ea71ec6edbea36e746f}{last\+Time\+Pointing}
+\begin{DoxyCompactList}\small\item\em last time point when the agent was pointing \end{DoxyCompactList}\item 
+bool \hyperlink{group__pasar_a1565ab479eb670f9b0f2fac851d04d4f}{check\+Waving}
+\begin{DoxyCompactList}\small\item\em whether to detect waving of an agent \end{DoxyCompactList}\item 
+bool \hyperlink{group__pasar_ac1e13b244af26bd77812305485c8c150}{check\+Pointing}
+\begin{DoxyCompactList}\small\item\em whether to detect pointing of an agent \end{DoxyCompactList}\item 
+\hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$ \hyperlink{group__pasar_a3f1698bbf327cebc9f30354b552abfaf}{i\+Cub}
+\item 
+yarp\+::os\+::\+Port \hyperlink{group__pasar_ab8c417213c0beb8e580d8fb2b1eebb66}{handler\+Port}
+\begin{DoxyCompactList}\small\item\em a port to handle messages \end{DoxyCompactList}\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__pasar_aab32988108828bc5647394433f17a896}{right\+Handt1}
+\begin{DoxyCompactList}\small\item\em position of right at t1 \end{DoxyCompactList}\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__pasar_ae5e94f066c3ecf8eebd2db8ec19f948f}{right\+Handt2}
+\begin{DoxyCompactList}\small\item\em position of right at t2 \end{DoxyCompactList}\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__pasar_a9bd22f6f18bdb9d5acb8b8fb8858716f}{left\+Handt1}
+\begin{DoxyCompactList}\small\item\em position of left hand at t1 \end{DoxyCompactList}\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__pasar_a495a4143156903eabb2ab4450bf3007f}{left\+Handt2}
+\begin{DoxyCompactList}\small\item\em position of left hand at t2 \end{DoxyCompactList}\item 
+std\+::pair$<$ bool, bool $>$ \hyperlink{group__pasar_a5bdd7a086325ec7bc41f71579c922212}{present\+Right\+Hand}
+\begin{DoxyCompactList}\small\item\em first\+: whether right hand was present at t1; second\+: whether right hand is present at t2 \end{DoxyCompactList}\item 
+std\+::pair$<$ bool, bool $>$ \hyperlink{group__pasar_a30c0a497ae076d531d86361a8ba906fa}{present\+Left\+Hand}
+\begin{DoxyCompactList}\small\item\em first\+: whether left hand was present at t1; second\+: whether left hand is present at t2 \end{DoxyCompactList}\item 
+std\+::map$<$ int, \hyperlink{group__pasar_structObjectModel}{Object\+Model} $>$ \hyperlink{group__pasar_ab0c3a82aef0ace07c7c704c58ffc6394}{present\+Objects\+Last\+Step}
+\item 
+std\+::map$<$ int, std\+::pair$<$ double, double $>$ $>$ \hyperlink{group__pasar_a28ae26a5986426c363c29a43cc63a473}{present\+Last\+Speed}
+\item 
+std\+::map$<$ int, std\+::pair$<$ double, double $>$ $>$ \hyperlink{group__pasar_a704006bef0d56f1b7b0050d2e32b23cd}{present\+Current\+Speed}
+\item 
+std\+::map$<$ int, \hyperlink{group__pasar_structObjectModel}{Object\+Model} $>$ \hyperlink{group__pasar_a0d58b73edb50621d08296ec966ecba86}{O\+P\+C\+Entities}
+\item 
+bool \hyperlink{group__pasar_a76569b77bf2b4b9fa8782651660a9d2f}{is\+Pointing}
+\begin{DoxyCompactList}\small\item\em if the human is pointing \end{DoxyCompactList}\item 
+bool \hyperlink{group__pasar_af357a34636a7af813bd7cd980f3cafb2}{is\+Waving}
+\begin{DoxyCompactList}\small\item\em if if the human is waving \end{DoxyCompactList}\item 
+double \hyperlink{group__pasar_a35ffec49eb190ac39eab3ea3934b34f4}{init\+Time}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__pasar_a06c1d515126a37d8b241ce64eb04aabe}\label{group__pasar_a06c1d515126a37d8b241ce64eb04aabe}} 
+\index{Pasar\+Module@{Pasar\+Module}!close@{close}}
+\index{close@{close}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool Pasar\+Module\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 123 of file pasar.\+cpp.
+
+\mbox{\Hypertarget{group__pasar_a6d5b29ca73e8cc6c01412ed727c0f1c1}\label{group__pasar_a6d5b29ca73e8cc6c01412ed727c0f1c1}} 
+\index{Pasar\+Module@{Pasar\+Module}!configure@{configure}}
+\index{configure@{configure}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool Pasar\+Module\+::configure (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf }\end{DoxyParamCaption})}
+
+
+
+Definition at line 28 of file pasar.\+cpp.
+
+\mbox{\Hypertarget{group__pasar_ad65081730e9591e95fdc39ee42c2622e}\label{group__pasar_ad65081730e9591e95fdc39ee42c2622e}} 
+\index{Pasar\+Module@{Pasar\+Module}!get\+Period@{get\+Period}}
+\index{get\+Period@{get\+Period}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{get\+Period()}{getPeriod()}}
+{\footnotesize\ttfamily double Pasar\+Module\+::get\+Period (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 372 of file pasar.\+cpp.
+
+\mbox{\Hypertarget{group__pasar_aa26ef95a5127bb6b5004ce879f8d43be}\label{group__pasar_aa26ef95a5127bb6b5004ce879f8d43be}} 
+\index{Pasar\+Module@{Pasar\+Module}!initialize\+Map\+Timing@{initialize\+Map\+Timing}}
+\index{initialize\+Map\+Timing@{initialize\+Map\+Timing}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{initialize\+Map\+Timing()}{initializeMapTiming()}}
+{\footnotesize\ttfamily void Pasar\+Module\+::initialize\+Map\+Timing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+!! O\+N\+LY O\+B\+J\+E\+C\+TS and A\+G\+E\+N\+TS A\+RE T\+R\+A\+C\+K\+ED !!! 
+
+Definition at line 587 of file pasar.\+cpp.
+
+\mbox{\Hypertarget{group__pasar_a4eac5ebe37b69e5806561310bafb9698}\label{group__pasar_a4eac5ebe37b69e5806561310bafb9698}} 
+\index{Pasar\+Module@{Pasar\+Module}!interrupt\+Module@{interrupt\+Module}}
+\index{interrupt\+Module@{interrupt\+Module}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{interrupt\+Module()}{interruptModule()}}
+{\footnotesize\ttfamily bool Pasar\+Module\+::interrupt\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 113 of file pasar.\+cpp.
+
+\mbox{\Hypertarget{group__pasar_ae281b878aee48592dd4c2d75dcb44fa9}\label{group__pasar_ae281b878aee48592dd4c2d75dcb44fa9}} 
+\index{Pasar\+Module@{Pasar\+Module}!respond@{respond}}
+\index{respond@{respond}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{respond()}{respond()}}
+{\footnotesize\ttfamily bool Pasar\+Module\+::respond (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{command,  }\item[{yarp\+::os\+::\+Bottle \&}]{reply }\end{DoxyParamCaption})}
+
+
+
+Definition at line 138 of file pasar.\+cpp.
+
+\mbox{\Hypertarget{group__pasar_af3892b35d0d3ee7cbc24a9db8d6709c7}\label{group__pasar_af3892b35d0d3ee7cbc24a9db8d6709c7}} 
+\index{Pasar\+Module@{Pasar\+Module}!saliency\+Leaky\+Integration@{saliency\+Leaky\+Integration}}
+\index{saliency\+Leaky\+Integration@{saliency\+Leaky\+Integration}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{saliency\+Leaky\+Integration()}{saliencyLeakyIntegration()}}
+{\footnotesize\ttfamily void Pasar\+Module\+::saliency\+Leaky\+Integration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+saliency\+Leaky\+Integration Decrease of the salience through time. 
+
+Exponential factor p\+Exponential\+Decrease $<$ 1 
+
+Definition at line 358 of file pasar.\+cpp.
+
+\mbox{\Hypertarget{group__pasar_aecae0bd601883938d95be10c5f6990af}\label{group__pasar_aecae0bd601883938d95be10c5f6990af}} 
+\index{Pasar\+Module@{Pasar\+Module}!saliency\+Normalize@{saliency\+Normalize}}
+\index{saliency\+Normalize@{saliency\+Normalize}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{saliency\+Normalize()}{saliencyNormalize()}}
+{\footnotesize\ttfamily void Pasar\+Module\+::saliency\+Normalize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+saliency\+Normalize Normalize salience such that maximum salience = 1 
+
+
+
+Definition at line 337 of file pasar.\+cpp.
+
+\mbox{\Hypertarget{group__pasar_a8c64b45d628f72c5a944f1952a5947b0}\label{group__pasar_a8c64b45d628f72c5a944f1952a5947b0}} 
+\index{Pasar\+Module@{Pasar\+Module}!saliency\+Pointing@{saliency\+Pointing}}
+\index{saliency\+Pointing@{saliency\+Pointing}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{saliency\+Pointing()}{saliencyPointing()}}
+{\footnotesize\ttfamily bool Pasar\+Module\+::saliency\+Pointing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+saliency\+Pointing Increase the salience of the closest object from the right hand 
+
+\begin{DoxyReturn}{Returns}
+True if robot is pointing now, False otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 378 of file pasar.\+cpp.
+
+\mbox{\Hypertarget{group__pasar_a8b6edeeb377af6f56cf8636c7a5471f3}\label{group__pasar_a8b6edeeb377af6f56cf8636c7a5471f3}} 
+\index{Pasar\+Module@{Pasar\+Module}!saliency\+Top\+Down@{saliency\+Top\+Down}}
+\index{saliency\+Top\+Down@{saliency\+Top\+Down}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{saliency\+Top\+Down()}{saliencyTopDown()}}
+{\footnotesize\ttfamily void Pasar\+Module\+::saliency\+Top\+Down (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+saliency\+Top\+Down Update the salience according to the informations contained in the O\+PC (acceleration, appareance, disappareance) 
+
+
+
+Definition at line 266 of file pasar.\+cpp.
+
+\mbox{\Hypertarget{group__pasar_a19ed41388e9bfb8f64f3b797212bdedb}\label{group__pasar_a19ed41388e9bfb8f64f3b797212bdedb}} 
+\index{Pasar\+Module@{Pasar\+Module}!saliency\+Waving@{saliency\+Waving}}
+\index{saliency\+Waving@{saliency\+Waving}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{saliency\+Waving()}{saliencyWaving()}}
+{\footnotesize\ttfamily bool Pasar\+Module\+::saliency\+Waving (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+saliency\+Waving Increase the saliency of the agent waving 
+
+\begin{DoxyReturn}{Returns}
+true is the agent is waving\+Now, False otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 462 of file pasar.\+cpp.
+
+\mbox{\Hypertarget{group__pasar_ae58e47bc057d67d97f4727584f30c0b1}\label{group__pasar_ae58e47bc057d67d97f4727584f30c0b1}} 
+\index{Pasar\+Module@{Pasar\+Module}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool Pasar\+Module\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 211 of file pasar.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__pasar_ac1e13b244af26bd77812305485c8c150}\label{group__pasar_ac1e13b244af26bd77812305485c8c150}} 
+\index{Pasar\+Module@{Pasar\+Module}!check\+Pointing@{check\+Pointing}}
+\index{check\+Pointing@{check\+Pointing}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{check\+Pointing}{checkPointing}}
+{\footnotesize\ttfamily bool Pasar\+Module\+::check\+Pointing\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+whether to detect pointing of an agent 
+
+
+
+Definition at line 66 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a1565ab479eb670f9b0f2fac851d04d4f}\label{group__pasar_a1565ab479eb670f9b0f2fac851d04d4f}} 
+\index{Pasar\+Module@{Pasar\+Module}!check\+Waving@{check\+Waving}}
+\index{check\+Waving@{check\+Waving}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{check\+Waving}{checkWaving}}
+{\footnotesize\ttfamily bool Pasar\+Module\+::check\+Waving\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+whether to detect waving of an agent 
+
+
+
+Definition at line 65 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a55005305cce26c9b3ace35b7a7cd6d99}\label{group__pasar_a55005305cce26c9b3ace35b7a7cd6d99}} 
+\index{Pasar\+Module@{Pasar\+Module}!d\+Burst\+Of\+Pointing@{d\+Burst\+Of\+Pointing}}
+\index{d\+Burst\+Of\+Pointing@{d\+Burst\+Of\+Pointing}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{d\+Burst\+Of\+Pointing}{dBurstOfPointing}}
+{\footnotesize\ttfamily double Pasar\+Module\+::d\+Burst\+Of\+Pointing\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+how much to increase saliency if object is pointed at 
+
+
+
+Definition at line 60 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a94cc40d7d4e86e835b05c46d2a4ecea0}\label{group__pasar_a94cc40d7d4e86e835b05c46d2a4ecea0}} 
+\index{Pasar\+Module@{Pasar\+Module}!dthreshold\+Appear@{dthreshold\+Appear}}
+\index{dthreshold\+Appear@{dthreshold\+Appear}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{dthreshold\+Appear}{dthresholdAppear}}
+{\footnotesize\ttfamily double Pasar\+Module\+::dthreshold\+Appear\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+minimum time an object has to be present before it is detected as appeared 
+
+
+
+Definition at line 58 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a1ac4c61e385a04fc07e764d5f09e9ce4}\label{group__pasar_a1ac4c61e385a04fc07e764d5f09e9ce4}} 
+\index{Pasar\+Module@{Pasar\+Module}!dthreshold\+Disappear@{dthreshold\+Disappear}}
+\index{dthreshold\+Disappear@{dthreshold\+Disappear}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{dthreshold\+Disappear}{dthresholdDisappear}}
+{\footnotesize\ttfamily double Pasar\+Module\+::dthreshold\+Disappear\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+minimum time an object has to be absent before it is detected as disappeared 
+
+
+
+Definition at line 59 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_ab8c417213c0beb8e580d8fb2b1eebb66}\label{group__pasar_ab8c417213c0beb8e580d8fb2b1eebb66}} 
+\index{Pasar\+Module@{Pasar\+Module}!handler\+Port@{handler\+Port}}
+\index{handler\+Port@{handler\+Port}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{handler\+Port}{handlerPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Port Pasar\+Module\+::handler\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+a port to handle messages 
+
+
+
+Definition at line 69 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a3f1698bbf327cebc9f30354b552abfaf}\label{group__pasar_a3f1698bbf327cebc9f30354b552abfaf}} 
+\index{Pasar\+Module@{Pasar\+Module}!i\+Cub@{i\+Cub}}
+\index{i\+Cub@{i\+Cub}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{i\+Cub}{iCub}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client}$\ast$ Pasar\+Module\+::i\+Cub\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 67 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a35ffec49eb190ac39eab3ea3934b34f4}\label{group__pasar_a35ffec49eb190ac39eab3ea3934b34f4}} 
+\index{Pasar\+Module@{Pasar\+Module}!init\+Time@{init\+Time}}
+\index{init\+Time@{init\+Time}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{init\+Time}{initTime}}
+{\footnotesize\ttfamily double Pasar\+Module\+::init\+Time\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 86 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a76569b77bf2b4b9fa8782651660a9d2f}\label{group__pasar_a76569b77bf2b4b9fa8782651660a9d2f}} 
+\index{Pasar\+Module@{Pasar\+Module}!is\+Pointing@{is\+Pointing}}
+\index{is\+Pointing@{is\+Pointing}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{is\+Pointing}{isPointing}}
+{\footnotesize\ttfamily bool Pasar\+Module\+::is\+Pointing\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+if the human is pointing 
+
+
+
+Definition at line 84 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_af357a34636a7af813bd7cd980f3cafb2}\label{group__pasar_af357a34636a7af813bd7cd980f3cafb2}} 
+\index{Pasar\+Module@{Pasar\+Module}!is\+Waving@{is\+Waving}}
+\index{is\+Waving@{is\+Waving}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{is\+Waving}{isWaving}}
+{\footnotesize\ttfamily bool Pasar\+Module\+::is\+Waving\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+if if the human is waving 
+
+
+
+Definition at line 85 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a0b488dc62d174ea71ec6edbea36e746f}\label{group__pasar_a0b488dc62d174ea71ec6edbea36e746f}} 
+\index{Pasar\+Module@{Pasar\+Module}!last\+Time\+Pointing@{last\+Time\+Pointing}}
+\index{last\+Time\+Pointing@{last\+Time\+Pointing}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{last\+Time\+Pointing}{lastTimePointing}}
+{\footnotesize\ttfamily double Pasar\+Module\+::last\+Time\+Pointing\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+last time point when the agent was pointing 
+
+
+
+Definition at line 63 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a679e9095d786c28375abe7f87420783b}\label{group__pasar_a679e9095d786c28375abe7f87420783b}} 
+\index{Pasar\+Module@{Pasar\+Module}!last\+Time\+Waving@{last\+Time\+Waving}}
+\index{last\+Time\+Waving@{last\+Time\+Waving}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{last\+Time\+Waving}{lastTimeWaving}}
+{\footnotesize\ttfamily double Pasar\+Module\+::last\+Time\+Waving\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+last time point when the agent was waving 
+
+
+
+Definition at line 62 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a9bd22f6f18bdb9d5acb8b8fb8858716f}\label{group__pasar_a9bd22f6f18bdb9d5acb8b8fb8858716f}} 
+\index{Pasar\+Module@{Pasar\+Module}!left\+Handt1@{left\+Handt1}}
+\index{left\+Handt1@{left\+Handt1}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{left\+Handt1}{leftHandt1}}
+{\footnotesize\ttfamily yarp\+::sig\+::\+Vector\+Of$<$double$>$ Pasar\+Module\+::left\+Handt1\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+position of left hand at t1 
+
+
+
+Definition at line 73 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a495a4143156903eabb2ab4450bf3007f}\label{group__pasar_a495a4143156903eabb2ab4450bf3007f}} 
+\index{Pasar\+Module@{Pasar\+Module}!left\+Handt2@{left\+Handt2}}
+\index{left\+Handt2@{left\+Handt2}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{left\+Handt2}{leftHandt2}}
+{\footnotesize\ttfamily yarp\+::sig\+::\+Vector\+Of$<$double$>$ Pasar\+Module\+::left\+Handt2\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+position of left hand at t2 
+
+
+
+Definition at line 74 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a0d58b73edb50621d08296ec966ecba86}\label{group__pasar_a0d58b73edb50621d08296ec966ecba86}} 
+\index{Pasar\+Module@{Pasar\+Module}!O\+P\+C\+Entities@{O\+P\+C\+Entities}}
+\index{O\+P\+C\+Entities@{O\+P\+C\+Entities}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{O\+P\+C\+Entities}{OPCEntities}}
+{\footnotesize\ttfamily std\+::map$<$int, \hyperlink{group__pasar_structObjectModel}{Object\+Model}$>$ Pasar\+Module\+::\+O\+P\+C\+Entities\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 82 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a911cdea1fc39d0c2e1dc30fa8b29f10b}\label{group__pasar_a911cdea1fc39d0c2e1dc30fa8b29f10b}} 
+\index{Pasar\+Module@{Pasar\+Module}!p\+Exponential\+Decrease@{p\+Exponential\+Decrease}}
+\index{p\+Exponential\+Decrease@{p\+Exponential\+Decrease}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{p\+Exponential\+Decrease}{pExponentialDecrease}}
+{\footnotesize\ttfamily double Pasar\+Module\+::p\+Exponential\+Decrease\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Speed of the decrease of the saliency over the time (should be less than 1) 
+
+
+
+Definition at line 51 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a704006bef0d56f1b7b0050d2e32b23cd}\label{group__pasar_a704006bef0d56f1b7b0050d2e32b23cd}} 
+\index{Pasar\+Module@{Pasar\+Module}!present\+Current\+Speed@{present\+Current\+Speed}}
+\index{present\+Current\+Speed@{present\+Current\+Speed}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{present\+Current\+Speed}{presentCurrentSpeed}}
+{\footnotesize\ttfamily std\+::map$<$int, std\+::pair$<$double, double$>$ $>$ Pasar\+Module\+::present\+Current\+Speed\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 81 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a28ae26a5986426c363c29a43cc63a473}\label{group__pasar_a28ae26a5986426c363c29a43cc63a473}} 
+\index{Pasar\+Module@{Pasar\+Module}!present\+Last\+Speed@{present\+Last\+Speed}}
+\index{present\+Last\+Speed@{present\+Last\+Speed}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{present\+Last\+Speed}{presentLastSpeed}}
+{\footnotesize\ttfamily std\+::map$<$int, std\+::pair$<$double, double$>$ $>$ Pasar\+Module\+::present\+Last\+Speed\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 80 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a30c0a497ae076d531d86361a8ba906fa}\label{group__pasar_a30c0a497ae076d531d86361a8ba906fa}} 
+\index{Pasar\+Module@{Pasar\+Module}!present\+Left\+Hand@{present\+Left\+Hand}}
+\index{present\+Left\+Hand@{present\+Left\+Hand}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{present\+Left\+Hand}{presentLeftHand}}
+{\footnotesize\ttfamily std\+::pair$<$bool, bool$>$ Pasar\+Module\+::present\+Left\+Hand\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+first\+: whether left hand was present at t1; second\+: whether left hand is present at t2 
+
+
+
+Definition at line 77 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_ab0c3a82aef0ace07c7c704c58ffc6394}\label{group__pasar_ab0c3a82aef0ace07c7c704c58ffc6394}} 
+\index{Pasar\+Module@{Pasar\+Module}!present\+Objects\+Last\+Step@{present\+Objects\+Last\+Step}}
+\index{present\+Objects\+Last\+Step@{present\+Objects\+Last\+Step}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{present\+Objects\+Last\+Step}{presentObjectsLastStep}}
+{\footnotesize\ttfamily std\+::map$<$int, \hyperlink{group__pasar_structObjectModel}{Object\+Model}$>$ Pasar\+Module\+::present\+Objects\+Last\+Step\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 79 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a5bdd7a086325ec7bc41f71579c922212}\label{group__pasar_a5bdd7a086325ec7bc41f71579c922212}} 
+\index{Pasar\+Module@{Pasar\+Module}!present\+Right\+Hand@{present\+Right\+Hand}}
+\index{present\+Right\+Hand@{present\+Right\+Hand}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{present\+Right\+Hand}{presentRightHand}}
+{\footnotesize\ttfamily std\+::pair$<$bool, bool$>$ Pasar\+Module\+::present\+Right\+Hand\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+first\+: whether right hand was present at t1; second\+: whether right hand is present at t2 
+
+
+
+Definition at line 76 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a6cd0031d0976255163c72374d085cd68}\label{group__pasar_a6cd0031d0976255163c72374d085cd68}} 
+\index{Pasar\+Module@{Pasar\+Module}!p\+Top\+Down\+Acceleration\+Coef@{p\+Top\+Down\+Acceleration\+Coef}}
+\index{p\+Top\+Down\+Acceleration\+Coef@{p\+Top\+Down\+Acceleration\+Coef}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{p\+Top\+Down\+Acceleration\+Coef}{pTopDownAccelerationCoef}}
+{\footnotesize\ttfamily double Pasar\+Module\+::p\+Top\+Down\+Acceleration\+Coef\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+score of saliency for an acceleration detected 
+
+
+
+Definition at line 50 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a036e6eefa05f5d54c446b410a20dad94}\label{group__pasar_a036e6eefa05f5d54c446b410a20dad94}} 
+\index{Pasar\+Module@{Pasar\+Module}!p\+Top\+Down\+Appearance\+Burst@{p\+Top\+Down\+Appearance\+Burst}}
+\index{p\+Top\+Down\+Appearance\+Burst@{p\+Top\+Down\+Appearance\+Burst}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{p\+Top\+Down\+Appearance\+Burst}{pTopDownAppearanceBurst}}
+{\footnotesize\ttfamily double Pasar\+Module\+::p\+Top\+Down\+Appearance\+Burst\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+score of saliency for an appereance 
+
+
+
+Definition at line 48 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a1ffee40c8bbcbeab1e4a3e06fcb69f74}\label{group__pasar_a1ffee40c8bbcbeab1e4a3e06fcb69f74}} 
+\index{Pasar\+Module@{Pasar\+Module}!p\+Top\+Down\+Disappearance\+Burst@{p\+Top\+Down\+Disappearance\+Burst}}
+\index{p\+Top\+Down\+Disappearance\+Burst@{p\+Top\+Down\+Disappearance\+Burst}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{p\+Top\+Down\+Disappearance\+Burst}{pTopDownDisappearanceBurst}}
+{\footnotesize\ttfamily double Pasar\+Module\+::p\+Top\+Down\+Disappearance\+Burst\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+score of saliency for an diappereance 
+
+
+
+Definition at line 49 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a8ac28563deb0e11e7389023ed3e7af83}\label{group__pasar_a8ac28563deb0e11e7389023ed3e7af83}} 
+\index{Pasar\+Module@{Pasar\+Module}!p\+Top\+Down\+Waving@{p\+Top\+Down\+Waving}}
+\index{p\+Top\+Down\+Waving@{p\+Top\+Down\+Waving}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{p\+Top\+Down\+Waving}{pTopDownWaving}}
+{\footnotesize\ttfamily double Pasar\+Module\+::p\+Top\+Down\+Waving\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+increase of saliency if waving 
+
+
+
+Definition at line 52 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_aab32988108828bc5647394433f17a896}\label{group__pasar_aab32988108828bc5647394433f17a896}} 
+\index{Pasar\+Module@{Pasar\+Module}!right\+Handt1@{right\+Handt1}}
+\index{right\+Handt1@{right\+Handt1}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{right\+Handt1}{rightHandt1}}
+{\footnotesize\ttfamily yarp\+::sig\+::\+Vector\+Of$<$double$>$ Pasar\+Module\+::right\+Handt1\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+position of right at t1 
+
+
+
+Definition at line 71 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_ae5e94f066c3ecf8eebd2db8ec19f948f}\label{group__pasar_ae5e94f066c3ecf8eebd2db8ec19f948f}} 
+\index{Pasar\+Module@{Pasar\+Module}!right\+Handt2@{right\+Handt2}}
+\index{right\+Handt2@{right\+Handt2}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{right\+Handt2}{rightHandt2}}
+{\footnotesize\ttfamily yarp\+::sig\+::\+Vector\+Of$<$double$>$ Pasar\+Module\+::right\+Handt2\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+position of right at t2 
+
+
+
+Definition at line 72 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a21daf3a3c5d5b52887083f56a5370262}\label{group__pasar_a21daf3a3c5d5b52887083f56a5370262}} 
+\index{Pasar\+Module@{Pasar\+Module}!threshold\+Movement\+Accel\+Agent@{threshold\+Movement\+Accel\+Agent}}
+\index{threshold\+Movement\+Accel\+Agent@{threshold\+Movement\+Accel\+Agent}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{threshold\+Movement\+Accel\+Agent}{thresholdMovementAccelAgent}}
+{\footnotesize\ttfamily double Pasar\+Module\+::threshold\+Movement\+Accel\+Agent\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+minimum acceleration to detect an agent 
+
+
+
+Definition at line 53 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_aaee66528c2e631dda1539ac530092229}\label{group__pasar_aaee66528c2e631dda1539ac530092229}} 
+\index{Pasar\+Module@{Pasar\+Module}!threshold\+Movement\+Accel\+Object@{threshold\+Movement\+Accel\+Object}}
+\index{threshold\+Movement\+Accel\+Object@{threshold\+Movement\+Accel\+Object}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{threshold\+Movement\+Accel\+Object}{thresholdMovementAccelObject}}
+{\footnotesize\ttfamily double Pasar\+Module\+::threshold\+Movement\+Accel\+Object\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+minimum acceleration to detect an object 
+
+
+
+Definition at line 54 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_a291feefbe67ed3e29994c73c4e185948}\label{group__pasar_a291feefbe67ed3e29994c73c4e185948}} 
+\index{Pasar\+Module@{Pasar\+Module}!threshold\+Pointing@{threshold\+Pointing}}
+\index{threshold\+Pointing@{threshold\+Pointing}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{threshold\+Pointing}{thresholdPointing}}
+{\footnotesize\ttfamily double Pasar\+Module\+::threshold\+Pointing\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+maximum distance between hand and object to detect pointing 
+
+
+
+Definition at line 56 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_af0ed238a5d456b0ca04f75b3b2576f14}\label{group__pasar_af0ed238a5d456b0ca04f75b3b2576f14}} 
+\index{Pasar\+Module@{Pasar\+Module}!threshold\+Saliency@{threshold\+Saliency}}
+\index{threshold\+Saliency@{threshold\+Saliency}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{threshold\+Saliency}{thresholdSaliency}}
+{\footnotesize\ttfamily double Pasar\+Module\+::threshold\+Saliency\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+if object saliency is below this value, it is set to 0 
+
+
+
+Definition at line 57 of file pasar.\+h.
+
+\mbox{\Hypertarget{group__pasar_af58bfaa1d774a864584a76da4d57be4e}\label{group__pasar_af58bfaa1d774a864584a76da4d57be4e}} 
+\index{Pasar\+Module@{Pasar\+Module}!threshold\+Waving@{threshold\+Waving}}
+\index{threshold\+Waving@{threshold\+Waving}!Pasar\+Module@{Pasar\+Module}}
+\subparagraph{\texorpdfstring{threshold\+Waving}{thresholdWaving}}
+{\footnotesize\ttfamily double Pasar\+Module\+::threshold\+Waving\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+minimum waving detected 
+
+
+
+Definition at line 55 of file pasar.\+h.
+

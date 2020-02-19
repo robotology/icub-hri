@@ -1,0 +1,45 @@
+\hypertarget{group__icubclient__libraries}{}\section{i\+Cub-\/\+Client libraries}
+\label{group__icubclient__libraries}\index{i\+Cub-\/\+Client libraries@{i\+Cub-\/\+Client libraries}}
+
+
+This is the list of i\+Cub-\/\+Client libraries in the main/src/libraries directory.  
+
+
+Collaboration diagram for i\+Cub-\/\+Client libraries\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__icubclient__libraries}
+\end{center}
+\end{figure}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__clients}{Clients}
+\begin{DoxyCompactList}\small\item\em Provide a compact way to access the i\+Cub functionalities within the icub-\/client framework. \end{DoxyCompactList}\item 
+\hyperlink{group__icubclient__helpers}{Helper Routines}
+\begin{DoxyCompactList}\small\item\em A container library containing defines and structures to formalize knowledge within an object\+Properties\+Collector module. \end{DoxyCompactList}\item 
+\hyperlink{group__icubclient__representations}{World Representation}
+\begin{DoxyCompactList}\small\item\em Contains classes to represent entities and relations between them. \end{DoxyCompactList}\item 
+\hyperlink{group__icubclient__subsystems}{Subsystems}
+\begin{DoxyCompactList}\small\item\em Abstract class to handle sub-\/systems of the icub-\/client (speech, action, etc...) and the relevant subclasses. \end{DoxyCompactList}\item 
+\hyperlink{group__icubclient__tags}{Global defines}
+\begin{DoxyCompactList}\small\item\em Global defines which are used throughout the i\+Cub\+Client library. \end{DoxyCompactList}\item 
+\hyperlink{group__icubclient__IDLClients}{I\+D\+L Client Interfaces}
+\begin{DoxyCompactList}\small\item\em This library contains all the definitions for a client to interface to the I\+DL services made available by icub-\/client software. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This is the list of i\+Cub-\/\+Client libraries in the main/src/libraries directory. 
+
+To add your own library to this list, just add a comment like the following anywhere in your source code (replacing \char`\"{}your\+\_\+library\+\_\+name\char`\"{} with the name of your module)\+: \begin{DoxyVerb}  /**
+   *
+   * @defgroup icubclient_your_library_name your_library_name
+   * @ingroup icubclient_libraries
+   *
+   */
+\end{DoxyVerb}
+
+
+For convenience, try to keep the library name the same as the directory it is placed in. If you\textquotesingle{}ve a good reason to do something different, of course you can do that too. 

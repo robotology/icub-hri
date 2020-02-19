@@ -1,0 +1,368 @@
+\hypertarget{group__guiUpdater}{}\section{gui\+Updater}
+\label{group__guiUpdater}\index{gui\+Updater@{gui\+Updater}}
+
+
+Module responsible for polling the O\+PC for various content (objects, skeletons, etc.) and updating icub\+Gui based on this.  
+
+
+Collaboration diagram for gui\+Updater\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{group__guiUpdater}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__guiUpdater_classGuiUpdater}{Gui\+Updater}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module responsible for polling the O\+PC for various content (objects, skeletons, etc.) and updating icub\+Gui based on this. 
+
+Version\+:1.\+0 \begin{DoxyAuthor}{Author}
+Stephane Lallee \href{mailto:stephane.lallee@gmail.com}{\tt stephane.\+lallee@gmail.\+com} ~\newline
+ 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Released under the terms of the G\+NU G\+PL v2.\+0 
+\end{DoxyCopyright}
+\hypertarget{group__touchDetector_intro_sec}{}\subsection{Description}\label{group__touchDetector_intro_sec}
+The purpose of this module is to retrieve information from the online database implemented by the objects\+Properties\+Collector module (O\+PC) and format/transmit this information to the gui implemented by i\+Cub\+Gui (icub repo).\hypertarget{group__touchDetector_parameters_sec}{}\subsection{Parameters}\label{group__touchDetector_parameters_sec}
+
+\begin{DoxyItemize}
+\item --name\+: To specify the module\textquotesingle{}s name; all the open ports will be tagged with the prefix /name
+\item --O\+P\+Cname\+: Name of the O\+PC to connect to
+\item --display\+Skeletons\+: Agents skeletons will be displayed if available. 
+\end{DoxyItemize}\hypertarget{group__touchDetector_inputports_sec}{}\subsection{Input Ports}\label{group__touchDetector_inputports_sec}
+
+\begin{DoxyItemize}
+\item /gui\+Updater/rpc \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Response port. Supported commands\+:
+\begin{DoxyItemize}
+\item help
+\item quit
+\item reset (Resets the i\+Cub\+G\+UI)
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{group__touchDetector_outputports_sec}{}\subsection{Output Ports}\label{group__touchDetector_outputports_sec}
+
+\begin{DoxyItemize}
+\item /gui\+Updater/gui\+:o \mbox{[}yarp\+::os\+::\+Port\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: To be connected to /i\+Cub\+Gui/objects
+\item /gui\+Updater/gui\+Base\+:o \mbox{[}yarp\+::os\+::\+Port\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: To be connected to /i\+Cub\+Gui/base\+:i
+\end{DoxyItemize}\hypertarget{group__touchDetector_services_sec}{}\subsection{Services}\label{group__touchDetector_services_sec}
+
+
+\subsection{Class Documentation}
+\index{Gui\+Updater@{Gui\+Updater}}\label{classGuiUpdater}
+\Hypertarget{group__guiUpdater_classGuiUpdater}
+\subsubsection{class Gui\+Updater}
+
+
+Definition at line 34 of file gui\+Updater.\+h.
+
+
+
+Inheritance diagram for Gui\+Updater\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=152pt]{classGuiUpdater__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__guiUpdater_a485439498bb6de83e9d222659e019e4c}{configure} (yarp\+::os\+::\+Resource\+Finder \&rf)
+\item 
+bool \hyperlink{group__guiUpdater_af6803c377f58e93185c0994af795cd32}{interrupt\+Module} ()
+\item 
+bool \hyperlink{group__guiUpdater_a337583d3d57d7b3e6aa14e3ef3f21e75}{close} ()
+\item 
+bool \hyperlink{group__guiUpdater_a65c3df8e11e7439a0c8d01fec93b10c1}{respond} (const yarp\+::os\+::\+Bottle \&command, yarp\+::os\+::\+Bottle \&reply)
+\item 
+double \hyperlink{group__guiUpdater_a4d8e42af983197a7b97c80ca6e52fc49}{get\+Period} ()
+\item 
+bool \hyperlink{group__guiUpdater_a344c4d08c3da25c91699b1b41575b5f9}{update\+Module} ()
+\item 
+void \hyperlink{group__guiUpdater_aae5c54332b87a2981d6e5a1f704b9459}{reset\+G\+UI} ()
+\begin{DoxyCompactList}\small\item\em Send a request to the i\+Cub\+G\+UI to remove all items. \end{DoxyCompactList}\item 
+void \hyperlink{group__guiUpdater_ac7d1b20d82741e487af43594dd20d498}{delete\+Object} (const string \&opc\+Tag, \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object} $\ast$o=nullptr)
+\begin{DoxyCompactList}\small\item\em Deletes an object with name {\ttfamily opc\+Tag} from the O\+PC. \end{DoxyCompactList}\item 
+void \hyperlink{group__guiUpdater_afa069ae03069ad5862a3beba9ef8c2fc}{add\+Object} (\hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object} $\ast$o)
+\begin{DoxyCompactList}\small\item\em Adds an object to the i\+Cub\+G\+UI. \end{DoxyCompactList}\item 
+void \hyperlink{group__guiUpdater_a1f2afbe4efaec509ee1687f35e7c0eef}{add\+Agent} (\hyperlink{group__icubclient__representations_classicubclient_1_1Agent}{Agent} $\ast$a)
+\begin{DoxyCompactList}\small\item\em Adds an agent to the i\+Cub\+G\+UI. \end{DoxyCompactList}\item 
+void \hyperlink{group__guiUpdater_ad83935ac90d7f0a3faf59baa3dd7658d}{addi\+Cub} (\hyperlink{group__icubclient__representations_classicubclient_1_1Agent}{Agent} $\ast$a)
+\begin{DoxyCompactList}\small\item\em Adds the i\+Cub the the i\+Cub\+G\+UI. \end{DoxyCompactList}\item 
+bool \hyperlink{group__guiUpdater_abc5325875147de98ff7af75d0f3b8dd8}{is\+Displayable} (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$entity)
+\begin{DoxyCompactList}\small\item\em Checks whether an Entity can be displayed in the G\+UI. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client} $\ast$ \hyperlink{group__guiUpdater_a9e03b8ddad16217a222dd71e4aba7966}{opc}
+\item 
+\hyperlink{group__icubclient__representations_classicubclient_1_1Agent}{Agent} $\ast$ \hyperlink{group__guiUpdater_aa941eaa4ca5e07d0ea0fccc00a5f230a}{i\+Cub}
+\item 
+Rpc\+Server \hyperlink{group__guiUpdater_adb0e6936ecb65372a44aef8efe9cb2ad}{handler\+Port}
+\item 
+Rpc\+Client \hyperlink{group__guiUpdater_ac2c199bbf945af098d5bd2ddd909415e}{to\+Gui}
+\item 
+Rpc\+Client \hyperlink{group__guiUpdater_a78035e8447f5c04203916e9e727b2805}{to\+Gui\+Base}
+\item 
+list$<$ shared\+\_\+ptr$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $>$ $>$ \hyperlink{group__guiUpdater_a44a33363b01d8799a3d48c9c0b14b200}{old\+Entities}
+\item 
+bool \hyperlink{group__guiUpdater_a4abe8ed2ee23b60de94d4055e90ef0aa}{display\+Skeleton}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__guiUpdater_a1f2afbe4efaec509ee1687f35e7c0eef}\label{group__guiUpdater_a1f2afbe4efaec509ee1687f35e7c0eef}} 
+\index{Gui\+Updater@{Gui\+Updater}!add\+Agent@{add\+Agent}}
+\index{add\+Agent@{add\+Agent}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{add\+Agent()}{addAgent()}}
+{\footnotesize\ttfamily void Gui\+Updater\+::add\+Agent (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Agent}{Agent} $\ast$}]{a }\end{DoxyParamCaption})}
+
+
+
+Adds an agent to the i\+Cub\+G\+UI. 
+
+Takes care of adding the body parts if {\ttfamily display\+Skeleton} is true 
+\begin{DoxyParams}{Parameters}
+{\em a} & -\/ the agent to be added \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 226 of file gui\+Updater.\+cpp.
+
+\mbox{\Hypertarget{group__guiUpdater_ad83935ac90d7f0a3faf59baa3dd7658d}\label{group__guiUpdater_ad83935ac90d7f0a3faf59baa3dd7658d}} 
+\index{Gui\+Updater@{Gui\+Updater}!addi\+Cub@{addi\+Cub}}
+\index{addi\+Cub@{addi\+Cub}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{addi\+Cub()}{addiCub()}}
+{\footnotesize\ttfamily void Gui\+Updater\+::addi\+Cub (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Agent}{Agent} $\ast$}]{a }\end{DoxyParamCaption})}
+
+
+
+Adds the i\+Cub the the i\+Cub\+G\+UI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & -\/ reference to the i\+Cub agent \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 315 of file gui\+Updater.\+cpp.
+
+\mbox{\Hypertarget{group__guiUpdater_afa069ae03069ad5862a3beba9ef8c2fc}\label{group__guiUpdater_afa069ae03069ad5862a3beba9ef8c2fc}} 
+\index{Gui\+Updater@{Gui\+Updater}!add\+Object@{add\+Object}}
+\index{add\+Object@{add\+Object}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{add\+Object()}{addObject()}}
+{\footnotesize\ttfamily void Gui\+Updater\+::add\+Object (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object} $\ast$}]{o }\end{DoxyParamCaption})}
+
+
+
+Adds an object to the i\+Cub\+G\+UI. 
+
+Takes care of reading the position, dimensions, color etc. 
+\begin{DoxyParams}{Parameters}
+{\em o} & -\/ the object to be added \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 287 of file gui\+Updater.\+cpp.
+
+\mbox{\Hypertarget{group__guiUpdater_a337583d3d57d7b3e6aa14e3ef3f21e75}\label{group__guiUpdater_a337583d3d57d7b3e6aa14e3ef3f21e75}} 
+\index{Gui\+Updater@{Gui\+Updater}!close@{close}}
+\index{close@{close}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool Gui\+Updater\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 81 of file gui\+Updater.\+cpp.
+
+\mbox{\Hypertarget{group__guiUpdater_a485439498bb6de83e9d222659e019e4c}\label{group__guiUpdater_a485439498bb6de83e9d222659e019e4c}} 
+\index{Gui\+Updater@{Gui\+Updater}!configure@{configure}}
+\index{configure@{configure}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool Gui\+Updater\+::configure (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf }\end{DoxyParamCaption})}
+
+
+
+Definition at line 35 of file gui\+Updater.\+cpp.
+
+\mbox{\Hypertarget{group__guiUpdater_ac7d1b20d82741e487af43594dd20d498}\label{group__guiUpdater_ac7d1b20d82741e487af43594dd20d498}} 
+\index{Gui\+Updater@{Gui\+Updater}!delete\+Object@{delete\+Object}}
+\index{delete\+Object@{delete\+Object}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{delete\+Object()}{deleteObject()}}
+{\footnotesize\ttfamily void Gui\+Updater\+::delete\+Object (\begin{DoxyParamCaption}\item[{const string \&}]{opc\+Tag,  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object} $\ast$}]{o = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Deletes an object with name {\ttfamily opc\+Tag} from the O\+PC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em opc\+Tag} & -\/ name of the object to be deleted \\
+\hline
+{\em o} & -\/ if this is an {\ttfamily Agent} instance, take care of removing all associated body parts \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 197 of file gui\+Updater.\+cpp.
+
+\mbox{\Hypertarget{group__guiUpdater_a4d8e42af983197a7b97c80ca6e52fc49}\label{group__guiUpdater_a4d8e42af983197a7b97c80ca6e52fc49}} 
+\index{Gui\+Updater@{Gui\+Updater}!get\+Period@{get\+Period}}
+\index{get\+Period@{get\+Period}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{get\+Period()}{getPeriod()}}
+{\footnotesize\ttfamily double Gui\+Updater\+::get\+Period (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 129 of file gui\+Updater.\+cpp.
+
+\mbox{\Hypertarget{group__guiUpdater_af6803c377f58e93185c0994af795cd32}\label{group__guiUpdater_af6803c377f58e93185c0994af795cd32}} 
+\index{Gui\+Updater@{Gui\+Updater}!interrupt\+Module@{interrupt\+Module}}
+\index{interrupt\+Module@{interrupt\+Module}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{interrupt\+Module()}{interruptModule()}}
+{\footnotesize\ttfamily bool Gui\+Updater\+::interrupt\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 72 of file gui\+Updater.\+cpp.
+
+\mbox{\Hypertarget{group__guiUpdater_abc5325875147de98ff7af75d0f3b8dd8}\label{group__guiUpdater_abc5325875147de98ff7af75d0f3b8dd8}} 
+\index{Gui\+Updater@{Gui\+Updater}!is\+Displayable@{is\+Displayable}}
+\index{is\+Displayable@{is\+Displayable}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{is\+Displayable()}{isDisplayable()}}
+{\footnotesize\ttfamily bool Gui\+Updater\+::is\+Displayable (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{entity }\end{DoxyParamCaption})}
+
+
+
+Checks whether an Entity can be displayed in the G\+UI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entity} & -\/ Entity to be checked \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if it is an {\ttfamily Object} or a subtype of {\ttfamily Object}, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 192 of file gui\+Updater.\+cpp.
+
+\mbox{\Hypertarget{group__guiUpdater_aae5c54332b87a2981d6e5a1f704b9459}\label{group__guiUpdater_aae5c54332b87a2981d6e5a1f704b9459}} 
+\index{Gui\+Updater@{Gui\+Updater}!reset\+G\+UI@{reset\+G\+UI}}
+\index{reset\+G\+UI@{reset\+G\+UI}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{reset\+G\+U\+I()}{resetGUI()}}
+{\footnotesize\ttfamily void Gui\+Updater\+::reset\+G\+UI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Send a request to the i\+Cub\+G\+UI to remove all items. 
+
+
+
+Definition at line 327 of file gui\+Updater.\+cpp.
+
+\mbox{\Hypertarget{group__guiUpdater_a65c3df8e11e7439a0c8d01fec93b10c1}\label{group__guiUpdater_a65c3df8e11e7439a0c8d01fec93b10c1}} 
+\index{Gui\+Updater@{Gui\+Updater}!respond@{respond}}
+\index{respond@{respond}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{respond()}{respond()}}
+{\footnotesize\ttfamily bool Gui\+Updater\+::respond (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{command,  }\item[{yarp\+::os\+::\+Bottle \&}]{reply }\end{DoxyParamCaption})}
+
+
+
+Definition at line 102 of file gui\+Updater.\+cpp.
+
+\mbox{\Hypertarget{group__guiUpdater_a344c4d08c3da25c91699b1b41575b5f9}\label{group__guiUpdater_a344c4d08c3da25c91699b1b41575b5f9}} 
+\index{Gui\+Updater@{Gui\+Updater}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool Gui\+Updater\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 134 of file gui\+Updater.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__guiUpdater_a4abe8ed2ee23b60de94d4055e90ef0aa}\label{group__guiUpdater_a4abe8ed2ee23b60de94d4055e90ef0aa}} 
+\index{Gui\+Updater@{Gui\+Updater}!display\+Skeleton@{display\+Skeleton}}
+\index{display\+Skeleton@{display\+Skeleton}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{display\+Skeleton}{displaySkeleton}}
+{\footnotesize\ttfamily bool Gui\+Updater\+::display\+Skeleton\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 43 of file gui\+Updater.\+h.
+
+\mbox{\Hypertarget{group__guiUpdater_adb0e6936ecb65372a44aef8efe9cb2ad}\label{group__guiUpdater_adb0e6936ecb65372a44aef8efe9cb2ad}} 
+\index{Gui\+Updater@{Gui\+Updater}!handler\+Port@{handler\+Port}}
+\index{handler\+Port@{handler\+Port}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{handler\+Port}{handlerPort}}
+{\footnotesize\ttfamily Rpc\+Server Gui\+Updater\+::handler\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 39 of file gui\+Updater.\+h.
+
+\mbox{\Hypertarget{group__guiUpdater_aa941eaa4ca5e07d0ea0fccc00a5f230a}\label{group__guiUpdater_aa941eaa4ca5e07d0ea0fccc00a5f230a}} 
+\index{Gui\+Updater@{Gui\+Updater}!i\+Cub@{i\+Cub}}
+\index{i\+Cub@{i\+Cub}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{i\+Cub}{iCub}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__representations_classicubclient_1_1Agent}{Agent}$\ast$ Gui\+Updater\+::i\+Cub\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 38 of file gui\+Updater.\+h.
+
+\mbox{\Hypertarget{group__guiUpdater_a44a33363b01d8799a3d48c9c0b14b200}\label{group__guiUpdater_a44a33363b01d8799a3d48c9c0b14b200}} 
+\index{Gui\+Updater@{Gui\+Updater}!old\+Entities@{old\+Entities}}
+\index{old\+Entities@{old\+Entities}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{old\+Entities}{oldEntities}}
+{\footnotesize\ttfamily list$<$shared\+\_\+ptr$<$\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity}$>$ $>$ Gui\+Updater\+::old\+Entities\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 42 of file gui\+Updater.\+h.
+
+\mbox{\Hypertarget{group__guiUpdater_a9e03b8ddad16217a222dd71e4aba7966}\label{group__guiUpdater_a9e03b8ddad16217a222dd71e4aba7966}} 
+\index{Gui\+Updater@{Gui\+Updater}!opc@{opc}}
+\index{opc@{opc}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{opc}{opc}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client}$\ast$ Gui\+Updater\+::opc\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 37 of file gui\+Updater.\+h.
+
+\mbox{\Hypertarget{group__guiUpdater_ac2c199bbf945af098d5bd2ddd909415e}\label{group__guiUpdater_ac2c199bbf945af098d5bd2ddd909415e}} 
+\index{Gui\+Updater@{Gui\+Updater}!to\+Gui@{to\+Gui}}
+\index{to\+Gui@{to\+Gui}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{to\+Gui}{toGui}}
+{\footnotesize\ttfamily Rpc\+Client Gui\+Updater\+::to\+Gui\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 40 of file gui\+Updater.\+h.
+
+\mbox{\Hypertarget{group__guiUpdater_a78035e8447f5c04203916e9e727b2805}\label{group__guiUpdater_a78035e8447f5c04203916e9e727b2805}} 
+\index{Gui\+Updater@{Gui\+Updater}!to\+Gui\+Base@{to\+Gui\+Base}}
+\index{to\+Gui\+Base@{to\+Gui\+Base}!Gui\+Updater@{Gui\+Updater}}
+\subparagraph{\texorpdfstring{to\+Gui\+Base}{toGuiBase}}
+{\footnotesize\ttfamily Rpc\+Client Gui\+Updater\+::to\+Gui\+Base\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 41 of file gui\+Updater.\+h.
+

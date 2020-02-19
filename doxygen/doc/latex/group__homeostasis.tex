@@ -1,0 +1,818 @@
+\hypertarget{group__homeostasis}{}\section{homeostasis}
+\label{group__homeostasis}\index{homeostasis@{homeostasis}}
+
+
+Module integrating an interface for dealing with homeostatic needs Version\+:1.\+0.  
+
+
+Collaboration diagram for homeostasis\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=311pt]{group__homeostasis}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__homeostasis_classDrive}{Drive}
+\item 
+class \hyperlink{group__homeostasis_classHomeostasisManager}{Homeostasis\+Manager}
+\item 
+class \hyperlink{group__homeostasis_classHomeostaticModule}{Homeostatic\+Module}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module integrating an interface for dealing with homeostatic needs Version\+:1.\+0. 
+
+\begin{DoxyAuthor}{Author}
+Jordi-\/\+Ysard Puigbò \href{mailto:jordiysard.puigbo@upf.edu}{\tt jordiysard.\+puigbo@upf.\+edu}, Clément Moulin-\/\+Frier \href{mailto:clement.moulin-frier@upf.edu}{\tt clement.\+moulin-\/frier@upf.\+edu} ~\newline
+ 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Released under the terms of the G\+NU G\+PL v2.\+0 
+\end{DoxyCopyright}
+\hypertarget{group__touchDetector_intro_sec}{}\subsection{Description}\label{group__touchDetector_intro_sec}
+Module that internally handles the dynamics of the defined needs. Needs are internal variables linked to external measurements (or sensations) and associated drives (e.\+g. the drive to ask satisfies the need of acquiring new knowledge). Needs are tipically defined by some dynamics (i.\+e. a decay or a direct dependence to a variable), their internal value (i.\+e. current state of the need) and an upper and lower boundaries, limiting a zone of confort where an action is not required. This module is strongly dependent on the allostatic\+Controller and sensations\+Manager. An example of how to create a drive can be found in app/reactive\+Layer/homeostasis/conf/example.\+ini\hypertarget{group__touchDetector_parameters_sec}{}\subsection{Parameters}\label{group__touchDetector_parameters_sec}
+
+\begin{DoxyItemize}
+\item -- name \+: name of the module
+\item -- verbose \+: change degree of verbosity of the module
+\item -- period \+: change the update rate of this module 
+\end{DoxyItemize}\hypertarget{group__touchDetector_inputports_sec}{}\subsection{Input Ports}\label{group__touchDetector_inputports_sec}
+
+\begin{DoxyItemize}
+\item /homeostasis/rpc \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Response port. Supported commands\+:
+\begin{DoxyItemize}
+\item help
+\item \mbox{[}\textquotesingle{}par\textquotesingle{}\mbox{]} \mbox{[}\textquotesingle{}drive\textquotesingle{}\mbox{]} \mbox{[}\textquotesingle{}val\textquotesingle{}/\textquotesingle{}min\textquotesingle{}/\textquotesingle{}max\textquotesingle{}/\textquotesingle{}dec\textquotesingle{}\mbox{]} \mbox{[}value\mbox{]} \+: Assigns a value to a specific parameter
+\item \mbox{[}\textquotesingle{}delta\textquotesingle{}\mbox{]} \mbox{[}\textquotesingle{}drive\textquotesingle{}\mbox{]} \mbox{[}\textquotesingle{}val\textquotesingle{}/\textquotesingle{}min\textquotesingle{}/\textquotesingle{}max\textquotesingle{}/\textquotesingle{}dec\textquotesingle{}\mbox{]} \mbox{[}value\mbox{]} \+: Adds a value to a specific parameter
+\item \mbox{[}\textquotesingle{}ask\textquotesingle{}\mbox{]} \mbox{[}\textquotesingle{}drive\textquotesingle{}\mbox{]} \mbox{[}\textquotesingle{}val\textquotesingle{}/\textquotesingle{}min\textquotesingle{}/\textquotesingle{}max\textquotesingle{}/\textquotesingle{}dec\textquotesingle{}\mbox{]} \mbox{[}value\mbox{]} \+: Returns a value to a specific parameter
+\item \mbox{[}\textquotesingle{}add\textquotesingle{}\mbox{]} \mbox{[}\textquotesingle{}conf\textquotesingle{}\mbox{]} \mbox{[}drive Bottle\mbox{]} \+: Adds a drive to the manager as a drive directly read from conf-\/file
+\item \mbox{[}\textquotesingle{}add\textquotesingle{}\mbox{]} \mbox{[}\textquotesingle{}botl\textquotesingle{}\mbox{]} \mbox{[}drive Bottle\mbox{]} \+: Adds a drive to the manager as a Bottle of values of shape
+\item \mbox{[}\textquotesingle{}add\textquotesingle{}\mbox{]} \mbox{[}\textquotesingle{}new\textquotesingle{}\mbox{]} \mbox{[}drive name\mbox{]} \+: Adds a default drive to the manager
+\item \mbox{[}\textquotesingle{}rm\textquotesingle{}\mbox{]} \mbox{[}drive name\mbox{]} \+: removes a drive from the manager
+\item \mbox{[}\textquotesingle{}sleep\textquotesingle{}\mbox{]} \mbox{[}drive name\mbox{]} \mbox{[}time\mbox{]} \+: prevent drive update for a certain time (in seconds)
+\item \mbox{[}freeze\textquotesingle{}/\textquotesingle{}unfreeze\textquotesingle{}\mbox{]} \mbox{[}drive name\mbox{]} \+: prevent / allow drive to update
+\item \mbox{[}\textquotesingle{}sleep\textquotesingle{}\mbox{]} \mbox{[}\textquotesingle{}all\textquotesingle{}\mbox{]} \mbox{[}time\mbox{]} \+: prevent all drive updates for a certain time (in seconds)
+\item \mbox{[}freeze\textquotesingle{}/\textquotesingle{}unfreeze\textquotesingle{}\mbox{]} \mbox{[}\textquotesingle{}all\textquotesingle{}\mbox{]} \mbox{[}time\mbox{]} \+: prevent / allow all drive updates
+\item \mbox{[}\textquotesingle{}names\textquotesingle{}\mbox{]} \+: returns an ordered list of the drives in the manager
+\item \mbox{[}\textquotesingle{}verbose\textquotesingle{}\mbox{]} \mbox{[}true/false\mbox{]} \+: change verbosity
+\end{DoxyItemize}
+\item /homeostasis/from\+Sensations\+:i \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Communication port to sensations to adapt needs accordingly.
+\end{DoxyItemize}\hypertarget{group__touchDetector_outputports_sec}{}\subsection{Output Ports}\label{group__touchDetector_outputports_sec}
+
+\begin{DoxyItemize}
+\item /homeostasis/drive\+\_\+name/min\+:o \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Communication port to allostatic\+Controller.
+\item /homeostasis/drive\+\_\+name/max\+:o \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Communication port to allostatic\+Controller.
+\end{DoxyItemize}\hypertarget{group__touchDetector_services_sec}{}\subsection{Services}\label{group__touchDetector_services_sec}
+
+
+\subsection{Class Documentation}
+\index{Drive@{Drive}}\label{classDrive}
+\Hypertarget{group__homeostasis_classDrive}
+\subsubsection{class Drive}
+
+
+Definition at line 14 of file homeostasis.\+h.
+
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__homeostasis_ab98d3c78f3e55b972f730e42dd46de31}{Drive} (std\+::string d\+\_\+name, double d\+\_\+period, std\+::string d\+\_\+key=\char`\"{}default\char`\"{}, double d\+\_\+value=0.\+5, double d\+\_\+homeo\+\_\+min=0.\+25, double d\+\_\+homeo\+\_\+max=0.\+75, double d\+\_\+decay=0.\+05, double d\+\_\+value\+\_\+min=std\+::numeric\+\_\+limits$<$ double $>$\+::min(), double d\+\_\+value\+\_\+max=std\+::numeric\+\_\+limits$<$ double $>$\+::max(), bool d\+\_\+gradient=false)
+\item 
+\hyperlink{group__homeostasis_a289d5dd9c0008856918199c15c520b55}{Drive} ()=delete
+\begin{DoxyCompactList}\small\item\em No default constructor! \end{DoxyCompactList}\item 
+void \hyperlink{group__homeostasis_aa66a1525b86bf51c0d8d30172766a98b}{set\+Key} (std\+::string d\+\_\+key)
+\item 
+void \hyperlink{group__homeostasis_a6c5b108ec53e5378f61a0af7ae207dfc}{set\+Value} (double d\+\_\+value)
+\item 
+void \hyperlink{group__homeostasis_a2f4190860384dcba745f87af3951dd60}{delta\+Value} (double d\+\_\+value)
+\item 
+void \hyperlink{group__homeostasis_acc9e502d6f8b11e9d66355fb16effdbd}{set\+Homeostasis\+Min} (double d\+\_\+homeo\+\_\+min)
+\item 
+void \hyperlink{group__homeostasis_a8e2c37a5788ce4ad36c7158dc4a38d12}{delta\+Homeostasis\+Min} (double d\+\_\+homeo\+\_\+min)
+\item 
+void \hyperlink{group__homeostasis_a54a7b939ea363a8c1bd4433929921f28}{set\+Homeostasis\+Max} (double d\+\_\+homeo\+\_\+max)
+\item 
+void \hyperlink{group__homeostasis_a56fcf4300b64315033b5b2224235d3e3}{delta\+Homeostasis\+Max} (double d\+\_\+homeo\+\_\+max)
+\item 
+void \hyperlink{group__homeostasis_a1de29c1d81c42d9c5b9a982524df6f6a}{set\+Decay} (double d\+\_\+decay)
+\item 
+void \hyperlink{group__homeostasis_aca3acaf534b711dbfa953503b2880b5d}{delta\+Decay} (double d\+\_\+decay)
+\item 
+void \hyperlink{group__homeostasis_a7ae347b4d2b03d714fbfdbcc99a84b66}{set\+Decay\+Multiplier} (double mult)
+\item 
+void \hyperlink{group__homeostasis_a029792cdd31295e7b945ca4c0b2c5a73}{sleep} (double t)
+\begin{DoxyCompactList}\small\item\em sleep Sleep drive for t seconds, i.\+e. \end{DoxyCompactList}\item 
+void \hyperlink{group__homeostasis_a0e72e89b7ba3550d055eabf2106cb051}{freeze} ()
+\begin{DoxyCompactList}\small\item\em freeze Freeze (sleep) drive indefinitely \end{DoxyCompactList}\item 
+void \hyperlink{group__homeostasis_ad8a2a663703ad5eb93716b6917e2d68d}{reset} ()
+\begin{DoxyCompactList}\small\item\em reset Set value back to default\+\_\+value \end{DoxyCompactList}\item 
+void \hyperlink{group__homeostasis_a9ca7343cc59e73fc12daf01a95331794}{unfreeze} ()
+\begin{DoxyCompactList}\small\item\em unfreeze Unfreeze drive \end{DoxyCompactList}\item 
+void \hyperlink{group__homeostasis_af22888e6ca70ca223fe71abebd84d90b}{update} ()
+\begin{DoxyCompactList}\small\item\em update Let drive decay \end{DoxyCompactList}\item 
+double \hyperlink{group__homeostasis_a887538b6478fc6cc8d2e02856264e79f}{get\+Value} ()
+\item 
+void \hyperlink{group__homeostasis_a931a1c03efb3c846d317160739f34f7a}{set\+Name} (std\+::string n)
+\item 
+void \hyperlink{group__homeostasis_a63aa9044b470ef1d942edeab621b9019}{set\+Gradient} (bool b)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{group__homeostasis_aacb834e6317eab8a360eeaa10286431d}{name}
+\begin{DoxyCompactList}\small\item\em Name of the drive. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__homeostasis_a4db43d91ee5e904568449ca7ae5eb032}{key}
+\begin{DoxyCompactList}\small\item\em Deprecated, not used anymore. \end{DoxyCompactList}\item 
+double \hyperlink{group__homeostasis_a371c5d5dac25ea418cb1031b9f4551f3}{period}
+\item 
+double \hyperlink{group__homeostasis_a5417db9e7769d888db2bb0c293e78323}{value}
+\item 
+double \hyperlink{group__homeostasis_a631e678038c0758143956be67f13e869}{homeostasis\+Min}
+\item 
+double \hyperlink{group__homeostasis_aeb14a32eaee7ef9db95132656378c4c9}{homeostasis\+Max}
+\item 
+double \hyperlink{group__homeostasis_abaa8695fc4e715e87a74de50235483d8}{decay}
+\item 
+double \hyperlink{group__homeostasis_ac15651cc5321e8b6a4458daeffb5d305}{value\+Min}
+\item 
+double \hyperlink{group__homeostasis_abe87b7fff815dd30f0deda945d851d4d}{value\+Max}
+\item 
+double \hyperlink{group__homeostasis_ad6ddf46ef65af0862fc35509fcde039e}{default\+\_\+value}
+\item 
+double \hyperlink{group__homeostasis_a04fc66af39d34d19820117c43b242d84}{decay\+\_\+multiplier}
+\item 
+bool \hyperlink{group__homeostasis_a634b05e0fce5a0860365521cd4a6d1ac}{gradient}
+\item 
+time\+\_\+t \hyperlink{group__homeostasis_adec23d880897e719e701d6f8a554a88b}{start\+\_\+sleep}
+\begin{DoxyCompactList}\small\item\em Time when the drive started to be sleeping. \end{DoxyCompactList}\item 
+bool \hyperlink{group__homeostasis_ab0c97482a89f335c3ed23f3b7ea97551}{is\+\_\+sleeping}
+\begin{DoxyCompactList}\small\item\em Whether drive is sleeping. \end{DoxyCompactList}\item 
+double \hyperlink{group__homeostasis_a755c6f79b4b5fc2a8be435e03fd76ba4}{time\+\_\+to\+\_\+sleep}
+\begin{DoxyCompactList}\small\item\em Timespan to be sleeping. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__homeostasis_ab98d3c78f3e55b972f730e42dd46de31}\label{group__homeostasis_ab98d3c78f3e55b972f730e42dd46de31}} 
+\index{Drive@{Drive}!Drive@{Drive}}
+\index{Drive@{Drive}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{Drive()}{Drive()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Drive\+::\+Drive (\begin{DoxyParamCaption}\item[{std\+::string}]{d\+\_\+name,  }\item[{double}]{d\+\_\+period,  }\item[{std\+::string}]{d\+\_\+key = {\ttfamily \char`\"{}default\char`\"{}},  }\item[{double}]{d\+\_\+value = {\ttfamily 0.5},  }\item[{double}]{d\+\_\+homeo\+\_\+min = {\ttfamily 0.25},  }\item[{double}]{d\+\_\+homeo\+\_\+max = {\ttfamily 0.75},  }\item[{double}]{d\+\_\+decay = {\ttfamily 0.05},  }\item[{double}]{d\+\_\+value\+\_\+min = {\ttfamily std\+:\+:numeric\+\_\+limits$<$double$>$\+:\+:min()},  }\item[{double}]{d\+\_\+value\+\_\+max = {\ttfamily std\+:\+:numeric\+\_\+limits$<$double$>$\+:\+:max()},  }\item[{bool}]{d\+\_\+gradient = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 26 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a289d5dd9c0008856918199c15c520b55}\label{group__homeostasis_a289d5dd9c0008856918199c15c520b55}} 
+\index{Drive@{Drive}!Drive@{Drive}}
+\index{Drive@{Drive}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{Drive()}{Drive()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Drive\+::\+Drive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+No default constructor! 
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__homeostasis_aca3acaf534b711dbfa953503b2880b5d}\label{group__homeostasis_aca3acaf534b711dbfa953503b2880b5d}} 
+\index{Drive@{Drive}!delta\+Decay@{delta\+Decay}}
+\index{delta\+Decay@{delta\+Decay}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{delta\+Decay()}{deltaDecay()}}
+{\footnotesize\ttfamily void Drive\+::delta\+Decay (\begin{DoxyParamCaption}\item[{double}]{d\+\_\+decay }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 88 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a56fcf4300b64315033b5b2224235d3e3}\label{group__homeostasis_a56fcf4300b64315033b5b2224235d3e3}} 
+\index{Drive@{Drive}!delta\+Homeostasis\+Max@{delta\+Homeostasis\+Max}}
+\index{delta\+Homeostasis\+Max@{delta\+Homeostasis\+Max}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{delta\+Homeostasis\+Max()}{deltaHomeostasisMax()}}
+{\footnotesize\ttfamily void Drive\+::delta\+Homeostasis\+Max (\begin{DoxyParamCaption}\item[{double}]{d\+\_\+homeo\+\_\+max }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 79 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a8e2c37a5788ce4ad36c7158dc4a38d12}\label{group__homeostasis_a8e2c37a5788ce4ad36c7158dc4a38d12}} 
+\index{Drive@{Drive}!delta\+Homeostasis\+Min@{delta\+Homeostasis\+Min}}
+\index{delta\+Homeostasis\+Min@{delta\+Homeostasis\+Min}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{delta\+Homeostasis\+Min()}{deltaHomeostasisMin()}}
+{\footnotesize\ttfamily void Drive\+::delta\+Homeostasis\+Min (\begin{DoxyParamCaption}\item[{double}]{d\+\_\+homeo\+\_\+min }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 70 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a2f4190860384dcba745f87af3951dd60}\label{group__homeostasis_a2f4190860384dcba745f87af3951dd60}} 
+\index{Drive@{Drive}!delta\+Value@{delta\+Value}}
+\index{delta\+Value@{delta\+Value}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{delta\+Value()}{deltaValue()}}
+{\footnotesize\ttfamily void Drive\+::delta\+Value (\begin{DoxyParamCaption}\item[{double}]{d\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 61 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a0e72e89b7ba3550d055eabf2106cb051}\label{group__homeostasis_a0e72e89b7ba3550d055eabf2106cb051}} 
+\index{Drive@{Drive}!freeze@{freeze}}
+\index{freeze@{freeze}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void Drive\+::freeze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+freeze Freeze (sleep) drive indefinitely 
+
+
+
+Definition at line 111 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a887538b6478fc6cc8d2e02856264e79f}\label{group__homeostasis_a887538b6478fc6cc8d2e02856264e79f}} 
+\index{Drive@{Drive}!get\+Value@{get\+Value}}
+\index{get\+Value@{get\+Value}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{get\+Value()}{getValue()}}
+{\footnotesize\ttfamily double Drive\+::get\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 146 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_ad8a2a663703ad5eb93716b6917e2d68d}\label{group__homeostasis_ad8a2a663703ad5eb93716b6917e2d68d}} 
+\index{Drive@{Drive}!reset@{reset}}
+\index{reset@{reset}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void Drive\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+reset Set value back to default\+\_\+value 
+
+
+
+Definition at line 120 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a1de29c1d81c42d9c5b9a982524df6f6a}\label{group__homeostasis_a1de29c1d81c42d9c5b9a982524df6f6a}} 
+\index{Drive@{Drive}!set\+Decay@{set\+Decay}}
+\index{set\+Decay@{set\+Decay}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{set\+Decay()}{setDecay()}}
+{\footnotesize\ttfamily void Drive\+::set\+Decay (\begin{DoxyParamCaption}\item[{double}]{d\+\_\+decay }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 84 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a7ae347b4d2b03d714fbfdbcc99a84b66}\label{group__homeostasis_a7ae347b4d2b03d714fbfdbcc99a84b66}} 
+\index{Drive@{Drive}!set\+Decay\+Multiplier@{set\+Decay\+Multiplier}}
+\index{set\+Decay\+Multiplier@{set\+Decay\+Multiplier}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{set\+Decay\+Multiplier()}{setDecayMultiplier()}}
+{\footnotesize\ttfamily void Drive\+::set\+Decay\+Multiplier (\begin{DoxyParamCaption}\item[{double}]{mult }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 93 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a63aa9044b470ef1d942edeab621b9019}\label{group__homeostasis_a63aa9044b470ef1d942edeab621b9019}} 
+\index{Drive@{Drive}!set\+Gradient@{set\+Gradient}}
+\index{set\+Gradient@{set\+Gradient}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{set\+Gradient()}{setGradient()}}
+{\footnotesize\ttfamily void Drive\+::set\+Gradient (\begin{DoxyParamCaption}\item[{bool}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 156 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a54a7b939ea363a8c1bd4433929921f28}\label{group__homeostasis_a54a7b939ea363a8c1bd4433929921f28}} 
+\index{Drive@{Drive}!set\+Homeostasis\+Max@{set\+Homeostasis\+Max}}
+\index{set\+Homeostasis\+Max@{set\+Homeostasis\+Max}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{set\+Homeostasis\+Max()}{setHomeostasisMax()}}
+{\footnotesize\ttfamily void Drive\+::set\+Homeostasis\+Max (\begin{DoxyParamCaption}\item[{double}]{d\+\_\+homeo\+\_\+max }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 75 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_acc9e502d6f8b11e9d66355fb16effdbd}\label{group__homeostasis_acc9e502d6f8b11e9d66355fb16effdbd}} 
+\index{Drive@{Drive}!set\+Homeostasis\+Min@{set\+Homeostasis\+Min}}
+\index{set\+Homeostasis\+Min@{set\+Homeostasis\+Min}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{set\+Homeostasis\+Min()}{setHomeostasisMin()}}
+{\footnotesize\ttfamily void Drive\+::set\+Homeostasis\+Min (\begin{DoxyParamCaption}\item[{double}]{d\+\_\+homeo\+\_\+min }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 66 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_aa66a1525b86bf51c0d8d30172766a98b}\label{group__homeostasis_aa66a1525b86bf51c0d8d30172766a98b}} 
+\index{Drive@{Drive}!set\+Key@{set\+Key}}
+\index{set\+Key@{set\+Key}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{set\+Key()}{setKey()}}
+{\footnotesize\ttfamily void Drive\+::set\+Key (\begin{DoxyParamCaption}\item[{std\+::string}]{d\+\_\+key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 53 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a931a1c03efb3c846d317160739f34f7a}\label{group__homeostasis_a931a1c03efb3c846d317160739f34f7a}} 
+\index{Drive@{Drive}!set\+Name@{set\+Name}}
+\index{set\+Name@{set\+Name}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{set\+Name()}{setName()}}
+{\footnotesize\ttfamily void Drive\+::set\+Name (\begin{DoxyParamCaption}\item[{std\+::string}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 151 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a6c5b108ec53e5378f61a0af7ae207dfc}\label{group__homeostasis_a6c5b108ec53e5378f61a0af7ae207dfc}} 
+\index{Drive@{Drive}!set\+Value@{set\+Value}}
+\index{set\+Value@{set\+Value}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{set\+Value()}{setValue()}}
+{\footnotesize\ttfamily void Drive\+::set\+Value (\begin{DoxyParamCaption}\item[{double}]{d\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 57 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a029792cdd31295e7b945ca4c0b2c5a73}\label{group__homeostasis_a029792cdd31295e7b945ca4c0b2c5a73}} 
+\index{Drive@{Drive}!sleep@{sleep}}
+\index{sleep@{sleep}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{sleep()}{sleep()}}
+{\footnotesize\ttfamily void Drive\+::sleep (\begin{DoxyParamCaption}\item[{double}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+sleep Sleep drive for t seconds, i.\+e. 
+
+drive won\textquotesingle{}t decay 
+\begin{DoxyParams}{Parameters}
+{\em t} & time to sleep \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 102 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a9ca7343cc59e73fc12daf01a95331794}\label{group__homeostasis_a9ca7343cc59e73fc12daf01a95331794}} 
+\index{Drive@{Drive}!unfreeze@{unfreeze}}
+\index{unfreeze@{unfreeze}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{unfreeze()}{unfreeze()}}
+{\footnotesize\ttfamily void Drive\+::unfreeze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+unfreeze Unfreeze drive 
+
+
+
+Definition at line 127 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_af22888e6ca70ca223fe71abebd84d90b}\label{group__homeostasis_af22888e6ca70ca223fe71abebd84d90b}} 
+\index{Drive@{Drive}!update@{update}}
+\index{update@{update}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Drive\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+update Let drive decay 
+
+
+
+Definition at line 134 of file homeostasis.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__homeostasis_abaa8695fc4e715e87a74de50235483d8}\label{group__homeostasis_abaa8695fc4e715e87a74de50235483d8}} 
+\index{Drive@{Drive}!decay@{decay}}
+\index{decay@{decay}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{decay}{decay}}
+{\footnotesize\ttfamily double Drive\+::decay}
+
+
+
+Definition at line 20 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a04fc66af39d34d19820117c43b242d84}\label{group__homeostasis_a04fc66af39d34d19820117c43b242d84}} 
+\index{Drive@{Drive}!decay\+\_\+multiplier@{decay\+\_\+multiplier}}
+\index{decay\+\_\+multiplier@{decay\+\_\+multiplier}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{decay\+\_\+multiplier}{decay\_multiplier}}
+{\footnotesize\ttfamily double Drive\+::decay\+\_\+multiplier}
+
+
+
+Definition at line 20 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_ad6ddf46ef65af0862fc35509fcde039e}\label{group__homeostasis_ad6ddf46ef65af0862fc35509fcde039e}} 
+\index{Drive@{Drive}!default\+\_\+value@{default\+\_\+value}}
+\index{default\+\_\+value@{default\+\_\+value}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{default\+\_\+value}{default\_value}}
+{\footnotesize\ttfamily double Drive\+::default\+\_\+value}
+
+
+
+Definition at line 20 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a634b05e0fce5a0860365521cd4a6d1ac}\label{group__homeostasis_a634b05e0fce5a0860365521cd4a6d1ac}} 
+\index{Drive@{Drive}!gradient@{gradient}}
+\index{gradient@{gradient}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{gradient}{gradient}}
+{\footnotesize\ttfamily bool Drive\+::gradient}
+
+
+
+Definition at line 21 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_aeb14a32eaee7ef9db95132656378c4c9}\label{group__homeostasis_aeb14a32eaee7ef9db95132656378c4c9}} 
+\index{Drive@{Drive}!homeostasis\+Max@{homeostasis\+Max}}
+\index{homeostasis\+Max@{homeostasis\+Max}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{homeostasis\+Max}{homeostasisMax}}
+{\footnotesize\ttfamily double Drive\+::homeostasis\+Max}
+
+
+
+Definition at line 20 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a631e678038c0758143956be67f13e869}\label{group__homeostasis_a631e678038c0758143956be67f13e869}} 
+\index{Drive@{Drive}!homeostasis\+Min@{homeostasis\+Min}}
+\index{homeostasis\+Min@{homeostasis\+Min}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{homeostasis\+Min}{homeostasisMin}}
+{\footnotesize\ttfamily double Drive\+::homeostasis\+Min}
+
+
+
+Definition at line 20 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_ab0c97482a89f335c3ed23f3b7ea97551}\label{group__homeostasis_ab0c97482a89f335c3ed23f3b7ea97551}} 
+\index{Drive@{Drive}!is\+\_\+sleeping@{is\+\_\+sleeping}}
+\index{is\+\_\+sleeping@{is\+\_\+sleeping}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{is\+\_\+sleeping}{is\_sleeping}}
+{\footnotesize\ttfamily bool Drive\+::is\+\_\+sleeping}
+
+
+
+Whether drive is sleeping. 
+
+
+
+Definition at line 23 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a4db43d91ee5e904568449ca7ae5eb032}\label{group__homeostasis_a4db43d91ee5e904568449ca7ae5eb032}} 
+\index{Drive@{Drive}!key@{key}}
+\index{key@{key}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{key}{key}}
+{\footnotesize\ttfamily std\+::string Drive\+::key}
+
+
+
+Deprecated, not used anymore. 
+
+
+
+Definition at line 18 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_aacb834e6317eab8a360eeaa10286431d}\label{group__homeostasis_aacb834e6317eab8a360eeaa10286431d}} 
+\index{Drive@{Drive}!name@{name}}
+\index{name@{name}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily std\+::string Drive\+::name}
+
+
+
+Name of the drive. 
+
+
+
+Definition at line 17 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a371c5d5dac25ea418cb1031b9f4551f3}\label{group__homeostasis_a371c5d5dac25ea418cb1031b9f4551f3}} 
+\index{Drive@{Drive}!period@{period}}
+\index{period@{period}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{period}{period}}
+{\footnotesize\ttfamily double Drive\+::period}
+
+
+
+Definition at line 19 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_adec23d880897e719e701d6f8a554a88b}\label{group__homeostasis_adec23d880897e719e701d6f8a554a88b}} 
+\index{Drive@{Drive}!start\+\_\+sleep@{start\+\_\+sleep}}
+\index{start\+\_\+sleep@{start\+\_\+sleep}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{start\+\_\+sleep}{start\_sleep}}
+{\footnotesize\ttfamily time\+\_\+t Drive\+::start\+\_\+sleep}
+
+
+
+Time when the drive started to be sleeping. 
+
+
+
+Definition at line 22 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a755c6f79b4b5fc2a8be435e03fd76ba4}\label{group__homeostasis_a755c6f79b4b5fc2a8be435e03fd76ba4}} 
+\index{Drive@{Drive}!time\+\_\+to\+\_\+sleep@{time\+\_\+to\+\_\+sleep}}
+\index{time\+\_\+to\+\_\+sleep@{time\+\_\+to\+\_\+sleep}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{time\+\_\+to\+\_\+sleep}{time\_to\_sleep}}
+{\footnotesize\ttfamily double Drive\+::time\+\_\+to\+\_\+sleep}
+
+
+
+Timespan to be sleeping. 
+
+
+
+Definition at line 24 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a5417db9e7769d888db2bb0c293e78323}\label{group__homeostasis_a5417db9e7769d888db2bb0c293e78323}} 
+\index{Drive@{Drive}!value@{value}}
+\index{value@{value}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily double Drive\+::value}
+
+
+
+Definition at line 20 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_abe87b7fff815dd30f0deda945d851d4d}\label{group__homeostasis_abe87b7fff815dd30f0deda945d851d4d}} 
+\index{Drive@{Drive}!value\+Max@{value\+Max}}
+\index{value\+Max@{value\+Max}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{value\+Max}{valueMax}}
+{\footnotesize\ttfamily double Drive\+::value\+Max}
+
+
+
+Definition at line 20 of file homeostasis.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_ac15651cc5321e8b6a4458daeffb5d305}\label{group__homeostasis_ac15651cc5321e8b6a4458daeffb5d305}} 
+\index{Drive@{Drive}!value\+Min@{value\+Min}}
+\index{value\+Min@{value\+Min}!Drive@{Drive}}
+\subparagraph{\texorpdfstring{value\+Min}{valueMin}}
+{\footnotesize\ttfamily double Drive\+::value\+Min}
+
+
+
+Definition at line 20 of file homeostasis.\+h.
+
+\index{Homeostasis\+Manager@{Homeostasis\+Manager}}\label{classHomeostasisManager}
+\Hypertarget{group__homeostasis_classHomeostasisManager}
+\subsubsection{class Homeostasis\+Manager}
+
+
+Definition at line 13 of file homeostasis\+Manager.\+h.
+
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__homeostasis_a3c699fb7bba30e09adc0f9650f8aa481}{add\+Drive} (\hyperlink{group__homeostasis_classDrive}{Drive} $\ast$D)
+\begin{DoxyCompactList}\small\item\em add\+Drive Generates a drive in the homeostasis manager. \end{DoxyCompactList}\item 
+void \hyperlink{group__homeostasis_a47f7063f612ac4a4a1cbf96bf289fa56}{remove\+Drive} (int D)
+\begin{DoxyCompactList}\small\item\em remove\+Drive Removes a drive in homeostasis manager. \end{DoxyCompactList}\item 
+void \hyperlink{group__homeostasis_a334738e699f022c7d364a01fa8b77231}{sleep} (int D, double time)
+\begin{DoxyCompactList}\small\item\em sleep cancels update function for a time \end{DoxyCompactList}\item 
+bool \hyperlink{group__homeostasis_ae904ca4369d3816c2cbccb7a36b4b54f}{update\+Drives} ()
+\begin{DoxyCompactList}\small\item\em update\+Drives updates all internal values \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{group__homeostasis_classDrive}{Drive} $\ast$ $>$ \hyperlink{group__homeostasis_ab1634f96f9e9104efcbe470c75a7f2f0}{drives}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__homeostasis_a3c699fb7bba30e09adc0f9650f8aa481}\label{group__homeostasis_a3c699fb7bba30e09adc0f9650f8aa481}} 
+\index{Homeostasis\+Manager@{Homeostasis\+Manager}!add\+Drive@{add\+Drive}}
+\index{add\+Drive@{add\+Drive}!Homeostasis\+Manager@{Homeostasis\+Manager}}
+\subparagraph{\texorpdfstring{add\+Drive()}{addDrive()}}
+{\footnotesize\ttfamily void Homeostasis\+Manager\+::add\+Drive (\begin{DoxyParamCaption}\item[{\hyperlink{group__homeostasis_classDrive}{Drive} $\ast$}]{D }\end{DoxyParamCaption})}
+
+
+
+add\+Drive Generates a drive in the homeostasis manager. 
+
+Homeostasis manager will take care of updating it. Input must be a drive and its position 
+\begin{DoxyParams}{Parameters}
+{\em D} & drive instance to add \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 13 of file homeostasis\+Manager.\+cpp.
+
+\mbox{\Hypertarget{group__homeostasis_a47f7063f612ac4a4a1cbf96bf289fa56}\label{group__homeostasis_a47f7063f612ac4a4a1cbf96bf289fa56}} 
+\index{Homeostasis\+Manager@{Homeostasis\+Manager}!remove\+Drive@{remove\+Drive}}
+\index{remove\+Drive@{remove\+Drive}!Homeostasis\+Manager@{Homeostasis\+Manager}}
+\subparagraph{\texorpdfstring{remove\+Drive()}{removeDrive()}}
+{\footnotesize\ttfamily void Homeostasis\+Manager\+::remove\+Drive (\begin{DoxyParamCaption}\item[{int}]{D }\end{DoxyParamCaption})}
+
+
+
+remove\+Drive Removes a drive in homeostasis manager. 
+
+Anything related to this drive outside here should also be removed. This is specially useful for temporal needs or subgoals. 
+\begin{DoxyParams}{Parameters}
+{\em D} & drive ID to remove \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 18 of file homeostasis\+Manager.\+cpp.
+
+\mbox{\Hypertarget{group__homeostasis_a334738e699f022c7d364a01fa8b77231}\label{group__homeostasis_a334738e699f022c7d364a01fa8b77231}} 
+\index{Homeostasis\+Manager@{Homeostasis\+Manager}!sleep@{sleep}}
+\index{sleep@{sleep}!Homeostasis\+Manager@{Homeostasis\+Manager}}
+\subparagraph{\texorpdfstring{sleep()}{sleep()}}
+{\footnotesize\ttfamily void Homeostasis\+Manager\+::sleep (\begin{DoxyParamCaption}\item[{int}]{D,  }\item[{double}]{time }\end{DoxyParamCaption})}
+
+
+
+sleep cancels update function for a time 
+
+
+\begin{DoxyParams}{Parameters}
+{\em D} & ID drive to add \\
+\hline
+{\em time} & time to sleep \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 23 of file homeostasis\+Manager.\+cpp.
+
+\mbox{\Hypertarget{group__homeostasis_ae904ca4369d3816c2cbccb7a36b4b54f}\label{group__homeostasis_ae904ca4369d3816c2cbccb7a36b4b54f}} 
+\index{Homeostasis\+Manager@{Homeostasis\+Manager}!update\+Drives@{update\+Drives}}
+\index{update\+Drives@{update\+Drives}!Homeostasis\+Manager@{Homeostasis\+Manager}}
+\subparagraph{\texorpdfstring{update\+Drives()}{updateDrives()}}
+{\footnotesize\ttfamily bool Homeostasis\+Manager\+::update\+Drives (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+update\+Drives updates all internal values 
+
+\begin{DoxyReturn}{Returns}
+bool success 
+\end{DoxyReturn}
+
+
+Definition at line 4 of file homeostasis\+Manager.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__homeostasis_ab1634f96f9e9104efcbe470c75a7f2f0}\label{group__homeostasis_ab1634f96f9e9104efcbe470c75a7f2f0}} 
+\index{Homeostasis\+Manager@{Homeostasis\+Manager}!drives@{drives}}
+\index{drives@{drives}!Homeostasis\+Manager@{Homeostasis\+Manager}}
+\subparagraph{\texorpdfstring{drives}{drives}}
+{\footnotesize\ttfamily std\+::vector$<$\hyperlink{group__homeostasis_classDrive}{Drive}$\ast$$>$ Homeostasis\+Manager\+::drives}
+
+
+
+Definition at line 18 of file homeostasis\+Manager.\+h.
+
+\index{Homeostatic\+Module@{Homeostatic\+Module}}\label{classHomeostaticModule}
+\Hypertarget{group__homeostasis_classHomeostaticModule}
+\subsubsection{class Homeostatic\+Module}
+
+
+Definition at line 18 of file homeostasis\+Manager\+Icub.\+h.
+
+
+
+Inheritance diagram for Homeostatic\+Module\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{classHomeostaticModule__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__homeostasis_classDrive}{Drive} \hyperlink{group__homeostasis_acccfc1bf4e585a64558d59f14e3b4971}{b\+Drive} (yarp\+::os\+::\+Bottle $\ast$b)
+\begin{DoxyCompactList}\small\item\em b\+Drive Create \hyperlink{group__homeostasis_classDrive}{Drive} from Bottle \end{DoxyCompactList}\item 
+int \hyperlink{group__homeostasis_a7ecc57cb05ab4ea92d62c3b963ac86ca}{open\+Ports} (std\+::string drive\+Name)
+\begin{DoxyCompactList}\small\item\em open\+Ports opens default ports for external communication \end{DoxyCompactList}\item 
+bool \hyperlink{group__homeostasis_a445bbd663f3af838c4333e3c241ce95c}{configure} (yarp\+::os\+::\+Resource\+Finder \&rf)
+\item 
+bool \hyperlink{group__homeostasis_a79746e7d7d8f751c06363ff80b9bf8f6}{interrupt\+Module} ()
+\item 
+bool \hyperlink{group__homeostasis_aa02cc6b879d746dbb9691dc16d2bf6d1}{close} ()
+\item 
+double \hyperlink{group__homeostasis_a63f6720809be33541f2e8fb9b7affaa2}{get\+Period} ()
+\item 
+bool \hyperlink{group__homeostasis_a614902e3bfe699aea53497a100929b1c}{update\+Module} ()
+\item 
+bool \hyperlink{group__homeostasis_a5b37922dc43bdd683b89c93c91e89db1}{respond} (const yarp\+::os\+::\+Bottle \&cmd, yarp\+::os\+::\+Bottle \&reply)
+\end{DoxyCompactItemize}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__homeostasis_acccfc1bf4e585a64558d59f14e3b4971}\label{group__homeostasis_acccfc1bf4e585a64558d59f14e3b4971}} 
+\index{Homeostatic\+Module@{Homeostatic\+Module}!b\+Drive@{b\+Drive}}
+\index{b\+Drive@{b\+Drive}!Homeostatic\+Module@{Homeostatic\+Module}}
+\subparagraph{\texorpdfstring{b\+Drive()}{bDrive()}}
+{\footnotesize\ttfamily \hyperlink{group__homeostasis_classDrive}{Drive} Homeostatic\+Module\+::b\+Drive (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Bottle $\ast$}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+b\+Drive Create \hyperlink{group__homeostasis_classDrive}{Drive} from Bottle 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & Bottle from which to create drive from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{group__homeostasis_classDrive}{Drive} newly created \hyperlink{group__homeostasis_classDrive}{Drive} 
+\end{DoxyReturn}
+
+
+Definition at line 61 of file homeostasis\+Manager\+Icub.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_aa02cc6b879d746dbb9691dc16d2bf6d1}\label{group__homeostasis_aa02cc6b879d746dbb9691dc16d2bf6d1}} 
+\index{Homeostatic\+Module@{Homeostatic\+Module}!close@{close}}
+\index{close@{close}!Homeostatic\+Module@{Homeostatic\+Module}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool Homeostatic\+Module\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 451 of file homeostasis\+Manager\+Icub.\+cpp.
+
+\mbox{\Hypertarget{group__homeostasis_a445bbd663f3af838c4333e3c241ce95c}\label{group__homeostasis_a445bbd663f3af838c4333e3c241ce95c}} 
+\index{Homeostatic\+Module@{Homeostatic\+Module}!configure@{configure}}
+\index{configure@{configure}!Homeostatic\+Module@{Homeostatic\+Module}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool Homeostatic\+Module\+::configure (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf }\end{DoxyParamCaption})}
+
+
+
+Definition at line 79 of file homeostasis\+Manager\+Icub.\+cpp.
+
+\mbox{\Hypertarget{group__homeostasis_a63f6720809be33541f2e8fb9b7affaa2}\label{group__homeostasis_a63f6720809be33541f2e8fb9b7affaa2}} 
+\index{Homeostatic\+Module@{Homeostatic\+Module}!get\+Period@{get\+Period}}
+\index{get\+Period@{get\+Period}!Homeostatic\+Module@{Homeostatic\+Module}}
+\subparagraph{\texorpdfstring{get\+Period()}{getPeriod()}}
+{\footnotesize\ttfamily double Homeostatic\+Module\+::get\+Period (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 82 of file homeostasis\+Manager\+Icub.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a79746e7d7d8f751c06363ff80b9bf8f6}\label{group__homeostasis_a79746e7d7d8f751c06363ff80b9bf8f6}} 
+\index{Homeostatic\+Module@{Homeostatic\+Module}!interrupt\+Module@{interrupt\+Module}}
+\index{interrupt\+Module@{interrupt\+Module}!Homeostatic\+Module@{Homeostatic\+Module}}
+\subparagraph{\texorpdfstring{interrupt\+Module()}{interruptModule()}}
+{\footnotesize\ttfamily bool Homeostatic\+Module\+::interrupt\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 75 of file homeostasis\+Manager\+Icub.\+h.
+
+\mbox{\Hypertarget{group__homeostasis_a7ecc57cb05ab4ea92d62c3b963ac86ca}\label{group__homeostasis_a7ecc57cb05ab4ea92d62c3b963ac86ca}} 
+\index{Homeostatic\+Module@{Homeostatic\+Module}!open\+Ports@{open\+Ports}}
+\index{open\+Ports@{open\+Ports}!Homeostatic\+Module@{Homeostatic\+Module}}
+\subparagraph{\texorpdfstring{open\+Ports()}{openPorts()}}
+{\footnotesize\ttfamily int Homeostatic\+Module\+::open\+Ports (\begin{DoxyParamCaption}\item[{std\+::string}]{drive\+Name }\end{DoxyParamCaption})}
+
+
+
+open\+Ports opens default ports for external communication 
+
+
+\begin{DoxyParams}{Parameters}
+{\em drive\+Name} & name of the drive \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int success 
+\end{DoxyReturn}
+
+
+Definition at line 49 of file homeostasis\+Manager\+Icub.\+cpp.
+
+\mbox{\Hypertarget{group__homeostasis_a5b37922dc43bdd683b89c93c91e89db1}\label{group__homeostasis_a5b37922dc43bdd683b89c93c91e89db1}} 
+\index{Homeostatic\+Module@{Homeostatic\+Module}!respond@{respond}}
+\index{respond@{respond}!Homeostatic\+Module@{Homeostatic\+Module}}
+\subparagraph{\texorpdfstring{respond()}{respond()}}
+{\footnotesize\ttfamily bool Homeostatic\+Module\+::respond (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{cmd,  }\item[{yarp\+::os\+::\+Bottle \&}]{reply }\end{DoxyParamCaption})}
+
+
+
+Definition at line 135 of file homeostasis\+Manager\+Icub.\+cpp.
+
+\mbox{\Hypertarget{group__homeostasis_a614902e3bfe699aea53497a100929b1c}\label{group__homeostasis_a614902e3bfe699aea53497a100929b1c}} 
+\index{Homeostatic\+Module@{Homeostatic\+Module}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!Homeostatic\+Module@{Homeostatic\+Module}}
+\subparagraph{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool Homeostatic\+Module\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 394 of file homeostasis\+Manager\+Icub.\+cpp.
+

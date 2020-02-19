@@ -1,0 +1,556 @@
+\hypertarget{group__icubclient__SAM__utils}{}\section{S\+AM Utils}
+\label{group__icubclient__SAM__utils}\index{S\+A\+M Utils@{S\+A\+M Utils}}
+
+
+Utility class for functions required by both \hyperlink{interactionSAMModel_8py}{interaction\+S\+A\+M\+Model.\+py} and \hyperlink{trainSAMModel_8py}{train\+S\+A\+M\+Model.\+py}.  
+
+
+Collaboration diagram for S\+AM Utils\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{group__icubclient__SAM__utils}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1TimeoutError}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+Timeout\+Error}
+\begin{DoxyCompactList}\small\item\em Custom \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1TimeoutError}{Timeout\+Error} Exception.  \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1TimeoutError}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1InterruptableThread}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+Interruptable\+Thread}
+\begin{DoxyCompactList}\small\item\em Class to launch a function inside of a separate thread.  \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1InterruptableThread}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1timeout}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+timeout}
+\begin{DoxyCompactList}\small\item\em Class to terminate a function running inside of a separate thread.  \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1timeout}{More...}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{group__icubclient__SAM__utils_ga7d1d61b09b614680e853bc0be5e10df1}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+initialise\+Models} (argv, update, init\+Mode=\textquotesingle{}training\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Initialise \hyperlink{namespaceSAM}{S\+AM} Model data structure, training parameters and user parameters. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_ga27bd9bc8ab5b70ae2f6cc18857afc88c}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+variance\+Class} (variance\+Direction, x, thresh)
+\begin{DoxyCompactList}\small\item\em Utility function to perform threshold or range checking. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_ga1626d58a716c5b4794ff6f6933011076}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+plot\+Known\+And\+Unknown} (var\+Dict, colour, axlist, width=\mbox{[}0.\+2, factor=\mbox{[}(0, 0.\+6), plot\+Range=False)
+\begin{DoxyCompactList}\small\item\em Utility function to plot variances of known and unknown as gaussian distributions. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_gafede13612da64cc2471be35b385972ed}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+bhattacharyya\+\_\+distance} (mu1, mu2, var1, var2)
+\begin{DoxyCompactList}\small\item\em Calculates a measure for the separability of two univariate gaussians. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_gae515125ab69f88f48f48b3eb766927a1}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+plot\+\_\+confusion\+\_\+matrix} (cm, target\+Names, title=\textquotesingle{}Confusion matrix\textquotesingle{}, cmap=plt.\+cm.\+inferno)
+\begin{DoxyCompactList}\small\item\em Generate and display a confusion matrix. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_gaf5214036730562004563e7c122e65998}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+plot\+Gauss\+From\+List} (mlist, vlist, rlist, colour, label, width, factor, axlist, plot\+Range=False)
+\begin{DoxyCompactList}\small\item\em Plot multiple Gaussians from a list on the same plot. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_gab49784000971804130fa10c1e3ad817d}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+solve\+\_\+intersections} (m1, m2, std1, std2)
+\begin{DoxyCompactList}\small\item\em Solve for the intersection/s of two Gaussian distributions. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_ga36c10c3281fd9c5aa4aeacacc693ee71}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+Pfrom\+Hist} (sample, hist, bin\+Width)
+\begin{DoxyCompactList}\small\item\em Calulates the probability of a sample from a histogram. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_ga82624221423212408df437771ccbd026}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+mean\+Var\+\_\+variance\+Distribution} (data\+List)
+\begin{DoxyCompactList}\small\item\em Calculate list of means, variances and ranges for the data in the data\+List. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_ga9f9e9fc5c10660319b4d78dcb1a04d10}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+bhattacharyya\+\_\+dict} (m, v)
+\begin{DoxyCompactList}\small\item\em Calculate bhattacharyya distances for each item in the dictionaries. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_ga993c63ecfc9099d2e2ccd42282354de5}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+smooth1D} (x, window\+\_\+len=11, window=\textquotesingle{}hanning\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Smooth the data using a window with a requested size. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_ga54c327e56dfec748f1c4a150b9180162}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+transform\+Time\+Series\+To\+Seq} (Y, time\+Window, offset=1, normalised=False, reduced=False, noY=False, do\+Offset=False)
+\begin{DoxyCompactList}\small\item\em Utility function to convert a time series into multiple time windows with additional functionality. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Utility class for functions required by both \hyperlink{interactionSAMModel_8py}{interaction\+S\+A\+M\+Model.\+py} and \hyperlink{trainSAMModel_8py}{train\+S\+A\+M\+Model.\+py}. 
+
+
+
+\subsection{Class Documentation}
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Timeout\+Error@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Timeout\+Error}}\label{classSAM_1_1SAM__Core_1_1SAM__utils_1_1TimeoutError}
+\Hypertarget{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1TimeoutError}
+\subsubsection{class S\+AM\+:\+:S\+A\+M\+\_\+\+Core\+:\+:S\+A\+M\+\_\+utils\+:\+:Timeout\+Error}
+Custom \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1TimeoutError}{Timeout\+Error} Exception. 
+
+\begin{DoxyParagraph}{Description}
+Class used to raise \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1TimeoutError}{Timeout\+Error} Exceptions. 
+\end{DoxyParagraph}
+
+
+Definition at line 414 of file S\+A\+M\+\_\+utils.\+py.
+
+
+
+Inheritance diagram for S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+Timeout\+Error\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=263pt]{classSAM_1_1SAM__Core_1_1SAM__utils_1_1TimeoutError__inherit__graph}
+\end{center}
+\end{figure}
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Interruptable\+Thread@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Interruptable\+Thread}}\label{classSAM_1_1SAM__Core_1_1SAM__utils_1_1InterruptableThread}
+\Hypertarget{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1InterruptableThread}
+\subsubsection{class S\+AM\+:\+:S\+A\+M\+\_\+\+Core\+:\+:S\+A\+M\+\_\+utils\+:\+:Interruptable\+Thread}
+Class to launch a function inside of a separate thread. 
+
+Definition at line 420 of file S\+A\+M\+\_\+utils.\+py.
+
+
+
+Inheritance diagram for S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+Interruptable\+Thread\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{classSAM_1_1SAM__Core_1_1SAM__utils_1_1InterruptableThread__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{group__icubclient__SAM__utils_a0797d5d722f29957fa9639aee0211e21}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, func, args, kwargs)
+\begin{DoxyCompactList}\small\item\em Initialise the interruptible thread. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_a1b57a578c33317f182ac877e3b8ecdd7}{run} (self)
+\begin{DoxyCompactList}\small\item\em Run the function. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_a707acf5e3b465ea2755b2239e5d1b2f6}{result} (self)
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__SAM__utils_a0797d5d722f29957fa9639aee0211e21}\label{group__icubclient__SAM__utils_a0797d5d722f29957fa9639aee0211e21}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Interruptable\+Thread@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Interruptable\+Thread}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Interruptable\+Thread@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Interruptable\+Thread}}
+\subparagraph{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+Interruptable\+Thread.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{func,  }\item[{}]{args,  }\item[{}]{kwargs }\end{DoxyParamCaption})}
+
+
+
+Initialise the interruptible thread. 
+
+
+
+Definition at line 424 of file S\+A\+M\+\_\+utils.\+py.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__SAM__utils_a707acf5e3b465ea2755b2239e5d1b2f6}\label{group__icubclient__SAM__utils_a707acf5e3b465ea2755b2239e5d1b2f6}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Interruptable\+Thread@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Interruptable\+Thread}!result@{result}}
+\index{result@{result}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Interruptable\+Thread@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Interruptable\+Thread}}
+\subparagraph{\texorpdfstring{result()}{result()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+Interruptable\+Thread.\+result (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 442 of file S\+A\+M\+\_\+utils.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__utils_a1b57a578c33317f182ac877e3b8ecdd7}\label{group__icubclient__SAM__utils_a1b57a578c33317f182ac877e3b8ecdd7}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Interruptable\+Thread@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Interruptable\+Thread}!run@{run}}
+\index{run@{run}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Interruptable\+Thread@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::\+Interruptable\+Thread}}
+\subparagraph{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+Interruptable\+Thread.\+run (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Run the function. 
+
+
+
+Definition at line 434 of file S\+A\+M\+\_\+utils.\+py.
+
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::timeout@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::timeout}}\label{classSAM_1_1SAM__Core_1_1SAM__utils_1_1timeout}
+\Hypertarget{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1timeout}
+\subsubsection{class S\+AM\+:\+:S\+A\+M\+\_\+\+Core\+:\+:S\+A\+M\+\_\+utils\+:\+:timeout}
+Class to terminate a function running inside of a separate thread. 
+
+Definition at line 449 of file S\+A\+M\+\_\+utils.\+py.
+
+
+
+Inheritance diagram for S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+timeout\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{classSAM_1_1SAM__Core_1_1SAM__utils_1_1timeout__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{group__icubclient__SAM__utils_a40209e793998e2d2feea1eb35b8daacc}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, sec)
+\begin{DoxyCompactList}\small\item\em Initialise the timeout function. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_a9019cee778e9c9547f9388927c4e9144}{\+\_\+\+\_\+call\+\_\+\+\_\+} (self, f)
+\begin{DoxyCompactList}\small\item\em Initialise an interruptible thread and start the thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__SAM__utils_a40209e793998e2d2feea1eb35b8daacc}\label{group__icubclient__SAM__utils_a40209e793998e2d2feea1eb35b8daacc}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::timeout@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::timeout}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::timeout@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::timeout}}
+\subparagraph{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+timeout.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{sec }\end{DoxyParamCaption})}
+
+
+
+Initialise the timeout function. 
+
+
+
+Definition at line 453 of file S\+A\+M\+\_\+utils.\+py.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__SAM__utils_a9019cee778e9c9547f9388927c4e9144}\label{group__icubclient__SAM__utils_a9019cee778e9c9547f9388927c4e9144}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::timeout@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::timeout}!\+\_\+\+\_\+call\+\_\+\+\_\+@{\+\_\+\+\_\+call\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+call\+\_\+\+\_\+@{\+\_\+\+\_\+call\+\_\+\+\_\+}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::timeout@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils\+::timeout}}
+\subparagraph{\texorpdfstring{\+\_\+\+\_\+call\+\_\+\+\_\+()}{\_\_call\_\_()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+timeout.\+\_\+\+\_\+call\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{f }\end{DoxyParamCaption})}
+
+
+
+Initialise an interruptible thread and start the thread. 
+
+
+
+Definition at line 459 of file S\+A\+M\+\_\+utils.\+py.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__icubclient__SAM__utils_ga9f9e9fc5c10660319b4d78dcb1a04d10}\label{group__icubclient__SAM__utils_ga9f9e9fc5c10660319b4d78dcb1a04d10}} 
+\index{S\+A\+M Utils@{S\+A\+M Utils}!bhattacharyya\+\_\+dict@{bhattacharyya\+\_\+dict}}
+\index{bhattacharyya\+\_\+dict@{bhattacharyya\+\_\+dict}!S\+A\+M Utils@{S\+A\+M Utils}}
+\subsubsection{\texorpdfstring{bhattacharyya\+\_\+dict()}{bhattacharyya\_dict()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+bhattacharyya\+\_\+dict (\begin{DoxyParamCaption}\item[{}]{m,  }\item[{}]{v }\end{DoxyParamCaption})}
+
+
+
+Calculate bhattacharyya distances for each item in the dictionaries. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & Dictionary of means. \\
+\hline
+{\em v} & Dictionary of variances.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of bhattacharyya distances for the input dictionaries. 
+\end{DoxyReturn}
+
+
+Definition at line 677 of file S\+A\+M\+\_\+utils.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__utils_gafede13612da64cc2471be35b385972ed}\label{group__icubclient__SAM__utils_gafede13612da64cc2471be35b385972ed}} 
+\index{S\+A\+M Utils@{S\+A\+M Utils}!bhattacharyya\+\_\+distance@{bhattacharyya\+\_\+distance}}
+\index{bhattacharyya\+\_\+distance@{bhattacharyya\+\_\+distance}!S\+A\+M Utils@{S\+A\+M Utils}}
+\subsubsection{\texorpdfstring{bhattacharyya\+\_\+distance()}{bhattacharyya\_distance()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+bhattacharyya\+\_\+distance (\begin{DoxyParamCaption}\item[{}]{mu1,  }\item[{}]{mu2,  }\item[{}]{var1,  }\item[{}]{var2 }\end{DoxyParamCaption})}
+
+
+
+Calculates a measure for the separability of two univariate gaussians. 
+
+Returns the bhattacharyya distance that is used to optimise for separability between known and unknown classes when these are modelled as univariate gaussians.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mu1} & Float with mean of distribution 1. \\
+\hline
+{\em mu2} & Float with mean of distribution 2. \\
+\hline
+{\em var1} & Float with variance of distribution 1. \\
+\hline
+{\em var2} & Float with variance of distribution 2.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a float with the bhattacharyya distance between the two distributions. 
+\end{DoxyReturn}
+
+
+Definition at line 509 of file S\+A\+M\+\_\+utils.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__utils_ga7d1d61b09b614680e853bc0be5e10df1}\label{group__icubclient__SAM__utils_ga7d1d61b09b614680e853bc0be5e10df1}} 
+\index{S\+A\+M Utils@{S\+A\+M Utils}!initialise\+Models@{initialise\+Models}}
+\index{initialise\+Models@{initialise\+Models}!S\+A\+M Utils@{S\+A\+M Utils}}
+\subsubsection{\texorpdfstring{initialise\+Models()}{initialiseModels()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+initialise\+Models (\begin{DoxyParamCaption}\item[{}]{argv,  }\item[{}]{update,  }\item[{}]{init\+Mode = {\ttfamily \textquotesingle{}training\textquotesingle{}} }\end{DoxyParamCaption})}
+
+
+
+Initialise \hyperlink{namespaceSAM}{S\+AM} Model data structure, training parameters and user parameters. 
+
+This method starts by initialising the required Driver from the driver name in argv\mbox{[}3\mbox{]} if it exists in \hyperlink{namespaceSAM_1_1SAM__Drivers}{S\+A\+M\+\_\+\+Drivers} folder. The standard model parameters and the specific user parameters are then initialised and the data is read in by the \hyperlink{group__icubclient__SAM__Drivers_ga7a55565b0b0f58639327877c4f9cced0}{S\+A\+M\+Driver.\+read\+Data} method to complete the model data structure. This method then replicates the model data structure for training with multiple models if it is required in the config file loaded by the Driver.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argv\+\_\+0} & data\+Path containing the data that is to be trained on. \\
+\hline
+{\em argv\+\_\+1} & model\+Path containing the path of where the model is to be stored. \\
+\hline
+{\em argv\+\_\+2} & driver\+Name containing the name of the driver class that is to be loaded from \hyperlink{namespaceSAM_1_1SAM__Drivers}{S\+A\+M\+\_\+\+Drivers} folder. \\
+\hline
+{\em update} & String having either a value of \textquotesingle{}update\textquotesingle{} or \textquotesingle{}new\textquotesingle{}. \textquotesingle{}new\textquotesingle{} will load the parameters as set in the config file of the driver being loaded present in the data\+Path directory. This is used to train a new model from scratch. \textquotesingle{}update\textquotesingle{} will check for an existing model in the model\+Path directory and load the parameters from this model if it exists. This is used for retraining a model when new data becomes available. \\
+\hline
+{\em init\+Mode} & String having either a value of \textquotesingle{}training\textquotesingle{} or \textquotesingle{}interaction\textquotesingle{}. \textquotesingle{}training\textquotesingle{} takes into consideration the value of update in loading the parameters. (Used by \hyperlink{trainSAMModel_8py}{train\+S\+A\+M\+Model.\+py}) \textquotesingle{}interaction\textquotesingle{} loads the parameters directly from the model if the model exists. (Used by \hyperlink{interactionSAMModel_8py}{interaction\+S\+A\+M\+Model.\+py})\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The output is a list of \hyperlink{namespaceSAM_1_1SAM__Core_1_1SAMDriver}{S\+A\+M\+Driver} models. The list is of length 1 when the config file requests a single model or a list of length n+1 for a config file requesting multiple models where n is the number of requested models. The number of models either depends on the number of directories present in the data\+Path or from the length of text\+Labels returned from the \hyperlink{group__icubclient__SAM__Drivers_ga7a55565b0b0f58639327877c4f9cced0}{S\+A\+M\+Driver.\+read\+Data} method. 
+\end{DoxyReturn}
+
+
+Definition at line 59 of file S\+A\+M\+\_\+utils.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__utils_ga82624221423212408df437771ccbd026}\label{group__icubclient__SAM__utils_ga82624221423212408df437771ccbd026}} 
+\index{S\+A\+M Utils@{S\+A\+M Utils}!mean\+Var\+\_\+variance\+Distribution@{mean\+Var\+\_\+variance\+Distribution}}
+\index{mean\+Var\+\_\+variance\+Distribution@{mean\+Var\+\_\+variance\+Distribution}!S\+A\+M Utils@{S\+A\+M Utils}}
+\subsubsection{\texorpdfstring{mean\+Var\+\_\+variance\+Distribution()}{meanVar\_varianceDistribution()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+mean\+Var\+\_\+variance\+Distribution (\begin{DoxyParamCaption}\item[{}]{data\+List }\end{DoxyParamCaption})}
+
+
+
+Calculate list of means, variances and ranges for the data in the data\+List. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+List} & List of numpy arrays containing the data to check.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of means, list of variances and list of ranges. One for each array in the data\+List. 
+\end{DoxyReturn}
+
+
+Definition at line 639 of file S\+A\+M\+\_\+utils.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__utils_ga36c10c3281fd9c5aa4aeacacc693ee71}\label{group__icubclient__SAM__utils_ga36c10c3281fd9c5aa4aeacacc693ee71}} 
+\index{S\+A\+M Utils@{S\+A\+M Utils}!Pfrom\+Hist@{Pfrom\+Hist}}
+\index{Pfrom\+Hist@{Pfrom\+Hist}!S\+A\+M Utils@{S\+A\+M Utils}}
+\subsubsection{\texorpdfstring{Pfrom\+Hist()}{PfromHist()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+Pfrom\+Hist (\begin{DoxyParamCaption}\item[{}]{sample,  }\item[{}]{hist,  }\item[{}]{bin\+Width }\end{DoxyParamCaption})}
+
+
+
+Calulates the probability of a sample from a histogram. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sample} & Float with sample to be tested. \\
+\hline
+{\em hist} & Numpy array with normalised histogram probability values. \\
+\hline
+{\em bin\+Width} & Float indicating the width for each probability bin.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Probability ranging from 0 to 1 for sample with respect to the histogram. 
+\end{DoxyReturn}
+
+
+Definition at line 621 of file S\+A\+M\+\_\+utils.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__utils_gae515125ab69f88f48f48b3eb766927a1}\label{group__icubclient__SAM__utils_gae515125ab69f88f48f48b3eb766927a1}} 
+\index{S\+A\+M Utils@{S\+A\+M Utils}!plot\+\_\+confusion\+\_\+matrix@{plot\+\_\+confusion\+\_\+matrix}}
+\index{plot\+\_\+confusion\+\_\+matrix@{plot\+\_\+confusion\+\_\+matrix}!S\+A\+M Utils@{S\+A\+M Utils}}
+\subsubsection{\texorpdfstring{plot\+\_\+confusion\+\_\+matrix()}{plot\_confusion\_matrix()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+plot\+\_\+confusion\+\_\+matrix (\begin{DoxyParamCaption}\item[{}]{cm,  }\item[{}]{target\+Names,  }\item[{}]{title = {\ttfamily \textquotesingle{}Confusion~matrix\textquotesingle{}},  }\item[{}]{cmap = {\ttfamily plt.cm.inferno} }\end{DoxyParamCaption})}
+
+
+
+Generate and display a confusion matrix. 
+
+This method plots a formatted confusion matrix from the provided array and target names.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cm} & Square numpy array containing the values for the confusion matrix. \\
+\hline
+{\em target\+Names} & labels for the different classes. \\
+\hline
+{\em title} & Title of the plot. \\
+\hline
+{\em cmap} & Matplotlib colourmap for the plot.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+No return. Blocking call to matplotlib.\+plot. 
+\end{DoxyReturn}
+
+
+Definition at line 531 of file S\+A\+M\+\_\+utils.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__utils_gaf5214036730562004563e7c122e65998}\label{group__icubclient__SAM__utils_gaf5214036730562004563e7c122e65998}} 
+\index{S\+A\+M Utils@{S\+A\+M Utils}!plot\+Gauss\+From\+List@{plot\+Gauss\+From\+List}}
+\index{plot\+Gauss\+From\+List@{plot\+Gauss\+From\+List}!S\+A\+M Utils@{S\+A\+M Utils}}
+\subsubsection{\texorpdfstring{plot\+Gauss\+From\+List()}{plotGaussFromList()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+plot\+Gauss\+From\+List (\begin{DoxyParamCaption}\item[{}]{mlist,  }\item[{}]{vlist,  }\item[{}]{rlist,  }\item[{}]{colour,  }\item[{}]{label,  }\item[{}]{width,  }\item[{}]{factor,  }\item[{}]{axlist,  }\item[{}]{plot\+Range = {\ttfamily False} }\end{DoxyParamCaption})}
+
+
+
+Plot multiple Gaussians from a list on the same plot. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mlist} & List of float means. \\
+\hline
+{\em vlist} & List of float variances. \\
+\hline
+{\em rlist} & List of float data ranges. \\
+\hline
+{\em colour} & Colour for the plots. \\
+\hline
+{\em label} & Label for the plot. \\
+\hline
+{\em width} & Width of line in the plot. \\
+\hline
+{\em factor} & Factor for the height of the ranges to make them more aesthetic. \\
+\hline
+{\em axlist} & List of axes. \\
+\hline
+{\em plot\+Range} & Boolean to plot ranges or not.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of axes. 
+\end{DoxyReturn}
+
+
+Definition at line 562 of file S\+A\+M\+\_\+utils.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__utils_ga1626d58a716c5b4794ff6f6933011076}\label{group__icubclient__SAM__utils_ga1626d58a716c5b4794ff6f6933011076}} 
+\index{S\+A\+M Utils@{S\+A\+M Utils}!plot\+Known\+And\+Unknown@{plot\+Known\+And\+Unknown}}
+\index{plot\+Known\+And\+Unknown@{plot\+Known\+And\+Unknown}!S\+A\+M Utils@{S\+A\+M Utils}}
+\subsubsection{\texorpdfstring{plot\+Known\+And\+Unknown()}{plotKnownAndUnknown()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+plot\+Known\+And\+Unknown (\begin{DoxyParamCaption}\item[{}]{var\+Dict,  }\item[{}]{colour,  }\item[{}]{axlist,  }\item[{}]{width = {\ttfamily \mbox{[}0.2},  }\item[{}]{factor = {\ttfamily \mbox{[}(0,~0.6)},  }\item[{}]{plot\+Range = {\ttfamily False} }\end{DoxyParamCaption})}
+
+
+
+Utility function to plot variances of known and unknown as gaussian distributions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em var\+Dict} & Dictionary containing the mean and variances of known and unknown for different sections of data. \\
+\hline
+{\em colour} & List of strings with the colours to be used for each plot. \\
+\hline
+{\em axlist} & Plot object to pass in and update. \\
+\hline
+{\em width} & List of floats with the linewidth for the plots. \\
+\hline
+{\em factor} & List of tuples with factors for the plotting of ranges. \\
+\hline
+{\em plot\+Range} & Boolean to plot a range together with gaussian distributions or not.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Plot object for the generated plot. 
+\end{DoxyReturn}
+
+
+Definition at line 484 of file S\+A\+M\+\_\+utils.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__utils_ga993c63ecfc9099d2e2ccd42282354de5}\label{group__icubclient__SAM__utils_ga993c63ecfc9099d2e2ccd42282354de5}} 
+\index{S\+A\+M Utils@{S\+A\+M Utils}!smooth1D@{smooth1D}}
+\index{smooth1D@{smooth1D}!S\+A\+M Utils@{S\+A\+M Utils}}
+\subsubsection{\texorpdfstring{smooth1\+D()}{smooth1D()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+smooth1D (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{window\+\_\+len = {\ttfamily 11},  }\item[{}]{window = {\ttfamily \textquotesingle{}hanning\textquotesingle{}} }\end{DoxyParamCaption})}
+
+
+
+Smooth the data using a window with a requested size. 
+
+This method is based on the convolution of a scaled window with the signal. The signal is prepared by introducing reflected copies of the signal (with the window size) in both ends so that transient parts are minimized in the beginning and end part of the output signal.
+
+input\+: x The input signal. window\+\_\+len The dimension of the smoothing window; should be an odd integer. window The type of window from \textquotesingle{}flat\textquotesingle{}, \textquotesingle{}hanning\textquotesingle{}, \textquotesingle{}hamming\textquotesingle{}, \textquotesingle{}bartlett\textquotesingle{}, \textquotesingle{}blackman\textquotesingle{} flat window will produce a moving average smoothing.
+
+output\+: The smoothed signal. 
+
+Definition at line 710 of file S\+A\+M\+\_\+utils.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__utils_gab49784000971804130fa10c1e3ad817d}\label{group__icubclient__SAM__utils_gab49784000971804130fa10c1e3ad817d}} 
+\index{S\+A\+M Utils@{S\+A\+M Utils}!solve\+\_\+intersections@{solve\+\_\+intersections}}
+\index{solve\+\_\+intersections@{solve\+\_\+intersections}!S\+A\+M Utils@{S\+A\+M Utils}}
+\subsubsection{\texorpdfstring{solve\+\_\+intersections()}{solve\_intersections()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+solve\+\_\+intersections (\begin{DoxyParamCaption}\item[{}]{m1,  }\item[{}]{m2,  }\item[{}]{std1,  }\item[{}]{std2 }\end{DoxyParamCaption})}
+
+
+
+Solve for the intersection/s of two Gaussian distributions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m1} & Float Mean of Gaussian 1. \\
+\hline
+{\em m2} & Float Mean of Gaussian 2. \\
+\hline
+{\em std1} & Float Standard Deviation of Gaussian 1. \\
+\hline
+{\em std2} & Float Standard Deviation of Gaussian 2.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Points of intersection for the two Gaussian distributions. 
+\end{DoxyReturn}
+
+
+Definition at line 603 of file S\+A\+M\+\_\+utils.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__utils_ga54c327e56dfec748f1c4a150b9180162}\label{group__icubclient__SAM__utils_ga54c327e56dfec748f1c4a150b9180162}} 
+\index{S\+A\+M Utils@{S\+A\+M Utils}!transform\+Time\+Series\+To\+Seq@{transform\+Time\+Series\+To\+Seq}}
+\index{transform\+Time\+Series\+To\+Seq@{transform\+Time\+Series\+To\+Seq}!S\+A\+M Utils@{S\+A\+M Utils}}
+\subsubsection{\texorpdfstring{transform\+Time\+Series\+To\+Seq()}{transformTimeSeriesToSeq()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+transform\+Time\+Series\+To\+Seq (\begin{DoxyParamCaption}\item[{}]{Y,  }\item[{}]{time\+Window,  }\item[{}]{offset = {\ttfamily 1},  }\item[{}]{normalised = {\ttfamily False},  }\item[{}]{reduced = {\ttfamily False},  }\item[{}]{noY = {\ttfamily False},  }\item[{}]{do\+Offset = {\ttfamily False} }\end{DoxyParamCaption})}
+
+
+
+Utility function to convert a time series into multiple time windows with additional functionality. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Y} & Time series data. \\
+\hline
+{\em time\+Window} & Length of the time window. \\
+\hline
+{\em offset} & Number of non-\/overlapping frames between successive time windows. \\
+\hline
+{\em normalised} & Boolean to normalise time windows with respect to the starting frame. \\
+\hline
+{\em reduced} & Boolean to remove the starting frame if normalisation is enabled since this frame contains 0. \\
+\hline
+{\em noY} & Boolean to return time windows of labels together. \\
+\hline
+{\em do\+Offset} & In future versions this parameter will enable skipping data points between sampled windows.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+
+X numpy array of size (number\+Windows x length\+Of\+Window) containing the time series split up into windows. 
+
+Y numpy array of size (number\+Windows x length\+Of\+Window) containing the labels for each frame in the time series split into windows. 
+\end{DoxyReturn}
+
+
+Definition at line 755 of file S\+A\+M\+\_\+utils.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__utils_ga27bd9bc8ab5b70ae2f6cc18857afc88c}\label{group__icubclient__SAM__utils_ga27bd9bc8ab5b70ae2f6cc18857afc88c}} 
+\index{S\+A\+M Utils@{S\+A\+M Utils}!variance\+Class@{variance\+Class}}
+\index{variance\+Class@{variance\+Class}!S\+A\+M Utils@{S\+A\+M Utils}}
+\subsubsection{\texorpdfstring{variance\+Class()}{varianceClass()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+variance\+Class (\begin{DoxyParamCaption}\item[{}]{variance\+Direction,  }\item[{}]{x,  }\item[{}]{thresh }\end{DoxyParamCaption})}
+
+
+
+Utility function to perform threshold or range checking. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em variance\+Direction} & List of strings with the conditions to check. \\
+\hline
+{\em x} & The value to be checked. \\
+\hline
+{\em thresh} & The threshold against which x is to be checked given the checks in variance\+Direction.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Boolean True or False confirming arg x validates variance\+Direction conditions for the threshold. 
+\end{DoxyReturn}
+
+
+Definition at line 398 of file S\+A\+M\+\_\+utils.\+py.
+

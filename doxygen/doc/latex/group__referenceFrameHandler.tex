@@ -1,0 +1,326 @@
+\hypertarget{group__referenceFrameHandler}{}\section{reference\+Frame\+Handler}
+\label{group__referenceFrameHandler}\index{reference\+Frame\+Handler@{reference\+Frame\+Handler}}
+
+
+Reference Frame Handler Version\+:1.\+0.  
+
+
+Collaboration diagram for reference\+Frame\+Handler\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__referenceFrameHandler}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{group__referenceFrameHandler_structFrameInfo}{Frame\+Info}
+\item 
+class \hyperlink{group__referenceFrameHandler_classFrameHandlerModule}{Frame\+Handler\+Module}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Reference Frame Handler Version\+:1.\+0. 
+
+\begin{DoxyAuthor}{Author}
+Stéphane Lallée \href{mailto:stephane.lallee@gmail.com}{\tt stephane.\+lallee@gmail.\+com} ~\newline
+ 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Released under the terms of the G\+NU G\+PL v2.\+0 
+\end{DoxyCopyright}
+\hypertarget{group__touchDetector_intro_sec}{}\subsection{Description}\label{group__touchDetector_intro_sec}
+Module responsible for handling the conversion between multiple reference frame (e.\+g multiple kinects, tactile table, etc) \hypertarget{group__touchDetector_parameters_sec}{}\subsection{Parameters}\label{group__touchDetector_parameters_sec}
+
+\begin{DoxyItemize}
+\item --name\+: To specify the module\textquotesingle{}s name; all the open ports will be tagged with the prefix /name
+\item --matrices\+File\+: file to be used for loading/saving purposes of the matrices
+\item --empty\+: starts the module without trying to load matrices from the file. (they can still be saved afterward)
+\item --verbose\+: To specify if debug information should be printed 
+\end{DoxyItemize}\hypertarget{group__touchDetector_inputports_sec}{}\subsection{Input Ports}\label{group__touchDetector_inputports_sec}
+\hypertarget{group__touchDetector_outputports_sec}{}\subsection{Output Ports}\label{group__touchDetector_outputports_sec}
+\hypertarget{group__touchDetector_services_sec}{}\subsection{Services}\label{group__touchDetector_services_sec}
+
+\begin{DoxyItemize}
+\item /reference\+Frame\+Handler/rpc \mbox{[}rpc-\/server\mbox{]}\+: It is the way to interact with the module. Commands are\+: ~\newline
+ \char`\"{}add frame\+Name (x y z) (x\textquotesingle{} y\textquotesingle{} z\textquotesingle{})\char`\"{}\+: add a calibration pair (xyz in frame\+Name\textquotesingle{}s reference, x\textquotesingle{}y\textquotesingle{}z\textquotesingle{} in i\+Cub pivot reference); reply is \mbox{[}ack/nack\mbox{]}. ~\newline
+ \char`\"{}cal frame\+Name\char`\"{}\+: calibrate and find the transformation matrix between frame\+Name\textquotesingle{}s reference and i\+Cub pivot reference; reply is \mbox{[}ack\mbox{]}. ~\newline
+ \char`\"{}scal frame\+Name\char`\"{}\+: calibrate and find H and S between frame\+Name\textquotesingle{}s reference and i\+Cub pivot reference; reply is \mbox{[}ack\mbox{]}. ~\newline
+ \char`\"{}trans frame\+Name1 frame\+Name2 (x y z)\char`\"{}\+: transform the point (x y z) given in frame\+Name1\textquotesingle{}s reference into the frame\+Name2\textquotesingle{}s reference; reply is \mbox{[}ack\mbox{]} (x\textquotesingle{} y\textquotesingle{} z\textquotesingle{}) (e.\+g \+: trans kinect reactable (0 0 0) Will return the position of the origin of the kinect reference into the reactable reference). ~\newline
+ \char`\"{}mat frame\+Name1 frame\+Name2\char`\"{}\+: get the transformation matrix from frame\+Name1 to frame\+Name2; reply is \href{m00 m01 ... m32 m33}{\tt ack}. ~\newline
+ \char`\"{}smat frame\+Name1 frame\+Name2\char`\"{}\+: set the transformation matrix from frame\+Name1 to frame\+Name2; reply is \mbox{[}ack\mbox{]}. ~\newline
+ \char`\"{}save\char`\"{}\+: save all the calibrated frames to a file; reply is \mbox{[}ack\mbox{]} file\+Path. ~\newline
+ \char`\"{}opcr\char`\"{}\+: read all the frames contained in the O\+PC; reply is \mbox{[}ack\mbox{]}. ~\newline
+ \char`\"{}opcw\char`\"{}\+: write all the calibrated frames to the O\+PC; reply is \mbox{[}ack\mbox{]}.
+
+. This service is described in () 
+\end{DoxyItemize}
+
+\subsection{Class Documentation}
+\index{Frame\+Info@{Frame\+Info}}\label{structFrameInfo}
+\Hypertarget{group__referenceFrameHandler_structFrameInfo}
+\subsubsection{struct Frame\+Info}
+
+
+Definition at line 44 of file main.\+cpp.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{group__referenceFrameHandler_a4099edbc00b7bc2e84093a19590d31d0}\label{group__referenceFrameHandler_a4099edbc00b7bc2e84093a19590d31d0}} 
+double&
+calibrationError&
+\\
+\hline
+
+\mbox{\Hypertarget{group__referenceFrameHandler_a16e20925f072bca955dd1e27eb2f31ca}\label{group__referenceFrameHandler_a16e20925f072bca955dd1e27eb2f31ca}} 
+CalibReferenceWithMatchedPoints&
+calibrator&
+\\
+\hline
+
+\mbox{\Hypertarget{group__referenceFrameHandler_a0b26689835498c777fd921b6464bb50e}\label{group__referenceFrameHandler_a0b26689835498c777fd921b6464bb50e}} 
+Matrix&
+H&
+\\
+\hline
+
+\mbox{\Hypertarget{group__referenceFrameHandler_a6d366877775d76de58c1f11e08b414e6}\label{group__referenceFrameHandler_a6d366877775d76de58c1f11e08b414e6}} 
+Matrix&
+HInv&
+\\
+\hline
+
+\mbox{\Hypertarget{group__referenceFrameHandler_a297eee5ae6d87c41a0cfb335a331fd16}\label{group__referenceFrameHandler_a297eee5ae6d87c41a0cfb335a331fd16}} 
+bool&
+isCalibrated&
+\\
+\hline
+
+\mbox{\Hypertarget{group__referenceFrameHandler_a409b52019fa5193cd87b5f50ce4a868d}\label{group__referenceFrameHandler_a409b52019fa5193cd87b5f50ce4a868d}} 
+string&
+name&
+\\
+\hline
+
+\mbox{\Hypertarget{group__referenceFrameHandler_a785143035c91d0e96169361af95d45f3}\label{group__referenceFrameHandler_a785143035c91d0e96169361af95d45f3}} 
+Matrix&
+S&
+\\
+\hline
+
+\mbox{\Hypertarget{group__referenceFrameHandler_a3c0e502106b71a211f8a15346bcbd289}\label{group__referenceFrameHandler_a3c0e502106b71a211f8a15346bcbd289}} 
+Matrix&
+SInv&
+\\
+\hline
+
+\end{DoxyFields}
+\index{Frame\+Handler\+Module@{Frame\+Handler\+Module}}\label{classFrameHandlerModule}
+\Hypertarget{group__referenceFrameHandler_classFrameHandlerModule}
+\subsubsection{class Frame\+Handler\+Module}
+
+
+Definition at line 56 of file main.\+cpp.
+
+
+
+Inheritance diagram for Frame\+Handler\+Module\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{classFrameHandlerModule__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__referenceFrameHandler_a13f89d223272b8f5e9ad542a8ba94bad}{Frame\+Handler\+Module} ()
+\item 
+bool \hyperlink{group__referenceFrameHandler_a932e0b19f6b4c4b5dd5e517d5c46c3c2}{configure} (Resource\+Finder \&rf)
+\item 
+Matrix \hyperlink{group__referenceFrameHandler_ae12d6eba8c62178508bf5ac1a9977bd0}{inverse\+Scale} (const Matrix \&in)
+\begin{DoxyCompactList}\small\item\em Inverts the scale of the provided matrix. \end{DoxyCompactList}\item 
+void \hyperlink{group__referenceFrameHandler_ac8865a00c58af255bafebb1ed7c525e8}{Load\+Matrices} (Property \&prop)
+\begin{DoxyCompactList}\small\item\em Load\+Matrices -\/ reads the matrices from the specified {\itshape matrices\+File} file. \end{DoxyCompactList}\item 
+void \hyperlink{group__referenceFrameHandler_aac780e0eb6d561838faa32d0294bc135}{Save\+Matrices} (const string \&file\+Name)
+\begin{DoxyCompactList}\small\item\em Saves the matrices to a file; this file can later be loaded using {\ttfamily Load\+Matrices} \end{DoxyCompactList}\item 
+void \hyperlink{group__referenceFrameHandler_a6ec74667ad1c117e815d31b30696261b}{Load\+Matrices\+From\+O\+PC} ()
+\begin{DoxyCompactList}\small\item\em Loads the calibration matrices from the O\+PC. \end{DoxyCompactList}\item 
+void \hyperlink{group__referenceFrameHandler_a2118efdc6d55910b8fcbbf3b4fb9de10}{Save\+Matrices2\+O\+PC} ()
+\begin{DoxyCompactList}\small\item\em Saves the calibration matrices to the O\+PC. \end{DoxyCompactList}\item 
+bool \hyperlink{group__referenceFrameHandler_ac511e77f51faf5ea84ed5162f3b4aed0}{respond} (const Bottle \&cmd, Bottle \&reply)
+\item 
+bool \hyperlink{group__referenceFrameHandler_a9a7173f45fe2911804970a595880413e}{interrupt\+Module} ()
+\item 
+bool \hyperlink{group__referenceFrameHandler_a81ed97b4ba5ca8334f85471fd0f9a58d}{close} ()
+\item 
+bool \hyperlink{group__referenceFrameHandler_a123d9f8aa941484862ed502f752653f9}{update\+Module} ()
+\item 
+double \hyperlink{group__referenceFrameHandler_a6f65d363cbf8aa84f0498ea4fd83a77e}{get\+Period} ()
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__referenceFrameHandler_a13f89d223272b8f5e9ad542a8ba94bad}\label{group__referenceFrameHandler_a13f89d223272b8f5e9ad542a8ba94bad}} 
+\index{Frame\+Handler\+Module@{Frame\+Handler\+Module}!Frame\+Handler\+Module@{Frame\+Handler\+Module}}
+\index{Frame\+Handler\+Module@{Frame\+Handler\+Module}!Frame\+Handler\+Module@{Frame\+Handler\+Module}}
+\subparagraph{\texorpdfstring{Frame\+Handler\+Module()}{FrameHandlerModule()}}
+{\footnotesize\ttfamily Frame\+Handler\+Module\+::\+Frame\+Handler\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 69 of file main.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__referenceFrameHandler_a81ed97b4ba5ca8334f85471fd0f9a58d}\label{group__referenceFrameHandler_a81ed97b4ba5ca8334f85471fd0f9a58d}} 
+\index{Frame\+Handler\+Module@{Frame\+Handler\+Module}!close@{close}}
+\index{close@{close}!Frame\+Handler\+Module@{Frame\+Handler\+Module}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool Frame\+Handler\+Module\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 734 of file main.\+cpp.
+
+\mbox{\Hypertarget{group__referenceFrameHandler_a932e0b19f6b4c4b5dd5e517d5c46c3c2}\label{group__referenceFrameHandler_a932e0b19f6b4c4b5dd5e517d5c46c3c2}} 
+\index{Frame\+Handler\+Module@{Frame\+Handler\+Module}!configure@{configure}}
+\index{configure@{configure}!Frame\+Handler\+Module@{Frame\+Handler\+Module}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool Frame\+Handler\+Module\+::configure (\begin{DoxyParamCaption}\item[{Resource\+Finder \&}]{rf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 73 of file main.\+cpp.
+
+\mbox{\Hypertarget{group__referenceFrameHandler_a6f65d363cbf8aa84f0498ea4fd83a77e}\label{group__referenceFrameHandler_a6f65d363cbf8aa84f0498ea4fd83a77e}} 
+\index{Frame\+Handler\+Module@{Frame\+Handler\+Module}!get\+Period@{get\+Period}}
+\index{get\+Period@{get\+Period}!Frame\+Handler\+Module@{Frame\+Handler\+Module}}
+\subparagraph{\texorpdfstring{get\+Period()}{getPeriod()}}
+{\footnotesize\ttfamily double Frame\+Handler\+Module\+::get\+Period (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 750 of file main.\+cpp.
+
+\mbox{\Hypertarget{group__referenceFrameHandler_a9a7173f45fe2911804970a595880413e}\label{group__referenceFrameHandler_a9a7173f45fe2911804970a595880413e}} 
+\index{Frame\+Handler\+Module@{Frame\+Handler\+Module}!interrupt\+Module@{interrupt\+Module}}
+\index{interrupt\+Module@{interrupt\+Module}!Frame\+Handler\+Module@{Frame\+Handler\+Module}}
+\subparagraph{\texorpdfstring{interrupt\+Module()}{interruptModule()}}
+{\footnotesize\ttfamily bool Frame\+Handler\+Module\+::interrupt\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 726 of file main.\+cpp.
+
+\mbox{\Hypertarget{group__referenceFrameHandler_ae12d6eba8c62178508bf5ac1a9977bd0}\label{group__referenceFrameHandler_ae12d6eba8c62178508bf5ac1a9977bd0}} 
+\index{Frame\+Handler\+Module@{Frame\+Handler\+Module}!inverse\+Scale@{inverse\+Scale}}
+\index{inverse\+Scale@{inverse\+Scale}!Frame\+Handler\+Module@{Frame\+Handler\+Module}}
+\subparagraph{\texorpdfstring{inverse\+Scale()}{inverseScale()}}
+{\footnotesize\ttfamily Matrix Frame\+Handler\+Module\+::inverse\+Scale (\begin{DoxyParamCaption}\item[{const Matrix \&}]{in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Inverts the scale of the provided matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & -\/ input matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Matrix with inverted scale 
+\end{DoxyReturn}
+
+
+Definition at line 121 of file main.\+cpp.
+
+\mbox{\Hypertarget{group__referenceFrameHandler_ac8865a00c58af255bafebb1ed7c525e8}\label{group__referenceFrameHandler_ac8865a00c58af255bafebb1ed7c525e8}} 
+\index{Frame\+Handler\+Module@{Frame\+Handler\+Module}!Load\+Matrices@{Load\+Matrices}}
+\index{Load\+Matrices@{Load\+Matrices}!Frame\+Handler\+Module@{Frame\+Handler\+Module}}
+\subparagraph{\texorpdfstring{Load\+Matrices()}{LoadMatrices()}}
+{\footnotesize\ttfamily void Frame\+Handler\+Module\+::\+Load\+Matrices (\begin{DoxyParamCaption}\item[{Property \&}]{prop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Load\+Matrices -\/ reads the matrices from the specified {\itshape matrices\+File} file. 
+
+Use {\ttfamily Save\+Matrices} to write this file in the proper format. 
+
+Definition at line 133 of file main.\+cpp.
+
+\mbox{\Hypertarget{group__referenceFrameHandler_a6ec74667ad1c117e815d31b30696261b}\label{group__referenceFrameHandler_a6ec74667ad1c117e815d31b30696261b}} 
+\index{Frame\+Handler\+Module@{Frame\+Handler\+Module}!Load\+Matrices\+From\+O\+PC@{Load\+Matrices\+From\+O\+PC}}
+\index{Load\+Matrices\+From\+O\+PC@{Load\+Matrices\+From\+O\+PC}!Frame\+Handler\+Module@{Frame\+Handler\+Module}}
+\subparagraph{\texorpdfstring{Load\+Matrices\+From\+O\+P\+C()}{LoadMatricesFromOPC()}}
+{\footnotesize\ttfamily void Frame\+Handler\+Module\+::\+Load\+Matrices\+From\+O\+PC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Loads the calibration matrices from the O\+PC. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000001}{Deprecated}]This is not supported anymore and may be removed in future versions \end{DoxyRefDesc}
+
+
+Definition at line 225 of file main.\+cpp.
+
+\mbox{\Hypertarget{group__referenceFrameHandler_ac511e77f51faf5ea84ed5162f3b4aed0}\label{group__referenceFrameHandler_ac511e77f51faf5ea84ed5162f3b4aed0}} 
+\index{Frame\+Handler\+Module@{Frame\+Handler\+Module}!respond@{respond}}
+\index{respond@{respond}!Frame\+Handler\+Module@{Frame\+Handler\+Module}}
+\subparagraph{\texorpdfstring{respond()}{respond()}}
+{\footnotesize\ttfamily bool Frame\+Handler\+Module\+::respond (\begin{DoxyParamCaption}\item[{const Bottle \&}]{cmd,  }\item[{Bottle \&}]{reply }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 372 of file main.\+cpp.
+
+\mbox{\Hypertarget{group__referenceFrameHandler_aac780e0eb6d561838faa32d0294bc135}\label{group__referenceFrameHandler_aac780e0eb6d561838faa32d0294bc135}} 
+\index{Frame\+Handler\+Module@{Frame\+Handler\+Module}!Save\+Matrices@{Save\+Matrices}}
+\index{Save\+Matrices@{Save\+Matrices}!Frame\+Handler\+Module@{Frame\+Handler\+Module}}
+\subparagraph{\texorpdfstring{Save\+Matrices()}{SaveMatrices()}}
+{\footnotesize\ttfamily void Frame\+Handler\+Module\+::\+Save\+Matrices (\begin{DoxyParamCaption}\item[{const string \&}]{file\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Saves the matrices to a file; this file can later be loaded using {\ttfamily Load\+Matrices} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & -\/ absolute path to the file \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 178 of file main.\+cpp.
+
+\mbox{\Hypertarget{group__referenceFrameHandler_a2118efdc6d55910b8fcbbf3b4fb9de10}\label{group__referenceFrameHandler_a2118efdc6d55910b8fcbbf3b4fb9de10}} 
+\index{Frame\+Handler\+Module@{Frame\+Handler\+Module}!Save\+Matrices2\+O\+PC@{Save\+Matrices2\+O\+PC}}
+\index{Save\+Matrices2\+O\+PC@{Save\+Matrices2\+O\+PC}!Frame\+Handler\+Module@{Frame\+Handler\+Module}}
+\subparagraph{\texorpdfstring{Save\+Matrices2\+O\+P\+C()}{SaveMatrices2OPC()}}
+{\footnotesize\ttfamily void Frame\+Handler\+Module\+::\+Save\+Matrices2\+O\+PC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Saves the calibration matrices to the O\+PC. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000002}{Deprecated}]This is not supported anymore and may be removed in future versions \end{DoxyRefDesc}
+
+
+Definition at line 299 of file main.\+cpp.
+
+\mbox{\Hypertarget{group__referenceFrameHandler_a123d9f8aa941484862ed502f752653f9}\label{group__referenceFrameHandler_a123d9f8aa941484862ed502f752653f9}} 
+\index{Frame\+Handler\+Module@{Frame\+Handler\+Module}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!Frame\+Handler\+Module@{Frame\+Handler\+Module}}
+\subparagraph{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool Frame\+Handler\+Module\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 744 of file main.\+cpp.
+

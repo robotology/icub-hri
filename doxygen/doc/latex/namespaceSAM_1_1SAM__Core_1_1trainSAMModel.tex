@@ -1,0 +1,276 @@
+\hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel}{}\section{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model Namespace Reference}
+\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel}\index{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model@{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model}}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a75a8353e5b55e744062b1b0b85bfa209}{threshold}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ada829c3b8c4a9aa3c556a90ad84ed7b2}{nan}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a0d813ce557a3e734bb4d3cdc1d1c5519}{precision}
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a227131024b77a9c68261ee558002e8c4}{data\+Path} = sys.\+argv\mbox{[}1\mbox{]}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a23d9f2671eb0af14906ea1e7e7d604b2}{model\+Path} = sys.\+argv\mbox{[}2\mbox{]}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ae368415e9cd168f04649ec4912f6fbb2}{driver\+Name} = sys.\+argv\mbox{[}3\mbox{]}
+\item 
+string \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a3d4d044a08cd44ee4b4b3cde836c5eed}{windowed\+Mode} = \textquotesingle{}True\textquotesingle{}
+\item 
+string \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a6de46d6299824b843c610668a3d4e3d0}{base\+Log\+File\+Name} = \textquotesingle{}train\+Error\+Log\+\_\+\textquotesingle{} + \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ae368415e9cd168f04649ec4912f6fbb2}{driver\+Name}
+\item 
+int \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_adabd782041187b40f1b3256100a40f18}{file\+\_\+i} = 0
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a9148bf18e6bcdc8a98559470787cbbd3}{logger\+F\+Name} = join(\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a227131024b77a9c68261ee558002e8c4}{data\+Path}, \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a6de46d6299824b843c610668a3d4e3d0}{base\+Log\+File\+Name} + \textquotesingle{}\+\_\+\textquotesingle{} + str(\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_adabd782041187b40f1b3256100a40f18}{file\+\_\+i}) + \textquotesingle{}.log\textquotesingle{})
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a49b763d06efdcaac2bc45c6b054827b0}{log\+Formatter} = logging.\+Formatter(\char`\"{}\mbox{[}\%(levelname)s\mbox{]} \%(message)s\char`\"{})
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aa6c9142ef2ae49892e6882a070a3afcd}{root\+Logger} = logging.\+get\+Logger(\textquotesingle{}train \textquotesingle{} + \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ae368415e9cd168f04649ec4912f6fbb2}{driver\+Name})
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a1b3f8525460c83d22622228cb27fc9ee}{file\+Handler} = logging.\+File\+Handler(\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a9148bf18e6bcdc8a98559470787cbbd3}{logger\+F\+Name})
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a304aac71072fe2e3a2d39f8aab4e4c78}{console\+Handler} = logging.\+Stream\+Handler()
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aa105ba4fe5c01efd4e10f0b17e51cd5b}{root}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_afc2414cf44fd68b8bfe50896cca60315}{mm} = initialise\+Models(sys.\+argv\mbox{[}1\+:4\mbox{]}, sys.\+argv\mbox{[}4\mbox{]})
+\item 
+int \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ab5021bf6fb77308233bbc3595f77294d}{overall\+Performance} = 100000
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a95f48ae2ace4025d7c9486bca0b71c0a}{overall\+Performance\+Labels}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aff84352e7940cc88f892f75360a6a54d}{label\+Comparison\+Dict}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a8cc79c923d6b6bed5dbdf3edfcdda00a}{num\+Parts} = len(\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_afc2414cf44fd68b8bfe50896cca60315}{mm}\mbox{[}0\mbox{]}.participant\+List)
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aff2733efcc99e07335dd4a963cf3b96c}{economy\+\_\+save}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a96bff06ae8a3e34fd235450c5df446ab}{extra\+Dict}
+\item 
+def \hyperlink{group__icubclient__SAM__Core_gab9063d062c168b9c621a28ab469ae1f9}{exception\+\_\+hook} (exc\+\_\+type, exc\+\_\+value, exc\+\_\+traceback)
+\begin{DoxyCompactList}\small\item\em Generic training function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a6de46d6299824b843c610668a3d4e3d0}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a6de46d6299824b843c610668a3d4e3d0}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!base\+Log\+File\+Name@{base\+Log\+File\+Name}}
+\index{base\+Log\+File\+Name@{base\+Log\+File\+Name}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{base\+Log\+File\+Name}{baseLogFileName}}
+{\footnotesize\ttfamily string S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+base\+Log\+File\+Name = \textquotesingle{}train\+Error\+Log\+\_\+\textquotesingle{} + \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ae368415e9cd168f04649ec4912f6fbb2}{driver\+Name}}
+
+
+
+Definition at line 57 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a304aac71072fe2e3a2d39f8aab4e4c78}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a304aac71072fe2e3a2d39f8aab4e4c78}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!console\+Handler@{console\+Handler}}
+\index{console\+Handler@{console\+Handler}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{console\+Handler}{consoleHandler}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+console\+Handler = logging.\+Stream\+Handler()}
+
+
+
+Definition at line 79 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a227131024b77a9c68261ee558002e8c4}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a227131024b77a9c68261ee558002e8c4}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!data\+Path@{data\+Path}}
+\index{data\+Path@{data\+Path}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{data\+Path}{dataPath}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+data\+Path = sys.\+argv\mbox{[}1\mbox{]}}
+
+
+
+Definition at line 53 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ae368415e9cd168f04649ec4912f6fbb2}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ae368415e9cd168f04649ec4912f6fbb2}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!driver\+Name@{driver\+Name}}
+\index{driver\+Name@{driver\+Name}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{driver\+Name}{driverName}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+driver\+Name = sys.\+argv\mbox{[}3\mbox{]}}
+
+
+
+Definition at line 55 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aff2733efcc99e07335dd4a963cf3b96c}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aff2733efcc99e07335dd4a963cf3b96c}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!economy\+\_\+save@{economy\+\_\+save}}
+\index{economy\+\_\+save@{economy\+\_\+save}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{economy\+\_\+save}{economy\_save}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+economy\+\_\+save}
+
+
+
+Definition at line 161 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a96bff06ae8a3e34fd235450c5df446ab}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a96bff06ae8a3e34fd235450c5df446ab}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!extra\+Dict@{extra\+Dict}}
+\index{extra\+Dict@{extra\+Dict}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{extra\+Dict}{extraDict}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+extra\+Dict}
+
+
+
+Definition at line 161 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_adabd782041187b40f1b3256100a40f18}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_adabd782041187b40f1b3256100a40f18}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!file\+\_\+i@{file\+\_\+i}}
+\index{file\+\_\+i@{file\+\_\+i}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{file\+\_\+i}{file\_i}}
+{\footnotesize\ttfamily int S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+file\+\_\+i = 0}
+
+
+
+Definition at line 59 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a1b3f8525460c83d22622228cb27fc9ee}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a1b3f8525460c83d22622228cb27fc9ee}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!file\+Handler@{file\+Handler}}
+\index{file\+Handler@{file\+Handler}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{file\+Handler}{fileHandler}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+file\+Handler = logging.\+File\+Handler(\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a9148bf18e6bcdc8a98559470787cbbd3}{logger\+F\+Name})}
+
+
+
+Definition at line 75 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aff84352e7940cc88f892f75360a6a54d}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aff84352e7940cc88f892f75360a6a54d}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!label\+Comparison\+Dict@{label\+Comparison\+Dict}}
+\index{label\+Comparison\+Dict@{label\+Comparison\+Dict}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{label\+Comparison\+Dict}{labelComparisonDict}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+label\+Comparison\+Dict}
+
+
+
+Definition at line 94 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a49b763d06efdcaac2bc45c6b054827b0}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a49b763d06efdcaac2bc45c6b054827b0}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!log\+Formatter@{log\+Formatter}}
+\index{log\+Formatter@{log\+Formatter}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{log\+Formatter}{logFormatter}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+log\+Formatter = logging.\+Formatter(\char`\"{}\mbox{[}\%(levelname)s\mbox{]} \%(message)s\char`\"{})}
+
+
+
+Definition at line 68 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a9148bf18e6bcdc8a98559470787cbbd3}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a9148bf18e6bcdc8a98559470787cbbd3}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!logger\+F\+Name@{logger\+F\+Name}}
+\index{logger\+F\+Name@{logger\+F\+Name}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{logger\+F\+Name}{loggerFName}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+logger\+F\+Name = join(\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a227131024b77a9c68261ee558002e8c4}{data\+Path}, \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a6de46d6299824b843c610668a3d4e3d0}{base\+Log\+File\+Name} + \textquotesingle{}\+\_\+\textquotesingle{} + str(\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_adabd782041187b40f1b3256100a40f18}{file\+\_\+i}) + \textquotesingle{}.log\textquotesingle{})}
+
+
+
+Definition at line 60 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_afc2414cf44fd68b8bfe50896cca60315}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_afc2414cf44fd68b8bfe50896cca60315}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!mm@{mm}}
+\index{mm@{mm}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{mm}{mm}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+mm = initialise\+Models(sys.\+argv\mbox{[}1\+:4\mbox{]}, sys.\+argv\mbox{[}4\mbox{]})}
+
+
+
+Definition at line 86 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a23d9f2671eb0af14906ea1e7e7d604b2}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a23d9f2671eb0af14906ea1e7e7d604b2}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!model\+Path@{model\+Path}}
+\index{model\+Path@{model\+Path}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{model\+Path}{modelPath}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+model\+Path = sys.\+argv\mbox{[}2\mbox{]}}
+
+
+
+Definition at line 54 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ada829c3b8c4a9aa3c556a90ad84ed7b2}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ada829c3b8c4a9aa3c556a90ad84ed7b2}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!nan@{nan}}
+\index{nan@{nan}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{nan}{nan}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+nan}
+
+
+
+Definition at line 25 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a8cc79c923d6b6bed5dbdf3edfcdda00a}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a8cc79c923d6b6bed5dbdf3edfcdda00a}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!num\+Parts@{num\+Parts}}
+\index{num\+Parts@{num\+Parts}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{num\+Parts}{numParts}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+num\+Parts = len(\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_afc2414cf44fd68b8bfe50896cca60315}{mm}\mbox{[}0\mbox{]}.participant\+List)}
+
+
+
+Definition at line 99 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ab5021bf6fb77308233bbc3595f77294d}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ab5021bf6fb77308233bbc3595f77294d}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!overall\+Performance@{overall\+Performance}}
+\index{overall\+Performance@{overall\+Performance}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{overall\+Performance}{overallPerformance}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+overall\+Performance = 100000}
+
+
+
+Definition at line 92 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a95f48ae2ace4025d7c9486bca0b71c0a}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a95f48ae2ace4025d7c9486bca0b71c0a}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!overall\+Performance\+Labels@{overall\+Performance\+Labels}}
+\index{overall\+Performance\+Labels@{overall\+Performance\+Labels}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{overall\+Performance\+Labels}{overallPerformanceLabels}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+overall\+Performance\+Labels}
+
+
+
+Definition at line 94 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a0d813ce557a3e734bb4d3cdc1d1c5519}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a0d813ce557a3e734bb4d3cdc1d1c5519}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!precision@{precision}}
+\index{precision@{precision}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{precision}{precision}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+precision}
+
+
+
+Definition at line 25 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aa105ba4fe5c01efd4e10f0b17e51cd5b}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aa105ba4fe5c01efd4e10f0b17e51cd5b}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!root@{root}}
+\index{root@{root}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{root}{root}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+root}
+
+
+
+Definition at line 82 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aa6c9142ef2ae49892e6882a070a3afcd}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aa6c9142ef2ae49892e6882a070a3afcd}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!root\+Logger@{root\+Logger}}
+\index{root\+Logger@{root\+Logger}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{root\+Logger}{rootLogger}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+root\+Logger = logging.\+get\+Logger(\textquotesingle{}train \textquotesingle{} + \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ae368415e9cd168f04649ec4912f6fbb2}{driver\+Name})}
+
+
+
+Definition at line 72 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a75a8353e5b55e744062b1b0b85bfa209}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a75a8353e5b55e744062b1b0b85bfa209}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!threshold@{threshold}}
+\index{threshold@{threshold}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{threshold}{threshold}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+threshold}
+
+
+
+Definition at line 25 of file train\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a3d4d044a08cd44ee4b4b3cde836c5eed}\label{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a3d4d044a08cd44ee4b4b3cde836c5eed}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}!windowed\+Mode@{windowed\+Mode}}
+\index{windowed\+Mode@{windowed\+Mode}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::train\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{windowed\+Mode}{windowedMode}}
+{\footnotesize\ttfamily string S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+windowed\+Mode = \textquotesingle{}True\textquotesingle{}}
+
+
+
+Definition at line 56 of file train\+S\+A\+M\+Model.\+py.
+

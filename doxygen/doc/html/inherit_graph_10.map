@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$group__icubclient__representations.html#classicubclient_1_1Entity" title="Represent any entity that can be stored within the OPC. " alt="" coords="5,31,136,57"/>
+<area shape="rect" id="node2" href="$group__icubclient__representations.html#classicubclient_1_1Action" title="Represents an action, whether composite or not. " alt="" coords="184,5,319,32"/>
+<area shape="rect" id="node3" href="$group__icubclient__representations.html#classicubclient_1_1Object" title="Represent any physical entity (including objects and agents) that can be stored within the OPC..." alt="" coords="184,56,319,83"/>
+<area shape="rect" id="node4" href="$group__icubclient__representations.html#classicubclient_1_1Agent" title="Represent an agent. " alt="" coords="377,31,508,57"/>
+<area shape="rect" id="node5" href="$group__icubclient__representations.html#classicubclient_1_1Bodypart" title="Represents a body part of the robot. " alt="" coords="367,81,519,108"/>
+</map>

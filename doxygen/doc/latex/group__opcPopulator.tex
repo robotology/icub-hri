@@ -1,0 +1,420 @@
+\hypertarget{group__opcPopulator}{}\section{opc\+Populator}
+\label{group__opcPopulator}\index{opc\+Populator@{opc\+Populator}}
+
+
+The opc\+Populator can be used to spawn new entities in simulation and control their parameters.  
+
+
+Collaboration diagram for opc\+Populator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=312pt]{group__opcPopulator}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__opcPopulator_classopcPopulator}{opc\+Populator}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The opc\+Populator can be used to spawn new entities in simulation and control their parameters. 
+
+This allows testing new functionalities in a controlled environment, without the noise encountered when using the real robot. Version\+:1.\+0 \begin{DoxyAuthor}{Author}
+Grégoire Pointeau \href{mailto:greg.pointeau@gmail.com}{\tt greg.\+pointeau@gmail.\+com}, Tobias Fischer \href{mailto:t.fischer@imperial.ac.uk}{\tt t.\+fischer@imperial.\+ac.\+uk} ~\newline
+
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Released under the terms of the G\+NU G\+PL v2.\+0 
+\end{DoxyCopyright}
+\hypertarget{group__touchDetector_intro_sec}{}\subsection{Description}\label{group__touchDetector_intro_sec}
+\hypertarget{group__touchDetector_parameters_sec}{}\subsection{Parameters}\label{group__touchDetector_parameters_sec}
+\hypertarget{group__touchDetector_inputports_sec}{}\subsection{Input Ports}\label{group__touchDetector_inputports_sec}
+\hypertarget{group__touchDetector_outputports_sec}{}\subsection{Output Ports}\label{group__touchDetector_outputports_sec}
+\hypertarget{group__touchDetector_services_sec}{}\subsection{Services}\label{group__touchDetector_services_sec}
+
+
+\subsection{Class Documentation}
+\index{opc\+Populator@{opc\+Populator}}\label{classopcPopulator}
+\Hypertarget{group__opcPopulator_classopcPopulator}
+\subsubsection{class opc\+Populator}
+
+
+Definition at line 13 of file opc\+Populator.\+h.
+
+
+
+Inheritance diagram for opc\+Populator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=160pt]{classopcPopulator__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__opcPopulator_a10c0ce4c8e20c9aa8f099fdb4ed15dcf}{configure} (yarp\+::os\+::\+Resource\+Finder \&rf)
+\item 
+bool \hyperlink{group__opcPopulator_a0bc208963071925c24e1c57a68f8881a}{interrupt\+Module} ()
+\item 
+bool \hyperlink{group__opcPopulator_a191a9f593be9cd6e877f1fd56804ba5b}{close} ()
+\item 
+double \hyperlink{group__opcPopulator_aeacfc987ebd30dd7c5fa23b586073fe8}{get\+Period} ()
+\item 
+bool \hyperlink{group__opcPopulator_a7b04ad1b8eadd3461062c611341d756d}{update\+Module} ()
+\item 
+bool \hyperlink{group__opcPopulator_a1b284864323f5a872cdcff286c3fd9f8}{populate\+Entity\+Random} (const yarp\+::os\+::\+Bottle \&b\+Input)
+\begin{DoxyCompactList}\small\item\em populate\+Entity\+Random populate entity from Bottle \end{DoxyCompactList}\item 
+bool \hyperlink{group__opcPopulator_ac93ef7767dd4ad2a9188c5a35372674a}{populate\+Red\+Ball} ()
+\begin{DoxyCompactList}\small\item\em populate\+Red\+Ball populate object with name \char`\"{}red\+\_\+ball\char`\"{} at location (-\/0.\+4, 0.\+25, 0.\+0); is\+\_\+present=0.\+0; color=(250,0,0) \end{DoxyCompactList}\item 
+bool \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific} ()
+\begin{DoxyCompactList}\small\item\em populate\+Specific populate four objects (\char`\"{}bottom\+\_\+left\char`\"{}, \char`\"{}bottom\+\_\+right\char`\"{}, according to X\+\_\+obj, Y\+\_\+obj, Z\+\_\+obj, and \char`\"{}top\+\_\+left\char`\"{}, \char`\"{}top\+\_\+right\char`\"{} according to X\+\_\+ag, Y\+\_\+ag, Z\+\_\+ag \end{DoxyCompactList}\item 
+bool \hyperlink{group__opcPopulator_a0f7311f7f70e2467ec283c7bae0a052c}{populate\+Two\+Unknowns} ()
+\begin{DoxyCompactList}\small\item\em populate\+Two\+Unknowns populate two objects\+: \char`\"{}unknown\+\_\+1\char`\"{} at (-\/0.\+4, 0.\+25, 0.\+0) and \char`\"{}unknown\+\_\+2\char`\"{} at (-\/0.\+4, -\/0.\+25, 0.\+0), both present and randomly colored \end{DoxyCompactList}\item 
+bool \hyperlink{group__opcPopulator_a85dcb08eeb5dd99770190dc06abfcef1}{add\+Unknown\+Entity} (const yarp\+::os\+::\+Bottle \&b\+Input)
+\begin{DoxyCompactList}\small\item\em add\+Unknown\+Entity populate object / agent at pseudo-\/random location, pseudo-\/randomly colored \end{DoxyCompactList}\item 
+bool \hyperlink{group__opcPopulator_a2af2bb944aa9801c0ad8634cdffee498}{set\+Attribute\+Entity} (const yarp\+::os\+::\+Bottle \&b\+Input, std\+::function$<$ void(\hyperlink{group__icubclient__representations_classicubclient_1_1Object}{icubclient\+::\+Object} $\ast$, double)$>$ f\+\_\+setter)
+\begin{DoxyCompactList}\small\item\em set\+Attribute\+Entity set an attribute of an object \end{DoxyCompactList}\item 
+bool \hyperlink{group__opcPopulator_ab8b7466e7e126e6604711824986ec0ac}{respond} (const yarp\+::os\+::\+Bottle \&cmd, yarp\+::os\+::\+Bottle \&reply)
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$ \hyperlink{group__opcPopulator_ae91ad173bd26955fced3acbd7955e860}{i\+Cub}
+\item 
+double \hyperlink{group__opcPopulator_a899c2fd9b44a6d91bae7e393dab25301}{period}
+\item 
+yarp\+::os\+::\+Port \hyperlink{group__opcPopulator_a7e160f62f4024857d8175ac8292bc0e6}{rpc}
+\item 
+double \hyperlink{group__opcPopulator_a5eb44c3b76f843da34dde2cf8976ddaf}{X\+\_\+obj}
+\begin{DoxyCompactList}\small\item\em X coordinate of object used within \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific()} for bottom\+\_\+left and bottom\+\_\+right. \end{DoxyCompactList}\item 
+double \hyperlink{group__opcPopulator_afa134f43a94a563ea0be367d3bd956f7}{Y\+\_\+obj}
+\begin{DoxyCompactList}\small\item\em Y coordinate of object used within \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific()} for bottom\+\_\+left (inverted) and bottom\+\_\+right. \end{DoxyCompactList}\item 
+double \hyperlink{group__opcPopulator_a5c6e50b6ea1a2112bbe8b484bee1a0b5}{Z\+\_\+obj}
+\begin{DoxyCompactList}\small\item\em Z coordinate of object used within \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific()} for bottom\+\_\+left and bottom\+\_\+right. \end{DoxyCompactList}\item 
+double \hyperlink{group__opcPopulator_ab1ea488289622582f9f3ffaeb39845cf}{X\+\_\+ag}
+\begin{DoxyCompactList}\small\item\em X coordinate of object used within \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific()} for top\+\_\+left and top\+\_\+right. \end{DoxyCompactList}\item 
+double \hyperlink{group__opcPopulator_a1128329503e3c50b59dc0ad5f43a5719}{Y\+\_\+ag}
+\begin{DoxyCompactList}\small\item\em Y coordinate of object used within \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific()} for top\+\_\+left (inverted) and top\+\_\+right. \end{DoxyCompactList}\item 
+double \hyperlink{group__opcPopulator_a7538dcad96e0b3be0a930f3f85ab0708}{Z\+\_\+ag}
+\begin{DoxyCompactList}\small\item\em Z coordinate of object used within \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific()} for top\+\_\+left and top\+\_\+right. \end{DoxyCompactList}\item 
+double \hyperlink{group__opcPopulator_aeffb7a10bda618b48f14298b671eec2d}{noise}
+\begin{DoxyCompactList}\small\item\em (Gaussian) noise to be added to X\+\_\+obj, Y\+\_\+obj, Z\+\_\+obj, X\+\_\+ag, Y\+\_\+ag, Z\+\_\+ag in \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific()} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__opcPopulator_a85dcb08eeb5dd99770190dc06abfcef1}\label{group__opcPopulator_a85dcb08eeb5dd99770190dc06abfcef1}} 
+\index{opc\+Populator@{opc\+Populator}!add\+Unknown\+Entity@{add\+Unknown\+Entity}}
+\index{add\+Unknown\+Entity@{add\+Unknown\+Entity}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{add\+Unknown\+Entity()}{addUnknownEntity()}}
+{\footnotesize\ttfamily bool opc\+Populator\+::add\+Unknown\+Entity (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{b\+Input }\end{DoxyParamCaption})}
+
+
+
+add\+Unknown\+Entity populate object / agent at pseudo-\/random location, pseudo-\/randomly colored 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b\+Input} & \char`\"{}add\+Unknown\+Entity type\char`\"{} where type is \char`\"{}agent\char`\"{} or \char`\"{}object\char`\"{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successful 
+\end{DoxyReturn}
+
+
+Definition at line 178 of file opc\+Populator.\+cpp.
+
+\mbox{\Hypertarget{group__opcPopulator_a191a9f593be9cd6e877f1fd56804ba5b}\label{group__opcPopulator_a191a9f593be9cd6e877f1fd56804ba5b}} 
+\index{opc\+Populator@{opc\+Populator}!close@{close}}
+\index{close@{close}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool opc\+Populator\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 57 of file opc\+Populator.\+cpp.
+
+\mbox{\Hypertarget{group__opcPopulator_a10c0ce4c8e20c9aa8f099fdb4ed15dcf}\label{group__opcPopulator_a10c0ce4c8e20c9aa8f099fdb4ed15dcf}} 
+\index{opc\+Populator@{opc\+Populator}!configure@{configure}}
+\index{configure@{configure}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool opc\+Populator\+::configure (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf }\end{DoxyParamCaption})}
+
+
+
+Definition at line 10 of file opc\+Populator.\+cpp.
+
+\mbox{\Hypertarget{group__opcPopulator_aeacfc987ebd30dd7c5fa23b586073fe8}\label{group__opcPopulator_aeacfc987ebd30dd7c5fa23b586073fe8}} 
+\index{opc\+Populator@{opc\+Populator}!get\+Period@{get\+Period}}
+\index{get\+Period@{get\+Period}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{get\+Period()}{getPeriod()}}
+{\footnotesize\ttfamily double opc\+Populator\+::get\+Period (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 38 of file opc\+Populator.\+h.
+
+\mbox{\Hypertarget{group__opcPopulator_a0bc208963071925c24e1c57a68f8881a}\label{group__opcPopulator_a0bc208963071925c24e1c57a68f8881a}} 
+\index{opc\+Populator@{opc\+Populator}!interrupt\+Module@{interrupt\+Module}}
+\index{interrupt\+Module@{interrupt\+Module}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{interrupt\+Module()}{interruptModule()}}
+{\footnotesize\ttfamily bool opc\+Populator\+::interrupt\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 31 of file opc\+Populator.\+h.
+
+\mbox{\Hypertarget{group__opcPopulator_a1b284864323f5a872cdcff286c3fd9f8}\label{group__opcPopulator_a1b284864323f5a872cdcff286c3fd9f8}} 
+\index{opc\+Populator@{opc\+Populator}!populate\+Entity\+Random@{populate\+Entity\+Random}}
+\index{populate\+Entity\+Random@{populate\+Entity\+Random}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{populate\+Entity\+Random()}{populateEntityRandom()}}
+{\footnotesize\ttfamily bool opc\+Populator\+::populate\+Entity\+Random (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{b\+Input }\end{DoxyParamCaption})}
+
+
+
+populate\+Entity\+Random populate entity from Bottle 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b\+Input} & Bottle containing type \char`\"{}populate\+Entity\+Random type name\char`\"{} where type is \char`\"{}agent\char`\"{} or \char`\"{}object\char`\"{} and name is the name of the new entity \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successful 
+\end{DoxyReturn}
+
+
+Definition at line 133 of file opc\+Populator.\+cpp.
+
+\mbox{\Hypertarget{group__opcPopulator_ac93ef7767dd4ad2a9188c5a35372674a}\label{group__opcPopulator_ac93ef7767dd4ad2a9188c5a35372674a}} 
+\index{opc\+Populator@{opc\+Populator}!populate\+Red\+Ball@{populate\+Red\+Ball}}
+\index{populate\+Red\+Ball@{populate\+Red\+Ball}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{populate\+Red\+Ball()}{populateRedBall()}}
+{\footnotesize\ttfamily bool opc\+Populator\+::populate\+Red\+Ball (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+populate\+Red\+Ball populate object with name \char`\"{}red\+\_\+ball\char`\"{} at location (-\/0.\+4, 0.\+25, 0.\+0); is\+\_\+present=0.\+0; color=(250,0,0) 
+
+\begin{DoxyReturn}{Returns}
+true if successful 
+\end{DoxyReturn}
+
+
+Definition at line 325 of file opc\+Populator.\+cpp.
+
+\mbox{\Hypertarget{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}\label{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}} 
+\index{opc\+Populator@{opc\+Populator}!populate\+Specific@{populate\+Specific}}
+\index{populate\+Specific@{populate\+Specific}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{populate\+Specific()}{populateSpecific()}}
+{\footnotesize\ttfamily bool opc\+Populator\+::populate\+Specific (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+populate\+Specific populate four objects (\char`\"{}bottom\+\_\+left\char`\"{}, \char`\"{}bottom\+\_\+right\char`\"{}, according to X\+\_\+obj, Y\+\_\+obj, Z\+\_\+obj, and \char`\"{}top\+\_\+left\char`\"{}, \char`\"{}top\+\_\+right\char`\"{} according to X\+\_\+ag, Y\+\_\+ag, Z\+\_\+ag 
+
+\begin{DoxyReturn}{Returns}
+true if successful 
+\end{DoxyReturn}
+
+
+Definition at line 249 of file opc\+Populator.\+cpp.
+
+\mbox{\Hypertarget{group__opcPopulator_a0f7311f7f70e2467ec283c7bae0a052c}\label{group__opcPopulator_a0f7311f7f70e2467ec283c7bae0a052c}} 
+\index{opc\+Populator@{opc\+Populator}!populate\+Two\+Unknowns@{populate\+Two\+Unknowns}}
+\index{populate\+Two\+Unknowns@{populate\+Two\+Unknowns}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{populate\+Two\+Unknowns()}{populateTwoUnknowns()}}
+{\footnotesize\ttfamily bool opc\+Populator\+::populate\+Two\+Unknowns (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+populate\+Two\+Unknowns populate two objects\+: \char`\"{}unknown\+\_\+1\char`\"{} at (-\/0.\+4, 0.\+25, 0.\+0) and \char`\"{}unknown\+\_\+2\char`\"{} at (-\/0.\+4, -\/0.\+25, 0.\+0), both present and randomly colored 
+
+\begin{DoxyReturn}{Returns}
+true if successful 
+\end{DoxyReturn}
+
+
+Definition at line 298 of file opc\+Populator.\+cpp.
+
+\mbox{\Hypertarget{group__opcPopulator_ab8b7466e7e126e6604711824986ec0ac}\label{group__opcPopulator_ab8b7466e7e126e6604711824986ec0ac}} 
+\index{opc\+Populator@{opc\+Populator}!respond@{respond}}
+\index{respond@{respond}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{respond()}{respond()}}
+{\footnotesize\ttfamily bool opc\+Populator\+::respond (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{cmd,  }\item[{yarp\+::os\+::\+Bottle \&}]{reply }\end{DoxyParamCaption})}
+
+
+
+Definition at line 65 of file opc\+Populator.\+cpp.
+
+\mbox{\Hypertarget{group__opcPopulator_a2af2bb944aa9801c0ad8634cdffee498}\label{group__opcPopulator_a2af2bb944aa9801c0ad8634cdffee498}} 
+\index{opc\+Populator@{opc\+Populator}!set\+Attribute\+Entity@{set\+Attribute\+Entity}}
+\index{set\+Attribute\+Entity@{set\+Attribute\+Entity}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{set\+Attribute\+Entity()}{setAttributeEntity()}}
+{\footnotesize\ttfamily bool opc\+Populator\+::set\+Attribute\+Entity (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{b\+Input,  }\item[{std\+::function$<$ void(\hyperlink{group__icubclient__representations_classicubclient_1_1Object}{icubclient\+::\+Object} $\ast$, double)$>$}]{f\+\_\+setter }\end{DoxyParamCaption})}
+
+
+
+set\+Attribute\+Entity set an attribute of an object 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b\+Input} & Bottle with format \char`\"{}set\+Attribute\+Entity name target\+Value\char`\"{} where name defines the object and target\+Value defines the new value \\
+\hline
+{\em f\+\_\+setter} & function pointer to function to be called, e.\+g. to \hyperlink{group__icubclient__representations_ae2d186d50a741b1d2c90ad5172268de8}{icubclient\+::\+Object\+::set\+Saliency()} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successful 
+\end{DoxyReturn}
+
+
+Definition at line 224 of file opc\+Populator.\+cpp.
+
+\mbox{\Hypertarget{group__opcPopulator_a7b04ad1b8eadd3461062c611341d756d}\label{group__opcPopulator_a7b04ad1b8eadd3461062c611341d756d}} 
+\index{opc\+Populator@{opc\+Populator}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool opc\+Populator\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 129 of file opc\+Populator.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__opcPopulator_ae91ad173bd26955fced3acbd7955e860}\label{group__opcPopulator_ae91ad173bd26955fced3acbd7955e860}} 
+\index{opc\+Populator@{opc\+Populator}!i\+Cub@{i\+Cub}}
+\index{i\+Cub@{i\+Cub}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{i\+Cub}{iCub}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client}$\ast$ opc\+Populator\+::i\+Cub\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 16 of file opc\+Populator.\+h.
+
+\mbox{\Hypertarget{group__opcPopulator_aeffb7a10bda618b48f14298b671eec2d}\label{group__opcPopulator_aeffb7a10bda618b48f14298b671eec2d}} 
+\index{opc\+Populator@{opc\+Populator}!noise@{noise}}
+\index{noise@{noise}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{noise}{noise}}
+{\footnotesize\ttfamily double opc\+Populator\+::noise\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+(Gaussian) noise to be added to X\+\_\+obj, Y\+\_\+obj, Z\+\_\+obj, X\+\_\+ag, Y\+\_\+ag, Z\+\_\+ag in \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific()} 
+
+
+
+Definition at line 26 of file opc\+Populator.\+h.
+
+\mbox{\Hypertarget{group__opcPopulator_a899c2fd9b44a6d91bae7e393dab25301}\label{group__opcPopulator_a899c2fd9b44a6d91bae7e393dab25301}} 
+\index{opc\+Populator@{opc\+Populator}!period@{period}}
+\index{period@{period}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{period}{period}}
+{\footnotesize\ttfamily double opc\+Populator\+::period\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 17 of file opc\+Populator.\+h.
+
+\mbox{\Hypertarget{group__opcPopulator_a7e160f62f4024857d8175ac8292bc0e6}\label{group__opcPopulator_a7e160f62f4024857d8175ac8292bc0e6}} 
+\index{opc\+Populator@{opc\+Populator}!rpc@{rpc}}
+\index{rpc@{rpc}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{rpc}{rpc}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Port opc\+Populator\+::rpc\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 18 of file opc\+Populator.\+h.
+
+\mbox{\Hypertarget{group__opcPopulator_ab1ea488289622582f9f3ffaeb39845cf}\label{group__opcPopulator_ab1ea488289622582f9f3ffaeb39845cf}} 
+\index{opc\+Populator@{opc\+Populator}!X\+\_\+ag@{X\+\_\+ag}}
+\index{X\+\_\+ag@{X\+\_\+ag}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{X\+\_\+ag}{X\_ag}}
+{\footnotesize\ttfamily double opc\+Populator\+::\+X\+\_\+ag\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+X coordinate of object used within \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific()} for top\+\_\+left and top\+\_\+right. 
+
+
+
+Definition at line 23 of file opc\+Populator.\+h.
+
+\mbox{\Hypertarget{group__opcPopulator_a5eb44c3b76f843da34dde2cf8976ddaf}\label{group__opcPopulator_a5eb44c3b76f843da34dde2cf8976ddaf}} 
+\index{opc\+Populator@{opc\+Populator}!X\+\_\+obj@{X\+\_\+obj}}
+\index{X\+\_\+obj@{X\+\_\+obj}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{X\+\_\+obj}{X\_obj}}
+{\footnotesize\ttfamily double opc\+Populator\+::\+X\+\_\+obj\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+X coordinate of object used within \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific()} for bottom\+\_\+left and bottom\+\_\+right. 
+
+
+
+Definition at line 20 of file opc\+Populator.\+h.
+
+\mbox{\Hypertarget{group__opcPopulator_a1128329503e3c50b59dc0ad5f43a5719}\label{group__opcPopulator_a1128329503e3c50b59dc0ad5f43a5719}} 
+\index{opc\+Populator@{opc\+Populator}!Y\+\_\+ag@{Y\+\_\+ag}}
+\index{Y\+\_\+ag@{Y\+\_\+ag}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{Y\+\_\+ag}{Y\_ag}}
+{\footnotesize\ttfamily double opc\+Populator\+::\+Y\+\_\+ag\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Y coordinate of object used within \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific()} for top\+\_\+left (inverted) and top\+\_\+right. 
+
+
+
+Definition at line 24 of file opc\+Populator.\+h.
+
+\mbox{\Hypertarget{group__opcPopulator_afa134f43a94a563ea0be367d3bd956f7}\label{group__opcPopulator_afa134f43a94a563ea0be367d3bd956f7}} 
+\index{opc\+Populator@{opc\+Populator}!Y\+\_\+obj@{Y\+\_\+obj}}
+\index{Y\+\_\+obj@{Y\+\_\+obj}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{Y\+\_\+obj}{Y\_obj}}
+{\footnotesize\ttfamily double opc\+Populator\+::\+Y\+\_\+obj\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Y coordinate of object used within \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific()} for bottom\+\_\+left (inverted) and bottom\+\_\+right. 
+
+
+
+Definition at line 21 of file opc\+Populator.\+h.
+
+\mbox{\Hypertarget{group__opcPopulator_a7538dcad96e0b3be0a930f3f85ab0708}\label{group__opcPopulator_a7538dcad96e0b3be0a930f3f85ab0708}} 
+\index{opc\+Populator@{opc\+Populator}!Z\+\_\+ag@{Z\+\_\+ag}}
+\index{Z\+\_\+ag@{Z\+\_\+ag}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{Z\+\_\+ag}{Z\_ag}}
+{\footnotesize\ttfamily double opc\+Populator\+::\+Z\+\_\+ag\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Z coordinate of object used within \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific()} for top\+\_\+left and top\+\_\+right. 
+
+
+
+Definition at line 25 of file opc\+Populator.\+h.
+
+\mbox{\Hypertarget{group__opcPopulator_a5c6e50b6ea1a2112bbe8b484bee1a0b5}\label{group__opcPopulator_a5c6e50b6ea1a2112bbe8b484bee1a0b5}} 
+\index{opc\+Populator@{opc\+Populator}!Z\+\_\+obj@{Z\+\_\+obj}}
+\index{Z\+\_\+obj@{Z\+\_\+obj}!opc\+Populator@{opc\+Populator}}
+\subparagraph{\texorpdfstring{Z\+\_\+obj}{Z\_obj}}
+{\footnotesize\ttfamily double opc\+Populator\+::\+Z\+\_\+obj\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Z coordinate of object used within \hyperlink{group__opcPopulator_a0fba845edd63a15da94b864022d20ba3}{populate\+Specific()} for bottom\+\_\+left and bottom\+\_\+right. 
+
+
+
+Definition at line 22 of file opc\+Populator.\+h.
+

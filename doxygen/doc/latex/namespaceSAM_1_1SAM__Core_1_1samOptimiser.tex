@@ -1,0 +1,92 @@
+\hypertarget{namespaceSAM_1_1SAM__Core_1_1samOptimiser}{}\section{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+sam\+Optimiser Namespace Reference}
+\label{namespaceSAM_1_1SAM__Core_1_1samOptimiser}\index{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+sam\+Optimiser@{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+sam\+Optimiser}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__SAM__Core_classSAM_1_1SAM__Core_1_1samOptimiser_1_1modelOptClass}{model\+Opt\+Class}
+\begin{DoxyCompactList}\small\item\em Class to perform optimisation of \hyperlink{namespaceSAM}{S\+AM} Models.  \hyperlink{group__icubclient__SAM__Core_classSAM_1_1SAM__Core_1_1samOptimiser_1_1modelOptClass}{More...}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespaceSAM_1_1SAM__Core_1_1samOptimiser_aaa1732931d8935e827164fbc742a6bc0}{delete\+Model} (model\+Dir, new\+Name)
+\begin{DoxyCompactList}\small\item\em Utility function to delete models. \end{DoxyCompactList}\item 
+def \hyperlink{namespaceSAM_1_1SAM__Core_1_1samOptimiser_a67ff14e060a0779ce9ecadee717d76a5}{main} ()
+\begin{DoxyCompactList}\small\item\em Sets up the \hyperlink{group__icubclient__SAM__Core_classSAM_1_1SAM__Core_1_1samOptimiser_1_1modelOptClass}{model\+Opt\+Class} and calls G\+Py\+Opt optimisation for 200 iterations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1samOptimiser_a9dbac1c83d2aee8db8fe3a941547e71e}{precision}
+\item 
+bool \hyperlink{namespaceSAM_1_1SAM__Core_1_1samOptimiser_a5711439302add7b6791b1fb732529f06}{opt\+Not\+Found} = False
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1samOptimiser_aaa1732931d8935e827164fbc742a6bc0}\label{namespaceSAM_1_1SAM__Core_1_1samOptimiser_aaa1732931d8935e827164fbc742a6bc0}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser}!delete\+Model@{delete\+Model}}
+\index{delete\+Model@{delete\+Model}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser}}
+\subsubsection{\texorpdfstring{delete\+Model()}{deleteModel()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+sam\+Optimiser.\+delete\+Model (\begin{DoxyParamCaption}\item[{}]{model\+Dir,  }\item[{}]{new\+Name }\end{DoxyParamCaption})}
+
+
+
+Utility function to delete models. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Dir} & Directory containing the model to delete. \\
+\hline
+{\em new\+Name} & Subset of model files to delete. Either {\ttfamily best}, {\ttfamily backup} or {\ttfamily exp}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+
+None 
+\end{DoxyReturn}
+
+
+Definition at line 472 of file sam\+Optimiser.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1samOptimiser_a67ff14e060a0779ce9ecadee717d76a5}\label{namespaceSAM_1_1SAM__Core_1_1samOptimiser_a67ff14e060a0779ce9ecadee717d76a5}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser}!main@{main}}
+\index{main@{main}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+sam\+Optimiser.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sets up the \hyperlink{group__icubclient__SAM__Core_classSAM_1_1SAM__Core_1_1samOptimiser_1_1modelOptClass}{model\+Opt\+Class} and calls G\+Py\+Opt optimisation for 200 iterations. 
+
+Same arguments as model\+Opt\+Class.\+init().
+
+\begin{DoxyReturn}{Returns}
+0 if completed successfully. -\/1 if completed unsuccessfully. 
+\end{DoxyReturn}
+
+
+Definition at line 488 of file sam\+Optimiser.\+py.
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1samOptimiser_a5711439302add7b6791b1fb732529f06}\label{namespaceSAM_1_1SAM__Core_1_1samOptimiser_a5711439302add7b6791b1fb732529f06}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser}!opt\+Not\+Found@{opt\+Not\+Found}}
+\index{opt\+Not\+Found@{opt\+Not\+Found}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser}}
+\subsubsection{\texorpdfstring{opt\+Not\+Found}{optNotFound}}
+{\footnotesize\ttfamily bool S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+sam\+Optimiser.\+opt\+Not\+Found = False}
+
+
+
+Definition at line 26 of file sam\+Optimiser.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1samOptimiser_a9dbac1c83d2aee8db8fe3a941547e71e}\label{namespaceSAM_1_1SAM__Core_1_1samOptimiser_a9dbac1c83d2aee8db8fe3a941547e71e}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser}!precision@{precision}}
+\index{precision@{precision}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Optimiser}}
+\subsubsection{\texorpdfstring{precision}{precision}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+sam\+Optimiser.\+precision}
+
+
+
+Definition at line 24 of file sam\+Optimiser.\+py.
+

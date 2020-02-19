@@ -1,0 +1,12 @@
+<map id="icubclient::SubSystem" name="icubclient::SubSystem">
+<area shape="rect" id="node2" href="$group__icubclient__subsystems.html#classicubclient_1_1SubSystem__agentDetector" title="SubSystem for agentDetector. " alt="" coords="237,5,404,47"/>
+<area shape="rect" id="node3" href="$group__icubclient__subsystems.html#classicubclient_1_1SubSystem__ARE" title="SubSystem to deal with the actionsRenderingEngine module (a.k.a. " alt="" coords="221,71,420,98"/>
+<area shape="rect" id="node4" href="$group__icubclient__subsystems.html#classicubclient_1_1SubSystem__babbling" title="SubSystem for babbling. " alt="" coords="237,123,404,164"/>
+<area shape="rect" id="node5" href="$group__icubclient__subsystems.html#classicubclient_1_1SubSystem__emotion" title="SubSystem for emotion. " alt="" coords="237,188,404,229"/>
+<area shape="rect" id="node6" href="$group__icubclient__subsystems.html#classicubclient_1_1SubSystem__IOL2OPC" title="SubSystem for iol2opc. " alt="" coords="237,253,404,295"/>
+<area shape="rect" id="node7" href="$group__icubclient__subsystems.html#classicubclient_1_1SubSystem__KARMA" title="SubSystem to deal with the experimental affordance learning module (a.k.a. " alt="" coords="237,319,404,360"/>
+<area shape="rect" id="node8" href="$group__icubclient__subsystems.html#classicubclient_1_1SubSystem__Recog" title="Abstract subSystem for speech recognizer. " alt="" coords="237,384,404,425"/>
+<area shape="rect" id="node9" href="$group__icubclient__subsystems.html#classicubclient_1_1SubSystem__SAM" title="SubSystem for SAM. " alt="" coords="220,450,421,477"/>
+<area shape="rect" id="node10" href="$group__icubclient__subsystems.html#classicubclient_1_1SubSystem__Speech" title="Abstract subSystem for speech management (Text to Speech) " alt="" coords="237,501,404,543"/>
+<area shape="rect" id="node11" href="$group__icubclient__subsystems.html#classicubclient_1_1SubSystem__Speech__eSpeak" title="SubSystem for speech synthesis with emotional tuning of speed and pitch using eSpeak. " alt="" coords="469,501,636,543"/>
+</map>

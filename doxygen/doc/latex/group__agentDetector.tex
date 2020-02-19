@@ -1,0 +1,931 @@
+\hypertarget{group__agentDetector}{}\section{agent\+Detector}
+\label{group__agentDetector}\index{agent\+Detector@{agent\+Detector}}
+
+
+Module based on kinect\+Client \char`\"{}\+Kinect Wrapper Client\char`\"{} that track and recognize people.  
+
+
+Collaboration diagram for agent\+Detector\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{group__agentDetector}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__agentDetector_classAgentDetector}{Agent\+Detector}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{group__agentDetector_ga25ebeb7c406dcf4415f5126894542df2}{click\+Type} \{ \newline
+\hyperlink{group__agentDetector_gga25ebeb7c406dcf4415f5126894542df2a0e9a37114c0e458d28d52f06ec0f2242}{idle}, 
+\newline
+\hyperlink{group__agentDetector_gga25ebeb7c406dcf4415f5126894542df2aa478b8b23f59790658a6751a035e5805}{clicked\+\_\+left}, 
+\newline
+\hyperlink{group__agentDetector_gga25ebeb7c406dcf4415f5126894542df2a86d4d3b99acb8ae2bab34a7f2b426f2f}{clicked\+\_\+right}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module based on kinect\+Client \char`\"{}\+Kinect Wrapper Client\char`\"{} that track and recognize people. 
+
+Version\+:1.\+0 \begin{DoxyAuthor}{Author}
+Stéphane Lallée \href{mailto:stephane.lallee@gmail.com}{\tt stephane.\+lallee@gmail.\+com} ~\newline
+ 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Released under the terms of the G\+NU G\+PL v2.\+0 
+\end{DoxyCopyright}
+\hypertarget{group__touchDetector_intro_sec}{}\subsection{Description}\label{group__touchDetector_intro_sec}
+Module based on kinect\+Client \char`\"{}\+Kinect Wrapper Client\char`\"{} that tracks people. This module receives information from the \href{https://github.com/robotology/kinect-wrapper}{\tt Kinect Wrapper}, and convert joints to the i\+Cub referential. It requires the kinect\+Server, O\+PC and R\+FH running.\hypertarget{group__touchDetector_parameters_sec}{}\subsection{Parameters}\label{group__touchDetector_parameters_sec}
+
+\begin{DoxyItemize}
+\item --name\+: To specify the module\textquotesingle{}s name; all the open ports will be tagged with the prefix /name
+\item --from\+: To specify the configuration file
+\item --context\+: To specify the default context where config files are loader
+\item --period\+: period of acquisition in seconds
+\item --opc\+: To specify the specifies the opc database name, where data are readed
+\item --show\+Images\+: to have G\+UI with depth, images, joints, ...
+\item --show\+Mode\+: to select which images to show, as a sum of available types\+: rgb, depth, skeleton, players
+\item --x\+: x position of the images as a group
+\item --y\+: y position of the images as a group
+\item --x-\/rgb\+: x position of the rgb image
+\item --y-\/rgb\+: y position of the rgb image
+\item --x-\/depth\+: x position of the depth image
+\item --y-\/depth\+: y position of the depth image
+\item --x-\/skeleton\+: x position of the skeleton image
+\item --y-\/skeleton\+: y position of the skeleton image
+\item --x-\/players\+: x position of the players image
+\item --y-\/players\+: y position of the players image 
+\end{DoxyItemize}\hypertarget{group__touchDetector_inputports_sec}{}\subsection{Input Ports}\label{group__touchDetector_inputports_sec}
+
+\begin{DoxyItemize}
+\item /agent\+Detector/rpc \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Response port. Supported commands\+:
+\begin{DoxyItemize}
+\item change\+\_\+partner\+\_\+name N\+A\+M\+E\+\_\+\+S\+T\+R\+I\+NG\+: change the name of partner
+\item pause\+: lock with mutex
+\item resume\+: unlock the mutex
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{group__touchDetector_outputports_sec}{}\subsection{Output Ports}\label{group__touchDetector_outputports_sec}
+
+\begin{DoxyItemize}
+\item /agent\+Detector/skeleton\+:o \mbox{[}yarp\+::sig\+::\+Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: buffered port streaming out skeleton properties
+\item /agent\+Detector/kinect/depth\+Port\+:o \mbox{[}yarp\+::sig\+::\+Image\+Of\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: buffered port streaming out depth images
+\item /agent\+Detector/kinect/image\+Port\+:o \mbox{[}yarp\+::sig\+::\+Image\+Of\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: buffered port streaming out images
+\item /agent\+Detector/kinect/player\+Port\+:o \mbox{[}yarp\+::sig\+::\+Image\+Of\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: buffered port streaming out partner images
+\item /agent\+Detector/kinect/skeleton\+Port\+:o \mbox{[}yarp\+::sig\+::\+Image\+Of\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: buffered port streaming out skeleton images
+\item /agent\+Detector/kinect/agent\+Loc\+:o \mbox{[}yarp\+::sig\+::\+Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: buffered port streaming out agent location
+\item /agent\+Detector/rfh\+:o \mbox{[}rpc\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: port to communicate with reference\+Frame\+Handler rpc server
+\end{DoxyItemize}\hypertarget{group__touchDetector_services_sec}{}\subsection{Services}\label{group__touchDetector_services_sec}
+
+
+\subsection{Class Documentation}
+\index{Agent\+Detector@{Agent\+Detector}}\label{classAgentDetector}
+\Hypertarget{group__agentDetector_classAgentDetector}
+\subsubsection{class Agent\+Detector}
+
+
+Definition at line 46 of file Agent\+Detector.\+h.
+
+
+
+Inheritance diagram for Agent\+Detector\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=167pt]{classAgentDetector__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__agentDetector_a533b84ddb447390ef80cc8386918f642}{configure} (Resource\+Finder \&rf)
+\item 
+bool \hyperlink{group__agentDetector_aff2af42266faa0da3afc95a062b4f1d0}{check\+Calibration} ()
+\item 
+bool \hyperlink{group__agentDetector_ad64b374c4a8778157104c12c1d1869b5}{close} ()
+\item 
+bool \hyperlink{group__agentDetector_aa95b702577413fcefcdaeda24ca340ba}{respond} (const Bottle \&cmd, Bottle \&reply)
+\item 
+double \hyperlink{group__agentDetector_a8cf24dd16e761eb5492f178e0307e288}{get\+Period} ()
+\item 
+bool \hyperlink{group__agentDetector_a7efc1a96bdabfa4f2d995277df21132e}{update\+Module} ()
+\item 
+void \hyperlink{group__agentDetector_a31c14a80218f798b615ead89d062e700}{set\+Identity} (Player p, string name)
+\begin{DoxyCompactList}\small\item\em set\+Identity Set identity to a partner \end{DoxyCompactList}\item 
+string \hyperlink{group__agentDetector_af559f7bc17005f4bb49931533deffe5e}{get\+Identity} (Player p)
+\begin{DoxyCompactList}\small\item\em get\+Identity Obtain identity of partner \end{DoxyCompactList}\item 
+Vector \hyperlink{group__agentDetector_a8639602ced96cef823d2f3d442159d94}{transform2\+IR} (Vector v)
+\begin{DoxyCompactList}\small\item\em transform2\+IR Transform a position to IR reference frame \end{DoxyCompactList}\item 
+Vector \hyperlink{group__agentDetector_a0b84169ad615735082f1fa765469212e}{get\+Skeleton\+Pattern} (Player p)
+\begin{DoxyCompactList}\small\item\em get\+Skeleton\+Pattern Obtain some properties of partner skeleton, such as eblow, shoulder, head position and size \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{group__agentDetector_aa103b25b46ba3083c5c5dfe2b055306d}{click\+\_\+callback} (int event, int x, int y, int flags, void $\ast$param)
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__agentDetector_a157b0882a6adf6678897f913c96de2f8}{show\+Image\+Parser} (string \&mode, string \&submode)
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Kinect\+Wrapper\+Client \hyperlink{group__agentDetector_a2f5671fc2803530ccad5d6e46315f054}{client}
+\begin{DoxyCompactList}\small\item\em kinect wrapper client object \end{DoxyCompactList}\item 
+Image\+Of$<$ Pixel\+Rgb $>$ \hyperlink{group__agentDetector_a6dded50135450c781366c97ab9b81bd6}{rgb}
+\item 
+Image\+Of$<$ Pixel\+Mono16 $>$ \hyperlink{group__agentDetector_a3787f2b0cf6d213321d9590ac18b8958}{depth}
+\begin{DoxyCompactList}\small\item\em depth image in a Yarp format \end{DoxyCompactList}\item 
+Image\+Of$<$ Pixel\+Float $>$ \hyperlink{group__agentDetector_a24cfdd0522338cab6d61d8a172a9a6d2}{depth\+To\+Display}
+\begin{DoxyCompactList}\small\item\em depth image to display in a Yarp format \end{DoxyCompactList}\item 
+Image\+Of$<$ Pixel\+Bgr $>$ \hyperlink{group__agentDetector_aa9ec013e4af6845f699603cf3765630d}{players\+Image}
+\begin{DoxyCompactList}\small\item\em partner image in a Yarp format \end{DoxyCompactList}\item 
+Image\+Of$<$ Pixel\+Bgr $>$ \hyperlink{group__agentDetector_a9c2e8040860e91c499d63e805cbd6505}{skeleton\+Image}
+\begin{DoxyCompactList}\small\item\em skeleton imange in a Yarp format \end{DoxyCompactList}\item 
+Ipl\+Image $\ast$ \hyperlink{group__agentDetector_a87d602df434b454a1e0d727c4a1cafcb}{depth\+Tmp}
+\item 
+Ipl\+Image $\ast$ \hyperlink{group__agentDetector_a40598409523396516d85112512d7abb3}{rgb\+Tmp}
+\item 
+yarp\+::os\+::\+Buffered\+Port$<$ Bottle $>$ \hyperlink{group__agentDetector_aae49558e62e43aae0158f9bbd8fd49fe}{output\+Skeleton\+Port}
+\begin{DoxyCompactList}\small\item\em Output Yarp Buffered Port of Bottle contains skeleton properties. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::sig\+::\+Image\+Of$<$ yarp\+::sig\+::\+Pixel\+Float $>$ $>$ \hyperlink{group__agentDetector_af0e69945340f969d71c0e1cf3b7dbc2b}{depth\+Port}
+\begin{DoxyCompactList}\small\item\em Output Yarp Buffered Port of images contains depth information. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::sig\+::\+Image\+Of$<$ yarp\+::sig\+::\+Pixel\+Rgb $>$ $>$ \hyperlink{group__agentDetector_a10140a4002c6bb0c2e7cc5e762d4ad6c}{image\+Port}
+\begin{DoxyCompactList}\small\item\em Output Yarp Buffered Port of images contains images. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::sig\+::\+Image\+Of$<$ yarp\+::sig\+::\+Pixel\+Bgr $>$ $>$ \hyperlink{group__agentDetector_ab6de38a8d44bdebe0007e411dddb0e9a}{players\+Port}
+\begin{DoxyCompactList}\small\item\em Output Yarp Buffered Port of partner images. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::sig\+::\+Image\+Of$<$ yarp\+::sig\+::\+Pixel\+Bgr $>$ $>$ \hyperlink{group__agentDetector_a3f23450351feb8d52896a7b321343a93}{skeleton\+Port}
+\begin{DoxyCompactList}\small\item\em Output Yarp Buffered Port of skeleton images. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ Bottle $>$ \hyperlink{group__agentDetector_abf1d4495bc0e3521788c73b526704ac4}{agent\+Loc\+Out\+Port}
+\begin{DoxyCompactList}\small\item\em Output Yarp Buffered Port of Bottle contains agent location. \end{DoxyCompactList}\item 
+double \hyperlink{group__agentDetector_a6fe92037066cc5b2c59506897ddef375}{period}
+\item 
+bool \hyperlink{group__agentDetector_af4c907b2826df0adb81fcc3e6e794941}{show\+Images}
+\item 
+string \hyperlink{group__agentDetector_a3e8a7c80666869f36870a094b01e57f7}{show\+Mode}
+\begin{DoxyCompactList}\small\item\em string value of show mode of module\+: rgb, depth, skeleton, players \end{DoxyCompactList}\item 
+bool \hyperlink{group__agentDetector_a6c6335e325d46e248b870f902af0f276}{handle\+Multiple\+Players}
+\begin{DoxyCompactList}\small\item\em boolean value for multiple players or not, if not, obtain only the closest player \end{DoxyCompactList}\item 
+Player \hyperlink{group__agentDetector_a9cc73260275a9fed6733dba7f77d61cd}{joint}
+\item 
+deque$<$ Player $>$ \hyperlink{group__agentDetector_a675c7a91e1281572fdac3274585c0979}{joints}
+\item 
+Matrix \hyperlink{group__agentDetector_adfb0c0123ed2d62394c4dec7daed2aa8}{players}
+\item 
+string \hyperlink{group__agentDetector_a0636e8352e4746030c95f7eaac41658b}{partner\+\_\+default\+\_\+name}
+\begin{DoxyCompactList}\small\item\em string value of default name of partner \end{DoxyCompactList}\item 
+\hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client} $\ast$ \hyperlink{group__agentDetector_aa2eace7b8603a72863384e33de3da699}{opc}
+\begin{DoxyCompactList}\small\item\em O\+PC client object. \end{DoxyCompactList}\item 
+Port \hyperlink{group__agentDetector_add076c0ba22e85ce107773f11948d771}{rfh}
+\begin{DoxyCompactList}\small\item\em port to reference\+Frame\+Handler \end{DoxyCompactList}\item 
+Port \hyperlink{group__agentDetector_a522ec89dc04b6458a912cc2243abc113}{rpc}
+\begin{DoxyCompactList}\small\item\em rpc server port to receive requests \end{DoxyCompactList}\item 
+bool \hyperlink{group__agentDetector_a479858be24a1f5405ca47a51618dc8ce}{is\+Mounted}
+\begin{DoxyCompactList}\small\item\em boolean value to check if the IR is mounted or not \end{DoxyCompactList}\item 
+bool \hyperlink{group__agentDetector_a901883d999711b6632f0ecc5114ea0ca}{is\+Calibrated}
+\begin{DoxyCompactList}\small\item\em boolean value to check if the kinect is calibrated or not \end{DoxyCompactList}\item 
+Matrix \hyperlink{group__agentDetector_a2bd8fc165ecc3ddb4fa11b57255f3e28}{kinect2icub}
+\begin{DoxyCompactList}\small\item\em conversion matrix from kinect frame to icub frame \end{DoxyCompactList}\item 
+Matrix \hyperlink{group__agentDetector_a9f319fe7d3efdaa95b90509ca177dd51}{icub2ir}
+\item 
+int \hyperlink{group__agentDetector_a4b18a14345740285b71b1287b2c430fc}{points\+Cnt}
+\begin{DoxyCompactList}\small\item\em integer of number of points \end{DoxyCompactList}\item 
+\hyperlink{group__icubclient__representations_classicubclient_1_1Agent}{Agent} $\ast$ \hyperlink{group__agentDetector_a38a81af762b23e270a34dd75ea95e0cd}{partner}
+\begin{DoxyCompactList}\small\item\em human as an agent object \end{DoxyCompactList}\item 
+map$<$ int, string $>$ \hyperlink{group__agentDetector_afbbfd1710693aad1f25ee1e01af512ea}{identities}
+\item 
+map$<$ string, Vector $>$ \hyperlink{group__agentDetector_a325c1d7d68fe58e337e50327b7276160}{skeleton\+Patterns}
+\begin{DoxyCompactList}\small\item\em properties of skeleton obtained from kinect \end{DoxyCompactList}\item 
+double \hyperlink{group__agentDetector_a1866219161a7e18eedc710a943687565}{d\+Since}
+\begin{DoxyCompactList}\small\item\em double value of timers \end{DoxyCompactList}\item 
+unsigned long \hyperlink{group__agentDetector_ad9ac37b9a9ba8db75e99aec3aa6cdecd}{d\+Timing\+Last\+Apparition}
+\begin{DoxyCompactList}\small\item\em time struct of the last appartition of an agent \end{DoxyCompactList}\item 
+double \hyperlink{group__agentDetector_a43e5c578387b472710786a5665d8244e}{d\+Threshold\+Disparition}
+\begin{DoxyCompactList}\small\item\em timing maximal of non-\/reconnaissance of a agent, after thath we consider the agent as absent \end{DoxyCompactList}\item 
+Mutex \hyperlink{group__agentDetector_acafd08537c8ad4ace4fd067eb473cc99}{m}
+\end{DoxyCompactItemize}
+\subsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{group__agentDetector_ga25ebeb7c406dcf4415f5126894542df2}{click\+Type} \hyperlink{group__agentDetector_ad4e5781343294574e5f3e4fd71d45c12}{clicked} =\hyperlink{group__agentDetector_gga25ebeb7c406dcf4415f5126894542df2a0e9a37114c0e458d28d52f06ec0f2242}{idle}
+\begin{DoxyCompactList}\small\item\em clicked type of object\+: left, right or nothing \end{DoxyCompactList}\item 
+static float \hyperlink{group__agentDetector_a03df7736aa16aabd5c50b122b1bbac4a}{clickX} =0.\+0F
+\item 
+static float \hyperlink{group__agentDetector_ab855a695c17b0ce07aab0356c5a53d1f}{clickY} =0.\+0F
+\begin{DoxyCompactList}\small\item\em float value of clicked coordinate in x and y axes \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__agentDetector_aff2af42266faa0da3afc95a062b4f1d0}\label{group__agentDetector_aff2af42266faa0da3afc95a062b4f1d0}} 
+\index{Agent\+Detector@{Agent\+Detector}!check\+Calibration@{check\+Calibration}}
+\index{check\+Calibration@{check\+Calibration}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{check\+Calibration()}{checkCalibration()}}
+{\footnotesize\ttfamily bool Agent\+Detector\+::check\+Calibration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 205 of file Agent\+Detector.\+cpp.
+
+\mbox{\Hypertarget{group__agentDetector_aa103b25b46ba3083c5c5dfe2b055306d}\label{group__agentDetector_aa103b25b46ba3083c5c5dfe2b055306d}} 
+\index{Agent\+Detector@{Agent\+Detector}!click\+\_\+callback@{click\+\_\+callback}}
+\index{click\+\_\+callback@{click\+\_\+callback}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{click\+\_\+callback()}{click\_callback()}}
+{\footnotesize\ttfamily static void Agent\+Detector\+::click\+\_\+callback (\begin{DoxyParamCaption}\item[{int}]{event,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{flags,  }\item[{void $\ast$}]{param }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 143 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_ad64b374c4a8778157104c12c1d1869b5}\label{group__agentDetector_ad64b374c4a8778157104c12c1d1869b5}} 
+\index{Agent\+Detector@{Agent\+Detector}!close@{close}}
+\index{close@{close}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool Agent\+Detector\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 234 of file Agent\+Detector.\+cpp.
+
+\mbox{\Hypertarget{group__agentDetector_a533b84ddb447390ef80cc8386918f642}\label{group__agentDetector_a533b84ddb447390ef80cc8386918f642}} 
+\index{Agent\+Detector@{Agent\+Detector}!configure@{configure}}
+\index{configure@{configure}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool Agent\+Detector\+::configure (\begin{DoxyParamCaption}\item[{Resource\+Finder \&}]{rf }\end{DoxyParamCaption})}
+
+
+
+Definition at line 28 of file Agent\+Detector.\+cpp.
+
+\mbox{\Hypertarget{group__agentDetector_af559f7bc17005f4bb49931533deffe5e}\label{group__agentDetector_af559f7bc17005f4bb49931533deffe5e}} 
+\index{Agent\+Detector@{Agent\+Detector}!get\+Identity@{get\+Identity}}
+\index{get\+Identity@{get\+Identity}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{get\+Identity()}{getIdentity()}}
+{\footnotesize\ttfamily string Agent\+Detector\+::get\+Identity (\begin{DoxyParamCaption}\item[{Player}]{p }\end{DoxyParamCaption})}
+
+
+
+get\+Identity Obtain identity of partner 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & A kinect\+Wrapper Player struct of partner \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string value of obtained identity 
+\end{DoxyReturn}
+
+
+Definition at line 606 of file Agent\+Detector.\+cpp.
+
+\mbox{\Hypertarget{group__agentDetector_a8cf24dd16e761eb5492f178e0307e288}\label{group__agentDetector_a8cf24dd16e761eb5492f178e0307e288}} 
+\index{Agent\+Detector@{Agent\+Detector}!get\+Period@{get\+Period}}
+\index{get\+Period@{get\+Period}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{get\+Period()}{getPeriod()}}
+{\footnotesize\ttfamily double Agent\+Detector\+::get\+Period (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 285 of file Agent\+Detector.\+cpp.
+
+\mbox{\Hypertarget{group__agentDetector_a0b84169ad615735082f1fa765469212e}\label{group__agentDetector_a0b84169ad615735082f1fa765469212e}} 
+\index{Agent\+Detector@{Agent\+Detector}!get\+Skeleton\+Pattern@{get\+Skeleton\+Pattern}}
+\index{get\+Skeleton\+Pattern@{get\+Skeleton\+Pattern}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{get\+Skeleton\+Pattern()}{getSkeletonPattern()}}
+{\footnotesize\ttfamily Vector Agent\+Detector\+::get\+Skeleton\+Pattern (\begin{DoxyParamCaption}\item[{Player}]{p }\end{DoxyParamCaption})}
+
+
+
+get\+Skeleton\+Pattern Obtain some properties of partner skeleton, such as eblow, shoulder, head position and size 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & A kinect\+Wrapper Player struct of partner \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Yarp Vector contains properties 
+\end{DoxyReturn}
+
+
+Definition at line 591 of file Agent\+Detector.\+cpp.
+
+\mbox{\Hypertarget{group__agentDetector_aa95b702577413fcefcdaeda24ca340ba}\label{group__agentDetector_aa95b702577413fcefcdaeda24ca340ba}} 
+\index{Agent\+Detector@{Agent\+Detector}!respond@{respond}}
+\index{respond@{respond}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{respond()}{respond()}}
+{\footnotesize\ttfamily bool Agent\+Detector\+::respond (\begin{DoxyParamCaption}\item[{const Bottle \&}]{cmd,  }\item[{Bottle \&}]{reply }\end{DoxyParamCaption})}
+
+
+
+Definition at line 259 of file Agent\+Detector.\+cpp.
+
+\mbox{\Hypertarget{group__agentDetector_a31c14a80218f798b615ead89d062e700}\label{group__agentDetector_a31c14a80218f798b615ead89d062e700}} 
+\index{Agent\+Detector@{Agent\+Detector}!set\+Identity@{set\+Identity}}
+\index{set\+Identity@{set\+Identity}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{set\+Identity()}{setIdentity()}}
+{\footnotesize\ttfamily void Agent\+Detector\+::set\+Identity (\begin{DoxyParamCaption}\item[{Player}]{p,  }\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+set\+Identity Set identity to a partner 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & A kinect\+Wrapper Player struct of partner \\
+\hline
+{\em name} & string value of parner\textquotesingle{}s name \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__agentDetector_a157b0882a6adf6678897f913c96de2f8}\label{group__agentDetector_a157b0882a6adf6678897f913c96de2f8}} 
+\index{Agent\+Detector@{Agent\+Detector}!show\+Image\+Parser@{show\+Image\+Parser}}
+\index{show\+Image\+Parser@{show\+Image\+Parser}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{show\+Image\+Parser()}{showImageParser()}}
+{\footnotesize\ttfamily bool Agent\+Detector\+::show\+Image\+Parser (\begin{DoxyParamCaption}\item[{string \&}]{mode,  }\item[{string \&}]{submode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 10 of file Agent\+Detector.\+cpp.
+
+\mbox{\Hypertarget{group__agentDetector_a8639602ced96cef823d2f3d442159d94}\label{group__agentDetector_a8639602ced96cef823d2f3d442159d94}} 
+\index{Agent\+Detector@{Agent\+Detector}!transform2\+IR@{transform2\+IR}}
+\index{transform2\+IR@{transform2\+IR}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{transform2\+I\+R()}{transform2IR()}}
+{\footnotesize\ttfamily Vector Agent\+Detector\+::transform2\+IR (\begin{DoxyParamCaption}\item[{Vector}]{v }\end{DoxyParamCaption})}
+
+
+
+transform2\+IR Transform a position to IR reference frame 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & Yarp Vector of position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Yarp Vector of position in IR reference frame 
+\end{DoxyReturn}
+
+
+Definition at line 643 of file Agent\+Detector.\+cpp.
+
+\mbox{\Hypertarget{group__agentDetector_a7efc1a96bdabfa4f2d995277df21132e}\label{group__agentDetector_a7efc1a96bdabfa4f2d995277df21132e}} 
+\index{Agent\+Detector@{Agent\+Detector}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool Agent\+Detector\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 290 of file Agent\+Detector.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__agentDetector_abf1d4495bc0e3521788c73b526704ac4}\label{group__agentDetector_abf1d4495bc0e3521788c73b526704ac4}} 
+\index{Agent\+Detector@{Agent\+Detector}!agent\+Loc\+Out\+Port@{agent\+Loc\+Out\+Port}}
+\index{agent\+Loc\+Out\+Port@{agent\+Loc\+Out\+Port}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{agent\+Loc\+Out\+Port}{agentLocOutPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$Bottle$>$ Agent\+Detector\+::agent\+Loc\+Out\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Output Yarp Buffered Port of Bottle contains agent location. 
+
+
+
+Definition at line 64 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_ad4e5781343294574e5f3e4fd71d45c12}\label{group__agentDetector_ad4e5781343294574e5f3e4fd71d45c12}} 
+\index{Agent\+Detector@{Agent\+Detector}!clicked@{clicked}}
+\index{clicked@{clicked}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{clicked}{clicked}}
+{\footnotesize\ttfamily \hyperlink{group__agentDetector_ga25ebeb7c406dcf4415f5126894542df2}{click\+Type} Agent\+Detector\+::clicked =\hyperlink{group__agentDetector_gga25ebeb7c406dcf4415f5126894542df2a0e9a37114c0e458d28d52f06ec0f2242}{idle}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+clicked type of object\+: left, right or nothing 
+
+
+
+Definition at line 85 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a03df7736aa16aabd5c50b122b1bbac4a}\label{group__agentDetector_a03df7736aa16aabd5c50b122b1bbac4a}} 
+\index{Agent\+Detector@{Agent\+Detector}!clickX@{clickX}}
+\index{clickX@{clickX}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{clickX}{clickX}}
+{\footnotesize\ttfamily float Agent\+Detector\+::clickX =0.\+0F\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 86 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_ab855a695c17b0ce07aab0356c5a53d1f}\label{group__agentDetector_ab855a695c17b0ce07aab0356c5a53d1f}} 
+\index{Agent\+Detector@{Agent\+Detector}!clickY@{clickY}}
+\index{clickY@{clickY}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{clickY}{clickY}}
+{\footnotesize\ttfamily float Agent\+Detector\+::clickY =0.\+0F\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+float value of clicked coordinate in x and y axes 
+
+
+
+Definition at line 86 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a2f5671fc2803530ccad5d6e46315f054}\label{group__agentDetector_a2f5671fc2803530ccad5d6e46315f054}} 
+\index{Agent\+Detector@{Agent\+Detector}!client@{client}}
+\index{client@{client}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily Kinect\+Wrapper\+Client Agent\+Detector\+::client\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+kinect wrapper client object 
+
+
+
+Definition at line 50 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a3787f2b0cf6d213321d9590ac18b8958}\label{group__agentDetector_a3787f2b0cf6d213321d9590ac18b8958}} 
+\index{Agent\+Detector@{Agent\+Detector}!depth@{depth}}
+\index{depth@{depth}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{depth}{depth}}
+{\footnotesize\ttfamily Image\+Of$<$Pixel\+Mono16$>$ Agent\+Detector\+::depth\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+depth image in a Yarp format 
+
+
+
+Definition at line 52 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_af0e69945340f969d71c0e1cf3b7dbc2b}\label{group__agentDetector_af0e69945340f969d71c0e1cf3b7dbc2b}} 
+\index{Agent\+Detector@{Agent\+Detector}!depth\+Port@{depth\+Port}}
+\index{depth\+Port@{depth\+Port}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{depth\+Port}{depthPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::sig\+::\+Image\+Of$<$yarp\+::sig\+::\+Pixel\+Float$>$ $>$ Agent\+Detector\+::depth\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Output Yarp Buffered Port of images contains depth information. 
+
+
+
+Definition at line 60 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a87d602df434b454a1e0d727c4a1cafcb}\label{group__agentDetector_a87d602df434b454a1e0d727c4a1cafcb}} 
+\index{Agent\+Detector@{Agent\+Detector}!depth\+Tmp@{depth\+Tmp}}
+\index{depth\+Tmp@{depth\+Tmp}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{depth\+Tmp}{depthTmp}}
+{\footnotesize\ttfamily Ipl\+Image$\ast$ Agent\+Detector\+::depth\+Tmp\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 56 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a24cfdd0522338cab6d61d8a172a9a6d2}\label{group__agentDetector_a24cfdd0522338cab6d61d8a172a9a6d2}} 
+\index{Agent\+Detector@{Agent\+Detector}!depth\+To\+Display@{depth\+To\+Display}}
+\index{depth\+To\+Display@{depth\+To\+Display}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{depth\+To\+Display}{depthToDisplay}}
+{\footnotesize\ttfamily Image\+Of$<$Pixel\+Float$>$ Agent\+Detector\+::depth\+To\+Display\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+depth image to display in a Yarp format 
+
+
+
+Definition at line 53 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a1866219161a7e18eedc710a943687565}\label{group__agentDetector_a1866219161a7e18eedc710a943687565}} 
+\index{Agent\+Detector@{Agent\+Detector}!d\+Since@{d\+Since}}
+\index{d\+Since@{d\+Since}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{d\+Since}{dSince}}
+{\footnotesize\ttfamily double Agent\+Detector\+::d\+Since\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+double value of timers 
+
+
+
+Definition at line 92 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a43e5c578387b472710786a5665d8244e}\label{group__agentDetector_a43e5c578387b472710786a5665d8244e}} 
+\index{Agent\+Detector@{Agent\+Detector}!d\+Threshold\+Disparition@{d\+Threshold\+Disparition}}
+\index{d\+Threshold\+Disparition@{d\+Threshold\+Disparition}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{d\+Threshold\+Disparition}{dThresholdDisparition}}
+{\footnotesize\ttfamily double Agent\+Detector\+::d\+Threshold\+Disparition\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+timing maximal of non-\/reconnaissance of a agent, after thath we consider the agent as absent 
+
+
+
+Definition at line 95 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_ad9ac37b9a9ba8db75e99aec3aa6cdecd}\label{group__agentDetector_ad9ac37b9a9ba8db75e99aec3aa6cdecd}} 
+\index{Agent\+Detector@{Agent\+Detector}!d\+Timing\+Last\+Apparition@{d\+Timing\+Last\+Apparition}}
+\index{d\+Timing\+Last\+Apparition@{d\+Timing\+Last\+Apparition}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{d\+Timing\+Last\+Apparition}{dTimingLastApparition}}
+{\footnotesize\ttfamily unsigned long Agent\+Detector\+::d\+Timing\+Last\+Apparition\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+time struct of the last appartition of an agent 
+
+
+
+Definition at line 94 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a6c6335e325d46e248b870f902af0f276}\label{group__agentDetector_a6c6335e325d46e248b870f902af0f276}} 
+\index{Agent\+Detector@{Agent\+Detector}!handle\+Multiple\+Players@{handle\+Multiple\+Players}}
+\index{handle\+Multiple\+Players@{handle\+Multiple\+Players}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{handle\+Multiple\+Players}{handleMultiplePlayers}}
+{\footnotesize\ttfamily bool Agent\+Detector\+::handle\+Multiple\+Players\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+boolean value for multiple players or not, if not, obtain only the closest player 
+
+
+
+Definition at line 69 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a9f319fe7d3efdaa95b90509ca177dd51}\label{group__agentDetector_a9f319fe7d3efdaa95b90509ca177dd51}} 
+\index{Agent\+Detector@{Agent\+Detector}!icub2ir@{icub2ir}}
+\index{icub2ir@{icub2ir}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{icub2ir}{icub2ir}}
+{\footnotesize\ttfamily Matrix Agent\+Detector\+::icub2ir\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 82 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_afbbfd1710693aad1f25ee1e01af512ea}\label{group__agentDetector_afbbfd1710693aad1f25ee1e01af512ea}} 
+\index{Agent\+Detector@{Agent\+Detector}!identities@{identities}}
+\index{identities@{identities}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{identities}{identities}}
+{\footnotesize\ttfamily map$<$int, string$>$ Agent\+Detector\+::identities\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 90 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a10140a4002c6bb0c2e7cc5e762d4ad6c}\label{group__agentDetector_a10140a4002c6bb0c2e7cc5e762d4ad6c}} 
+\index{Agent\+Detector@{Agent\+Detector}!image\+Port@{image\+Port}}
+\index{image\+Port@{image\+Port}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{image\+Port}{imagePort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::sig\+::\+Image\+Of$<$yarp\+::sig\+::\+Pixel\+Rgb$>$ $>$ Agent\+Detector\+::image\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Output Yarp Buffered Port of images contains images. 
+
+
+
+Definition at line 61 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a901883d999711b6632f0ecc5114ea0ca}\label{group__agentDetector_a901883d999711b6632f0ecc5114ea0ca}} 
+\index{Agent\+Detector@{Agent\+Detector}!is\+Calibrated@{is\+Calibrated}}
+\index{is\+Calibrated@{is\+Calibrated}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{is\+Calibrated}{isCalibrated}}
+{\footnotesize\ttfamily bool Agent\+Detector\+::is\+Calibrated\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+boolean value to check if the kinect is calibrated or not 
+
+
+
+Definition at line 80 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a479858be24a1f5405ca47a51618dc8ce}\label{group__agentDetector_a479858be24a1f5405ca47a51618dc8ce}} 
+\index{Agent\+Detector@{Agent\+Detector}!is\+Mounted@{is\+Mounted}}
+\index{is\+Mounted@{is\+Mounted}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{is\+Mounted}{isMounted}}
+{\footnotesize\ttfamily bool Agent\+Detector\+::is\+Mounted\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+boolean value to check if the IR is mounted or not 
+
+
+
+Definition at line 79 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a9cc73260275a9fed6733dba7f77d61cd}\label{group__agentDetector_a9cc73260275a9fed6733dba7f77d61cd}} 
+\index{Agent\+Detector@{Agent\+Detector}!joint@{joint}}
+\index{joint@{joint}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{joint}{joint}}
+{\footnotesize\ttfamily Player Agent\+Detector\+::joint\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 70 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a675c7a91e1281572fdac3274585c0979}\label{group__agentDetector_a675c7a91e1281572fdac3274585c0979}} 
+\index{Agent\+Detector@{Agent\+Detector}!joints@{joints}}
+\index{joints@{joints}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{joints}{joints}}
+{\footnotesize\ttfamily deque$<$Player$>$ Agent\+Detector\+::joints\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 71 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a2bd8fc165ecc3ddb4fa11b57255f3e28}\label{group__agentDetector_a2bd8fc165ecc3ddb4fa11b57255f3e28}} 
+\index{Agent\+Detector@{Agent\+Detector}!kinect2icub@{kinect2icub}}
+\index{kinect2icub@{kinect2icub}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{kinect2icub}{kinect2icub}}
+{\footnotesize\ttfamily Matrix Agent\+Detector\+::kinect2icub\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+conversion matrix from kinect frame to icub frame 
+
+
+
+Definition at line 81 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_acafd08537c8ad4ace4fd067eb473cc99}\label{group__agentDetector_acafd08537c8ad4ace4fd067eb473cc99}} 
+\index{Agent\+Detector@{Agent\+Detector}!m@{m}}
+\index{m@{m}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{m}{m}}
+{\footnotesize\ttfamily Mutex Agent\+Detector\+::m\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 97 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_aa2eace7b8603a72863384e33de3da699}\label{group__agentDetector_aa2eace7b8603a72863384e33de3da699}} 
+\index{Agent\+Detector@{Agent\+Detector}!opc@{opc}}
+\index{opc@{opc}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{opc}{opc}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client}$\ast$ Agent\+Detector\+::opc\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+O\+PC client object. 
+
+
+
+Definition at line 76 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_aae49558e62e43aae0158f9bbd8fd49fe}\label{group__agentDetector_aae49558e62e43aae0158f9bbd8fd49fe}} 
+\index{Agent\+Detector@{Agent\+Detector}!output\+Skeleton\+Port@{output\+Skeleton\+Port}}
+\index{output\+Skeleton\+Port@{output\+Skeleton\+Port}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{output\+Skeleton\+Port}{outputSkeletonPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$Bottle$>$ Agent\+Detector\+::output\+Skeleton\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Output Yarp Buffered Port of Bottle contains skeleton properties. 
+
+
+
+Definition at line 59 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a38a81af762b23e270a34dd75ea95e0cd}\label{group__agentDetector_a38a81af762b23e270a34dd75ea95e0cd}} 
+\index{Agent\+Detector@{Agent\+Detector}!partner@{partner}}
+\index{partner@{partner}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{partner}{partner}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__representations_classicubclient_1_1Agent}{Agent}$\ast$ Agent\+Detector\+::partner\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+human as an agent object 
+
+
+
+Definition at line 89 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a0636e8352e4746030c95f7eaac41658b}\label{group__agentDetector_a0636e8352e4746030c95f7eaac41658b}} 
+\index{Agent\+Detector@{Agent\+Detector}!partner\+\_\+default\+\_\+name@{partner\+\_\+default\+\_\+name}}
+\index{partner\+\_\+default\+\_\+name@{partner\+\_\+default\+\_\+name}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{partner\+\_\+default\+\_\+name}{partner\_default\_name}}
+{\footnotesize\ttfamily string Agent\+Detector\+::partner\+\_\+default\+\_\+name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+string value of default name of partner 
+
+
+
+Definition at line 73 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a6fe92037066cc5b2c59506897ddef375}\label{group__agentDetector_a6fe92037066cc5b2c59506897ddef375}} 
+\index{Agent\+Detector@{Agent\+Detector}!period@{period}}
+\index{period@{period}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{period}{period}}
+{\footnotesize\ttfamily double Agent\+Detector\+::period\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 66 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_adfb0c0123ed2d62394c4dec7daed2aa8}\label{group__agentDetector_adfb0c0123ed2d62394c4dec7daed2aa8}} 
+\index{Agent\+Detector@{Agent\+Detector}!players@{players}}
+\index{players@{players}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{players}{players}}
+{\footnotesize\ttfamily Matrix Agent\+Detector\+::players\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 72 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_aa9ec013e4af6845f699603cf3765630d}\label{group__agentDetector_aa9ec013e4af6845f699603cf3765630d}} 
+\index{Agent\+Detector@{Agent\+Detector}!players\+Image@{players\+Image}}
+\index{players\+Image@{players\+Image}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{players\+Image}{playersImage}}
+{\footnotesize\ttfamily Image\+Of$<$Pixel\+Bgr$>$ Agent\+Detector\+::players\+Image\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+partner image in a Yarp format 
+
+
+
+Definition at line 54 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_ab6de38a8d44bdebe0007e411dddb0e9a}\label{group__agentDetector_ab6de38a8d44bdebe0007e411dddb0e9a}} 
+\index{Agent\+Detector@{Agent\+Detector}!players\+Port@{players\+Port}}
+\index{players\+Port@{players\+Port}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{players\+Port}{playersPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::sig\+::\+Image\+Of$<$yarp\+::sig\+::\+Pixel\+Bgr$>$ $>$ Agent\+Detector\+::players\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Output Yarp Buffered Port of partner images. 
+
+
+
+Definition at line 62 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a4b18a14345740285b71b1287b2c430fc}\label{group__agentDetector_a4b18a14345740285b71b1287b2c430fc}} 
+\index{Agent\+Detector@{Agent\+Detector}!points\+Cnt@{points\+Cnt}}
+\index{points\+Cnt@{points\+Cnt}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{points\+Cnt}{pointsCnt}}
+{\footnotesize\ttfamily int Agent\+Detector\+::points\+Cnt\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+integer of number of points 
+
+
+
+Definition at line 84 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_add076c0ba22e85ce107773f11948d771}\label{group__agentDetector_add076c0ba22e85ce107773f11948d771}} 
+\index{Agent\+Detector@{Agent\+Detector}!rfh@{rfh}}
+\index{rfh@{rfh}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{rfh}{rfh}}
+{\footnotesize\ttfamily Port Agent\+Detector\+::rfh\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+port to reference\+Frame\+Handler 
+
+
+
+Definition at line 77 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a6dded50135450c781366c97ab9b81bd6}\label{group__agentDetector_a6dded50135450c781366c97ab9b81bd6}} 
+\index{Agent\+Detector@{Agent\+Detector}!rgb@{rgb}}
+\index{rgb@{rgb}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{rgb}{rgb}}
+{\footnotesize\ttfamily Image\+Of$<$Pixel\+Rgb$>$ Agent\+Detector\+::rgb\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 51 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a40598409523396516d85112512d7abb3}\label{group__agentDetector_a40598409523396516d85112512d7abb3}} 
+\index{Agent\+Detector@{Agent\+Detector}!rgb\+Tmp@{rgb\+Tmp}}
+\index{rgb\+Tmp@{rgb\+Tmp}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{rgb\+Tmp}{rgbTmp}}
+{\footnotesize\ttfamily Ipl\+Image$\ast$ Agent\+Detector\+::rgb\+Tmp\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 57 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a522ec89dc04b6458a912cc2243abc113}\label{group__agentDetector_a522ec89dc04b6458a912cc2243abc113}} 
+\index{Agent\+Detector@{Agent\+Detector}!rpc@{rpc}}
+\index{rpc@{rpc}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{rpc}{rpc}}
+{\footnotesize\ttfamily Port Agent\+Detector\+::rpc\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+rpc server port to receive requests 
+
+
+
+Definition at line 78 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_af4c907b2826df0adb81fcc3e6e794941}\label{group__agentDetector_af4c907b2826df0adb81fcc3e6e794941}} 
+\index{Agent\+Detector@{Agent\+Detector}!show\+Images@{show\+Images}}
+\index{show\+Images@{show\+Images}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{show\+Images}{showImages}}
+{\footnotesize\ttfamily bool Agent\+Detector\+::show\+Images\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 67 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a3e8a7c80666869f36870a094b01e57f7}\label{group__agentDetector_a3e8a7c80666869f36870a094b01e57f7}} 
+\index{Agent\+Detector@{Agent\+Detector}!show\+Mode@{show\+Mode}}
+\index{show\+Mode@{show\+Mode}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{show\+Mode}{showMode}}
+{\footnotesize\ttfamily string Agent\+Detector\+::show\+Mode\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+string value of show mode of module\+: rgb, depth, skeleton, players 
+
+
+
+Definition at line 68 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a9c2e8040860e91c499d63e805cbd6505}\label{group__agentDetector_a9c2e8040860e91c499d63e805cbd6505}} 
+\index{Agent\+Detector@{Agent\+Detector}!skeleton\+Image@{skeleton\+Image}}
+\index{skeleton\+Image@{skeleton\+Image}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{skeleton\+Image}{skeletonImage}}
+{\footnotesize\ttfamily Image\+Of$<$Pixel\+Bgr$>$ Agent\+Detector\+::skeleton\+Image\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+skeleton imange in a Yarp format 
+
+
+
+Definition at line 55 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a325c1d7d68fe58e337e50327b7276160}\label{group__agentDetector_a325c1d7d68fe58e337e50327b7276160}} 
+\index{Agent\+Detector@{Agent\+Detector}!skeleton\+Patterns@{skeleton\+Patterns}}
+\index{skeleton\+Patterns@{skeleton\+Patterns}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{skeleton\+Patterns}{skeletonPatterns}}
+{\footnotesize\ttfamily map$<$string, Vector$>$ Agent\+Detector\+::skeleton\+Patterns\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+properties of skeleton obtained from kinect 
+
+
+
+Definition at line 91 of file Agent\+Detector.\+h.
+
+\mbox{\Hypertarget{group__agentDetector_a3f23450351feb8d52896a7b321343a93}\label{group__agentDetector_a3f23450351feb8d52896a7b321343a93}} 
+\index{Agent\+Detector@{Agent\+Detector}!skeleton\+Port@{skeleton\+Port}}
+\index{skeleton\+Port@{skeleton\+Port}!Agent\+Detector@{Agent\+Detector}}
+\subparagraph{\texorpdfstring{skeleton\+Port}{skeletonPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::sig\+::\+Image\+Of$<$yarp\+::sig\+::\+Pixel\+Bgr$>$ $>$ Agent\+Detector\+::skeleton\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Output Yarp Buffered Port of skeleton images. 
+
+
+
+Definition at line 63 of file Agent\+Detector.\+h.
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{group__agentDetector_ga25ebeb7c406dcf4415f5126894542df2}\label{group__agentDetector_ga25ebeb7c406dcf4415f5126894542df2}} 
+\index{agent\+Detector@{agent\+Detector}!click\+Type@{click\+Type}}
+\index{click\+Type@{click\+Type}!agent\+Detector@{agent\+Detector}}
+\subsubsection{\texorpdfstring{click\+Type}{clickType}}
+{\footnotesize\ttfamily enum \hyperlink{group__agentDetector_ga25ebeb7c406dcf4415f5126894542df2}{click\+Type}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{idle@{idle}!agent\+Detector@{agent\+Detector}}\index{agent\+Detector@{agent\+Detector}!idle@{idle}}}\mbox{\Hypertarget{group__agentDetector_gga25ebeb7c406dcf4415f5126894542df2a0e9a37114c0e458d28d52f06ec0f2242}\label{group__agentDetector_gga25ebeb7c406dcf4415f5126894542df2a0e9a37114c0e458d28d52f06ec0f2242}} 
+idle&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{clicked\+\_\+left@{clicked\+\_\+left}!agent\+Detector@{agent\+Detector}}\index{agent\+Detector@{agent\+Detector}!clicked\+\_\+left@{clicked\+\_\+left}}}\mbox{\Hypertarget{group__agentDetector_gga25ebeb7c406dcf4415f5126894542df2aa478b8b23f59790658a6751a035e5805}\label{group__agentDetector_gga25ebeb7c406dcf4415f5126894542df2aa478b8b23f59790658a6751a035e5805}} 
+clicked\+\_\+left&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{clicked\+\_\+right@{clicked\+\_\+right}!agent\+Detector@{agent\+Detector}}\index{agent\+Detector@{agent\+Detector}!clicked\+\_\+right@{clicked\+\_\+right}}}\mbox{\Hypertarget{group__agentDetector_gga25ebeb7c406dcf4415f5126894542df2a86d4d3b99acb8ae2bab34a7f2b426f2f}\label{group__agentDetector_gga25ebeb7c406dcf4415f5126894542df2a86d4d3b99acb8ae2bab34a7f2b426f2f}} 
+clicked\+\_\+right&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 38 of file Agent\+Detector.\+h.
+

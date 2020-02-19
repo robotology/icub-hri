@@ -1,0 +1,279 @@
+\hypertarget{classiol2opc__IDL}{}\section{iol2opc\+\_\+\+I\+DL Class Reference}
+\label{classiol2opc__IDL}\index{iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}}
+
+
+\hyperlink{classiol2opc__IDL}{iol2opc\+\_\+\+I\+DL} I\+DL Interface to \hyperlink{group__iol2opc}{iol2opc} service.  
+
+
+
+
+{\ttfamily \#include $<$iol2opc\+\_\+\+I\+D\+L.\+h$>$}
+
+
+
+Inheritance diagram for iol2opc\+\_\+\+I\+DL\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{classiol2opc__IDL__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classiol2opc__IDL_ac05579cbbff611ecb48b422b1dc3c8bb}{iol2opc\+\_\+\+I\+DL} ()
+\item 
+virtual bool \hyperlink{classiol2opc__IDL_a6215d1e2e1865dcf4584e925b8c1d1be}{train\+\_\+object} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Add a new object to the object-\/recognition database based on the selected blob. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classiol2opc__IDL_a69ecef7b79d9f59b9db91e4471627cb5}{remove\+\_\+object} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Remove object with a given name from the object-\/recognition database. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classiol2opc__IDL_a1b773df105805332a143614903ae6370}{remove\+\_\+all} ()
+\begin{DoxyCompactList}\small\item\em Remove all objects from the object-\/recognition database. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classiol2opc__IDL_a18ecf43816b0df1187a208df18fb98a7}{change\+\_\+name} (const std\+::string \&old\+\_\+name, const std\+::string \&new\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Change the name of an object. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classiol2opc__IDL_a8973d954812064a1662acaaa434947e7}{set\+\_\+object\+\_\+persistence} (const std\+::string \&sw)
+\begin{DoxyCompactList}\small\item\em Enable/disable object persistence. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{classiol2opc__IDL_a51b8e076770a618ef676dd2ccdf4b35a}{get\+\_\+object\+\_\+persistence} ()
+\begin{DoxyCompactList}\small\item\em Return current status of object persistence. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classiol2opc__IDL_a98bd49ef49a7600dc2d995dc165e73ce}{pause} ()
+\begin{DoxyCompactList}\small\item\em Pause module. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classiol2opc__IDL_a10ec403a9dfc09503e3155227c7283bb}{resume} ()
+\begin{DoxyCompactList}\small\item\em Resume module. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classiol2opc__IDL_a6604c8b35853929ba57ee643a8bf9894}{read} (yarp\+::os\+::\+Connection\+Reader \&connection) override
+\item 
+virtual std\+::vector$<$ std\+::string $>$ \hyperlink{classiol2opc__IDL_ab4c595b6f7371a052624190440bf6d05}{help} (const std\+::string \&function\+Name=\char`\"{}-\/-\/all\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classiol2opc__IDL}{iol2opc\+\_\+\+I\+DL} I\+DL Interface to \hyperlink{group__iol2opc}{iol2opc} service. 
+
+Definition at line 25 of file iol2opc\+\_\+\+I\+D\+L.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classiol2opc__IDL_ac05579cbbff611ecb48b422b1dc3c8bb}\label{classiol2opc__IDL_ac05579cbbff611ecb48b422b1dc3c8bb}} 
+\index{iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}!iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}}
+\index{iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}!iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}}
+\subsubsection{\texorpdfstring{iol2opc\+\_\+\+I\+D\+L()}{iol2opc\_IDL()}}
+{\footnotesize\ttfamily iol2opc\+\_\+\+I\+D\+L\+::iol2opc\+\_\+\+I\+DL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 252 of file iol2opc\+\_\+\+I\+D\+L.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classiol2opc__IDL_a18ecf43816b0df1187a208df18fb98a7}\label{classiol2opc__IDL_a18ecf43816b0df1187a208df18fb98a7}} 
+\index{iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}!change\+\_\+name@{change\+\_\+name}}
+\index{change\+\_\+name@{change\+\_\+name}!iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}}
+\subsubsection{\texorpdfstring{change\+\_\+name()}{change\_name()}}
+{\footnotesize\ttfamily bool iol2opc\+\_\+\+I\+D\+L\+::change\+\_\+name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{old\+\_\+name,  }\item[{const std\+::string \&}]{new\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Change the name of an object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em old\+\_\+name} & is the object which name is to be changed \\
+\hline
+{\em new\+\_\+name} & is the new object name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true/false on success/failure. 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{group__iol2opc_ae91edb0bb7a3b851e2387cda653d80fb}{I\+O\+L2\+O\+P\+C\+Bridge}.
+
+
+
+Definition at line 285 of file iol2opc\+\_\+\+I\+D\+L.\+cpp.
+
+\mbox{\Hypertarget{classiol2opc__IDL_a51b8e076770a618ef676dd2ccdf4b35a}\label{classiol2opc__IDL_a51b8e076770a618ef676dd2ccdf4b35a}} 
+\index{iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}!get\+\_\+object\+\_\+persistence@{get\+\_\+object\+\_\+persistence}}
+\index{get\+\_\+object\+\_\+persistence@{get\+\_\+object\+\_\+persistence}!iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}}
+\subsubsection{\texorpdfstring{get\+\_\+object\+\_\+persistence()}{get\_object\_persistence()}}
+{\footnotesize\ttfamily std\+::string iol2opc\+\_\+\+I\+D\+L\+::get\+\_\+object\+\_\+persistence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return current status of object persistence. 
+
+\begin{DoxyReturn}{Returns}
+\char`\"{}on\char`\"{}$\vert$\char`\"{}off\char`\"{}. 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{group__iol2opc_ac5ec9c3ba20773a056a266e8d6b5daae}{I\+O\+L2\+O\+P\+C\+Bridge}.
+
+
+
+Definition at line 305 of file iol2opc\+\_\+\+I\+D\+L.\+cpp.
+
+\mbox{\Hypertarget{classiol2opc__IDL_ab4c595b6f7371a052624190440bf6d05}\label{classiol2opc__IDL_ab4c595b6f7371a052624190440bf6d05}} 
+\index{iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}!help@{help}}
+\index{help@{help}!iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}}
+\subsubsection{\texorpdfstring{help()}{help()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ iol2opc\+\_\+\+I\+D\+L\+::help (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{function\+Name = {\ttfamily \char`\"{}-\/-\/all\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Definition at line 479 of file iol2opc\+\_\+\+I\+D\+L.\+cpp.
+
+\mbox{\Hypertarget{classiol2opc__IDL_a98bd49ef49a7600dc2d995dc165e73ce}\label{classiol2opc__IDL_a98bd49ef49a7600dc2d995dc165e73ce}} 
+\index{iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}!pause@{pause}}
+\index{pause@{pause}!iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}}
+\subsubsection{\texorpdfstring{pause()}{pause()}}
+{\footnotesize\ttfamily void iol2opc\+\_\+\+I\+D\+L\+::pause (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Pause module. 
+
+
+
+Reimplemented in \hyperlink{group__iol2opc_a21b91dd20d666a826eee419f0a29f1a9}{I\+O\+L2\+O\+P\+C\+Bridge}.
+
+
+
+Definition at line 315 of file iol2opc\+\_\+\+I\+D\+L.\+cpp.
+
+\mbox{\Hypertarget{classiol2opc__IDL_a6604c8b35853929ba57ee643a8bf9894}\label{classiol2opc__IDL_a6604c8b35853929ba57ee643a8bf9894}} 
+\index{iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}!read@{read}}
+\index{read@{read}!iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}}
+\subsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily bool iol2opc\+\_\+\+I\+D\+L\+::read (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Connection\+Reader \&}]{connection }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 332 of file iol2opc\+\_\+\+I\+D\+L.\+cpp.
+
+\mbox{\Hypertarget{classiol2opc__IDL_a1b773df105805332a143614903ae6370}\label{classiol2opc__IDL_a1b773df105805332a143614903ae6370}} 
+\index{iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}!remove\+\_\+all@{remove\+\_\+all}}
+\index{remove\+\_\+all@{remove\+\_\+all}!iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}}
+\subsubsection{\texorpdfstring{remove\+\_\+all()}{remove\_all()}}
+{\footnotesize\ttfamily bool iol2opc\+\_\+\+I\+D\+L\+::remove\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Remove all objects from the object-\/recognition database. 
+
+\begin{DoxyReturn}{Returns}
+true/false on success/failure. 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{group__iol2opc_abdb9a0e9a4edb15469cce67416ed6a2f}{I\+O\+L2\+O\+P\+C\+Bridge}.
+
+
+
+Definition at line 275 of file iol2opc\+\_\+\+I\+D\+L.\+cpp.
+
+\mbox{\Hypertarget{classiol2opc__IDL_a69ecef7b79d9f59b9db91e4471627cb5}\label{classiol2opc__IDL_a69ecef7b79d9f59b9db91e4471627cb5}} 
+\index{iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}!remove\+\_\+object@{remove\+\_\+object}}
+\index{remove\+\_\+object@{remove\+\_\+object}!iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}}
+\subsubsection{\texorpdfstring{remove\+\_\+object()}{remove\_object()}}
+{\footnotesize\ttfamily bool iol2opc\+\_\+\+I\+D\+L\+::remove\+\_\+object (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Remove object with a given name from the object-\/recognition database. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & is the object name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true/false on success/failure. 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{group__iol2opc_aab19e8834838cce5da74d31f115b9fd5}{I\+O\+L2\+O\+P\+C\+Bridge}.
+
+
+
+Definition at line 265 of file iol2opc\+\_\+\+I\+D\+L.\+cpp.
+
+\mbox{\Hypertarget{classiol2opc__IDL_a10ec403a9dfc09503e3155227c7283bb}\label{classiol2opc__IDL_a10ec403a9dfc09503e3155227c7283bb}} 
+\index{iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}!resume@{resume}}
+\index{resume@{resume}!iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}}
+\subsubsection{\texorpdfstring{resume()}{resume()}}
+{\footnotesize\ttfamily void iol2opc\+\_\+\+I\+D\+L\+::resume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Resume module. 
+
+
+
+Reimplemented in \hyperlink{group__iol2opc_a449fd15b4e5d4e198182cb3df189e40b}{I\+O\+L2\+O\+P\+C\+Bridge}.
+
+
+
+Definition at line 323 of file iol2opc\+\_\+\+I\+D\+L.\+cpp.
+
+\mbox{\Hypertarget{classiol2opc__IDL_a8973d954812064a1662acaaa434947e7}\label{classiol2opc__IDL_a8973d954812064a1662acaaa434947e7}} 
+\index{iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}!set\+\_\+object\+\_\+persistence@{set\+\_\+object\+\_\+persistence}}
+\index{set\+\_\+object\+\_\+persistence@{set\+\_\+object\+\_\+persistence}!iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}}
+\subsubsection{\texorpdfstring{set\+\_\+object\+\_\+persistence()}{set\_object\_persistence()}}
+{\footnotesize\ttfamily bool iol2opc\+\_\+\+I\+D\+L\+::set\+\_\+object\+\_\+persistence (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{sw }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Enable/disable object persistence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sw} & can be \char`\"{}on\char`\"{}$\vert$\char`\"{}off\char`\"{}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true/false on success/failure. 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{group__iol2opc_a4305ac00526221c453fb9f39edaf05a4}{I\+O\+L2\+O\+P\+C\+Bridge}.
+
+
+
+Definition at line 295 of file iol2opc\+\_\+\+I\+D\+L.\+cpp.
+
+\mbox{\Hypertarget{classiol2opc__IDL_a6215d1e2e1865dcf4584e925b8c1d1be}\label{classiol2opc__IDL_a6215d1e2e1865dcf4584e925b8c1d1be}} 
+\index{iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}!train\+\_\+object@{train\+\_\+object}}
+\index{train\+\_\+object@{train\+\_\+object}!iol2opc\+\_\+\+I\+DL@{iol2opc\+\_\+\+I\+DL}}
+\subsubsection{\texorpdfstring{train\+\_\+object()}{train\_object()}}
+{\footnotesize\ttfamily bool iol2opc\+\_\+\+I\+D\+L\+::train\+\_\+object (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Add a new object to the object-\/recognition database based on the selected blob. 
+
+If the object is already existing, its recognition is improved. 
+\begin{DoxyParams}{Parameters}
+{\em name} & is the object name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true/false on success/failure. 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{group__iol2opc_aa48eed5c7920cd2116c81e88cae0ab4a}{I\+O\+L2\+O\+P\+C\+Bridge}.
+
+
+
+Definition at line 255 of file iol2opc\+\_\+\+I\+D\+L.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/robotology/icub-\/hri/src/idl\+\_\+generated\+\_\+code/include/\hyperlink{iol2opc__IDL_8h}{iol2opc\+\_\+\+I\+D\+L.\+h}\item 
+/home/travis/build/robotology/icub-\/hri/src/idl\+\_\+generated\+\_\+code/src/\hyperlink{iol2opc__IDL_8cpp}{iol2opc\+\_\+\+I\+D\+L.\+cpp}\end{DoxyCompactItemize}

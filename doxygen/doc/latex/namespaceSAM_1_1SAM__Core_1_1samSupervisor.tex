@@ -1,0 +1,76 @@
+\hypertarget{namespaceSAM_1_1SAM__Core_1_1samSupervisor}{}\section{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+sam\+Supervisor Namespace Reference}
+\label{namespaceSAM_1_1SAM__Core_1_1samSupervisor}\index{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+sam\+Supervisor@{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+sam\+Supervisor}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__SAM__Core_classSAM_1_1SAM__Core_1_1samSupervisor_1_1SamSupervisorModule}{Sam\+Supervisor\+Module}
+\begin{DoxyCompactList}\small\item\em Model management and supervisor.  \hyperlink{group__icubclient__SAM__Core_classSAM_1_1SAM__Core_1_1samSupervisor_1_1SamSupervisorModule}{More...}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespaceSAM_1_1SAM__Core_1_1samSupervisor_a415b85af0bd12e418a319fecfd65e31f}{exception\+\_\+hook} (exc\+\_\+type, exc\+\_\+value, exc\+\_\+traceback)
+\begin{DoxyCompactList}\small\item\em Callback function to record any errors that occur in the log files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1samSupervisor_a998b816bed474dcb43905a36b489fd09}{sam\+Mod} = \hyperlink{group__icubclient__SAM__Core_classSAM_1_1SAM__Core_1_1samSupervisor_1_1SamSupervisorModule}{Sam\+Supervisor\+Module}()
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1samSupervisor_ade9e0fbf5ed13d1d191932931a4e3aac}{yrf} = yarp.\+Resource\+Finder()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1samSupervisor_a415b85af0bd12e418a319fecfd65e31f}\label{namespaceSAM_1_1SAM__Core_1_1samSupervisor_a415b85af0bd12e418a319fecfd65e31f}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Supervisor@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Supervisor}!exception\+\_\+hook@{exception\+\_\+hook}}
+\index{exception\+\_\+hook@{exception\+\_\+hook}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Supervisor@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Supervisor}}
+\subsubsection{\texorpdfstring{exception\+\_\+hook()}{exception\_hook()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+sam\+Supervisor.\+exception\+\_\+hook (\begin{DoxyParamCaption}\item[{}]{exc\+\_\+type,  }\item[{}]{exc\+\_\+value,  }\item[{}]{exc\+\_\+traceback }\end{DoxyParamCaption})}
+
+
+
+Callback function to record any errors that occur in the log files. 
+
+\begin{DoxyParagraph}{Documentation}
+Substitutes the standard python exception\+\_\+hook with one that records the error into a log file. Can only work if \hyperlink{interactionSAMModel_8py}{interaction\+S\+A\+M\+Model.\+py} is called from python and not ipython because ipython overrides this substitution.
+\end{DoxyParagraph}
+
+\begin{DoxyParams}{Parameters}
+{\em exc\+\_\+type} & Exception Type. \\
+\hline
+{\em exc\+\_\+value} & Exception Value. \\
+\hline
+{\em exc\+\_\+traceback} & Exception Traceback.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+
+None 
+\end{DoxyReturn}
+
+
+Definition at line 1742 of file sam\+Supervisor.\+py.
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1samSupervisor_a998b816bed474dcb43905a36b489fd09}\label{namespaceSAM_1_1SAM__Core_1_1samSupervisor_a998b816bed474dcb43905a36b489fd09}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Supervisor@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Supervisor}!sam\+Mod@{sam\+Mod}}
+\index{sam\+Mod@{sam\+Mod}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Supervisor@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Supervisor}}
+\subsubsection{\texorpdfstring{sam\+Mod}{samMod}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+sam\+Supervisor.\+sam\+Mod = \hyperlink{group__icubclient__SAM__Core_classSAM_1_1SAM__Core_1_1samSupervisor_1_1SamSupervisorModule}{Sam\+Supervisor\+Module}()}
+
+
+
+Definition at line 1751 of file sam\+Supervisor.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1samSupervisor_ade9e0fbf5ed13d1d191932931a4e3aac}\label{namespaceSAM_1_1SAM__Core_1_1samSupervisor_ade9e0fbf5ed13d1d191932931a4e3aac}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Supervisor@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Supervisor}!yrf@{yrf}}
+\index{yrf@{yrf}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Supervisor@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::sam\+Supervisor}}
+\subsubsection{\texorpdfstring{yrf}{yrf}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+sam\+Supervisor.\+yrf = yarp.\+Resource\+Finder()}
+
+
+
+Definition at line 1752 of file sam\+Supervisor.\+py.
+

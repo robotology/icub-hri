@@ -1,0 +1,5 @@
+<map id="icubclient::Object" name="icubclient::Object">
+<area shape="rect" id="node3" href="$group__icubclient__representations.html#classicubclient_1_1Agent" title="Represent an agent. " alt="" coords="5,155,136,181"/>
+<area shape="rect" id="node4" href="$group__icubclient__representations.html#classicubclient_1_1Bodypart" title="Represents a body part of the robot. " alt="" coords="160,155,312,181"/>
+<area shape="rect" id="node2" href="$group__icubclient__representations.html#classicubclient_1_1Entity" title="Represent any entity that can be stored within the OPC. " alt="" coords="88,5,219,32"/>
+</map>

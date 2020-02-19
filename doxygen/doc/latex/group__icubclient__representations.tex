@@ -1,0 +1,2095 @@
+\hypertarget{group__icubclient__representations}{}\section{World Representation}
+\label{group__icubclient__representations}\index{World Representation@{World Representation}}
+
+
+Contains classes to represent entities and relations between them.  
+
+
+Collaboration diagram for World Representation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__icubclient__representations}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__representations_classicubclient_1_1Action}{icubclient\+::\+Action}
+\begin{DoxyCompactList}\small\item\em Represents an action, whether composite or not.  \hyperlink{group__icubclient__representations_classicubclient_1_1Action}{More...}\end{DoxyCompactList}\item 
+struct \hyperlink{group__icubclient__representations_structicubclient_1_1Body}{icubclient\+::\+Body}
+\begin{DoxyCompactList}\small\item\em Represent a the body of an agent.  \hyperlink{group__icubclient__representations_structicubclient_1_1Body}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__representations_classicubclient_1_1Agent}{icubclient\+::\+Agent}
+\begin{DoxyCompactList}\small\item\em Represent an agent.  \hyperlink{group__icubclient__representations_classicubclient_1_1Agent}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__representations_classicubclient_1_1Bodypart}{icubclient\+::\+Bodypart}
+\begin{DoxyCompactList}\small\item\em Represents a body part of the robot.  \hyperlink{group__icubclient__representations_classicubclient_1_1Bodypart}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{icubclient\+::\+Entity}
+\begin{DoxyCompactList}\small\item\em Represent any entity that can be stored within the O\+PC.  \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{icubclient\+::\+Object}
+\begin{DoxyCompactList}\small\item\em Represent any physical entity (including objects and agents) that can be stored within the O\+PC.  \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{icubclient\+::\+Relation}
+\begin{DoxyCompactList}\small\item\em Represent a relation between two entities.  \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{More...}\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains classes to represent entities and relations between them. 
+
+Those classes are meant to be accessed through the opc\+Client.
+
+\begin{DoxyAuthor}{Author}
+Ugo Pattacini \& Stéphane Lallée 
+\end{DoxyAuthor}
+
+
+\subsection{Class Documentation}
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}}\label{classicubclient_1_1Action}
+\Hypertarget{group__icubclient__representations_classicubclient_1_1Action}
+\subsubsection{class icubclient\+:\+:Action}
+Represents an action, whether composite or not. 
+
+Stores as well the expected impact on the drives. 
+
+Definition at line 33 of file action.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Action\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{classicubclient_1_1Action__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__representations_a4f457ccfc8336b565cadca56b36e0271}{Action} ()
+\item 
+\hyperlink{group__icubclient__representations_a97702e22855a0b37743229d444cd0e95}{Action} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Action}{Action} \&b)
+\item 
+virtual bool \hyperlink{group__icubclient__representations_a928f5814d5160e14157391cd85c0cbd0}{is\+Type} (std\+::string \+\_\+entity\+Type) const
+\begin{DoxyCompactList}\small\item\em Test if an entity is inheriting a given type. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__representations_a5b8e483eea56d34bc0724f469410580b}{set\+Initial\+Description} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&r)
+\item 
+\hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \hyperlink{group__icubclient__representations_adbf6f29ba5b1111e1e8e28391badbda3}{description} () const
+\begin{DoxyCompactList}\small\item\em Return initial\+Description as \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation}. \end{DoxyCompactList}\item 
+\hyperlink{group__icubclient__representations_classicubclient_1_1Action}{Action} \hyperlink{group__icubclient__representations_a9974e0796b2b1d647c3670a9adaf306d}{express} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&r) const
+\item 
+void \hyperlink{group__icubclient__representations_a1d7d32ec1d32736fc22c6fb78c653c5b}{append} (\hyperlink{group__icubclient__representations_classicubclient_1_1Action}{Action} \&a)
+\begin{DoxyCompactList}\small\item\em Append a subaction to create a composite one. \end{DoxyCompactList}\item 
+virtual std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Action}{Action} $>$ \hyperlink{group__icubclient__representations_a1a840d759c2b5448792307394c3fdf4a}{as\+Plan} () const
+\begin{DoxyCompactList}\small\item\em Get an unrolled plan description. \end{DoxyCompactList}\item 
+virtual std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Action}{Action} $>$ \hyperlink{group__icubclient__representations_a260238c3bc643b27a5f6f5001ebf1444}{as\+Plan} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&new\+Description) const
+\begin{DoxyCompactList}\small\item\em Get an unrolled plan description based on new arguments. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{group__icubclient__representations_a082ed3f3c38800ae49ab9d8ef991de8b}{is\+Composite} ()
+\begin{DoxyCompactList}\small\item\em Is an action composite or not? \end{DoxyCompactList}\item 
+int \hyperlink{group__icubclient__representations_a6f97f36aa3e072445f24774c2e0d9dcd}{size} ()
+\begin{DoxyCompactList}\small\item\em Number of subactions composing this one. \end{DoxyCompactList}\item 
+virtual yarp\+::os\+::\+Bottle \hyperlink{group__icubclient__representations_a55fccb7922381a3d9a6657af902368b9}{as\+Bottle} () const
+\begin{DoxyCompactList}\small\item\em Number of subactions composing this one. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{group__icubclient__representations_a5bde40cd7f11badb7d61b70e51fe18c0}{from\+Bottle} (const yarp\+::os\+::\+Bottle \&b)
+\begin{DoxyCompactList}\small\item\em Fill entity fields from a bottle representation. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{group__icubclient__representations_a725d45d77d48e73135956e1aadfe3889}{to\+String} () const
+\begin{DoxyCompactList}\small\item\em Return a human readable description of the entity. \end{DoxyCompactList}\item 
+virtual void \hyperlink{group__icubclient__representations_a627e81e6a323fe17c1a240d3a06f9a75}{get\+Plan\+Drives\+Effect} (std\+::map$<$ std\+::string, double $>$ \&drive\+Effects)
+\begin{DoxyCompactList}\small\item\em Estimate the effect of this plan on a specific drive, by summing all the effects of subplans to this specific plan effect. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{group__icubclient__representations_a0db8acde84f6986ea158f865ba752d40}{to\+String} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&new\+Relation) const
+\begin{DoxyCompactList}\small\item\em Gives the string according to a current situation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ std\+::string, double $>$ \hyperlink{group__icubclient__representations_a097956811c22b237972880efab649438}{estimated\+Drive\+Effects}
+\begin{DoxyCompactList}\small\item\em Estimated effects on the drive. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}{O\+P\+C\+Client}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a4f457ccfc8336b565cadca56b36e0271}\label{group__icubclient__representations_a4f457ccfc8336b565cadca56b36e0271}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!Action@{Action}}
+\index{Action@{Action}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{Action()}{Action()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Action\+::\+Action (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 27 of file action.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a97702e22855a0b37743229d444cd0e95}\label{group__icubclient__representations_a97702e22855a0b37743229d444cd0e95}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!Action@{Action}}
+\index{Action@{Action}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{Action()}{Action()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Action\+::\+Action (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Action}{Action} \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Definition at line 32 of file action.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a1d7d32ec1d32736fc22c6fb78c653c5b}\label{group__icubclient__representations_a1d7d32ec1d32736fc22c6fb78c653c5b}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!append@{append}}
+\index{append@{append}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily void Action\+::append (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Action}{Action} \&}]{a }\end{DoxyParamCaption})}
+
+
+
+Append a subaction to create a composite one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & The subaction \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 131 of file action.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a55fccb7922381a3d9a6657af902368b9}\label{group__icubclient__representations_a55fccb7922381a3d9a6657af902368b9}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!as\+Bottle@{as\+Bottle}}
+\index{as\+Bottle@{as\+Bottle}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{as\+Bottle()}{asBottle()}}
+{\footnotesize\ttfamily Bottle Action\+::as\+Bottle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Number of subactions composing this one. 
+
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_a1481200655f5b88c81a9fa19941fd841}{icubclient\+::\+Entity}.
+
+
+
+Definition at line 39 of file action.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a1a840d759c2b5448792307394c3fdf4a}\label{group__icubclient__representations_a1a840d759c2b5448792307394c3fdf4a}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!as\+Plan@{as\+Plan}}
+\index{as\+Plan@{as\+Plan}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{as\+Plan()}{asPlan()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Action}{Action} $>$ Action\+::as\+Plan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get an unrolled plan description. 
+
+
+
+Definition at line 136 of file action.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a260238c3bc643b27a5f6f5001ebf1444}\label{group__icubclient__representations_a260238c3bc643b27a5f6f5001ebf1444}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!as\+Plan@{as\+Plan}}
+\index{as\+Plan@{as\+Plan}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{as\+Plan()}{asPlan()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Action}{Action} $>$ Action\+::as\+Plan (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&}]{new\+Description }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get an unrolled plan description based on new arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Description} & The new arguments \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 151 of file action.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_adbf6f29ba5b1111e1e8e28391badbda3}\label{group__icubclient__representations_adbf6f29ba5b1111e1e8e28391badbda3}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!description@{description}}
+\index{description@{description}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{description()}{description()}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} Action\+::description (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Return initial\+Description as \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation}. 
+
+
+
+Definition at line 124 of file action.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a9974e0796b2b1d647c3670a9adaf306d}\label{group__icubclient__representations_a9974e0796b2b1d647c3670a9adaf306d}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!express@{express}}
+\index{express@{express}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{express()}{express()}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__representations_classicubclient_1_1Action}{Action} Action\+::express (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&}]{r }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 104 of file action.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a5bde40cd7f11badb7d61b70e51fe18c0}\label{group__icubclient__representations_a5bde40cd7f11badb7d61b70e51fe18c0}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!from\+Bottle@{from\+Bottle}}
+\index{from\+Bottle@{from\+Bottle}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{from\+Bottle()}{fromBottle()}}
+{\footnotesize\ttfamily bool Action\+::from\+Bottle (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Fill entity fields from a bottle representation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & a pointer to the bottle containing the entity representation \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_aba7fbff7372e12c9eacf7f458ba66478}{icubclient\+::\+Entity}.
+
+
+
+Definition at line 68 of file action.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a627e81e6a323fe17c1a240d3a06f9a75}\label{group__icubclient__representations_a627e81e6a323fe17c1a240d3a06f9a75}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!get\+Plan\+Drives\+Effect@{get\+Plan\+Drives\+Effect}}
+\index{get\+Plan\+Drives\+Effect@{get\+Plan\+Drives\+Effect}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{get\+Plan\+Drives\+Effect()}{getPlanDrivesEffect()}}
+{\footnotesize\ttfamily void Action\+::get\+Plan\+Drives\+Effect (\begin{DoxyParamCaption}\item[{std\+::map$<$ std\+::string, double $>$ \&}]{drive\+Effects }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Estimate the effect of this plan on a specific drive, by summing all the effects of subplans to this specific plan effect. 
+
+
+
+Definition at line 158 of file action.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a082ed3f3c38800ae49ab9d8ef991de8b}\label{group__icubclient__representations_a082ed3f3c38800ae49ab9d8ef991de8b}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!is\+Composite@{is\+Composite}}
+\index{is\+Composite@{is\+Composite}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{is\+Composite()}{isComposite()}}
+{\footnotesize\ttfamily virtual bool icubclient\+::\+Action\+::is\+Composite (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Is an action composite or not? 
+
+
+
+Definition at line 81 of file action.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a928f5814d5160e14157391cd85c0cbd0}\label{group__icubclient__representations_a928f5814d5160e14157391cd85c0cbd0}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!is\+Type@{is\+Type}}
+\index{is\+Type@{is\+Type}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{is\+Type()}{isType()}}
+{\footnotesize\ttfamily virtual bool icubclient\+::\+Action\+::is\+Type (\begin{DoxyParamCaption}\item[{std\+::string}]{\+\_\+entity\+Type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Test if an entity is inheriting a given type. 
+
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_a5cbd0e5e254b3881a6a0adfc28107eb5}{icubclient\+::\+Entity}.
+
+
+
+Definition at line 49 of file action.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a5b8e483eea56d34bc0724f469410580b}\label{group__icubclient__representations_a5b8e483eea56d34bc0724f469410580b}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!set\+Initial\+Description@{set\+Initial\+Description}}
+\index{set\+Initial\+Description@{set\+Initial\+Description}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{set\+Initial\+Description()}{setInitialDescription()}}
+{\footnotesize\ttfamily void Action\+::set\+Initial\+Description (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&}]{r }\end{DoxyParamCaption})}
+
+
+
+Definition at line 99 of file action.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a6f97f36aa3e072445f24774c2e0d9dcd}\label{group__icubclient__representations_a6f97f36aa3e072445f24774c2e0d9dcd}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!size@{size}}
+\index{size@{size}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int icubclient\+::\+Action\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of subactions composing this one. 
+
+
+
+Definition at line 86 of file action.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a725d45d77d48e73135956e1aadfe3889}\label{group__icubclient__representations_a725d45d77d48e73135956e1aadfe3889}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{to\+String()}{toString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily string Action\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return a human readable description of the entity. 
+
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_ad578a93701121f00ac7079fafad6c0e1}{icubclient\+::\+Entity}.
+
+
+
+Definition at line 172 of file action.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a0db8acde84f6986ea158f865ba752d40}\label{group__icubclient__representations_a0db8acde84f6986ea158f865ba752d40}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{to\+String()}{toString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily string Action\+::to\+String (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&}]{new\+Relation }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Gives the string according to a current situation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Relation} & The new arguments \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 177 of file action.\+cpp.
+
+
+
+\paragraph{Friends And Related Function Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}\label{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!O\+P\+C\+Client@{O\+P\+C\+Client}}
+\index{O\+P\+C\+Client@{O\+P\+C\+Client}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{O\+P\+C\+Client}{OPCClient}}
+{\footnotesize\ttfamily friend class \hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 35 of file action.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a097956811c22b237972880efab649438}\label{group__icubclient__representations_a097956811c22b237972880efab649438}} 
+\index{icubclient\+::\+Action@{icubclient\+::\+Action}!estimated\+Drive\+Effects@{estimated\+Drive\+Effects}}
+\index{estimated\+Drive\+Effects@{estimated\+Drive\+Effects}!icubclient\+::\+Action@{icubclient\+::\+Action}}
+\subparagraph{\texorpdfstring{estimated\+Drive\+Effects}{estimatedDriveEffects}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, double$>$ icubclient\+::\+Action\+::estimated\+Drive\+Effects}
+
+
+
+Estimated effects on the drive. 
+
+
+
+Definition at line 44 of file action.\+h.
+
+\index{icubclient\+::\+Body@{icubclient\+::\+Body}}\label{structicubclient_1_1Body}
+\Hypertarget{group__icubclient__representations_structicubclient_1_1Body}
+\subsubsection{struct icubclient\+:\+:Body}
+Represent a the body of an agent. 
+
+Joints are stored as a dictionnary of string, position 
+
+Definition at line 33 of file agent.\+h.
+
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__representations_a0d2109199526e443d321a69dd23398b2}{Body} ()
+\item 
+yarp\+::os\+::\+Bottle \hyperlink{group__icubclient__representations_af2ba1e2ba63afa934054d0055bd4a61d}{as\+Bottle} () const
+\item 
+bool \hyperlink{group__icubclient__representations_a63aee3af01b5e41f75f0a9d6df43a7ea}{from\+Bottle} (const yarp\+::os\+::\+Bottle \&b)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ std\+::string, yarp\+::sig\+::\+Vector\+Of$<$ double $>$ $>$ \hyperlink{group__icubclient__representations_ac31e859719f94ca6606132b47bc27421}{m\+\_\+parts}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a0d2109199526e443d321a69dd23398b2}\label{group__icubclient__representations_a0d2109199526e443d321a69dd23398b2}} 
+\index{icubclient\+::\+Body@{icubclient\+::\+Body}!Body@{Body}}
+\index{Body@{Body}!icubclient\+::\+Body@{icubclient\+::\+Body}}
+\subparagraph{\texorpdfstring{Body()}{Body()}}
+{\footnotesize\ttfamily icubclient\+::\+Body\+::\+Body (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 37 of file agent.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_af2ba1e2ba63afa934054d0055bd4a61d}\label{group__icubclient__representations_af2ba1e2ba63afa934054d0055bd4a61d}} 
+\index{icubclient\+::\+Body@{icubclient\+::\+Body}!as\+Bottle@{as\+Bottle}}
+\index{as\+Bottle@{as\+Bottle}!icubclient\+::\+Body@{icubclient\+::\+Body}}
+\subparagraph{\texorpdfstring{as\+Bottle()}{asBottle()}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Bottle icubclient\+::\+Body\+::as\+Bottle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 56 of file agent.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a63aee3af01b5e41f75f0a9d6df43a7ea}\label{group__icubclient__representations_a63aee3af01b5e41f75f0a9d6df43a7ea}} 
+\index{icubclient\+::\+Body@{icubclient\+::\+Body}!from\+Bottle@{from\+Bottle}}
+\index{from\+Bottle@{from\+Bottle}!icubclient\+::\+Body@{icubclient\+::\+Body}}
+\subparagraph{\texorpdfstring{from\+Bottle()}{fromBottle()}}
+{\footnotesize\ttfamily bool icubclient\+::\+Body\+::from\+Bottle (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 73 of file agent.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_ac31e859719f94ca6606132b47bc27421}\label{group__icubclient__representations_ac31e859719f94ca6606132b47bc27421}} 
+\index{icubclient\+::\+Body@{icubclient\+::\+Body}!m\+\_\+parts@{m\+\_\+parts}}
+\index{m\+\_\+parts@{m\+\_\+parts}!icubclient\+::\+Body@{icubclient\+::\+Body}}
+\subparagraph{\texorpdfstring{m\+\_\+parts}{m\_parts}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, yarp\+::sig\+::\+Vector\+Of$<$double$>$ $>$ icubclient\+::\+Body\+::m\+\_\+parts}
+
+
+
+Definition at line 35 of file agent.\+h.
+
+\index{icubclient\+::\+Agent@{icubclient\+::\+Agent}}\label{classicubclient_1_1Agent}
+\Hypertarget{group__icubclient__representations_classicubclient_1_1Agent}
+\subsubsection{class icubclient\+:\+:Agent}
+Represent an agent. 
+
+An agent is a \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object} which possesses emotions and beliefs. Beliefs are encoded as a list of relations. 
+
+Definition at line 93 of file agent.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Agent\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{classicubclient_1_1Agent__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__representations_a24a60f1d260bf19a4f7f8a5f36881d3f}{Agent} ()
+\item 
+\hyperlink{group__icubclient__representations_a82c1a30e19f6f37eb994e258c98dce13}{Agent} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Agent}{Agent} \&b)
+\item 
+virtual bool \hyperlink{group__icubclient__representations_a0ec60560ae6d20bffb64ce9aa6339894}{is\+Type} (std\+::string \+\_\+entity\+Type) const
+\begin{DoxyCompactList}\small\item\em Test if an entity is inheriting a given type. \end{DoxyCompactList}\item 
+virtual yarp\+::os\+::\+Bottle \hyperlink{group__icubclient__representations_a7969e73f3ee81ba44e36211807666033}{as\+Bottle} () const
+\begin{DoxyCompactList}\small\item\em Return the entity as a bottle. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{group__icubclient__representations_abee6123159a9c2d01cd0f6609c8e3415}{from\+Bottle} (const yarp\+::os\+::\+Bottle \&b)
+\begin{DoxyCompactList}\small\item\em Fill entity fields from a bottle representation. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{group__icubclient__representations_a1fbd9d1acccac0b9fb5a6a1dce6f44f9}{to\+String} () const
+\begin{DoxyCompactList}\small\item\em Return a human readable description of the entity. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__representations_a93a948b0365677e594244a75521f2b6a}{add\+Belief} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&r)
+\begin{DoxyCompactList}\small\item\em Add the belief of a relation to the agent. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__representations_a88a72b25c0e87ea6048416d20fb79ae5}{remove\+Belief} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&r)
+\begin{DoxyCompactList}\small\item\em Remove the belief of a relation from the agent. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__representations_aecc3b845c448a87061534928d125f1e4}{check\+Belief} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&r) const
+\begin{DoxyCompactList}\small\item\em Check if some relation is believed by an agent. \end{DoxyCompactList}\item 
+const std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} $>$ \& \hyperlink{group__icubclient__representations_ae17b4238ba14a8a0b19a238a333d6472}{beliefs} () const
+\begin{DoxyCompactList}\small\item\em Get a read-\/only copy of the agent believes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ std\+::string, double $>$ \hyperlink{group__icubclient__representations_a714610cafc5f7b7942badedd056ae87e}{m\+\_\+emotions\+\_\+intrinsic}
+\item 
+\hyperlink{group__icubclient__representations_structicubclient_1_1Body}{Body} \hyperlink{group__icubclient__representations_a6ab805862ead5247cd5cbd99f5c6da76}{m\+\_\+body}
+\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}{O\+P\+C\+Client}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a24a60f1d260bf19a4f7f8a5f36881d3f}\label{group__icubclient__representations_a24a60f1d260bf19a4f7f8a5f36881d3f}} 
+\index{icubclient\+::\+Agent@{icubclient\+::\+Agent}!Agent@{Agent}}
+\index{Agent@{Agent}!icubclient\+::\+Agent@{icubclient\+::\+Agent}}
+\subparagraph{\texorpdfstring{Agent()}{Agent()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Agent\+::\+Agent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 28 of file agent.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a82c1a30e19f6f37eb994e258c98dce13}\label{group__icubclient__representations_a82c1a30e19f6f37eb994e258c98dce13}} 
+\index{icubclient\+::\+Agent@{icubclient\+::\+Agent}!Agent@{Agent}}
+\index{Agent@{Agent}!icubclient\+::\+Agent@{icubclient\+::\+Agent}}
+\subparagraph{\texorpdfstring{Agent()}{Agent()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Agent\+::\+Agent (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Agent}{Agent} \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Definition at line 34 of file agent.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a93a948b0365677e594244a75521f2b6a}\label{group__icubclient__representations_a93a948b0365677e594244a75521f2b6a}} 
+\index{icubclient\+::\+Agent@{icubclient\+::\+Agent}!add\+Belief@{add\+Belief}}
+\index{add\+Belief@{add\+Belief}!icubclient\+::\+Agent@{icubclient\+::\+Agent}}
+\subparagraph{\texorpdfstring{add\+Belief()}{addBelief()}}
+{\footnotesize\ttfamily bool Agent\+::add\+Belief (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&}]{r }\end{DoxyParamCaption})}
+
+
+
+Add the belief of a relation to the agent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & a relation that the agent will believe to be true \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 127 of file agent.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a7969e73f3ee81ba44e36211807666033}\label{group__icubclient__representations_a7969e73f3ee81ba44e36211807666033}} 
+\index{icubclient\+::\+Agent@{icubclient\+::\+Agent}!as\+Bottle@{as\+Bottle}}
+\index{as\+Bottle@{as\+Bottle}!icubclient\+::\+Agent@{icubclient\+::\+Agent}}
+\subparagraph{\texorpdfstring{as\+Bottle()}{asBottle()}}
+{\footnotesize\ttfamily Bottle Agent\+::as\+Bottle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return the entity as a bottle. 
+
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_a60acd95fa583dc758f2b76e1968a7ea2}{icubclient\+::\+Object}.
+
+
+
+Definition at line 41 of file agent.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_ae17b4238ba14a8a0b19a238a333d6472}\label{group__icubclient__representations_ae17b4238ba14a8a0b19a238a333d6472}} 
+\index{icubclient\+::\+Agent@{icubclient\+::\+Agent}!beliefs@{beliefs}}
+\index{beliefs@{beliefs}!icubclient\+::\+Agent@{icubclient\+::\+Agent}}
+\subparagraph{\texorpdfstring{beliefs()}{beliefs()}}
+{\footnotesize\ttfamily const std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} $>$ \& Agent\+::beliefs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get a read-\/only copy of the agent believes. 
+
+
+
+Definition at line 161 of file agent.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_aecc3b845c448a87061534928d125f1e4}\label{group__icubclient__representations_aecc3b845c448a87061534928d125f1e4}} 
+\index{icubclient\+::\+Agent@{icubclient\+::\+Agent}!check\+Belief@{check\+Belief}}
+\index{check\+Belief@{check\+Belief}!icubclient\+::\+Agent@{icubclient\+::\+Agent}}
+\subparagraph{\texorpdfstring{check\+Belief()}{checkBelief()}}
+{\footnotesize\ttfamily bool Agent\+::check\+Belief (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&}]{r }\end{DoxyParamCaption}) const}
+
+
+
+Check if some relation is believed by an agent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & a relation to check \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 156 of file agent.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_abee6123159a9c2d01cd0f6609c8e3415}\label{group__icubclient__representations_abee6123159a9c2d01cd0f6609c8e3415}} 
+\index{icubclient\+::\+Agent@{icubclient\+::\+Agent}!from\+Bottle@{from\+Bottle}}
+\index{from\+Bottle@{from\+Bottle}!icubclient\+::\+Agent@{icubclient\+::\+Agent}}
+\subparagraph{\texorpdfstring{from\+Bottle()}{fromBottle()}}
+{\footnotesize\ttfamily bool Agent\+::from\+Bottle (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Fill entity fields from a bottle representation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & a pointer to the bottle containing the entity representation \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_ab5662af99b6bfa7d3996192c62536bf1}{icubclient\+::\+Object}.
+
+
+
+Definition at line 74 of file agent.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a0ec60560ae6d20bffb64ce9aa6339894}\label{group__icubclient__representations_a0ec60560ae6d20bffb64ce9aa6339894}} 
+\index{icubclient\+::\+Agent@{icubclient\+::\+Agent}!is\+Type@{is\+Type}}
+\index{is\+Type@{is\+Type}!icubclient\+::\+Agent@{icubclient\+::\+Agent}}
+\subparagraph{\texorpdfstring{is\+Type()}{isType()}}
+{\footnotesize\ttfamily virtual bool icubclient\+::\+Agent\+::is\+Type (\begin{DoxyParamCaption}\item[{std\+::string}]{\+\_\+entity\+Type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Test if an entity is inheriting a given type. 
+
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_a90398d2c9cc2a42617b50fcbc4533734}{icubclient\+::\+Object}.
+
+
+
+Definition at line 105 of file agent.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a88a72b25c0e87ea6048416d20fb79ae5}\label{group__icubclient__representations_a88a72b25c0e87ea6048416d20fb79ae5}} 
+\index{icubclient\+::\+Agent@{icubclient\+::\+Agent}!remove\+Belief@{remove\+Belief}}
+\index{remove\+Belief@{remove\+Belief}!icubclient\+::\+Agent@{icubclient\+::\+Agent}}
+\subparagraph{\texorpdfstring{remove\+Belief()}{removeBelief()}}
+{\footnotesize\ttfamily bool Agent\+::remove\+Belief (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&}]{r }\end{DoxyParamCaption})}
+
+
+
+Remove the belief of a relation from the agent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & a relation that the agent will believe not to be true \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 142 of file agent.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a1fbd9d1acccac0b9fb5a6a1dce6f44f9}\label{group__icubclient__representations_a1fbd9d1acccac0b9fb5a6a1dce6f44f9}} 
+\index{icubclient\+::\+Agent@{icubclient\+::\+Agent}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!icubclient\+::\+Agent@{icubclient\+::\+Agent}}
+\subparagraph{\texorpdfstring{to\+String()}{toString()}}
+{\footnotesize\ttfamily string Agent\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return a human readable description of the entity. 
+
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_aef5180c43e05c572865ad38ff650b930}{icubclient\+::\+Object}.
+
+
+
+Definition at line 107 of file agent.\+cpp.
+
+
+
+\paragraph{Friends And Related Function Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}\label{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}} 
+\index{icubclient\+::\+Agent@{icubclient\+::\+Agent}!O\+P\+C\+Client@{O\+P\+C\+Client}}
+\index{O\+P\+C\+Client@{O\+P\+C\+Client}!icubclient\+::\+Agent@{icubclient\+::\+Agent}}
+\subparagraph{\texorpdfstring{O\+P\+C\+Client}{OPCClient}}
+{\footnotesize\ttfamily friend class \hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 95 of file agent.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a6ab805862ead5247cd5cbd99f5c6da76}\label{group__icubclient__representations_a6ab805862ead5247cd5cbd99f5c6da76}} 
+\index{icubclient\+::\+Agent@{icubclient\+::\+Agent}!m\+\_\+body@{m\+\_\+body}}
+\index{m\+\_\+body@{m\+\_\+body}!icubclient\+::\+Agent@{icubclient\+::\+Agent}}
+\subparagraph{\texorpdfstring{m\+\_\+body}{m\_body}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__representations_structicubclient_1_1Body}{Body} icubclient\+::\+Agent\+::m\+\_\+body}
+
+
+
+Definition at line 103 of file agent.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a714610cafc5f7b7942badedd056ae87e}\label{group__icubclient__representations_a714610cafc5f7b7942badedd056ae87e}} 
+\index{icubclient\+::\+Agent@{icubclient\+::\+Agent}!m\+\_\+emotions\+\_\+intrinsic@{m\+\_\+emotions\+\_\+intrinsic}}
+\index{m\+\_\+emotions\+\_\+intrinsic@{m\+\_\+emotions\+\_\+intrinsic}!icubclient\+::\+Agent@{icubclient\+::\+Agent}}
+\subparagraph{\texorpdfstring{m\+\_\+emotions\+\_\+intrinsic}{m\_emotions\_intrinsic}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, double$>$ icubclient\+::\+Agent\+::m\+\_\+emotions\+\_\+intrinsic}
+
+
+
+Definition at line 102 of file agent.\+h.
+
+\index{icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}}\label{classicubclient_1_1Bodypart}
+\Hypertarget{group__icubclient__representations_classicubclient_1_1Bodypart}
+\subsubsection{class icubclient\+:\+:Bodypart}
+Represents a body part of the robot. 
+
+Definition at line 29 of file bodypart.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Bodypart\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{classicubclient_1_1Bodypart__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__representations_a3eb671588904ac51120d9db3be131273}{Bodypart} ()
+\item 
+\hyperlink{group__icubclient__representations_aaed98e4908214ca9523e46557120743a}{Bodypart} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Bodypart}{Bodypart} \&b)
+\item 
+virtual bool \hyperlink{group__icubclient__representations_a092e89cbeecc23d729be0423216a9920}{is\+Type} (std\+::string \+\_\+entity\+Type) const
+\begin{DoxyCompactList}\small\item\em Test if an entity is inheriting a given type. \end{DoxyCompactList}\item 
+virtual yarp\+::os\+::\+Bottle \hyperlink{group__icubclient__representations_acacf4d8971e54092fae9f3278f219562}{as\+Bottle} () const
+\begin{DoxyCompactList}\small\item\em Return the entity as a bottle. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{group__icubclient__representations_a0d70a33efc69486a46e7f6a06abc5ff2}{from\+Bottle} (const yarp\+::os\+::\+Bottle \&b)
+\begin{DoxyCompactList}\small\item\em Fill entity fields from a bottle representation. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{group__icubclient__representations_ac14830acd5adc122c5caeb91947b9ca1}{to\+String} () const
+\begin{DoxyCompactList}\small\item\em Return a human readable description of the entity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group__icubclient__representations_ac6d24ba7230a01a4b19e53853f86f24d}{m\+\_\+joint\+\_\+number}
+\begin{DoxyCompactList}\small\item\em Joint number of the represented body part. \end{DoxyCompactList}\item 
+int \hyperlink{group__icubclient__representations_a2551839d7a05aad0ed6cb5c4bca69b7a}{m\+\_\+tactile\+\_\+number}
+\begin{DoxyCompactList}\small\item\em Tactile number of the represented body part. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__representations_a96200fe4105f64e2b1c5ea1387b951e6}{m\+\_\+part}
+\begin{DoxyCompactList}\small\item\em The part itself, e.\+g. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__representations_a90e8e2887be1b576e2151cf32807d0f4}{m\+\_\+kinect\+Node}
+\begin{DoxyCompactList}\small\item\em The string labelling the kinect node (of a human kinematic structure, one of the I\+C\+U\+B\+C\+L\+I\+E\+N\+T\+\_\+\+O\+P\+C\+\_\+\+B\+O\+D\+Y\+\_\+\+P\+A\+R\+T\+\_\+\+T\+Y\+P\+E\+\_\+\+X\+XX) that corresponds to the i\+Cub\textquotesingle{}s joint. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}{O\+P\+C\+Client}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a3eb671588904ac51120d9db3be131273}\label{group__icubclient__representations_a3eb671588904ac51120d9db3be131273}} 
+\index{icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}!Bodypart@{Bodypart}}
+\index{Bodypart@{Bodypart}!icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}}
+\subparagraph{\texorpdfstring{Bodypart()}{Bodypart()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Bodypart\+::\+Bodypart (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 25 of file bodypart.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_aaed98e4908214ca9523e46557120743a}\label{group__icubclient__representations_aaed98e4908214ca9523e46557120743a}} 
+\index{icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}!Bodypart@{Bodypart}}
+\index{Bodypart@{Bodypart}!icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}}
+\subparagraph{\texorpdfstring{Bodypart()}{Bodypart()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Bodypart\+::\+Bodypart (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Bodypart}{Bodypart} \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Definition at line 36 of file bodypart.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_acacf4d8971e54092fae9f3278f219562}\label{group__icubclient__representations_acacf4d8971e54092fae9f3278f219562}} 
+\index{icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}!as\+Bottle@{as\+Bottle}}
+\index{as\+Bottle@{as\+Bottle}!icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}}
+\subparagraph{\texorpdfstring{as\+Bottle()}{asBottle()}}
+{\footnotesize\ttfamily Bottle Bodypart\+::as\+Bottle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return the entity as a bottle. 
+
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_a60acd95fa583dc758f2b76e1968a7ea2}{icubclient\+::\+Object}.
+
+
+
+Definition at line 46 of file bodypart.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a0d70a33efc69486a46e7f6a06abc5ff2}\label{group__icubclient__representations_a0d70a33efc69486a46e7f6a06abc5ff2}} 
+\index{icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}!from\+Bottle@{from\+Bottle}}
+\index{from\+Bottle@{from\+Bottle}!icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}}
+\subparagraph{\texorpdfstring{from\+Bottle()}{fromBottle()}}
+{\footnotesize\ttfamily bool Bodypart\+::from\+Bottle (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Fill entity fields from a bottle representation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & a pointer to the bottle containing the entity representation \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_ab5662af99b6bfa7d3996192c62536bf1}{icubclient\+::\+Object}.
+
+
+
+Definition at line 87 of file bodypart.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a092e89cbeecc23d729be0423216a9920}\label{group__icubclient__representations_a092e89cbeecc23d729be0423216a9920}} 
+\index{icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}!is\+Type@{is\+Type}}
+\index{is\+Type@{is\+Type}!icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}}
+\subparagraph{\texorpdfstring{is\+Type()}{isType()}}
+{\footnotesize\ttfamily virtual bool icubclient\+::\+Bodypart\+::is\+Type (\begin{DoxyParamCaption}\item[{std\+::string}]{\+\_\+entity\+Type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Test if an entity is inheriting a given type. 
+
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_a90398d2c9cc2a42617b50fcbc4533734}{icubclient\+::\+Object}.
+
+
+
+Definition at line 55 of file bodypart.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_ac14830acd5adc122c5caeb91947b9ca1}\label{group__icubclient__representations_ac14830acd5adc122c5caeb91947b9ca1}} 
+\index{icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}}
+\subparagraph{\texorpdfstring{to\+String()}{toString()}}
+{\footnotesize\ttfamily string Bodypart\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return a human readable description of the entity. 
+
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_aef5180c43e05c572865ad38ff650b930}{icubclient\+::\+Object}.
+
+
+
+Definition at line 72 of file bodypart.\+cpp.
+
+
+
+\paragraph{Friends And Related Function Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}\label{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}} 
+\index{icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}!O\+P\+C\+Client@{O\+P\+C\+Client}}
+\index{O\+P\+C\+Client@{O\+P\+C\+Client}!icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}}
+\subparagraph{\texorpdfstring{O\+P\+C\+Client}{OPCClient}}
+{\footnotesize\ttfamily friend class \hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 31 of file bodypart.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_ac6d24ba7230a01a4b19e53853f86f24d}\label{group__icubclient__representations_ac6d24ba7230a01a4b19e53853f86f24d}} 
+\index{icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}!m\+\_\+joint\+\_\+number@{m\+\_\+joint\+\_\+number}}
+\index{m\+\_\+joint\+\_\+number@{m\+\_\+joint\+\_\+number}!icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}}
+\subparagraph{\texorpdfstring{m\+\_\+joint\+\_\+number}{m\_joint\_number}}
+{\footnotesize\ttfamily int icubclient\+::\+Bodypart\+::m\+\_\+joint\+\_\+number}
+
+
+
+Joint number of the represented body part. 
+
+
+
+Definition at line 38 of file bodypart.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a90e8e2887be1b576e2151cf32807d0f4}\label{group__icubclient__representations_a90e8e2887be1b576e2151cf32807d0f4}} 
+\index{icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}!m\+\_\+kinect\+Node@{m\+\_\+kinect\+Node}}
+\index{m\+\_\+kinect\+Node@{m\+\_\+kinect\+Node}!icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}}
+\subparagraph{\texorpdfstring{m\+\_\+kinect\+Node}{m\_kinectNode}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Bodypart\+::m\+\_\+kinect\+Node}
+
+
+
+The string labelling the kinect node (of a human kinematic structure, one of the I\+C\+U\+B\+C\+L\+I\+E\+N\+T\+\_\+\+O\+P\+C\+\_\+\+B\+O\+D\+Y\+\_\+\+P\+A\+R\+T\+\_\+\+T\+Y\+P\+E\+\_\+\+X\+XX) that corresponds to the i\+Cub\textquotesingle{}s joint. 
+
+
+
+Definition at line 53 of file bodypart.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a96200fe4105f64e2b1c5ea1387b951e6}\label{group__icubclient__representations_a96200fe4105f64e2b1c5ea1387b951e6}} 
+\index{icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}!m\+\_\+part@{m\+\_\+part}}
+\index{m\+\_\+part@{m\+\_\+part}!icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}}
+\subparagraph{\texorpdfstring{m\+\_\+part}{m\_part}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Bodypart\+::m\+\_\+part}
+
+
+
+The part itself, e.\+g. 
+
+left\+\_\+arm, right\+\_\+arm, ... 
+
+Definition at line 48 of file bodypart.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a2551839d7a05aad0ed6cb5c4bca69b7a}\label{group__icubclient__representations_a2551839d7a05aad0ed6cb5c4bca69b7a}} 
+\index{icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}!m\+\_\+tactile\+\_\+number@{m\+\_\+tactile\+\_\+number}}
+\index{m\+\_\+tactile\+\_\+number@{m\+\_\+tactile\+\_\+number}!icubclient\+::\+Bodypart@{icubclient\+::\+Bodypart}}
+\subparagraph{\texorpdfstring{m\+\_\+tactile\+\_\+number}{m\_tactile\_number}}
+{\footnotesize\ttfamily int icubclient\+::\+Bodypart\+::m\+\_\+tactile\+\_\+number}
+
+
+
+Tactile number of the represented body part. 
+
+
+
+Definition at line 43 of file bodypart.\+h.
+
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}}\label{classicubclient_1_1Entity}
+\Hypertarget{group__icubclient__representations_classicubclient_1_1Entity}
+\subsubsection{class icubclient\+:\+:Entity}
+Represent any entity that can be stored within the O\+PC. 
+
+All representations derive from entities. 
+
+Definition at line 40 of file entity.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Entity\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classicubclient_1_1Entity__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__representations_a980f368aa07ce358583982821533a54a}{Entity} ()
+\item 
+\hyperlink{group__icubclient__representations_a102a6356e68520823918424453f89dd1}{Entity} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} \&b)
+\item 
+\hyperlink{group__icubclient__representations_a10efef64904ff6927808373f488703d7}{Entity} (yarp\+::os\+::\+Bottle \&b)
+\item 
+virtual \hyperlink{group__icubclient__representations_afb1d60fc54152b596f18de2538688863}{$\sim$\+Entity} ()
+\item 
+virtual bool \hyperlink{group__icubclient__representations_a5cbd0e5e254b3881a6a0adfc28107eb5}{is\+Type} (std\+::string \+\_\+entity\+Type) const
+\begin{DoxyCompactList}\small\item\em Test if an entity is inheriting a given type. \end{DoxyCompactList}\item 
+virtual yarp\+::os\+::\+Bottle \hyperlink{group__icubclient__representations_a1481200655f5b88c81a9fa19941fd841}{as\+Bottle} () const
+\begin{DoxyCompactList}\small\item\em Return the entity as a bottle. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{group__icubclient__representations_aba7fbff7372e12c9eacf7f458ba66478}{from\+Bottle} (const yarp\+::os\+::\+Bottle \&b)
+\begin{DoxyCompactList}\small\item\em Fill entity fields from a bottle representation. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{group__icubclient__representations_ad578a93701121f00ac7079fafad6c0e1}{to\+String} () const
+\begin{DoxyCompactList}\small\item\em Return a human readable description of the entity. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__representations_a622173d0dec878783dcc31aafad49a97}{name} () const
+\begin{DoxyCompactList}\small\item\em Return the name of an entity (which has to be unique within the O\+PC) \end{DoxyCompactList}\item 
+int \hyperlink{group__icubclient__representations_afbc352dfc6eb9d896024403fdad3096d}{opc\+\_\+id} () const
+\begin{DoxyCompactList}\small\item\em Return the id of an entity (which has to be unique within the O\+PC) Typically, modules should employ the \hyperlink{group__icubclient__representations_a622173d0dec878783dcc31aafad49a97}{name()} instead. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__representations_a070b4a41c396c3740e5aec8a861436a6}{properties} (const std\+::string \&p) const
+\begin{DoxyCompactList}\small\item\em Returns the name of an entity contained in a property, returns the string \char`\"{}\+N\+U\+L\+L\char`\"{} if property is not set Deprecated, do not use! \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__representations_a1795021c80c136ab0356d9aa58027c08}{entity\+\_\+type} () const
+\begin{DoxyCompactList}\small\item\em Return the specific type of an entity. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__representations_a9a600b75d689669bd3c23995f438d002}{operator==} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} \&b) const
+\item 
+bool \hyperlink{group__icubclient__representations_a84aba0d6b8447437f8bb042daf383957}{operator$<$} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} \&b) const
+\item 
+bool \hyperlink{group__icubclient__representations_a2425ca69ea9fa4d2b31cc78c88d0c755}{operator$>$} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} \&b) const
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__icubclient__representations_a6dee4e872381a74a59d35f5f72710364}{change\+Name} (std\+::string s\+Name)
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{group__icubclient__representations_a4e8debb6585287440c3e04d07628ee36}{m\+\_\+entity\+\_\+type}
+\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}{O\+P\+C\+Client}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a980f368aa07ce358583982821533a54a}\label{group__icubclient__representations_a980f368aa07ce358583982821533a54a}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!Entity@{Entity}}
+\index{Entity@{Entity}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{Entity()}{Entity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Entity\+::\+Entity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 31 of file entity.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a102a6356e68520823918424453f89dd1}\label{group__icubclient__representations_a102a6356e68520823918424453f89dd1}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!Entity@{Entity}}
+\index{Entity@{Entity}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{Entity()}{Entity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Entity\+::\+Entity (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Definition at line 38 of file entity.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a10efef64904ff6927808373f488703d7}\label{group__icubclient__representations_a10efef64904ff6927808373f488703d7}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!Entity@{Entity}}
+\index{Entity@{Entity}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{Entity()}{Entity()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Entity\+::\+Entity (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Bottle \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Definition at line 25 of file entity.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_afb1d60fc54152b596f18de2538688863}\label{group__icubclient__representations_afb1d60fc54152b596f18de2538688863}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!````~Entity@{$\sim$\+Entity}}
+\index{````~Entity@{$\sim$\+Entity}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{$\sim$\+Entity()}{~Entity()}}
+{\footnotesize\ttfamily virtual icubclient\+::\+Entity\+::$\sim$\+Entity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 62 of file entity.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a1481200655f5b88c81a9fa19941fd841}\label{group__icubclient__representations_a1481200655f5b88c81a9fa19941fd841}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!as\+Bottle@{as\+Bottle}}
+\index{as\+Bottle@{as\+Bottle}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{as\+Bottle()}{asBottle()}}
+{\footnotesize\ttfamily Bottle Entity\+::as\+Bottle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return the entity as a bottle. 
+
+
+
+Reimplemented in \hyperlink{group__icubclient__representations_a7969e73f3ee81ba44e36211807666033}{icubclient\+::\+Agent}, \hyperlink{group__icubclient__representations_a60acd95fa583dc758f2b76e1968a7ea2}{icubclient\+::\+Object}, \hyperlink{group__icubclient__representations_a55fccb7922381a3d9a6657af902368b9}{icubclient\+::\+Action}, and \hyperlink{group__icubclient__representations_acacf4d8971e54092fae9f3278f219562}{icubclient\+::\+Bodypart}.
+
+
+
+Definition at line 45 of file entity.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a6dee4e872381a74a59d35f5f72710364}\label{group__icubclient__representations_a6dee4e872381a74a59d35f5f72710364}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!change\+Name@{change\+Name}}
+\index{change\+Name@{change\+Name}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{change\+Name()}{changeName()}}
+{\footnotesize\ttfamily void Entity\+::change\+Name (\begin{DoxyParamCaption}\item[{std\+::string}]{s\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 149 of file entity.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a1795021c80c136ab0356d9aa58027c08}\label{group__icubclient__representations_a1795021c80c136ab0356d9aa58027c08}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!entity\+\_\+type@{entity\+\_\+type}}
+\index{entity\+\_\+type@{entity\+\_\+type}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{entity\+\_\+type()}{entity\_type()}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Entity\+::entity\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the specific type of an entity. 
+
+
+
+Definition at line 121 of file entity.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_aba7fbff7372e12c9eacf7f458ba66478}\label{group__icubclient__representations_aba7fbff7372e12c9eacf7f458ba66478}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!from\+Bottle@{from\+Bottle}}
+\index{from\+Bottle@{from\+Bottle}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{from\+Bottle()}{fromBottle()}}
+{\footnotesize\ttfamily bool Entity\+::from\+Bottle (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Fill entity fields from a bottle representation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & a pointer to the bottle containing the entity representation \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{group__icubclient__representations_abee6123159a9c2d01cd0f6609c8e3415}{icubclient\+::\+Agent}, \hyperlink{group__icubclient__representations_ab5662af99b6bfa7d3996192c62536bf1}{icubclient\+::\+Object}, \hyperlink{group__icubclient__representations_a5bde40cd7f11badb7d61b70e51fe18c0}{icubclient\+::\+Action}, and \hyperlink{group__icubclient__representations_a0d70a33efc69486a46e7f6a06abc5ff2}{icubclient\+::\+Bodypart}.
+
+
+
+Definition at line 95 of file entity.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a5cbd0e5e254b3881a6a0adfc28107eb5}\label{group__icubclient__representations_a5cbd0e5e254b3881a6a0adfc28107eb5}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!is\+Type@{is\+Type}}
+\index{is\+Type@{is\+Type}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{is\+Type()}{isType()}}
+{\footnotesize\ttfamily virtual bool icubclient\+::\+Entity\+::is\+Type (\begin{DoxyParamCaption}\item[{std\+::string}]{\+\_\+entity\+Type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Test if an entity is inheriting a given type. 
+
+
+
+Reimplemented in \hyperlink{group__icubclient__representations_a0ec60560ae6d20bffb64ce9aa6339894}{icubclient\+::\+Agent}, \hyperlink{group__icubclient__representations_a90398d2c9cc2a42617b50fcbc4533734}{icubclient\+::\+Object}, \hyperlink{group__icubclient__representations_a092e89cbeecc23d729be0423216a9920}{icubclient\+::\+Bodypart}, and \hyperlink{group__icubclient__representations_a928f5814d5160e14157391cd85c0cbd0}{icubclient\+::\+Action}.
+
+
+
+Definition at line 67 of file entity.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a622173d0dec878783dcc31aafad49a97}\label{group__icubclient__representations_a622173d0dec878783dcc31aafad49a97}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!name@{name}}
+\index{name@{name}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Entity\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the name of an entity (which has to be unique within the O\+PC) 
+
+
+
+Definition at line 93 of file entity.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_afbc352dfc6eb9d896024403fdad3096d}\label{group__icubclient__representations_afbc352dfc6eb9d896024403fdad3096d}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!opc\+\_\+id@{opc\+\_\+id}}
+\index{opc\+\_\+id@{opc\+\_\+id}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{opc\+\_\+id()}{opc\_id()}}
+{\footnotesize\ttfamily int icubclient\+::\+Entity\+::opc\+\_\+id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the id of an entity (which has to be unique within the O\+PC) Typically, modules should employ the \hyperlink{group__icubclient__representations_a622173d0dec878783dcc31aafad49a97}{name()} instead. 
+
+
+
+Definition at line 101 of file entity.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a84aba0d6b8447437f8bb042daf383957}\label{group__icubclient__representations_a84aba0d6b8447437f8bb042daf383957}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Entity\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} \&}]{b }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 137 of file entity.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a9a600b75d689669bd3c23995f438d002}\label{group__icubclient__representations_a9a600b75d689669bd3c23995f438d002}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!operator==@{operator==}}
+\index{operator==@{operator==}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Entity\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} \&}]{b }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 131 of file entity.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a2425ca69ea9fa4d2b31cc78c88d0c755}\label{group__icubclient__representations_a2425ca69ea9fa4d2b31cc78c88d0c755}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily bool Entity\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} \&}]{b }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 143 of file entity.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a070b4a41c396c3740e5aec8a861436a6}\label{group__icubclient__representations_a070b4a41c396c3740e5aec8a861436a6}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!properties@{properties}}
+\index{properties@{properties}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{properties()}{properties()}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Entity\+::properties (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{p }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the name of an entity contained in a property, returns the string \char`\"{}\+N\+U\+L\+L\char`\"{} if property is not set Deprecated, do not use! 
+
+
+
+Definition at line 109 of file entity.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_ad578a93701121f00ac7079fafad6c0e1}\label{group__icubclient__representations_ad578a93701121f00ac7079fafad6c0e1}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{to\+String()}{toString()}}
+{\footnotesize\ttfamily string Entity\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return a human readable description of the entity. 
+
+
+
+Reimplemented in \hyperlink{group__icubclient__representations_a1fbd9d1acccac0b9fb5a6a1dce6f44f9}{icubclient\+::\+Agent}, \hyperlink{group__icubclient__representations_aef5180c43e05c572865ad38ff650b930}{icubclient\+::\+Object}, \hyperlink{group__icubclient__representations_a725d45d77d48e73135956e1aadfe3889}{icubclient\+::\+Action}, and \hyperlink{group__icubclient__representations_ac14830acd5adc122c5caeb91947b9ca1}{icubclient\+::\+Bodypart}.
+
+
+
+Definition at line 116 of file entity.\+cpp.
+
+
+
+\paragraph{Friends And Related Function Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}\label{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!O\+P\+C\+Client@{O\+P\+C\+Client}}
+\index{O\+P\+C\+Client@{O\+P\+C\+Client}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{O\+P\+C\+Client}{OPCClient}}
+{\footnotesize\ttfamily friend class \hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 42 of file entity.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a4e8debb6585287440c3e04d07628ee36}\label{group__icubclient__representations_a4e8debb6585287440c3e04d07628ee36}} 
+\index{icubclient\+::\+Entity@{icubclient\+::\+Entity}!m\+\_\+entity\+\_\+type@{m\+\_\+entity\+\_\+type}}
+\index{m\+\_\+entity\+\_\+type@{m\+\_\+entity\+\_\+type}!icubclient\+::\+Entity@{icubclient\+::\+Entity}}
+\subparagraph{\texorpdfstring{m\+\_\+entity\+\_\+type}{m\_entity\_type}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Entity\+::m\+\_\+entity\+\_\+type\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 55 of file entity.\+h.
+
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}}\label{classicubclient_1_1Object}
+\Hypertarget{group__icubclient__representations_classicubclient_1_1Object}
+\subsubsection{class icubclient\+:\+:Object}
+Represent any physical entity (including objects and agents) that can be stored within the O\+PC. 
+
+Definition at line 35 of file object.\+h.
+
+
+
+Inheritance diagram for icubclient\+:\+:Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{classicubclient_1_1Object__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__representations_a40860402e64d8008fb42329df7097cdb}{Object} ()
+\item 
+\hyperlink{group__icubclient__representations_a770d7836e04c192a8207168888bf7889}{Object} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object} \&b)
+\item 
+virtual bool \hyperlink{group__icubclient__representations_a90398d2c9cc2a42617b50fcbc4533734}{is\+Type} (std\+::string \+\_\+entity\+Type) const
+\begin{DoxyCompactList}\small\item\em Test if an entity is inheriting a given type. \end{DoxyCompactList}\item 
+virtual yarp\+::os\+::\+Bottle \hyperlink{group__icubclient__representations_a60acd95fa583dc758f2b76e1968a7ea2}{as\+Bottle} () const
+\begin{DoxyCompactList}\small\item\em Return the entity as a bottle. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{group__icubclient__representations_ab5662af99b6bfa7d3996192c62536bf1}{from\+Bottle} (const yarp\+::os\+::\+Bottle \&b)
+\begin{DoxyCompactList}\small\item\em Fill entity fields from a bottle representation. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{group__icubclient__representations_aef5180c43e05c572865ad38ff650b930}{to\+String} () const
+\begin{DoxyCompactList}\small\item\em Return a human readable description of the entity. \end{DoxyCompactList}\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__icubclient__representations_a79b1df29bd8ca51d6659e720081b87a4}{get\+Self\+Relative\+Position} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&v\+Initial\+Root) const
+\begin{DoxyCompactList}\small\item\em Express a point given in the initial ego-\/centered reference frame in respect to the object reference frame. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__representations_a1b656b2a08b880ca5905c3b2e675af19}{object\+Area\+As\+String} () const
+\item 
+double \hyperlink{group__icubclient__representations_a6b588211af9fae42e26d516f882986bd}{saliency} () const
+\begin{DoxyCompactList}\small\item\em Get saliency of object. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__representations_ae2d186d50a741b1d2c90ad5172268de8}{set\+Saliency} (double \hyperlink{group__icubclient__representations_a6b588211af9fae42e26d516f882986bd}{saliency})
+\begin{DoxyCompactList}\small\item\em Set saliency of object. \end{DoxyCompactList}\item 
+double \hyperlink{group__icubclient__representations_aa60275afeab2678509b4288d4c0a7a42}{value} () const
+\begin{DoxyCompactList}\small\item\em Get value of object. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__representations_a19d56c855f6cc48e8164eb1e9ecf4430}{set\+Value} (double \hyperlink{group__icubclient__representations_aa60275afeab2678509b4288d4c0a7a42}{value})
+\begin{DoxyCompactList}\small\item\em Set value of object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \hyperlink{group__icubclient__representations_a2a9073877fc6ab21a1d6997930612c74}{object\+Area\+As\+String} (const \hyperlink{namespaceicubclient_a582031d3e105cc59d614d15d30d22e65}{icubclient\+::\+Object\+Area} \&o)
+\item 
+static \hyperlink{namespaceicubclient_a582031d3e105cc59d614d15d30d22e65}{icubclient\+::\+Object\+Area} \hyperlink{group__icubclient__representations_a36022118155dfd605b1208a246dce4c3}{string\+To\+Object\+Area} (const std\+::string \&o)
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__icubclient__representations_a060b41eb669e6fc344fda352c3f63feb}{m\+\_\+ego\+\_\+position}
+\begin{DoxyCompactList}\small\item\em Position of the \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object}, in the initial ego-\/centered reference frame of the agent mainting the O\+PC (initial root of the i\+Cub). \end{DoxyCompactList}\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__icubclient__representations_a9a76ee654f30131f0ccb31b08fc088d3}{m\+\_\+ego\+\_\+orientation}
+\begin{DoxyCompactList}\small\item\em Orientation of the \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object}, in the initial ego-\/centered reference frame of the agent mainting the O\+PC (initial root of the i\+Cub). \end{DoxyCompactList}\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__icubclient__representations_ad3a16bbccf720dbf2d6c47af362af860}{m\+\_\+dimensions}
+\begin{DoxyCompactList}\small\item\em Dimensions of the \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object}, in meters. \end{DoxyCompactList}\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__icubclient__representations_ace0d43079d691484cfe2f0a96ffebd14}{m\+\_\+color}
+\begin{DoxyCompactList}\small\item\em Mean color of the object (r,g,b) used mainly for debugging/displaying purposes in the i\+Cub\+G\+UI. \end{DoxyCompactList}\item 
+double \hyperlink{group__icubclient__representations_a2a4dbbc7b70e2cc2d81b4f519493ffe6}{m\+\_\+present}
+\begin{DoxyCompactList}\small\item\em Is the object present in the scene A value of 1.\+0 means that the object currently is in the scene A value of 0.\+5 means that the object is likely to be in the scene, but not currently visible by the i\+Cub A value of 0.\+0 means that the object is currently not in the scene. \end{DoxyCompactList}\item 
+double \hyperlink{group__icubclient__representations_a0d5e8b5dce9751c5439b50461a16782a}{m\+\_\+saliency}
+\begin{DoxyCompactList}\small\item\em A measurement of the object saliency \mbox{[}0,1\mbox{]}. \end{DoxyCompactList}\item 
+\hyperlink{namespaceicubclient_a582031d3e105cc59d614d15d30d22e65}{Object\+Area} \hyperlink{group__icubclient__representations_a762c490f385f69ba71c522d4eb9c1e9d}{m\+\_\+objectarea}
+\begin{DoxyCompactList}\small\item\em Whether the object is accessible by only the robot, only the human, both or neither agent. \end{DoxyCompactList}\item 
+double \hyperlink{group__icubclient__representations_a6d330b102ce154567c0532a345950f2a}{m\+\_\+value}
+\begin{DoxyCompactList}\small\item\em A measurement of the object subjective value \mbox{[}0,1\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}{O\+P\+C\+Client}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a40860402e64d8008fb42329df7097cdb}\label{group__icubclient__representations_a40860402e64d8008fb42329df7097cdb}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!Object@{Object}}
+\index{Object@{Object}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{Object()}{Object()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Object\+::\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 28 of file object.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a770d7836e04c192a8207168888bf7889}\label{group__icubclient__representations_a770d7836e04c192a8207168888bf7889}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!Object@{Object}}
+\index{Object@{Object}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{Object()}{Object()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Object\+::\+Object (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object} \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Definition at line 45 of file object.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a60acd95fa583dc758f2b76e1968a7ea2}\label{group__icubclient__representations_a60acd95fa583dc758f2b76e1968a7ea2}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!as\+Bottle@{as\+Bottle}}
+\index{as\+Bottle@{as\+Bottle}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{as\+Bottle()}{asBottle()}}
+{\footnotesize\ttfamily Bottle Object\+::as\+Bottle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return the entity as a bottle. 
+
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_a1481200655f5b88c81a9fa19941fd841}{icubclient\+::\+Entity}.
+
+
+
+Reimplemented in \hyperlink{group__icubclient__representations_a7969e73f3ee81ba44e36211807666033}{icubclient\+::\+Agent}, and \hyperlink{group__icubclient__representations_acacf4d8971e54092fae9f3278f219562}{icubclient\+::\+Bodypart}.
+
+
+
+Definition at line 78 of file object.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_ab5662af99b6bfa7d3996192c62536bf1}\label{group__icubclient__representations_ab5662af99b6bfa7d3996192c62536bf1}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!from\+Bottle@{from\+Bottle}}
+\index{from\+Bottle@{from\+Bottle}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{from\+Bottle()}{fromBottle()}}
+{\footnotesize\ttfamily bool Object\+::from\+Bottle (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Fill entity fields from a bottle representation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & a pointer to the bottle containing the entity representation \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_aba7fbff7372e12c9eacf7f458ba66478}{icubclient\+::\+Entity}.
+
+
+
+Reimplemented in \hyperlink{group__icubclient__representations_abee6123159a9c2d01cd0f6609c8e3415}{icubclient\+::\+Agent}, and \hyperlink{group__icubclient__representations_a0d70a33efc69486a46e7f6a06abc5ff2}{icubclient\+::\+Bodypart}.
+
+
+
+Definition at line 169 of file object.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a79b1df29bd8ca51d6659e720081b87a4}\label{group__icubclient__representations_a79b1df29bd8ca51d6659e720081b87a4}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!get\+Self\+Relative\+Position@{get\+Self\+Relative\+Position}}
+\index{get\+Self\+Relative\+Position@{get\+Self\+Relative\+Position}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{get\+Self\+Relative\+Position()}{getSelfRelativePosition()}}
+{\footnotesize\ttfamily Vector Object\+::get\+Self\+Relative\+Position (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{v\+Initial\+Root }\end{DoxyParamCaption}) const}
+
+
+
+Express a point given in the initial ego-\/centered reference frame in respect to the object reference frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v\+Initial\+Root} & the point to transform \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The transformed vector (x y z) 
+\end{DoxyReturn}
+
+
+Definition at line 236 of file object.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a90398d2c9cc2a42617b50fcbc4533734}\label{group__icubclient__representations_a90398d2c9cc2a42617b50fcbc4533734}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!is\+Type@{is\+Type}}
+\index{is\+Type@{is\+Type}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{is\+Type()}{isType()}}
+{\footnotesize\ttfamily virtual bool icubclient\+::\+Object\+::is\+Type (\begin{DoxyParamCaption}\item[{std\+::string}]{\+\_\+entity\+Type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Test if an entity is inheriting a given type. 
+
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_a5cbd0e5e254b3881a6a0adfc28107eb5}{icubclient\+::\+Entity}.
+
+
+
+Reimplemented in \hyperlink{group__icubclient__representations_a0ec60560ae6d20bffb64ce9aa6339894}{icubclient\+::\+Agent}, and \hyperlink{group__icubclient__representations_a092e89cbeecc23d729be0423216a9920}{icubclient\+::\+Bodypart}.
+
+
+
+Definition at line 86 of file object.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a1b656b2a08b880ca5905c3b2e675af19}\label{group__icubclient__representations_a1b656b2a08b880ca5905c3b2e675af19}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!object\+Area\+As\+String@{object\+Area\+As\+String}}
+\index{object\+Area\+As\+String@{object\+Area\+As\+String}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{object\+Area\+As\+String()}{objectAreaAsString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Object\+::object\+Area\+As\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 106 of file object.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a2a9073877fc6ab21a1d6997930612c74}\label{group__icubclient__representations_a2a9073877fc6ab21a1d6997930612c74}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!object\+Area\+As\+String@{object\+Area\+As\+String}}
+\index{object\+Area\+As\+String@{object\+Area\+As\+String}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{object\+Area\+As\+String()}{objectAreaAsString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::string Object\+::object\+Area\+As\+String (\begin{DoxyParamCaption}\item[{const \hyperlink{namespaceicubclient_a582031d3e105cc59d614d15d30d22e65}{icubclient\+::\+Object\+Area} \&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 254 of file object.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a6b588211af9fae42e26d516f882986bd}\label{group__icubclient__representations_a6b588211af9fae42e26d516f882986bd}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!saliency@{saliency}}
+\index{saliency@{saliency}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{saliency()}{saliency()}}
+{\footnotesize\ttfamily double Object\+::saliency (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get saliency of object. 
+
+\begin{DoxyReturn}{Returns}
+saliency of object 
+\end{DoxyReturn}
+
+
+Definition at line 67 of file object.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_ae2d186d50a741b1d2c90ad5172268de8}\label{group__icubclient__representations_ae2d186d50a741b1d2c90ad5172268de8}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!set\+Saliency@{set\+Saliency}}
+\index{set\+Saliency@{set\+Saliency}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{set\+Saliency()}{setSaliency()}}
+{\footnotesize\ttfamily void Object\+::set\+Saliency (\begin{DoxyParamCaption}\item[{double}]{saliency }\end{DoxyParamCaption})}
+
+
+
+Set saliency of object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em saliency} & -\/ New saliency value \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 72 of file object.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a19d56c855f6cc48e8164eb1e9ecf4430}\label{group__icubclient__representations_a19d56c855f6cc48e8164eb1e9ecf4430}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!set\+Value@{set\+Value}}
+\index{set\+Value@{set\+Value}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{set\+Value()}{setValue()}}
+{\footnotesize\ttfamily void Object\+::set\+Value (\begin{DoxyParamCaption}\item[{double}]{value }\end{DoxyParamCaption})}
+
+
+
+Set value of object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & -\/ New value \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 62 of file object.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a36022118155dfd605b1208a246dce4c3}\label{group__icubclient__representations_a36022118155dfd605b1208a246dce4c3}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!string\+To\+Object\+Area@{string\+To\+Object\+Area}}
+\index{string\+To\+Object\+Area@{string\+To\+Object\+Area}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{string\+To\+Object\+Area()}{stringToObjectArea()}}
+{\footnotesize\ttfamily \hyperlink{namespaceicubclient_a582031d3e105cc59d614d15d30d22e65}{Object\+Area} Object\+::string\+To\+Object\+Area (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 269 of file object.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_aef5180c43e05c572865ad38ff650b930}\label{group__icubclient__representations_aef5180c43e05c572865ad38ff650b930}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{to\+String()}{toString()}}
+{\footnotesize\ttfamily string Object\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return a human readable description of the entity. 
+
+
+
+Reimplemented from \hyperlink{group__icubclient__representations_ad578a93701121f00ac7079fafad6c0e1}{icubclient\+::\+Entity}.
+
+
+
+Reimplemented in \hyperlink{group__icubclient__representations_a1fbd9d1acccac0b9fb5a6a1dce6f44f9}{icubclient\+::\+Agent}, and \hyperlink{group__icubclient__representations_ac14830acd5adc122c5caeb91947b9ca1}{icubclient\+::\+Bodypart}.
+
+
+
+Definition at line 213 of file object.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_aa60275afeab2678509b4288d4c0a7a42}\label{group__icubclient__representations_aa60275afeab2678509b4288d4c0a7a42}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!value@{value}}
+\index{value@{value}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{value()}{value()}}
+{\footnotesize\ttfamily double Object\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get value of object. 
+
+\begin{DoxyReturn}{Returns}
+value of object 
+\end{DoxyReturn}
+
+
+Definition at line 57 of file object.\+cpp.
+
+
+
+\paragraph{Friends And Related Function Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}\label{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!O\+P\+C\+Client@{O\+P\+C\+Client}}
+\index{O\+P\+C\+Client@{O\+P\+C\+Client}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{O\+P\+C\+Client}{OPCClient}}
+{\footnotesize\ttfamily friend class \hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 37 of file object.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_ace0d43079d691484cfe2f0a96ffebd14}\label{group__icubclient__representations_ace0d43079d691484cfe2f0a96ffebd14}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!m\+\_\+color@{m\+\_\+color}}
+\index{m\+\_\+color@{m\+\_\+color}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{m\+\_\+color}{m\_color}}
+{\footnotesize\ttfamily yarp\+::sig\+::\+Vector\+Of$<$double$>$ icubclient\+::\+Object\+::m\+\_\+color}
+
+
+
+Mean color of the object (r,g,b) used mainly for debugging/displaying purposes in the i\+Cub\+G\+UI. 
+
+
+
+Definition at line 61 of file object.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_ad3a16bbccf720dbf2d6c47af362af860}\label{group__icubclient__representations_ad3a16bbccf720dbf2d6c47af362af860}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!m\+\_\+dimensions@{m\+\_\+dimensions}}
+\index{m\+\_\+dimensions@{m\+\_\+dimensions}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{m\+\_\+dimensions}{m\_dimensions}}
+{\footnotesize\ttfamily yarp\+::sig\+::\+Vector\+Of$<$double$>$ icubclient\+::\+Object\+::m\+\_\+dimensions}
+
+
+
+Dimensions of the \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object}, in meters. 
+
+
+
+Definition at line 56 of file object.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a9a76ee654f30131f0ccb31b08fc088d3}\label{group__icubclient__representations_a9a76ee654f30131f0ccb31b08fc088d3}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!m\+\_\+ego\+\_\+orientation@{m\+\_\+ego\+\_\+orientation}}
+\index{m\+\_\+ego\+\_\+orientation@{m\+\_\+ego\+\_\+orientation}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{m\+\_\+ego\+\_\+orientation}{m\_ego\_orientation}}
+{\footnotesize\ttfamily yarp\+::sig\+::\+Vector\+Of$<$double$>$ icubclient\+::\+Object\+::m\+\_\+ego\+\_\+orientation}
+
+
+
+Orientation of the \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object}, in the initial ego-\/centered reference frame of the agent mainting the O\+PC (initial root of the i\+Cub). 
+
+
+
+Definition at line 51 of file object.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a060b41eb669e6fc344fda352c3f63feb}\label{group__icubclient__representations_a060b41eb669e6fc344fda352c3f63feb}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!m\+\_\+ego\+\_\+position@{m\+\_\+ego\+\_\+position}}
+\index{m\+\_\+ego\+\_\+position@{m\+\_\+ego\+\_\+position}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{m\+\_\+ego\+\_\+position}{m\_ego\_position}}
+{\footnotesize\ttfamily yarp\+::sig\+::\+Vector\+Of$<$double$>$ icubclient\+::\+Object\+::m\+\_\+ego\+\_\+position}
+
+
+
+Position of the \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object}, in the initial ego-\/centered reference frame of the agent mainting the O\+PC (initial root of the i\+Cub). 
+
+
+
+Definition at line 46 of file object.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a762c490f385f69ba71c522d4eb9c1e9d}\label{group__icubclient__representations_a762c490f385f69ba71c522d4eb9c1e9d}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!m\+\_\+objectarea@{m\+\_\+objectarea}}
+\index{m\+\_\+objectarea@{m\+\_\+objectarea}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{m\+\_\+objectarea}{m\_objectarea}}
+{\footnotesize\ttfamily \hyperlink{namespaceicubclient_a582031d3e105cc59d614d15d30d22e65}{Object\+Area} icubclient\+::\+Object\+::m\+\_\+objectarea}
+
+
+
+Whether the object is accessible by only the robot, only the human, both or neither agent. 
+
+
+
+Definition at line 79 of file object.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a2a4dbbc7b70e2cc2d81b4f519493ffe6}\label{group__icubclient__representations_a2a4dbbc7b70e2cc2d81b4f519493ffe6}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!m\+\_\+present@{m\+\_\+present}}
+\index{m\+\_\+present@{m\+\_\+present}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{m\+\_\+present}{m\_present}}
+{\footnotesize\ttfamily double icubclient\+::\+Object\+::m\+\_\+present}
+
+
+
+Is the object present in the scene A value of 1.\+0 means that the object currently is in the scene A value of 0.\+5 means that the object is likely to be in the scene, but not currently visible by the i\+Cub A value of 0.\+0 means that the object is currently not in the scene. 
+
+
+
+Definition at line 69 of file object.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a0d5e8b5dce9751c5439b50461a16782a}\label{group__icubclient__representations_a0d5e8b5dce9751c5439b50461a16782a}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!m\+\_\+saliency@{m\+\_\+saliency}}
+\index{m\+\_\+saliency@{m\+\_\+saliency}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{m\+\_\+saliency}{m\_saliency}}
+{\footnotesize\ttfamily double icubclient\+::\+Object\+::m\+\_\+saliency}
+
+
+
+A measurement of the object saliency \mbox{[}0,1\mbox{]}. 
+
+
+
+Definition at line 74 of file object.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a6d330b102ce154567c0532a345950f2a}\label{group__icubclient__representations_a6d330b102ce154567c0532a345950f2a}} 
+\index{icubclient\+::\+Object@{icubclient\+::\+Object}!m\+\_\+value@{m\+\_\+value}}
+\index{m\+\_\+value@{m\+\_\+value}!icubclient\+::\+Object@{icubclient\+::\+Object}}
+\subparagraph{\texorpdfstring{m\+\_\+value}{m\_value}}
+{\footnotesize\ttfamily double icubclient\+::\+Object\+::m\+\_\+value}
+
+
+
+A measurement of the object subjective value \mbox{[}0,1\mbox{]}. 
+
+
+
+Definition at line 84 of file object.\+h.
+
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}}\label{classicubclient_1_1Relation}
+\Hypertarget{group__icubclient__representations_classicubclient_1_1Relation}
+\subsubsection{class icubclient\+:\+:Relation}
+Represent a relation between two entities. 
+
+Definition at line 31 of file relation.\+h.
+
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__representations_ad534358d219c6bd37103261b8c73ca28}{Relation} ()
+\item 
+\hyperlink{group__icubclient__representations_a87209b6621a3a92e9a839cbf1874e102}{Relation} (yarp\+::os\+::\+Bottle \&b)
+\item 
+\hyperlink{group__icubclient__representations_abd844358bc71826a1a6bf50d66a283bb}{Relation} (std\+::string \hyperlink{group__icubclient__representations_a7001a61802fd1292a54b20ab4bb2565e}{subject}, std\+::string \hyperlink{group__icubclient__representations_ad20612000c6327a4ee6cb1f7568ccefa}{verb}, std\+::string \hyperlink{group__icubclient__representations_a701b6174e22c50ce091c321faca34df3}{object}=\char`\"{}none\char`\"{}, std\+::string \hyperlink{group__icubclient__representations_a8a4d20108d73ff505c8cadfaeb902c98}{complement\+\_\+place}=\char`\"{}none\char`\"{}, std\+::string \hyperlink{group__icubclient__representations_a2aa21779ce00775fc5a937e9cfc9bce0}{complement\+\_\+time}=\char`\"{}none\char`\"{}, std\+::string \hyperlink{group__icubclient__representations_afefea8d3d76cee06eeb88dcd04e4d39e}{complement\+\_\+manner}=\char`\"{}none\char`\"{})
+\item 
+\hyperlink{group__icubclient__representations_a896d0c420059a0a133d4a8cdb3d7b8f6}{Relation} (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$\hyperlink{group__icubclient__representations_a7001a61802fd1292a54b20ab4bb2565e}{subject}, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$\hyperlink{group__icubclient__representations_ad20612000c6327a4ee6cb1f7568ccefa}{verb}, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$\hyperlink{group__icubclient__representations_a701b6174e22c50ce091c321faca34df3}{object}=nullptr, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$\hyperlink{group__icubclient__representations_a8a4d20108d73ff505c8cadfaeb902c98}{complement\+\_\+place}=nullptr, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$\hyperlink{group__icubclient__representations_a2aa21779ce00775fc5a937e9cfc9bce0}{complement\+\_\+time}=nullptr, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$\hyperlink{group__icubclient__representations_afefea8d3d76cee06eeb88dcd04e4d39e}{complement\+\_\+manner}=nullptr)
+\item 
+virtual \hyperlink{group__icubclient__representations_a2539248fae2e1ff137e39d8fddf537ff}{$\sim$\+Relation} ()
+\item 
+yarp\+::os\+::\+Bottle \hyperlink{group__icubclient__representations_abd8f5fd5ffde5d321e8c5ba9feb5e929}{as\+Bottle} (bool ignore\+ID=false) const
+\item 
+yarp\+::os\+::\+Bottle \hyperlink{group__icubclient__representations_ad3b7769384f11727be8e4e9d491342f2}{as\+Light\+Bottle} () const
+\begin{DoxyCompactList}\small\item\em Return the relation as a bottle without the argument to \char`\"{}none\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__representations_aacd17ed756214b7cab4baf9708257340}{from\+Bottle} (const yarp\+::os\+::\+Bottle \&b)
+\begin{DoxyCompactList}\small\item\em Create a \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} from a Bottle. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{group__icubclient__representations_a30f68703dc4a28bc03a79503177f5466}{to\+String} () const
+\begin{DoxyCompactList}\small\item\em Return string representation of this \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation}. \end{DoxyCompactList}\item 
+int \hyperlink{group__icubclient__representations_ad69f93ae76f642e9c47178789b694b93}{ID} () const
+\begin{DoxyCompactList}\small\item\em Get the opc ID of the relation. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__representations_a7001a61802fd1292a54b20ab4bb2565e}{subject} () const
+\begin{DoxyCompactList}\small\item\em Get the name of the relation\textquotesingle{}s subject. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__representations_a701b6174e22c50ce091c321faca34df3}{object} () const
+\begin{DoxyCompactList}\small\item\em Get the name of the relation\textquotesingle{}s object. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__representations_ad20612000c6327a4ee6cb1f7568ccefa}{verb} () const
+\begin{DoxyCompactList}\small\item\em Get the type of the relation. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__representations_a8a4d20108d73ff505c8cadfaeb902c98}{complement\+\_\+place} () const
+\begin{DoxyCompactList}\small\item\em Get the complement of place of the relation. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__representations_a2aa21779ce00775fc5a937e9cfc9bce0}{complement\+\_\+time} () const
+\begin{DoxyCompactList}\small\item\em Get the complement of time of the relation. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__representations_afefea8d3d76cee06eeb88dcd04e4d39e}{complement\+\_\+manner} () const
+\begin{DoxyCompactList}\small\item\em Get the complement of manner of the relation. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__representations_a990fdaafe95a48d4a84b797f5a8e0871}{operator==} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&b) const
+\item 
+bool \hyperlink{group__icubclient__representations_ac84667418f86edca13ed238e5d7472e2}{operator$<$} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&b) const
+\item 
+bool \hyperlink{group__icubclient__representations_a0d96d3ec8edb6dc1898eaf7cfbb7086e}{operator$>$} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&b) const
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{group__icubclient__representations_ad918c1a79c53ff302803e3369c899a48}{m\+\_\+verb}
+\item 
+std\+::string \hyperlink{group__icubclient__representations_a17aa3a13fa0d96fef36e4e9ca9a79545}{m\+\_\+subject}
+\item 
+std\+::string \hyperlink{group__icubclient__representations_a45b344b5e1330bb8f987566179545289}{m\+\_\+object}
+\item 
+std\+::string \hyperlink{group__icubclient__representations_aaa98e6911d76f87fc93a2d3e3a44b8ac}{m\+\_\+complement\+\_\+place}
+\item 
+std\+::string \hyperlink{group__icubclient__representations_a3993e492f949767d75f113df9d96a8bf}{m\+\_\+complement\+\_\+time}
+\item 
+std\+::string \hyperlink{group__icubclient__representations_adf280bb23fd4bda8deb840fcf57a5f6f}{m\+\_\+complement\+\_\+manner}
+\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}{O\+P\+C\+Client}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_ad534358d219c6bd37103261b8c73ca28}\label{group__icubclient__representations_ad534358d219c6bd37103261b8c73ca28}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!Relation@{Relation}}
+\index{Relation@{Relation}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{Relation()}{Relation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily icubclient\+::\+Relation\+::\+Relation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 46 of file relation.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a87209b6621a3a92e9a839cbf1874e102}\label{group__icubclient__representations_a87209b6621a3a92e9a839cbf1874e102}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!Relation@{Relation}}
+\index{Relation@{Relation}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{Relation()}{Relation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Relation\+::\+Relation (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Bottle \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Definition at line 85 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_abd844358bc71826a1a6bf50d66a283bb}\label{group__icubclient__representations_abd844358bc71826a1a6bf50d66a283bb}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!Relation@{Relation}}
+\index{Relation@{Relation}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{Relation()}{Relation()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Relation\+::\+Relation (\begin{DoxyParamCaption}\item[{std\+::string}]{subject,  }\item[{std\+::string}]{verb,  }\item[{std\+::string}]{object = {\ttfamily \char`\"{}none\char`\"{}},  }\item[{std\+::string}]{complement\+\_\+place = {\ttfamily \char`\"{}none\char`\"{}},  }\item[{std\+::string}]{complement\+\_\+time = {\ttfamily \char`\"{}none\char`\"{}},  }\item[{std\+::string}]{complement\+\_\+manner = {\ttfamily \char`\"{}none\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 27 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a896d0c420059a0a133d4a8cdb3d7b8f6}\label{group__icubclient__representations_a896d0c420059a0a133d4a8cdb3d7b8f6}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!Relation@{Relation}}
+\index{Relation@{Relation}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{Relation()}{Relation()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Relation\+::\+Relation (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{subject,  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{verb,  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{object = {\ttfamily nullptr},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+place = {\ttfamily nullptr},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+time = {\ttfamily nullptr},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+manner = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 44 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a2539248fae2e1ff137e39d8fddf537ff}\label{group__icubclient__representations_a2539248fae2e1ff137e39d8fddf537ff}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!````~Relation@{$\sim$\+Relation}}
+\index{````~Relation@{$\sim$\+Relation}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{$\sim$\+Relation()}{~Relation()}}
+{\footnotesize\ttfamily virtual icubclient\+::\+Relation\+::$\sim$\+Relation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 67 of file relation.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_abd8f5fd5ffde5d321e8c5ba9feb5e929}\label{group__icubclient__representations_abd8f5fd5ffde5d321e8c5ba9feb5e929}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!as\+Bottle@{as\+Bottle}}
+\index{as\+Bottle@{as\+Bottle}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{as\+Bottle()}{asBottle()}}
+{\footnotesize\ttfamily Bottle Relation\+::as\+Bottle (\begin{DoxyParamCaption}\item[{bool}]{ignore\+ID = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 90 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_ad3b7769384f11727be8e4e9d491342f2}\label{group__icubclient__representations_ad3b7769384f11727be8e4e9d491342f2}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!as\+Light\+Bottle@{as\+Light\+Bottle}}
+\index{as\+Light\+Bottle@{as\+Light\+Bottle}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{as\+Light\+Bottle()}{asLightBottle()}}
+{\footnotesize\ttfamily Bottle Relation\+::as\+Light\+Bottle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Return the relation as a bottle without the argument to \char`\"{}none\char`\"{}. 
+
+
+
+Definition at line 132 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_afefea8d3d76cee06eeb88dcd04e4d39e}\label{group__icubclient__representations_afefea8d3d76cee06eeb88dcd04e4d39e}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!complement\+\_\+manner@{complement\+\_\+manner}}
+\index{complement\+\_\+manner@{complement\+\_\+manner}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{complement\+\_\+manner()}{complement\_manner()}}
+{\footnotesize\ttfamily string Relation\+::complement\+\_\+manner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the complement of manner of the relation. 
+
+
+
+Definition at line 236 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a8a4d20108d73ff505c8cadfaeb902c98}\label{group__icubclient__representations_a8a4d20108d73ff505c8cadfaeb902c98}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!complement\+\_\+place@{complement\+\_\+place}}
+\index{complement\+\_\+place@{complement\+\_\+place}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{complement\+\_\+place()}{complement\_place()}}
+{\footnotesize\ttfamily string Relation\+::complement\+\_\+place (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the complement of place of the relation. 
+
+
+
+Definition at line 226 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a2aa21779ce00775fc5a937e9cfc9bce0}\label{group__icubclient__representations_a2aa21779ce00775fc5a937e9cfc9bce0}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!complement\+\_\+time@{complement\+\_\+time}}
+\index{complement\+\_\+time@{complement\+\_\+time}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{complement\+\_\+time()}{complement\_time()}}
+{\footnotesize\ttfamily string Relation\+::complement\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the complement of time of the relation. 
+
+
+
+Definition at line 231 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_aacd17ed756214b7cab4baf9708257340}\label{group__icubclient__representations_aacd17ed756214b7cab4baf9708257340}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!from\+Bottle@{from\+Bottle}}
+\index{from\+Bottle@{from\+Bottle}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{from\+Bottle()}{fromBottle()}}
+{\footnotesize\ttfamily void Relation\+::from\+Bottle (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Create a \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} from a Bottle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & The Bottle representation of a \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 179 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_ad69f93ae76f642e9c47178789b694b93}\label{group__icubclient__representations_ad69f93ae76f642e9c47178789b694b93}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!ID@{ID}}
+\index{ID@{ID}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{I\+D()}{ID()}}
+{\footnotesize\ttfamily int Relation\+::\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the opc ID of the relation. 
+
+
+
+Definition at line 206 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a701b6174e22c50ce091c321faca34df3}\label{group__icubclient__representations_a701b6174e22c50ce091c321faca34df3}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!object@{object}}
+\index{object@{object}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{object()}{object()}}
+{\footnotesize\ttfamily string Relation\+::object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the name of the relation\textquotesingle{}s object. 
+
+
+
+Definition at line 216 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_ac84667418f86edca13ed238e5d7472e2}\label{group__icubclient__representations_ac84667418f86edca13ed238e5d7472e2}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Relation\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&}]{b }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 275 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a990fdaafe95a48d4a84b797f5a8e0871}\label{group__icubclient__representations_a990fdaafe95a48d4a84b797f5a8e0871}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!operator==@{operator==}}
+\index{operator==@{operator==}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Relation\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&}]{b }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 280 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a0d96d3ec8edb6dc1898eaf7cfbb7086e}\label{group__icubclient__representations_a0d96d3ec8edb6dc1898eaf7cfbb7086e}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily bool Relation\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&}]{b }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 241 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a7001a61802fd1292a54b20ab4bb2565e}\label{group__icubclient__representations_a7001a61802fd1292a54b20ab4bb2565e}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!subject@{subject}}
+\index{subject@{subject}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{subject()}{subject()}}
+{\footnotesize\ttfamily string Relation\+::subject (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the name of the relation\textquotesingle{}s subject. 
+
+
+
+Definition at line 211 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_a30f68703dc4a28bc03a79503177f5466}\label{group__icubclient__representations_a30f68703dc4a28bc03a79503177f5466}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{to\+String()}{toString()}}
+{\footnotesize\ttfamily string Relation\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return string representation of this \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation}. 
+
+
+
+Definition at line 190 of file relation.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__representations_ad20612000c6327a4ee6cb1f7568ccefa}\label{group__icubclient__representations_ad20612000c6327a4ee6cb1f7568ccefa}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!verb@{verb}}
+\index{verb@{verb}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{verb()}{verb()}}
+{\footnotesize\ttfamily string Relation\+::verb (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the type of the relation. 
+
+
+
+Definition at line 221 of file relation.\+cpp.
+
+
+
+\paragraph{Friends And Related Function Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}\label{group__icubclient__representations_a80f0caa9925206967111a3d2713874a2}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!O\+P\+C\+Client@{O\+P\+C\+Client}}
+\index{O\+P\+C\+Client@{O\+P\+C\+Client}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{O\+P\+C\+Client}{OPCClient}}
+{\footnotesize\ttfamily friend class \hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 33 of file relation.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__representations_adf280bb23fd4bda8deb840fcf57a5f6f}\label{group__icubclient__representations_adf280bb23fd4bda8deb840fcf57a5f6f}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!m\+\_\+complement\+\_\+manner@{m\+\_\+complement\+\_\+manner}}
+\index{m\+\_\+complement\+\_\+manner@{m\+\_\+complement\+\_\+manner}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{m\+\_\+complement\+\_\+manner}{m\_complement\_manner}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Relation\+::m\+\_\+complement\+\_\+manner}
+
+
+
+Definition at line 44 of file relation.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_aaa98e6911d76f87fc93a2d3e3a44b8ac}\label{group__icubclient__representations_aaa98e6911d76f87fc93a2d3e3a44b8ac}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!m\+\_\+complement\+\_\+place@{m\+\_\+complement\+\_\+place}}
+\index{m\+\_\+complement\+\_\+place@{m\+\_\+complement\+\_\+place}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{m\+\_\+complement\+\_\+place}{m\_complement\_place}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Relation\+::m\+\_\+complement\+\_\+place}
+
+
+
+Definition at line 42 of file relation.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a3993e492f949767d75f113df9d96a8bf}\label{group__icubclient__representations_a3993e492f949767d75f113df9d96a8bf}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!m\+\_\+complement\+\_\+time@{m\+\_\+complement\+\_\+time}}
+\index{m\+\_\+complement\+\_\+time@{m\+\_\+complement\+\_\+time}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{m\+\_\+complement\+\_\+time}{m\_complement\_time}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Relation\+::m\+\_\+complement\+\_\+time}
+
+
+
+Definition at line 43 of file relation.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a45b344b5e1330bb8f987566179545289}\label{group__icubclient__representations_a45b344b5e1330bb8f987566179545289}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!m\+\_\+object@{m\+\_\+object}}
+\index{m\+\_\+object@{m\+\_\+object}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{m\+\_\+object}{m\_object}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Relation\+::m\+\_\+object}
+
+
+
+Definition at line 41 of file relation.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_a17aa3a13fa0d96fef36e4e9ca9a79545}\label{group__icubclient__representations_a17aa3a13fa0d96fef36e4e9ca9a79545}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!m\+\_\+subject@{m\+\_\+subject}}
+\index{m\+\_\+subject@{m\+\_\+subject}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{m\+\_\+subject}{m\_subject}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Relation\+::m\+\_\+subject}
+
+
+
+Definition at line 40 of file relation.\+h.
+
+\mbox{\Hypertarget{group__icubclient__representations_ad918c1a79c53ff302803e3369c899a48}\label{group__icubclient__representations_ad918c1a79c53ff302803e3369c899a48}} 
+\index{icubclient\+::\+Relation@{icubclient\+::\+Relation}!m\+\_\+verb@{m\+\_\+verb}}
+\index{m\+\_\+verb@{m\+\_\+verb}!icubclient\+::\+Relation@{icubclient\+::\+Relation}}
+\subparagraph{\texorpdfstring{m\+\_\+verb}{m\_verb}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+Relation\+::m\+\_\+verb}
+
+
+
+Definition at line 39 of file relation.\+h.
+

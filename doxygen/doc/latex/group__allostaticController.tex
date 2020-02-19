@@ -1,0 +1,599 @@
+\hypertarget{group__allostaticController}{}\section{allostatic\+Controller}
+\label{group__allostaticController}\index{allostatic\+Controller@{allostatic\+Controller}}
+
+
+Drive scheduler for the reactive\+Layer Version\+:1.\+0  
+
+
+Collaboration diagram for allostatic\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{group__allostaticController}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{group__allostaticController_structDriveOutCZ}{Drive\+Out\+CZ}
+\item 
+class \hyperlink{group__allostaticController_classAllostaticDrive}{Allostatic\+Drive}
+\item 
+class \hyperlink{group__allostaticController_classAllostaticController}{Allostatic\+Controller}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{group__allostaticController_gaf40887c05ba83b6f4c0809ce4716dcbc}{Out\+CZ} \{ \newline
+\hyperlink{group__allostaticController_ggaf40887c05ba83b6f4c0809ce4716dcbcab5726a81978ba2a47fcea5ef4fb8fbf4}{U\+N\+D\+ER}, 
+\newline
+\hyperlink{group__allostaticController_ggaf40887c05ba83b6f4c0809ce4716dcbcaee4b1697462879d869ff122fc694e9e8}{O\+V\+ER}, 
+\newline
+\hyperlink{group__allostaticController_ggaf40887c05ba83b6f4c0809ce4716dcbca605159e8a4c32319fd69b5d151369d93}{U\+N\+D\+E\+F\+I\+N\+ED}
+ \}
+\item 
+enum \hyperlink{group__allostaticController_gab2a3f165075ddd5df4b2f6910928a311}{Drive\+Update\+Mode} \{ \newline
+\hyperlink{group__allostaticController_ggab2a3f165075ddd5df4b2f6910928a311a6b7e396bc942b13df719fee7bee389ef}{S\+E\+N\+S\+A\+T\+I\+O\+N\+\_\+\+ON}, 
+\newline
+\hyperlink{group__allostaticController_ggab2a3f165075ddd5df4b2f6910928a311ac4f1d0f383d94c415be67267485ad8ca}{S\+E\+N\+S\+A\+T\+I\+O\+N\+\_\+\+O\+FF}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Drive scheduler for the reactive\+Layer Version\+:1.\+0 
+
+\begin{DoxyAuthor}{Author}
+Jordi-\/\+Ysard Puigbò \href{mailto:jordiysard@gmail.com}{\tt jordiysard@gmail.\+com}, Clément Moulin-\/\+Frier \href{mailto:clement.moulin-frier@upf.edu}{\tt clement.\+moulin-\/frier@upf.\+edu}, Stéphane Lallée \href{mailto:stephane.lallee@gmail.com}{\tt stephane.\+lallee@gmail.\+com} ~\newline
+ 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Released under the terms of the G\+NU G\+PL v2.\+0 
+\end{DoxyCopyright}
+\hypertarget{group__touchDetector_intro_sec}{}\subsection{Description}\label{group__touchDetector_intro_sec}
+On top of the homeostasis module, the allostatic controller monitors all needs in homeostasis and triggers corresponding behaviors in function of which need requires to be addressed sooner. We call this pre-\/defined sensory-\/motor association a drive. This module creates needs in homeostasis from a config file or R\+PC command, and provides an interface to freeze them and change their parameters depending on their internal values. This module is strongly dependent on sensation\+Manager, homeostasis and behavior\+Manager and is the core of the reactive\+Layer. See the default.\+ini config file to see an example on how to define a new drive.\hypertarget{group__touchDetector_parameters_sec}{}\subsection{Parameters}\label{group__touchDetector_parameters_sec}
+
+\begin{DoxyItemize}
+\item -- name \+: name of the module
+\item -- period \+: change the update rate of this module 
+\end{DoxyItemize}\hypertarget{group__touchDetector_inputports_sec}{}\subsection{Input Ports}\label{group__touchDetector_inputports_sec}
+
+\begin{DoxyItemize}
+\item /\+Allostatic\+Controller/rpc \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Response port. Supported commands\+:
+\begin{DoxyItemize}
+\item help
+\item \mbox{[}\textquotesingle{}manual\textquotesingle{}\mbox{]} \mbox{[}\textquotesingle{}on\textquotesingle{}/\textquotesingle{}off\textquotesingle{}\mbox{]} \+: sets the allostatic\+Controller in manual mode. It the drives needs are frozen and behaviors can be triggered through rpc commands or a gui
+\end{DoxyItemize}
+\item /\+Allostatic\+Controller/to\+Homeo\+R\+PC\+:o \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Communication port to create and manage homeostatic needs.
+\item /\+Allostatic\+Controller/to\+Behavior\+Manager\+:o \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Communication port to trigger behaviors.
+\item /\+Allostatic\+Controller/drive\+Name/min\+:o \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Port to quickly read when a need crosses its lower boundary.
+\item /\+Allostatic\+Controller/drive\+Name/max\+:o \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Port to quickly read when a need crosses its upper boundary.
+\end{DoxyItemize}\hypertarget{group__touchDetector_outputports_sec}{}\subsection{Output Ports}\label{group__touchDetector_outputports_sec}
+\hypertarget{group__touchDetector_services_sec}{}\subsection{Services}\label{group__touchDetector_services_sec}
+
+
+\subsection{Class Documentation}
+\index{Drive\+Out\+CZ@{Drive\+Out\+CZ}}\label{structDriveOutCZ}
+\Hypertarget{group__allostaticController_structDriveOutCZ}
+\subsubsection{struct Drive\+Out\+CZ}
+
+
+Definition at line 28 of file allostatic\+Controller.\+h.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{group__allostaticController_a5f3a5c7c49f34e0d0196ec0c75b7afaf}\label{group__allostaticController_a5f3a5c7c49f34e0d0196ec0c75b7afaf}} 
+\hyperlink{group__allostaticController_gaf40887c05ba83b6f4c0809ce4716dcbc}{OutCZ}&
+level&
+\\
+\hline
+
+\mbox{\Hypertarget{group__allostaticController_a3ac86bf70ff4ec5faea3b5d2666c836a}\label{group__allostaticController_a3ac86bf70ff4ec5faea3b5d2666c836a}} 
+string&
+name&
+\\
+\hline
+
+\end{DoxyFields}
+\index{Allostatic\+Drive@{Allostatic\+Drive}}\label{classAllostaticDrive}
+\Hypertarget{group__allostaticController_classAllostaticDrive}
+\subsubsection{class Allostatic\+Drive}
+
+
+Definition at line 42 of file allostatic\+Controller.\+h.
+
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__allostaticController_aaa650f6d22aab98491d3a416a6f779fa}{Allostatic\+Drive} ()
+\item 
+bool \hyperlink{group__allostaticController_a7344034cd5c68b5a9580e3bc0bd35c6b}{interrupt\+\_\+ports} ()
+\begin{DoxyCompactList}\small\item\em Interrupt ports of the drive. \end{DoxyCompactList}\item 
+bool \hyperlink{group__allostaticController_a39a9ed70e712c005bb825ffcd1f47c26}{close\+\_\+ports} ()
+\begin{DoxyCompactList}\small\item\em Close ports of the drive. \end{DoxyCompactList}\item 
+Bottle \hyperlink{group__allostaticController_a2d05d5861a68c6b8126b5d1d6fb97f69}{update} (\hyperlink{group__allostaticController_gab2a3f165075ddd5df4b2f6910928a311}{Drive\+Update\+Mode} mode)
+\item 
+void \hyperlink{group__allostaticController_a70e9a461682da34e29e77d5d85d5a11c}{trigger\+Behavior} (\hyperlink{group__allostaticController_gaf40887c05ba83b6f4c0809ce4716dcbc}{Out\+CZ} mode)
+\begin{DoxyCompactList}\small\item\em triggers a behavior if needs are out of threshold \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{group__allostaticController_abd23f5c821ac78b4bfd55377f73d6d94}{name}
+\begin{DoxyCompactList}\small\item\em Name of the drive. \end{DoxyCompactList}\item 
+bool \hyperlink{group__allostaticController_aeb90236386ea512b6100583b7d0c409f}{active}
+\item 
+bool \hyperlink{group__allostaticController_a6c346cb58e92a490c784e1e637529d50}{manual\+Mode}
+\item 
+Port $\ast$ \hyperlink{group__allostaticController_a1cbe962d96a15bf82f7e57a11ab3c1c0}{behavior\+Under\+Port}
+\begin{DoxyCompactList}\small\item\em Port to be used when drive falls below homeostatic level. \end{DoxyCompactList}\item 
+Port $\ast$ \hyperlink{group__allostaticController_a0ae7b5cdd6d2ef10fc83a0b426019615}{behavior\+Over\+Port}
+\begin{DoxyCompactList}\small\item\em Port to be used when drive hits upper threshold of homeostatic level. \end{DoxyCompactList}\item 
+Port $\ast$ \hyperlink{group__allostaticController_a1f2c6a7f4f35d01061381569f98b2a1e}{homeo\+Port}
+\begin{DoxyCompactList}\small\item\em Port to homeostasis module. \end{DoxyCompactList}\item 
+Buffered\+Port$<$ Bottle $>$ $\ast$ \hyperlink{group__allostaticController_a09a6b2f056f2b4517e6a338f499fa9c1}{input\+Sensation\+Port}
+\begin{DoxyCompactList}\small\item\em Port from sensation\+Manager. \end{DoxyCompactList}\item 
+Bottle \hyperlink{group__allostaticController_abae41498adb72667a5e884242fbccff6}{behavior\+Under\+Cmd}
+\begin{DoxyCompactList}\small\item\em Command to be send to behavior\+Under\+Port when drive falls below homeostatic level. \end{DoxyCompactList}\item 
+Bottle \hyperlink{group__allostaticController_a0e6d273bf648085493b00b9aae6c88b9}{behavior\+Over\+Cmd}
+\begin{DoxyCompactList}\small\item\em Command to be send to behavior\+Over\+Port when drive hits upper threshold of homeostatic level. \end{DoxyCompactList}\item 
+Bottle \hyperlink{group__allostaticController_a26f0b7c82d8ad12eaf4e3a68f4000302}{sensation\+On\+Cmd}
+\item 
+Bottle \hyperlink{group__allostaticController_a10d504bd4b07b96cac8bbb040bb5fd57}{sensation\+Off\+Cmd}
+\item 
+Bottle \hyperlink{group__allostaticController_a7605dcaf4074f476d6f743814f15c382}{before\+Trigger\+Cmd}
+\item 
+Bottle \hyperlink{group__allostaticController_aac6cbca31cb2568076e57aaabbfc2d2e}{after\+Trigger\+Cmd}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__allostaticController_aaa650f6d22aab98491d3a416a6f779fa}\label{group__allostaticController_aaa650f6d22aab98491d3a416a6f779fa}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!Allostatic\+Drive@{Allostatic\+Drive}}
+\index{Allostatic\+Drive@{Allostatic\+Drive}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{Allostatic\+Drive()}{AllostaticDrive()}}
+{\footnotesize\ttfamily Allostatic\+Drive\+::\+Allostatic\+Drive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 55 of file allostatic\+Controller.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__allostaticController_a39a9ed70e712c005bb825ffcd1f47c26}\label{group__allostaticController_a39a9ed70e712c005bb825ffcd1f47c26}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!close\+\_\+ports@{close\+\_\+ports}}
+\index{close\+\_\+ports@{close\+\_\+ports}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{close\+\_\+ports()}{close\_ports()}}
+{\footnotesize\ttfamily bool Allostatic\+Drive\+::close\+\_\+ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Close ports of the drive. 
+
+
+
+Definition at line 440 of file allostatic\+Controller.\+cpp.
+
+\mbox{\Hypertarget{group__allostaticController_a7344034cd5c68b5a9580e3bc0bd35c6b}\label{group__allostaticController_a7344034cd5c68b5a9580e3bc0bd35c6b}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!interrupt\+\_\+ports@{interrupt\+\_\+ports}}
+\index{interrupt\+\_\+ports@{interrupt\+\_\+ports}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{interrupt\+\_\+ports()}{interrupt\_ports()}}
+{\footnotesize\ttfamily bool Allostatic\+Drive\+::interrupt\+\_\+ports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Interrupt ports of the drive. 
+
+
+
+Definition at line 427 of file allostatic\+Controller.\+cpp.
+
+\mbox{\Hypertarget{group__allostaticController_a70e9a461682da34e29e77d5d85d5a11c}\label{group__allostaticController_a70e9a461682da34e29e77d5d85d5a11c}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!trigger\+Behavior@{trigger\+Behavior}}
+\index{trigger\+Behavior@{trigger\+Behavior}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{trigger\+Behavior()}{triggerBehavior()}}
+{\footnotesize\ttfamily void Allostatic\+Drive\+::trigger\+Behavior (\begin{DoxyParamCaption}\item[{\hyperlink{group__allostaticController_gaf40887c05ba83b6f4c0809ce4716dcbc}{Out\+CZ}}]{mode }\end{DoxyParamCaption})}
+
+
+
+triggers a behavior if needs are out of threshold 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & under or below threshold \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 489 of file allostatic\+Controller.\+cpp.
+
+\mbox{\Hypertarget{group__allostaticController_a2d05d5861a68c6b8126b5d1d6fb97f69}\label{group__allostaticController_a2d05d5861a68c6b8126b5d1d6fb97f69}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!update@{update}}
+\index{update@{update}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily Bottle Allostatic\+Drive\+::update (\begin{DoxyParamCaption}\item[{\hyperlink{group__allostaticController_gab2a3f165075ddd5df4b2f6910928a311}{Drive\+Update\+Mode}}]{mode }\end{DoxyParamCaption})}
+
+
+
+Definition at line 462 of file allostatic\+Controller.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__allostaticController_aeb90236386ea512b6100583b7d0c409f}\label{group__allostaticController_aeb90236386ea512b6100583b7d0c409f}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!active@{active}}
+\index{active@{active}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{active}{active}}
+{\footnotesize\ttfamily bool Allostatic\+Drive\+::active}
+
+
+
+Definition at line 46 of file allostatic\+Controller.\+h.
+
+\mbox{\Hypertarget{group__allostaticController_aac6cbca31cb2568076e57aaabbfc2d2e}\label{group__allostaticController_aac6cbca31cb2568076e57aaabbfc2d2e}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!after\+Trigger\+Cmd@{after\+Trigger\+Cmd}}
+\index{after\+Trigger\+Cmd@{after\+Trigger\+Cmd}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{after\+Trigger\+Cmd}{afterTriggerCmd}}
+{\footnotesize\ttfamily Bottle Allostatic\+Drive\+::after\+Trigger\+Cmd}
+
+
+
+Definition at line 53 of file allostatic\+Controller.\+h.
+
+\mbox{\Hypertarget{group__allostaticController_a7605dcaf4074f476d6f743814f15c382}\label{group__allostaticController_a7605dcaf4074f476d6f743814f15c382}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!before\+Trigger\+Cmd@{before\+Trigger\+Cmd}}
+\index{before\+Trigger\+Cmd@{before\+Trigger\+Cmd}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{before\+Trigger\+Cmd}{beforeTriggerCmd}}
+{\footnotesize\ttfamily Bottle Allostatic\+Drive\+::before\+Trigger\+Cmd}
+
+
+
+Definition at line 53 of file allostatic\+Controller.\+h.
+
+\mbox{\Hypertarget{group__allostaticController_a0e6d273bf648085493b00b9aae6c88b9}\label{group__allostaticController_a0e6d273bf648085493b00b9aae6c88b9}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!behavior\+Over\+Cmd@{behavior\+Over\+Cmd}}
+\index{behavior\+Over\+Cmd@{behavior\+Over\+Cmd}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{behavior\+Over\+Cmd}{behaviorOverCmd}}
+{\footnotesize\ttfamily Bottle Allostatic\+Drive\+::behavior\+Over\+Cmd}
+
+
+
+Command to be send to behavior\+Over\+Port when drive hits upper threshold of homeostatic level. 
+
+
+
+Definition at line 52 of file allostatic\+Controller.\+h.
+
+\mbox{\Hypertarget{group__allostaticController_a0ae7b5cdd6d2ef10fc83a0b426019615}\label{group__allostaticController_a0ae7b5cdd6d2ef10fc83a0b426019615}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!behavior\+Over\+Port@{behavior\+Over\+Port}}
+\index{behavior\+Over\+Port@{behavior\+Over\+Port}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{behavior\+Over\+Port}{behaviorOverPort}}
+{\footnotesize\ttfamily Port$\ast$ Allostatic\+Drive\+::behavior\+Over\+Port}
+
+
+
+Port to be used when drive hits upper threshold of homeostatic level. 
+
+
+
+Definition at line 48 of file allostatic\+Controller.\+h.
+
+\mbox{\Hypertarget{group__allostaticController_abae41498adb72667a5e884242fbccff6}\label{group__allostaticController_abae41498adb72667a5e884242fbccff6}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!behavior\+Under\+Cmd@{behavior\+Under\+Cmd}}
+\index{behavior\+Under\+Cmd@{behavior\+Under\+Cmd}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{behavior\+Under\+Cmd}{behaviorUnderCmd}}
+{\footnotesize\ttfamily Bottle Allostatic\+Drive\+::behavior\+Under\+Cmd}
+
+
+
+Command to be send to behavior\+Under\+Port when drive falls below homeostatic level. 
+
+
+
+Definition at line 51 of file allostatic\+Controller.\+h.
+
+\mbox{\Hypertarget{group__allostaticController_a1cbe962d96a15bf82f7e57a11ab3c1c0}\label{group__allostaticController_a1cbe962d96a15bf82f7e57a11ab3c1c0}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!behavior\+Under\+Port@{behavior\+Under\+Port}}
+\index{behavior\+Under\+Port@{behavior\+Under\+Port}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{behavior\+Under\+Port}{behaviorUnderPort}}
+{\footnotesize\ttfamily Port$\ast$ Allostatic\+Drive\+::behavior\+Under\+Port}
+
+
+
+Port to be used when drive falls below homeostatic level. 
+
+
+
+Definition at line 47 of file allostatic\+Controller.\+h.
+
+\mbox{\Hypertarget{group__allostaticController_a1f2c6a7f4f35d01061381569f98b2a1e}\label{group__allostaticController_a1f2c6a7f4f35d01061381569f98b2a1e}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!homeo\+Port@{homeo\+Port}}
+\index{homeo\+Port@{homeo\+Port}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{homeo\+Port}{homeoPort}}
+{\footnotesize\ttfamily Port$\ast$ Allostatic\+Drive\+::homeo\+Port}
+
+
+
+Port to homeostasis module. 
+
+
+
+Definition at line 49 of file allostatic\+Controller.\+h.
+
+\mbox{\Hypertarget{group__allostaticController_a09a6b2f056f2b4517e6a338f499fa9c1}\label{group__allostaticController_a09a6b2f056f2b4517e6a338f499fa9c1}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!input\+Sensation\+Port@{input\+Sensation\+Port}}
+\index{input\+Sensation\+Port@{input\+Sensation\+Port}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{input\+Sensation\+Port}{inputSensationPort}}
+{\footnotesize\ttfamily Buffered\+Port$<$Bottle$>$$\ast$ Allostatic\+Drive\+::input\+Sensation\+Port}
+
+
+
+Port from sensation\+Manager. 
+
+
+
+Definition at line 50 of file allostatic\+Controller.\+h.
+
+\mbox{\Hypertarget{group__allostaticController_a6c346cb58e92a490c784e1e637529d50}\label{group__allostaticController_a6c346cb58e92a490c784e1e637529d50}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!manual\+Mode@{manual\+Mode}}
+\index{manual\+Mode@{manual\+Mode}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{manual\+Mode}{manualMode}}
+{\footnotesize\ttfamily bool Allostatic\+Drive\+::manual\+Mode}
+
+
+
+Definition at line 46 of file allostatic\+Controller.\+h.
+
+\mbox{\Hypertarget{group__allostaticController_abd23f5c821ac78b4bfd55377f73d6d94}\label{group__allostaticController_abd23f5c821ac78b4bfd55377f73d6d94}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!name@{name}}
+\index{name@{name}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily string Allostatic\+Drive\+::name}
+
+
+
+Name of the drive. 
+
+
+
+Definition at line 45 of file allostatic\+Controller.\+h.
+
+\mbox{\Hypertarget{group__allostaticController_a10d504bd4b07b96cac8bbb040bb5fd57}\label{group__allostaticController_a10d504bd4b07b96cac8bbb040bb5fd57}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!sensation\+Off\+Cmd@{sensation\+Off\+Cmd}}
+\index{sensation\+Off\+Cmd@{sensation\+Off\+Cmd}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{sensation\+Off\+Cmd}{sensationOffCmd}}
+{\footnotesize\ttfamily Bottle Allostatic\+Drive\+::sensation\+Off\+Cmd}
+
+
+
+Definition at line 53 of file allostatic\+Controller.\+h.
+
+\mbox{\Hypertarget{group__allostaticController_a26f0b7c82d8ad12eaf4e3a68f4000302}\label{group__allostaticController_a26f0b7c82d8ad12eaf4e3a68f4000302}} 
+\index{Allostatic\+Drive@{Allostatic\+Drive}!sensation\+On\+Cmd@{sensation\+On\+Cmd}}
+\index{sensation\+On\+Cmd@{sensation\+On\+Cmd}!Allostatic\+Drive@{Allostatic\+Drive}}
+\subparagraph{\texorpdfstring{sensation\+On\+Cmd}{sensationOnCmd}}
+{\footnotesize\ttfamily Bottle Allostatic\+Drive\+::sensation\+On\+Cmd}
+
+
+
+Definition at line 53 of file allostatic\+Controller.\+h.
+
+\index{Allostatic\+Controller@{Allostatic\+Controller}}\label{classAllostaticController}
+\Hypertarget{group__allostaticController_classAllostaticController}
+\subsubsection{class Allostatic\+Controller}
+
+
+Definition at line 86 of file allostatic\+Controller.\+h.
+
+
+
+Inheritance diagram for Allostatic\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=190pt]{classAllostaticController__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__allostaticController_ae80a5d7d6996241bbeeea5e32072e411}{Allostatic\+Controller} ()
+\item 
+bool \hyperlink{group__allostaticController_ae55423793b89f1649296e82dc8ee0527}{configure} (yarp\+::os\+::\+Resource\+Finder \&rf)
+\item 
+bool \hyperlink{group__allostaticController_abbadd8c4806800a86ee6f4896079ffe2}{interrupt\+Module} ()
+\item 
+bool \hyperlink{group__allostaticController_a7968a168c0bf3409c0a82078e651cdbc}{close} ()
+\item 
+double \hyperlink{group__allostaticController_a6963bd52b9b2c5962bac39354601a61c}{get\+Period} ()
+\item 
+bool \hyperlink{group__allostaticController_aace595e55a9517470a9d241b64e57c22}{update\+Module} ()
+\item 
+bool \hyperlink{group__allostaticController_a448eb3497467e10577e6a03ef55633f3}{update\+Allostatic} ()
+\begin{DoxyCompactList}\small\item\em update\+Allostatic Update the drives accordingly to the stimuli \end{DoxyCompactList}\item 
+bool \hyperlink{group__allostaticController_a335dd66e9d7384168be21d74451f13e1}{Normalize} (vector$<$ double $>$ \&vec)
+\begin{DoxyCompactList}\small\item\em Normalize normalize drive priorities. \end{DoxyCompactList}\item 
+\hyperlink{group__allostaticController_structDriveOutCZ}{Drive\+Out\+CZ} \hyperlink{group__allostaticController_a695d63459d3e78fdd5b024d5c3504742}{choose\+Drive} ()
+\begin{DoxyCompactList}\small\item\em choose\+Drive Choose a drive out of CZ, according to drive priorities \end{DoxyCompactList}\item 
+bool \hyperlink{group__allostaticController_ae647895ab1c78e36dbc52fed8b276120}{respond} (const Bottle \&cmd, Bottle \&reply)
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__allostaticController_ae80a5d7d6996241bbeeea5e32072e411}\label{group__allostaticController_ae80a5d7d6996241bbeeea5e32072e411}} 
+\index{Allostatic\+Controller@{Allostatic\+Controller}!Allostatic\+Controller@{Allostatic\+Controller}}
+\index{Allostatic\+Controller@{Allostatic\+Controller}!Allostatic\+Controller@{Allostatic\+Controller}}
+\subparagraph{\texorpdfstring{Allostatic\+Controller()}{AllostaticController()}}
+{\footnotesize\ttfamily Allostatic\+Controller\+::\+Allostatic\+Controller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 120 of file allostatic\+Controller.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__allostaticController_a695d63459d3e78fdd5b024d5c3504742}\label{group__allostaticController_a695d63459d3e78fdd5b024d5c3504742}} 
+\index{Allostatic\+Controller@{Allostatic\+Controller}!choose\+Drive@{choose\+Drive}}
+\index{choose\+Drive@{choose\+Drive}!Allostatic\+Controller@{Allostatic\+Controller}}
+\subparagraph{\texorpdfstring{choose\+Drive()}{chooseDrive()}}
+{\footnotesize\ttfamily \hyperlink{group__allostaticController_structDriveOutCZ}{Drive\+Out\+CZ} Allostatic\+Controller\+::choose\+Drive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+choose\+Drive Choose a drive out of CZ, according to drive priorities 
+
+\begin{DoxyReturn}{Returns}
+bool success 
+\end{DoxyReturn}
+
+
+Definition at line 312 of file allostatic\+Controller.\+cpp.
+
+\mbox{\Hypertarget{group__allostaticController_a7968a168c0bf3409c0a82078e651cdbc}\label{group__allostaticController_a7968a168c0bf3409c0a82078e651cdbc}} 
+\index{Allostatic\+Controller@{Allostatic\+Controller}!close@{close}}
+\index{close@{close}!Allostatic\+Controller@{Allostatic\+Controller}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool Allostatic\+Controller\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 30 of file allostatic\+Controller.\+cpp.
+
+\mbox{\Hypertarget{group__allostaticController_ae55423793b89f1649296e82dc8ee0527}\label{group__allostaticController_ae55423793b89f1649296e82dc8ee0527}} 
+\index{Allostatic\+Controller@{Allostatic\+Controller}!configure@{configure}}
+\index{configure@{configure}!Allostatic\+Controller@{Allostatic\+Controller}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool Allostatic\+Controller\+::configure (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf }\end{DoxyParamCaption})}
+
+
+
+Definition at line 117 of file allostatic\+Controller.\+cpp.
+
+\mbox{\Hypertarget{group__allostaticController_a6963bd52b9b2c5962bac39354601a61c}\label{group__allostaticController_a6963bd52b9b2c5962bac39354601a61c}} 
+\index{Allostatic\+Controller@{Allostatic\+Controller}!get\+Period@{get\+Period}}
+\index{get\+Period@{get\+Period}!Allostatic\+Controller@{Allostatic\+Controller}}
+\subparagraph{\texorpdfstring{get\+Period()}{getPeriod()}}
+{\footnotesize\ttfamily double Allostatic\+Controller\+::get\+Period (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 129 of file allostatic\+Controller.\+h.
+
+\mbox{\Hypertarget{group__allostaticController_abbadd8c4806800a86ee6f4896079ffe2}\label{group__allostaticController_abbadd8c4806800a86ee6f4896079ffe2}} 
+\index{Allostatic\+Controller@{Allostatic\+Controller}!interrupt\+Module@{interrupt\+Module}}
+\index{interrupt\+Module@{interrupt\+Module}!Allostatic\+Controller@{Allostatic\+Controller}}
+\subparagraph{\texorpdfstring{interrupt\+Module()}{interruptModule()}}
+{\footnotesize\ttfamily bool Allostatic\+Controller\+::interrupt\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file allostatic\+Controller.\+cpp.
+
+\mbox{\Hypertarget{group__allostaticController_a335dd66e9d7384168be21d74451f13e1}\label{group__allostaticController_a335dd66e9d7384168be21d74451f13e1}} 
+\index{Allostatic\+Controller@{Allostatic\+Controller}!Normalize@{Normalize}}
+\index{Normalize@{Normalize}!Allostatic\+Controller@{Allostatic\+Controller}}
+\subparagraph{\texorpdfstring{Normalize()}{Normalize()}}
+{\footnotesize\ttfamily bool Allostatic\+Controller\+::\+Normalize (\begin{DoxyParamCaption}\item[{vector$<$ double $>$ \&}]{vec }\end{DoxyParamCaption})}
+
+
+
+Normalize normalize drive priorities. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & list of priorities for each drive \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool false if no priority, true otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 273 of file allostatic\+Controller.\+cpp.
+
+\mbox{\Hypertarget{group__allostaticController_ae647895ab1c78e36dbc52fed8b276120}\label{group__allostaticController_ae647895ab1c78e36dbc52fed8b276120}} 
+\index{Allostatic\+Controller@{Allostatic\+Controller}!respond@{respond}}
+\index{respond@{respond}!Allostatic\+Controller@{Allostatic\+Controller}}
+\subparagraph{\texorpdfstring{respond()}{respond()}}
+{\footnotesize\ttfamily bool Allostatic\+Controller\+::respond (\begin{DoxyParamCaption}\item[{const Bottle \&}]{cmd,  }\item[{Bottle \&}]{reply }\end{DoxyParamCaption})}
+
+
+
+Definition at line 390 of file allostatic\+Controller.\+cpp.
+
+\mbox{\Hypertarget{group__allostaticController_a448eb3497467e10577e6a03ef55633f3}\label{group__allostaticController_a448eb3497467e10577e6a03ef55633f3}} 
+\index{Allostatic\+Controller@{Allostatic\+Controller}!update\+Allostatic@{update\+Allostatic}}
+\index{update\+Allostatic@{update\+Allostatic}!Allostatic\+Controller@{Allostatic\+Controller}}
+\subparagraph{\texorpdfstring{update\+Allostatic()}{updateAllostatic()}}
+{\footnotesize\ttfamily bool Allostatic\+Controller\+::update\+Allostatic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+update\+Allostatic Update the drives accordingly to the stimuli 
+
+\begin{DoxyReturn}{Returns}
+bool success 
+\end{DoxyReturn}
+
+
+Definition at line 363 of file allostatic\+Controller.\+cpp.
+
+\mbox{\Hypertarget{group__allostaticController_aace595e55a9517470a9d241b64e57c22}\label{group__allostaticController_aace595e55a9517470a9d241b64e57c22}} 
+\index{Allostatic\+Controller@{Allostatic\+Controller}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!Allostatic\+Controller@{Allostatic\+Controller}}
+\subparagraph{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool Allostatic\+Controller\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 284 of file allostatic\+Controller.\+cpp.
+
+
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{group__allostaticController_gab2a3f165075ddd5df4b2f6910928a311}\label{group__allostaticController_gab2a3f165075ddd5df4b2f6910928a311}} 
+\index{allostatic\+Controller@{allostatic\+Controller}!Drive\+Update\+Mode@{Drive\+Update\+Mode}}
+\index{Drive\+Update\+Mode@{Drive\+Update\+Mode}!allostatic\+Controller@{allostatic\+Controller}}
+\subsubsection{\texorpdfstring{Drive\+Update\+Mode}{DriveUpdateMode}}
+{\footnotesize\ttfamily enum \hyperlink{group__allostaticController_gab2a3f165075ddd5df4b2f6910928a311}{Drive\+Update\+Mode}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+E\+N\+S\+A\+T\+I\+O\+N\+\_\+\+ON@{S\+E\+N\+S\+A\+T\+I\+O\+N\+\_\+\+ON}!allostatic\+Controller@{allostatic\+Controller}}\index{allostatic\+Controller@{allostatic\+Controller}!S\+E\+N\+S\+A\+T\+I\+O\+N\+\_\+\+ON@{S\+E\+N\+S\+A\+T\+I\+O\+N\+\_\+\+ON}}}\mbox{\Hypertarget{group__allostaticController_ggab2a3f165075ddd5df4b2f6910928a311a6b7e396bc942b13df719fee7bee389ef}\label{group__allostaticController_ggab2a3f165075ddd5df4b2f6910928a311a6b7e396bc942b13df719fee7bee389ef}} 
+S\+E\+N\+S\+A\+T\+I\+O\+N\+\_\+\+ON&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+E\+N\+S\+A\+T\+I\+O\+N\+\_\+\+O\+FF@{S\+E\+N\+S\+A\+T\+I\+O\+N\+\_\+\+O\+FF}!allostatic\+Controller@{allostatic\+Controller}}\index{allostatic\+Controller@{allostatic\+Controller}!S\+E\+N\+S\+A\+T\+I\+O\+N\+\_\+\+O\+FF@{S\+E\+N\+S\+A\+T\+I\+O\+N\+\_\+\+O\+FF}}}\mbox{\Hypertarget{group__allostaticController_ggab2a3f165075ddd5df4b2f6910928a311ac4f1d0f383d94c415be67267485ad8ca}\label{group__allostaticController_ggab2a3f165075ddd5df4b2f6910928a311ac4f1d0f383d94c415be67267485ad8ca}} 
+S\+E\+N\+S\+A\+T\+I\+O\+N\+\_\+\+O\+FF&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 37 of file allostatic\+Controller.\+h.
+
+\mbox{\Hypertarget{group__allostaticController_gaf40887c05ba83b6f4c0809ce4716dcbc}\label{group__allostaticController_gaf40887c05ba83b6f4c0809ce4716dcbc}} 
+\index{allostatic\+Controller@{allostatic\+Controller}!Out\+CZ@{Out\+CZ}}
+\index{Out\+CZ@{Out\+CZ}!allostatic\+Controller@{allostatic\+Controller}}
+\subsubsection{\texorpdfstring{Out\+CZ}{OutCZ}}
+{\footnotesize\ttfamily enum \hyperlink{group__allostaticController_gaf40887c05ba83b6f4c0809ce4716dcbc}{Out\+CZ}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{U\+N\+D\+ER@{U\+N\+D\+ER}!allostatic\+Controller@{allostatic\+Controller}}\index{allostatic\+Controller@{allostatic\+Controller}!U\+N\+D\+ER@{U\+N\+D\+ER}}}\mbox{\Hypertarget{group__allostaticController_ggaf40887c05ba83b6f4c0809ce4716dcbcab5726a81978ba2a47fcea5ef4fb8fbf4}\label{group__allostaticController_ggaf40887c05ba83b6f4c0809ce4716dcbcab5726a81978ba2a47fcea5ef4fb8fbf4}} 
+U\+N\+D\+ER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{O\+V\+ER@{O\+V\+ER}!allostatic\+Controller@{allostatic\+Controller}}\index{allostatic\+Controller@{allostatic\+Controller}!O\+V\+ER@{O\+V\+ER}}}\mbox{\Hypertarget{group__allostaticController_ggaf40887c05ba83b6f4c0809ce4716dcbcaee4b1697462879d869ff122fc694e9e8}\label{group__allostaticController_ggaf40887c05ba83b6f4c0809ce4716dcbcaee4b1697462879d869ff122fc694e9e8}} 
+O\+V\+ER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{U\+N\+D\+E\+F\+I\+N\+ED@{U\+N\+D\+E\+F\+I\+N\+ED}!allostatic\+Controller@{allostatic\+Controller}}\index{allostatic\+Controller@{allostatic\+Controller}!U\+N\+D\+E\+F\+I\+N\+ED@{U\+N\+D\+E\+F\+I\+N\+ED}}}\mbox{\Hypertarget{group__allostaticController_ggaf40887c05ba83b6f4c0809ce4716dcbca605159e8a4c32319fd69b5d151369d93}\label{group__allostaticController_ggaf40887c05ba83b6f4c0809ce4716dcbca605159e8a4c32319fd69b5d151369d93}} 
+U\+N\+D\+E\+F\+I\+N\+ED&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 23 of file allostatic\+Controller.\+h.
+

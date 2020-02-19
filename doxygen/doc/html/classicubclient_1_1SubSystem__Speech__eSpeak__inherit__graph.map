@@ -1,0 +1,4 @@
+<map id="icubclient::SubSystem_Speech_eSpeak" name="icubclient::SubSystem_Speech_eSpeak">
+<area shape="rect" id="node2" href="$group__icubclient__subsystems.html#classicubclient_1_1SubSystem__Speech" title="Abstract subSystem for speech management (Text to Speech) " alt="" coords="5,80,172,121"/>
+<area shape="rect" id="node3" href="$group__icubclient__subsystems.html#classicubclient_1_1SubSystem" title="Abstract class to handle sub&#45;systems of the icub&#45;client. " alt="" coords="5,5,172,32"/>
+</map>

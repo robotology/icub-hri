@@ -1,0 +1,4 @@
+<map id="icubclient::Bodypart" name="icubclient::Bodypart">
+<area shape="rect" id="node2" href="$group__icubclient__representations.html#classicubclient_1_1Object" title="Represent any physical entity (including objects and agents) that can be stored within the OPC..." alt="" coords="14,80,149,107"/>
+<area shape="rect" id="node3" href="$group__icubclient__representations.html#classicubclient_1_1Entity" title="Represent any entity that can be stored within the OPC. " alt="" coords="16,5,147,32"/>
+</map>

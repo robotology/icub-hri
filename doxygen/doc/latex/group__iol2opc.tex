@@ -1,0 +1,2156 @@
+\hypertarget{group__iol2opc}{}\section{iol2opc}
+\label{group__iol2opc}\index{iol2opc@{iol2opc}}
+
+
+Bridge module between the interactive object learning and recognition system (iol) and yarp database of object properties Version\+:1.\+0  
+
+
+Collaboration diagram for iol2opc\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{group__iol2opc}
+\end{center}
+\end{figure}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceBridge}{Bridge}
+\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__iol2opc_classIOLObject}{I\+O\+L\+Object}
+\item 
+class \hyperlink{group__iol2opc_classIOL2OPCBridge}{I\+O\+L2\+O\+P\+C\+Bridge}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Bridge module between the interactive object learning and recognition system (iol) and yarp database of object properties Version\+:1.\+0 
+
+\begin{DoxyAuthor}{Author}
+Ugo Pattacini \href{mailto:ugo.pattacini@iit.it}{\tt ugo.\+pattacini@iit.\+it}, Tobias Fischer \href{mailto:t.fischer@imperial.ac.uk}{\tt t.\+fischer@imperial.\+ac.\+uk} ~\newline
+ 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Released under the terms of the G\+NU G\+PL v2.\+0 
+\end{DoxyCopyright}
+\hypertarget{group__touchDetector_intro_sec}{}\subsection{Description}\label{group__touchDetector_intro_sec}
+This module provides wrappers of procedures to acquire perceived information from iol and store them in opc database.\hypertarget{group__touchDetector_parameters_sec}{}\subsection{Parameters}\label{group__touchDetector_parameters_sec}
+
+\begin{DoxyItemize}
+\item -- name \+: name of the module 
+\end{DoxyItemize}\hypertarget{group__touchDetector_inputports_sec}{}\subsection{Input Ports}\label{group__touchDetector_inputports_sec}
+
+\begin{DoxyItemize}
+\item /iol2opc/blobs\+:i \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: Get extracted blobs from lbp\+Extract.
+\item /iol2opc/hist\+Obj\+Location\+:i \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Receives the pixel in the image from which retrieve a cartesian position for displaying the classification histograms of the closest blob.
+\item /iol2opc/img\+:i \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Get calibrated images from camera.
+\item /iol2opc/get\+Click\+:i \mbox{[}Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Get clicked position through this port
+\end{DoxyItemize}\hypertarget{group__touchDetector_outputports_sec}{}\subsection{Output Ports}\label{group__touchDetector_outputports_sec}
+
+\begin{DoxyItemize}
+\item /iol2opc/img\+Track\+:o \mbox{[}Image\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: Stream out the image of tracked objects
+\item /iol2opc/img\+Loc\+:o \mbox{[}Image\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: Streams out the images for real-\/time objects localization.
+\item /iol2opc/img\+Histogram\+:o \mbox{[}Image\mbox{]} \mbox{[}default carrier\+:udp\mbox{]}\+: Stream out the histogram of classification scores.
+\item /iol2opc/img\+Classifier\+:o \mbox{[}Image\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Pass images to the classifier.
+\item /iol2opc/img\+Sel\+:o \mbox{[}Image\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Stream out the image inside the selected blob.
+\item /iol2opc/get3d\+:rpc \mbox{[}rpc\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Send requests to S\+FM for 3D estimation.
+\item /iol2opc/classify\+:rpc \mbox{[}rpc\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Send requests to himrep\+Classifier for object classification.
+\end{DoxyItemize}\hypertarget{group__touchDetector_services_sec}{}\subsection{Services}\label{group__touchDetector_services_sec}
+
+\begin{DoxyItemize}
+\item /iol2opc/rpc \mbox{[}rpc-\/server\mbox{]}\+: Command port . This service is described in \hyperlink{classiol2opc__IDL}{iol2opc\+\_\+\+I\+DL} (iol2opc.\+thrift) 
+\end{DoxyItemize}
+
+\subsection{Class Documentation}
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}}\label{classIOLObject}
+\Hypertarget{group__iol2opc_classIOLObject}
+\subsubsection{class I\+O\+L\+Object}
+
+
+Definition at line 62 of file module.\+h.
+
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__iol2opc_a4b46d29a6b84e8d9c99225a016fa4fff}{I\+O\+L\+Object} (const int filter\+\_\+order=1, const double presence\+Tmo\+\_\+=0.\+0, const string \&tracker\+Type\+\_\+=\char`\"{}B\+O\+O\+S\+T\+I\+NG\char`\"{}, const double tracker\+Tmo\+\_\+=0.\+0)
+\item 
+void \hyperlink{group__iol2opc_a96aa95797fec5352039d6699241b6a48}{heart\+Beat} ()
+\begin{DoxyCompactList}\small\item\em heart\+Beat current time value \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_a60d0fd467e4f4ab3b4aebed4100e5f21}{is\+Dead} ()
+\begin{DoxyCompactList}\small\item\em is\+Dead duration comparison procedure with presence\+Tmo \end{DoxyCompactList}\item 
+void \hyperlink{group__iol2opc_a04a024674f0499d660dfe683dca81bd3}{filt} (const Vector \&x, Vector \&x\+Filt, const Vector \&d, Vector \&d\+Filt)
+\begin{DoxyCompactList}\small\item\em filt apply the median filter \end{DoxyCompactList}\item 
+void \hyperlink{group__iol2opc_a6122efa684bdf4ff7b8bd53ec5db93c9}{prepare} ()
+\begin{DoxyCompactList}\small\item\em prepare initialize the tracker \end{DoxyCompactList}\item 
+void \hyperlink{group__iol2opc_a9d0702dd5fdcd2a98a5463ddae96c35a}{latch\+B\+Box} (const Cv\+Rect \&bbox)
+\begin{DoxyCompactList}\small\item\em latch\+B\+Box assign tracker with bounding box value \end{DoxyCompactList}\item 
+void \hyperlink{group__iol2opc_ab113f55006c7a92a7b919d59ac6b94df}{track} (const Image \&img)
+\begin{DoxyCompactList}\small\item\em track procdure to start tracking an image \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_a0b5e86163956a37881bf96a0ae7ec067}{is\+\_\+tracking} (Cv\+Rect \&bbox) const
+\begin{DoxyCompactList}\small\item\em is\+\_\+tracking procedure to check the tracking state \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \newline
+\hyperlink{group__iol2opc_a392d1e67a1136839f42cf9b3593025a5ab4d23703abc8de486720da281b68560c}{idle}, 
+\newline
+\hyperlink{group__iol2opc_a392d1e67a1136839f42cf9b3593025a5ae6fa0c01fa92b22937ebc2f67b306a5c}{init}, 
+\newline
+\hyperlink{group__iol2opc_a392d1e67a1136839f42cf9b3593025a5a042244177f1959c9f72e3424c03d8bd8}{no\+\_\+need}, 
+\newline
+\hyperlink{group__iol2opc_a392d1e67a1136839f42cf9b3593025a5a4ab85c491a57121dff247f0ea2e38178}{tracking}
+ \}
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Median\+Filter \hyperlink{group__iol2opc_a93bdd7472a32538399030d0366a3f5d0}{filter\+Pos}
+\begin{DoxyCompactList}\small\item\em median filter for position of object \end{DoxyCompactList}\item 
+Median\+Filter \hyperlink{group__iol2opc_a6c5b58b7df86ea40ed804ba9fcb4bb12}{filter\+Dim}
+\begin{DoxyCompactList}\small\item\em median filter for object dimension \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_a3e7d6f87a6909d2bf3b6e86bcda4c117}{init\+\_\+filters}
+\item 
+double \hyperlink{group__iol2opc_adbb799c2540094cc2b0cbb14562f0809}{presence\+Tmo}
+\begin{DoxyCompactList}\small\item\em current set timeout \end{DoxyCompactList}\item 
+double \hyperlink{group__iol2opc_ad867e2f12963dec2c6ee462a2b9ac838}{presence\+Timer}
+\begin{DoxyCompactList}\small\item\em current timer \end{DoxyCompactList}\item 
+string \hyperlink{group__iol2opc_a08dfc6b6b77b90ae16bd275b1f0ebd7b}{tracker\+Type}
+\item 
+int \hyperlink{group__iol2opc_a540982aca760bdd3706ddb058860a87c}{tracker\+State}
+\begin{DoxyCompactList}\small\item\em tracker state\+: idle, init, no\+\_\+need or tracking \end{DoxyCompactList}\item 
+double \hyperlink{group__iol2opc_aa609241dfe0304c989c0c5a4d953da3c}{tracker\+Tmo}
+\begin{DoxyCompactList}\small\item\em set value of tracker timout \end{DoxyCompactList}\item 
+double \hyperlink{group__iol2opc_a6bcc5eeb63f6f97848bfdb35d0d0d383}{tracker\+Timer}
+\begin{DoxyCompactList}\small\item\em current value of tracker timer \end{DoxyCompactList}\item 
+cv\+::\+Rect2d \hyperlink{group__iol2opc_a0451afb5147a6f0f3fa37e8c1d575d18}{tracker\+Result}
+\item 
+cv\+::\+Ptr$<$ cv\+::\+Tracker $>$ \hyperlink{group__iol2opc_ae7e7e36f0cf21bee692712195187ce3f}{tracker}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Member Enumeration Documentation}
+\mbox{\Hypertarget{group__iol2opc_a392d1e67a1136839f42cf9b3593025a5}\label{group__iol2opc_a392d1e67a1136839f42cf9b3593025a5}} 
+\subparagraph{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily anonymous enum\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{idle@{idle}!I\+O\+L\+Object@{I\+O\+L\+Object}}\index{I\+O\+L\+Object@{I\+O\+L\+Object}!idle@{idle}}}\mbox{\Hypertarget{group__iol2opc_a392d1e67a1136839f42cf9b3593025a5ab4d23703abc8de486720da281b68560c}\label{group__iol2opc_a392d1e67a1136839f42cf9b3593025a5ab4d23703abc8de486720da281b68560c}} 
+idle&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{init@{init}!I\+O\+L\+Object@{I\+O\+L\+Object}}\index{I\+O\+L\+Object@{I\+O\+L\+Object}!init@{init}}}\mbox{\Hypertarget{group__iol2opc_a392d1e67a1136839f42cf9b3593025a5ae6fa0c01fa92b22937ebc2f67b306a5c}\label{group__iol2opc_a392d1e67a1136839f42cf9b3593025a5ae6fa0c01fa92b22937ebc2f67b306a5c}} 
+init&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{no\+\_\+need@{no\+\_\+need}!I\+O\+L\+Object@{I\+O\+L\+Object}}\index{I\+O\+L\+Object@{I\+O\+L\+Object}!no\+\_\+need@{no\+\_\+need}}}\mbox{\Hypertarget{group__iol2opc_a392d1e67a1136839f42cf9b3593025a5a042244177f1959c9f72e3424c03d8bd8}\label{group__iol2opc_a392d1e67a1136839f42cf9b3593025a5a042244177f1959c9f72e3424c03d8bd8}} 
+no\+\_\+need&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{tracking@{tracking}!I\+O\+L\+Object@{I\+O\+L\+Object}}\index{I\+O\+L\+Object@{I\+O\+L\+Object}!tracking@{tracking}}}\mbox{\Hypertarget{group__iol2opc_a392d1e67a1136839f42cf9b3593025a5a4ab85c491a57121dff247f0ea2e38178}\label{group__iol2opc_a392d1e67a1136839f42cf9b3593025a5a4ab85c491a57121dff247f0ea2e38178}} 
+tracking&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 71 of file module.\+h.
+
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__iol2opc_a4b46d29a6b84e8d9c99225a016fa4fff}\label{group__iol2opc_a4b46d29a6b84e8d9c99225a016fa4fff}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{I\+O\+L\+Object()}{IOLObject()}}
+{\footnotesize\ttfamily I\+O\+L\+Object\+::\+I\+O\+L\+Object (\begin{DoxyParamCaption}\item[{const int}]{filter\+\_\+order = {\ttfamily 1},  }\item[{const double}]{presence\+Tmo\+\_\+ = {\ttfamily 0.0},  }\item[{const string \&}]{tracker\+Type\+\_\+ = {\ttfamily \char`\"{}BOOSTING\char`\"{}},  }\item[{const double}]{tracker\+Tmo\+\_\+ = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 83 of file module.\+h.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__iol2opc_a04a024674f0499d660dfe683dca81bd3}\label{group__iol2opc_a04a024674f0499d660dfe683dca81bd3}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!filt@{filt}}
+\index{filt@{filt}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{filt()}{filt()}}
+{\footnotesize\ttfamily void I\+O\+L\+Object\+::filt (\begin{DoxyParamCaption}\item[{const Vector \&}]{x,  }\item[{Vector \&}]{x\+Filt,  }\item[{const Vector \&}]{d,  }\item[{Vector \&}]{d\+Filt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+filt apply the median filter 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Yarp Vector of current state of x \\
+\hline
+{\em x\+Filt} & Yarp Vector of filtered state of x \\
+\hline
+{\em d} & Yarp Vector of current state of d \\
+\hline
+{\em d\+Filt} & Yarp Vector of filtered state of d \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 125 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a96aa95797fec5352039d6699241b6a48}\label{group__iol2opc_a96aa95797fec5352039d6699241b6a48}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!heart\+Beat@{heart\+Beat}}
+\index{heart\+Beat@{heart\+Beat}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{heart\+Beat()}{heartBeat()}}
+{\footnotesize\ttfamily void I\+O\+L\+Object\+::heart\+Beat (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+heart\+Beat current time value 
+
+
+
+Definition at line 99 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a0b5e86163956a37881bf96a0ae7ec067}\label{group__iol2opc_a0b5e86163956a37881bf96a0ae7ec067}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!is\+\_\+tracking@{is\+\_\+tracking}}
+\index{is\+\_\+tracking@{is\+\_\+tracking}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{is\+\_\+tracking()}{is\_tracking()}}
+{\footnotesize\ttfamily bool I\+O\+L\+Object\+::is\+\_\+tracking (\begin{DoxyParamCaption}\item[{Cv\+Rect \&}]{bbox }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+is\+\_\+tracking procedure to check the tracking state 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bbox} & the tracked bouding box \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the tracker\+State is not idle, False otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 219 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a60d0fd467e4f4ab3b4aebed4100e5f21}\label{group__iol2opc_a60d0fd467e4f4ab3b4aebed4100e5f21}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!is\+Dead@{is\+Dead}}
+\index{is\+Dead@{is\+Dead}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{is\+Dead()}{isDead()}}
+{\footnotesize\ttfamily bool I\+O\+L\+Object\+::is\+Dead (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+is\+Dead duration comparison procedure with presence\+Tmo 
+
+\begin{DoxyReturn}{Returns}
+True if presence\+Tmo is exceeded, False otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 109 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a9d0702dd5fdcd2a98a5463ddae96c35a}\label{group__iol2opc_a9d0702dd5fdcd2a98a5463ddae96c35a}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!latch\+B\+Box@{latch\+B\+Box}}
+\index{latch\+B\+Box@{latch\+B\+Box}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{latch\+B\+Box()}{latchBBox()}}
+{\footnotesize\ttfamily void I\+O\+L\+Object\+::latch\+B\+Box (\begin{DoxyParamCaption}\item[{const Cv\+Rect \&}]{bbox }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+latch\+B\+Box assign tracker with bounding box value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bbox} & Cv\+Rect object containing bouding box value, i.\+e x, y, width, height \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 156 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a6122efa684bdf4ff7b8bd53ec5db93c9}\label{group__iol2opc_a6122efa684bdf4ff7b8bd53ec5db93c9}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!prepare@{prepare}}
+\index{prepare@{prepare}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{prepare()}{prepare()}}
+{\footnotesize\ttfamily void I\+O\+L\+Object\+::prepare (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+prepare initialize the tracker 
+
+
+
+Definition at line 145 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_ab113f55006c7a92a7b919d59ac6b94df}\label{group__iol2opc_ab113f55006c7a92a7b919d59ac6b94df}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!track@{track}}
+\index{track@{track}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{track()}{track()}}
+{\footnotesize\ttfamily void I\+O\+L\+Object\+::track (\begin{DoxyParamCaption}\item[{const Image \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+track procdure to start tracking an image 
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & Image type object \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 170 of file module.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__iol2opc_a6c5b58b7df86ea40ed804ba9fcb4bb12}\label{group__iol2opc_a6c5b58b7df86ea40ed804ba9fcb4bb12}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!filter\+Dim@{filter\+Dim}}
+\index{filter\+Dim@{filter\+Dim}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{filter\+Dim}{filterDim}}
+{\footnotesize\ttfamily Median\+Filter I\+O\+L\+Object\+::filter\+Dim\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+median filter for object dimension 
+
+
+
+Definition at line 66 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a93bdd7472a32538399030d0366a3f5d0}\label{group__iol2opc_a93bdd7472a32538399030d0366a3f5d0}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!filter\+Pos@{filter\+Pos}}
+\index{filter\+Pos@{filter\+Pos}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{filter\+Pos}{filterPos}}
+{\footnotesize\ttfamily Median\+Filter I\+O\+L\+Object\+::filter\+Pos\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+median filter for position of object 
+
+
+
+Definition at line 65 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a3e7d6f87a6909d2bf3b6e86bcda4c117}\label{group__iol2opc_a3e7d6f87a6909d2bf3b6e86bcda4c117}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!init\+\_\+filters@{init\+\_\+filters}}
+\index{init\+\_\+filters@{init\+\_\+filters}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{init\+\_\+filters}{init\_filters}}
+{\footnotesize\ttfamily bool I\+O\+L\+Object\+::init\+\_\+filters\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 67 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_ad867e2f12963dec2c6ee462a2b9ac838}\label{group__iol2opc_ad867e2f12963dec2c6ee462a2b9ac838}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!presence\+Timer@{presence\+Timer}}
+\index{presence\+Timer@{presence\+Timer}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{presence\+Timer}{presenceTimer}}
+{\footnotesize\ttfamily double I\+O\+L\+Object\+::presence\+Timer\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+current timer 
+
+
+
+Definition at line 69 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_adbb799c2540094cc2b0cbb14562f0809}\label{group__iol2opc_adbb799c2540094cc2b0cbb14562f0809}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!presence\+Tmo@{presence\+Tmo}}
+\index{presence\+Tmo@{presence\+Tmo}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{presence\+Tmo}{presenceTmo}}
+{\footnotesize\ttfamily double I\+O\+L\+Object\+::presence\+Tmo\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+current set timeout 
+
+
+
+Definition at line 68 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_ae7e7e36f0cf21bee692712195187ce3f}\label{group__iol2opc_ae7e7e36f0cf21bee692712195187ce3f}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!tracker@{tracker}}
+\index{tracker@{tracker}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{tracker}{tracker}}
+{\footnotesize\ttfamily cv\+::\+Ptr$<$cv\+::\+Tracker$>$ I\+O\+L\+Object\+::tracker\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 79 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a0451afb5147a6f0f3fa37e8c1d575d18}\label{group__iol2opc_a0451afb5147a6f0f3fa37e8c1d575d18}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!tracker\+Result@{tracker\+Result}}
+\index{tracker\+Result@{tracker\+Result}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{tracker\+Result}{trackerResult}}
+{\footnotesize\ttfamily cv\+::\+Rect2d I\+O\+L\+Object\+::tracker\+Result\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 78 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a540982aca760bdd3706ddb058860a87c}\label{group__iol2opc_a540982aca760bdd3706ddb058860a87c}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!tracker\+State@{tracker\+State}}
+\index{tracker\+State@{tracker\+State}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{tracker\+State}{trackerState}}
+{\footnotesize\ttfamily int I\+O\+L\+Object\+::tracker\+State\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+tracker state\+: idle, init, no\+\_\+need or tracking 
+
+
+
+Definition at line 74 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a6bcc5eeb63f6f97848bfdb35d0d0d383}\label{group__iol2opc_a6bcc5eeb63f6f97848bfdb35d0d0d383}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!tracker\+Timer@{tracker\+Timer}}
+\index{tracker\+Timer@{tracker\+Timer}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{tracker\+Timer}{trackerTimer}}
+{\footnotesize\ttfamily double I\+O\+L\+Object\+::tracker\+Timer\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+current value of tracker timer 
+
+
+
+Definition at line 76 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_aa609241dfe0304c989c0c5a4d953da3c}\label{group__iol2opc_aa609241dfe0304c989c0c5a4d953da3c}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!tracker\+Tmo@{tracker\+Tmo}}
+\index{tracker\+Tmo@{tracker\+Tmo}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{tracker\+Tmo}{trackerTmo}}
+{\footnotesize\ttfamily double I\+O\+L\+Object\+::tracker\+Tmo\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+set value of tracker timout 
+
+
+
+Definition at line 75 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a08dfc6b6b77b90ae16bd275b1f0ebd7b}\label{group__iol2opc_a08dfc6b6b77b90ae16bd275b1f0ebd7b}} 
+\index{I\+O\+L\+Object@{I\+O\+L\+Object}!tracker\+Type@{tracker\+Type}}
+\index{tracker\+Type@{tracker\+Type}!I\+O\+L\+Object@{I\+O\+L\+Object}}
+\subparagraph{\texorpdfstring{tracker\+Type}{trackerType}}
+{\footnotesize\ttfamily string I\+O\+L\+Object\+::tracker\+Type\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 73 of file module.\+h.
+
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}\label{classIOL2OPCBridge}
+\Hypertarget{group__iol2opc_classIOL2OPCBridge}
+\subsubsection{class I\+O\+L2\+O\+P\+C\+Bridge}
+
+
+Definition at line 232 of file module.\+h.
+
+
+
+Inheritance diagram for I\+O\+L2\+O\+P\+C\+Bridge\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{classIOL2OPCBridge__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__iol2opc_aa48eed5c7920cd2116c81e88cae0ab4a}{train\+\_\+object} (const string \&name)
+\begin{DoxyCompactList}\small\item\em Add a new object to the object-\/recognition database based on the selected blob. \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_aab19e8834838cce5da74d31f115b9fd5}{remove\+\_\+object} (const string \&name)
+\begin{DoxyCompactList}\small\item\em Remove object with a given name from the object-\/recognition database. \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_abdb9a0e9a4edb15469cce67416ed6a2f}{remove\+\_\+all} ()
+\begin{DoxyCompactList}\small\item\em Remove all objects from the object-\/recognition database. \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_ae91edb0bb7a3b851e2387cda653d80fb}{change\+\_\+name} (const string \&old\+\_\+name, const string \&new\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Change the name of an object. \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_a4305ac00526221c453fb9f39edaf05a4}{set\+\_\+object\+\_\+persistence} (const string \&sw)
+\begin{DoxyCompactList}\small\item\em Enable/disable object persistence. \end{DoxyCompactList}\item 
+string \hyperlink{group__iol2opc_ac5ec9c3ba20773a056a266e8d6b5daae}{get\+\_\+object\+\_\+persistence} ()
+\begin{DoxyCompactList}\small\item\em Return current status of object persistence. \end{DoxyCompactList}\item 
+void \hyperlink{group__iol2opc_a21b91dd20d666a826eee419f0a29f1a9}{pause} ()
+\begin{DoxyCompactList}\small\item\em Pause module. \end{DoxyCompactList}\item 
+void \hyperlink{group__iol2opc_a449fd15b4e5d4e198182cb3df189e40b}{resume} ()
+\begin{DoxyCompactList}\small\item\em Resume module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__iol2opc_af5370b7c2c0625d22cd9464914c74ab7}{y\+Info\+Gated} (const char $\ast$msg,...) const
+\item 
+string \hyperlink{group__iol2opc_a5e0675c4593af9ce2c6a04c77732811a}{find\+Name} (const Bottle \&scores, const string \&tag)
+\begin{DoxyCompactList}\small\item\em find\+Name Find name of a blob or set it O\+B\+J\+E\+C\+T\+\_\+\+U\+N\+K\+N\+O\+WN \end{DoxyCompactList}\item 
+Bottle \hyperlink{group__iol2opc_ac15a56e6429ba763d3ac515906e5b0b9}{skim\+Blobs} (const Bottle \&blobs)
+\begin{DoxyCompactList}\small\item\em skim\+Blobs Remove blobs which are too far away in the Cartesian space wrt Root frame \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_ac1eda5d663ae0e5d70857ffebea03c7b}{thres\+B\+Box} (Cv\+Rect \&bbox, const Image \&img)
+\begin{DoxyCompactList}\small\item\em thres\+B\+Box Constrain a bounding box with respect to an image size \end{DoxyCompactList}\item 
+Bottle \hyperlink{group__iol2opc_a628771932e6423ccd5963290558436b7}{get\+Blobs} ()
+\begin{DoxyCompactList}\small\item\em get\+Blobs Wrapper to get blobs information from the blob\+Extractor port \end{DoxyCompactList}\item 
+Cv\+Point \hyperlink{group__iol2opc_a9990bcbf744a34e01711e47a2a8a9205}{get\+Blob\+C\+OG} (const Bottle \&blobs, const unsigned int i)
+\begin{DoxyCompactList}\small\item\em get\+Blob\+C\+OG Get the blob center of the object defined by i \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_a8afddd23b4706e3d50ec6e5abb5141ce}{get\+Blob\+Points} (const Cv\+Point \&cog, deque$<$ Cv\+Point $>$ \&blob\+Points)
+\begin{DoxyCompactList}\small\item\em get\+Blob\+Points Obtain Cv\+Points belonging to a blob defined by cog, from lbp\+Extract \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_a6226f7de8cac860645608e45759f8d9a}{get\+Super\+Quadric} (const Cv\+Point \&point, Vector \&pos, Vector \&dim)
+\begin{DoxyCompactList}\small\item\em get\+Super\+Quadric Obtain superquadric-\/model of an object, defined by point \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_af32fec2950ca87ee525c38168b02571b}{get3\+D\+Position} (const Cv\+Point \&point, Vector \&x)
+\begin{DoxyCompactList}\small\item\em get3\+D\+Position Get the 3D point coordinate in Root frame through S\+FM \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_a6efd4c47885da925320b3d07deb5ec28}{get3\+D\+Position\+And\+Dimensions} (const Cv\+Rect \&bbox, Vector \&x, Vector \&dim)
+\begin{DoxyCompactList}\small\item\em get3\+D\+Position\+And\+Dimensions Get the 3D point coordinate and dimension in Root frame through S\+FM \end{DoxyCompactList}\item 
+Vector \hyperlink{group__iol2opc_a04b7cefdcd8c2ea856d348af2c07cb12}{calib\+Position} (const Vector \&x)
+\item 
+bool \hyperlink{group__iol2opc_aa0b5940b736070309d86fdaef957b2b9}{get\+Click\+Position} (Cv\+Point \&pos)
+\begin{DoxyCompactList}\small\item\em get\+Click\+Position Get the position on image that user clicks on \end{DoxyCompactList}\item 
+void \hyperlink{group__iol2opc_a798175bdeb57a13150a7d7d1ae9b1fd3}{acquire\+Image} ()
+\begin{DoxyCompactList}\small\item\em acquire\+Image Get calibrated image from the left camera of i\+Cub \end{DoxyCompactList}\item 
+void \hyperlink{group__iol2opc_a00146072817ea712a7fca1039707fe00}{draw\+Blobs} (const Bottle \&blobs, const unsigned int i, const Bottle \&scores)
+\begin{DoxyCompactList}\small\item\em draw\+Blobs Add bounding box and name of object in output image shown through port img\+Rt\+Loc\+Out \end{DoxyCompactList}\item 
+void \hyperlink{group__iol2opc_ab89714358f38a76b5638ad0ac6b40c4f}{rotate} (cv\+::\+Mat \&src, const double angle, cv\+::\+Mat \&dst)
+\begin{DoxyCompactList}\small\item\em rotate Create new Open\+CV matrix by rotating an original one an angle in 2D, a wrapper of cv\+::warp\+Affine \end{DoxyCompactList}\item 
+void \hyperlink{group__iol2opc_aa496db72603bd88317ba47e1229167c0}{draw\+Scores\+Histogram} (const Bottle \&blobs, const Bottle \&scores, const int i)
+\begin{DoxyCompactList}\small\item\em draw\+Scores\+Histogram Draw histogram of objects\textquotesingle{} scores \end{DoxyCompactList}\item 
+int \hyperlink{group__iol2opc_ab8eebf53c05431d054bf6d44319cf706}{find\+Closest\+Blob} (const Bottle \&blobs, const Cv\+Point \&loc)
+\begin{DoxyCompactList}\small\item\em find\+Closest\+Blob Find the closest blob to location \end{DoxyCompactList}\item 
+int \hyperlink{group__iol2opc_aae4d9ebe5591b73728e105ed0dc859ff}{find\+Closest\+Blob} (const Bottle \&blobs, const Vector \&loc)
+\begin{DoxyCompactList}\small\item\em find\+Closest\+Blob Find the closest blob to location \end{DoxyCompactList}\item 
+Bottle \hyperlink{group__iol2opc_a372d6a1015753163ed2fc7fa1838bff5}{classify} (const Bottle \&blobs)
+\begin{DoxyCompactList}\small\item\em classify Classify an object using himrep\+Classifier \end{DoxyCompactList}\item 
+void \hyperlink{group__iol2opc_a8363a7dd5c259d30d97f04cb15aa9a96}{train} (const string \&object, const Bottle \&blobs, const int i)
+\begin{DoxyCompactList}\small\item\em train Training himrep\+Classifier by sending an object by name and its bounding box \end{DoxyCompactList}\item 
+void \hyperlink{group__iol2opc_abc489aac7033917618fd74ddb318a213}{do\+Localization} ()
+\begin{DoxyCompactList}\small\item\em do\+Localization The whole procedure to classify objects, from getting image to draw bounding boxes arround objects \end{DoxyCompactList}\item 
+void \hyperlink{group__iol2opc_ab3fd466f349b214e52cc524b837e2277}{update\+O\+PC} ()
+\begin{DoxyCompactList}\small\item\em update\+O\+PC The whole procedure to update O\+PC, including naming known and unknown objects, drawing bounding boxes around objects \end{DoxyCompactList}\item 
+\hyperlink{namespaceicubclient_a582031d3e105cc59d614d15d30d22e65}{Object\+Area} \hyperlink{group__iol2opc_a4cecacb6f48875b87a6e9351d9d46a5d}{get\+Reachable\+Area} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&objpos)
+\begin{DoxyCompactList}\small\item\em get\+Reachable\+Area Analyse if an object is inside which region\+: Human, Shared, Robot or Not-\/\+Reachable \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_a1d25f5c96f5e5992c7f442e954e3759a}{configure} (Resource\+Finder \&rf)
+\item 
+void \hyperlink{group__iol2opc_a3acbd9194837f89ab917d81bd0513c21}{set\+Bounds} (Resource\+Finder \&rf, Vector \&bounds, string config\+Name, double std\+\_\+lower, double std\+\_\+upper)
+\begin{DoxyCompactList}\small\item\em set\+Bounds Set min \& max for a vector \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_a476b04172d3e7b3a7f97d4129542ebb8}{interrupt\+Module} ()
+\item 
+bool \hyperlink{group__iol2opc_aa9245a6a4ab492288cf7dc776b0cdad8}{close} ()
+\item 
+bool \hyperlink{group__iol2opc_af569c67872e76a8e9cfa765f30ec8e06}{attach} (Rpc\+Server \&source)
+\item 
+double \hyperlink{group__iol2opc_a0b50085b3c3a57fde55d2241bc1bdee8}{get\+Period} ()
+\item 
+bool \hyperlink{group__iol2opc_aaf70332dcf01dc12e2b849c4ff6620af}{update\+Module} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Rpc\+Server \hyperlink{group__iol2opc_af1f97807672a82261e98cde725ac02ff}{rpc\+Port}
+\begin{DoxyCompactList}\small\item\em rpc server to receive user request \end{DoxyCompactList}\item 
+Rpc\+Client \hyperlink{group__iol2opc_a970d4bb81398fe86064d8b27061689a2}{rpc\+Classifier}
+\begin{DoxyCompactList}\small\item\em rpc client port to send requests to himrep\+Classifier \end{DoxyCompactList}\item 
+Rpc\+Client \hyperlink{group__iol2opc_a82ce504b5a096979977bbb8d28a362d7}{rpc\+Get3D}
+\begin{DoxyCompactList}\small\item\em rpc client port to send requests to S\+FM \end{DoxyCompactList}\item 
+\hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client} $\ast$ \hyperlink{group__iol2opc_a7a2a1ed53d1b52114f98257b2576ff23}{opc}
+\begin{DoxyCompactList}\small\item\em O\+PC client object. \end{DoxyCompactList}\item 
+Rpc\+Client \hyperlink{group__iol2opc_af7d4fdfb04c11e6b385bb69624765005}{rpc\+Get\+S\+PQ}
+\begin{DoxyCompactList}\small\item\em rpc client port to send requests to superquadric-\/model and receive superquadric parameters \end{DoxyCompactList}\item 
+Rpc\+Client \hyperlink{group__iol2opc_a55365e238335fce2ec65e63885968926}{rpc\+Get\+Blob\+Points}
+\begin{DoxyCompactList}\small\item\em rpc client port to send requests to lbp\+Extract and receive all points of a blob \end{DoxyCompactList}\item 
+Buffered\+Port$<$ Bottle $>$ \hyperlink{group__iol2opc_af1d53efcbe15fda3a7214387d11cb446}{blob\+Extractor}
+\begin{DoxyCompactList}\small\item\em buffered port of input of received blobs from lbp\+Extract \end{DoxyCompactList}\item 
+Buffered\+Port$<$ Bottle $>$ \hyperlink{group__iol2opc_a5ece3f8300b23d1ae214a641ef3d929e}{hist\+Obj\+Loc\+Port}
+\begin{DoxyCompactList}\small\item\em buffered port of input of localized objects from iol localizer \end{DoxyCompactList}\item 
+Buffered\+Port$<$ Bottle $>$ \hyperlink{group__iol2opc_a01f92df086689f5c3cfe172bc2e67d52}{get\+Click\+Port}
+\begin{DoxyCompactList}\small\item\em buffered port of input of clicked position \end{DoxyCompactList}\item 
+Buffered\+Port$<$ Bottle $>$ \hyperlink{group__iol2opc_a88a2df81712e21c9cc2b8f91ee4bbe38}{obj\+Loc\+Out}
+\begin{DoxyCompactList}\small\item\em buffered port of output of localized objects \end{DoxyCompactList}\item 
+Buffered\+Port$<$ Image\+Of$<$ Pixel\+Bgr $>$ $>$ \hyperlink{group__iol2opc_a555425396bb28c42fc80bec3f5479558}{img\+In}
+\begin{DoxyCompactList}\small\item\em buffered port of input calibrated image from left camera of i\+Cub \end{DoxyCompactList}\item 
+Buffered\+Port$<$ Image\+Of$<$ Pixel\+Bgr $>$ $>$ \hyperlink{group__iol2opc_a65d96ea254077eae418dc53dd7c62a9a}{img\+Rt\+Loc\+Out}
+\begin{DoxyCompactList}\small\item\em buffered port of output image for real-\/time objects localization \end{DoxyCompactList}\item 
+Buffered\+Port$<$ Image\+Of$<$ Pixel\+Bgr $>$ $>$ \hyperlink{group__iol2opc_a7c0aeec18511fb66b6281b82ddd14c24}{img\+Track\+Out}
+\begin{DoxyCompactList}\small\item\em buffered port of output image of tracked object \end{DoxyCompactList}\item 
+Buffered\+Port$<$ Image\+Of$<$ Pixel\+Bgr $>$ $>$ \hyperlink{group__iol2opc_a87d83209572c282b7705963c5bb7b7cb}{img\+Sel\+Blob\+Out}
+\begin{DoxyCompactList}\small\item\em buffered port of output image inside the selected blob (by clicking on) \end{DoxyCompactList}\item 
+Buffered\+Port$<$ Image\+Of$<$ Pixel\+Bgr $>$ $>$ \hyperlink{group__iol2opc_a2fafcb468ebabe79b1468b7ee0a0c570}{img\+Histogram}
+\begin{DoxyCompactList}\small\item\em buffered port of output image of histogram of classification scores. \end{DoxyCompactList}\item 
+Port \hyperlink{group__iol2opc_a9944166088f32d0f615418004b1011e0}{img\+Classifier}
+\begin{DoxyCompactList}\small\item\em port of output image to himref\+Classifier \end{DoxyCompactList}\item 
+\hyperlink{classRtLocalization}{Rt\+Localization} \hyperlink{group__iol2opc_a4ed8af58d3a1cc46b53d144b5bb12480}{rt\+Localization}
+\item 
+\hyperlink{classOpcUpdater}{Opc\+Updater} \hyperlink{group__iol2opc_a6a1af6a40656eab2ade00191f1cad20f}{opc\+Updater}
+\item 
+int \hyperlink{group__iol2opc_a6dbce7745268485f2d303b51836a424a}{opc\+Median\+Filter\+Order}
+\item 
+\hyperlink{classClassifierReporter}{Classifier\+Reporter} \hyperlink{group__iol2opc_a50b88ace7a1e0a3a1fa0b7d641ebac53}{classifier\+Reporter}
+\item 
+Image\+Of$<$ Pixel\+Bgr $>$ \hyperlink{group__iol2opc_acc3e8bbf7c6afc78a12fc8705bccd84a}{img\+Rt\+Loc}
+\begin{DoxyCompactList}\small\item\em Image for real-\/time objects localization. \end{DoxyCompactList}\item 
+Mutex \hyperlink{group__iol2opc_a16267d2158276e3d367d98d3e077ba57}{mutex\+Resources}
+\item 
+Mutex \hyperlink{group__iol2opc_a18cc1dcb526a5916632a12514769962a}{mutex\+Resources\+Opc}
+\item 
+Mutex \hyperlink{group__iol2opc_a305ce862e0e62c240498cba175f35944}{mutex\+Resources\+S\+FM}
+\item 
+Mutex \hyperlink{group__iol2opc_adb9723473c9839da678d067758813e72}{mutex\+Resources\+S\+PQ}
+\item 
+double \hyperlink{group__iol2opc_ab76800629942b2263b2b9cb3d94cba9d}{period}
+\item 
+bool \hyperlink{group__iol2opc_af6ea487a8920c984b65bbf94f3dd9b7d}{verbose}
+\item 
+bool \hyperlink{group__iol2opc_a294e1534e6a04f621810a1d5be591e6f}{empty}
+\item 
+bool \hyperlink{group__iol2opc_a5ae5263a8e26d31c563782bea99ed577}{object\+\_\+persistence}
+\item 
+bool \hyperlink{group__iol2opc_a0810f28176726d22c6a5990cbfd86d56}{use\+S\+PQ}
+\begin{DoxyCompactList}\small\item\em boolean flag to enable/disable using Superquadric-\/model for object pose and size estimation \end{DoxyCompactList}\item 
+bool \hyperlink{group__iol2opc_aa51599d805d2e204420448c254fd90fb}{connected\+S\+PQ}
+\begin{DoxyCompactList}\small\item\em boolean flag to check internal connection to Superquadric-\/model \end{DoxyCompactList}\item 
+double \hyperlink{group__iol2opc_a830b1fc76e62720585c729fba6775dae}{presence\+\_\+timeout}
+\item 
+string \hyperlink{group__iol2opc_a8dc202854b79330a34a0233b87076267}{tracker\+\_\+type}
+\item 
+double \hyperlink{group__iol2opc_a2927446ee6c368d8173aa67022c936e6}{tracker\+\_\+timeout}
+\item 
+Vector\+Of$<$ int $>$ \hyperlink{group__iol2opc_a35271a1cfeea9b703afc16e684ff18dd}{tracker\+\_\+min\+\_\+blob\+\_\+size}
+\begin{DoxyCompactList}\small\item\em minimum size of tracker blob \end{DoxyCompactList}\item 
+map$<$ string, \hyperlink{group__iol2opc_classIOLObject}{I\+O\+L\+Object} $>$ \hyperlink{group__iol2opc_ad1c7be159c8f139565088dcfd502cf56}{db}
+\item 
+\hyperlink{namespaceBridge_a58acad8bf83b6df8e000fd21a8be62a9}{Bridge\+::\+State} \hyperlink{group__iol2opc_a1362fad5d1cca317ac6c632075dd4ef7}{state}
+\item 
+\hyperlink{group__iol2opc_classIOLObject}{I\+O\+L\+Object} \hyperlink{group__iol2opc_a1a161477a0a2d6a12e47abe090082f42}{only\+Known\+Objects}
+\item 
+map$<$ string, Filter $\ast$ $>$ \hyperlink{group__iol2opc_aa5dc576e1ea8f255865910b586c75914}{hist\+Filters\+Pool}
+\item 
+int \hyperlink{group__iol2opc_ac4cfcd6af9e5dcf3f3d463a31b478fbb}{hist\+Filter\+Length}
+\item 
+deque$<$ Cv\+Scalar $>$ \hyperlink{group__iol2opc_ad0047567208e337c4c8007d7a0d0ad59}{hist\+Colors\+Code}
+\item 
+double \hyperlink{group__iol2opc_a253b67fea52b3d0a697ae82bcf63b201}{blobs\+\_\+detection\+\_\+timeout}
+\item 
+double \hyperlink{group__iol2opc_a5718f234d5aa14378bceb65b8cc68e0a}{last\+Blobs\+Arrival\+Time}
+\begin{DoxyCompactList}\small\item\em time stamp of last received blob \end{DoxyCompactList}\item 
+Bottle \hyperlink{group__iol2opc_a7755982592a2045ad9c7558e5ca61548}{last\+Blobs}
+\begin{DoxyCompactList}\small\item\em Bottle contains last blob information. \end{DoxyCompactList}\item 
+Bottle \hyperlink{group__iol2opc_a8cb45af99e75edd2c75f5a4832680e5d}{opc\+Blobs}
+\begin{DoxyCompactList}\small\item\em Bottle contains received blobs of objects from O\+PC. \end{DoxyCompactList}\item 
+Bottle \hyperlink{group__iol2opc_a9318b4bf7afa7a742fe7e1e8834addd3}{opc\+Scores}
+\begin{DoxyCompactList}\small\item\em Bottle contains received (class) score of objects from O\+PC. \end{DoxyCompactList}\item 
+Vector \hyperlink{group__iol2opc_ab98ac03446e16344588dcb9e208e9785}{skim\+\_\+blobs\+\_\+x\+\_\+bounds}
+\begin{DoxyCompactList}\small\item\em Yarp Vector of min, max bounding in x-\/axis to reduce the blob detection. \end{DoxyCompactList}\item 
+Vector \hyperlink{group__iol2opc_ae74b7043710384997ede028e0991fd6f}{skim\+\_\+blobs\+\_\+y\+\_\+bounds}
+\begin{DoxyCompactList}\small\item\em Yarp Vector of min, max bounding in y-\/axis to reduce the blob detection. \end{DoxyCompactList}\item 
+Vector \hyperlink{group__iol2opc_a6cc8ffebdd654152848639f33d1d4858}{hist\+Obj\+Location}
+\item 
+Vector \hyperlink{group__iol2opc_a1c9e052961da72723c385bad7757e105}{human\+\_\+area\+\_\+x\+\_\+bounds}
+\begin{DoxyCompactList}\small\item\em Yarp Vector of min, max bounding of human region in x-\/axis. \end{DoxyCompactList}\item 
+Vector \hyperlink{group__iol2opc_a50a6288c938f47d639b4392472ab01c6}{human\+\_\+area\+\_\+y\+\_\+bounds}
+\begin{DoxyCompactList}\small\item\em Yarp Vector of min, max bounding of human region in y-\/axis. \end{DoxyCompactList}\item 
+Vector \hyperlink{group__iol2opc_a1a5966db1522c0e5888465eb33d52430}{robot\+\_\+area\+\_\+x\+\_\+bounds}
+\begin{DoxyCompactList}\small\item\em Yarp Vector of min, max bounding of robot region in x-\/axis. \end{DoxyCompactList}\item 
+Vector \hyperlink{group__iol2opc_aa8bae109b5a9d58a0b191914497046d2}{robot\+\_\+area\+\_\+y\+\_\+bounds}
+\begin{DoxyCompactList}\small\item\em Yarp Vector of min, max bounding of robot region in y-\/axis. \end{DoxyCompactList}\item 
+Vector \hyperlink{group__iol2opc_a48edc965e39929871bcd4b074d51c866}{shared\+\_\+area\+\_\+x\+\_\+bounds}
+\begin{DoxyCompactList}\small\item\em Yarp Vector of min, max bounding of shared region in x-\/axis. \end{DoxyCompactList}\item 
+Vector \hyperlink{group__iol2opc_a1cf551318c3b94be6e385bf40146dc09}{shared\+\_\+area\+\_\+y\+\_\+bounds}
+\begin{DoxyCompactList}\small\item\em Yarp Vector of min, max bounding of shared region in y-\/axis. \end{DoxyCompactList}\item 
+Cv\+Point \hyperlink{group__iol2opc_ab278fa0fa676cb4634501053f7ce6a82}{click\+Location}
+\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__iol2opc_a07428251e180710afce1c377e6391901}{Rt\+Localization}
+\item 
+class \hyperlink{group__iol2opc_a175c6756cab94a7f341e39e979d422e2}{Opc\+Updater}
+\item 
+class \hyperlink{group__iol2opc_a2d65ad1e24770ec65134e5ed6b45b8a4}{Classifier\+Reporter}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__iol2opc_a798175bdeb57a13150a7d7d1ae9b1fd3}\label{group__iol2opc_a798175bdeb57a13150a7d7d1ae9b1fd3}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!acquire\+Image@{acquire\+Image}}
+\index{acquire\+Image@{acquire\+Image}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{acquire\+Image()}{acquireImage()}}
+{\footnotesize\ttfamily void I\+O\+L2\+O\+P\+C\+Bridge\+::acquire\+Image (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+acquire\+Image Get calibrated image from the left camera of i\+Cub 
+
+
+
+Definition at line 438 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_af569c67872e76a8e9cfa765f30ec8e06}\label{group__iol2opc_af569c67872e76a8e9cfa765f30ec8e06}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!attach@{attach}}
+\index{attach@{attach}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{attach()}{attach()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::attach (\begin{DoxyParamCaption}\item[{Rpc\+Server \&}]{source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1334 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a04b7cefdcd8c2ea856d348af2c07cb12}\label{group__iol2opc_a04b7cefdcd8c2ea856d348af2c07cb12}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!calib\+Position@{calib\+Position}}
+\index{calib\+Position@{calib\+Position}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{calib\+Position()}{calibPosition()}}
+{\footnotesize\ttfamily Vector I\+O\+L2\+O\+P\+C\+Bridge\+::calib\+Position (\begin{DoxyParamCaption}\item[{const Vector \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{group__iol2opc_ae91edb0bb7a3b851e2387cda653d80fb}\label{group__iol2opc_ae91edb0bb7a3b851e2387cda653d80fb}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!change\+\_\+name@{change\+\_\+name}}
+\index{change\+\_\+name@{change\+\_\+name}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{change\+\_\+name()}{change\_name()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::change\+\_\+name (\begin{DoxyParamCaption}\item[{const string \&}]{old\+\_\+name,  }\item[{const string \&}]{new\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Change the name of an object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em old\+\_\+name} & is the object which name is to be changed \\
+\hline
+{\em new\+\_\+name} & is the new object name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true/false on success/failure. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classiol2opc__IDL_a18ecf43816b0df1187a208df18fb98a7}{iol2opc\+\_\+\+I\+DL}.
+
+
+
+Definition at line 1444 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a372d6a1015753163ed2fc7fa1838bff5}\label{group__iol2opc_a372d6a1015753163ed2fc7fa1838bff5}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!classify@{classify}}
+\index{classify@{classify}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{classify()}{classify()}}
+{\footnotesize\ttfamily Bottle I\+O\+L2\+O\+P\+C\+Bridge\+::classify (\begin{DoxyParamCaption}\item[{const Bottle \&}]{blobs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+classify Classify an object using himrep\+Classifier 
+
+
+\begin{DoxyParams}{Parameters}
+{\em blobs} & Yarp Bottle contains information of the estimated object bounding boxes\+: top left x, y, bottom right x, y. This will be sent to himrep\+Classifier for object detection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Yarp Bottle contains class of object and confidence score 
+\end{DoxyReturn}
+
+
+Definition at line 693 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_aa9245a6a4ab492288cf7dc776b0cdad8}\label{group__iol2opc_aa9245a6a4ab492288cf7dc776b0cdad8}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!close@{close}}
+\index{close@{close}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1176 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a1d25f5c96f5e5992c7f442e954e3759a}\label{group__iol2opc_a1d25f5c96f5e5992c7f442e954e3759a}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!configure@{configure}}
+\index{configure@{configure}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::configure (\begin{DoxyParamCaption}\item[{Resource\+Finder \&}]{rf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1016 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_abc489aac7033917618fd74ddb318a213}\label{group__iol2opc_abc489aac7033917618fd74ddb318a213}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!do\+Localization@{do\+Localization}}
+\index{do\+Localization@{do\+Localization}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{do\+Localization()}{doLocalization()}}
+{\footnotesize\ttfamily void I\+O\+L2\+O\+P\+C\+Bridge\+::do\+Localization (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+do\+Localization The whole procedure to classify objects, from getting image to draw bounding boxes arround objects 
+
+
+
+Definition at line 757 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a00146072817ea712a7fca1039707fe00}\label{group__iol2opc_a00146072817ea712a7fca1039707fe00}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!draw\+Blobs@{draw\+Blobs}}
+\index{draw\+Blobs@{draw\+Blobs}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{draw\+Blobs()}{drawBlobs()}}
+{\footnotesize\ttfamily void I\+O\+L2\+O\+P\+C\+Bridge\+::draw\+Blobs (\begin{DoxyParamCaption}\item[{const Bottle \&}]{blobs,  }\item[{const unsigned int}]{i,  }\item[{const Bottle \&}]{scores }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+draw\+Blobs Add bounding box and name of object in output image shown through port img\+Rt\+Loc\+Out 
+
+
+\begin{DoxyParams}{Parameters}
+{\em blobs} & Yarp Bottle contains information of the estimated object bounding boxes\+: top left x, y, bottom right x, y \\
+\hline
+{\em i} & integer value as index of the blob to draw the bounding box \\
+\hline
+{\em scores} & Bottle contains classified results from himrep\+Classifier, \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__iol2opc_a372d6a1015753163ed2fc7fa1838bff5}{classify()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 453 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_aa496db72603bd88317ba47e1229167c0}\label{group__iol2opc_aa496db72603bd88317ba47e1229167c0}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!draw\+Scores\+Histogram@{draw\+Scores\+Histogram}}
+\index{draw\+Scores\+Histogram@{draw\+Scores\+Histogram}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{draw\+Scores\+Histogram()}{drawScoresHistogram()}}
+{\footnotesize\ttfamily void I\+O\+L2\+O\+P\+C\+Bridge\+::draw\+Scores\+Histogram (\begin{DoxyParamCaption}\item[{const Bottle \&}]{blobs,  }\item[{const Bottle \&}]{scores,  }\item[{const int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+draw\+Scores\+Histogram Draw histogram of objects\textquotesingle{} scores 
+
+
+\begin{DoxyParams}{Parameters}
+{\em blobs} & Yarp Bottle contains information of the estimated object bounding boxes\+: top left x, y, bottom right x, y \\
+\hline
+{\em i} & integer value as index of the blob to draw the bounding box \\
+\hline
+{\em scores} & Bottle contains classified results from himrep\+Classifier, \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__iol2opc_a372d6a1015753163ed2fc7fa1838bff5}{classify()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 513 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_ab8eebf53c05431d054bf6d44319cf706}\label{group__iol2opc_ab8eebf53c05431d054bf6d44319cf706}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!find\+Closest\+Blob@{find\+Closest\+Blob}}
+\index{find\+Closest\+Blob@{find\+Closest\+Blob}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{find\+Closest\+Blob()}{findClosestBlob()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int I\+O\+L2\+O\+P\+C\+Bridge\+::find\+Closest\+Blob (\begin{DoxyParamCaption}\item[{const Bottle \&}]{blobs,  }\item[{const Cv\+Point \&}]{loc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+find\+Closest\+Blob Find the closest blob to location 
+
+
+\begin{DoxyParams}{Parameters}
+{\em blobs} & Yarp Bottle contains information of the estimated object bounding box\+: top left x, y, bottom right x, y \\
+\hline
+{\em loc} & A Cv\+Point contains 2D coordinate of pixel expressed the location \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+integer value of the corresponding blob to the location 
+\end{DoxyReturn}
+
+
+Definition at line 636 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_aae4d9ebe5591b73728e105ed0dc859ff}\label{group__iol2opc_aae4d9ebe5591b73728e105ed0dc859ff}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!find\+Closest\+Blob@{find\+Closest\+Blob}}
+\index{find\+Closest\+Blob@{find\+Closest\+Blob}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{find\+Closest\+Blob()}{findClosestBlob()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int I\+O\+L2\+O\+P\+C\+Bridge\+::find\+Closest\+Blob (\begin{DoxyParamCaption}\item[{const Bottle \&}]{blobs,  }\item[{const Vector \&}]{loc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+find\+Closest\+Blob Find the closest blob to location 
+
+
+\begin{DoxyParams}{Parameters}
+{\em blobs} & Yarp Bottle contains information of the estimated object bounding boxes\+: top left x, y, bottom right x, y \\
+\hline
+{\em loc} & A Vector contains 3D coordinate of the location in the Root frame \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+integer value of the corresponding blob to the location 
+\end{DoxyReturn}
+
+
+Definition at line 664 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a5e0675c4593af9ce2c6a04c77732811a}\label{group__iol2opc_a5e0675c4593af9ce2c6a04c77732811a}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!find\+Name@{find\+Name}}
+\index{find\+Name@{find\+Name}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{find\+Name()}{findName()}}
+{\footnotesize\ttfamily string I\+O\+L2\+O\+P\+C\+Bridge\+::find\+Name (\begin{DoxyParamCaption}\item[{const Bottle \&}]{scores,  }\item[{const string \&}]{tag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+find\+Name Find name of a blob or set it O\+B\+J\+E\+C\+T\+\_\+\+U\+N\+K\+N\+O\+WN 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scores} & Bottle contains classified results from himrep\+Classifier, \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{group__iol2opc_a372d6a1015753163ed2fc7fa1838bff5}{classify()} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em tag} & input string contains blob name, i.\+e. \char`\"{}blob\+\_\+$<$i$>$\char`\"{} with i as index of a blob in set of results from \hyperlink{group__iol2opc_a628771932e6423ccd5963290558436b7}{get\+Blobs()} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string value for name of the blob\+: O\+B\+J\+E\+C\+T\+\_\+\+U\+N\+K\+N\+O\+WN or class name from classifier 
+\end{DoxyReturn}
+
+
+Definition at line 46 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_af32fec2950ca87ee525c38168b02571b}\label{group__iol2opc_af32fec2950ca87ee525c38168b02571b}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!get3\+D\+Position@{get3\+D\+Position}}
+\index{get3\+D\+Position@{get3\+D\+Position}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{get3\+D\+Position()}{get3DPosition()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::get3\+D\+Position (\begin{DoxyParamCaption}\item[{const Cv\+Point \&}]{point,  }\item[{Vector \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+get3\+D\+Position Get the 3D point coordinate in Root frame through S\+FM 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & A Cv\+Point for the estimated coordinate of an image pixel. \\
+\hline
+{\em x} & Vector for 3D point coordinate. If S\+FM return more than one 3D point as result, the coordinate is average of all result \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if can get 3D point from S\+FM, False otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 339 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a6efd4c47885da925320b3d07deb5ec28}\label{group__iol2opc_a6efd4c47885da925320b3d07deb5ec28}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!get3\+D\+Position\+And\+Dimensions@{get3\+D\+Position\+And\+Dimensions}}
+\index{get3\+D\+Position\+And\+Dimensions@{get3\+D\+Position\+And\+Dimensions}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{get3\+D\+Position\+And\+Dimensions()}{get3DPositionAndDimensions()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::get3\+D\+Position\+And\+Dimensions (\begin{DoxyParamCaption}\item[{const Cv\+Rect \&}]{bbox,  }\item[{Vector \&}]{x,  }\item[{Vector \&}]{dim }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+get3\+D\+Position\+And\+Dimensions Get the 3D point coordinate and dimension in Root frame through S\+FM 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bbox} & A Cv\+Rect for bounding box of object \\
+\hline
+{\em x} & Vector for 3D point coordinate. If S\+FM return more than one 3D point as result, the coordinate is average of all result \\
+\hline
+{\em dim} & Vector for 3D dimensions of object, calculated using coordinates of points from S\+FM \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if get response from S\+FM, False otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 392 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_ac5ec9c3ba20773a056a266e8d6b5daae}\label{group__iol2opc_ac5ec9c3ba20773a056a266e8d6b5daae}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!get\+\_\+object\+\_\+persistence@{get\+\_\+object\+\_\+persistence}}
+\index{get\+\_\+object\+\_\+persistence@{get\+\_\+object\+\_\+persistence}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{get\+\_\+object\+\_\+persistence()}{get\_object\_persistence()}}
+{\footnotesize\ttfamily string I\+O\+L2\+O\+P\+C\+Bridge\+::get\+\_\+object\+\_\+persistence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Return current status of object persistence. 
+
+\begin{DoxyReturn}{Returns}
+\char`\"{}on\char`\"{}$\vert$\char`\"{}off\char`\"{}. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classiol2opc__IDL_a51b8e076770a618ef676dd2ccdf4b35a}{iol2opc\+\_\+\+I\+DL}.
+
+
+
+Definition at line 1520 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a9990bcbf744a34e01711e47a2a8a9205}\label{group__iol2opc_a9990bcbf744a34e01711e47a2a8a9205}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!get\+Blob\+C\+OG@{get\+Blob\+C\+OG}}
+\index{get\+Blob\+C\+OG@{get\+Blob\+C\+OG}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{get\+Blob\+C\+O\+G()}{getBlobCOG()}}
+{\footnotesize\ttfamily Cv\+Point I\+O\+L2\+O\+P\+C\+Bridge\+::get\+Blob\+C\+OG (\begin{DoxyParamCaption}\item[{const Bottle \&}]{blobs,  }\item[{const unsigned int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+get\+Blob\+C\+OG Get the blob center of the object defined by i 
+
+
+\begin{DoxyParams}{Parameters}
+{\em blobs} & Yarp Bottle contains information of the estimated object bounding boxes\+: top left x, y, bottom right x, y \\
+\hline
+{\em i} & integer value to define object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Cv\+Point containing x, y coordinate of the blob center 
+\end{DoxyReturn}
+
+
+Definition at line 169 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a8afddd23b4706e3d50ec6e5abb5141ce}\label{group__iol2opc_a8afddd23b4706e3d50ec6e5abb5141ce}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!get\+Blob\+Points@{get\+Blob\+Points}}
+\index{get\+Blob\+Points@{get\+Blob\+Points}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{get\+Blob\+Points()}{getBlobPoints()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::get\+Blob\+Points (\begin{DoxyParamCaption}\item[{const Cv\+Point \&}]{cog,  }\item[{deque$<$ Cv\+Point $>$ \&}]{blob\+Points }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+get\+Blob\+Points Obtain Cv\+Points belonging to a blob defined by cog, from lbp\+Extract 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cog} & Cv\+Point of center of mass of the blob \\
+\hline
+{\em blob\+Points} & A set of Cv\+Points of the blob \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if can get result from lbp\+Extract, False otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 214 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a628771932e6423ccd5963290558436b7}\label{group__iol2opc_a628771932e6423ccd5963290558436b7}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!get\+Blobs@{get\+Blobs}}
+\index{get\+Blobs@{get\+Blobs}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{get\+Blobs()}{getBlobs()}}
+{\footnotesize\ttfamily Bottle I\+O\+L2\+O\+P\+C\+Bridge\+::get\+Blobs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+get\+Blobs Wrapper to get blobs information from the blob\+Extractor port 
+
+\begin{DoxyReturn}{Returns}
+Yarp Bottle contains all valid segmented object blobs from lbp\+Extract module 
+\end{DoxyReturn}
+
+
+Definition at line 141 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_aa0b5940b736070309d86fdaef957b2b9}\label{group__iol2opc_aa0b5940b736070309d86fdaef957b2b9}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!get\+Click\+Position@{get\+Click\+Position}}
+\index{get\+Click\+Position@{get\+Click\+Position}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{get\+Click\+Position()}{getClickPosition()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::get\+Click\+Position (\begin{DoxyParamCaption}\item[{Cv\+Point \&}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+get\+Click\+Position Get the position on image that user clicks on 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & A Cv\+Point contains 2D coordinate of the estimated pixel that user clicks on \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the result pixel is valid, False otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 193 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a0b50085b3c3a57fde55d2241bc1bdee8}\label{group__iol2opc_a0b50085b3c3a57fde55d2241bc1bdee8}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!get\+Period@{get\+Period}}
+\index{get\+Period@{get\+Period}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{get\+Period()}{getPeriod()}}
+{\footnotesize\ttfamily double I\+O\+L2\+O\+P\+C\+Bridge\+::get\+Period (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1228 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a4cecacb6f48875b87a6e9351d9d46a5d}\label{group__iol2opc_a4cecacb6f48875b87a6e9351d9d46a5d}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!get\+Reachable\+Area@{get\+Reachable\+Area}}
+\index{get\+Reachable\+Area@{get\+Reachable\+Area}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{get\+Reachable\+Area()}{getReachableArea()}}
+{\footnotesize\ttfamily \hyperlink{namespaceicubclient_a582031d3e105cc59d614d15d30d22e65}{Object\+Area} I\+O\+L2\+O\+P\+C\+Bridge\+::get\+Reachable\+Area (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{objpos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+get\+Reachable\+Area Analyse if an object is inside which region\+: Human, Shared, Robot or Not-\/\+Reachable 
+
+
+\begin{DoxyParams}{Parameters}
+{\em objpos} & Vector of object position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Object\+Area that the object belongs to 
+\end{DoxyReturn}
+
+
+Definition at line 792 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a6226f7de8cac860645608e45759f8d9a}\label{group__iol2opc_a6226f7de8cac860645608e45759f8d9a}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!get\+Super\+Quadric@{get\+Super\+Quadric}}
+\index{get\+Super\+Quadric@{get\+Super\+Quadric}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{get\+Super\+Quadric()}{getSuperQuadric()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::get\+Super\+Quadric (\begin{DoxyParamCaption}\item[{const Cv\+Point \&}]{point,  }\item[{Vector \&}]{pos,  }\item[{Vector \&}]{dim }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+get\+Super\+Quadric Obtain superquadric-\/model of an object, defined by point 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Cv\+Point of center of mass of the blob \\
+\hline
+{\em pos} & A Yarp Vector of the object pose estimation, calculated by the superquadric-\/model \\
+\hline
+{\em dim} & A Yarp Vector of the object dimension estimation, calculated by the superquadric-\/model \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if can get result from superquadric-\/model, False otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 255 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a476b04172d3e7b3a7f97d4129542ebb8}\label{group__iol2opc_a476b04172d3e7b3a7f97d4129542ebb8}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!interrupt\+Module@{interrupt\+Module}}
+\index{interrupt\+Module@{interrupt\+Module}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{interrupt\+Module()}{interruptModule()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::interrupt\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1143 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a21b91dd20d666a826eee419f0a29f1a9}\label{group__iol2opc_a21b91dd20d666a826eee419f0a29f1a9}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!pause@{pause}}
+\index{pause@{pause}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{pause()}{pause()}}
+{\footnotesize\ttfamily void I\+O\+L2\+O\+P\+C\+Bridge\+::pause (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Pause module. 
+
+
+
+Reimplemented from \hyperlink{classiol2opc__IDL_a98bd49ef49a7600dc2d995dc165e73ce}{iol2opc\+\_\+\+I\+DL}.
+
+
+
+Definition at line 1527 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_abdb9a0e9a4edb15469cce67416ed6a2f}\label{group__iol2opc_abdb9a0e9a4edb15469cce67416ed6a2f}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!remove\+\_\+all@{remove\+\_\+all}}
+\index{remove\+\_\+all@{remove\+\_\+all}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{remove\+\_\+all()}{remove\_all()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::remove\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Remove all objects from the object-\/recognition database. 
+
+\begin{DoxyReturn}{Returns}
+true/false on success/failure. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classiol2opc__IDL_a1b773df105805332a143614903ae6370}{iol2opc\+\_\+\+I\+DL}.
+
+
+
+Definition at line 1414 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_aab19e8834838cce5da74d31f115b9fd5}\label{group__iol2opc_aab19e8834838cce5da74d31f115b9fd5}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!remove\+\_\+object@{remove\+\_\+object}}
+\index{remove\+\_\+object@{remove\+\_\+object}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{remove\+\_\+object()}{remove\_object()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::remove\+\_\+object (\begin{DoxyParamCaption}\item[{const string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Remove object with a given name from the object-\/recognition database. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & is the object name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true/false on success/failure. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classiol2opc__IDL_a69ecef7b79d9f59b9db91e4471627cb5}{iol2opc\+\_\+\+I\+DL}.
+
+
+
+Definition at line 1382 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a449fd15b4e5d4e198182cb3df189e40b}\label{group__iol2opc_a449fd15b4e5d4e198182cb3df189e40b}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!resume@{resume}}
+\index{resume@{resume}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{resume()}{resume()}}
+{\footnotesize\ttfamily void I\+O\+L2\+O\+P\+C\+Bridge\+::resume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Resume module. 
+
+
+
+Reimplemented from \hyperlink{classiol2opc__IDL_a10ec403a9dfc09503e3155227c7283bb}{iol2opc\+\_\+\+I\+DL}.
+
+
+
+Definition at line 1534 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_ab89714358f38a76b5638ad0ac6b40c4f}\label{group__iol2opc_ab89714358f38a76b5638ad0ac6b40c4f}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!rotate@{rotate}}
+\index{rotate@{rotate}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{rotate()}{rotate()}}
+{\footnotesize\ttfamily void I\+O\+L2\+O\+P\+C\+Bridge\+::rotate (\begin{DoxyParamCaption}\item[{cv\+::\+Mat \&}]{src,  }\item[{const double}]{angle,  }\item[{cv\+::\+Mat \&}]{dst }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+rotate Create new Open\+CV matrix by rotating an original one an angle in 2D, a wrapper of cv\+::warp\+Affine 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Original Open\+CV matrix \\
+\hline
+{\em angle} & Double value for rotated angle \\
+\hline
+{\em dst} & New rotated Open\+CV matrix \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 502 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a4305ac00526221c453fb9f39edaf05a4}\label{group__iol2opc_a4305ac00526221c453fb9f39edaf05a4}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!set\+\_\+object\+\_\+persistence@{set\+\_\+object\+\_\+persistence}}
+\index{set\+\_\+object\+\_\+persistence@{set\+\_\+object\+\_\+persistence}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{set\+\_\+object\+\_\+persistence()}{set\_object\_persistence()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::set\+\_\+object\+\_\+persistence (\begin{DoxyParamCaption}\item[{const string \&}]{sw }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Enable/disable object persistence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sw} & can be \char`\"{}on\char`\"{}$\vert$\char`\"{}off\char`\"{}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true/false on success/failure. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classiol2opc__IDL_a8973d954812064a1662acaaa434947e7}{iol2opc\+\_\+\+I\+DL}.
+
+
+
+Definition at line 1506 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a3acbd9194837f89ab917d81bd0513c21}\label{group__iol2opc_a3acbd9194837f89ab917d81bd0513c21}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!set\+Bounds@{set\+Bounds}}
+\index{set\+Bounds@{set\+Bounds}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{set\+Bounds()}{setBounds()}}
+{\footnotesize\ttfamily void I\+O\+L2\+O\+P\+C\+Bridge\+::set\+Bounds (\begin{DoxyParamCaption}\item[{Resource\+Finder \&}]{rf,  }\item[{Vector \&}]{bounds,  }\item[{string}]{config\+Name,  }\item[{double}]{std\+\_\+lower,  }\item[{double}]{std\+\_\+upper }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+set\+Bounds Set min \& max for a vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rf} & Resource\+Finder object \\
+\hline
+{\em bounds} & Vector to set bounds to \\
+\hline
+{\em config\+Name} & string value for name of the parameter in config file \\
+\hline
+{\em std\+\_\+lower} & double value for min bound \\
+\hline
+{\em std\+\_\+upper} & double value for max bound \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 985 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_ac15a56e6429ba763d3ac515906e5b0b9}\label{group__iol2opc_ac15a56e6429ba763d3ac515906e5b0b9}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!skim\+Blobs@{skim\+Blobs}}
+\index{skim\+Blobs@{skim\+Blobs}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{skim\+Blobs()}{skimBlobs()}}
+{\footnotesize\ttfamily Bottle I\+O\+L2\+O\+P\+C\+Bridge\+::skim\+Blobs (\begin{DoxyParamCaption}\item[{const Bottle \&}]{blobs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+skim\+Blobs Remove blobs which are too far away in the Cartesian space wrt Root frame 
+
+
+\begin{DoxyParams}{Parameters}
+{\em blobs} & Original Yarp Bottle contains all blobs \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Result Bottle contains valid blobs 
+\end{DoxyReturn}
+
+
+Definition at line 97 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_ac1eda5d663ae0e5d70857ffebea03c7b}\label{group__iol2opc_ac1eda5d663ae0e5d70857ffebea03c7b}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!thres\+B\+Box@{thres\+B\+Box}}
+\index{thres\+B\+Box@{thres\+B\+Box}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{thres\+B\+Box()}{thresBBox()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::thres\+B\+Box (\begin{DoxyParamCaption}\item[{Cv\+Rect \&}]{bbox,  }\item[{const Image \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+thres\+B\+Box Constrain a bounding box with respect to an image size 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bbox} & Cv\+Rect define the bounding box \\
+\hline
+{\em img} & Image with information used to constrain the bounding box \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the size of the constrained bounding box is large enough (bigger than tracker\+\_\+min\+\_\+blob\+\_\+size) 
+\end{DoxyReturn}
+
+
+Definition at line 121 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_a8363a7dd5c259d30d97f04cb15aa9a96}\label{group__iol2opc_a8363a7dd5c259d30d97f04cb15aa9a96}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!train@{train}}
+\index{train@{train}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{train()}{train()}}
+{\footnotesize\ttfamily void I\+O\+L2\+O\+P\+C\+Bridge\+::train (\begin{DoxyParamCaption}\item[{const string \&}]{object,  }\item[{const Bottle \&}]{blobs,  }\item[{const int}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+train Training himrep\+Classifier by sending an object by name and its bounding box 
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & string value contains name of object to train \\
+\hline
+{\em blobs} & Yarp Bottle contains information of the estimated object bounding boxes\+: top left x, y, bottom right x, y \\
+\hline
+{\em i} & integer value for the corresponding blob of the object needed to train \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 723 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_aa48eed5c7920cd2116c81e88cae0ab4a}\label{group__iol2opc_aa48eed5c7920cd2116c81e88cae0ab4a}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!train\+\_\+object@{train\+\_\+object}}
+\index{train\+\_\+object@{train\+\_\+object}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{train\+\_\+object()}{train\_object()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::train\+\_\+object (\begin{DoxyParamCaption}\item[{const string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Add a new object to the object-\/recognition database based on the selected blob. 
+
+If the object is already existing, its recognition is improved. 
+\begin{DoxyParams}{Parameters}
+{\em name} & is the object name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true/false on success/failure. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classiol2opc__IDL_a6215d1e2e1865dcf4584e925b8c1d1be}{iol2opc\+\_\+\+I\+DL}.
+
+
+
+Definition at line 1341 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_aaf70332dcf01dc12e2b849c4ff6620af}\label{group__iol2opc_aaf70332dcf01dc12e2b849c4ff6620af}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1235 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_ab3fd466f349b214e52cc524b837e2277}\label{group__iol2opc_ab3fd466f349b214e52cc524b837e2277}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!update\+O\+PC@{update\+O\+PC}}
+\index{update\+O\+PC@{update\+O\+PC}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{update\+O\+P\+C()}{updateOPC()}}
+{\footnotesize\ttfamily void I\+O\+L2\+O\+P\+C\+Bridge\+::update\+O\+PC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+update\+O\+PC The whole procedure to update O\+PC, including naming known and unknown objects, drawing bounding boxes around objects 
+
+
+
+Definition at line 808 of file module.\+cpp.
+
+\mbox{\Hypertarget{group__iol2opc_af5370b7c2c0625d22cd9464914c74ab7}\label{group__iol2opc_af5370b7c2c0625d22cd9464914c74ab7}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!y\+Info\+Gated@{y\+Info\+Gated}}
+\index{y\+Info\+Gated@{y\+Info\+Gated}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{y\+Info\+Gated()}{yInfoGated()}}
+{\footnotesize\ttfamily void I\+O\+L2\+O\+P\+C\+Bridge\+::y\+Info\+Gated (\begin{DoxyParamCaption}\item[{const char $\ast$}]{msg,  }\item[{}]{... }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 30 of file module.\+cpp.
+
+
+
+\paragraph{Friends And Related Function Documentation}
+\mbox{\Hypertarget{group__iol2opc_a2d65ad1e24770ec65134e5ed6b45b8a4}\label{group__iol2opc_a2d65ad1e24770ec65134e5ed6b45b8a4}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!Classifier\+Reporter@{Classifier\+Reporter}}
+\index{Classifier\+Reporter@{Classifier\+Reporter}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{Classifier\+Reporter}{ClassifierReporter}}
+{\footnotesize\ttfamily friend class \hyperlink{classClassifierReporter}{Classifier\+Reporter}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 304 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a175c6756cab94a7f341e39e979d422e2}\label{group__iol2opc_a175c6756cab94a7f341e39e979d422e2}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!Opc\+Updater@{Opc\+Updater}}
+\index{Opc\+Updater@{Opc\+Updater}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{Opc\+Updater}{OpcUpdater}}
+{\footnotesize\ttfamily friend class \hyperlink{classOpcUpdater}{Opc\+Updater}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 303 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a07428251e180710afce1c377e6391901}\label{group__iol2opc_a07428251e180710afce1c377e6391901}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!Rt\+Localization@{Rt\+Localization}}
+\index{Rt\+Localization@{Rt\+Localization}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{Rt\+Localization}{RtLocalization}}
+{\footnotesize\ttfamily friend class \hyperlink{classRtLocalization}{Rt\+Localization}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 302 of file module.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__iol2opc_af1d53efcbe15fda3a7214387d11cb446}\label{group__iol2opc_af1d53efcbe15fda3a7214387d11cb446}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!blob\+Extractor@{blob\+Extractor}}
+\index{blob\+Extractor@{blob\+Extractor}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{blob\+Extractor}{blobExtractor}}
+{\footnotesize\ttfamily Buffered\+Port$<$Bottle$>$ I\+O\+L2\+O\+P\+C\+Bridge\+::blob\+Extractor\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+buffered port of input of received blobs from lbp\+Extract 
+
+
+
+Definition at line 242 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a253b67fea52b3d0a697ae82bcf63b201}\label{group__iol2opc_a253b67fea52b3d0a697ae82bcf63b201}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!blobs\+\_\+detection\+\_\+timeout@{blobs\+\_\+detection\+\_\+timeout}}
+\index{blobs\+\_\+detection\+\_\+timeout@{blobs\+\_\+detection\+\_\+timeout}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{blobs\+\_\+detection\+\_\+timeout}{blobs\_detection\_timeout}}
+{\footnotesize\ttfamily double I\+O\+L2\+O\+P\+C\+Bridge\+::blobs\+\_\+detection\+\_\+timeout\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 283 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a50b88ace7a1e0a3a1fa0b7d641ebac53}\label{group__iol2opc_a50b88ace7a1e0a3a1fa0b7d641ebac53}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!classifier\+Reporter@{classifier\+Reporter}}
+\index{classifier\+Reporter@{classifier\+Reporter}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{classifier\+Reporter}{classifierReporter}}
+{\footnotesize\ttfamily \hyperlink{classClassifierReporter}{Classifier\+Reporter} I\+O\+L2\+O\+P\+C\+Bridge\+::classifier\+Reporter\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 256 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_ab278fa0fa676cb4634501053f7ce6a82}\label{group__iol2opc_ab278fa0fa676cb4634501053f7ce6a82}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!click\+Location@{click\+Location}}
+\index{click\+Location@{click\+Location}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{click\+Location}{clickLocation}}
+{\footnotesize\ttfamily Cv\+Point I\+O\+L2\+O\+P\+C\+Bridge\+::click\+Location\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 300 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_aa51599d805d2e204420448c254fd90fb}\label{group__iol2opc_aa51599d805d2e204420448c254fd90fb}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!connected\+S\+PQ@{connected\+S\+PQ}}
+\index{connected\+S\+PQ@{connected\+S\+PQ}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{connected\+S\+PQ}{connectedSPQ}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::connected\+S\+PQ\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+boolean flag to check internal connection to Superquadric-\/model 
+
+
+
+Definition at line 269 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_ad1c7be159c8f139565088dcfd502cf56}\label{group__iol2opc_ad1c7be159c8f139565088dcfd502cf56}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!db@{db}}
+\index{db@{db}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{db}{db}}
+{\footnotesize\ttfamily map$<$string,\hyperlink{group__iol2opc_classIOLObject}{I\+O\+L\+Object}$>$ I\+O\+L2\+O\+P\+C\+Bridge\+::db\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 275 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a294e1534e6a04f621810a1d5be591e6f}\label{group__iol2opc_a294e1534e6a04f621810a1d5be591e6f}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!empty@{empty}}
+\index{empty@{empty}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{empty}{empty}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::empty\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 266 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a01f92df086689f5c3cfe172bc2e67d52}\label{group__iol2opc_a01f92df086689f5c3cfe172bc2e67d52}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!get\+Click\+Port@{get\+Click\+Port}}
+\index{get\+Click\+Port@{get\+Click\+Port}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{get\+Click\+Port}{getClickPort}}
+{\footnotesize\ttfamily Buffered\+Port$<$Bottle$>$ I\+O\+L2\+O\+P\+C\+Bridge\+::get\+Click\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+buffered port of input of clicked position 
+
+
+
+Definition at line 244 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_ad0047567208e337c4c8007d7a0d0ad59}\label{group__iol2opc_ad0047567208e337c4c8007d7a0d0ad59}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!hist\+Colors\+Code@{hist\+Colors\+Code}}
+\index{hist\+Colors\+Code@{hist\+Colors\+Code}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{hist\+Colors\+Code}{histColorsCode}}
+{\footnotesize\ttfamily deque$<$Cv\+Scalar$>$ I\+O\+L2\+O\+P\+C\+Bridge\+::hist\+Colors\+Code\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 281 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_ac4cfcd6af9e5dcf3f3d463a31b478fbb}\label{group__iol2opc_ac4cfcd6af9e5dcf3f3d463a31b478fbb}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!hist\+Filter\+Length@{hist\+Filter\+Length}}
+\index{hist\+Filter\+Length@{hist\+Filter\+Length}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{hist\+Filter\+Length}{histFilterLength}}
+{\footnotesize\ttfamily int I\+O\+L2\+O\+P\+C\+Bridge\+::hist\+Filter\+Length\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 280 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_aa5dc576e1ea8f255865910b586c75914}\label{group__iol2opc_aa5dc576e1ea8f255865910b586c75914}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!hist\+Filters\+Pool@{hist\+Filters\+Pool}}
+\index{hist\+Filters\+Pool@{hist\+Filters\+Pool}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{hist\+Filters\+Pool}{histFiltersPool}}
+{\footnotesize\ttfamily map$<$string,Filter$\ast$$>$ I\+O\+L2\+O\+P\+C\+Bridge\+::hist\+Filters\+Pool\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 279 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a6cc8ffebdd654152848639f33d1d4858}\label{group__iol2opc_a6cc8ffebdd654152848639f33d1d4858}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!hist\+Obj\+Location@{hist\+Obj\+Location}}
+\index{hist\+Obj\+Location@{hist\+Obj\+Location}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{hist\+Obj\+Location}{histObjLocation}}
+{\footnotesize\ttfamily Vector I\+O\+L2\+O\+P\+C\+Bridge\+::hist\+Obj\+Location\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 291 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a5ece3f8300b23d1ae214a641ef3d929e}\label{group__iol2opc_a5ece3f8300b23d1ae214a641ef3d929e}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!hist\+Obj\+Loc\+Port@{hist\+Obj\+Loc\+Port}}
+\index{hist\+Obj\+Loc\+Port@{hist\+Obj\+Loc\+Port}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{hist\+Obj\+Loc\+Port}{histObjLocPort}}
+{\footnotesize\ttfamily Buffered\+Port$<$Bottle$>$ I\+O\+L2\+O\+P\+C\+Bridge\+::hist\+Obj\+Loc\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+buffered port of input of localized objects from iol localizer 
+
+
+
+Definition at line 243 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a1c9e052961da72723c385bad7757e105}\label{group__iol2opc_a1c9e052961da72723c385bad7757e105}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!human\+\_\+area\+\_\+x\+\_\+bounds@{human\+\_\+area\+\_\+x\+\_\+bounds}}
+\index{human\+\_\+area\+\_\+x\+\_\+bounds@{human\+\_\+area\+\_\+x\+\_\+bounds}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{human\+\_\+area\+\_\+x\+\_\+bounds}{human\_area\_x\_bounds}}
+{\footnotesize\ttfamily Vector I\+O\+L2\+O\+P\+C\+Bridge\+::human\+\_\+area\+\_\+x\+\_\+bounds\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Vector of min, max bounding of human region in x-\/axis. 
+
+
+
+Definition at line 293 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a50a6288c938f47d639b4392472ab01c6}\label{group__iol2opc_a50a6288c938f47d639b4392472ab01c6}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!human\+\_\+area\+\_\+y\+\_\+bounds@{human\+\_\+area\+\_\+y\+\_\+bounds}}
+\index{human\+\_\+area\+\_\+y\+\_\+bounds@{human\+\_\+area\+\_\+y\+\_\+bounds}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{human\+\_\+area\+\_\+y\+\_\+bounds}{human\_area\_y\_bounds}}
+{\footnotesize\ttfamily Vector I\+O\+L2\+O\+P\+C\+Bridge\+::human\+\_\+area\+\_\+y\+\_\+bounds\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Vector of min, max bounding of human region in y-\/axis. 
+
+
+
+Definition at line 294 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a9944166088f32d0f615418004b1011e0}\label{group__iol2opc_a9944166088f32d0f615418004b1011e0}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!img\+Classifier@{img\+Classifier}}
+\index{img\+Classifier@{img\+Classifier}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{img\+Classifier}{imgClassifier}}
+{\footnotesize\ttfamily Port I\+O\+L2\+O\+P\+C\+Bridge\+::img\+Classifier\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+port of output image to himref\+Classifier 
+
+
+
+Definition at line 251 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a2fafcb468ebabe79b1468b7ee0a0c570}\label{group__iol2opc_a2fafcb468ebabe79b1468b7ee0a0c570}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!img\+Histogram@{img\+Histogram}}
+\index{img\+Histogram@{img\+Histogram}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{img\+Histogram}{imgHistogram}}
+{\footnotesize\ttfamily Buffered\+Port$<$Image\+Of$<$Pixel\+Bgr$>$ $>$ I\+O\+L2\+O\+P\+C\+Bridge\+::img\+Histogram\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+buffered port of output image of histogram of classification scores. 
+
+
+
+Definition at line 250 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a555425396bb28c42fc80bec3f5479558}\label{group__iol2opc_a555425396bb28c42fc80bec3f5479558}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!img\+In@{img\+In}}
+\index{img\+In@{img\+In}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{img\+In}{imgIn}}
+{\footnotesize\ttfamily Buffered\+Port$<$Image\+Of$<$Pixel\+Bgr$>$ $>$ I\+O\+L2\+O\+P\+C\+Bridge\+::img\+In\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+buffered port of input calibrated image from left camera of i\+Cub 
+
+
+
+Definition at line 246 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_acc3e8bbf7c6afc78a12fc8705bccd84a}\label{group__iol2opc_acc3e8bbf7c6afc78a12fc8705bccd84a}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!img\+Rt\+Loc@{img\+Rt\+Loc}}
+\index{img\+Rt\+Loc@{img\+Rt\+Loc}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{img\+Rt\+Loc}{imgRtLoc}}
+{\footnotesize\ttfamily Image\+Of$<$Pixel\+Bgr$>$ I\+O\+L2\+O\+P\+C\+Bridge\+::img\+Rt\+Loc\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Image for real-\/time objects localization. 
+
+
+
+Definition at line 258 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a65d96ea254077eae418dc53dd7c62a9a}\label{group__iol2opc_a65d96ea254077eae418dc53dd7c62a9a}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!img\+Rt\+Loc\+Out@{img\+Rt\+Loc\+Out}}
+\index{img\+Rt\+Loc\+Out@{img\+Rt\+Loc\+Out}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{img\+Rt\+Loc\+Out}{imgRtLocOut}}
+{\footnotesize\ttfamily Buffered\+Port$<$Image\+Of$<$Pixel\+Bgr$>$ $>$ I\+O\+L2\+O\+P\+C\+Bridge\+::img\+Rt\+Loc\+Out\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+buffered port of output image for real-\/time objects localization 
+
+
+
+Definition at line 247 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a87d83209572c282b7705963c5bb7b7cb}\label{group__iol2opc_a87d83209572c282b7705963c5bb7b7cb}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!img\+Sel\+Blob\+Out@{img\+Sel\+Blob\+Out}}
+\index{img\+Sel\+Blob\+Out@{img\+Sel\+Blob\+Out}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{img\+Sel\+Blob\+Out}{imgSelBlobOut}}
+{\footnotesize\ttfamily Buffered\+Port$<$Image\+Of$<$Pixel\+Bgr$>$ $>$ I\+O\+L2\+O\+P\+C\+Bridge\+::img\+Sel\+Blob\+Out\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+buffered port of output image inside the selected blob (by clicking on) 
+
+
+
+Definition at line 249 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a7c0aeec18511fb66b6281b82ddd14c24}\label{group__iol2opc_a7c0aeec18511fb66b6281b82ddd14c24}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!img\+Track\+Out@{img\+Track\+Out}}
+\index{img\+Track\+Out@{img\+Track\+Out}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{img\+Track\+Out}{imgTrackOut}}
+{\footnotesize\ttfamily Buffered\+Port$<$Image\+Of$<$Pixel\+Bgr$>$ $>$ I\+O\+L2\+O\+P\+C\+Bridge\+::img\+Track\+Out\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+buffered port of output image of tracked object 
+
+
+
+Definition at line 248 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a7755982592a2045ad9c7558e5ca61548}\label{group__iol2opc_a7755982592a2045ad9c7558e5ca61548}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!last\+Blobs@{last\+Blobs}}
+\index{last\+Blobs@{last\+Blobs}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{last\+Blobs}{lastBlobs}}
+{\footnotesize\ttfamily Bottle I\+O\+L2\+O\+P\+C\+Bridge\+::last\+Blobs\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Bottle contains last blob information. 
+
+
+
+Definition at line 285 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a5718f234d5aa14378bceb65b8cc68e0a}\label{group__iol2opc_a5718f234d5aa14378bceb65b8cc68e0a}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!last\+Blobs\+Arrival\+Time@{last\+Blobs\+Arrival\+Time}}
+\index{last\+Blobs\+Arrival\+Time@{last\+Blobs\+Arrival\+Time}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{last\+Blobs\+Arrival\+Time}{lastBlobsArrivalTime}}
+{\footnotesize\ttfamily double I\+O\+L2\+O\+P\+C\+Bridge\+::last\+Blobs\+Arrival\+Time\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+time stamp of last received blob 
+
+
+
+Definition at line 284 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a16267d2158276e3d367d98d3e077ba57}\label{group__iol2opc_a16267d2158276e3d367d98d3e077ba57}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!mutex\+Resources@{mutex\+Resources}}
+\index{mutex\+Resources@{mutex\+Resources}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{mutex\+Resources}{mutexResources}}
+{\footnotesize\ttfamily Mutex I\+O\+L2\+O\+P\+C\+Bridge\+::mutex\+Resources\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 259 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a18cc1dcb526a5916632a12514769962a}\label{group__iol2opc_a18cc1dcb526a5916632a12514769962a}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!mutex\+Resources\+Opc@{mutex\+Resources\+Opc}}
+\index{mutex\+Resources\+Opc@{mutex\+Resources\+Opc}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{mutex\+Resources\+Opc}{mutexResourcesOpc}}
+{\footnotesize\ttfamily Mutex I\+O\+L2\+O\+P\+C\+Bridge\+::mutex\+Resources\+Opc\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 260 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a305ce862e0e62c240498cba175f35944}\label{group__iol2opc_a305ce862e0e62c240498cba175f35944}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!mutex\+Resources\+S\+FM@{mutex\+Resources\+S\+FM}}
+\index{mutex\+Resources\+S\+FM@{mutex\+Resources\+S\+FM}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{mutex\+Resources\+S\+FM}{mutexResourcesSFM}}
+{\footnotesize\ttfamily Mutex I\+O\+L2\+O\+P\+C\+Bridge\+::mutex\+Resources\+S\+FM\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 261 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_adb9723473c9839da678d067758813e72}\label{group__iol2opc_adb9723473c9839da678d067758813e72}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!mutex\+Resources\+S\+PQ@{mutex\+Resources\+S\+PQ}}
+\index{mutex\+Resources\+S\+PQ@{mutex\+Resources\+S\+PQ}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{mutex\+Resources\+S\+PQ}{mutexResourcesSPQ}}
+{\footnotesize\ttfamily Mutex I\+O\+L2\+O\+P\+C\+Bridge\+::mutex\+Resources\+S\+PQ\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 262 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a5ae5263a8e26d31c563782bea99ed577}\label{group__iol2opc_a5ae5263a8e26d31c563782bea99ed577}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!object\+\_\+persistence@{object\+\_\+persistence}}
+\index{object\+\_\+persistence@{object\+\_\+persistence}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{object\+\_\+persistence}{object\_persistence}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::object\+\_\+persistence\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 267 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a88a2df81712e21c9cc2b8f91ee4bbe38}\label{group__iol2opc_a88a2df81712e21c9cc2b8f91ee4bbe38}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!obj\+Loc\+Out@{obj\+Loc\+Out}}
+\index{obj\+Loc\+Out@{obj\+Loc\+Out}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{obj\+Loc\+Out}{objLocOut}}
+{\footnotesize\ttfamily Buffered\+Port$<$Bottle$>$ I\+O\+L2\+O\+P\+C\+Bridge\+::obj\+Loc\+Out\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+buffered port of output of localized objects 
+
+
+
+Definition at line 245 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a1a161477a0a2d6a12e47abe090082f42}\label{group__iol2opc_a1a161477a0a2d6a12e47abe090082f42}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!only\+Known\+Objects@{only\+Known\+Objects}}
+\index{only\+Known\+Objects@{only\+Known\+Objects}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{only\+Known\+Objects}{onlyKnownObjects}}
+{\footnotesize\ttfamily \hyperlink{group__iol2opc_classIOLObject}{I\+O\+L\+Object} I\+O\+L2\+O\+P\+C\+Bridge\+::only\+Known\+Objects\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 277 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a7a2a1ed53d1b52114f98257b2576ff23}\label{group__iol2opc_a7a2a1ed53d1b52114f98257b2576ff23}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!opc@{opc}}
+\index{opc@{opc}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{opc}{opc}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client}$\ast$ I\+O\+L2\+O\+P\+C\+Bridge\+::opc\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+O\+PC client object. 
+
+
+
+Definition at line 238 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a8cb45af99e75edd2c75f5a4832680e5d}\label{group__iol2opc_a8cb45af99e75edd2c75f5a4832680e5d}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!opc\+Blobs@{opc\+Blobs}}
+\index{opc\+Blobs@{opc\+Blobs}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{opc\+Blobs}{opcBlobs}}
+{\footnotesize\ttfamily Bottle I\+O\+L2\+O\+P\+C\+Bridge\+::opc\+Blobs\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Bottle contains received blobs of objects from O\+PC. 
+
+
+
+Definition at line 286 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a6dbce7745268485f2d303b51836a424a}\label{group__iol2opc_a6dbce7745268485f2d303b51836a424a}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!opc\+Median\+Filter\+Order@{opc\+Median\+Filter\+Order}}
+\index{opc\+Median\+Filter\+Order@{opc\+Median\+Filter\+Order}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{opc\+Median\+Filter\+Order}{opcMedianFilterOrder}}
+{\footnotesize\ttfamily int I\+O\+L2\+O\+P\+C\+Bridge\+::opc\+Median\+Filter\+Order\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 255 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a9318b4bf7afa7a742fe7e1e8834addd3}\label{group__iol2opc_a9318b4bf7afa7a742fe7e1e8834addd3}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!opc\+Scores@{opc\+Scores}}
+\index{opc\+Scores@{opc\+Scores}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{opc\+Scores}{opcScores}}
+{\footnotesize\ttfamily Bottle I\+O\+L2\+O\+P\+C\+Bridge\+::opc\+Scores\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Bottle contains received (class) score of objects from O\+PC. 
+
+
+
+Definition at line 287 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a6a1af6a40656eab2ade00191f1cad20f}\label{group__iol2opc_a6a1af6a40656eab2ade00191f1cad20f}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!opc\+Updater@{opc\+Updater}}
+\index{opc\+Updater@{opc\+Updater}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{opc\+Updater}{opcUpdater}}
+{\footnotesize\ttfamily \hyperlink{classOpcUpdater}{Opc\+Updater} I\+O\+L2\+O\+P\+C\+Bridge\+::opc\+Updater\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 254 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_ab76800629942b2263b2b9cb3d94cba9d}\label{group__iol2opc_ab76800629942b2263b2b9cb3d94cba9d}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!period@{period}}
+\index{period@{period}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{period}{period}}
+{\footnotesize\ttfamily double I\+O\+L2\+O\+P\+C\+Bridge\+::period\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 264 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a830b1fc76e62720585c729fba6775dae}\label{group__iol2opc_a830b1fc76e62720585c729fba6775dae}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!presence\+\_\+timeout@{presence\+\_\+timeout}}
+\index{presence\+\_\+timeout@{presence\+\_\+timeout}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{presence\+\_\+timeout}{presence\_timeout}}
+{\footnotesize\ttfamily double I\+O\+L2\+O\+P\+C\+Bridge\+::presence\+\_\+timeout\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 271 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a1a5966db1522c0e5888465eb33d52430}\label{group__iol2opc_a1a5966db1522c0e5888465eb33d52430}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!robot\+\_\+area\+\_\+x\+\_\+bounds@{robot\+\_\+area\+\_\+x\+\_\+bounds}}
+\index{robot\+\_\+area\+\_\+x\+\_\+bounds@{robot\+\_\+area\+\_\+x\+\_\+bounds}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{robot\+\_\+area\+\_\+x\+\_\+bounds}{robot\_area\_x\_bounds}}
+{\footnotesize\ttfamily Vector I\+O\+L2\+O\+P\+C\+Bridge\+::robot\+\_\+area\+\_\+x\+\_\+bounds\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Vector of min, max bounding of robot region in x-\/axis. 
+
+
+
+Definition at line 295 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_aa8bae109b5a9d58a0b191914497046d2}\label{group__iol2opc_aa8bae109b5a9d58a0b191914497046d2}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!robot\+\_\+area\+\_\+y\+\_\+bounds@{robot\+\_\+area\+\_\+y\+\_\+bounds}}
+\index{robot\+\_\+area\+\_\+y\+\_\+bounds@{robot\+\_\+area\+\_\+y\+\_\+bounds}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{robot\+\_\+area\+\_\+y\+\_\+bounds}{robot\_area\_y\_bounds}}
+{\footnotesize\ttfamily Vector I\+O\+L2\+O\+P\+C\+Bridge\+::robot\+\_\+area\+\_\+y\+\_\+bounds\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Vector of min, max bounding of robot region in y-\/axis. 
+
+
+
+Definition at line 296 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a970d4bb81398fe86064d8b27061689a2}\label{group__iol2opc_a970d4bb81398fe86064d8b27061689a2}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!rpc\+Classifier@{rpc\+Classifier}}
+\index{rpc\+Classifier@{rpc\+Classifier}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{rpc\+Classifier}{rpcClassifier}}
+{\footnotesize\ttfamily Rpc\+Client I\+O\+L2\+O\+P\+C\+Bridge\+::rpc\+Classifier\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+rpc client port to send requests to himrep\+Classifier 
+
+
+
+Definition at line 236 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a82ce504b5a096979977bbb8d28a362d7}\label{group__iol2opc_a82ce504b5a096979977bbb8d28a362d7}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!rpc\+Get3D@{rpc\+Get3D}}
+\index{rpc\+Get3D@{rpc\+Get3D}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{rpc\+Get3D}{rpcGet3D}}
+{\footnotesize\ttfamily Rpc\+Client I\+O\+L2\+O\+P\+C\+Bridge\+::rpc\+Get3D\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+rpc client port to send requests to S\+FM 
+
+
+
+Definition at line 237 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a55365e238335fce2ec65e63885968926}\label{group__iol2opc_a55365e238335fce2ec65e63885968926}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!rpc\+Get\+Blob\+Points@{rpc\+Get\+Blob\+Points}}
+\index{rpc\+Get\+Blob\+Points@{rpc\+Get\+Blob\+Points}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{rpc\+Get\+Blob\+Points}{rpcGetBlobPoints}}
+{\footnotesize\ttfamily Rpc\+Client I\+O\+L2\+O\+P\+C\+Bridge\+::rpc\+Get\+Blob\+Points\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+rpc client port to send requests to lbp\+Extract and receive all points of a blob 
+
+
+
+Definition at line 240 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_af7d4fdfb04c11e6b385bb69624765005}\label{group__iol2opc_af7d4fdfb04c11e6b385bb69624765005}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!rpc\+Get\+S\+PQ@{rpc\+Get\+S\+PQ}}
+\index{rpc\+Get\+S\+PQ@{rpc\+Get\+S\+PQ}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{rpc\+Get\+S\+PQ}{rpcGetSPQ}}
+{\footnotesize\ttfamily Rpc\+Client I\+O\+L2\+O\+P\+C\+Bridge\+::rpc\+Get\+S\+PQ\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+rpc client port to send requests to superquadric-\/model and receive superquadric parameters 
+
+
+
+Definition at line 239 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_af1f97807672a82261e98cde725ac02ff}\label{group__iol2opc_af1f97807672a82261e98cde725ac02ff}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!rpc\+Port@{rpc\+Port}}
+\index{rpc\+Port@{rpc\+Port}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{rpc\+Port}{rpcPort}}
+{\footnotesize\ttfamily Rpc\+Server I\+O\+L2\+O\+P\+C\+Bridge\+::rpc\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+rpc server to receive user request 
+
+
+
+Definition at line 235 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a4ed8af58d3a1cc46b53d144b5bb12480}\label{group__iol2opc_a4ed8af58d3a1cc46b53d144b5bb12480}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!rt\+Localization@{rt\+Localization}}
+\index{rt\+Localization@{rt\+Localization}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{rt\+Localization}{rtLocalization}}
+{\footnotesize\ttfamily \hyperlink{classRtLocalization}{Rt\+Localization} I\+O\+L2\+O\+P\+C\+Bridge\+::rt\+Localization\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 253 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a48edc965e39929871bcd4b074d51c866}\label{group__iol2opc_a48edc965e39929871bcd4b074d51c866}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!shared\+\_\+area\+\_\+x\+\_\+bounds@{shared\+\_\+area\+\_\+x\+\_\+bounds}}
+\index{shared\+\_\+area\+\_\+x\+\_\+bounds@{shared\+\_\+area\+\_\+x\+\_\+bounds}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{shared\+\_\+area\+\_\+x\+\_\+bounds}{shared\_area\_x\_bounds}}
+{\footnotesize\ttfamily Vector I\+O\+L2\+O\+P\+C\+Bridge\+::shared\+\_\+area\+\_\+x\+\_\+bounds\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Vector of min, max bounding of shared region in x-\/axis. 
+
+
+
+Definition at line 297 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a1cf551318c3b94be6e385bf40146dc09}\label{group__iol2opc_a1cf551318c3b94be6e385bf40146dc09}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!shared\+\_\+area\+\_\+y\+\_\+bounds@{shared\+\_\+area\+\_\+y\+\_\+bounds}}
+\index{shared\+\_\+area\+\_\+y\+\_\+bounds@{shared\+\_\+area\+\_\+y\+\_\+bounds}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{shared\+\_\+area\+\_\+y\+\_\+bounds}{shared\_area\_y\_bounds}}
+{\footnotesize\ttfamily Vector I\+O\+L2\+O\+P\+C\+Bridge\+::shared\+\_\+area\+\_\+y\+\_\+bounds\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Vector of min, max bounding of shared region in y-\/axis. 
+
+
+
+Definition at line 298 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_ab98ac03446e16344588dcb9e208e9785}\label{group__iol2opc_ab98ac03446e16344588dcb9e208e9785}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!skim\+\_\+blobs\+\_\+x\+\_\+bounds@{skim\+\_\+blobs\+\_\+x\+\_\+bounds}}
+\index{skim\+\_\+blobs\+\_\+x\+\_\+bounds@{skim\+\_\+blobs\+\_\+x\+\_\+bounds}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{skim\+\_\+blobs\+\_\+x\+\_\+bounds}{skim\_blobs\_x\_bounds}}
+{\footnotesize\ttfamily Vector I\+O\+L2\+O\+P\+C\+Bridge\+::skim\+\_\+blobs\+\_\+x\+\_\+bounds\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Vector of min, max bounding in x-\/axis to reduce the blob detection. 
+
+
+
+Definition at line 289 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_ae74b7043710384997ede028e0991fd6f}\label{group__iol2opc_ae74b7043710384997ede028e0991fd6f}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!skim\+\_\+blobs\+\_\+y\+\_\+bounds@{skim\+\_\+blobs\+\_\+y\+\_\+bounds}}
+\index{skim\+\_\+blobs\+\_\+y\+\_\+bounds@{skim\+\_\+blobs\+\_\+y\+\_\+bounds}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{skim\+\_\+blobs\+\_\+y\+\_\+bounds}{skim\_blobs\_y\_bounds}}
+{\footnotesize\ttfamily Vector I\+O\+L2\+O\+P\+C\+Bridge\+::skim\+\_\+blobs\+\_\+y\+\_\+bounds\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Yarp Vector of min, max bounding in y-\/axis to reduce the blob detection. 
+
+
+
+Definition at line 290 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a1362fad5d1cca317ac6c632075dd4ef7}\label{group__iol2opc_a1362fad5d1cca317ac6c632075dd4ef7}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!state@{state}}
+\index{state@{state}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily \hyperlink{namespaceBridge_a58acad8bf83b6df8e000fd21a8be62a9}{Bridge\+::\+State} I\+O\+L2\+O\+P\+C\+Bridge\+::state\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 276 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a35271a1cfeea9b703afc16e684ff18dd}\label{group__iol2opc_a35271a1cfeea9b703afc16e684ff18dd}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!tracker\+\_\+min\+\_\+blob\+\_\+size@{tracker\+\_\+min\+\_\+blob\+\_\+size}}
+\index{tracker\+\_\+min\+\_\+blob\+\_\+size@{tracker\+\_\+min\+\_\+blob\+\_\+size}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{tracker\+\_\+min\+\_\+blob\+\_\+size}{tracker\_min\_blob\_size}}
+{\footnotesize\ttfamily Vector\+Of$<$int$>$ I\+O\+L2\+O\+P\+C\+Bridge\+::tracker\+\_\+min\+\_\+blob\+\_\+size\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+minimum size of tracker blob 
+
+
+
+Definition at line 274 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a2927446ee6c368d8173aa67022c936e6}\label{group__iol2opc_a2927446ee6c368d8173aa67022c936e6}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!tracker\+\_\+timeout@{tracker\+\_\+timeout}}
+\index{tracker\+\_\+timeout@{tracker\+\_\+timeout}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{tracker\+\_\+timeout}{tracker\_timeout}}
+{\footnotesize\ttfamily double I\+O\+L2\+O\+P\+C\+Bridge\+::tracker\+\_\+timeout\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 273 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a8dc202854b79330a34a0233b87076267}\label{group__iol2opc_a8dc202854b79330a34a0233b87076267}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!tracker\+\_\+type@{tracker\+\_\+type}}
+\index{tracker\+\_\+type@{tracker\+\_\+type}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{tracker\+\_\+type}{tracker\_type}}
+{\footnotesize\ttfamily string I\+O\+L2\+O\+P\+C\+Bridge\+::tracker\+\_\+type\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 272 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_a0810f28176726d22c6a5990cbfd86d56}\label{group__iol2opc_a0810f28176726d22c6a5990cbfd86d56}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!use\+S\+PQ@{use\+S\+PQ}}
+\index{use\+S\+PQ@{use\+S\+PQ}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{use\+S\+PQ}{useSPQ}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::use\+S\+PQ\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+boolean flag to enable/disable using Superquadric-\/model for object pose and size estimation 
+
+
+
+Definition at line 268 of file module.\+h.
+
+\mbox{\Hypertarget{group__iol2opc_af6ea487a8920c984b65bbf94f3dd9b7d}\label{group__iol2opc_af6ea487a8920c984b65bbf94f3dd9b7d}} 
+\index{I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}!verbose@{verbose}}
+\index{verbose@{verbose}!I\+O\+L2\+O\+P\+C\+Bridge@{I\+O\+L2\+O\+P\+C\+Bridge}}
+\subparagraph{\texorpdfstring{verbose}{verbose}}
+{\footnotesize\ttfamily bool I\+O\+L2\+O\+P\+C\+Bridge\+::verbose\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 265 of file module.\+h.
+

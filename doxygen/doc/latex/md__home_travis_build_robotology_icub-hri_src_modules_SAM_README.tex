@@ -1,0 +1,136 @@
+Authors\+: Uriel Martinez, Daniel Camilleri, Andreas Damianou, Luke Boorman email\+: \href{mailto:d.camilleri@sheffield.ac.uk}{\tt d.\+camilleri@sheffield.\+ac.\+uk}
+
+A Synthetic Autobiographical Memory for the i\+Cub robot. This module contains the core, which implements the high-\/level functionality, and the drivers which act as middleware between the perceptual system and the core.
+
+Pre-\/trained Action Recognition model and data can be downloaded \href{https://drive.google.com/open?id=0B6fkkRLTYjNLbjFFSEZtUmtHNk0}{\tt here}.
+
+\subsection*{Features}
+
+
+\begin{DoxyItemize}
+\item {\ttfamily sam\+Supervisor} can manage multiple models with great flexibility in training and interacting with models.
+\item {\ttfamily train\+S\+A\+M\+Model} allows for the training of multiple, single or temporal models by simply changing the value in the config.\+ini of the particular model and automates testing of the different types of models.
+\item {\ttfamily interaction\+S\+A\+M\+Model} also allows for great flexibility in the method of data collection. 3 Methods are currently supported.
+\begin{DoxyEnumerate}
+\item {\ttfamily continuous} \+: Data is continuously classified by the driver with a buffer of classifications being kept. Each time a classification is queried, the classification buffer decreases in size until it reaches 0 and returns None
+\item {\ttfamily buffered} \+: In this case, a buffer of the latest n data points are kept and when the classification command is sent, these data points are sent to the driver for classification which is returned immediately.
+\item {\ttfamily future\+\_\+buffered} \+: In this case, when a classification request is sent, the future n data points are collected, classified and a classification returned.
+\end{DoxyEnumerate}
+\end{DoxyItemize}
+
+Setting a model to any one of these data collection methods and also specifying the buffer lengths is done within {\ttfamily sensory\+\_\+level\+\_\+config.\+ini}
+
+\subsection*{Pre\+Requisites}
+
+
+\begin{DoxyEnumerate}
+\item G\+Py dependency from \href{https://github.com/SheffieldML/GPy}{\tt https\+://github.\+com/\+Sheffield\+M\+L/\+G\+Py}. The best way to include this is\+:
+\begin{DoxyEnumerate}
+\item clone the G\+Py repository \href{https://github.com/SheffieldML/GPy.git}{\tt https\+://github.\+com/\+Sheffield\+M\+L/\+G\+Py.\+git}
+\item switch to branch \char`\"{}devel\char`\"{}
+\item Include the directory where you cloned G\+Py in your P\+Y\+T\+H\+O\+N\+P\+A\+TH.
+\item Move to the G\+Py directory and run\+: \char`\"{}python setup.\+py install\char`\"{} (try \char`\"{}python setup.\+py build\+\_\+ext -\/-\/inplace\char`\"{} if you want to do the installation in the same directory).
+\end{DoxyEnumerate}
+\item G\+Py\+Opt dependency from \href{https://github.com/SheffieldML/GPy}{\tt https\+://github.\+com/\+Sheffield\+M\+L/\+G\+Py}. The best way to include this is\+:
+\begin{DoxyEnumerate}
+\item sudo apt-\/get install python-\/pip
+\item pip install gpyopt If this does not work\+:
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item clone the G\+Py\+Opt repository \href{https://github.com/SheffieldML/GPy.git}{\tt https\+://github.\+com/\+Sheffield\+M\+L/\+G\+Py.\+git}
+\item Include the directory where you cloned G\+Py\+Opt in your P\+Y\+T\+H\+O\+N\+P\+A\+TH.
+\item Move to the G\+Py\+Opt directory and run\+: \char`\"{}python setup.\+py develop\char`\"{}
+\end{DoxyEnumerate}
+\item Include the directory {\bfseries I\+C\+U\+B\+C\+L\+I\+E\+N\+T\+\_\+\+R\+O\+O\+T/src/modules} in your P\+Y\+T\+H\+O\+N\+P\+A\+TH.
+\end{DoxyEnumerate}
+
+\subsection*{How to use\+:}
+
+Everything is accessed via {\bfseries sam\+Supervisor} which is installed to {\bfseries I\+C\+U\+B\+C\+L\+I\+E\+N\+T\+\_\+\+D\+IR}.
+
+Connect with {\bfseries sam\+Supervisor} via {\ttfamily /sam/rpc\+:i} and issue {\ttfamily help} for a list of all possible commands
+\begin{DoxyItemize}
+\item {\ttfamily check\+\_\+all}\+: Check data and config.\+ini availabilities for that model, as well as current status (Training or Loaded) and check if model is curently up to date
+\item {\ttfamily check $<$model\+Name$>$}\+: Check the same points as above but for a single model
+\item {\ttfamily close $<$model\+Name$>$}\+: Terminates a currently loaded interaction process for the particular model
+\item {\ttfamily delete $<$model\+Name$>$}\+: Physically deletes the trained model for {\ttfamily $<$model\+Name$>$}
+\item {\ttfamily help}\+: Provides a list of available commands
+\item {\ttfamily load $<$model\+Name$>$}\+: Launches an interaction process for the corresponding model. If model already present, reloads model from disk
+\item {\ttfamily optimise $<$model\+Name$>$}\+: Optimises the parameters of the model via Bayesian Optimisation to achieve the best result. Require G\+Py\+Opt to be installed
+\item {\ttfamily quit}\+: Terminates sam\+Supervisor
+\item {\ttfamily train $<$model\+Name$>$}\+: Launches a training process for the corresponding model
+\item {\ttfamily list\+\_\+call\+Signs}\+: Compiles a list of currently active call\+Signs. Where call\+Signs are the messages that loaded models respond to
+\end{DoxyItemize}
+
+When a model is loaded, to retrieve a classification of a generation from the model, issue the respective command in the list\+\_\+call\+Signs list. There is a timeout of 10 seconds for the response so as not to block the operation of sam\+Supervisor
+
+\subsection*{Prerequisites to use sam\+Supervisor\+:}
+
+A folder, {\ttfamily $<$Folder\+Name$>$} which has the following folder structure\+:
+
+{\ttfamily $<$Folder\+Name$>$}\+:
+\begin{DoxyItemize}
+\item {\ttfamily Data\+:}
+\begin{DoxyItemize}
+\item {\ttfamily $<$model1\+Name$>$}
+\item {\ttfamily $<$model2\+Name$>$}
+\item {\ttfamily $<$model3\+Name$>$}
+\begin{DoxyItemize}
+\item {\ttfamily $<$model3\+Sub\+Model\+Name1$>$}
+\item {\ttfamily $<$model3\+Sub\+Model\+Name2$>$}
+\item {\ttfamily $<$model3\+Sub\+Model\+NameN$>$}
+\end{DoxyItemize}
+\item {\ttfamily $<$model\+M\+Name$>$}
+\end{DoxyItemize}
+\item {\ttfamily Models\+:}
+\end{DoxyItemize}
+
+Where {\ttfamily $<$model1\+Name$>$} and {\ttfamily $<$model2\+Name$>$} will be modelled as a single model while {\ttfamily $<$model3\+Name$>$} will have multiple models depending on the number of subfolders in {\ttfamily $<$model3\+Name$>$}.
+
+\subsection*{Important Notes\+:}
+
+
+\begin{DoxyEnumerate}
+\item Each {\ttfamily $<$model\+Xname$>$} folder must contain data as well as a {\ttfamily config.\+ini} which specifies the parameters for training the data found in that folder.
+\item To carry out training, {\bfseries sam\+Supervisor} requires at least one {\ttfamily $<$model\+X\+Name$>$} folder.
+\item sam\+Supervisor on startup compiles a list of models that are available for training. The models are referenced according their {\ttfamily $<$model\+X\+Name$>$}
+\item {\ttfamily $<$Folder\+Name$>$/\+Models} is left empty and is used by sam\+Supervisor to store trained models.
+\item You can get an example {\ttfamily $<$Folder\+Name$>$} from \href{https://drive.google.com/open?id=0B6fkkRLTYjNLbjFFSEZtUmtHNk0}{\tt here} which contains data and config.\+ini for Faces and Actions and pre-\/trained models for Actions
+\item Finally, modify {\ttfamily default.\+ini} in {\bfseries sam\+Supervisor} context to point to your {\ttfamily $<$Folder\+Name$>$} and comment out models within {\ttfamily sensory\+\_\+level\+\_\+conf.\+ini} also found in the {\bfseries sam\+Supervisor} context which you do not require to run automatically when launching sam\+Supervisor
+\item {\ttfamily default.\+ini} has 3 options.
+\begin{DoxyEnumerate}
+\item persistence\+: which defines if windows opened should remain open or close auomatically upon termination. Set to true this is useful to debug training or interaction algorithms.
+\item windowed\+: which defines if training and interaction functions should spawn a window or not
+\item verbose\+: defines the level of verbosity of sam\+Supervisor
+\end{DoxyEnumerate}
+\item {\ttfamily sensory\+\_\+level\+\_\+conf.\+ini} specifies which models should be loaded as sections, the names of their respective input/output ports as well as the callsigns which will trigger recall or recognition of that particular model
+\item All {\bfseries P\+O\+R\+TS}, {\bfseries R\+P\+C\+B\+A\+S\+ES}, and {\bfseries C\+A\+L\+L\+S\+I\+G\+NS} must be unique
+\end{DoxyEnumerate}
+
+\subsection*{Breakdown of contents in \hyperlink{namespaceSAM}{S\+AM} folder\+:}
+
+\paragraph*{S\+A\+M\+\_\+\+Core\+:}
+
+
+\begin{DoxyItemize}
+\item Includes the base classes for S\+A\+M\+\_\+\+Core and S\+A\+M\+\_\+\+Driver
+\item Includes \hyperlink{samSupervisor_8py}{sam\+Supervisor.\+py}, \hyperlink{trainSAMModel_8py}{train\+S\+A\+M\+Model.\+py}, \hyperlink{interactionSAMModel_8py}{interaction\+S\+A\+M\+Model.\+py} classes which are installed into I\+C\+U\+B\+C\+L\+I\+E\+N\+T\+\_\+\+D\+IR
+\item Implements the core functionality of \hyperlink{namespaceSAM}{S\+AM}. This module is the memory system where the already transformed (by S\+A\+M\+\_\+\+Drivers) perceived signals are compressed and stored in a coherent way. Coherent meaning that audio, visual etc signals are treated in analogous manner. This model is built upon the deep Gaussian process model using G\+Py, so that high-\/dimensional, noisy data can be compressed, chunked and \char`\"{}cleaned\char`\"{} automatically in a probabilistic way (ie the model is trying to keep the \char`\"{}relevant\char`\"{} variance in the data and eliminate redundancies in the representation by encoding memories as \char`\"{}clean\char`\"{} and non-\/redundant signals).
+\end{DoxyItemize}
+
+\paragraph*{S\+A\+M\+\_\+\+Drivers\+:}
+
+
+\begin{DoxyItemize}
+\item This folder contains all developed drivers.
+\item These drivers are accessed via the generic train\+Model and interaction\+Model classes which are called from sam\+Supervisor
+\item This module contains the implementation for transforming the raw perceptual signal into preprocessed signal. For example, in the biological brain, the visual cortex is hierarchically processing the visual stimuli before the signal is reaching the brain. In the current implementation, the drivers are doing this work, and currently we have implemented\+: Faces, Actions
+\end{DoxyItemize}
+
+\subsection*{License}
+
+Copyright (C) 2015 W\+Y\+S\+I\+W\+YD Consortium, European Commission F\+P7 Project I\+C\+T-\/612139 website\+: \href{http://wysiwyd.upf.edu/}{\tt http\+://wysiwyd.\+upf.\+edu/} Permission is granted to copy, distribute, and/or modify this program under the terms of the G\+NU General Public License, version 2 or any later version published by the Free Software Foundation.
+
+A copy of the license can be found at icub-\/client/\+L\+I\+C\+E\+N\+SE
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details 

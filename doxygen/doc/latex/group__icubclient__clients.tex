@@ -1,0 +1,2108 @@
+\hypertarget{group__icubclient__clients}{}\section{Clients}
+\label{group__icubclient__clients}\index{Clients@{Clients}}
+
+
+Provide a compact way to access the i\+Cub functionalities within the icub-\/client framework.  
+
+
+Collaboration diagram for Clients\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{group__icubclient__clients}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client}
+\begin{DoxyCompactList}\small\item\em Grants access to high level motor commands (grasp, touch, look, goto, etc) of the robot as well as its internal state (drives, emotions, beliefs) and its interaction means (speech).  \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{icubclient\+::\+O\+P\+C\+Client}
+\begin{DoxyCompactList}\small\item\em An O\+PC client using the datastructures defined within the icub-\/client library.  \hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{More...}\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Provide a compact way to access the i\+Cub functionalities within the icub-\/client framework. 
+
+
+
+\subsection{Class Documentation}
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}\label{classicubclient_1_1ICubClient}
+\Hypertarget{group__icubclient__clients_classicubclient_1_1ICubClient}
+\subsubsection{class icubclient\+:\+:I\+Cub\+Client}
+Grants access to high level motor commands (grasp, touch, look, goto, etc) of the robot as well as its internal state (drives, emotions, beliefs) and its interaction means (speech). 
+
+Definition at line 66 of file icub\+Client.\+h.
+
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$ \hyperlink{group__icubclient__clients_a7ad0d4360f735c3631b2bdaa3caa5d80}{get\+Sub\+System} (const std\+::string \&sub\+System\+Name)
+\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$ \hyperlink{group__icubclient__clients_ae62e5489f0412acc15304f68bbc0ac3a}{get\+Sub\+System} (T)
+\begin{DoxyCompactList}\small\item\em get a subsystem by just providing the type untested, just to play around with C++11 \end{DoxyCompactList}\item 
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__agentDetector}{Sub\+System\+\_\+agent\+Detector} $\ast$ \hyperlink{group__icubclient__clients_ab9e784430f1aa872ec58bdaea716dc57}{get\+Agent\+Detector\+Client} ()
+\item 
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__ARE}{Sub\+System\+\_\+\+A\+RE} $\ast$ \hyperlink{group__icubclient__clients_ad022d3754041d652ebc37044c7be047c}{get\+A\+RE} ()
+\item 
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__babbling}{Sub\+System\+\_\+babbling} $\ast$ \hyperlink{group__icubclient__clients_a25bc61a476eae941aa5a25cd5d21a0d2}{get\+Babbling\+Client} ()
+\item 
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__IOL2OPC}{Sub\+System\+\_\+\+I\+O\+L2\+O\+PC} $\ast$ \hyperlink{group__icubclient__clients_ae5b9052e8435d13811e30f3d74343536}{get\+I\+O\+L2\+O\+P\+C\+Client} ()
+\item 
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__KARMA}{Sub\+System\+\_\+\+K\+A\+R\+MA} $\ast$ \hyperlink{group__icubclient__clients_a95285ba946061fa56e031f72b70110ed}{get\+K\+A\+R\+MA} ()
+\item 
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__Recog}{Sub\+System\+\_\+\+Recog} $\ast$ \hyperlink{group__icubclient__clients_aa444258246f4ed1e3569a039db6f678c}{get\+Recog\+Client} ()
+\item 
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__Speech}{Sub\+System\+\_\+\+Speech} $\ast$ \hyperlink{group__icubclient__clients_ab0c540ef27084c3845c4bf102808bb83}{get\+Speech\+Client} ()
+\item 
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__SAM}{Sub\+System\+\_\+\+S\+AM} $\ast$ \hyperlink{group__icubclient__clients_ae255d014e106fbbae51f56e670093610}{get\+S\+A\+M\+Client} ()
+\item 
+\hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__emotion}{Sub\+System\+\_\+emotion} $\ast$ \hyperlink{group__icubclient__clients_afbb986e5685fe8d66784217a6f6b0230}{get\+Emotion\+Client} ()
+\item 
+\hyperlink{group__icubclient__clients_a50ca757de4db9723eaf872791a8c20c8}{I\+Cub\+Client} (const std\+::string \&module\+Name, const std\+::string \&context=\char`\"{}icub\+Client\char`\"{}, const std\+::string \&client\+Config\+File=\char`\"{}client.\+ini\char`\"{}, bool is\+R\+F\+Verbose=false)
+\begin{DoxyCompactList}\small\item\em Create an i\+Cub client. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a3909d8199400ef12033f10c070a026a3}{connect} (const std\+::string \&opc\+Name=\char`\"{}O\+PC\char`\"{})
+\begin{DoxyCompactList}\small\item\em Try to connect all functionalities. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a62aa694a2b631e84f922188ad44ba7eb}{connect\+O\+PC} (const std\+::string \&opc\+Name=\char`\"{}O\+PC\char`\"{})
+\begin{DoxyCompactList}\small\item\em Try to connect to O\+PC. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a7cb4ce150f6033c93d68380ab50106db}{connect\+Sub\+Systems} ()
+\begin{DoxyCompactList}\small\item\em Try to connect to all sub-\/systems. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__clients_a965d41811ec54d656fa58222ac1b13de}{update\+Agent} ()
+\begin{DoxyCompactList}\small\item\em Retrieve fresh definition of the i\+Cub agent from the O\+PC. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__clients_a514afed176cadaaaee1fca994dde96b5}{commit\+Agent} ()
+\begin{DoxyCompactList}\small\item\em Commit the local definition of i\+Cub agent to the O\+PC. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a2743bef01da8066f944699983fbfc6d2}{home} (const std\+::string \&part=\char`\"{}all\char`\"{})
+\begin{DoxyCompactList}\small\item\em Go in home position. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a5b975d62f96c10225022dc6bc88f3409}{release} (const std\+::string \&o\+Location, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Release the hand-\/held object on a given location. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_abf66ab5453dc661233d7cc9d85b42617}{release} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Release the hand-\/held object on a given location. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a916d79977e918e349aee0b13567f9f18}{point} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Point at a specified location from the i\+Cub. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a1aeddcdd0f1b623d0b79a24ca69e728d}{point} (const double x, const double y, const double z, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\item 
+bool \hyperlink{group__icubclient__clients_a16d4dfb3231983b49590f7eae62b6337}{point} (const std\+::string \&o\+Location, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Point at a specified location. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a5cca1bace5eab90ed0e9618e7939b949}{waving} (const bool sw)
+\begin{DoxyCompactList}\small\item\em Enable/disable arms waving. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a72699f9aa7aa1c3bccf4ea2b85e24fd1}{push} (const std\+::string \&o\+Location, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Push at a specified location. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_ab719d817deb3de266ea75e5a84898702}{take} (const std\+::string \&o\+Name, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Take (grasp) an object. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a55c9ed5a628f396b215ac363cd943609}{push\+Karma\+Left} (const std\+::string \&obj\+Name, const double \&target\+Pos\+Y\+Left, const std\+::string \&arm\+Type=\char`\"{}selectable\char`\"{}, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em push\+Karma\+Left\+: push an object by name to left side See the \hyperlink{group__icubclient__subsystems_ae831bfd7af1572a65f53b11b9519e473}{Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::push\+Aside} documentation for more details. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a3529ae126c176090205fc59059f413ce}{push\+Karma\+Right} (const std\+::string \&obj\+Name, const double \&target\+Pos\+Y\+Right, const std\+::string \&arm\+Type=\char`\"{}selectable\char`\"{}, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em push\+Karma\+Right\+: push an object by name to right side See the \hyperlink{group__icubclient__subsystems_ae831bfd7af1572a65f53b11b9519e473}{Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::push\+Aside} documentation for more details. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_adb9b0ec66870a1dea115def6af252048}{push\+Karma\+Front} (const std\+::string \&obj\+Name, const double \&target\+Pos\+X\+Front, const std\+::string \&arm\+Type=\char`\"{}selectable\char`\"{}, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em push\+Karma\+Front\+: push an object by name to front See the \hyperlink{group__icubclient__subsystems_ac7835e392d76249294d19c863f88e679}{Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::push\+Front} documentation for more details. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a5deec64a5964aacb94268867e804ae1e}{pull\+Karma\+Back} (const std\+::string \&obj\+Name, const double \&target\+Pos\+X\+Back, const std\+::string \&arm\+Type=\char`\"{}selectable\char`\"{}, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em pull\+Karma\+Back\+: pull an object by name back See the \hyperlink{group__icubclient__subsystems_a956b5bad90e96ca0c2c8f33f306256ac}{Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::pull\+Back} documentation for more details. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a2890c9f5f2f1d5ab4fc371d556a7238c}{push\+Karma} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target\+Center, const double \&theta, const double \&radius, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em push\+Karma (K\+A\+R\+MA)\+: push to certain position, along a direction See the \hyperlink{group__icubclient__subsystems_aabe8749ad0593a522e8377477d7d3d9b}{Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::push} documentation for more details. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a328124b23108364ed78abced438e88c5}{draw\+Karma} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target\+Center, const double \&theta, const double \&radius, const double \&dist, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em draw\+Karma (K\+A\+R\+MA)\+: draw action, along the positive direction of the x-\/axis (in robot FoR) See the \hyperlink{group__icubclient__subsystems_a328d7187887b653399ccc783be8fb56e}{Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::draw} documentation for more details. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_ac045289e67ede0aa0a22869600a6021d}{look} (const std\+::string \&target, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Look at a specified target object. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a54af100e4707843e8e84d9e6c397e4fb}{look} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target, const yarp\+::os\+::\+Bottle \&options=yarp\+::os\+::\+Bottle())
+\begin{DoxyCompactList}\small\item\em Look at a specified target location. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a7466b597efdf9ed613ab446e8cb46e25}{look\+At\+Partner} ()
+\begin{DoxyCompactList}\small\item\em Looks at the agent if present in the scene. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_aad1592c7eb0b276114fa564ceb20902a}{look\+At\+Bodypart} (const std\+::string \&s\+Bodypart\+Name)
+\begin{DoxyCompactList}\small\item\em Looks at the agent specific bodypart if present in the scene. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__clients_acd076c847fe2533127ef55c8ea63034d}{get\+Partner\+Name} (bool verbose=true)
+\begin{DoxyCompactList}\small\item\em Extract the name of the agent interaction with the i\+Cub (present, not i\+Cub nor \textquotesingle{}unnamed\textquotesingle{} partner) \end{DoxyCompactList}\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__icubclient__clients_ae40ff3f75d4c2fa6d4e2d0c55ee568ca}{get\+Partner\+Bodypart\+Loc} (std\+::string s\+Bodypart\+Name)
+\begin{DoxyCompactList}\small\item\em Extract the location of the bodypart name of the partner. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a2c1758c19e1fcb1fb322499990cc2646}{babbling} (int joint\+Number, const std\+::string \&babbling\+Arm, double train\+\_\+dur=-\/1.\+0)
+\begin{DoxyCompactList}\small\item\em Babbling using a single joint. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a078c593ad81fb05676b1eb6d68c6c655}{babbling} (const std\+::string \&bp\+Name, const std\+::string \&babbling\+Arm, double train\+\_\+dur=-\/1.\+0)
+\begin{DoxyCompactList}\small\item\em Babbling with a single joint using the name of a corresponding bodypart See the \hyperlink{group__icubclient__subsystems_a9baa0d296d355f5e2c83ec972b17cdad}{Sub\+System\+\_\+babbling\+::babbling} documentation for more details. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_aee94220297bc4131cd0236838ec8027d}{say} (const std\+::string \&text, bool should\+Wait=true)
+\begin{DoxyCompactList}\small\item\em Ask the robot to perform speech synthesis of a given sentence. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a860fb1399bafb125c3955110dc17a42e}{change\+Name} (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$e, const std\+::string \&new\+Name)
+\begin{DoxyCompactList}\small\item\em Change the name of a given entity. \end{DoxyCompactList}\item 
+std\+::tuple$<$ std\+::string, double $>$ \hyperlink{group__icubclient__clients_a121c1d28c4b6f8c8cec80f4216dfb30c}{get\+Highest\+Emotion} ()
+\begin{DoxyCompactList}\small\item\em Get the strongest emotion. \end{DoxyCompactList}\item 
+std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Action}{Action} $\ast$ $>$ \hyperlink{group__icubclient__clients_ad50cd8953af1f4c418e79c2319a6ce44}{get\+Known\+Actions} ()
+\begin{DoxyCompactList}\small\item\em Get the list of actions known the i\+Cub. \end{DoxyCompactList}\item 
+std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object} $\ast$ $>$ \hyperlink{group__icubclient__clients_aadf74f6b99e053bedc3665a41c04f89b}{get\+Objects\+In\+Sight} ()
+\begin{DoxyCompactList}\small\item\em Get the list of object that are in front of the i\+Cub Warning\+: this will update the local icub\+Agent. \end{DoxyCompactList}\item 
+std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object} $\ast$ $>$ \hyperlink{group__icubclient__clients_ab6f337af95d90108deb4c12530bccec0}{get\+Objects\+In\+Range} ()
+\begin{DoxyCompactList}\small\item\em Get the list of objects that are graspable by the i\+Cub See \hyperlink{group__icubclient__clients_ae2c6388e184ee5f8feeb5c79901f32d5}{is\+Target\+In\+Range()} for a definition of how an object is defined to be in range Warning\+: this will update the local icub\+Agent. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_ae2c6388e184ee5f8feeb5c79901f32d5}{is\+Target\+In\+Range} (const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&target) const
+\begin{DoxyCompactList}\small\item\em Check if a given cartesian position is within the reach of the robot This can be adjusted using the reaching\+Range\+Min and reaching\+Range\+Max parameters in the configuration file (client.\+ini) \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__clients_a928939e68435d8f143883675eb0183af}{close} ()
+\begin{DoxyCompactList}\small\item\em Properly closes all ports which were opened. \end{DoxyCompactList}\item 
+virtual \hyperlink{group__icubclient__clients_a8a3081520380059d11ca3c72a36de58d}{$\sim$\+I\+Cub\+Client} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client} $\ast$ \hyperlink{group__icubclient__clients_a2d3ed93e325adeb8cb1c11a5d6508821}{opc}
+\item 
+\hyperlink{group__icubclient__representations_classicubclient_1_1Agent}{Agent} $\ast$ \hyperlink{group__icubclient__clients_a331f874d5382777bb167d42bf10e8014}{icub\+Agent}
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ std\+::string, \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System} $\ast$ $>$ \hyperlink{group__icubclient__clients_a7f57e7b935843803fe1c098f5ce01cb3}{sub\+Systems}
+\item 
+bool \hyperlink{group__icubclient__clients_a08b2e9fb2884b6c42c872bfafecea4f1}{closed}
+\item 
+std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Action}{Action} $\ast$ $>$ \hyperlink{group__icubclient__clients_a93d0abd1eaf1006e53e6a3cec00a7297}{actions\+Known}
+\item 
+double \hyperlink{group__icubclient__clients_aab67a0f3fe46c8b3a537464bf6cfe1cc}{x\+Range\+Min}
+\item 
+double \hyperlink{group__icubclient__clients_a5ad10026486abc1bdb8e2625a488633a}{y\+Range\+Min}
+\item 
+double \hyperlink{group__icubclient__clients_a1006409da155ce1f67418577656c04b7}{z\+Range\+Min}
+\item 
+double \hyperlink{group__icubclient__clients_a7e53916315fedd2230c6af7c3c639a35}{x\+Range\+Max}
+\item 
+double \hyperlink{group__icubclient__clients_a9fade7afd90baf2a7f5bae908d801ecb}{y\+Range\+Max}
+\item 
+double \hyperlink{group__icubclient__clients_a10631424384ecdfc1a34c4a30b9acaed}{z\+Range\+Max}
+\item 
+std\+::string \hyperlink{group__icubclient__clients_a05b88ac70c854a3526a28b8fde540ebc}{robot}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__clients_a50ca757de4db9723eaf872791a8c20c8}\label{group__icubclient__clients_a50ca757de4db9723eaf872791a8c20c8}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!I\+Cub\+Client@{I\+Cub\+Client}}
+\index{I\+Cub\+Client@{I\+Cub\+Client}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{I\+Cub\+Client()}{ICubClient()}}
+{\footnotesize\ttfamily I\+Cub\+Client\+::\+I\+Cub\+Client (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{module\+Name,  }\item[{const std\+::string \&}]{context = {\ttfamily \char`\"{}icubClient\char`\"{}},  }\item[{const std\+::string \&}]{client\+Config\+File = {\ttfamily \char`\"{}client.ini\char`\"{}},  }\item[{bool}]{is\+R\+F\+Verbose = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Create an i\+Cub client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em module\+Name} & The port namespace that will precede the client ports names. \\
+\hline
+{\em context} & The yarp context to be used. \\
+\hline
+{\em client\+Config\+File} & The yarp config file to be used. \\
+\hline
+{\em is\+R\+F\+Verbose} & Whether the yarp resource finder should be verbose \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 37 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a8a3081520380059d11ca3c72a36de58d}\label{group__icubclient__clients_a8a3081520380059d11ca3c72a36de58d}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!````~I\+Cub\+Client@{$\sim$\+I\+Cub\+Client}}
+\index{````~I\+Cub\+Client@{$\sim$\+I\+Cub\+Client}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{$\sim$\+I\+Cub\+Client()}{~ICubClient()}}
+{\footnotesize\ttfamily I\+Cub\+Client\+::$\sim$\+I\+Cub\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 161 of file icub\+Client.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__clients_a2c1758c19e1fcb1fb322499990cc2646}\label{group__icubclient__clients_a2c1758c19e1fcb1fb322499990cc2646}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!babbling@{babbling}}
+\index{babbling@{babbling}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{babbling()}{babbling()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::babbling (\begin{DoxyParamCaption}\item[{int}]{joint\+Number,  }\item[{const std\+::string \&}]{babbling\+Arm,  }\item[{double}]{train\+\_\+dur = {\ttfamily -\/1.0} }\end{DoxyParamCaption})}
+
+
+
+Babbling using a single joint. 
+
+See the \hyperlink{group__icubclient__subsystems_a9baa0d296d355f5e2c83ec972b17cdad}{Sub\+System\+\_\+babbling\+::babbling} documentation for more details. 
+\begin{DoxyParams}{Parameters}
+{\em joint\+Number} & contains the int corresponding to an arm joint \\
+\hline
+{\em babbling\+Arm} & contains the string corresponding to the side of the arm used (\char`\"{}left\char`\"{} or \char`\"{}right\char`\"{}) \\
+\hline
+{\em train\+\_\+dur} & set the babbling time, if \char`\"{}-\/1\char`\"{} use default time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 344 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a078c593ad81fb05676b1eb6d68c6c655}\label{group__icubclient__clients_a078c593ad81fb05676b1eb6d68c6c655}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!babbling@{babbling}}
+\index{babbling@{babbling}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{babbling()}{babbling()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::babbling (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{bp\+Name,  }\item[{const std\+::string \&}]{babbling\+Arm,  }\item[{double}]{train\+\_\+dur = {\ttfamily -\/1.0} }\end{DoxyParamCaption})}
+
+
+
+Babbling with a single joint using the name of a corresponding bodypart See the \hyperlink{group__icubclient__subsystems_a9baa0d296d355f5e2c83ec972b17cdad}{Sub\+System\+\_\+babbling\+::babbling} documentation for more details. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bp\+Name} & contains the string with the name of the bodypart \\
+\hline
+{\em babbling\+Arm} & contains the string corresponding to the side of the arm used (\char`\"{}left\char`\"{} or \char`\"{}right\char`\"{}) \\
+\hline
+{\em train\+\_\+dur} & set the babbling time, if \char`\"{}-\/1\char`\"{} use default time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise (bodypart non existing, no joint number assigned, etc.). 
+\end{DoxyReturn}
+
+
+Definition at line 312 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a860fb1399bafb125c3955110dc17a42e}\label{group__icubclient__clients_a860fb1399bafb125c3955110dc17a42e}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!change\+Name@{change\+Name}}
+\index{change\+Name@{change\+Name}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{change\+Name()}{changeName()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::change\+Name (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{e,  }\item[{const std\+::string \&}]{new\+Name }\end{DoxyParamCaption})}
+
+
+
+Change the name of a given entity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & -\/ the entity whose name should be changed \\
+\hline
+{\em new\+Name} & -\/ the new name of the entity \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case the name was changed, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 183 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a928939e68435d8f143883675eb0183af}\label{group__icubclient__clients_a928939e68435d8f143883675eb0183af}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!close@{close}}
+\index{close@{close}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily void I\+Cub\+Client\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Properly closes all ports which were opened. 
+
+This is being called automatically in the destructor, there is typically no need to call this manually. 
+
+Definition at line 140 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a514afed176cadaaaee1fca994dde96b5}\label{group__icubclient__clients_a514afed176cadaaaee1fca994dde96b5}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!commit\+Agent@{commit\+Agent}}
+\index{commit\+Agent@{commit\+Agent}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{commit\+Agent()}{commitAgent()}}
+{\footnotesize\ttfamily void I\+Cub\+Client\+::commit\+Agent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Commit the local definition of i\+Cub agent to the O\+PC. 
+
+
+
+Definition at line 245 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a3909d8199400ef12033f10c070a026a3}\label{group__icubclient__clients_a3909d8199400ef12033f10c070a026a3}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!connect@{connect}}
+\index{connect@{connect}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::connect (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{opc\+Name = {\ttfamily \char`\"{}OPC\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Try to connect all functionalities. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em opc\+Name} & the stem-\/name of the O\+PC server. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success false if some connections are missing. 
+\end{DoxyReturn}
+
+
+Definition at line 132 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a62aa694a2b631e84f922188ad44ba7eb}\label{group__icubclient__clients_a62aa694a2b631e84f922188ad44ba7eb}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!connect\+O\+PC@{connect\+O\+PC}}
+\index{connect\+O\+PC@{connect\+O\+PC}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{connect\+O\+P\+C()}{connectOPC()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::connect\+O\+PC (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{opc\+Name = {\ttfamily \char`\"{}OPC\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Try to connect to O\+PC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em opc\+Name} & the stem-\/name of the O\+PC server. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true on success. 
+\end{DoxyReturn}
+
+
+Definition at line 107 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a7cb4ce150f6033c93d68380ab50106db}\label{group__icubclient__clients_a7cb4ce150f6033c93d68380ab50106db}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!connect\+Sub\+Systems@{connect\+Sub\+Systems}}
+\index{connect\+Sub\+Systems@{connect\+Sub\+Systems}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{connect\+Sub\+Systems()}{connectSubSystems()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::connect\+Sub\+Systems (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Try to connect to all sub-\/systems. 
+
+\begin{DoxyReturn}{Returns}
+true on success. 
+\end{DoxyReturn}
+
+
+Definition at line 117 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a328124b23108364ed78abced438e88c5}\label{group__icubclient__clients_a328124b23108364ed78abced438e88c5}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!draw\+Karma@{draw\+Karma}}
+\index{draw\+Karma@{draw\+Karma}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{draw\+Karma()}{drawKarma()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::draw\+Karma (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target\+Center,  }\item[{const double \&}]{theta,  }\item[{const double \&}]{radius,  }\item[{const double \&}]{dist,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+draw\+Karma (K\+A\+R\+MA)\+: draw action, along the positive direction of the x-\/axis (in robot FoR) See the \hyperlink{group__icubclient__subsystems_a328d7187887b653399ccc783be8fb56e}{Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::draw} documentation for more details. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+Center} & center of a circle \\
+\hline
+{\em theta} & angle between the y-\/axis (in robot FoR) and starting position of draw action. \\
+\hline
+{\em radius} & radius of the circle with center at \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+target\+Center 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em dist} & moving distance of draw action \\
+\hline
+{\em options} & options to be passed to Karma \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 199 of file icub\+Client\+\_\+\+K\+A\+R\+M\+Arelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ab9e784430f1aa872ec58bdaea716dc57}\label{group__icubclient__clients_ab9e784430f1aa872ec58bdaea716dc57}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+Agent\+Detector\+Client@{get\+Agent\+Detector\+Client}}
+\index{get\+Agent\+Detector\+Client@{get\+Agent\+Detector\+Client}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+Agent\+Detector\+Client()}{getAgentDetectorClient()}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__agentDetector}{Sub\+System\+\_\+agent\+Detector} $\ast$ I\+Cub\+Client\+::get\+Agent\+Detector\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 454 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ad022d3754041d652ebc37044c7be047c}\label{group__icubclient__clients_ad022d3754041d652ebc37044c7be047c}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+A\+RE@{get\+A\+RE}}
+\index{get\+A\+RE@{get\+A\+RE}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+A\+R\+E()}{getARE()}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__ARE}{Sub\+System\+\_\+\+A\+RE} $\ast$ I\+Cub\+Client\+::get\+A\+RE (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 474 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a25bc61a476eae941aa5a25cd5d21a0d2}\label{group__icubclient__clients_a25bc61a476eae941aa5a25cd5d21a0d2}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+Babbling\+Client@{get\+Babbling\+Client}}
+\index{get\+Babbling\+Client@{get\+Babbling\+Client}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+Babbling\+Client()}{getBabblingClient()}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__babbling}{Sub\+System\+\_\+babbling} $\ast$ I\+Cub\+Client\+::get\+Babbling\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 459 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_afbb986e5685fe8d66784217a6f6b0230}\label{group__icubclient__clients_afbb986e5685fe8d66784217a6f6b0230}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+Emotion\+Client@{get\+Emotion\+Client}}
+\index{get\+Emotion\+Client@{get\+Emotion\+Client}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+Emotion\+Client()}{getEmotionClient()}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__emotion}{Sub\+System\+\_\+emotion} $\ast$ I\+Cub\+Client\+::get\+Emotion\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 501 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a121c1d28c4b6f8c8cec80f4216dfb30c}\label{group__icubclient__clients_a121c1d28c4b6f8c8cec80f4216dfb30c}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+Highest\+Emotion@{get\+Highest\+Emotion}}
+\index{get\+Highest\+Emotion@{get\+Highest\+Emotion}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+Highest\+Emotion()}{getHighestEmotion()}}
+{\footnotesize\ttfamily std\+::tuple$<$ std\+::string, double $>$ I\+Cub\+Client\+::get\+Highest\+Emotion (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the strongest emotion. 
+
+\begin{DoxyReturn}{Returns}
+tuple with name of emotion and intensity of emotion as items 
+\end{DoxyReturn}
+
+
+Definition at line 354 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ae5b9052e8435d13811e30f3d74343536}\label{group__icubclient__clients_ae5b9052e8435d13811e30f3d74343536}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+I\+O\+L2\+O\+P\+C\+Client@{get\+I\+O\+L2\+O\+P\+C\+Client}}
+\index{get\+I\+O\+L2\+O\+P\+C\+Client@{get\+I\+O\+L2\+O\+P\+C\+Client}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+I\+O\+L2\+O\+P\+C\+Client()}{getIOL2OPCClient()}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__IOL2OPC}{Sub\+System\+\_\+\+I\+O\+L2\+O\+PC} $\ast$ I\+Cub\+Client\+::get\+I\+O\+L2\+O\+P\+C\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 464 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a95285ba946061fa56e031f72b70110ed}\label{group__icubclient__clients_a95285ba946061fa56e031f72b70110ed}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+K\+A\+R\+MA@{get\+K\+A\+R\+MA}}
+\index{get\+K\+A\+R\+MA@{get\+K\+A\+R\+MA}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+K\+A\+R\+M\+A()}{getKARMA()}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__KARMA}{Sub\+System\+\_\+\+K\+A\+R\+MA} $\ast$ I\+Cub\+Client\+::get\+K\+A\+R\+MA (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 479 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ad50cd8953af1f4c418e79c2319a6ce44}\label{group__icubclient__clients_ad50cd8953af1f4c418e79c2319a6ce44}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+Known\+Actions@{get\+Known\+Actions}}
+\index{get\+Known\+Actions@{get\+Known\+Actions}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+Known\+Actions()}{getKnownActions()}}
+{\footnotesize\ttfamily list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Action}{Action} $\ast$ $>$ I\+Cub\+Client\+::get\+Known\+Actions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the list of actions known the i\+Cub. 
+
+\begin{DoxyReturn}{Returns}
+list of pointers to actions 
+\end{DoxyReturn}
+
+
+Definition at line 387 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ab6f337af95d90108deb4c12530bccec0}\label{group__icubclient__clients_ab6f337af95d90108deb4c12530bccec0}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+Objects\+In\+Range@{get\+Objects\+In\+Range}}
+\index{get\+Objects\+In\+Range@{get\+Objects\+In\+Range}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+Objects\+In\+Range()}{getObjectsInRange()}}
+{\footnotesize\ttfamily list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object} $\ast$ $>$ I\+Cub\+Client\+::get\+Objects\+In\+Range (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the list of objects that are graspable by the i\+Cub See \hyperlink{group__icubclient__clients_ae2c6388e184ee5f8feeb5c79901f32d5}{is\+Target\+In\+Range()} for a definition of how an object is defined to be in range Warning\+: this will update the local icub\+Agent. 
+
+
+
+Definition at line 422 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_aadf74f6b99e053bedc3665a41c04f89b}\label{group__icubclient__clients_aadf74f6b99e053bedc3665a41c04f89b}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+Objects\+In\+Sight@{get\+Objects\+In\+Sight}}
+\index{get\+Objects\+In\+Sight@{get\+Objects\+In\+Sight}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+Objects\+In\+Sight()}{getObjectsInSight()}}
+{\footnotesize\ttfamily list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Object}{Object} $\ast$ $>$ I\+Cub\+Client\+::get\+Objects\+In\+Sight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the list of object that are in front of the i\+Cub Warning\+: this will update the local icub\+Agent. 
+
+\begin{DoxyReturn}{Returns}
+list of pointers to objects which are front of the i\+Cub (x$<$0.\+0) 
+\end{DoxyReturn}
+
+
+Definition at line 399 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ae40ff3f75d4c2fa6d4e2d0c55ee568ca}\label{group__icubclient__clients_ae40ff3f75d4c2fa6d4e2d0c55ee568ca}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+Partner\+Bodypart\+Loc@{get\+Partner\+Bodypart\+Loc}}
+\index{get\+Partner\+Bodypart\+Loc@{get\+Partner\+Bodypart\+Loc}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+Partner\+Bodypart\+Loc()}{getPartnerBodypartLoc()}}
+{\footnotesize\ttfamily yarp\+::sig\+::\+Vector\+Of$<$ double $>$ I\+Cub\+Client\+::get\+Partner\+Bodypart\+Loc (\begin{DoxyParamCaption}\item[{std\+::string}]{s\+Bodypart\+Name }\end{DoxyParamCaption})}
+
+
+
+Extract the location of the bodypart name of the partner. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s\+Bodypart\+Name} & is the name of the bodypart (kinect skeleton node) to be looked at \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+v\+Loc, the vector of the bodypart localisation 
+\end{DoxyReturn}
+
+
+Definition at line 274 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_acd076c847fe2533127ef55c8ea63034d}\label{group__icubclient__clients_acd076c847fe2533127ef55c8ea63034d}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+Partner\+Name@{get\+Partner\+Name}}
+\index{get\+Partner\+Name@{get\+Partner\+Name}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+Partner\+Name()}{getPartnerName()}}
+{\footnotesize\ttfamily std\+::string I\+Cub\+Client\+::get\+Partner\+Name (\begin{DoxyParamCaption}\item[{bool}]{verbose = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Extract the name of the agent interaction with the i\+Cub (present, not i\+Cub nor \textquotesingle{}unnamed\textquotesingle{} partner) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em verbose} & -\/ whether a y\+Info output should happen if the partner is found \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string\+: the name of the agent 
+\end{DoxyReturn}
+
+
+Definition at line 251 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_aa444258246f4ed1e3569a039db6f678c}\label{group__icubclient__clients_aa444258246f4ed1e3569a039db6f678c}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+Recog\+Client@{get\+Recog\+Client}}
+\index{get\+Recog\+Client@{get\+Recog\+Client}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+Recog\+Client()}{getRecogClient()}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__Recog}{Sub\+System\+\_\+\+Recog} $\ast$ I\+Cub\+Client\+::get\+Recog\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 469 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ae255d014e106fbbae51f56e670093610}\label{group__icubclient__clients_ae255d014e106fbbae51f56e670093610}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+S\+A\+M\+Client@{get\+S\+A\+M\+Client}}
+\index{get\+S\+A\+M\+Client@{get\+S\+A\+M\+Client}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+S\+A\+M\+Client()}{getSAMClient()}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__SAM}{Sub\+System\+\_\+\+S\+AM} $\ast$ I\+Cub\+Client\+::get\+S\+A\+M\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 496 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ab0c540ef27084c3845c4bf102808bb83}\label{group__icubclient__clients_ab0c540ef27084c3845c4bf102808bb83}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+Speech\+Client@{get\+Speech\+Client}}
+\index{get\+Speech\+Client@{get\+Speech\+Client}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+Speech\+Client()}{getSpeechClient()}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem__Speech}{Sub\+System\+\_\+\+Speech} $\ast$ I\+Cub\+Client\+::get\+Speech\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 484 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a7ad0d4360f735c3631b2bdaa3caa5d80}\label{group__icubclient__clients_a7ad0d4360f735c3631b2bdaa3caa5d80}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+Sub\+System@{get\+Sub\+System}}
+\index{get\+Sub\+System@{get\+Sub\+System}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+Sub\+System()}{getSubSystem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ icubclient\+::\+I\+Cub\+Client\+::get\+Sub\+System (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{sub\+System\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 81 of file icub\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_ae62e5489f0412acc15304f68bbc0ac3a}\label{group__icubclient__clients_ae62e5489f0412acc15304f68bbc0ac3a}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!get\+Sub\+System@{get\+Sub\+System}}
+\index{get\+Sub\+System@{get\+Sub\+System}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{get\+Sub\+System()}{getSubSystem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ icubclient\+::\+I\+Cub\+Client\+::get\+Sub\+System (\begin{DoxyParamCaption}\item[{T}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+get a subsystem by just providing the type untested, just to play around with C++11 
+
+
+
+Definition at line 93 of file icub\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a2743bef01da8066f944699983fbfc6d2}\label{group__icubclient__clients_a2743bef01da8066f944699983fbfc6d2}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!home@{home}}
+\index{home@{home}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{home()}{home()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::home (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{part = {\ttfamily \char`\"{}all\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Go in home position. 
+
+See the \hyperlink{group__icubclient__subsystems_ae328769c62775194ac87a2cb6143d3e2}{Sub\+System\+\_\+\+A\+R\+E\+::home} documentation for more details. 
+\begin{DoxyParams}{Parameters}
+{\em part} & the part to be homed (\char`\"{}gaze\char`\"{}, \char`\"{}head\char`\"{}, \char`\"{}arms\char`\"{}, \char`\"{}fingers\char`\"{}, \char`\"{}all\char`\"{}; \char`\"{}all\char`\"{} by default). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful motor command, false otherwise (e.\+g. wrong part name) 
+\end{DoxyReturn}
+
+
+Definition at line 27 of file icub\+Client\+\_\+\+A\+R\+Erelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ae2c6388e184ee5f8feeb5c79901f32d5}\label{group__icubclient__clients_ae2c6388e184ee5f8feeb5c79901f32d5}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!is\+Target\+In\+Range@{is\+Target\+In\+Range}}
+\index{is\+Target\+In\+Range@{is\+Target\+In\+Range}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{is\+Target\+In\+Range()}{isTargetInRange()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::is\+Target\+In\+Range (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target }\end{DoxyParamCaption}) const}
+
+
+
+Check if a given cartesian position is within the reach of the robot This can be adjusted using the reaching\+Range\+Min and reaching\+Range\+Max parameters in the configuration file (client.\+ini) 
+
+
+
+Definition at line 444 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ac045289e67ede0aa0a22869600a6021d}\label{group__icubclient__clients_ac045289e67ede0aa0a22869600a6021d}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!look@{look}}
+\index{look@{look}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{look()}{look()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::look (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{target,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Look at a specified target object. 
+
+See the sub\+System\+\_\+\+A\+R\+E\+::look documentation for more details. 
+\begin{DoxyParams}{Parameters}
+{\em target} & is the name of the entity in the O\+PC where the robot should look. \\
+\hline
+{\em options} & contains options to be passed on the gaze controller. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 162 of file icub\+Client\+\_\+\+A\+R\+Erelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a54af100e4707843e8e84d9e6c397e4fb}\label{group__icubclient__clients_a54af100e4707843e8e84d9e6c397e4fb}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!look@{look}}
+\index{look@{look}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{look()}{look()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::look (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Look at a specified target location. 
+
+See the sub\+System\+\_\+\+A\+R\+E\+::look documentation for more details. 
+\begin{DoxyParams}{Parameters}
+{\em target} & is a vector where the robot should look. \\
+\hline
+{\em options} & contains options to be passed on the gaze controller. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 178 of file icub\+Client\+\_\+\+A\+R\+Erelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_aad1592c7eb0b276114fa564ceb20902a}\label{group__icubclient__clients_aad1592c7eb0b276114fa564ceb20902a}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!look\+At\+Bodypart@{look\+At\+Bodypart}}
+\index{look\+At\+Bodypart@{look\+At\+Bodypart}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{look\+At\+Bodypart()}{lookAtBodypart()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::look\+At\+Bodypart (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s\+Bodypart\+Name }\end{DoxyParamCaption})}
+
+
+
+Looks at the agent specific bodypart if present in the scene. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s\+Bodypart\+Name} & is the name of the bodypart (kinect skeleton node) to be looked at \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 189 of file icub\+Client\+\_\+\+A\+R\+Erelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a7466b597efdf9ed613ab446e8cb46e25}\label{group__icubclient__clients_a7466b597efdf9ed613ab446e8cb46e25}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!look\+At\+Partner@{look\+At\+Partner}}
+\index{look\+At\+Partner@{look\+At\+Partner}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{look\+At\+Partner()}{lookAtPartner()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::look\+At\+Partner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Looks at the agent if present in the scene. 
+
+
+
+Definition at line 307 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a916d79977e918e349aee0b13567f9f18}\label{group__icubclient__clients_a916d79977e918e349aee0b13567f9f18}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!point@{point}}
+\index{point@{point}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{point()}{point()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily bool icubclient\+::\+I\+Cub\+Client\+::point (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Point at a specified location from the i\+Cub. 
+
+See the \hyperlink{group__icubclient__subsystems_a92fbb5f6c28b6bf9c7dec4ef3737b7c6}{Sub\+System\+\_\+\+A\+R\+E\+::point} documentation for more details. 
+\begin{DoxyParams}{Parameters}
+{\em target} & contains spatial information about the location where pointing at. The target can be far away from the i\+Cub \\
+\hline
+{\em options} & bottle containing a list of options (e.\+g. force to use specific hand with \char`\"{}left\char`\"{}$\vert$\char`\"{}right\char`\"{} option). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} non existing, impossible to reach, etc.). 
+\end{DoxyReturn}
+
+
+Definition at line 89 of file icub\+Client\+\_\+\+A\+R\+Erelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a1aeddcdd0f1b623d0b79a24ca69e728d}\label{group__icubclient__clients_a1aeddcdd0f1b623d0b79a24ca69e728d}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!point@{point}}
+\index{point@{point}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{point()}{point()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily bool icubclient\+::\+I\+Cub\+Client\+::point (\begin{DoxyParamCaption}\item[{const double}]{x,  }\item[{const double}]{y,  }\item[{const double}]{z,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 203 of file icub\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a16d4dfb3231983b49590f7eae62b6337}\label{group__icubclient__clients_a16d4dfb3231983b49590f7eae62b6337}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!point@{point}}
+\index{point@{point}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{point()}{point()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily bool icubclient\+::\+I\+Cub\+Client\+::point (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{o\+Location,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Point at a specified location. 
+
+See the \hyperlink{group__icubclient__subsystems_a92fbb5f6c28b6bf9c7dec4ef3737b7c6}{Sub\+System\+\_\+\+A\+R\+E\+::point} documentation for more details. 
+\begin{DoxyParams}{Parameters}
+{\em o\+Location} & is the name of the entity in the O\+PC where the robot should point at. \\
+\hline
+{\em options} & bottle containing a list of options (e.\+g. force to use specific hand with \char`\"{}left\char`\"{}$\vert$\char`\"{}right\char`\"{} option). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} non existing, impossible to reach, etc.). 
+\end{DoxyReturn}
+
+
+Definition at line 104 of file icub\+Client\+\_\+\+A\+R\+Erelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a5deec64a5964aacb94268867e804ae1e}\label{group__icubclient__clients_a5deec64a5964aacb94268867e804ae1e}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!pull\+Karma\+Back@{pull\+Karma\+Back}}
+\index{pull\+Karma\+Back@{pull\+Karma\+Back}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{pull\+Karma\+Back()}{pullKarmaBack()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::pull\+Karma\+Back (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{obj\+Name,  }\item[{const double \&}]{target\+Pos\+X\+Back,  }\item[{const std\+::string \&}]{arm\+Type = {\ttfamily \char`\"{}selectable\char`\"{}},  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+pull\+Karma\+Back\+: pull an object by name back See the \hyperlink{group__icubclient__subsystems_a956b5bad90e96ca0c2c8f33f306256ac}{Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::pull\+Back} documentation for more details. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj\+Name} & name of object, which will be looked for in O\+PC \\
+\hline
+{\em target\+Pos\+X\+Back} & X coordinate of object to pull back \\
+\hline
+{\em arm\+Type} & \char`\"{}left\char`\"{} or \char`\"{}right\char`\"{} arm to conduct action, otherwise arm will be chosen by K\+A\+R\+MA \\
+\hline
+{\em options} & options to be passed to Karma \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 160 of file icub\+Client\+\_\+\+K\+A\+R\+M\+Arelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a72699f9aa7aa1c3bccf4ea2b85e24fd1}\label{group__icubclient__clients_a72699f9aa7aa1c3bccf4ea2b85e24fd1}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!push@{push}}
+\index{push@{push}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::push (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{o\+Location,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Push at a specified location. 
+
+This method is deprecated, and \hyperlink{group__icubclient__clients_a55c9ed5a628f396b215ac363cd943609}{I\+Cub\+Client\+::push\+Karma\+Left} or \hyperlink{group__icubclient__clients_a3529ae126c176090205fc59059f413ce}{I\+Cub\+Client\+::push\+Karma\+Right} should be used instead. See the \hyperlink{group__icubclient__subsystems_a4b1fe9a6c979be5ec739d319ad0e3d94}{Sub\+System\+\_\+\+A\+R\+E\+::push} documentation for more details. 
+\begin{DoxyParams}{Parameters}
+{\em o\+Location} & is the name of the entity in the O\+PC where the robot should push at. \\
+\hline
+{\em options} & bottle containing a list of options (e.\+g. force to use specific hand with \char`\"{}left\char`\"{}$\vert$\char`\"{}right\char`\"{} option). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} non existing, impossible to reach, etc.). 
+\end{DoxyReturn}
+
+
+Definition at line 131 of file icub\+Client\+\_\+\+A\+R\+Erelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a2890c9f5f2f1d5ab4fc371d556a7238c}\label{group__icubclient__clients_a2890c9f5f2f1d5ab4fc371d556a7238c}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!push\+Karma@{push\+Karma}}
+\index{push\+Karma@{push\+Karma}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{push\+Karma()}{pushKarma()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::push\+Karma (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target\+Center,  }\item[{const double \&}]{theta,  }\item[{const double \&}]{radius,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+push\+Karma (K\+A\+R\+MA)\+: push to certain position, along a direction See the \hyperlink{group__icubclient__subsystems_aabe8749ad0593a522e8377477d7d3d9b}{Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::push} documentation for more details. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+Center} & position to push to. \\
+\hline
+{\em theta} & angle between the y-\/axis (in robot FoR) and starting position of push action, defines the direction of push action \\
+\hline
+{\em radius} & radius of the circle with center at \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+target\+Center 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em options} & options to be passed to Karma \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 147 of file icub\+Client\+\_\+\+K\+A\+R\+M\+Arelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_adb9b0ec66870a1dea115def6af252048}\label{group__icubclient__clients_adb9b0ec66870a1dea115def6af252048}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!push\+Karma\+Front@{push\+Karma\+Front}}
+\index{push\+Karma\+Front@{push\+Karma\+Front}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{push\+Karma\+Front()}{pushKarmaFront()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::push\+Karma\+Front (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{obj\+Name,  }\item[{const double \&}]{target\+Pos\+X\+Front,  }\item[{const std\+::string \&}]{arm\+Type = {\ttfamily \char`\"{}selectable\char`\"{}},  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+push\+Karma\+Front\+: push an object by name to front See the \hyperlink{group__icubclient__subsystems_ac7835e392d76249294d19c863f88e679}{Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::push\+Front} documentation for more details. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj\+Name} & name of object, which will be looked for in O\+PC \\
+\hline
+{\em target\+Pos\+X\+Front} & X coordinate of object to push to \\
+\hline
+{\em arm\+Type} & \char`\"{}left\char`\"{} or \char`\"{}right\char`\"{} arm to conduct action, otherwise arm will be chosen by K\+A\+R\+MA \\
+\hline
+{\em options} & options to be passed to Karma \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 108 of file icub\+Client\+\_\+\+K\+A\+R\+M\+Arelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a55c9ed5a628f396b215ac363cd943609}\label{group__icubclient__clients_a55c9ed5a628f396b215ac363cd943609}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!push\+Karma\+Left@{push\+Karma\+Left}}
+\index{push\+Karma\+Left@{push\+Karma\+Left}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{push\+Karma\+Left()}{pushKarmaLeft()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::push\+Karma\+Left (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{obj\+Name,  }\item[{const double \&}]{target\+Pos\+Y\+Left,  }\item[{const std\+::string \&}]{arm\+Type = {\ttfamily \char`\"{}selectable\char`\"{}},  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+push\+Karma\+Left\+: push an object by name to left side See the \hyperlink{group__icubclient__subsystems_ae831bfd7af1572a65f53b11b9519e473}{Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::push\+Aside} documentation for more details. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj\+Name} & is the name of object, which will be looked for in O\+PC \\
+\hline
+{\em target\+Pos\+Y\+Left} & Y coordinate of object to push to \\
+\hline
+{\em arm\+Type} & \char`\"{}left\char`\"{} or \char`\"{}right\char`\"{} arm to conduct action, otherwise arm will be chosen by K\+A\+R\+MA \\
+\hline
+{\em options} & options to be passed to Karma \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 30 of file icub\+Client\+\_\+\+K\+A\+R\+M\+Arelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a3529ae126c176090205fc59059f413ce}\label{group__icubclient__clients_a3529ae126c176090205fc59059f413ce}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!push\+Karma\+Right@{push\+Karma\+Right}}
+\index{push\+Karma\+Right@{push\+Karma\+Right}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{push\+Karma\+Right()}{pushKarmaRight()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::push\+Karma\+Right (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{obj\+Name,  }\item[{const double \&}]{target\+Pos\+Y\+Right,  }\item[{const std\+::string \&}]{arm\+Type = {\ttfamily \char`\"{}selectable\char`\"{}},  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+push\+Karma\+Right\+: push an object by name to right side See the \hyperlink{group__icubclient__subsystems_ae831bfd7af1572a65f53b11b9519e473}{Sub\+System\+\_\+\+K\+A\+R\+M\+A\+::push\+Aside} documentation for more details. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj\+Name} & is the name of object, which will be looked for in O\+PC \\
+\hline
+{\em target\+Pos\+Y\+Right} & Y coordinate of object to push to \\
+\hline
+{\em arm\+Type} & \char`\"{}left\char`\"{} or \char`\"{}right\char`\"{} arm to conduct action, otherwise arm will be chosen by K\+A\+R\+MA \\
+\hline
+{\em options} & options to be passed to Karma \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 69 of file icub\+Client\+\_\+\+K\+A\+R\+M\+Arelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a5b975d62f96c10225022dc6bc88f3409}\label{group__icubclient__clients_a5b975d62f96c10225022dc6bc88f3409}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!release@{release}}
+\index{release@{release}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{release()}{release()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::release (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{o\+Location,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Release the hand-\/held object on a given location. 
+
+See the Sub\+System\+\_\+\+A\+R\+E\+::release documentation for more details. 
+\begin{DoxyParams}{Parameters}
+{\em o\+Location} & is the name of the entity in the O\+PC where the robot should release. \\
+\hline
+{\em options} & bottle containing a list of options (e.\+g. force to use specific hand with \char`\"{}left\char`\"{}$\vert$\char`\"{}right\char`\"{} option). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} non existing, impossible to reach, etc.). 
+\end{DoxyReturn}
+
+
+Definition at line 39 of file icub\+Client\+\_\+\+A\+R\+Erelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_abf66ab5453dc661233d7cc9d85b42617}\label{group__icubclient__clients_abf66ab5453dc661233d7cc9d85b42617}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!release@{release}}
+\index{release@{release}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{release()}{release()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::release (\begin{DoxyParamCaption}\item[{const yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \&}]{target,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Release the hand-\/held object on a given location. 
+
+See the Sub\+System\+\_\+\+A\+R\+E\+::release documentation for more details. 
+\begin{DoxyParams}{Parameters}
+{\em target} & contains spatial information about the location where releasing the object. \\
+\hline
+{\em options} & bottle containing a list of options (e.\+g. force to use specific hand with \char`\"{}left\char`\"{}$\vert$\char`\"{}right\char`\"{} option). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success release, false otherwise (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} non existing, impossible to reach, etc.). 
+\end{DoxyReturn}
+
+
+Definition at line 59 of file icub\+Client\+\_\+\+A\+R\+Erelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_aee94220297bc4131cd0236838ec8027d}\label{group__icubclient__clients_aee94220297bc4131cd0236838ec8027d}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!say@{say}}
+\index{say@{say}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{say()}{say()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::say (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text,  }\item[{bool}]{should\+Wait = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Ask the robot to perform speech synthesis of a given sentence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & to be said. \\
+\hline
+{\em should\+Wait} & Whether the method should wait until the speech was produced, or return immediately \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case the sentence was uttered, false otherwise (speech subsystem not available) 
+\end{DoxyReturn}
+
+
+Definition at line 374 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ab719d817deb3de266ea75e5a84898702}\label{group__icubclient__clients_ab719d817deb3de266ea75e5a84898702}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!take@{take}}
+\index{take@{take}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{take()}{take()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::take (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{o\+Name,  }\item[{const yarp\+::os\+::\+Bottle \&}]{options = {\ttfamily yarp\+:\+:os\+:\+:Bottle()} }\end{DoxyParamCaption})}
+
+
+
+Take (grasp) an object. 
+
+See the sub\+System\+\_\+\+A\+R\+E\+::take documentation for more details. 
+\begin{DoxyParams}{Parameters}
+{\em o\+Name} & is the name of the entity in the O\+PC where the robot should take at. \\
+\hline
+{\em options} & bottle containing a list of options (e.\+g. force to use specific hand with \char`\"{}left\char`\"{}$\vert$\char`\"{}right\char`\"{} option). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success grasp, false otherwise (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} non existing, impossible to reach, etc.). 
+\end{DoxyReturn}
+
+
+Definition at line 147 of file icub\+Client\+\_\+\+A\+R\+Erelated.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a965d41811ec54d656fa58222ac1b13de}\label{group__icubclient__clients_a965d41811ec54d656fa58222ac1b13de}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!update\+Agent@{update\+Agent}}
+\index{update\+Agent@{update\+Agent}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{update\+Agent()}{updateAgent()}}
+{\footnotesize\ttfamily void I\+Cub\+Client\+::update\+Agent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retrieve fresh definition of the i\+Cub agent from the O\+PC. 
+
+
+
+Definition at line 169 of file icub\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a5cca1bace5eab90ed0e9618e7939b949}\label{group__icubclient__clients_a5cca1bace5eab90ed0e9618e7939b949}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!waving@{waving}}
+\index{waving@{waving}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{waving()}{waving()}}
+{\footnotesize\ttfamily bool I\+Cub\+Client\+::waving (\begin{DoxyParamCaption}\item[{const bool}]{sw }\end{DoxyParamCaption})}
+
+
+
+Enable/disable arms waving. 
+
+See the \hyperlink{group__icubclient__subsystems_a12374067510db0ffcd01bbea4e7b0ce1}{Sub\+System\+\_\+\+A\+R\+E\+::waving} documentation for more details. 
+\begin{DoxyParams}{Parameters}
+{\em sw} & enable/disable if true/false. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of successful request, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 77 of file icub\+Client\+\_\+\+A\+R\+Erelated.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__clients_a93d0abd1eaf1006e53e6a3cec00a7297}\label{group__icubclient__clients_a93d0abd1eaf1006e53e6a3cec00a7297}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!actions\+Known@{actions\+Known}}
+\index{actions\+Known@{actions\+Known}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{actions\+Known}{actionsKnown}}
+{\footnotesize\ttfamily std\+::list$<$\hyperlink{group__icubclient__representations_classicubclient_1_1Action}{Action}$\ast$$>$ icubclient\+::\+I\+Cub\+Client\+::actions\+Known\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 71 of file icub\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a08b2e9fb2884b6c42c872bfafecea4f1}\label{group__icubclient__clients_a08b2e9fb2884b6c42c872bfafecea4f1}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!closed@{closed}}
+\index{closed@{closed}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{closed}{closed}}
+{\footnotesize\ttfamily bool icubclient\+::\+I\+Cub\+Client\+::closed\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 70 of file icub\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a331f874d5382777bb167d42bf10e8014}\label{group__icubclient__clients_a331f874d5382777bb167d42bf10e8014}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!icub\+Agent@{icub\+Agent}}
+\index{icub\+Agent@{icub\+Agent}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{icub\+Agent}{icubAgent}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__representations_classicubclient_1_1Agent}{Agent}$\ast$ icubclient\+::\+I\+Cub\+Client\+::icub\+Agent}
+
+
+
+Definition at line 113 of file icub\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a2d3ed93e325adeb8cb1c11a5d6508821}\label{group__icubclient__clients_a2d3ed93e325adeb8cb1c11a5d6508821}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!opc@{opc}}
+\index{opc@{opc}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{opc}{opc}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__clients_classicubclient_1_1OPCClient}{O\+P\+C\+Client}$\ast$ icubclient\+::\+I\+Cub\+Client\+::opc}
+
+
+
+Definition at line 112 of file icub\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a05b88ac70c854a3526a28b8fde540ebc}\label{group__icubclient__clients_a05b88ac70c854a3526a28b8fde540ebc}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!robot@{robot}}
+\index{robot@{robot}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{robot}{robot}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+I\+Cub\+Client\+::robot\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 77 of file icub\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a7f57e7b935843803fe1c098f5ce01cb3}\label{group__icubclient__clients_a7f57e7b935843803fe1c098f5ce01cb3}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!sub\+Systems@{sub\+Systems}}
+\index{sub\+Systems@{sub\+Systems}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{sub\+Systems}{subSystems}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, \hyperlink{group__icubclient__subsystems_classicubclient_1_1SubSystem}{Sub\+System}$\ast$$>$ icubclient\+::\+I\+Cub\+Client\+::sub\+Systems\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 69 of file icub\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a7e53916315fedd2230c6af7c3c639a35}\label{group__icubclient__clients_a7e53916315fedd2230c6af7c3c639a35}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!x\+Range\+Max@{x\+Range\+Max}}
+\index{x\+Range\+Max@{x\+Range\+Max}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{x\+Range\+Max}{xRangeMax}}
+{\footnotesize\ttfamily double icubclient\+::\+I\+Cub\+Client\+::x\+Range\+Max\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 75 of file icub\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_aab67a0f3fe46c8b3a537464bf6cfe1cc}\label{group__icubclient__clients_aab67a0f3fe46c8b3a537464bf6cfe1cc}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!x\+Range\+Min@{x\+Range\+Min}}
+\index{x\+Range\+Min@{x\+Range\+Min}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{x\+Range\+Min}{xRangeMin}}
+{\footnotesize\ttfamily double icubclient\+::\+I\+Cub\+Client\+::x\+Range\+Min\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 74 of file icub\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a9fade7afd90baf2a7f5bae908d801ecb}\label{group__icubclient__clients_a9fade7afd90baf2a7f5bae908d801ecb}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!y\+Range\+Max@{y\+Range\+Max}}
+\index{y\+Range\+Max@{y\+Range\+Max}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{y\+Range\+Max}{yRangeMax}}
+{\footnotesize\ttfamily double icubclient\+::\+I\+Cub\+Client\+::y\+Range\+Max\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 75 of file icub\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a5ad10026486abc1bdb8e2625a488633a}\label{group__icubclient__clients_a5ad10026486abc1bdb8e2625a488633a}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!y\+Range\+Min@{y\+Range\+Min}}
+\index{y\+Range\+Min@{y\+Range\+Min}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{y\+Range\+Min}{yRangeMin}}
+{\footnotesize\ttfamily double icubclient\+::\+I\+Cub\+Client\+::y\+Range\+Min\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 74 of file icub\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a10631424384ecdfc1a34c4a30b9acaed}\label{group__icubclient__clients_a10631424384ecdfc1a34c4a30b9acaed}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!z\+Range\+Max@{z\+Range\+Max}}
+\index{z\+Range\+Max@{z\+Range\+Max}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{z\+Range\+Max}{zRangeMax}}
+{\footnotesize\ttfamily double icubclient\+::\+I\+Cub\+Client\+::z\+Range\+Max\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 75 of file icub\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a1006409da155ce1f67418577656c04b7}\label{group__icubclient__clients_a1006409da155ce1f67418577656c04b7}} 
+\index{icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}!z\+Range\+Min@{z\+Range\+Min}}
+\index{z\+Range\+Min@{z\+Range\+Min}!icubclient\+::\+I\+Cub\+Client@{icubclient\+::\+I\+Cub\+Client}}
+\subparagraph{\texorpdfstring{z\+Range\+Min}{zRangeMin}}
+{\footnotesize\ttfamily double icubclient\+::\+I\+Cub\+Client\+::z\+Range\+Min\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 74 of file icub\+Client.\+h.
+
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}\label{classicubclient_1_1OPCClient}
+\Hypertarget{group__icubclient__clients_classicubclient_1_1OPCClient}
+\subsubsection{class icubclient\+:\+:O\+P\+C\+Client}
+An O\+PC client using the datastructures defined within the icub-\/client library. 
+
+Using this ensures you that your manipulation of the O\+PC will be done with correct formatting. 
+
+Definition at line 35 of file opc\+Client.\+h.
+
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__clients_a9c46e911dfd3ddb68f79d7601355329a}{O\+P\+C\+Client} (const std\+::string \&module\+Name)
+\begin{DoxyCompactList}\small\item\em Create an O\+PC client. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$ \hyperlink{group__icubclient__clients_a8ce1aa9d81ed8d32e53346b94f3c032c}{add\+Entity} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Creates a new entity. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$ \hyperlink{group__icubclient__clients_a4874ae1177b1f4a7aa5267428de3a8b7}{add\+Or\+Retrieve\+Entity} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Obtains an entity with the given name. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_aa4d162f66e8a7c1b3418e331fcc0556f}{is\+Connected} ()
+\begin{DoxyCompactList}\small\item\em Check if the client is already connected to the O\+PC server. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_ab5223fad505130bd95aba586889edefc}{connect} (const std\+::string \&\hyperlink{group__icubclient__clients_aaa18459f611f4c14b7e3a197d7ce9b7a}{opc\+Name})
+\begin{DoxyCompactList}\small\item\em Try to connect the client to an O\+PC server. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__clients_a319df571cac4fc425832546234cda426}{interrupt} ()
+\begin{DoxyCompactList}\small\item\em Interrupt communications of the client ports. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__clients_a4b193fe61992f927591ea0e5ff2a6f66}{close} ()
+\begin{DoxyCompactList}\small\item\em Close the client ports. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__clients_ae884577090108846f1b0015818a2f13d}{clear} ()
+\begin{DoxyCompactList}\small\item\em Clear the O\+PC content. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a384897adb9f2d8d19e6c6ff6a9e5c946}{set\+Entity\+Property} (std\+::string source\+Entity\+Name, std\+::string property\+Name, std\+::string target\+Entity\+Name)
+\begin{DoxyCompactList}\small\item\em Try to assign a property from an entity to another entity, using a specific property name. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a08ede3e77a372824e3a176a1d6466638}{add\+Relation} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&r, double life\+Time=-\/1)
+\begin{DoxyCompactList}\small\item\em Obtains a relation between two entities. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_ab0ef7754465e8fdd7b199d47e10f3d54}{add\+Relation} (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$subject, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$verb, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$object=nullptr, double life\+Time=-\/1, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$complement\+\_\+place=nullptr, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$complement\+\_\+time=nullptr, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$complement\+\_\+manner=nullptr)
+\begin{DoxyCompactList}\small\item\em Obtains a relation between two entities. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_ac28de9ea15a53d29d9e5c794d98d0ab4}{remove\+Relation} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&r)
+\begin{DoxyCompactList}\small\item\em Try to remove a relation between two entities. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a6875420cc0976a941b47ca639240e896}{remove\+Relation} (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$subject, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$verb, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$object=nullptr, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$complement\+\_\+place=nullptr, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$complement\+\_\+time=nullptr, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$complement\+\_\+manner=nullptr)
+\begin{DoxyCompactList}\small\item\em Try to remove a relation between two entities. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a8679fddd5ea40734a4da2d89ec6155c7}{contains\+Relation} (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$subject, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$verb, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$object=nullptr, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$complement\+\_\+place=nullptr, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$complement\+\_\+time=nullptr, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$complement\+\_\+manner=nullptr)
+\begin{DoxyCompactList}\small\item\em Check if a relation exists. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_af024cf7dd739214e22c176911740778a}{contains\+Relation} (const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&r)
+\begin{DoxyCompactList}\small\item\em Check if a relation exists. \end{DoxyCompactList}\item 
+std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} $>$ \hyperlink{group__icubclient__clients_a10a9d5b6006fce9a32c82f19ae03ae74}{get\+Relations} ()
+\begin{DoxyCompactList}\small\item\em Returns a list of all existing relations between entities. \end{DoxyCompactList}\item 
+std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} $>$ \hyperlink{group__icubclient__clients_a1a3ea6255bc9da44f281fa767801587e}{get\+Relations} (std\+::string entity)
+\begin{DoxyCompactList}\small\item\em Returns a list of all existing relations involving a specific entities. \end{DoxyCompactList}\item 
+std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} $>$ \hyperlink{group__icubclient__clients_a7a5d4c886b537244cf7fbd25d4141388}{get\+Relations} (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$entity)
+\begin{DoxyCompactList}\small\item\em Returns a list of all existing relations involving a specific entities. \end{DoxyCompactList}\item 
+std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} $>$ \hyperlink{group__icubclient__clients_a6df65f36cc97fe26d05df85c3c56faed}{get\+Relations\+Matching} (std\+::string subject=\char`\"{}any\char`\"{}, std\+::string verb=\char`\"{}any\char`\"{}, std\+::string object=\char`\"{}any\char`\"{}, std\+::string c\+\_\+place=\char`\"{}any\char`\"{}, std\+::string c\+\_\+time=\char`\"{}any\char`\"{}, std\+::string c\+\_\+manner=\char`\"{}any\char`\"{})
+\begin{DoxyCompactList}\small\item\em Returns a list of all existing relations between entities. \end{DoxyCompactList}\item 
+std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} $>$ \hyperlink{group__icubclient__clients_a9eb229857b2afdf17304e8bdd6fb2b61}{get\+Relations\+Matching\+Loosly} (std\+::string subject=\char`\"{}any\char`\"{}, std\+::string verb=\char`\"{}any\char`\"{}, std\+::string object=\char`\"{}any\char`\"{}, std\+::string c\+\_\+place=\char`\"{}any\char`\"{}, std\+::string c\+\_\+time=\char`\"{}any\char`\"{}, std\+::string c\+\_\+manner=\char`\"{}any\char`\"{})
+\begin{DoxyCompactList}\small\item\em Returns a list of all existing relations between entities. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_aa3df78dc97e0148fea927dd85c053fbf}{set\+Life\+Time} (int id, double life\+Time)
+\begin{DoxyCompactList}\small\item\em Set the lifetime property of a relation in the O\+PC. \end{DoxyCompactList}\item 
+\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$ \hyperlink{group__icubclient__clients_ad0aea7a8df35f5e01f352b789ea043e1}{get\+Entity} (const std\+::string \&name, bool force\+Update=false)
+\begin{DoxyCompactList}\small\item\em Gets an entity based on its name, but do no create it if it doesn\textquotesingle{}t exist yet. \end{DoxyCompactList}\item 
+\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$ \hyperlink{group__icubclient__clients_aa7accc436612cd9cd73fb264649675ee}{get\+Entity} (int id, bool force\+Update=false)
+\begin{DoxyCompactList}\small\item\em Gets an entity based on its id, but do no create it if it doesn\textquotesingle{}t exist yet. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_a19a6372fc0c11da66009ba4e11ac6b38}{remove\+Entity} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Removes an entity based on its name. \end{DoxyCompactList}\item 
+bool \hyperlink{group__icubclient__clients_afcb57495b66f77df3aa4991f2a14901e}{remove\+Entity} (int id)
+\begin{DoxyCompactList}\small\item\em Removes an entity based on its id. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__clients_a5a5bedfa32b8adba9a6ecf1d69745dc5}{checkout} (bool update\+Cache=true)
+\begin{DoxyCompactList}\small\item\em Poll the O\+PC for all entities and relations and store them locally. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__clients_a1f5e82e93d8d522381cf596d870ccf87}{update} ()
+\begin{DoxyCompactList}\small\item\em Update the properties of all locally stored entities \& relations. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__clients_ad2b063f232705be47c345e331b2be8fd}{update} (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$e)
+\begin{DoxyCompactList}\small\item\em Poll the O\+PC for updating a given entity properties. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__clients_a79bec5f248fcff8ae539b2cd285950a3}{commit} ()
+\begin{DoxyCompactList}\small\item\em Commit all the entities \& relations stored locally, erasing the server copies. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__clients_abaec4d0b527ced007679b857446f09ec}{commit} (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$e)
+\begin{DoxyCompactList}\small\item\em Commit a single local entity, erasing the server copies. \end{DoxyCompactList}\item 
+std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$ $>$ \hyperlink{group__icubclient__clients_af4129eac8888d65d3142b15a7f17909c}{Entities} (const yarp\+::os\+::\+Bottle \&condition)
+\begin{DoxyCompactList}\small\item\em Getter of the list of entities of matching a complex condition (e.\+g \char`\"{}(entity \char`\"{}==\char`\"{} agent) \char`\"{}\&\&\char`\"{} (is\+Present \char`\"{}==" 1) ) and update them locally. \end{DoxyCompactList}\item 
+std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$ $>$ \hyperlink{group__icubclient__clients_a62ac8158ffa1f9d4d33ea15ea5403a15}{Entities} (const std\+::string \&prop, const std\+::string \&op, const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Getter of the list of entities matching a condition and update them locally. \end{DoxyCompactList}\item 
+std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$ $>$ \hyperlink{group__icubclient__clients_af92d4219221c7705bf70779bcde33768}{Entities\+Cache} () const
+\begin{DoxyCompactList}\small\item\em Getter of the list of entities stored locally. \end{DoxyCompactList}\item 
+std\+::list$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $>$ $>$ \hyperlink{group__icubclient__clients_a9e33c7aaf762eea9123b90565812e04c}{Entities\+Cache\+Copy} () const
+\begin{DoxyCompactList}\small\item\em Getter of the list of the copies of the entities stored locally. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__clients_a46da9e7f9ba02ae088fe210d6e52bcee}{to\+String} ()
+\begin{DoxyCompactList}\small\item\em Returns a human readable description of the client content (Entities \& Relations) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__icubclient__clients_ae9916c9f9f313c49ea22be20c4570a7a}{is\+Verbose}
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__icubclient__clients_a92aeb4c3bb65cd62368980a28496d024}{write} (yarp\+::os\+::\+Bottle \&cmd, yarp\+::os\+::\+Bottle \&reply, bool Verbose=false)
+\begin{DoxyCompactList}\small\item\em Send a command to the O\+PC and return the reply. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__clients_aeddebad5a837addc613f0234aa59d4cb}{add\+Entity} (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$e)
+\begin{DoxyCompactList}\small\item\em Send a the request to add a new entity to the O\+PC. \end{DoxyCompactList}\item 
+int \hyperlink{group__icubclient__clients_a3dbf81c34467613af606013e45042f01}{get\+Relation\+ID} (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$subject, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$verb, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$object=nullptr, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$complement\+\_\+place=nullptr, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$complement\+\_\+time=nullptr, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$complement\+\_\+manner=nullptr)
+\item 
+bool \hyperlink{group__icubclient__clients_a0b4c570e07720cc25c203eda14adda99}{change\+Name} (\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$e, const std\+::string \&new\+Name)
+\begin{DoxyCompactList}\small\item\em Change the name of an entity and send messages to relevant subsystems. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+yarp\+::os\+::\+Port \hyperlink{group__icubclient__clients_adf399e85f0cccebc9e95a7863bb62aba}{opc}
+\begin{DoxyCompactList}\small\item\em Port which connects to /\+O\+P\+C/rpc. \end{DoxyCompactList}\item 
+std\+::map$<$ int, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$ $>$ \hyperlink{group__icubclient__clients_acd1fedcd96e9cc5a766bfe72484cad46}{entities\+By\+ID}
+\item 
+std\+::string \hyperlink{group__icubclient__clients_aaa18459f611f4c14b7e3a197d7ce9b7a}{opc\+Name}
+\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__clients_a56c42753f30380d8abf4a96bc322b3b0}{I\+Cub\+Client}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__clients_a9c46e911dfd3ddb68f79d7601355329a}\label{group__icubclient__clients_a9c46e911dfd3ddb68f79d7601355329a}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!O\+P\+C\+Client@{O\+P\+C\+Client}}
+\index{O\+P\+C\+Client@{O\+P\+C\+Client}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{O\+P\+C\+Client()}{OPCClient()}}
+{\footnotesize\ttfamily O\+P\+C\+Client\+::\+O\+P\+C\+Client (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{module\+Name }\end{DoxyParamCaption})}
+
+
+
+Create an O\+PC client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em module\+Name} & The port namespace that will precede the client ports names. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 32 of file opc\+Client.\+cpp.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__clients_aeddebad5a837addc613f0234aa59d4cb}\label{group__icubclient__clients_aeddebad5a837addc613f0234aa59d4cb}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!add\+Entity@{add\+Entity}}
+\index{add\+Entity@{add\+Entity}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{add\+Entity()}{addEntity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void O\+P\+C\+Client\+::add\+Entity (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Send a the request to add a new entity to the O\+PC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & Pointer to the entity to be added. After executing the method, it will contain the updated entity. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 95 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a8ce1aa9d81ed8d32e53346b94f3c032c}\label{group__icubclient__clients_a8ce1aa9d81ed8d32e53346b94f3c032c}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!add\+Entity@{add\+Entity}}
+\index{add\+Entity@{add\+Entity}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{add\+Entity()}{addEntity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ icubclient\+::\+O\+P\+C\+Client\+::add\+Entity (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new entity. 
+
+If an \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} with the provided name is already existing, a new \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} with an appended number is returned. It is a template method, so all subclasses of \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} can be created like this 
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the new entity \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Newly created entity 
+\end{DoxyReturn}
+
+
+Definition at line 92 of file opc\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a4874ae1177b1f4a7aa5267428de3a8b7}\label{group__icubclient__clients_a4874ae1177b1f4a7aa5267428de3a8b7}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!add\+Or\+Retrieve\+Entity@{add\+Or\+Retrieve\+Entity}}
+\index{add\+Or\+Retrieve\+Entity@{add\+Or\+Retrieve\+Entity}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{add\+Or\+Retrieve\+Entity()}{addOrRetrieveEntity()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ icubclient\+::\+O\+P\+C\+Client\+::add\+Or\+Retrieve\+Entity (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Obtains an entity with the given name. 
+
+If this name is already present, then the existing entity is returned, otherwise a new one is created. It is a template method, so all subclasses of \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} can be created like this 
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the entity to be retrieved / created \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} 
+\end{DoxyReturn}
+
+
+Definition at line 119 of file opc\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a08ede3e77a372824e3a176a1d6466638}\label{group__icubclient__clients_a08ede3e77a372824e3a176a1d6466638}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!add\+Relation@{add\+Relation}}
+\index{add\+Relation@{add\+Relation}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{add\+Relation()}{addRelation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool O\+P\+C\+Client\+::add\+Relation (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&}]{r,  }\item[{double}]{life\+Time = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Obtains a relation between two entities. 
+
+If this relation is already present on the server side then the local relations are updated, else a new one is created. The relation is directly added on the server side. 
+\begin{DoxyParams}{Parameters}
+{\em r} & -\/ The relation to be added on the server \\
+\hline
+{\em life\+Time} & -\/ how long the relation should last for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success (relation was not present and was successfuly added), false in other cases. 
+\end{DoxyReturn}
+
+
+Definition at line 390 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ab0ef7754465e8fdd7b199d47e10f3d54}\label{group__icubclient__clients_ab0ef7754465e8fdd7b199d47e10f3d54}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!add\+Relation@{add\+Relation}}
+\index{add\+Relation@{add\+Relation}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{add\+Relation()}{addRelation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool O\+P\+C\+Client\+::add\+Relation (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{subject,  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{verb,  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{object = {\ttfamily nullptr},  }\item[{double}]{life\+Time = {\ttfamily -\/1},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+place = {\ttfamily nullptr},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+time = {\ttfamily nullptr},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+manner = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Obtains a relation between two entities. 
+
+If this relation already present on the server side then the local relations are updated, else a new one is created. The relation is directly added on the server side. 
+\begin{DoxyParams}{Parameters}
+{\em life\+Time} & -\/ how long the relation should last for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success (relation was not present and was successfuly added), false in other cases. 
+\end{DoxyReturn}
+
+
+Definition at line 408 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a0b4c570e07720cc25c203eda14adda99}\label{group__icubclient__clients_a0b4c570e07720cc25c203eda14adda99}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!change\+Name@{change\+Name}}
+\index{change\+Name@{change\+Name}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{change\+Name()}{changeName()}}
+{\footnotesize\ttfamily bool O\+P\+C\+Client\+::change\+Name (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{e,  }\item[{const std\+::string \&}]{new\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Change the name of an entity and send messages to relevant subsystems. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} whose name is to be changed \\
+\hline
+{\em new\+Name} & Desired name of e \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 969 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a5a5bedfa32b8adba9a6ecf1d69745dc5}\label{group__icubclient__clients_a5a5bedfa32b8adba9a6ecf1d69745dc5}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!checkout@{checkout}}
+\index{checkout@{checkout}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{checkout()}{checkout()}}
+{\footnotesize\ttfamily void O\+P\+C\+Client\+::checkout (\begin{DoxyParamCaption}\item[{bool}]{update\+Cache = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Poll the O\+PC for all entities and relations and store them locally. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em update\+Cache} & If this option is turned on the local cache will be wiped \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 754 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ae884577090108846f1b0015818a2f13d}\label{group__icubclient__clients_ae884577090108846f1b0015818a2f13d}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!clear@{clear}}
+\index{clear@{clear}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void O\+P\+C\+Client\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear the O\+PC content. 
+
+
+
+Definition at line 80 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a4b193fe61992f927591ea0e5ff2a6f66}\label{group__icubclient__clients_a4b193fe61992f927591ea0e5ff2a6f66}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!close@{close}}
+\index{close@{close}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily void O\+P\+C\+Client\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Close the client ports. 
+
+
+
+Definition at line 69 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a79bec5f248fcff8ae539b2cd285950a3}\label{group__icubclient__clients_a79bec5f248fcff8ae539b2cd285950a3}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!commit@{commit}}
+\index{commit@{commit}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{commit()}{commit()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void O\+P\+C\+Client\+::commit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Commit all the entities \& relations stored locally, erasing the server copies. 
+
+
+
+Definition at line 835 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_abaec4d0b527ced007679b857446f09ec}\label{group__icubclient__clients_abaec4d0b527ced007679b857446f09ec}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!commit@{commit}}
+\index{commit@{commit}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{commit()}{commit()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void O\+P\+C\+Client\+::commit (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{e }\end{DoxyParamCaption})}
+
+
+
+Commit a single local entity, erasing the server copies. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & A pointer to the entity to be commited \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 844 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ab5223fad505130bd95aba586889edefc}\label{group__icubclient__clients_ab5223fad505130bd95aba586889edefc}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!connect@{connect}}
+\index{connect@{connect}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{connect()}{connect()}}
+{\footnotesize\ttfamily bool icubclient\+::\+O\+P\+C\+Client\+::connect (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{opc\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Try to connect the client to an O\+PC server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em opc\+Name} & the name of the O\+PC module to connect to. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 157 of file opc\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a8679fddd5ea40734a4da2d89ec6155c7}\label{group__icubclient__clients_a8679fddd5ea40734a4da2d89ec6155c7}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!contains\+Relation@{contains\+Relation}}
+\index{contains\+Relation@{contains\+Relation}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{contains\+Relation()}{containsRelation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool O\+P\+C\+Client\+::contains\+Relation (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{subject,  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{verb,  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{object = {\ttfamily nullptr},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+place = {\ttfamily nullptr},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+time = {\ttfamily nullptr},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+manner = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Check if a relation exists. 
+
+\begin{DoxyReturn}{Returns}
+true in case the relation exists, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 501 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_af024cf7dd739214e22c176911740778a}\label{group__icubclient__clients_af024cf7dd739214e22c176911740778a}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!contains\+Relation@{contains\+Relation}}
+\index{contains\+Relation@{contains\+Relation}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{contains\+Relation()}{containsRelation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool O\+P\+C\+Client\+::contains\+Relation (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&}]{r }\end{DoxyParamCaption})}
+
+
+
+Check if a relation exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & -\/ relation to be checked \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case the relation exists, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 513 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_af4129eac8888d65d3142b15a7f17909c}\label{group__icubclient__clients_af4129eac8888d65d3142b15a7f17909c}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!Entities@{Entities}}
+\index{Entities@{Entities}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{Entities()}{Entities()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$ $>$ O\+P\+C\+Client\+::\+Entities (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{condition }\end{DoxyParamCaption})}
+
+
+
+Getter of the list of entities of matching a complex condition (e.\+g \char`\"{}(entity \char`\"{}==\char`\"{} agent) \char`\"{}\&\&\char`\"{} (is\+Present \char`\"{}==" 1) ) and update them locally. 
+
+
+
+Definition at line 865 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a62ac8158ffa1f9d4d33ea15ea5403a15}\label{group__icubclient__clients_a62ac8158ffa1f9d4d33ea15ea5403a15}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!Entities@{Entities}}
+\index{Entities@{Entities}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{Entities()}{Entities()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$ $>$ O\+P\+C\+Client\+::\+Entities (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{prop,  }\item[{const std\+::string \&}]{op,  }\item[{const std\+::string \&}]{value }\end{DoxyParamCaption})}
+
+
+
+Getter of the list of entities matching a condition and update them locally. 
+
+
+
+Definition at line 893 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_af92d4219221c7705bf70779bcde33768}\label{group__icubclient__clients_af92d4219221c7705bf70779bcde33768}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!Entities\+Cache@{Entities\+Cache}}
+\index{Entities\+Cache@{Entities\+Cache}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{Entities\+Cache()}{EntitiesCache()}}
+{\footnotesize\ttfamily list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$ $>$ O\+P\+C\+Client\+::\+Entities\+Cache (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getter of the list of entities stored locally. 
+
+
+
+Definition at line 905 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a9e33c7aaf762eea9123b90565812e04c}\label{group__icubclient__clients_a9e33c7aaf762eea9123b90565812e04c}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!Entities\+Cache\+Copy@{Entities\+Cache\+Copy}}
+\index{Entities\+Cache\+Copy@{Entities\+Cache\+Copy}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{Entities\+Cache\+Copy()}{EntitiesCacheCopy()}}
+{\footnotesize\ttfamily std\+::list$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $>$ $>$ O\+P\+C\+Client\+::\+Entities\+Cache\+Copy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getter of the list of the copies of the entities stored locally. 
+
+
+
+Definition at line 917 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ad0aea7a8df35f5e01f352b789ea043e1}\label{group__icubclient__clients_ad0aea7a8df35f5e01f352b789ea043e1}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!get\+Entity@{get\+Entity}}
+\index{get\+Entity@{get\+Entity}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{get\+Entity()}{getEntity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$ O\+P\+C\+Client\+::get\+Entity (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{bool}]{force\+Update = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Gets an entity based on its name, but do no create it if it doesn\textquotesingle{}t exist yet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the entity to retrieve. \\
+\hline
+{\em force\+Update} & Update the entity instead of retrieving from the cache. (false by default) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the entity or nullptr if not existing 
+\end{DoxyReturn}
+
+
+Definition at line 134 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_aa7accc436612cd9cd73fb264649675ee}\label{group__icubclient__clients_aa7accc436612cd9cd73fb264649675ee}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!get\+Entity@{get\+Entity}}
+\index{get\+Entity@{get\+Entity}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{get\+Entity()}{getEntity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$ O\+P\+C\+Client\+::get\+Entity (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{bool}]{force\+Update = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Gets an entity based on its id, but do no create it if it doesn\textquotesingle{}t exist yet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The ID of the entity to retrieve. \\
+\hline
+{\em force\+Update} & Update the entity instead of retrieving from the cache. (false by default) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the entity or nullptr if not existing 
+\end{DoxyReturn}
+
+
+Definition at line 181 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a3dbf81c34467613af606013e45042f01}\label{group__icubclient__clients_a3dbf81c34467613af606013e45042f01}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!get\+Relation\+ID@{get\+Relation\+ID}}
+\index{get\+Relation\+ID@{get\+Relation\+ID}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{get\+Relation\+I\+D()}{getRelationID()}}
+{\footnotesize\ttfamily int O\+P\+C\+Client\+::get\+Relation\+ID (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{subject,  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{verb,  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{object = {\ttfamily nullptr},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+place = {\ttfamily nullptr},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+time = {\ttfamily nullptr},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+manner = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 302 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a10a9d5b6006fce9a32c82f19ae03ae74}\label{group__icubclient__clients_a10a9d5b6006fce9a32c82f19ae03ae74}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!get\+Relations@{get\+Relations}}
+\index{get\+Relations@{get\+Relations}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{get\+Relations()}{getRelations()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} $>$ O\+P\+C\+Client\+::get\+Relations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns a list of all existing relations between entities. 
+
+
+
+Definition at line 570 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a1a3ea6255bc9da44f281fa767801587e}\label{group__icubclient__clients_a1a3ea6255bc9da44f281fa767801587e}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!get\+Relations@{get\+Relations}}
+\index{get\+Relations@{get\+Relations}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{get\+Relations()}{getRelations()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} $>$ O\+P\+C\+Client\+::get\+Relations (\begin{DoxyParamCaption}\item[{std\+::string}]{entity }\end{DoxyParamCaption})}
+
+
+
+Returns a list of all existing relations involving a specific entities. 
+
+
+
+Definition at line 729 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a7a5d4c886b537244cf7fbd25d4141388}\label{group__icubclient__clients_a7a5d4c886b537244cf7fbd25d4141388}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!get\+Relations@{get\+Relations}}
+\index{get\+Relations@{get\+Relations}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{get\+Relations()}{getRelations()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} $>$ O\+P\+C\+Client\+::get\+Relations (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{entity }\end{DoxyParamCaption})}
+
+
+
+Returns a list of all existing relations involving a specific entities. 
+
+
+
+Definition at line 748 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a6df65f36cc97fe26d05df85c3c56faed}\label{group__icubclient__clients_a6df65f36cc97fe26d05df85c3c56faed}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!get\+Relations\+Matching@{get\+Relations\+Matching}}
+\index{get\+Relations\+Matching@{get\+Relations\+Matching}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{get\+Relations\+Matching()}{getRelationsMatching()}}
+{\footnotesize\ttfamily std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} $>$ O\+P\+C\+Client\+::get\+Relations\+Matching (\begin{DoxyParamCaption}\item[{std\+::string}]{subject = {\ttfamily \char`\"{}any\char`\"{}},  }\item[{std\+::string}]{verb = {\ttfamily \char`\"{}any\char`\"{}},  }\item[{std\+::string}]{object = {\ttfamily \char`\"{}any\char`\"{}},  }\item[{std\+::string}]{c\+\_\+place = {\ttfamily \char`\"{}any\char`\"{}},  }\item[{std\+::string}]{c\+\_\+time = {\ttfamily \char`\"{}any\char`\"{}},  }\item[{std\+::string}]{c\+\_\+manner = {\ttfamily \char`\"{}any\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Returns a list of all existing relations between entities. 
+
+All the roles with something other than \char`\"{}any\char`\"{} will act as filters for the relation. 
+
+Definition at line 617 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a9eb229857b2afdf17304e8bdd6fb2b61}\label{group__icubclient__clients_a9eb229857b2afdf17304e8bdd6fb2b61}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!get\+Relations\+Matching\+Loosly@{get\+Relations\+Matching\+Loosly}}
+\index{get\+Relations\+Matching\+Loosly@{get\+Relations\+Matching\+Loosly}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{get\+Relations\+Matching\+Loosly()}{getRelationsMatchingLoosly()}}
+{\footnotesize\ttfamily std\+::list$<$ \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} $>$ O\+P\+C\+Client\+::get\+Relations\+Matching\+Loosly (\begin{DoxyParamCaption}\item[{std\+::string}]{subject = {\ttfamily \char`\"{}any\char`\"{}},  }\item[{std\+::string}]{verb = {\ttfamily \char`\"{}any\char`\"{}},  }\item[{std\+::string}]{object = {\ttfamily \char`\"{}any\char`\"{}},  }\item[{std\+::string}]{c\+\_\+place = {\ttfamily \char`\"{}any\char`\"{}},  }\item[{std\+::string}]{c\+\_\+time = {\ttfamily \char`\"{}any\char`\"{}},  }\item[{std\+::string}]{c\+\_\+manner = {\ttfamily \char`\"{}any\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Returns a list of all existing relations between entities. 
+
+All the roles with something else than \char`\"{}any\char`\"{} will act as filters for the relation. All relations with at least one role matching will be returned. 
+
+Definition at line 710 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a319df571cac4fc425832546234cda426}\label{group__icubclient__clients_a319df571cac4fc425832546234cda426}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!interrupt@{interrupt}}
+\index{interrupt@{interrupt}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{interrupt()}{interrupt()}}
+{\footnotesize\ttfamily void O\+P\+C\+Client\+::interrupt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Interrupt communications of the client ports. 
+
+
+
+Definition at line 64 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_aa4d162f66e8a7c1b3418e331fcc0556f}\label{group__icubclient__clients_aa4d162f66e8a7c1b3418e331fcc0556f}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!is\+Connected@{is\+Connected}}
+\index{is\+Connected@{is\+Connected}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{is\+Connected()}{isConnected()}}
+{\footnotesize\ttfamily bool icubclient\+::\+O\+P\+C\+Client\+::is\+Connected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if the client is already connected to the O\+PC server. 
+
+Warning, this method tries to connect to the O\+PC again in case it is not connected yet. \begin{DoxyReturn}{Returns}
+Whether the O\+PC was already connected OR whether the new connect was successful 
+\end{DoxyReturn}
+
+
+Definition at line 141 of file opc\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_a19a6372fc0c11da66009ba4e11ac6b38}\label{group__icubclient__clients_a19a6372fc0c11da66009ba4e11ac6b38}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!remove\+Entity@{remove\+Entity}}
+\index{remove\+Entity@{remove\+Entity}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{remove\+Entity()}{removeEntity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool O\+P\+C\+Client\+::remove\+Entity (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})}
+
+
+
+Removes an entity based on its name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the entity to remove. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true/false if succeeded/failed. 
+\end{DoxyReturn}
+
+
+Definition at line 246 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_afcb57495b66f77df3aa4991f2a14901e}\label{group__icubclient__clients_afcb57495b66f77df3aa4991f2a14901e}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!remove\+Entity@{remove\+Entity}}
+\index{remove\+Entity@{remove\+Entity}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{remove\+Entity()}{removeEntity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool O\+P\+C\+Client\+::remove\+Entity (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Removes an entity based on its id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The ID of the entity to retrieve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true/false if succeeded/failed. 
+\end{DoxyReturn}
+
+
+Definition at line 273 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ac28de9ea15a53d29d9e5c794d98d0ab4}\label{group__icubclient__clients_ac28de9ea15a53d29d9e5c794d98d0ab4}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!remove\+Relation@{remove\+Relation}}
+\index{remove\+Relation@{remove\+Relation}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{remove\+Relation()}{removeRelation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool O\+P\+C\+Client\+::remove\+Relation (\begin{DoxyParamCaption}\item[{const \hyperlink{group__icubclient__representations_classicubclient_1_1Relation}{Relation} \&}]{r }\end{DoxyParamCaption})}
+
+
+
+Try to remove a relation between two entities. 
+
+The relation is directly removed on the server side. 
+\begin{DoxyParams}{Parameters}
+{\em r} & -\/ relation to be removed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true in case of success (final state no relation locally/server), false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 450 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a6875420cc0976a941b47ca639240e896}\label{group__icubclient__clients_a6875420cc0976a941b47ca639240e896}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!remove\+Relation@{remove\+Relation}}
+\index{remove\+Relation@{remove\+Relation}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{remove\+Relation()}{removeRelation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool O\+P\+C\+Client\+::remove\+Relation (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{subject,  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{verb,  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{object = {\ttfamily nullptr},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+place = {\ttfamily nullptr},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+time = {\ttfamily nullptr},  }\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{complement\+\_\+manner = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Try to remove a relation between two entities. 
+
+The relation is directly removed on the server side. \begin{DoxyReturn}{Returns}
+true in case of success (final state no relation locally/server), false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 462 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a384897adb9f2d8d19e6c6ff6a9e5c946}\label{group__icubclient__clients_a384897adb9f2d8d19e6c6ff6a9e5c946}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!set\+Entity\+Property@{set\+Entity\+Property}}
+\index{set\+Entity\+Property@{set\+Entity\+Property}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{set\+Entity\+Property()}{setEntityProperty()}}
+{\footnotesize\ttfamily bool O\+P\+C\+Client\+::set\+Entity\+Property (\begin{DoxyParamCaption}\item[{std\+::string}]{source\+Entity\+Name,  }\item[{std\+::string}]{property\+Name,  }\item[{std\+::string}]{target\+Entity\+Name }\end{DoxyParamCaption})}
+
+
+
+Try to assign a property from an entity to another entity, using a specific property name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source\+Entity\+Name} & Name of the entity the property should be copied from \\
+\hline
+{\em property\+Name} & Name of the property to be copied \\
+\hline
+{\em target\+Entity\+Name} & Name of the entity where the property should be copied into \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 122 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_aa3df78dc97e0148fea927dd85c053fbf}\label{group__icubclient__clients_aa3df78dc97e0148fea927dd85c053fbf}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!set\+Life\+Time@{set\+Life\+Time}}
+\index{set\+Life\+Time@{set\+Life\+Time}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{set\+Life\+Time()}{setLifeTime()}}
+{\footnotesize\ttfamily bool O\+P\+C\+Client\+::set\+Life\+Time (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{double}]{life\+Time }\end{DoxyParamCaption})}
+
+
+
+Set the lifetime property of a relation in the O\+PC. 
+
+\begin{DoxyReturn}{Returns}
+true in case of success, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 524 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a46da9e7f9ba02ae088fe210d6e52bcee}\label{group__icubclient__clients_a46da9e7f9ba02ae088fe210d6e52bcee}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{to\+String()}{toString()}}
+{\footnotesize\ttfamily string O\+P\+C\+Client\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns a human readable description of the client content (Entities \& Relations) 
+
+
+
+Definition at line 954 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a1f5e82e93d8d522381cf596d870ccf87}\label{group__icubclient__clients_a1f5e82e93d8d522381cf596d870ccf87}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!update@{update}}
+\index{update@{update}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void O\+P\+C\+Client\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update the properties of all locally stored entities \& relations. 
+
+
+
+Definition at line 794 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_ad2b063f232705be47c345e331b2be8fd}\label{group__icubclient__clients_ad2b063f232705be47c345e331b2be8fd}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!update@{update}}
+\index{update@{update}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void O\+P\+C\+Client\+::update (\begin{DoxyParamCaption}\item[{\hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity} $\ast$}]{e }\end{DoxyParamCaption})}
+
+
+
+Poll the O\+PC for updating a given entity properties. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & A pointer on the entity to update. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 803 of file opc\+Client.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__clients_a92aeb4c3bb65cd62368980a28496d024}\label{group__icubclient__clients_a92aeb4c3bb65cd62368980a28496d024}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!write@{write}}
+\index{write@{write}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily bool O\+P\+C\+Client\+::write (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Bottle \&}]{cmd,  }\item[{yarp\+::os\+::\+Bottle \&}]{reply,  }\item[{bool}]{Verbose = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Send a command to the O\+PC and return the reply. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & the command to be send to the O\+PC \\
+\hline
+{\em reply} & reference to the reply of the O\+PC \\
+\hline
+{\em Verbose} & Whether to output additional information using y\+Info() \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 39 of file opc\+Client.\+cpp.
+
+
+
+\paragraph{Friends And Related Function Documentation}
+\mbox{\Hypertarget{group__icubclient__clients_a56c42753f30380d8abf4a96bc322b3b0}\label{group__icubclient__clients_a56c42753f30380d8abf4a96bc322b3b0}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!I\+Cub\+Client@{I\+Cub\+Client}}
+\index{I\+Cub\+Client@{I\+Cub\+Client}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{I\+Cub\+Client}{ICubClient}}
+{\footnotesize\ttfamily friend class \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{I\+Cub\+Client}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 37 of file opc\+Client.\+h.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__clients_acd1fedcd96e9cc5a766bfe72484cad46}\label{group__icubclient__clients_acd1fedcd96e9cc5a766bfe72484cad46}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!entities\+By\+ID@{entities\+By\+ID}}
+\index{entities\+By\+ID@{entities\+By\+ID}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{entities\+By\+ID}{entitiesByID}}
+{\footnotesize\ttfamily std\+::map$<$int, \hyperlink{group__icubclient__representations_classicubclient_1_1Entity}{Entity}$\ast$$>$ icubclient\+::\+O\+P\+C\+Client\+::entities\+By\+ID\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 50 of file opc\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_ae9916c9f9f313c49ea22be20c4570a7a}\label{group__icubclient__clients_ae9916c9f9f313c49ea22be20c4570a7a}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!is\+Verbose@{is\+Verbose}}
+\index{is\+Verbose@{is\+Verbose}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{is\+Verbose}{isVerbose}}
+{\footnotesize\ttfamily bool icubclient\+::\+O\+P\+C\+Client\+::is\+Verbose}
+
+
+
+Definition at line 82 of file opc\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_adf399e85f0cccebc9e95a7863bb62aba}\label{group__icubclient__clients_adf399e85f0cccebc9e95a7863bb62aba}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!opc@{opc}}
+\index{opc@{opc}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{opc}{opc}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Port icubclient\+::\+O\+P\+C\+Client\+::opc\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Port which connects to /\+O\+P\+C/rpc. 
+
+
+
+Definition at line 40 of file opc\+Client.\+h.
+
+\mbox{\Hypertarget{group__icubclient__clients_aaa18459f611f4c14b7e3a197d7ce9b7a}\label{group__icubclient__clients_aaa18459f611f4c14b7e3a197d7ce9b7a}} 
+\index{icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}!opc\+Name@{opc\+Name}}
+\index{opc\+Name@{opc\+Name}!icubclient\+::\+O\+P\+C\+Client@{icubclient\+::\+O\+P\+C\+Client}}
+\subparagraph{\texorpdfstring{opc\+Name}{opcName}}
+{\footnotesize\ttfamily std\+::string icubclient\+::\+O\+P\+C\+Client\+::opc\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 73 of file opc\+Client.\+h.
+

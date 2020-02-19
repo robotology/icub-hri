@@ -1,0 +1,571 @@
+\hypertarget{classproactiveTagging}{}\section{proactive\+Tagging Class Reference}
+\label{classproactiveTagging}\index{proactive\+Tagging@{proactive\+Tagging}}
+
+
+{\ttfamily \#include $<$proactive\+Tagging.\+h$>$}
+
+
+
+Inheritance diagram for proactive\+Tagging\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=180pt]{classproactiveTagging__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+yarp\+::os\+::\+Bottle \hyperlink{classproactiveTagging_a7645a181289f171fc5268ecd24e7ace9}{explore\+Unknown\+Entity} (const yarp\+::os\+::\+Bottle \&b\+Input)
+\begin{DoxyCompactList}\small\item\em Explore an unknown entity by asking for the name (response via speech recognition) \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Bottle \hyperlink{classproactiveTagging_a06f3da8e08290cc4e667dc1f1ab0a2ba}{searching\+Entity} (const yarp\+::os\+::\+Bottle \&b\+Input)
+\begin{DoxyCompactList}\small\item\em Search for the entity corresponding to a certain name in all the unknown entities. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classproactiveTagging_a203d678d3eb79a1fe78d9f2142e0459e}{get\+Best\+Entity} (std\+::string s\+Type\+Target)
+\begin{DoxyCompactList}\small\item\em Loop through all objects in the O\+PC, and check their saliency. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Bottle \hyperlink{classproactiveTagging_a7d77039a8eb90ea145043d28a2b5435c}{get\+Name\+From\+S\+AM} (std\+::string s\+Name\+Target, std\+::string current\+Entity\+Type)
+\begin{DoxyCompactList}\small\item\em Send request to \hyperlink{namespaceSAM}{S\+AM} to use its face recognition to recognise partner. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Bottle \hyperlink{classproactiveTagging_ad767fe5d8389c2773da1d34501b8b792}{explore\+Tactile\+Entity\+With\+Name} (yarp\+::os\+::\+Bottle b\+Input)
+\begin{DoxyCompactList}\small\item\em Explore an unknown tactile entity (e.\+g. \end{DoxyCompactList}\item 
+bool \hyperlink{classproactiveTagging_aff877a5a6351b04b96a9c2d5649bc89a}{configure} (yarp\+::os\+::\+Resource\+Finder \&rf)
+\item 
+bool \hyperlink{classproactiveTagging_aaf4c0db3e658e44211ea8ccd3e0e91dc}{interrupt\+Module} ()
+\item 
+bool \hyperlink{classproactiveTagging_aed2dea4a5b6aef473d4975699d374104}{close} ()
+\item 
+double \hyperlink{classproactiveTagging_a0535c03567fa716dbcb91b5a801be0ff}{get\+Period} ()
+\item 
+bool \hyperlink{classproactiveTagging_a024bbe02d942466a0b96dac527d170e0}{update\+Module} ()
+\item 
+bool \hyperlink{classproactiveTagging_a6d7c50fb7e1b26cd1c7d757ef3640359}{respond} (const yarp\+::os\+::\+Bottle \&cmd, yarp\+::os\+::\+Bottle \&reply)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classproactiveTagging_a8765b5f24e822956a835baf9f2097a5f}{configure\+O\+PC} (yarp\+::os\+::\+Resource\+Finder \&rf)
+\begin{DoxyCompactList}\small\item\em Read config file and fill O\+PC accordingly. \end{DoxyCompactList}\item 
+void \hyperlink{classproactiveTagging_ab7f6a446c71a7bc9416472fd8a59cac2}{sub\+Populate\+Objects} (yarp\+::os\+::\+Bottle $\ast$object\+List, bool add\+Or\+Retrieve)
+\item 
+void \hyperlink{classproactiveTagging_ae3566ba1d23f67b927f2fe4e624505d2}{sub\+Populate\+Bodyparts} (yarp\+::os\+::\+Bottle $\ast$body\+Part\+List, yarp\+::os\+::\+Bottle $\ast$body\+Part\+Joint\+List, bool add\+Or\+Retrieve)
+\item 
+yarp\+::os\+::\+Bottle \hyperlink{classproactiveTagging_aaf4838d9ca0569c9cfbe14f406c9fa04}{recog\+Name} (std\+::string entity\+Type)
+\begin{DoxyCompactList}\small\item\em Recognize the name of an unknown entity (communicate with speech recognizer) \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classproactiveTagging_a59ee98016936f16bd5aeb4f23e10563a}{get\+Body\+Part\+Name\+For\+Speech} (const std\+::string bodypart)
+\begin{DoxyCompactList}\small\item\em Return a \char`\"{}nice\char`\"{} version of a body part name, eg given \char`\"{}index\char`\"{} as input, it returns \char`\"{}index finger\char`\"{}. \end{DoxyCompactList}\item 
+bool \hyperlink{classproactiveTagging_a277e15d7575cbd390dac6acd248a0efe}{set\+Pasar\+Pointing} (bool on)
+\begin{DoxyCompactList}\small\item\em Ask pasar to increase saliency when a human is pointing to an object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client} $\ast$ \hyperlink{classproactiveTagging_af0a6a3c8dd1504920ca362a55defadb2}{i\+Cub}
+\begin{DoxyCompactList}\small\item\em icubclient \end{DoxyCompactList}\item 
+double \hyperlink{classproactiveTagging_a50ac9c7c0744e710bdcc51bd931a4b0e}{period}
+\item 
+std\+::string \hyperlink{classproactiveTagging_a9f26b33c30966d628ecdd89cd953c852}{S\+A\+M\+Rpc}
+\begin{DoxyCompactList}\small\item\em Name of \hyperlink{namespaceSAM}{S\+AM} R\+PC port. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classproactiveTagging_aaaaed95ad0d6607683ab8451d6a90abf}{touch\+Detector\+Rpc}
+\begin{DoxyCompactList}\small\item\em Name of touch\+Detector R\+PC port. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Port \hyperlink{classproactiveTagging_a7f2ff11627a9a75f56b33ac626b3a252}{rpc\+Port}
+\begin{DoxyCompactList}\small\item\em Response port. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Port \hyperlink{classproactiveTagging_a0b64adf975edfe871cf4816b824e8cf0}{port\+To\+S\+AM}
+\begin{DoxyCompactList}\small\item\em Port used to communicate with \hyperlink{namespaceSAM}{S\+AM}. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Port \hyperlink{classproactiveTagging_a94a5997938a3b60d47c7feb179a93888}{port\+To\+Pasar}
+\begin{DoxyCompactList}\small\item\em Port used to communicate with pasar. \end{DoxyCompactList}\item 
+yarp\+::os\+::\+Buffered\+Port$<$ yarp\+::os\+::\+Bottle $>$ \hyperlink{classproactiveTagging_af8b98de7b5bd419ad166a343922924c2}{port\+From\+Touch\+Detector}
+\begin{DoxyCompactList}\small\item\em Port used to communicate with touch detector. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classproactiveTagging_a73f0a523a12bdbb43a78e729b567d416}{Grammar\+Ask\+Name\+Agent}
+\begin{DoxyCompactList}\small\item\em Name of grammar file when asking for name of agent. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classproactiveTagging_a144b3a62457fae75af0950e223bfdb01}{Grammar\+Ask\+Name\+Object}
+\begin{DoxyCompactList}\small\item\em Name of grammar file when asking for name of object. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classproactiveTagging_a50b13e3330905f1b19c6a16b94bc67b6}{Grammar\+Ask\+Name\+Bodypart}
+\begin{DoxyCompactList}\small\item\em Name of grammar file when asking for name of bodypart. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classproactiveTagging_a77047c3a21e39d1aa6a6d0f656707621}{babbling\+Arm}
+\begin{DoxyCompactList}\small\item\em side of the babbling arm \+: left or right \end{DoxyCompactList}\item 
+double \hyperlink{classproactiveTagging_a6586dc8849953aa36aa0cb88ade14bf0}{threshold\+Distinguish\+Objects\+Ratio}
+\begin{DoxyCompactList}\small\item\em ratio of saliency needed to detect if 1 object is more salient that the other \end{DoxyCompactList}\item 
+double \hyperlink{classproactiveTagging_a5e506aa6021526fb0665711593a5797c}{threshold\+Salience\+Detection}
+\begin{DoxyCompactList}\small\item\em value of saliency needed to detect if 1 object is more salient that the other \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 27 of file proactive\+Tagging.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classproactiveTagging_aed2dea4a5b6aef473d4975699d374104}\label{classproactiveTagging_aed2dea4a5b6aef473d4975699d374104}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!close@{close}}
+\index{close@{close}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool proactive\+Tagging\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 109 of file proactive\+Tagging.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_aff877a5a6351b04b96a9c2d5649bc89a}\label{classproactiveTagging_aff877a5a6351b04b96a9c2d5649bc89a}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!configure@{configure}}
+\index{configure@{configure}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool proactive\+Tagging\+::configure (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf }\end{DoxyParamCaption})}
+
+
+
+Definition at line 30 of file proactive\+Tagging.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_a8765b5f24e822956a835baf9f2097a5f}\label{classproactiveTagging_a8765b5f24e822956a835baf9f2097a5f}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!configure\+O\+PC@{configure\+O\+PC}}
+\index{configure\+O\+PC@{configure\+O\+PC}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{configure\+O\+P\+C()}{configureOPC()}}
+{\footnotesize\ttfamily void proactive\+Tagging\+::configure\+O\+PC (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Read config file and fill O\+PC accordingly. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rf} & -\/ resource\+Finder instance \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 235 of file helpers.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_ad767fe5d8389c2773da1d34501b8b792}\label{classproactiveTagging_ad767fe5d8389c2773da1d34501b8b792}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!explore\+Tactile\+Entity\+With\+Name@{explore\+Tactile\+Entity\+With\+Name}}
+\index{explore\+Tactile\+Entity\+With\+Name@{explore\+Tactile\+Entity\+With\+Name}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{explore\+Tactile\+Entity\+With\+Name()}{exploreTactileEntityWithName()}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Bottle proactive\+Tagging\+::explore\+Tactile\+Entity\+With\+Name (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Bottle}]{b\+Input }\end{DoxyParamCaption})}
+
+
+
+Explore an unknown tactile entity (e.\+g. 
+
+fingertips), when knowing the name 
+\begin{DoxyParams}{Parameters}
+{\em b\+Input} & Bottle with (explore\+Tactile\+Entity\+With\+Name entity\+Type entity\+Name) (eg\+: explore\+Tactile\+Entity\+With\+Name bodypart index) -\/ entity\+Type must be \char`\"{}bodypart\char`\"{}! \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Bottle with the result (ack skin\+\_\+patch\+\_\+number) or (nack error\+\_\+message) 
+\end{DoxyReturn}
+
+
+Definition at line 268 of file proactive\+Tagging.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_a7645a181289f171fc5268ecd24e7ace9}\label{classproactiveTagging_a7645a181289f171fc5268ecd24e7ace9}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!explore\+Unknown\+Entity@{explore\+Unknown\+Entity}}
+\index{explore\+Unknown\+Entity@{explore\+Unknown\+Entity}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{explore\+Unknown\+Entity()}{exploreUnknownEntity()}}
+{\footnotesize\ttfamily Bottle proactive\+Tagging\+::explore\+Unknown\+Entity (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{b\+Input }\end{DoxyParamCaption})}
+
+
+
+Explore an unknown entity by asking for the name (response via speech recognition) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b\+Input} & explore\+Unknown\+Entity entity\+Type entity\+Name (eg\+: explore\+Unknown\+Entity agent unknown\+\_\+25) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Bottle with (success entity\+Type) or (nack error\+Message) 
+\end{DoxyReturn}
+
+
+Definition at line 360 of file proactive\+Tagging.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_a203d678d3eb79a1fe78d9f2142e0459e}\label{classproactiveTagging_a203d678d3eb79a1fe78d9f2142e0459e}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!get\+Best\+Entity@{get\+Best\+Entity}}
+\index{get\+Best\+Entity@{get\+Best\+Entity}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{get\+Best\+Entity()}{getBestEntity()}}
+{\footnotesize\ttfamily std\+::string proactive\+Tagging\+::get\+Best\+Entity (\begin{DoxyParamCaption}\item[{std\+::string}]{s\+Type\+Target }\end{DoxyParamCaption})}
+
+
+
+Loop through all objects in the O\+PC, and check their saliency. 
+
+Return the name of the object with the highest saliency 
+\begin{DoxyParams}{Parameters}
+{\em s\+Type\+Target} & -\/ type of the target. For now, only \hyperlink{group__icubclient__tags_ga6797b1b7c9fa53110a21f603348bf53b}{I\+C\+U\+B\+C\+L\+I\+E\+N\+T\+\_\+\+O\+P\+C\+\_\+\+E\+N\+T\+I\+T\+Y\+\_\+\+O\+B\+J\+E\+CT} is supported \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Name of the most salient object 
+\end{DoxyReturn}
+
+
+Definition at line 70 of file helpers.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_a59ee98016936f16bd5aeb4f23e10563a}\label{classproactiveTagging_a59ee98016936f16bd5aeb4f23e10563a}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!get\+Body\+Part\+Name\+For\+Speech@{get\+Body\+Part\+Name\+For\+Speech}}
+\index{get\+Body\+Part\+Name\+For\+Speech@{get\+Body\+Part\+Name\+For\+Speech}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{get\+Body\+Part\+Name\+For\+Speech()}{getBodyPartNameForSpeech()}}
+{\footnotesize\ttfamily std\+::string proactive\+Tagging\+::get\+Body\+Part\+Name\+For\+Speech (\begin{DoxyParamCaption}\item[{const std\+::string}]{bodypart }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Return a \char`\"{}nice\char`\"{} version of a body part name, eg given \char`\"{}index\char`\"{} as input, it returns \char`\"{}index finger\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bodypart} & -\/ \char`\"{}\+Plain\char`\"{} version of a body part name, eg \char`\"{}index\char`\"{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\char`\"{}\+Nice\char`\"{} version of a body part name for speech synthesis, eg \char`\"{}index finger\char`\"{} 
+\end{DoxyReturn}
+
+
+Definition at line 266 of file helpers.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_a7d77039a8eb90ea145043d28a2b5435c}\label{classproactiveTagging_a7d77039a8eb90ea145043d28a2b5435c}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!get\+Name\+From\+S\+AM@{get\+Name\+From\+S\+AM}}
+\index{get\+Name\+From\+S\+AM@{get\+Name\+From\+S\+AM}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{get\+Name\+From\+S\+A\+M()}{getNameFromSAM()}}
+{\footnotesize\ttfamily Bottle proactive\+Tagging\+::get\+Name\+From\+S\+AM (\begin{DoxyParamCaption}\item[{std\+::string}]{s\+Name\+Target,  }\item[{std\+::string}]{current\+Entity\+Type }\end{DoxyParamCaption})}
+
+
+
+Send request to \hyperlink{namespaceSAM}{S\+AM} to use its face recognition to recognise partner. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s\+Name\+Target} & name of the entity to detect, typically \char`\"{}partner\char`\"{} \\
+\hline
+{\em current\+Entity\+Type} & type of the entity, typically \hyperlink{group__icubclient__tags_ga344c831a91baa7409cf3b36a7442bdb4}{I\+C\+U\+B\+C\+L\+I\+E\+N\+T\+\_\+\+O\+P\+C\+\_\+\+E\+N\+T\+I\+T\+Y\+\_\+\+A\+G\+E\+NT} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Bottle. In case of success\+: (success entity\+Type) where entity\+Type = agent, in case of failure\+: (nack) 
+\end{DoxyReturn}
+
+
+Definition at line 219 of file proactive\+Tagging.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_a0535c03567fa716dbcb91b5a801be0ff}\label{classproactiveTagging_a0535c03567fa716dbcb91b5a801be0ff}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!get\+Period@{get\+Period}}
+\index{get\+Period@{get\+Period}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{get\+Period()}{getPeriod()}}
+{\footnotesize\ttfamily double proactive\+Tagging\+::get\+Period (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 125 of file proactive\+Tagging.\+h.
+
+\mbox{\Hypertarget{classproactiveTagging_aaf4c0db3e658e44211ea8ccd3e0e91dc}\label{classproactiveTagging_aaf4c0db3e658e44211ea8ccd3e0e91dc}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!interrupt\+Module@{interrupt\+Module}}
+\index{interrupt\+Module@{interrupt\+Module}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{interrupt\+Module()}{interruptModule()}}
+{\footnotesize\ttfamily bool proactive\+Tagging\+::interrupt\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 101 of file proactive\+Tagging.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_aaf4838d9ca0569c9cfbe14f406c9fa04}\label{classproactiveTagging_aaf4838d9ca0569c9cfbe14f406c9fa04}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!recog\+Name@{recog\+Name}}
+\index{recog\+Name@{recog\+Name}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{recog\+Name()}{recogName()}}
+{\footnotesize\ttfamily Bottle proactive\+Tagging\+::recog\+Name (\begin{DoxyParamCaption}\item[{std\+::string}]{entity\+Type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Recognize the name of an unknown entity (communicate with speech recognizer) 
+
+\begin{DoxyReturn}{Returns}
+Bottle with either name of the object or (error error\+Description) 
+\end{DoxyReturn}
+
+
+Definition at line 138 of file helpers.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_a6d7c50fb7e1b26cd1c7d757ef3640359}\label{classproactiveTagging_a6d7c50fb7e1b26cd1c7d757ef3640359}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!respond@{respond}}
+\index{respond@{respond}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{respond()}{respond()}}
+{\footnotesize\ttfamily bool proactive\+Tagging\+::respond (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{cmd,  }\item[{yarp\+::os\+::\+Bottle \&}]{reply }\end{DoxyParamCaption})}
+
+
+
+Definition at line 128 of file proactive\+Tagging.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_a06f3da8e08290cc4e667dc1f1ab0a2ba}\label{classproactiveTagging_a06f3da8e08290cc4e667dc1f1ab0a2ba}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!searching\+Entity@{searching\+Entity}}
+\index{searching\+Entity@{searching\+Entity}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{searching\+Entity()}{searchingEntity()}}
+{\footnotesize\ttfamily Bottle proactive\+Tagging\+::searching\+Entity (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{b\+Input }\end{DoxyParamCaption})}
+
+
+
+Search for the entity corresponding to a certain name in all the unknown entities. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b\+Input} & searching\+Entity entity\+Type entity\+Name \mbox{[}verbose\mbox{]} (eg\+: searching\+Entity object octopus) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Bottle consisting of two elements. First element is \{error; warning; success\} Second element is\+: information about the action 
+\end{DoxyReturn}
+
+
+Definition at line 484 of file proactive\+Tagging.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_a277e15d7575cbd390dac6acd248a0efe}\label{classproactiveTagging_a277e15d7575cbd390dac6acd248a0efe}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!set\+Pasar\+Pointing@{set\+Pasar\+Pointing}}
+\index{set\+Pasar\+Pointing@{set\+Pasar\+Pointing}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{set\+Pasar\+Pointing()}{setPasarPointing()}}
+{\footnotesize\ttfamily bool proactive\+Tagging\+::set\+Pasar\+Pointing (\begin{DoxyParamCaption}\item[{bool}]{on }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Ask pasar to increase saliency when a human is pointing to an object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em on} & -\/ whether pasar should increase the saliency \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if communication to pasar was successful, false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 46 of file helpers.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_ae3566ba1d23f67b927f2fe4e624505d2}\label{classproactiveTagging_ae3566ba1d23f67b927f2fe4e624505d2}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!sub\+Populate\+Bodyparts@{sub\+Populate\+Bodyparts}}
+\index{sub\+Populate\+Bodyparts@{sub\+Populate\+Bodyparts}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{sub\+Populate\+Bodyparts()}{subPopulateBodyparts()}}
+{\footnotesize\ttfamily void proactive\+Tagging\+::sub\+Populate\+Bodyparts (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Bottle $\ast$}]{body\+Part\+List,  }\item[{yarp\+::os\+::\+Bottle $\ast$}]{body\+Part\+Joint\+List,  }\item[{bool}]{add\+Or\+Retrieve }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 198 of file helpers.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_ab7f6a446c71a7bc9416472fd8a59cac2}\label{classproactiveTagging_ab7f6a446c71a7bc9416472fd8a59cac2}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!sub\+Populate\+Objects@{sub\+Populate\+Objects}}
+\index{sub\+Populate\+Objects@{sub\+Populate\+Objects}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{sub\+Populate\+Objects()}{subPopulateObjects()}}
+{\footnotesize\ttfamily void proactive\+Tagging\+::sub\+Populate\+Objects (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Bottle $\ast$}]{object\+List,  }\item[{bool}]{add\+Or\+Retrieve }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 29 of file helpers.\+cpp.
+
+\mbox{\Hypertarget{classproactiveTagging_a024bbe02d942466a0b96dac527d170e0}\label{classproactiveTagging_a024bbe02d942466a0b96dac527d170e0}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool proactive\+Tagging\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 215 of file proactive\+Tagging.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classproactiveTagging_a77047c3a21e39d1aa6a6d0f656707621}\label{classproactiveTagging_a77047c3a21e39d1aa6a6d0f656707621}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!babbling\+Arm@{babbling\+Arm}}
+\index{babbling\+Arm@{babbling\+Arm}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{babbling\+Arm}{babblingArm}}
+{\footnotesize\ttfamily std\+::string proactive\+Tagging\+::babbling\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+side of the babbling arm \+: left or right 
+
+
+
+Definition at line 46 of file proactive\+Tagging.\+h.
+
+\mbox{\Hypertarget{classproactiveTagging_a73f0a523a12bdbb43a78e729b567d416}\label{classproactiveTagging_a73f0a523a12bdbb43a78e729b567d416}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!Grammar\+Ask\+Name\+Agent@{Grammar\+Ask\+Name\+Agent}}
+\index{Grammar\+Ask\+Name\+Agent@{Grammar\+Ask\+Name\+Agent}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{Grammar\+Ask\+Name\+Agent}{GrammarAskNameAgent}}
+{\footnotesize\ttfamily std\+::string proactive\+Tagging\+::\+Grammar\+Ask\+Name\+Agent\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Name of grammar file when asking for name of agent. 
+
+
+
+Definition at line 42 of file proactive\+Tagging.\+h.
+
+\mbox{\Hypertarget{classproactiveTagging_a50b13e3330905f1b19c6a16b94bc67b6}\label{classproactiveTagging_a50b13e3330905f1b19c6a16b94bc67b6}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!Grammar\+Ask\+Name\+Bodypart@{Grammar\+Ask\+Name\+Bodypart}}
+\index{Grammar\+Ask\+Name\+Bodypart@{Grammar\+Ask\+Name\+Bodypart}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{Grammar\+Ask\+Name\+Bodypart}{GrammarAskNameBodypart}}
+{\footnotesize\ttfamily std\+::string proactive\+Tagging\+::\+Grammar\+Ask\+Name\+Bodypart\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Name of grammar file when asking for name of bodypart. 
+
+
+
+Definition at line 44 of file proactive\+Tagging.\+h.
+
+\mbox{\Hypertarget{classproactiveTagging_a144b3a62457fae75af0950e223bfdb01}\label{classproactiveTagging_a144b3a62457fae75af0950e223bfdb01}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!Grammar\+Ask\+Name\+Object@{Grammar\+Ask\+Name\+Object}}
+\index{Grammar\+Ask\+Name\+Object@{Grammar\+Ask\+Name\+Object}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{Grammar\+Ask\+Name\+Object}{GrammarAskNameObject}}
+{\footnotesize\ttfamily std\+::string proactive\+Tagging\+::\+Grammar\+Ask\+Name\+Object\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Name of grammar file when asking for name of object. 
+
+
+
+Definition at line 43 of file proactive\+Tagging.\+h.
+
+\mbox{\Hypertarget{classproactiveTagging_af0a6a3c8dd1504920ca362a55defadb2}\label{classproactiveTagging_af0a6a3c8dd1504920ca362a55defadb2}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!i\+Cub@{i\+Cub}}
+\index{i\+Cub@{i\+Cub}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{i\+Cub}{iCub}}
+{\footnotesize\ttfamily \hyperlink{group__icubclient__clients_classicubclient_1_1ICubClient}{icubclient\+::\+I\+Cub\+Client}$\ast$ proactive\+Tagging\+::i\+Cub\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+icubclient 
+
+
+
+Definition at line 30 of file proactive\+Tagging.\+h.
+
+\mbox{\Hypertarget{classproactiveTagging_a50ac9c7c0744e710bdcc51bd931a4b0e}\label{classproactiveTagging_a50ac9c7c0744e710bdcc51bd931a4b0e}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!period@{period}}
+\index{period@{period}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{period}{period}}
+{\footnotesize\ttfamily double proactive\+Tagging\+::period\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 32 of file proactive\+Tagging.\+h.
+
+\mbox{\Hypertarget{classproactiveTagging_af8b98de7b5bd419ad166a343922924c2}\label{classproactiveTagging_af8b98de7b5bd419ad166a343922924c2}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!port\+From\+Touch\+Detector@{port\+From\+Touch\+Detector}}
+\index{port\+From\+Touch\+Detector@{port\+From\+Touch\+Detector}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{port\+From\+Touch\+Detector}{portFromTouchDetector}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Buffered\+Port$<$yarp\+::os\+::\+Bottle$>$ proactive\+Tagging\+::port\+From\+Touch\+Detector\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Port used to communicate with touch detector. 
+
+
+
+Definition at line 40 of file proactive\+Tagging.\+h.
+
+\mbox{\Hypertarget{classproactiveTagging_a94a5997938a3b60d47c7feb179a93888}\label{classproactiveTagging_a94a5997938a3b60d47c7feb179a93888}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!port\+To\+Pasar@{port\+To\+Pasar}}
+\index{port\+To\+Pasar@{port\+To\+Pasar}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{port\+To\+Pasar}{portToPasar}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Port proactive\+Tagging\+::port\+To\+Pasar\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Port used to communicate with pasar. 
+
+
+
+Definition at line 39 of file proactive\+Tagging.\+h.
+
+\mbox{\Hypertarget{classproactiveTagging_a0b64adf975edfe871cf4816b824e8cf0}\label{classproactiveTagging_a0b64adf975edfe871cf4816b824e8cf0}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!port\+To\+S\+AM@{port\+To\+S\+AM}}
+\index{port\+To\+S\+AM@{port\+To\+S\+AM}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{port\+To\+S\+AM}{portToSAM}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Port proactive\+Tagging\+::port\+To\+S\+AM\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Port used to communicate with \hyperlink{namespaceSAM}{S\+AM}. 
+
+
+
+Definition at line 38 of file proactive\+Tagging.\+h.
+
+\mbox{\Hypertarget{classproactiveTagging_a7f2ff11627a9a75f56b33ac626b3a252}\label{classproactiveTagging_a7f2ff11627a9a75f56b33ac626b3a252}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!rpc\+Port@{rpc\+Port}}
+\index{rpc\+Port@{rpc\+Port}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{rpc\+Port}{rpcPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Port proactive\+Tagging\+::rpc\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Response port. 
+
+
+
+Definition at line 37 of file proactive\+Tagging.\+h.
+
+\mbox{\Hypertarget{classproactiveTagging_a9f26b33c30966d628ecdd89cd953c852}\label{classproactiveTagging_a9f26b33c30966d628ecdd89cd953c852}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!S\+A\+M\+Rpc@{S\+A\+M\+Rpc}}
+\index{S\+A\+M\+Rpc@{S\+A\+M\+Rpc}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{S\+A\+M\+Rpc}{SAMRpc}}
+{\footnotesize\ttfamily std\+::string proactive\+Tagging\+::\+S\+A\+M\+Rpc\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Name of \hyperlink{namespaceSAM}{S\+AM} R\+PC port. 
+
+
+
+Definition at line 34 of file proactive\+Tagging.\+h.
+
+\mbox{\Hypertarget{classproactiveTagging_a6586dc8849953aa36aa0cb88ade14bf0}\label{classproactiveTagging_a6586dc8849953aa36aa0cb88ade14bf0}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!threshold\+Distinguish\+Objects\+Ratio@{threshold\+Distinguish\+Objects\+Ratio}}
+\index{threshold\+Distinguish\+Objects\+Ratio@{threshold\+Distinguish\+Objects\+Ratio}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{threshold\+Distinguish\+Objects\+Ratio}{thresholdDistinguishObjectsRatio}}
+{\footnotesize\ttfamily double proactive\+Tagging\+::threshold\+Distinguish\+Objects\+Ratio\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+ratio of saliency needed to detect if 1 object is more salient that the other 
+
+
+
+Definition at line 48 of file proactive\+Tagging.\+h.
+
+\mbox{\Hypertarget{classproactiveTagging_a5e506aa6021526fb0665711593a5797c}\label{classproactiveTagging_a5e506aa6021526fb0665711593a5797c}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!threshold\+Salience\+Detection@{threshold\+Salience\+Detection}}
+\index{threshold\+Salience\+Detection@{threshold\+Salience\+Detection}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{threshold\+Salience\+Detection}{thresholdSalienceDetection}}
+{\footnotesize\ttfamily double proactive\+Tagging\+::threshold\+Salience\+Detection\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+value of saliency needed to detect if 1 object is more salient that the other 
+
+
+
+Definition at line 49 of file proactive\+Tagging.\+h.
+
+\mbox{\Hypertarget{classproactiveTagging_aaaaed95ad0d6607683ab8451d6a90abf}\label{classproactiveTagging_aaaaed95ad0d6607683ab8451d6a90abf}} 
+\index{proactive\+Tagging@{proactive\+Tagging}!touch\+Detector\+Rpc@{touch\+Detector\+Rpc}}
+\index{touch\+Detector\+Rpc@{touch\+Detector\+Rpc}!proactive\+Tagging@{proactive\+Tagging}}
+\subsubsection{\texorpdfstring{touch\+Detector\+Rpc}{touchDetectorRpc}}
+{\footnotesize\ttfamily std\+::string proactive\+Tagging\+::touch\+Detector\+Rpc\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Name of touch\+Detector R\+PC port. 
+
+
+
+Definition at line 35 of file proactive\+Tagging.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/travis/build/robotology/icub-\/hri/src/modules/proactive\+Tagging/include/\hyperlink{proactiveTagging_8h}{proactive\+Tagging.\+h}\item 
+/home/travis/build/robotology/icub-\/hri/src/modules/proactive\+Tagging/src/\hyperlink{helpers_8cpp}{helpers.\+cpp}\item 
+/home/travis/build/robotology/icub-\/hri/src/modules/proactive\+Tagging/src/\hyperlink{proactiveTagging_8cpp}{proactive\+Tagging.\+cpp}\end{DoxyCompactItemize}

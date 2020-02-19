@@ -1,0 +1,9 @@
+<map id="iCub&#45;Client libraries" name="iCub&#45;Client libraries">
+<area shape="rect" id="node1" href="$group__icubclient__software__all.html" title="A container for all software. " alt="" coords="5,132,85,159"/>
+<area shape="rect" id="node2" href="$group__icubclient__helpers.html" title="A container library containing defines and structures to formalize knowledge within an objectProperti..." alt="" coords="350,5,475,32"/>
+<area shape="rect" id="node3" href="$group__icubclient__tags.html" title="Global defines which are used throughout the iCubClient library. " alt="" coords="355,56,470,83"/>
+<area shape="rect" id="node4" href="$group__icubclient__IDLClients.html" title="This library contains all the definitions for a client to interface to the IDL services made availabl..." alt="" coords="335,107,490,133"/>
+<area shape="rect" id="node5" href="$group__icubclient__subsystems.html" title="Abstract class to handle sub&#45;systems of the icub&#45;client (speech, action, etc...) and the relevant sub..." alt="" coords="362,157,463,184"/>
+<area shape="rect" id="node6" href="$group__icubclient__representations.html" title="Contains classes to represent entities and relations between them. " alt="" coords="332,208,493,235"/>
+<area shape="rect" id="node8" href="$group__icubclient__clients.html" title="Provide a compact way to access the iCub functionalities within the icub&#45;client framework. " alt="" coords="379,259,446,285"/>
+</map>

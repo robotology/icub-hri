@@ -1,0 +1,58 @@
+\hypertarget{trainSAMModel_8py}{}\section{/home/travis/build/robotology/icub-\/hri/src/modules/\+S\+A\+M/\+S\+A\+M\+\_\+\+Core/train\+S\+A\+M\+Model.py File Reference}
+\label{trainSAMModel_8py}\index{/home/travis/build/robotology/icub-\/hri/src/modules/\+S\+A\+M/\+S\+A\+M\+\_\+\+Core/train\+S\+A\+M\+Model.\+py@{/home/travis/build/robotology/icub-\/hri/src/modules/\+S\+A\+M/\+S\+A\+M\+\_\+\+Core/train\+S\+A\+M\+Model.\+py}}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a75a8353e5b55e744062b1b0b85bfa209}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+threshold}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ada829c3b8c4a9aa3c556a90ad84ed7b2}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+nan}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a0d813ce557a3e734bb4d3cdc1d1c5519}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+precision}
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a227131024b77a9c68261ee558002e8c4}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+data\+Path} = sys.\+argv\mbox{[}1\mbox{]}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a23d9f2671eb0af14906ea1e7e7d604b2}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+model\+Path} = sys.\+argv\mbox{[}2\mbox{]}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ae368415e9cd168f04649ec4912f6fbb2}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+driver\+Name} = sys.\+argv\mbox{[}3\mbox{]}
+\item 
+string \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a3d4d044a08cd44ee4b4b3cde836c5eed}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+windowed\+Mode} = \textquotesingle{}True\textquotesingle{}
+\item 
+string \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a6de46d6299824b843c610668a3d4e3d0}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+base\+Log\+File\+Name} = \textquotesingle{}train\+Error\+Log\+\_\+\textquotesingle{} + driver\+Name
+\item 
+int \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_adabd782041187b40f1b3256100a40f18}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+file\+\_\+i} = 0
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a9148bf18e6bcdc8a98559470787cbbd3}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+logger\+F\+Name} = join(data\+Path, base\+Log\+File\+Name + \textquotesingle{}\+\_\+\textquotesingle{} + str(file\+\_\+i) + \textquotesingle{}.log\textquotesingle{})
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a49b763d06efdcaac2bc45c6b054827b0}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+log\+Formatter} = logging.\+Formatter(\char`\"{}\mbox{[}\%(levelname)s\mbox{]} \%(message)s\char`\"{})
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aa6c9142ef2ae49892e6882a070a3afcd}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+root\+Logger} = logging.\+get\+Logger(\textquotesingle{}train \textquotesingle{} + driver\+Name)
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a1b3f8525460c83d22622228cb27fc9ee}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+file\+Handler} = logging.\+File\+Handler(logger\+F\+Name)
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a304aac71072fe2e3a2d39f8aab4e4c78}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+console\+Handler} = logging.\+Stream\+Handler()
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aa105ba4fe5c01efd4e10f0b17e51cd5b}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+root}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_afc2414cf44fd68b8bfe50896cca60315}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+mm} = initialise\+Models(sys.\+argv\mbox{[}1\+:4\mbox{]}, sys.\+argv\mbox{[}4\mbox{]})
+\item 
+int \hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_ab5021bf6fb77308233bbc3595f77294d}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+overall\+Performance} = 100000
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a95f48ae2ace4025d7c9486bca0b71c0a}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+overall\+Performance\+Labels}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aff84352e7940cc88f892f75360a6a54d}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+label\+Comparison\+Dict}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a8cc79c923d6b6bed5dbdf3edfcdda00a}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+num\+Parts} = len(mm\mbox{[}0\mbox{]}.participant\+List)
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_aff2733efcc99e07335dd4a963cf3b96c}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+economy\+\_\+save}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1trainSAMModel_a96bff06ae8a3e34fd235450c5df446ab}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+extra\+Dict}
+\item 
+def \hyperlink{group__icubclient__SAM__Core_gab9063d062c168b9c621a28ab469ae1f9}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+train\+S\+A\+M\+Model.\+exception\+\_\+hook} (exc\+\_\+type, exc\+\_\+value, exc\+\_\+traceback)
+\begin{DoxyCompactList}\small\item\em Generic training function. \end{DoxyCompactList}\end{DoxyCompactItemize}

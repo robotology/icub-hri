@@ -1,0 +1,102 @@
+\hypertarget{group__icubclient__helpers}{}\section{Helper Routines}
+\label{group__icubclient__helpers}\index{Helper Routines@{Helper Routines}}
+
+
+A container library containing defines and structures to formalize knowledge within an object\+Properties\+Collector module.  
+
+
+Collaboration diagram for Helper Routines\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=323pt]{group__icubclient__helpers}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+yarp\+::os\+::\+Bottle \hyperlink{group__icubclient__helpers_ga8acf76546a060893d573c697403e4196}{icubclient\+::opc\+Get\+Ids\+From\+Ask} (const yarp\+::os\+::\+Bottle \&reply)
+\begin{DoxyCompactList}\small\item\em Allow retrieving the list of unique identifiers of those items verifying the set of conditions queried to the database through a \mbox{[}ask\mbox{]} request. \end{DoxyCompactList}\item 
+void \hyperlink{group__icubclient__helpers_ga2f96d56ceecf459408d38f01ebce1111}{icubclient\+::replace\+\_\+all} (std\+::string \&in, const std\+::string \&plain, const std\+::string \&tok)
+\begin{DoxyCompactList}\small\item\em Simple search and replace function for strings;. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__icubclient__helpers_gaf5d181da46b2680f90cb7b0df1fd7068}{icubclient\+::grammar\+To\+String} (const std\+::string \&s\+Path)
+\begin{DoxyCompactList}\small\item\em Get the context path of a .grxml grammar, and return it as a string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A container library containing defines and structures to formalize knowledge within an object\+Properties\+Collector module. 
+
+\begin{DoxyAuthor}{Author}
+Ugo Pattacini \& Stéphane Lallée 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__icubclient__helpers_gaf5d181da46b2680f90cb7b0df1fd7068}\label{group__icubclient__helpers_gaf5d181da46b2680f90cb7b0df1fd7068}} 
+\index{Helper Routines@{Helper Routines}!grammar\+To\+String@{grammar\+To\+String}}
+\index{grammar\+To\+String@{grammar\+To\+String}!Helper Routines@{Helper Routines}}
+\subsubsection{\texorpdfstring{grammar\+To\+String()}{grammarToString()}}
+{\footnotesize\ttfamily std\+::string icubclient\+::grammar\+To\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s\+Path }\end{DoxyParamCaption})}
+
+
+
+Get the context path of a .grxml grammar, and return it as a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s\+Path} & Path to the grammar file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Grammar as string 
+\end{DoxyReturn}
+
+
+Definition at line 58 of file functions.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__helpers_ga8acf76546a060893d573c697403e4196}\label{group__icubclient__helpers_ga8acf76546a060893d573c697403e4196}} 
+\index{Helper Routines@{Helper Routines}!opc\+Get\+Ids\+From\+Ask@{opc\+Get\+Ids\+From\+Ask}}
+\index{opc\+Get\+Ids\+From\+Ask@{opc\+Get\+Ids\+From\+Ask}!Helper Routines@{Helper Routines}}
+\subsubsection{\texorpdfstring{opc\+Get\+Ids\+From\+Ask()}{opcGetIdsFromAsk()}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Bottle icubclient\+::opc\+Get\+Ids\+From\+Ask (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{reply }\end{DoxyParamCaption})}
+
+
+
+Allow retrieving the list of unique identifiers of those items verifying the set of conditions queried to the database through a \mbox{[}ask\mbox{]} request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reply} & the bottle received from the database\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the list of items identifiers as a Bottle 
+\end{DoxyReturn}
+
+
+Definition at line 29 of file functions.\+cpp.
+
+\mbox{\Hypertarget{group__icubclient__helpers_ga2f96d56ceecf459408d38f01ebce1111}\label{group__icubclient__helpers_ga2f96d56ceecf459408d38f01ebce1111}} 
+\index{Helper Routines@{Helper Routines}!replace\+\_\+all@{replace\+\_\+all}}
+\index{replace\+\_\+all@{replace\+\_\+all}!Helper Routines@{Helper Routines}}
+\subsubsection{\texorpdfstring{replace\+\_\+all()}{replace\_all()}}
+{\footnotesize\ttfamily void icubclient\+::replace\+\_\+all (\begin{DoxyParamCaption}\item[{std\+::string \&}]{in,  }\item[{const std\+::string \&}]{plain,  }\item[{const std\+::string \&}]{tok }\end{DoxyParamCaption})}
+
+
+
+Simple search and replace function for strings;. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & the input and output string \\
+\hline
+{\em plain} & the substring to be replaced \\
+\hline
+{\em tok} & the replacement \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 42 of file functions.\+cpp.
+

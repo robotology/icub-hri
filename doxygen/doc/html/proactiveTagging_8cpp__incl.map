@@ -1,0 +1,18 @@
+<map id="/home/travis/build/robotology/icub&#45;hri/src/modules/proactiveTagging/src/proactiveTagging.cpp" name="/home/travis/build/robotology/icub&#45;hri/src/modules/proactiveTagging/src/proactiveTagging.cpp">
+<area shape="rect" id="node2" href="$proactiveTagging_8h.html" title="proactiveTagging.h" alt="" coords="553,131,699,158"/>
+<area shape="rect" id="node4" href="$icubClient_8h.html" title="icubclient/clients\l/icubClient.h" alt="" coords="397,467,529,508"/>
+<area shape="rect" id="node13" href="$opcClient_8h.html" title="icubclient/clients\l/opcClient.h" alt="" coords="884,124,1016,165"/>
+<area shape="rect" id="node27" href="$subSystem__recog_8h.html" title="icubclient/subsystems\l/subSystem_recog.h" alt="" coords="1049,377,1216,419"/>
+<area shape="rect" id="node32" href="$subSystem__speech_8h.html" title="icubclient/subsystems\l/subSystem_speech.h" alt="" coords="1431,377,1597,419"/>
+<area shape="rect" id="node35" href="$subSystem__SAM_8h.html" title="icubclient/subsystems\l/subSystem_SAM.h" alt="" coords="1240,377,1407,419"/>
+<area shape="rect" id="node15" href="$representations_8h.html" title="icubclient/knowledge\l/representations.h" alt="" coords="797,213,957,255"/>
+<area shape="rect" id="node21" href="$tags_8h.html" title="icubclient/tags.h" alt="" coords="763,474,892,501"/>
+<area shape="rect" id="node16" href="$action_8h.html" title="action.h" alt="" coords="655,303,730,329"/>
+<area shape="rect" id="node17" href="$entity_8h.html" title="entity.h" alt="" coords="668,474,739,501"/>
+<area shape="rect" id="node20" href="$relation_8h.html" title="relation.h" alt="" coords="760,385,844,411"/>
+<area shape="rect" id="node23" href="$agent_8h.html" title="agent.h" alt="" coords="805,303,876,329"/>
+<area shape="rect" id="node24" href="$object_8h.html" title="object.h" alt="" coords="871,385,946,411"/>
+<area shape="rect" id="node26" href="$bodypart_8h.html" title="bodypart.h" alt="" coords="952,303,1044,329"/>
+<area shape="rect" id="node28" href="$subSystem_8h.html" title="icubclient/subsystems\l/subSystem.h" alt="" coords="1385,467,1552,508"/>
+<area shape="rect" id="node33" href="$functions_8h.html" title="icubclient/functions.h" alt="" coords="1200,474,1361,501"/>
+</map>

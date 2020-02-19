@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$group__allostaticController.html#classAllostaticController" title="AllostaticController" alt="" coords="147,5,293,32"/>
+<area shape="rect" id="node3" href="$group__babbling.html#classBabbling" title="Babbling" alt="" coords="181,56,259,83"/>
+<area shape="rect" id="node4" href="$group__behaviorManager.html#classBehaviorManager" title="BehaviorManager" alt="" coords="152,107,288,133"/>
+<area shape="rect" id="node5" href="$group__ears.html#classears" title="ears" alt="" coords="195,157,245,184"/>
+<area shape="rect" id="node6" href="$group__faceTracker.html#classfaceTrackerModule" title="faceTrackerModule" alt="" coords="148,208,292,235"/>
+<area shape="rect" id="node7" href="$group__guiUpdater.html#classGuiUpdater" title="GuiUpdater" alt="" coords="172,259,268,285"/>
+<area shape="rect" id="node8" href="$group__homeostasis.html#classHomeostaticModule" title="HomeostaticModule" alt="" coords="144,309,296,336"/>
+<area shape="rect" id="node9" href="$group__opcPopulator.html#classopcPopulator" title="opcPopulator" alt="" coords="167,360,273,387"/>
+<area shape="rect" id="node10" href="$group__pasar.html#classPasarModule" title="PasarModule" alt="" coords="168,411,272,437"/>
+<area shape="rect" id="node11" href="$classproactiveTagging.html" title="proactiveTagging" alt="" coords="153,461,287,488"/>
+<area shape="rect" id="node12" href="$group__touchDetector.html#classTouchDetectorModule" title="TouchDetectorModule" alt="" coords="139,512,301,539"/>
+</map>

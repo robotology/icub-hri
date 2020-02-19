@@ -1,0 +1,30 @@
+\hypertarget{group__icubclient__bindings}{}\section{Compile and use Python bindings}
+\label{group__icubclient__bindings}\index{Compile and use Python bindings@{Compile and use Python bindings}}
+
+
+Instructions for compiling the Python bindings for the i\+Cub-\/\+Client.  
+
+
+Instructions for compiling the Python bindings for the i\+Cub-\/\+Client. 
+
+First, follow the instructions to compile the \href{http://www.yarp.it/yarp_swig.html}{\tt Y\+A\+RP bindings for Python} (see sections \char`\"{}\+Yarp for Python\char`\"{} and \char`\"{}\+Compiling Y\+A\+R\+P language bindings\char`\"{} and make sure they work correctly. For better compatibility, set the {\ttfamily Y\+A\+R\+P\+\_\+\+U\+S\+E\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+V\+E\+R\+S\+I\+ON} variable, and use S\+W\+IG version 3 or newer (S\+W\+IG version 2 will not work for the i\+Cub-\/\+Client due to the C++11 dependency).
+
+To compile the Python bindings for the i\+Cub-\/\+Client, follow these instructions\+: \begin{DoxyVerb}cd /path/to/icub-client/bindings
+mkdir build
+cd build
+ccmake ..
+set `ICUBCLIENT_USE_PYTHON_VERSION` to the same value as `YARP_USE_PYTHON_VERSION` and configure + generate
+make
+\end{DoxyVerb}
+ You can then append the path of the bindings, the same as you did for Y\+A\+RP (you might want to add this to your {\ttfamily .bashrc}\+: \begin{DoxyVerb}export PYTHONPATH=$PYTHONPATH:/path/to/icub-client/bindings/build
+\end{DoxyVerb}
+ To use the bindings, make sure to run the same version of Python as you specified using the {\ttfamily Y\+A\+R\+P\+\_\+\+U\+S\+E\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+V\+E\+R\+S\+I\+ON} / I\+C\+U\+B\+C\+L\+I\+E\+N\+T\+\_\+\+U\+S\+E\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+V\+E\+R\+S\+I\+O\+N` variables. Then, you can \begin{DoxyVerb}import yarp
+import icubclient
+yarp.Network.init()
+iCub = icubclient.ICubClient("pythontest")
+iCub.close()
+yarp.Network.fini()
+\end{DoxyVerb}
+ Then, using the i\+Cub-\/\+Client is straightforward and works as expected, nicely interplaying with Y\+A\+RP objects like {\ttfamily Bottle}. Examples for A\+RE and K\+A\+R\+MA can be found in the {\ttfamily icub-\/client/bindings} folder.
+
+(This page can be edited at \hyperlink{bindings_8dox}{src/doc/bindings.\+dox}) 

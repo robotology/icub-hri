@@ -1,0 +1,63 @@
+\hypertarget{group__icubclient__modules}{}\section{i\+Cub-\/\+Client modules}
+\label{group__icubclient__modules}\index{i\+Cub-\/\+Client modules@{i\+Cub-\/\+Client modules}}
+
+
+This is the list of i\+Cub-\/\+Client modules in the src/modules directory.  
+
+
+Collaboration diagram for i\+Cub-\/\+Client modules\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__icubclient__modules}
+\end{center}
+\end{figure}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__SAM__source}{S\+AM}
+\begin{DoxyCompactList}\small\item\em Synthetic Autobiographical Memory for face recognition and action recognition. \end{DoxyCompactList}\item 
+\hyperlink{group__agentDetector}{agent\+Detector}
+\begin{DoxyCompactList}\small\item\em Module based on kinect\+Client \char`\"{}\+Kinect Wrapper Client\char`\"{} that track and recognize people. \end{DoxyCompactList}\item 
+\hyperlink{group__allostaticController}{allostatic\+Controller}
+\begin{DoxyCompactList}\small\item\em Drive scheduler for the reactive\+Layer Version\+:1.\+0 \end{DoxyCompactList}\item 
+\hyperlink{group__babbling}{babbling}
+\begin{DoxyCompactList}\small\item\em Motor babbling with the i\+Cub Version\+:1.\+0. \end{DoxyCompactList}\item 
+\hyperlink{group__behaviorManager}{behavior\+Manager}
+\begin{DoxyCompactList}\small\item\em Module for quick control of default complex behaviors. \end{DoxyCompactList}\item 
+\hyperlink{group__ears}{ears}
+\begin{DoxyCompactList}\small\item\em Listen to humans when not doing something else Version\+:1.\+0. \end{DoxyCompactList}\item 
+\hyperlink{group__faceTracker}{face\+Tracker}
+\begin{DoxyCompactList}\small\item\em Face tracking module for i\+Cub head and gaze using Open\+CV functions Version\+:1.\+0. \end{DoxyCompactList}\item 
+\hyperlink{group__guiUpdater}{gui\+Updater}
+\begin{DoxyCompactList}\small\item\em Module responsible for polling the O\+PC for various content (objects, skeletons, etc.) and updating icub\+Gui based on this. \end{DoxyCompactList}\item 
+\hyperlink{group__homeostasis}{homeostasis}
+\begin{DoxyCompactList}\small\item\em Module integrating an interface for dealing with homeostatic needs Version\+:1.\+0. \end{DoxyCompactList}\item 
+\hyperlink{group__iol2opc}{iol2opc}
+\begin{DoxyCompactList}\small\item\em Bridge module between the interactive object learning and recognition system (iol) and yarp database of object properties Version\+:1.\+0 \end{DoxyCompactList}\item 
+\hyperlink{group__opcPopulator}{opc\+Populator}
+\begin{DoxyCompactList}\small\item\em The opc\+Populator can be used to spawn new entities in simulation and control their parameters. \end{DoxyCompactList}\item 
+\hyperlink{group__pasar}{pasar}
+\begin{DoxyCompactList}\small\item\em A module that gets the objects present in the O\+PC, and change their top down saliency according to their acceleration, appereance and disappereance. \end{DoxyCompactList}\item 
+\hyperlink{group__referenceFrameHandler}{reference\+Frame\+Handler}
+\begin{DoxyCompactList}\small\item\em Reference Frame Handler Version\+:1.\+0. \end{DoxyCompactList}\item 
+\hyperlink{group__sensationManager}{sensation\+Manager}
+\begin{DoxyCompactList}\small\item\em Reactive layer module to monitor basic sensations. \end{DoxyCompactList}\item 
+\hyperlink{group__touchDetector}{touch\+Detector}
+\begin{DoxyCompactList}\small\item\em Module to detect touch activations to robot\textquotesingle{}s body parts Version\+:1.\+0 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This is the list of i\+Cub-\/\+Client modules in the src/modules directory. 
+
+To add your own module to this list, just add a comment like the following anywhere in your source code (replacing \char`\"{}your\+\_\+module\+\_\+name\char`\"{} with the name of your module)\+: \begin{DoxyVerb}  /**
+   *
+   * @defgroup icubclient_your_module_name your_module_name
+   * @ingroup icubclient_modules
+   *
+   */
+\end{DoxyVerb}
+
+
+For convenience, try to keep the module name the same as the directory it is placed in. If you have a good reason to do something different, of course you can do that too. 

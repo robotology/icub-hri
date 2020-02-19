@@ -1,0 +1,18 @@
+<map id="iCub&#45;Client modules" name="iCub&#45;Client modules">
+<area shape="rect" id="node2" href="$group__behaviorManager.html" title="Module for quick control of default complex behaviors. " alt="" coords="356,5,491,32"/>
+<area shape="rect" id="node3" href="$group__referenceFrameHandler.html" title="Reference Frame Handler Version:1.0. " alt="" coords="336,56,511,83"/>
+<area shape="rect" id="node4" href="$group__pasar.html" title="A module that gets the objects present in the OPC, and change their top down saliency according to th..." alt="" coords="394,107,453,133"/>
+<area shape="rect" id="node5" href="$group__babbling.html" title="Motor babbling with the iCub Version:1.0. " alt="" coords="384,157,463,184"/>
+<area shape="rect" id="node6" href="$group__guiUpdater.html" title="Module responsible for polling the OPC for various content (objects, skeletons, etc.) and updating icubGui based on this. " alt="" coords="376,208,471,235"/>
+<area shape="rect" id="node7" href="$group__agentDetector.html" title="Module based on kinectClient &quot;Kinect Wrapper Client&quot; that track and recognize people. " alt="" coords="366,259,481,285"/>
+<area shape="rect" id="node8" href="$group__icubclient__SAM__source.html" title="Synthetic Autobiographical Memory for face recognition and action recognition. " alt="" coords="398,309,449,336"/>
+<area shape="rect" id="node10" href="$group__iol2opc.html" title="Bridge module between the interactive object learning and recognition system (iol) and yarp database ..." alt="" coords="389,360,458,387"/>
+<area shape="rect" id="node11" href="$group__opcPopulator.html" title="The opcPopulator can be used to spawn new entities in simulation and control their parameters..." alt="" coords="370,411,477,437"/>
+<area shape="rect" id="node12" href="$group__ears.html" title="Listen to humans when not doing something else Version:1.0. " alt="" coords="398,461,449,488"/>
+<area shape="rect" id="node13" href="$group__allostaticController.html" title="Drive scheduler for the reactiveLayer Version:1.0 " alt="" coords="350,512,497,539"/>
+<area shape="rect" id="node14" href="$group__sensationManager.html" title="Reactive layer module to monitor basic sensations. " alt="" coords="353,563,494,589"/>
+<area shape="rect" id="node15" href="$group__homeostasis.html" title="Module integrating an interface for dealing with homeostatic needs Version:1.0. " alt="" coords="371,613,476,640"/>
+<area shape="rect" id="node16" href="$group__touchDetector.html" title="Module to detect touch activations to robot&#39;s body parts Version:1.0 " alt="" coords="366,664,481,691"/>
+<area shape="rect" id="node17" href="$group__faceTracker.html" title="Face tracking module for iCub head and gaze using OpenCV functions Version:1.0. " alt="" coords="375,715,472,741"/>
+<area shape="rect" id="node9" href="$group__icubclient__software__all.html" title="A container for all software. " alt="" coords="5,360,85,387"/>
+</map>

@@ -1,0 +1,1686 @@
+\hypertarget{group__icubclient__SAM__Drivers}{}\section{S\+AM Drivers}
+\label{group__icubclient__SAM__Drivers}\index{S\+A\+M Drivers@{S\+A\+M Drivers}}
+
+
+Drivers folder containing driver classes that inherit from \hyperlink{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Core_1_1SAMDriver_1_1SAMDriver}{S\+A\+M\+Driver} to implement custom functionality.  
+
+
+Collaboration diagram for S\+AM Drivers\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=255pt]{group__icubclient__SAM__Drivers}
+\end{center}
+\end{figure}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceSAM_1_1SAM__Core_1_1samOptimiser}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+sam\+Optimiser}
+\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Core_1_1SAMDriver_1_1SAMDriver}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver}
+\begin{DoxyCompactList}\small\item\em \hyperlink{namespaceSAM}{S\+AM} Driver parent class that defines the methods by which models are initialised, trained and saved.  \hyperlink{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Core_1_1SAMDriver_1_1SAMDriver}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Drivers_1_1SAMDriver__ARWin_1_1SAMDriver__ARWin}{S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}
+\begin{DoxyCompactList}\small\item\em Class developed for the implementation of windowed real time action recognition.  \hyperlink{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Drivers_1_1SAMDriver__ARWin_1_1SAMDriver__ARWin}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Drivers_1_1SAMDriver__interaction_1_1SAMDriver__interaction}{S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+interaction.\+S\+A\+M\+Driver\+\_\+interaction}
+\begin{DoxyCompactList}\small\item\em Class developed for the implementation of face recognition.  \hyperlink{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Drivers_1_1SAMDriver__interaction_1_1SAMDriver__interaction}{More...}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{group__icubclient__SAM__Drivers_gac35ec3eea80d1fb5704758a9c53267a1}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\begin{DoxyCompactList}\small\item\em Initialisation for \hyperlink{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Core_1_1SAMDriver_1_1SAMDriver}{S\+A\+M\+Driver}. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_gaa44829106cbdec9d9548151582908dce}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+load\+Parameters} (self, parser, train\+Name)
+\begin{DoxyCompactList}\small\item\em Function to load parameters from the model config.\+ini file. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_gac6f300d2daf748b11b28802574b6f5e8}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+save\+Parameters} (self)
+\begin{DoxyCompactList}\small\item\em Method to store variables generated during training which are required during interaction in self.\+params\+Dict. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_ga282ca575179c9374f26da33269b14ea7}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+test\+Performance} (self, test\+Model, \hyperlink{group__icubclient__SAM__Drivers_ga99651a34f71273b720039e8f4d4b03a4}{Yall}, \hyperlink{group__icubclient__SAM__Drivers_ga4b259685c2b7fddfc554f75eee45389a}{Lall}, \hyperlink{group__icubclient__SAM__Drivers_ga61bc4612a1dd3b5d593798bb7e338c81}{Ytest\+All}, \hyperlink{group__icubclient__SAM__Drivers_ga47bb2e79cf8b5f8e071ab6208cf25dd0}{Ltest\+All}, \hyperlink{group__icubclient__SAM__Drivers_ga48cfefc6532ba606936b9fd7f3156da8}{verbose})
+\begin{DoxyCompactList}\small\item\em Method for testing the whole dataset for overall performance. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_ga35c70890b650a03a8da39b87c1de39d7}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+training} (self, model\+Num\+Inducing, model\+Num\+Iterations, model\+Init\+Iterations, \hyperlink{group__icubclient__SAM__Drivers_ga1095171ae626372dde87a71f9d9263ce}{fname}, save\+\_\+model, economy\+\_\+save, keep\+If\+Present=True, kernel\+Str=None)
+\begin{DoxyCompactList}\small\item\em Method to train, store and load the learned model. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_ga9e09b2b15fd19eeceef3345c55ffdbdb}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+prepare\+Data} (self, model=\textquotesingle{}mrd\textquotesingle{}, Ntr=50, rand\+Seed=0, normalise=True)
+\begin{DoxyCompactList}\small\item\em Method for randomly splitting data and preparing Y dictionary. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_ga7a55565b0b0f58639327877c4f9cced0}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+read\+Data} (self, root\+\_\+data\+\_\+dir, participant\+\_\+index, args, kw)
+\begin{DoxyCompactList}\small\item\em Method which accepts a data directory, reads all the data in and outputs self.\+Y which is a numpy array with n instances of m length feature vectors and self.\+L which is a list of text Labels of length n. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_gab82c8e473429a812d61a6685428dfc72}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+process\+Live\+Data} (self, data\+List, this\+Model, \hyperlink{group__icubclient__SAM__Drivers_ga48cfefc6532ba606936b9fd7f3156da8}{verbose}=False)
+\begin{DoxyCompactList}\small\item\em Method which receives a list of data frames and outputs a classification if available or \textquotesingle{}no\+\_\+classification\textquotesingle{} if it is not. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_gaac21747b09e36216d09a23bd726cf62d}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+format\+Generated\+Data} (self, instance)
+\begin{DoxyCompactList}\small\item\em Method which receives an instance generated from a model via a label and formats the received vector by reshaping it or adding crucial data with it for it to be deciphered at the receiving end. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga58c437c869d397cc69296ba13eecbce2}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+S\+A\+M\+Object}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga462d762fee5145a93abaccf45505391d}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Y}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gad584d554bc3c5c82f75c37d69c66add2}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+L}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gaafcaf934890fe0ea13e17f384868b07d}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+X}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga47e71ceed497adbec4ba952b4385d8b1}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ytest}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga25f88f3ef7b54ea69fba9ef30fe929bd}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ltest}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga8ce3d609c06b6374b1c18a8236042186}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ytestn}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gad85dff96ce76cf33eb3c2806c88339ce}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ltestn}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga8744836c0d908359d2de313417311dac}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ymean}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gab4f0e7e943deb9806f07908a5aaa36fe}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ystd}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga2317645ba1bb66c3c7527687cfe3262e}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Yn}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga22a80ec6fb07792d354d1267e52c3b7c}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ln}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga510653c29b923373a47faf252919d6cb}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+seg\+Train\+Conf}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gaf7748998c4b4347aaac0df1cc38a830c}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+seg\+Train\+Perc}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga11f7d1112da1490998b9878d212d6255}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+seg\+Test\+Conf}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga0cbeb9209124fba55cb56c5de40b7a63}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+seg\+Test\+Perc}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gac25896ed8992a4f3315b937f8a54613d}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+data\+\_\+labels}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga462b640279c37475acc154525d327eeb}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+params\+Dict}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga48cfefc6532ba606936b9fd7f3156da8}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+verbose}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gaa8e9a230b77bb0223043c14f711fb8a9}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+model\+\_\+mode}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gafa17acba2ab91a5988b535ab129694e7}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Quser}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga962b980991bc6ea994f32f2baf4266e6}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+list\+Of\+Models}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga825f509582eecf9d63d742b9f47cf759}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+model\+\_\+type}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga25e341fd0f6a6103844e8412ee7811a4}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+model\+Label}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga56128df082b1160386c6d9857ef0fe38}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+text\+Labels}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga8a072edf4ea7097a7524c6f691e7d6a8}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+participant\+List}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gaf9de3e104bba0f3944bb9a23b328d684}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+variance\+Threshold}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga1095171ae626372dde87a71f9d9263ce}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+fname}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gad8dfb72012bbcecd068e7ad4271c609e}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+optimise\+Recall}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga820552da530ea75cc7109c7e450b7e31}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+model\+Loaded}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gaf6e991ba9bb10709f700208591849c4d}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+parallel\+Operation}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gabca45237d0107c510889d82d283fbaec}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+calibrated}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga34a0d852321cad5abdc8fd4d514e60fa}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+raw\+Text\+Data}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga7e5bd4edc32a108d5641cf7343887b6c}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+raw\+Data}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga99651a34f71273b720039e8f4d4b03a4}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Yall}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga4b259685c2b7fddfc554f75eee45389a}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Lall}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga61bc4612a1dd3b5d593798bb7e338c81}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ytest\+All}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga47bb2e79cf8b5f8e071ab6208cf25dd0}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ltest\+All}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gabe6b807db021be28e71f027af8123925}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+classifiers}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gac5a03c4fd8cc77e66e3b990cde23ce81}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+classif\+\_\+thresh}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga3c0dc0cea69b59e7bf3e2bf21d098d7f}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+model\+\_\+num\+\_\+inducing}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gad641973a96f09f2047d0410e31bc609c}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+model\+\_\+num\+\_\+iterations}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga058fd6bcc38278be395e94cad6db2729}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+model\+\_\+init\+\_\+iterations}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gaba1d7355c9842c5ea5881fc9926c06bf}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+additional\+Parameters\+List}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Drivers folder containing driver classes that inherit from \hyperlink{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Core_1_1SAMDriver_1_1SAMDriver}{S\+A\+M\+Driver} to implement custom functionality. 
+
+
+
+\subsection{Class Documentation}
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+Driver\+::\+S\+A\+M\+Driver@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+Driver\+::\+S\+A\+M\+Driver}}\label{classSAM_1_1SAM__Core_1_1SAMDriver_1_1SAMDriver}
+\Hypertarget{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Core_1_1SAMDriver_1_1SAMDriver}
+\subsubsection{class S\+AM\+:\+:S\+A\+M\+\_\+\+Core\+:\+:S\+A\+M\+Driver\+:\+:S\+A\+M\+Driver}
+\hyperlink{namespaceSAM}{S\+AM} Driver parent class that defines the methods by which models are initialised, trained and saved. 
+
+Definition at line 35 of file S\+A\+M\+Driver.\+py.
+
+
+
+Inheritance diagram for S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSAM_1_1SAM__Core_1_1SAMDriver_1_1SAMDriver__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{group__icubclient__SAM__Drivers_gac35ec3eea80d1fb5704758a9c53267a1}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\begin{DoxyCompactList}\small\item\em Initialisation for \hyperlink{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Core_1_1SAMDriver_1_1SAMDriver}{S\+A\+M\+Driver}. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_gaa44829106cbdec9d9548151582908dce}{load\+Parameters} (self, parser, train\+Name)
+\begin{DoxyCompactList}\small\item\em Function to load parameters from the model config.\+ini file. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_gac6f300d2daf748b11b28802574b6f5e8}{save\+Parameters} (self)
+\begin{DoxyCompactList}\small\item\em Method to store variables generated during training which are required during interaction in self.\+params\+Dict. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_ga282ca575179c9374f26da33269b14ea7}{test\+Performance} (self, test\+Model, \hyperlink{group__icubclient__SAM__Drivers_ga99651a34f71273b720039e8f4d4b03a4}{Yall}, \hyperlink{group__icubclient__SAM__Drivers_ga4b259685c2b7fddfc554f75eee45389a}{Lall}, \hyperlink{group__icubclient__SAM__Drivers_ga61bc4612a1dd3b5d593798bb7e338c81}{Ytest\+All}, \hyperlink{group__icubclient__SAM__Drivers_ga47bb2e79cf8b5f8e071ab6208cf25dd0}{Ltest\+All}, \hyperlink{group__icubclient__SAM__Drivers_ga48cfefc6532ba606936b9fd7f3156da8}{verbose})
+\begin{DoxyCompactList}\small\item\em Method for testing the whole dataset for overall performance. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_ga35c70890b650a03a8da39b87c1de39d7}{training} (self, model\+Num\+Inducing, model\+Num\+Iterations, model\+Init\+Iterations, \hyperlink{group__icubclient__SAM__Drivers_ga1095171ae626372dde87a71f9d9263ce}{fname}, save\+\_\+model, economy\+\_\+save, keep\+If\+Present=True, kernel\+Str=None)
+\begin{DoxyCompactList}\small\item\em Method to train, store and load the learned model. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_ga9e09b2b15fd19eeceef3345c55ffdbdb}{prepare\+Data} (self, model=\textquotesingle{}mrd\textquotesingle{}, Ntr=50, rand\+Seed=0, normalise=True)
+\begin{DoxyCompactList}\small\item\em Method for randomly splitting data and preparing Y dictionary. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_ga7a55565b0b0f58639327877c4f9cced0}{read\+Data} (self, root\+\_\+data\+\_\+dir, participant\+\_\+index, args, kw)
+\begin{DoxyCompactList}\small\item\em Method which accepts a data directory, reads all the data in and outputs self.\+Y which is a numpy array with n instances of m length feature vectors and self.\+L which is a list of text Labels of length n. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_gab82c8e473429a812d61a6685428dfc72}{process\+Live\+Data} (self, data\+List, this\+Model, \hyperlink{group__icubclient__SAM__Drivers_ga48cfefc6532ba606936b9fd7f3156da8}{verbose}=False)
+\begin{DoxyCompactList}\small\item\em Method which receives a list of data frames and outputs a classification if available or \textquotesingle{}no\+\_\+classification\textquotesingle{} if it is not. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_gaac21747b09e36216d09a23bd726cf62d}{format\+Generated\+Data} (self, instance)
+\begin{DoxyCompactList}\small\item\em Method which receives an instance generated from a model via a label and formats the received vector by reshaping it or adding crucial data with it for it to be deciphered at the receiving end. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga58c437c869d397cc69296ba13eecbce2}{S\+A\+M\+Object}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga462d762fee5145a93abaccf45505391d}{Y}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gad584d554bc3c5c82f75c37d69c66add2}{L}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gaafcaf934890fe0ea13e17f384868b07d}{X}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga47e71ceed497adbec4ba952b4385d8b1}{Ytest}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga25f88f3ef7b54ea69fba9ef30fe929bd}{Ltest}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga8ce3d609c06b6374b1c18a8236042186}{Ytestn}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gad85dff96ce76cf33eb3c2806c88339ce}{Ltestn}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga8744836c0d908359d2de313417311dac}{Ymean}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gab4f0e7e943deb9806f07908a5aaa36fe}{Ystd}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga2317645ba1bb66c3c7527687cfe3262e}{Yn}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga22a80ec6fb07792d354d1267e52c3b7c}{Ln}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga510653c29b923373a47faf252919d6cb}{seg\+Train\+Conf}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gaf7748998c4b4347aaac0df1cc38a830c}{seg\+Train\+Perc}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga11f7d1112da1490998b9878d212d6255}{seg\+Test\+Conf}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga0cbeb9209124fba55cb56c5de40b7a63}{seg\+Test\+Perc}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gac25896ed8992a4f3315b937f8a54613d}{data\+\_\+labels}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga462b640279c37475acc154525d327eeb}{params\+Dict}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga48cfefc6532ba606936b9fd7f3156da8}{verbose}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gaa8e9a230b77bb0223043c14f711fb8a9}{model\+\_\+mode}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gafa17acba2ab91a5988b535ab129694e7}{Quser}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga962b980991bc6ea994f32f2baf4266e6}{list\+Of\+Models}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga825f509582eecf9d63d742b9f47cf759}{model\+\_\+type}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga25e341fd0f6a6103844e8412ee7811a4}{model\+Label}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga56128df082b1160386c6d9857ef0fe38}{text\+Labels}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga8a072edf4ea7097a7524c6f691e7d6a8}{participant\+List}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gaf9de3e104bba0f3944bb9a23b328d684}{variance\+Threshold}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga1095171ae626372dde87a71f9d9263ce}{fname}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gad8dfb72012bbcecd068e7ad4271c609e}{optimise\+Recall}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga820552da530ea75cc7109c7e450b7e31}{model\+Loaded}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gaf6e991ba9bb10709f700208591849c4d}{parallel\+Operation}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gabca45237d0107c510889d82d283fbaec}{calibrated}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga34a0d852321cad5abdc8fd4d514e60fa}{raw\+Text\+Data}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga7e5bd4edc32a108d5641cf7343887b6c}{raw\+Data}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga99651a34f71273b720039e8f4d4b03a4}{Yall}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga4b259685c2b7fddfc554f75eee45389a}{Lall}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga61bc4612a1dd3b5d593798bb7e338c81}{Ytest\+All}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga47bb2e79cf8b5f8e071ab6208cf25dd0}{Ltest\+All}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gabe6b807db021be28e71f027af8123925}{classifiers}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gac5a03c4fd8cc77e66e3b990cde23ce81}{classif\+\_\+thresh}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga3c0dc0cea69b59e7bf3e2bf21d098d7f}{model\+\_\+num\+\_\+inducing}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gad641973a96f09f2047d0410e31bc609c}{model\+\_\+num\+\_\+iterations}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ga058fd6bcc38278be395e94cad6db2729}{model\+\_\+init\+\_\+iterations}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_gaba1d7355c9842c5ea5881fc9926c06bf}{additional\+Parameters\+List}
+\end{DoxyCompactItemize}
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}\label{classSAM_1_1SAM__Drivers_1_1SAMDriver__ARWin_1_1SAMDriver__ARWin}
+\Hypertarget{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Drivers_1_1SAMDriver__ARWin_1_1SAMDriver__ARWin}
+\subsubsection{class S\+AM\+:\+:S\+A\+M\+\_\+\+Drivers\+:\+:S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+:\+:S\+A\+M\+Driver\+\_\+\+A\+R\+Win}
+Class developed for the implementation of windowed real time action recognition. 
+
+Definition at line 28 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+
+
+Inheritance diagram for S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{classSAM_1_1SAM__Drivers_1_1SAMDriver__ARWin_1_1SAMDriver__ARWin__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{group__icubclient__SAM__Drivers_a1d8d40aaf3d8688bb50f784c19615368}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\begin{DoxyCompactList}\small\item\em Initialise class using \hyperlink{group__icubclient__SAM__Drivers_gac35ec3eea80d1fb5704758a9c53267a1}{S\+A\+M\+Driver.\+\_\+\+\_\+init\+\_\+\+\_\+} and augment with custom parameters. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_a51c7b0fd9952b5cb0d347912ce12d14e}{load\+Parameters} (self, parser, train\+Name)
+\begin{DoxyCompactList}\small\item\em Function to load parameters from the model config.\+ini file. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_a12a86e98b3d5335ef56bcd3f6d048f81}{save\+Parameters} (self)
+\begin{DoxyCompactList}\small\item\em Override \hyperlink{group__icubclient__SAM__Drivers_gac6f300d2daf748b11b28802574b6f5e8}{S\+A\+M\+Driver.\+save\+Parameters}. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_a9e07c7922ed5de8fed5ec837d191743f}{test\+Performance} (self, test\+Model, \hyperlink{group__icubclient__SAM__Drivers_ga99651a34f71273b720039e8f4d4b03a4}{Yall}, \hyperlink{group__icubclient__SAM__Drivers_ga4b259685c2b7fddfc554f75eee45389a}{Lall}, \hyperlink{group__icubclient__SAM__Drivers_ga61bc4612a1dd3b5d593798bb7e338c81}{Ytest\+All}, \hyperlink{group__icubclient__SAM__Drivers_ga47bb2e79cf8b5f8e071ab6208cf25dd0}{Ltest\+All}, \hyperlink{group__icubclient__SAM__Drivers_ga48cfefc6532ba606936b9fd7f3156da8}{verbose})
+\begin{DoxyCompactList}\small\item\em Custom test\+Performance method. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_abfdb7d58b7dde75f1e9dfdbd1c053264}{disk\+Data\+To\+Live\+Data} (self, root\+\_\+data\+\_\+dir)
+\begin{DoxyCompactList}\small\item\em This method reads in time series data from disk for \hyperlink{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Drivers_1_1SAMDriver__ARWin_1_1SAMDriver__ARWin}{S\+A\+M\+Driver\+\_\+\+A\+R\+Win}. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_adf0a2c86e4fb05deaee70ffbd212db57}{convert\+To\+Dict} (self, \hyperlink{group__icubclient__SAM__Drivers_ga7e5bd4edc32a108d5641cf7343887b6c}{raw\+Data}, mode, \hyperlink{group__icubclient__SAM__Drivers_ga48cfefc6532ba606936b9fd7f3156da8}{verbose})
+\begin{DoxyCompactList}\small\item\em Convert list of strings time series to dictionary with joints and objects as different items of the dictionary and windows of positions for each joint. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_afc5f853cfede70ba59eadee2277a9e6c}{read\+Data} (self, root\+\_\+data\+\_\+dir, participant\+\_\+index, args, kw)
+\begin{DoxyCompactList}\small\item\em Method which accepts a data directory, reads all the data in and outputs self.\+Y which is a numpy array with n instances of m length feature vectors and self.\+L which is a list of text Labels of length n. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_ac06888bfa96e2317bd325af608fcf463}{list\+Of\+Classification\+Vectors} (self, \hyperlink{group__icubclient__SAM__Drivers_accf604f68241cf3847a9f5d695710330}{feature\+Sequence}, objects\+List, partner\+Name=\textquotesingle{}partner\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Constructs a list of classifications to carry out. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_a3efad08324380997a894dd960a302bc2}{message\+Checker} (self, data\+Message, mode)
+\begin{DoxyCompactList}\small\item\em Method to check validity of incoming messages and split into components if valid. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_ab7e00f1a17cf5022d7a0864ed2e097aa}{process\+Live\+Data} (self, data\+List, this\+Model, \hyperlink{group__icubclient__SAM__Drivers_ga48cfefc6532ba606936b9fd7f3156da8}{verbose}=False, return\+Unknown=False, print\+Class=True, additional\+Data=dict())
+\begin{DoxyCompactList}\small\item\em Method which receives a list of data frames and outputs a classification if available or \textquotesingle{}no\+\_\+classification\textquotesingle{} if it is not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_a56b2437f3700afce6363dd8510f6661b}{data}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ab90cebf00ada98f96102c2b01b2ff970}{num\+Joints}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_a0795d275820675450a4ccc869e759958}{data\+Log\+List}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_a3d24d506bc292c1f8f53ebd903e6f0e3}{labels\+Log\+List}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_a9bca50058da592720fd710d2d6e3e1ec}{items\+Per\+Joint}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_accf604f68241cf3847a9f5d695710330}{feature\+Sequence}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_aa99dc23f32bb97a5dc615764f3812248}{hands\+Combined}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ad9c274bfb069dd815c35b46d77bca9d1}{data2\+Labels}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_a405e35ae705be4102f3e7cb2394f055f}{data\+Vec}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_a2c4032e4052b59a249bae791ee6a4ae8}{all\+Data\+Dict}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_a59f13ac648de32dde07f5b18c1e78a56}{list\+Of\+Vectors\+To\+Classify}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_a0dab1e97a70d82f72fe076df29b0e052}{seq\+Test\+Conf}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_a8d905b932fffa96aeeb19f121c225d66}{seq\+Test\+Perc}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ad699eb08f48f023fb5e0c744c9a4051e}{additional\+Parameters\+List}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ae0bdb001bbc956edc2bb1e8f5f1e3093}{raw\+Text\+Data}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ab531558eee10a99547032f611799fc2e}{Y}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_a794184bc22c039821402946663a2fe5b}{L}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a1d8d40aaf3d8688bb50f784c19615368}\label{group__icubclient__SAM__Drivers_a1d8d40aaf3d8688bb50f784c19615368}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Initialise class using \hyperlink{group__icubclient__SAM__Drivers_gac35ec3eea80d1fb5704758a9c53267a1}{S\+A\+M\+Driver.\+\_\+\+\_\+init\+\_\+\+\_\+} and augment with custom parameters. 
+
+additional\+Parameter\+List is a list of extra parameters to preserve between training and interaction. 
+
+Definition at line 34 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_adf0a2c86e4fb05deaee70ffbd212db57}\label{group__icubclient__SAM__Drivers_adf0a2c86e4fb05deaee70ffbd212db57}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!convert\+To\+Dict@{convert\+To\+Dict}}
+\index{convert\+To\+Dict@{convert\+To\+Dict}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{convert\+To\+Dict()}{convertToDict()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+convert\+To\+Dict (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{raw\+Data,  }\item[{}]{mode,  }\item[{}]{verbose }\end{DoxyParamCaption})}
+
+
+
+Convert list of strings time series to dictionary with joints and objects as different items of the dictionary and windows of positions for each joint. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+Data} & List of strings read in from files. \\
+\hline
+{\em mode} & {\ttfamily \textquotesingle{}testing\textquotesingle{}} or {\ttfamily \textquotesingle{}live\textquotesingle{}}. {\ttfamily \textquotesingle{}testing\textquotesingle{}} will format strings read from file. {\ttfamily \textquotesingle{}live\textquotesingle{}} will format strings received via Yarp during interaction. \\
+\hline
+{\em verbose} & Switch logging to stdout on or off.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Dictionary with the windowed data, list of joints present in dictionary items, list of objects present in dictionary items. 
+\end{DoxyReturn}
+
+
+Definition at line 272 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_abfdb7d58b7dde75f1e9dfdbd1c053264}\label{group__icubclient__SAM__Drivers_abfdb7d58b7dde75f1e9dfdbd1c053264}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!disk\+Data\+To\+Live\+Data@{disk\+Data\+To\+Live\+Data}}
+\index{disk\+Data\+To\+Live\+Data@{disk\+Data\+To\+Live\+Data}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{disk\+Data\+To\+Live\+Data()}{diskDataToLiveData()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+disk\+Data\+To\+Live\+Data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{root\+\_\+data\+\_\+dir }\end{DoxyParamCaption})}
+
+
+
+This method reads in time series data from disk for \hyperlink{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Drivers_1_1SAMDriver__ARWin_1_1SAMDriver__ARWin}{S\+A\+M\+Driver\+\_\+\+A\+R\+Win}. 
+
+\begin{DoxyReturn}{Returns}
+list of strings with raw data and list of strings with ground truth classifications. 
+\end{DoxyReturn}
+
+
+Definition at line 198 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ac06888bfa96e2317bd325af608fcf463}\label{group__icubclient__SAM__Drivers_ac06888bfa96e2317bd325af608fcf463}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!list\+Of\+Classification\+Vectors@{list\+Of\+Classification\+Vectors}}
+\index{list\+Of\+Classification\+Vectors@{list\+Of\+Classification\+Vectors}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{list\+Of\+Classification\+Vectors()}{listOfClassificationVectors()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+list\+Of\+Classification\+Vectors (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{feature\+Sequence,  }\item[{}]{objects\+List,  }\item[{}]{partner\+Name = {\ttfamily \textquotesingle{}partner\textquotesingle{}} }\end{DoxyParamCaption})}
+
+
+
+Constructs a list of classifications to carry out. 
+
+Consider an example where feature\+Sequence consists of `object\textquotesingle{}, \textquotesingle{}hand\textquotesingle{}, \textquotesingle{}head\textquotesingle{}. Assuming there are 2 objects in the scene, this method constructs 4 possible vectors to classify. ~\newline
+ 1) {\ttfamily object1, right\+Hand, head} ~\newline
+ 2) {\ttfamily object1, left\+Hand, head} ~\newline
+ 3) {\ttfamily object2, right\+Hand, head} ~\newline
+ 4) {\ttfamily object2, left\+Hand, head} ~\newline
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em feature\+Sequence} & Organisation of features within the feature vector. \\
+\hline
+{\em objects\+List} & List of objects currently in the scene. \\
+\hline
+{\em partner\+Name} & Object name to ignore. This ignores the motion of the interacting agent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of vectors to classify. 
+\end{DoxyReturn}
+
+
+Definition at line 763 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a51c7b0fd9952b5cb0d347912ce12d14e}\label{group__icubclient__SAM__Drivers_a51c7b0fd9952b5cb0d347912ce12d14e}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!load\+Parameters@{load\+Parameters}}
+\index{load\+Parameters@{load\+Parameters}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{load\+Parameters()}{loadParameters()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+load\+Parameters (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{parser,  }\item[{}]{train\+Name }\end{DoxyParamCaption})}
+
+
+
+Function to load parameters from the model config.\+ini file. 
+
+Method to load parameters from file loaded in parser from within section train\+Name and store these parameters in self.\+params\+Dict.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parser} & Safe\+Config\+Parser with pre-\/read config file. \\
+\hline
+{\em train\+Name} & Section from which parameters are to be read.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+
+None 
+\end{DoxyReturn}
+
+
+Definition at line 65 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a3efad08324380997a894dd960a302bc2}\label{group__icubclient__SAM__Drivers_a3efad08324380997a894dd960a302bc2}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!message\+Checker@{message\+Checker}}
+\index{message\+Checker@{message\+Checker}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{message\+Checker()}{messageChecker()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+message\+Checker (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{data\+Message,  }\item[{}]{mode }\end{DoxyParamCaption})}
+
+
+
+Method to check validity of incoming messages and split into components if valid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+Message} & String message to validate. \\
+\hline
+{\em mode} & Mode of validation. Either {\ttfamily \textquotesingle{}test\textquotesingle{}} or {\ttfamily \textquotesingle{}live\textquotesingle{}}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of strings with split sections and a boolean indicating validity of received string. 
+\end{DoxyReturn}
+
+
+Definition at line 800 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ab7e00f1a17cf5022d7a0864ed2e097aa}\label{group__icubclient__SAM__Drivers_ab7e00f1a17cf5022d7a0864ed2e097aa}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!process\+Live\+Data@{process\+Live\+Data}}
+\index{process\+Live\+Data@{process\+Live\+Data}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{process\+Live\+Data()}{processLiveData()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+process\+Live\+Data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{data\+List,  }\item[{}]{this\+Model,  }\item[{}]{verbose = {\ttfamily False},  }\item[{}]{return\+Unknown = {\ttfamily False},  }\item[{}]{print\+Class = {\ttfamily True},  }\item[{}]{additional\+Data = {\ttfamily dict()} }\end{DoxyParamCaption})}
+
+
+
+Method which receives a list of data frames and outputs a classification if available or \textquotesingle{}no\+\_\+classification\textquotesingle{} if it is not. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+List} & List of data\+Frames collected. Length of list is variable. \\
+\hline
+{\em this\+Model} & List of models required for testing. \\
+\hline
+{\em verbose} & Boolean turning logging to stdout on or off. \\
+\hline
+{\em return\+Unknown} & Boolean to turn on or off the return a sentence if the classification is unknown. \\
+\hline
+{\em print\+Class} & Boolean to turn on or off logging of classification to stdout. \\
+\hline
+{\em additional\+Data} & Dictionary containing additional data required for classification to occur. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String with result of classification, likelihood of the classification, and list of frames with the latest x number of frames popped where x is the window length of the model. Classification result can be string {\ttfamily \textquotesingle{}None\textquotesingle{}} if the classification is unknown or message is invalid or {\ttfamily None} if a different error occurs. 
+\end{DoxyReturn}
+
+
+Definition at line 851 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_afc5f853cfede70ba59eadee2277a9e6c}\label{group__icubclient__SAM__Drivers_afc5f853cfede70ba59eadee2277a9e6c}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!read\+Data@{read\+Data}}
+\index{read\+Data@{read\+Data}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{read\+Data()}{readData()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+read\+Data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{root\+\_\+data\+\_\+dir,  }\item[{}]{participant\+\_\+index,  }\item[{}]{args,  }\item[{}]{kw }\end{DoxyParamCaption})}
+
+
+
+Method which accepts a data directory, reads all the data in and outputs self.\+Y which is a numpy array with n instances of m length feature vectors and self.\+L which is a list of text Labels of length n. 
+
+This method reads data$<$number$>$.\+log files and the corresponding labels$<$number$>$.\+log files present in the root\+\_\+data\+\_\+dir and formats the time series data into normalised and smoothed windows. Subsequently depending on the list of joints chosen by the user and other parameters set in the config file present in the root\+\_\+data\+\_\+dir, the information of the different joints and objects are appended into a single feature vector. Number of feature vectors is equal to the number of windows extracted from the time series data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em root\+\_\+data\+\_\+dir} & Data directory. \\
+\hline
+{\em participant\+\_\+index} & List of subfolders to consider. Can be left as an empty list.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+
+None 
+\end{DoxyReturn}
+
+
+Definition at line 417 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a12a86e98b3d5335ef56bcd3f6d048f81}\label{group__icubclient__SAM__Drivers_a12a86e98b3d5335ef56bcd3f6d048f81}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!save\+Parameters@{save\+Parameters}}
+\index{save\+Parameters@{save\+Parameters}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{save\+Parameters()}{saveParameters()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+save\+Parameters (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Override \hyperlink{group__icubclient__SAM__Drivers_gac6f300d2daf748b11b28802574b6f5e8}{S\+A\+M\+Driver.\+save\+Parameters}. 
+
+This function adds items of additional\+Parameters\+List to params\+Dict to be saved. 
+
+Definition at line 153 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a9e07c7922ed5de8fed5ec837d191743f}\label{group__icubclient__SAM__Drivers_a9e07c7922ed5de8fed5ec837d191743f}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!test\+Performance@{test\+Performance}}
+\index{test\+Performance@{test\+Performance}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{test\+Performance()}{testPerformance()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+test\+Performance (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{test\+Model,  }\item[{}]{Yall,  }\item[{}]{Lall,  }\item[{}]{Ytest\+All,  }\item[{}]{Ltest\+All,  }\item[{}]{verbose }\end{DoxyParamCaption})}
+
+
+
+Custom test\+Performance method. 
+
+This augments the standard test\+Performance method by including testing of known and unknown together with testing on known training points and known testing points.
+
+
+\begin{DoxyParams}{Parameters}
+{\em test\+Model} & S\+A\+M\+Object Model to be tested. \\
+\hline
+{\em Yall} & Numpy array with training data vectors to be tested. \\
+\hline
+{\em Lall} & List with corresponding training data labels. \\
+\hline
+{\em Ytest\+All} & Numpy array with testing data vectors to be tested. \\
+\hline
+{\em Ltest\+All} & List with corresponding testing data labels. \\
+\hline
+{\em verbose} & Boolean turning logging to stdout on or off.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Square numpy array confusion matrix. 
+\end{DoxyReturn}
+
+
+Definition at line 176 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ad699eb08f48f023fb5e0c744c9a4051e}\label{group__icubclient__SAM__Drivers_ad699eb08f48f023fb5e0c744c9a4051e}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!additional\+Parameters\+List@{additional\+Parameters\+List}}
+\index{additional\+Parameters\+List@{additional\+Parameters\+List}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{additional\+Parameters\+List}{additionalParametersList}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+additional\+Parameters\+List}
+
+
+
+Definition at line 49 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a2c4032e4052b59a249bae791ee6a4ae8}\label{group__icubclient__SAM__Drivers_a2c4032e4052b59a249bae791ee6a4ae8}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!all\+Data\+Dict@{all\+Data\+Dict}}
+\index{all\+Data\+Dict@{all\+Data\+Dict}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{all\+Data\+Dict}{allDataDict}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+all\+Data\+Dict}
+
+
+
+Definition at line 45 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a56b2437f3700afce6363dd8510f6661b}\label{group__icubclient__SAM__Drivers_a56b2437f3700afce6363dd8510f6661b}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!data@{data}}
+\index{data@{data}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+data}
+
+
+
+Definition at line 36 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ad9c274bfb069dd815c35b46d77bca9d1}\label{group__icubclient__SAM__Drivers_ad9c274bfb069dd815c35b46d77bca9d1}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!data2\+Labels@{data2\+Labels}}
+\index{data2\+Labels@{data2\+Labels}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{data2\+Labels}{data2Labels}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+data2\+Labels}
+
+
+
+Definition at line 43 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a0795d275820675450a4ccc869e759958}\label{group__icubclient__SAM__Drivers_a0795d275820675450a4ccc869e759958}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!data\+Log\+List@{data\+Log\+List}}
+\index{data\+Log\+List@{data\+Log\+List}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{data\+Log\+List}{dataLogList}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+data\+Log\+List}
+
+
+
+Definition at line 38 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a405e35ae705be4102f3e7cb2394f055f}\label{group__icubclient__SAM__Drivers_a405e35ae705be4102f3e7cb2394f055f}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!data\+Vec@{data\+Vec}}
+\index{data\+Vec@{data\+Vec}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{data\+Vec}{dataVec}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+data\+Vec}
+
+
+
+Definition at line 44 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_accf604f68241cf3847a9f5d695710330}\label{group__icubclient__SAM__Drivers_accf604f68241cf3847a9f5d695710330}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!feature\+Sequence@{feature\+Sequence}}
+\index{feature\+Sequence@{feature\+Sequence}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{feature\+Sequence}{featureSequence}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+feature\+Sequence}
+
+
+
+Definition at line 41 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_aa99dc23f32bb97a5dc615764f3812248}\label{group__icubclient__SAM__Drivers_aa99dc23f32bb97a5dc615764f3812248}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!hands\+Combined@{hands\+Combined}}
+\index{hands\+Combined@{hands\+Combined}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{hands\+Combined}{handsCombined}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+hands\+Combined}
+
+
+
+Definition at line 42 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a9bca50058da592720fd710d2d6e3e1ec}\label{group__icubclient__SAM__Drivers_a9bca50058da592720fd710d2d6e3e1ec}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!items\+Per\+Joint@{items\+Per\+Joint}}
+\index{items\+Per\+Joint@{items\+Per\+Joint}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{items\+Per\+Joint}{itemsPerJoint}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+items\+Per\+Joint}
+
+
+
+Definition at line 40 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a794184bc22c039821402946663a2fe5b}\label{group__icubclient__SAM__Drivers_a794184bc22c039821402946663a2fe5b}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!L@{L}}
+\index{L@{L}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+L}
+
+
+
+Definition at line 740 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a3d24d506bc292c1f8f53ebd903e6f0e3}\label{group__icubclient__SAM__Drivers_a3d24d506bc292c1f8f53ebd903e6f0e3}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!labels\+Log\+List@{labels\+Log\+List}}
+\index{labels\+Log\+List@{labels\+Log\+List}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{labels\+Log\+List}{labelsLogList}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+labels\+Log\+List}
+
+
+
+Definition at line 39 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a59f13ac648de32dde07f5b18c1e78a56}\label{group__icubclient__SAM__Drivers_a59f13ac648de32dde07f5b18c1e78a56}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!list\+Of\+Vectors\+To\+Classify@{list\+Of\+Vectors\+To\+Classify}}
+\index{list\+Of\+Vectors\+To\+Classify@{list\+Of\+Vectors\+To\+Classify}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{list\+Of\+Vectors\+To\+Classify}{listOfVectorsToClassify}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+list\+Of\+Vectors\+To\+Classify}
+
+
+
+Definition at line 46 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ab90cebf00ada98f96102c2b01b2ff970}\label{group__icubclient__SAM__Drivers_ab90cebf00ada98f96102c2b01b2ff970}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!num\+Joints@{num\+Joints}}
+\index{num\+Joints@{num\+Joints}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{num\+Joints}{numJoints}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+num\+Joints}
+
+
+
+Definition at line 37 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ae0bdb001bbc956edc2bb1e8f5f1e3093}\label{group__icubclient__SAM__Drivers_ae0bdb001bbc956edc2bb1e8f5f1e3093}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!raw\+Text\+Data@{raw\+Text\+Data}}
+\index{raw\+Text\+Data@{raw\+Text\+Data}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{raw\+Text\+Data}{rawTextData}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+raw\+Text\+Data}
+
+
+
+Definition at line 208 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a0dab1e97a70d82f72fe076df29b0e052}\label{group__icubclient__SAM__Drivers_a0dab1e97a70d82f72fe076df29b0e052}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!seq\+Test\+Conf@{seq\+Test\+Conf}}
+\index{seq\+Test\+Conf@{seq\+Test\+Conf}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{seq\+Test\+Conf}{seqTestConf}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+seq\+Test\+Conf}
+
+
+
+Definition at line 47 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a8d905b932fffa96aeeb19f121c225d66}\label{group__icubclient__SAM__Drivers_a8d905b932fffa96aeeb19f121c225d66}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!seq\+Test\+Perc@{seq\+Test\+Perc}}
+\index{seq\+Test\+Perc@{seq\+Test\+Perc}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{seq\+Test\+Perc}{seqTestPerc}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+seq\+Test\+Perc}
+
+
+
+Definition at line 48 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ab531558eee10a99547032f611799fc2e}\label{group__icubclient__SAM__Drivers_ab531558eee10a99547032f611799fc2e}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}!Y@{Y}}
+\index{Y@{Y}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win\+::\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win}}
+\subparagraph{\texorpdfstring{Y}{Y}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+Y}
+
+
+
+Definition at line 739 of file S\+A\+M\+Driver\+\_\+\+A\+R\+Win.\+py.
+
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}}\label{classSAM_1_1SAM__Drivers_1_1SAMDriver__interaction_1_1SAMDriver__interaction}
+\Hypertarget{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Drivers_1_1SAMDriver__interaction_1_1SAMDriver__interaction}
+\subsubsection{class S\+AM\+:\+:S\+A\+M\+\_\+\+Drivers\+:\+:S\+A\+M\+Driver\+\_\+interaction\+:\+:S\+A\+M\+Driver\+\_\+interaction}
+Class developed for the implementation of face recognition. 
+
+Definition at line 26 of file S\+A\+M\+Driver\+\_\+interaction.\+py.
+
+
+
+Inheritance diagram for S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+interaction.\+S\+A\+M\+Driver\+\_\+interaction\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{classSAM_1_1SAM__Drivers_1_1SAMDriver__interaction_1_1SAMDriver__interaction__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{group__icubclient__SAM__Drivers_afae51ba28a26b423b2607e6cafa8ef3b}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\begin{DoxyCompactList}\small\item\em Initialise class using \hyperlink{group__icubclient__SAM__Drivers_gac35ec3eea80d1fb5704758a9c53267a1}{S\+A\+M\+Driver.\+\_\+\+\_\+init\+\_\+\+\_\+} and augment with custom parameters. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_a19a7560a34cf400d887b8dfc99c2e666}{load\+Parameters} (self, parser, train\+Name)
+\begin{DoxyCompactList}\small\item\em Function to load parameters from the model config.\+ini file. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_a18cf4294387e41e3ad97dbf4d84e08aa}{save\+Parameters} (self)
+\begin{DoxyCompactList}\small\item\em Executes \hyperlink{group__icubclient__SAM__Drivers_gac6f300d2daf748b11b28802574b6f5e8}{S\+A\+M\+Driver.\+save\+Parameters} to save default parameters. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_ab9458625bb39c7575a96e7ccc63c8660}{read\+Data} (self, root\+\_\+data\+\_\+dir, participant\+\_\+index, args, kw)
+\begin{DoxyCompactList}\small\item\em Method which accepts a data directory, reads all the data in and outputs self.\+Y which is a numpy array with n instances of m length feature vectors and self.\+L which is a list of text Labels of length n. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_a67d8509e605eac274321cdd30fd747e6}{process\+Live\+Data} (self, data\+List, this\+Model, \hyperlink{group__icubclient__SAM__Drivers_ga48cfefc6532ba606936b9fd7f3156da8}{verbose}, additional\+Data=dict())
+\begin{DoxyCompactList}\small\item\em Method which receives a list of data frames and outputs a classification if available or \textquotesingle{}no\+\_\+classification\textquotesingle{} if it is not. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Drivers_af99e275c9f691489b795d33d52b4bbfc}{format\+Generated\+Data} (self, instance)
+\begin{DoxyCompactList}\small\item\em Method to transform a generated instance from the model into a Yarp formatted output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_ad156c110c349c2170f6ac74ef98d9d5d}{additional\+Parameters\+List}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_adba94f830ec5b368df923f19d1cb4e89}{Y}
+\item 
+\hyperlink{group__icubclient__SAM__Drivers_adaed67c0fbe44b2e7acd9719fe56f0ee}{L}
+\end{DoxyCompactItemize}
+
+
+\paragraph{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_afae51ba28a26b423b2607e6cafa8ef3b}\label{group__icubclient__SAM__Drivers_afae51ba28a26b423b2607e6cafa8ef3b}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}}
+\subparagraph{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+interaction.\+S\+A\+M\+Driver\+\_\+interaction.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Initialise class using \hyperlink{group__icubclient__SAM__Drivers_gac35ec3eea80d1fb5704758a9c53267a1}{S\+A\+M\+Driver.\+\_\+\+\_\+init\+\_\+\+\_\+} and augment with custom parameters. 
+
+additional\+Parameter\+List is a list of extra parameters to preserve between training and interaction. 
+
+Definition at line 32 of file S\+A\+M\+Driver\+\_\+interaction.\+py.
+
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_af99e275c9f691489b795d33d52b4bbfc}\label{group__icubclient__SAM__Drivers_af99e275c9f691489b795d33d52b4bbfc}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}!format\+Generated\+Data@{format\+Generated\+Data}}
+\index{format\+Generated\+Data@{format\+Generated\+Data}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}}
+\subparagraph{\texorpdfstring{format\+Generated\+Data()}{formatGeneratedData()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+interaction.\+S\+A\+M\+Driver\+\_\+interaction.\+format\+Generated\+Data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{instance }\end{DoxyParamCaption})}
+
+
+
+Method to transform a generated instance from the model into a Yarp formatted output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & Feature vector returned during generation of a label.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Yarp formatted output for instance. 
+\end{DoxyReturn}
+
+
+Definition at line 264 of file S\+A\+M\+Driver\+\_\+interaction.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a19a7560a34cf400d887b8dfc99c2e666}\label{group__icubclient__SAM__Drivers_a19a7560a34cf400d887b8dfc99c2e666}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}!load\+Parameters@{load\+Parameters}}
+\index{load\+Parameters@{load\+Parameters}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}}
+\subparagraph{\texorpdfstring{load\+Parameters()}{loadParameters()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+interaction.\+S\+A\+M\+Driver\+\_\+interaction.\+load\+Parameters (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{parser,  }\item[{}]{train\+Name }\end{DoxyParamCaption})}
+
+
+
+Function to load parameters from the model config.\+ini file. 
+
+Method to load parameters from file loaded in parser from within section train\+Name and store these parameters in self.\+params\+Dict.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parser} & Safe\+Config\+Parser with pre-\/read config file. \\
+\hline
+{\em train\+Name} & Section from which parameters are to be read.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+
+None 
+\end{DoxyReturn}
+
+
+Definition at line 49 of file S\+A\+M\+Driver\+\_\+interaction.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a67d8509e605eac274321cdd30fd747e6}\label{group__icubclient__SAM__Drivers_a67d8509e605eac274321cdd30fd747e6}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}!process\+Live\+Data@{process\+Live\+Data}}
+\index{process\+Live\+Data@{process\+Live\+Data}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}}
+\subparagraph{\texorpdfstring{process\+Live\+Data()}{processLiveData()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+interaction.\+S\+A\+M\+Driver\+\_\+interaction.\+process\+Live\+Data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{data\+List,  }\item[{}]{this\+Model,  }\item[{}]{verbose,  }\item[{}]{additional\+Data = {\ttfamily dict()} }\end{DoxyParamCaption})}
+
+
+
+Method which receives a list of data frames and outputs a classification if available or \textquotesingle{}no\+\_\+classification\textquotesingle{} if it is not. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+List} & List of data\+Frames collected. Length of list is variable. \\
+\hline
+{\em this\+Model} & List of models required for testing. \\
+\hline
+{\em verbose} & Boolean turning logging to stdout on or off. \\
+\hline
+{\em additional\+Data} & Dictionary containing additional data required for classification to occur. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String with result of classification, likelihood of the classification, and list of frames with the latest x number of frames popped where x is the window length of the model. Classification result can be string {\ttfamily \textquotesingle{}None\textquotesingle{}} if the classification is unknown or message is invalid or {\ttfamily None} if a different error occurs. 
+\end{DoxyReturn}
+
+
+Definition at line 213 of file S\+A\+M\+Driver\+\_\+interaction.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ab9458625bb39c7575a96e7ccc63c8660}\label{group__icubclient__SAM__Drivers_ab9458625bb39c7575a96e7ccc63c8660}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}!read\+Data@{read\+Data}}
+\index{read\+Data@{read\+Data}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}}
+\subparagraph{\texorpdfstring{read\+Data()}{readData()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+interaction.\+S\+A\+M\+Driver\+\_\+interaction.\+read\+Data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{root\+\_\+data\+\_\+dir,  }\item[{}]{participant\+\_\+index,  }\item[{}]{args,  }\item[{}]{kw }\end{DoxyParamCaption})}
+
+
+
+Method which accepts a data directory, reads all the data in and outputs self.\+Y which is a numpy array with n instances of m length feature vectors and self.\+L which is a list of text Labels of length n. 
+
+This method reads .ppm images from disk, converts the images to grayscale and serialises the data into a feature vector.
+
+
+\begin{DoxyParams}{Parameters}
+{\em root\+\_\+data\+\_\+dir} & Data directory. \\
+\hline
+{\em participant\+\_\+index} & List of subfolders to consider. Can be left as an empty list.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 104 of file S\+A\+M\+Driver\+\_\+interaction.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_a18cf4294387e41e3ad97dbf4d84e08aa}\label{group__icubclient__SAM__Drivers_a18cf4294387e41e3ad97dbf4d84e08aa}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}!save\+Parameters@{save\+Parameters}}
+\index{save\+Parameters@{save\+Parameters}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}}
+\subparagraph{\texorpdfstring{save\+Parameters()}{saveParameters()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+interaction.\+S\+A\+M\+Driver\+\_\+interaction.\+save\+Parameters (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Executes \hyperlink{group__icubclient__SAM__Drivers_gac6f300d2daf748b11b28802574b6f5e8}{S\+A\+M\+Driver.\+save\+Parameters} to save default parameters. 
+
+
+
+Definition at line 88 of file S\+A\+M\+Driver\+\_\+interaction.\+py.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ad156c110c349c2170f6ac74ef98d9d5d}\label{group__icubclient__SAM__Drivers_ad156c110c349c2170f6ac74ef98d9d5d}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}!additional\+Parameters\+List@{additional\+Parameters\+List}}
+\index{additional\+Parameters\+List@{additional\+Parameters\+List}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}}
+\subparagraph{\texorpdfstring{additional\+Parameters\+List}{additionalParametersList}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+interaction.\+S\+A\+M\+Driver\+\_\+interaction.\+additional\+Parameters\+List}
+
+
+
+Definition at line 34 of file S\+A\+M\+Driver\+\_\+interaction.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_adaed67c0fbe44b2e7acd9719fe56f0ee}\label{group__icubclient__SAM__Drivers_adaed67c0fbe44b2e7acd9719fe56f0ee}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}!L@{L}}
+\index{L@{L}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}}
+\subparagraph{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+interaction.\+S\+A\+M\+Driver\+\_\+interaction.\+L}
+
+
+
+Definition at line 199 of file S\+A\+M\+Driver\+\_\+interaction.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_adba94f830ec5b368df923f19d1cb4e89}\label{group__icubclient__SAM__Drivers_adba94f830ec5b368df923f19d1cb4e89}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}!Y@{Y}}
+\index{Y@{Y}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Drivers\+::\+S\+A\+M\+Driver\+\_\+interaction\+::\+S\+A\+M\+Driver\+\_\+interaction}}
+\subparagraph{\texorpdfstring{Y}{Y}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Drivers.\+S\+A\+M\+Driver\+\_\+interaction.\+S\+A\+M\+Driver\+\_\+interaction.\+Y}
+
+
+
+Definition at line 198 of file S\+A\+M\+Driver\+\_\+interaction.\+py.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gac35ec3eea80d1fb5704758a9c53267a1}\label{group__icubclient__SAM__Drivers_gac35ec3eea80d1fb5704758a9c53267a1}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Initialisation for \hyperlink{group__icubclient__SAM__Drivers_classSAM_1_1SAM__Core_1_1SAMDriver_1_1SAMDriver}{S\+A\+M\+Driver}. 
+
+
+
+Definition at line 40 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gaac21747b09e36216d09a23bd726cf62d}\label{group__icubclient__SAM__Drivers_gaac21747b09e36216d09a23bd726cf62d}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!format\+Generated\+Data@{format\+Generated\+Data}}
+\index{format\+Generated\+Data@{format\+Generated\+Data}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{format\+Generated\+Data()}{formatGeneratedData()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+format\+Generated\+Data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{instance }\end{DoxyParamCaption})}
+
+
+
+Method which receives an instance generated from a model via a label and formats the received vector by reshaping it or adding crucial data with it for it to be deciphered at the receiving end. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & A vector of generated data.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\bfseries Not\+Implemented\+Error} if not implemented by the inheriting child. Otherwise returns a Yarp Bottle or Yarp Image with the formatted generated data. 
+\end{DoxyReturn}
+
+
+Definition at line 373 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gaa44829106cbdec9d9548151582908dce}\label{group__icubclient__SAM__Drivers_gaa44829106cbdec9d9548151582908dce}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!load\+Parameters@{load\+Parameters}}
+\index{load\+Parameters@{load\+Parameters}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{load\+Parameters()}{loadParameters()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+load\+Parameters (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{parser,  }\item[{}]{train\+Name }\end{DoxyParamCaption})}
+
+
+
+Function to load parameters from the model config.\+ini file. 
+
+Method to load parameters from file loaded in parser from within section train\+Name and store these parameters in self.\+params\+Dict,
+
+
+\begin{DoxyParams}{Parameters}
+{\em parser} & Safe\+Config\+Parser with pre-\/read config file. \\
+\hline
+{\em train\+Name} & Section from which parameters are to be read.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\bfseries Not\+Implemented\+Error} if this function is not implemented by the inheriting child. 
+\end{DoxyReturn}
+
+
+Definition at line 105 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga9e09b2b15fd19eeceef3345c55ffdbdb}\label{group__icubclient__SAM__Drivers_ga9e09b2b15fd19eeceef3345c55ffdbdb}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!prepare\+Data@{prepare\+Data}}
+\index{prepare\+Data@{prepare\+Data}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{prepare\+Data()}{prepareData()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+prepare\+Data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{model = {\ttfamily \textquotesingle{}mrd\textquotesingle{}},  }\item[{}]{Ntr = {\ttfamily 50},  }\item[{}]{rand\+Seed = {\ttfamily 0},  }\item[{}]{normalise = {\ttfamily True} }\end{DoxyParamCaption})}
+
+
+
+Method for randomly splitting data and preparing Y dictionary. 
+
+This method splits the data in the model randomly between training and testing. Currently does not take equal number of samples from different classes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & String with type of model to be trained. Accepted values are {\ttfamily \textquotesingle{}mrd\textquotesingle{}} and {\ttfamily \textquotesingle{}bgplvm\textquotesingle{}}. \\
+\hline
+{\em Ntr} & Float percentage for the training/testing division of data. \\
+\hline
+{\em rand\+Seed} & Integer random seed. \\
+\hline
+{\em normalise} & Boolean turning normalisation of data on or off.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+
+None 
+\end{DoxyReturn}
+
+
+Definition at line 271 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gab82c8e473429a812d61a6685428dfc72}\label{group__icubclient__SAM__Drivers_gab82c8e473429a812d61a6685428dfc72}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!process\+Live\+Data@{process\+Live\+Data}}
+\index{process\+Live\+Data@{process\+Live\+Data}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{process\+Live\+Data()}{processLiveData()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+process\+Live\+Data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{data\+List,  }\item[{}]{this\+Model,  }\item[{}]{verbose = {\ttfamily False} }\end{DoxyParamCaption})}
+
+
+
+Method which receives a list of data frames and outputs a classification if available or \textquotesingle{}no\+\_\+classification\textquotesingle{} if it is not. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+List} & List of data\+Frames collected. Length of list is variable. \\
+\hline
+{\em this\+Model} & List of models required for testing. \\
+\hline
+{\em verbose} & Boolean turning logging to stdout on or off.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\bfseries Not\+Implemented\+Error} if not implemented by the inheriting child. Otherwise returns a string classification label. 
+\end{DoxyReturn}
+
+
+Definition at line 361 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga7a55565b0b0f58639327877c4f9cced0}\label{group__icubclient__SAM__Drivers_ga7a55565b0b0f58639327877c4f9cced0}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!read\+Data@{read\+Data}}
+\index{read\+Data@{read\+Data}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{read\+Data()}{readData()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+read\+Data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{root\+\_\+data\+\_\+dir,  }\item[{}]{participant\+\_\+index,  }\item[{}]{args,  }\item[{}]{kw }\end{DoxyParamCaption})}
+
+
+
+Method which accepts a data directory, reads all the data in and outputs self.\+Y which is a numpy array with n instances of m length feature vectors and self.\+L which is a list of text Labels of length n. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root\+\_\+data\+\_\+dir} & Data directory. \\
+\hline
+{\em participant\+\_\+index} & List of subfolders to consider. Can be left as an empty list.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\bfseries Not\+Implemented\+Error} if not implemented by the inheriting child. Otherwise returns self.\+Y and self.\+L which contain the formatted data and labels read from the data directory. 
+\end{DoxyReturn}
+
+
+Definition at line 347 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gac6f300d2daf748b11b28802574b6f5e8}\label{group__icubclient__SAM__Drivers_gac6f300d2daf748b11b28802574b6f5e8}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!save\+Parameters@{save\+Parameters}}
+\index{save\+Parameters@{save\+Parameters}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{save\+Parameters()}{saveParameters()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+save\+Parameters (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Method to store variables generated during training which are required during interaction in self.\+params\+Dict. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+
+None 
+\end{DoxyReturn}
+
+
+Definition at line 117 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga282ca575179c9374f26da33269b14ea7}\label{group__icubclient__SAM__Drivers_ga282ca575179c9374f26da33269b14ea7}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!test\+Performance@{test\+Performance}}
+\index{test\+Performance@{test\+Performance}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{test\+Performance()}{testPerformance()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+test\+Performance (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{test\+Model,  }\item[{}]{Yall,  }\item[{}]{Lall,  }\item[{}]{Ytest\+All,  }\item[{}]{Ltest\+All,  }\item[{}]{verbose }\end{DoxyParamCaption})}
+
+
+
+Method for testing the whole dataset for overall performance. 
+
+Returns a confusion matrix. \begin{DoxyVerb}   This implementation is a standard performance testing method that can be overridden by an inheriting child.
+\end{DoxyVerb}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em test\+Model} & S\+A\+M\+Object Model to be tested. \\
+\hline
+{\em Yall} & Numpy array with training data vectors to be tested. \\
+\hline
+{\em Lall} & List with corresponding training data labels. \\
+\hline
+{\em Ytest\+All} & Numpy array with testing data vectors to be tested. \\
+\hline
+{\em Ltest\+All} & List with corresponding testing data labels. \\
+\hline
+{\em verbose} & Boolean turning logging to stdout on or off.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Square numpy array confusion matrix. 
+\end{DoxyReturn}
+
+
+Definition at line 142 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga35c70890b650a03a8da39b87c1de39d7}\label{group__icubclient__SAM__Drivers_ga35c70890b650a03a8da39b87c1de39d7}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!training@{training}}
+\index{training@{training}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{training()}{training()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+training (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{model\+Num\+Inducing,  }\item[{}]{model\+Num\+Iterations,  }\item[{}]{model\+Init\+Iterations,  }\item[{}]{fname,  }\item[{}]{save\+\_\+model,  }\item[{}]{economy\+\_\+save,  }\item[{}]{keep\+If\+Present = {\ttfamily True},  }\item[{}]{kernel\+Str = {\ttfamily None} }\end{DoxyParamCaption})}
+
+
+
+Method to train, store and load the learned model. 
+
+This method tries reloading the model in fname. If unsuccessful or loaded model has mismatching parameters, trains a new model from scratch.
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Num\+Inducing} & Integer number of inducing parameters. \\
+\hline
+{\em model\+Num\+Iterations} & Integer number of training iterations. \\
+\hline
+{\em model\+Init\+Iterations} & Integer number of initialisation iterations. \\
+\hline
+{\em fname} & Filename to save model to. \\
+\hline
+{\em save\+\_\+model} & Boolean to turn saving of the model on or off. \\
+\hline
+{\em economy\+\_\+save} & Boolean to turn economy saving on or off. Economy save saves smaller models by not storing data inside the model but keeping it stored in the data path. \\
+\hline
+{\em keep\+If\+Present} & Boolean to enable or disable loading of a model when one is available. \\
+\hline
+{\em kernel\+Str} & Kernel string with the requested kernel. If {\ttfamily None} the default kernel is used.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+
+None 
+\end{DoxyReturn}
+
+
+Definition at line 172 of file S\+A\+M\+Driver.\+py.
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gaba1d7355c9842c5ea5881fc9926c06bf}\label{group__icubclient__SAM__Drivers_gaba1d7355c9842c5ea5881fc9926c06bf}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!additional\+Parameters\+List@{additional\+Parameters\+List}}
+\index{additional\+Parameters\+List@{additional\+Parameters\+List}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{additional\+Parameters\+List}{additionalParametersList}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+additional\+Parameters\+List}
+
+
+
+Definition at line 90 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gabca45237d0107c510889d82d283fbaec}\label{group__icubclient__SAM__Drivers_gabca45237d0107c510889d82d283fbaec}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!calibrated@{calibrated}}
+\index{calibrated@{calibrated}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{calibrated}{calibrated}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+calibrated}
+
+
+
+Definition at line 74 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gac5a03c4fd8cc77e66e3b990cde23ce81}\label{group__icubclient__SAM__Drivers_gac5a03c4fd8cc77e66e3b990cde23ce81}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!classif\+\_\+thresh@{classif\+\_\+thresh}}
+\index{classif\+\_\+thresh@{classif\+\_\+thresh}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{classif\+\_\+thresh}{classif\_thresh}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+classif\+\_\+thresh}
+
+
+
+Definition at line 84 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gabe6b807db021be28e71f027af8123925}\label{group__icubclient__SAM__Drivers_gabe6b807db021be28e71f027af8123925}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!classifiers@{classifiers}}
+\index{classifiers@{classifiers}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{classifiers}{classifiers}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+classifiers}
+
+
+
+Definition at line 83 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gac25896ed8992a4f3315b937f8a54613d}\label{group__icubclient__SAM__Drivers_gac25896ed8992a4f3315b937f8a54613d}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!data\+\_\+labels@{data\+\_\+labels}}
+\index{data\+\_\+labels@{data\+\_\+labels}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{data\+\_\+labels}{data\_labels}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+data\+\_\+labels}
+
+
+
+Definition at line 59 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga1095171ae626372dde87a71f9d9263ce}\label{group__icubclient__SAM__Drivers_ga1095171ae626372dde87a71f9d9263ce}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!fname@{fname}}
+\index{fname@{fname}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{fname}{fname}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+fname}
+
+
+
+Definition at line 70 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gad584d554bc3c5c82f75c37d69c66add2}\label{group__icubclient__SAM__Drivers_gad584d554bc3c5c82f75c37d69c66add2}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!L@{L}}
+\index{L@{L}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+L}
+
+
+
+Definition at line 45 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga4b259685c2b7fddfc554f75eee45389a}\label{group__icubclient__SAM__Drivers_ga4b259685c2b7fddfc554f75eee45389a}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!Lall@{Lall}}
+\index{Lall@{Lall}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{Lall}{Lall}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Lall}
+
+
+
+Definition at line 79 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga962b980991bc6ea994f32f2baf4266e6}\label{group__icubclient__SAM__Drivers_ga962b980991bc6ea994f32f2baf4266e6}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!list\+Of\+Models@{list\+Of\+Models}}
+\index{list\+Of\+Models@{list\+Of\+Models}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{list\+Of\+Models}{listOfModels}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+list\+Of\+Models}
+
+
+
+Definition at line 64 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga22a80ec6fb07792d354d1267e52c3b7c}\label{group__icubclient__SAM__Drivers_ga22a80ec6fb07792d354d1267e52c3b7c}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!Ln@{Ln}}
+\index{Ln@{Ln}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{Ln}{Ln}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ln}
+
+
+
+Definition at line 54 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga25f88f3ef7b54ea69fba9ef30fe929bd}\label{group__icubclient__SAM__Drivers_ga25f88f3ef7b54ea69fba9ef30fe929bd}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!Ltest@{Ltest}}
+\index{Ltest@{Ltest}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{Ltest}{Ltest}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ltest}
+
+
+
+Definition at line 48 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga47bb2e79cf8b5f8e071ab6208cf25dd0}\label{group__icubclient__SAM__Drivers_ga47bb2e79cf8b5f8e071ab6208cf25dd0}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!Ltest\+All@{Ltest\+All}}
+\index{Ltest\+All@{Ltest\+All}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{Ltest\+All}{LtestAll}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ltest\+All}
+
+
+
+Definition at line 81 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gad85dff96ce76cf33eb3c2806c88339ce}\label{group__icubclient__SAM__Drivers_gad85dff96ce76cf33eb3c2806c88339ce}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!Ltestn@{Ltestn}}
+\index{Ltestn@{Ltestn}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{Ltestn}{Ltestn}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ltestn}
+
+
+
+Definition at line 50 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga058fd6bcc38278be395e94cad6db2729}\label{group__icubclient__SAM__Drivers_ga058fd6bcc38278be395e94cad6db2729}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!model\+\_\+init\+\_\+iterations@{model\+\_\+init\+\_\+iterations}}
+\index{model\+\_\+init\+\_\+iterations@{model\+\_\+init\+\_\+iterations}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{model\+\_\+init\+\_\+iterations}{model\_init\_iterations}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+model\+\_\+init\+\_\+iterations}
+
+
+
+Definition at line 88 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gaa8e9a230b77bb0223043c14f711fb8a9}\label{group__icubclient__SAM__Drivers_gaa8e9a230b77bb0223043c14f711fb8a9}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!model\+\_\+mode@{model\+\_\+mode}}
+\index{model\+\_\+mode@{model\+\_\+mode}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{model\+\_\+mode}{model\_mode}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+model\+\_\+mode}
+
+
+
+Definition at line 62 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga3c0dc0cea69b59e7bf3e2bf21d098d7f}\label{group__icubclient__SAM__Drivers_ga3c0dc0cea69b59e7bf3e2bf21d098d7f}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!model\+\_\+num\+\_\+inducing@{model\+\_\+num\+\_\+inducing}}
+\index{model\+\_\+num\+\_\+inducing@{model\+\_\+num\+\_\+inducing}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{model\+\_\+num\+\_\+inducing}{model\_num\_inducing}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+model\+\_\+num\+\_\+inducing}
+
+
+
+Definition at line 86 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gad641973a96f09f2047d0410e31bc609c}\label{group__icubclient__SAM__Drivers_gad641973a96f09f2047d0410e31bc609c}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!model\+\_\+num\+\_\+iterations@{model\+\_\+num\+\_\+iterations}}
+\index{model\+\_\+num\+\_\+iterations@{model\+\_\+num\+\_\+iterations}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{model\+\_\+num\+\_\+iterations}{model\_num\_iterations}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+model\+\_\+num\+\_\+iterations}
+
+
+
+Definition at line 87 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga825f509582eecf9d63d742b9f47cf759}\label{group__icubclient__SAM__Drivers_ga825f509582eecf9d63d742b9f47cf759}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!model\+\_\+type@{model\+\_\+type}}
+\index{model\+\_\+type@{model\+\_\+type}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{model\+\_\+type}{model\_type}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+model\+\_\+type}
+
+
+
+Definition at line 65 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga25e341fd0f6a6103844e8412ee7811a4}\label{group__icubclient__SAM__Drivers_ga25e341fd0f6a6103844e8412ee7811a4}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!model\+Label@{model\+Label}}
+\index{model\+Label@{model\+Label}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{model\+Label}{modelLabel}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+model\+Label}
+
+
+
+Definition at line 66 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga820552da530ea75cc7109c7e450b7e31}\label{group__icubclient__SAM__Drivers_ga820552da530ea75cc7109c7e450b7e31}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!model\+Loaded@{model\+Loaded}}
+\index{model\+Loaded@{model\+Loaded}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{model\+Loaded}{modelLoaded}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+model\+Loaded}
+
+
+
+Definition at line 72 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gad8dfb72012bbcecd068e7ad4271c609e}\label{group__icubclient__SAM__Drivers_gad8dfb72012bbcecd068e7ad4271c609e}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!optimise\+Recall@{optimise\+Recall}}
+\index{optimise\+Recall@{optimise\+Recall}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{optimise\+Recall}{optimiseRecall}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+optimise\+Recall}
+
+
+
+Definition at line 71 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gaf6e991ba9bb10709f700208591849c4d}\label{group__icubclient__SAM__Drivers_gaf6e991ba9bb10709f700208591849c4d}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!parallel\+Operation@{parallel\+Operation}}
+\index{parallel\+Operation@{parallel\+Operation}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{parallel\+Operation}{parallelOperation}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+parallel\+Operation}
+
+
+
+Definition at line 73 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga462b640279c37475acc154525d327eeb}\label{group__icubclient__SAM__Drivers_ga462b640279c37475acc154525d327eeb}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!params\+Dict@{params\+Dict}}
+\index{params\+Dict@{params\+Dict}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{params\+Dict}{paramsDict}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+params\+Dict}
+
+
+
+Definition at line 60 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga8a072edf4ea7097a7524c6f691e7d6a8}\label{group__icubclient__SAM__Drivers_ga8a072edf4ea7097a7524c6f691e7d6a8}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!participant\+List@{participant\+List}}
+\index{participant\+List@{participant\+List}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{participant\+List}{participantList}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+participant\+List}
+
+
+
+Definition at line 68 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gafa17acba2ab91a5988b535ab129694e7}\label{group__icubclient__SAM__Drivers_gafa17acba2ab91a5988b535ab129694e7}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!Quser@{Quser}}
+\index{Quser@{Quser}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{Quser}{Quser}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Quser}
+
+
+
+Definition at line 63 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga7e5bd4edc32a108d5641cf7343887b6c}\label{group__icubclient__SAM__Drivers_ga7e5bd4edc32a108d5641cf7343887b6c}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!raw\+Data@{raw\+Data}}
+\index{raw\+Data@{raw\+Data}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{raw\+Data}{rawData}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+raw\+Data}
+
+
+
+Definition at line 76 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga34a0d852321cad5abdc8fd4d514e60fa}\label{group__icubclient__SAM__Drivers_ga34a0d852321cad5abdc8fd4d514e60fa}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!raw\+Text\+Data@{raw\+Text\+Data}}
+\index{raw\+Text\+Data@{raw\+Text\+Data}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{raw\+Text\+Data}{rawTextData}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+raw\+Text\+Data}
+
+
+
+Definition at line 75 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga58c437c869d397cc69296ba13eecbce2}\label{group__icubclient__SAM__Drivers_ga58c437c869d397cc69296ba13eecbce2}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!S\+A\+M\+Object@{S\+A\+M\+Object}}
+\index{S\+A\+M\+Object@{S\+A\+M\+Object}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{S\+A\+M\+Object}{SAMObject}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+S\+A\+M\+Object}
+
+
+
+Definition at line 42 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga11f7d1112da1490998b9878d212d6255}\label{group__icubclient__SAM__Drivers_ga11f7d1112da1490998b9878d212d6255}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!seg\+Test\+Conf@{seg\+Test\+Conf}}
+\index{seg\+Test\+Conf@{seg\+Test\+Conf}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{seg\+Test\+Conf}{segTestConf}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+seg\+Test\+Conf}
+
+
+
+Definition at line 57 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga0cbeb9209124fba55cb56c5de40b7a63}\label{group__icubclient__SAM__Drivers_ga0cbeb9209124fba55cb56c5de40b7a63}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!seg\+Test\+Perc@{seg\+Test\+Perc}}
+\index{seg\+Test\+Perc@{seg\+Test\+Perc}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{seg\+Test\+Perc}{segTestPerc}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+seg\+Test\+Perc}
+
+
+
+Definition at line 58 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga510653c29b923373a47faf252919d6cb}\label{group__icubclient__SAM__Drivers_ga510653c29b923373a47faf252919d6cb}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!seg\+Train\+Conf@{seg\+Train\+Conf}}
+\index{seg\+Train\+Conf@{seg\+Train\+Conf}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{seg\+Train\+Conf}{segTrainConf}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+seg\+Train\+Conf}
+
+
+
+Definition at line 55 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gaf7748998c4b4347aaac0df1cc38a830c}\label{group__icubclient__SAM__Drivers_gaf7748998c4b4347aaac0df1cc38a830c}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!seg\+Train\+Perc@{seg\+Train\+Perc}}
+\index{seg\+Train\+Perc@{seg\+Train\+Perc}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{seg\+Train\+Perc}{segTrainPerc}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+seg\+Train\+Perc}
+
+
+
+Definition at line 56 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga56128df082b1160386c6d9857ef0fe38}\label{group__icubclient__SAM__Drivers_ga56128df082b1160386c6d9857ef0fe38}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!text\+Labels@{text\+Labels}}
+\index{text\+Labels@{text\+Labels}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{text\+Labels}{textLabels}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+text\+Labels}
+
+
+
+Definition at line 67 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gaf9de3e104bba0f3944bb9a23b328d684}\label{group__icubclient__SAM__Drivers_gaf9de3e104bba0f3944bb9a23b328d684}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!variance\+Threshold@{variance\+Threshold}}
+\index{variance\+Threshold@{variance\+Threshold}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{variance\+Threshold}{varianceThreshold}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+variance\+Threshold}
+
+
+
+Definition at line 69 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga48cfefc6532ba606936b9fd7f3156da8}\label{group__icubclient__SAM__Drivers_ga48cfefc6532ba606936b9fd7f3156da8}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!verbose@{verbose}}
+\index{verbose@{verbose}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{verbose}{verbose}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+verbose}
+
+
+
+Definition at line 61 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gaafcaf934890fe0ea13e17f384868b07d}\label{group__icubclient__SAM__Drivers_gaafcaf934890fe0ea13e17f384868b07d}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!X@{X}}
+\index{X@{X}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{X}{X}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+X}
+
+
+
+Definition at line 46 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga462d762fee5145a93abaccf45505391d}\label{group__icubclient__SAM__Drivers_ga462d762fee5145a93abaccf45505391d}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!Y@{Y}}
+\index{Y@{Y}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{Y}{Y}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Y}
+
+
+
+Definition at line 44 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga99651a34f71273b720039e8f4d4b03a4}\label{group__icubclient__SAM__Drivers_ga99651a34f71273b720039e8f4d4b03a4}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!Yall@{Yall}}
+\index{Yall@{Yall}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{Yall}{Yall}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Yall}
+
+
+
+Definition at line 78 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga8744836c0d908359d2de313417311dac}\label{group__icubclient__SAM__Drivers_ga8744836c0d908359d2de313417311dac}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!Ymean@{Ymean}}
+\index{Ymean@{Ymean}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{Ymean}{Ymean}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ymean}
+
+
+
+Definition at line 51 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga2317645ba1bb66c3c7527687cfe3262e}\label{group__icubclient__SAM__Drivers_ga2317645ba1bb66c3c7527687cfe3262e}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!Yn@{Yn}}
+\index{Yn@{Yn}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{Yn}{Yn}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Yn}
+
+
+
+Definition at line 53 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_gab4f0e7e943deb9806f07908a5aaa36fe}\label{group__icubclient__SAM__Drivers_gab4f0e7e943deb9806f07908a5aaa36fe}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!Ystd@{Ystd}}
+\index{Ystd@{Ystd}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{Ystd}{Ystd}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ystd}
+
+
+
+Definition at line 52 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga47e71ceed497adbec4ba952b4385d8b1}\label{group__icubclient__SAM__Drivers_ga47e71ceed497adbec4ba952b4385d8b1}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!Ytest@{Ytest}}
+\index{Ytest@{Ytest}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{Ytest}{Ytest}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ytest}
+
+
+
+Definition at line 47 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga61bc4612a1dd3b5d593798bb7e338c81}\label{group__icubclient__SAM__Drivers_ga61bc4612a1dd3b5d593798bb7e338c81}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!Ytest\+All@{Ytest\+All}}
+\index{Ytest\+All@{Ytest\+All}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{Ytest\+All}{YtestAll}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ytest\+All}
+
+
+
+Definition at line 80 of file S\+A\+M\+Driver.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Drivers_ga8ce3d609c06b6374b1c18a8236042186}\label{group__icubclient__SAM__Drivers_ga8ce3d609c06b6374b1c18a8236042186}} 
+\index{S\+A\+M Drivers@{S\+A\+M Drivers}!Ytestn@{Ytestn}}
+\index{Ytestn@{Ytestn}!S\+A\+M Drivers@{S\+A\+M Drivers}}
+\subsubsection{\texorpdfstring{Ytestn}{Ytestn}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Driver.\+S\+A\+M\+Driver.\+Ytestn}
+
+
+
+Definition at line 49 of file S\+A\+M\+Driver.\+py.
+

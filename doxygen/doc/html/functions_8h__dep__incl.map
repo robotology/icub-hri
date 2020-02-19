@@ -1,0 +1,13 @@
+<map id="/home/travis/build/robotology/icub&#45;hri/src/libraries/icubclient/include/icubclient/functions.h" name="/home/travis/build/robotology/icub&#45;hri/src/libraries/icubclient/include/icubclient/functions.h">
+<area shape="rect" id="node2" href="$all_8h.html" title="/home/travis/build\l/robotology/icub&#45;hri\l/src/libraries/icubclient\l/include/icubclient/all.h" alt="" coords="36,265,208,335"/>
+<area shape="rect" id="node4" href="$subSystem__speech_8h.html" title="/home/travis/build\l/robotology/icub&#45;hri\l/src/libraries/icubclient\l/include/icubclient/subsystems\l/subSystem_speech.h" alt="" coords="324,124,547,209"/>
+<area shape="rect" id="node9" href="$functions_8cpp.html" title="/home/travis/build\l/robotology/icub&#45;hri\l/src/libraries/icubclient\l/src/functions.cpp" alt="" coords="571,131,740,202"/>
+<area shape="rect" id="node10" href="$action_8cpp.html" title="/home/travis/build\l/robotology/icub&#45;hri\l/src/libraries/icubclient\l/src/knowledge/action.cpp" alt="" coords="764,131,955,202"/>
+<area shape="rect" id="node11" href="$ears_8cpp.html" title="/home/travis/build\l/robotology/icub&#45;hri\l/src/modules/ears/src\l/ears.cpp" alt="" coords="979,131,1139,202"/>
+<area shape="rect" id="node12" href="$modules_2tools_2referenceFrameHandler_2main_8cpp.html" title="/home/travis/build\l/robotology/icub&#45;hri\l/src/modules/tools/reference\lFrameHandler/main.cpp" alt="" coords="1164,131,1371,202"/>
+<area shape="rect" id="node3" href="$examples_2icub-client-dependent-project_2src_2main_8cpp.html" title="/home/travis/build\l/robotology/icub&#45;hri\l/src/examples/icub&#45;client\l&#45;dependent&#45;project/src/main.cpp" alt="" coords="5,391,239,461"/>
+<area shape="rect" id="node5" href="$icubClient_8cpp.html" title="/home/travis/build\l/robotology/icub&#45;hri\l/src/libraries/icubclient\l/src/clients/icubClient.cpp" alt="" coords="232,265,420,335"/>
+<area shape="rect" id="node6" href="$subSystem__speech_8cpp.html" title="/home/travis/build\l/robotology/icub&#45;hri\l/src/libraries/icubclient\l/src/subsystems/subSystem\l_speech.cpp" alt="" coords="445,257,647,343"/>
+<area shape="rect" id="node7" href="$helpers_8cpp.html" title="/home/travis/build\l/robotology/icub&#45;hri\l/src/modules/proactiveTagging\l/src/helpers.cpp" alt="" coords="672,265,892,335"/>
+<area shape="rect" id="node8" href="$proactiveTagging_8cpp.html" title="/home/travis/build\l/robotology/icub&#45;hri\l/src/modules/proactiveTagging\l/src/proactiveTagging.cpp" alt="" coords="916,265,1136,335"/>
+</map>

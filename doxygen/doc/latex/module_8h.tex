@@ -1,0 +1,84 @@
+\hypertarget{module_8h}{}\section{/home/travis/build/robotology/icub-\/hri/src/modules/iol2opc/include/module.h File Reference}
+\label{module_8h}\index{/home/travis/build/robotology/icub-\/hri/src/modules/iol2opc/include/module.\+h@{/home/travis/build/robotology/icub-\/hri/src/modules/iol2opc/include/module.\+h}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$deque$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$yarp/os/all.\+h$>$}\newline
+{\ttfamily \#include $<$yarp/sig/all.\+h$>$}\newline
+{\ttfamily \#include $<$yarp/math/\+Math.\+h$>$}\newline
+{\ttfamily \#include $<$yarp/math/\+Rand.\+h$>$}\newline
+{\ttfamily \#include $<$i\+Cub/ctrl/filters.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}icubclient/clients/opc\+Client.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$opencv2/opencv.\+hpp$>$}\newline
+{\ttfamily \#include $<$opencv2/tracking.\+hpp$>$}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}iol2opc\+\_\+\+I\+D\+L.\+h\char`\"{}}\newline
+Include dependency graph for module.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{module_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{module_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__iol2opc_classIOLObject}{I\+O\+L\+Object}
+\item 
+class \hyperlink{group__iol2opc_classIOL2OPCBridge}{I\+O\+L2\+O\+P\+C\+Bridge}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceBridge}{Bridge}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{module_8h_a5b8a24bb4741d8312c505c1ef9420d9d}{R\+E\+T\+\_\+\+I\+N\+V\+A\+L\+ID}~-\/1
+\item 
+\#define \hyperlink{module_8h_a2b75a9fa3a4aacd142a17c3fdebcca9f}{O\+B\+J\+E\+C\+T\+\_\+\+U\+N\+K\+N\+O\+WN}~\char`\"{}?\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespaceBridge_a58acad8bf83b6df8e000fd21a8be62a9}{Bridge\+::\+State} \{ \newline
+\hyperlink{namespaceBridge_a58acad8bf83b6df8e000fd21a8be62a9a663a609b9fbd926acff431382ba59034}{Bridge\+::idle}, 
+\newline
+\hyperlink{namespaceBridge_a58acad8bf83b6df8e000fd21a8be62a9ae5a6c219405776236d738c8e0f3be438}{Bridge\+::load\+\_\+database}, 
+\newline
+\hyperlink{namespaceBridge_a58acad8bf83b6df8e000fd21a8be62a9a72b5e0b430183aa37e9b33dea060a439}{Bridge\+::localization}
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{module_8h_a2b75a9fa3a4aacd142a17c3fdebcca9f}\label{module_8h_a2b75a9fa3a4aacd142a17c3fdebcca9f}} 
+\index{module.\+h@{module.\+h}!O\+B\+J\+E\+C\+T\+\_\+\+U\+N\+K\+N\+O\+WN@{O\+B\+J\+E\+C\+T\+\_\+\+U\+N\+K\+N\+O\+WN}}
+\index{O\+B\+J\+E\+C\+T\+\_\+\+U\+N\+K\+N\+O\+WN@{O\+B\+J\+E\+C\+T\+\_\+\+U\+N\+K\+N\+O\+WN}!module.\+h@{module.\+h}}
+\subsubsection{\texorpdfstring{O\+B\+J\+E\+C\+T\+\_\+\+U\+N\+K\+N\+O\+WN}{OBJECT\_UNKNOWN}}
+{\footnotesize\ttfamily \#define O\+B\+J\+E\+C\+T\+\_\+\+U\+N\+K\+N\+O\+WN~\char`\"{}?\char`\"{}}
+
+
+
+Definition at line 39 of file module.\+h.
+
+\mbox{\Hypertarget{module_8h_a5b8a24bb4741d8312c505c1ef9420d9d}\label{module_8h_a5b8a24bb4741d8312c505c1ef9420d9d}} 
+\index{module.\+h@{module.\+h}!R\+E\+T\+\_\+\+I\+N\+V\+A\+L\+ID@{R\+E\+T\+\_\+\+I\+N\+V\+A\+L\+ID}}
+\index{R\+E\+T\+\_\+\+I\+N\+V\+A\+L\+ID@{R\+E\+T\+\_\+\+I\+N\+V\+A\+L\+ID}!module.\+h@{module.\+h}}
+\subsubsection{\texorpdfstring{R\+E\+T\+\_\+\+I\+N\+V\+A\+L\+ID}{RET\_INVALID}}
+{\footnotesize\ttfamily \#define R\+E\+T\+\_\+\+I\+N\+V\+A\+L\+ID~-\/1}
+
+
+
+Definition at line 38 of file module.\+h.
+

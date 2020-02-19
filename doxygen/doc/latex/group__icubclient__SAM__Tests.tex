@@ -1,0 +1,501 @@
+\hypertarget{group__icubclient__SAM__Tests}{}\section{S\+AM Tests}
+\label{group__icubclient__SAM__Tests}\index{S\+A\+M Tests@{S\+A\+M Tests}}
+
+
+Collection of methods for testing and calibrating recall for \hyperlink{namespaceSAM}{S\+AM} Models.  
+
+
+Collaboration diagram for S\+AM Tests\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{group__icubclient__SAM__Tests}
+\end{center}
+\end{figure}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceSAM_1_1SAM__Core_1_1svi__ratio}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+svi\+\_\+ratio}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{group__icubclient__SAM__Tests_ga4030a4fb35c568869122103d29b6cc25}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+deep\+\_\+getsizeof} (o, ids)
+\begin{DoxyCompactList}\small\item\em Method to calculate the size of an object {\ttfamily o} in bytes. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Tests_ga451f7ba20c084a7482fc4bab4ba0f59d}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+calibrate\+Model\+Recall} (this\+Model)
+\begin{DoxyCompactList}\small\item\em Logic to initialise calibration of model recall in order to recognize known from unknown instances. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Tests_ga9c6b9bfe733e2ff320995ec7e0ee9cdf}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+calibrate\+Single\+Model\+Recall} (this\+Model)
+\begin{DoxyCompactList}\small\item\em Perform calibration for single model implementations. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Tests_ga609a55c3b5bbf9ab1f9759c240aefd8e}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+calibrate\+Multiple\+Model\+Recall} (this\+Model)
+\begin{DoxyCompactList}\small\item\em Perform calibration for multiple model implementations. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Tests_ga5edddf8683ce4a2650429c355e4dd7dd}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+format\+Data\+Func} (Ydata)
+\begin{DoxyCompactList}\small\item\em Utility function to format data for testing. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Tests_ga08baf53ab45bde447965b03d0bfa1a35}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+single\+Recall} (this\+Model, test\+Instance, verbose, visualise\+Info=None, optimise=100)
+\begin{DoxyCompactList}\small\item\em Method that performs classification for single model implementations. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Tests_gae7639430f294ed485cb2ea03a9bb5095}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+multiple\+Recall\+\_\+no\+Calib} (this\+Model, test\+Instance, verbose, visualise\+Info=None, optimise=True)
+\begin{DoxyCompactList}\small\item\em Method that performs classification for uncalibrated multiple model implementations. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Tests_ga684e61ac3df13fa4ae0d20ed03a9979f}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+multiple\+Recall} (this\+Model, test\+Instance, verbose, visualise\+Info=None, optimise=100)
+\begin{DoxyCompactList}\small\item\em Method that performs classification for calibrated multiple model implementations. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Tests_gaa209fbf7add0cf59bd93a76f0387d343}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+wait\+\_\+watching\+\_\+stdout} (ar, dt=1, truncate=1000)
+\begin{DoxyCompactList}\small\item\em Monitoring function that logs to stdout the logging output of multiple threads. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Tests_gaa5357ad5f4775cd411d35896655374f5}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+test\+Segment} (this\+Model, Ysample, verbose, visualise\+Info=None, optimise=100)
+\begin{DoxyCompactList}\small\item\em Utility function to test a sample. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Tests_ga3a78ca830aeec689bb106d1af35c2411}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+segment\+Testing} (this\+Model, Ysample, Lnum, verbose, label, serial\+Mode=False, optimise=100, calibrate=False)
+\begin{DoxyCompactList}\small\item\em Method to test multiple samples at a time. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Tests_gab4468c0fd3358f455f808f6e4a4132ea}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+test\+Segments} (this\+Model, Ysample, Lnum, verbose, label, serial\+Mode=False)
+\begin{DoxyCompactList}\small\item\em Function to test segments and return a confusion matrix. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Tests_gad2632767e0112bb1762614591096bd95}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+calculate\+Variance\+Threshold} (seg\+Intersections, mk, muk, vk, vuk)
+\begin{DoxyCompactList}\small\item\em Method to decide on the approach to be used for setting variance thresholds and method of thresholding. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Tests_ga7ae6c28b9d56e28c26cd320b8d321ff6}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+calculate\+Data} (text\+Labels, conf\+Matrix, num\+Items=None)
+\begin{DoxyCompactList}\small\item\em Calculate the normalised confusion matrix. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__Tests_ga2475129eb5c2e30ffe652729e98b3fc5}{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+combine\+Classifications} (this\+Model, labels, likelihoods)
+\begin{DoxyCompactList}\small\item\em Combine multiple classifications into a single classification. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Collection of methods for testing and calibrating recall for \hyperlink{namespaceSAM}{S\+AM} Models. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_ga7ae6c28b9d56e28c26cd320b8d321ff6}\label{group__icubclient__SAM__Tests_ga7ae6c28b9d56e28c26cd320b8d321ff6}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!calculate\+Data@{calculate\+Data}}
+\index{calculate\+Data@{calculate\+Data}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{calculate\+Data()}{calculateData()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+calculate\+Data (\begin{DoxyParamCaption}\item[{}]{text\+Labels,  }\item[{}]{conf\+Matrix,  }\item[{}]{num\+Items = {\ttfamily None} }\end{DoxyParamCaption})}
+
+
+
+Calculate the normalised confusion matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text\+Labels} & List of classifications. \\
+\hline
+{\em conf\+Matrix} & Confusion matrix to normalise. \\
+\hline
+{\em num\+Items} & Total number of items tested.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Normalised confusion matrix and overall percentage correct. 
+\end{DoxyReturn}
+
+
+Definition at line 843 of file S\+A\+M\+Testing.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_gad2632767e0112bb1762614591096bd95}\label{group__icubclient__SAM__Tests_gad2632767e0112bb1762614591096bd95}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!calculate\+Variance\+Threshold@{calculate\+Variance\+Threshold}}
+\index{calculate\+Variance\+Threshold@{calculate\+Variance\+Threshold}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{calculate\+Variance\+Threshold()}{calculateVarianceThreshold()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+calculate\+Variance\+Threshold (\begin{DoxyParamCaption}\item[{}]{seg\+Intersections,  }\item[{}]{mk,  }\item[{}]{muk,  }\item[{}]{vk,  }\item[{}]{vuk }\end{DoxyParamCaption})}
+
+
+
+Method to decide on the approach to be used for setting variance thresholds and method of thresholding. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seg\+Intersections} & Number of gaussian intersections. \\
+\hline
+{\em mk} & Means of known. \\
+\hline
+{\em muk} & Means of unknown. \\
+\hline
+{\em vk} & Variances of known. \\
+\hline
+{\em vuk} & Variances of unknown.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of threshold variances and method of thresholding. 
+\end{DoxyReturn}
+
+
+Definition at line 791 of file S\+A\+M\+Testing.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_ga451f7ba20c084a7482fc4bab4ba0f59d}\label{group__icubclient__SAM__Tests_ga451f7ba20c084a7482fc4bab4ba0f59d}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!calibrate\+Model\+Recall@{calibrate\+Model\+Recall}}
+\index{calibrate\+Model\+Recall@{calibrate\+Model\+Recall}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{calibrate\+Model\+Recall()}{calibrateModelRecall()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+calibrate\+Model\+Recall (\begin{DoxyParamCaption}\item[{}]{this\+Model }\end{DoxyParamCaption})}
+
+
+
+Logic to initialise calibration of model recall in order to recognize known from unknown instances. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em this\+Model} & S\+A\+M\+Object model to calibrate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+
+None 
+\end{DoxyReturn}
+
+
+Definition at line 87 of file S\+A\+M\+Testing.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_ga609a55c3b5bbf9ab1f9759c240aefd8e}\label{group__icubclient__SAM__Tests_ga609a55c3b5bbf9ab1f9759c240aefd8e}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!calibrate\+Multiple\+Model\+Recall@{calibrate\+Multiple\+Model\+Recall}}
+\index{calibrate\+Multiple\+Model\+Recall@{calibrate\+Multiple\+Model\+Recall}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{calibrate\+Multiple\+Model\+Recall()}{calibrateMultipleModelRecall()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+calibrate\+Multiple\+Model\+Recall (\begin{DoxyParamCaption}\item[{}]{this\+Model }\end{DoxyParamCaption})}
+
+
+
+Perform calibration for multiple model implementations. 
+
+In contrast with calibrate\+Single\+Model\+Recall, in this method known and unknown are calibrated according to measures of familiarity between all model classes. The familiarity of each class with each other class and with itself are then used to perform a Bayesian decision depending on the resulting familiarity when testing a new instance.
+
+\begin{DoxyVerb}        SAMObject model to calibrate.
+\end{DoxyVerb}
+
+
+\begin{DoxyReturn}{Returns}
+
+
+None 
+\end{DoxyReturn}
+
+
+Definition at line 208 of file S\+A\+M\+Testing.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_ga9c6b9bfe733e2ff320995ec7e0ee9cdf}\label{group__icubclient__SAM__Tests_ga9c6b9bfe733e2ff320995ec7e0ee9cdf}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!calibrate\+Single\+Model\+Recall@{calibrate\+Single\+Model\+Recall}}
+\index{calibrate\+Single\+Model\+Recall@{calibrate\+Single\+Model\+Recall}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{calibrate\+Single\+Model\+Recall()}{calibrateSingleModelRecall()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+calibrate\+Single\+Model\+Recall (\begin{DoxyParamCaption}\item[{}]{this\+Model }\end{DoxyParamCaption})}
+
+
+
+Perform calibration for single model implementations. 
+
+This method either uses the bhattacharyya distance to perform calibration of known and unknown or uses histograms to use the histogram distribution of known and unknown labels in the training data to carry out the classification. This method depends on the following parameters present in config.\+ini. ~\newline
+ 1) {\bfseries use\+Max\+Distance} \+: {\ttfamily False} or {\ttfamily True}. This enables the use of bhattacharyya distance method to recognise known and unknown. ~\newline
+ 2) {\bfseries calibrate\+Unknown} \+: {\ttfamily True} or {\ttfamily False}. This turns on or off the calibration of the model for known and unknown inputs. ~\newline
+ 3) {\bfseries no\+Bins} \+: Integer number of bins to be used for the histogram method if {\bfseries calibrate\+Unknown} is {\ttfamily True} and {\bfseries use\+Max\+Distance} is {\ttfamily False}. ~\newline
+ 4) {\bfseries method} \+: String indicating the method used when histograms are used for calibration. When using histograms, the multi-\/dimensional probability of known and unknown are both calculated using the histogram. {\ttfamily sum\+Prob} then performs a decision based on the largest sum after summing the probabilities of known and unknown independently. {\ttfamily mul\+Prob} performs a decision based on the largest sum after multiplying the probabilities of known and unknown independently.~\newline
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em this\+Model} & S\+A\+M\+Object model to calibrate.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+
+None 
+\end{DoxyReturn}
+
+
+Definition at line 113 of file S\+A\+M\+Testing.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_ga2475129eb5c2e30ffe652729e98b3fc5}\label{group__icubclient__SAM__Tests_ga2475129eb5c2e30ffe652729e98b3fc5}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!combine\+Classifications@{combine\+Classifications}}
+\index{combine\+Classifications@{combine\+Classifications}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{combine\+Classifications()}{combineClassifications()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+combine\+Classifications (\begin{DoxyParamCaption}\item[{}]{this\+Model,  }\item[{}]{labels,  }\item[{}]{likelihoods }\end{DoxyParamCaption})}
+
+
+
+Combine multiple classifications into a single classification. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em this\+Model} & S\+A\+M\+Object model. \\
+\hline
+{\em labels} & List of labels for classifications. \\
+\hline
+{\em likelihoods} & List of likelihoods.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Label with the highest likelihood together with the normalised likelihood. 
+\end{DoxyReturn}
+
+
+Definition at line 883 of file S\+A\+M\+Testing.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_ga4030a4fb35c568869122103d29b6cc25}\label{group__icubclient__SAM__Tests_ga4030a4fb35c568869122103d29b6cc25}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!deep\+\_\+getsizeof@{deep\+\_\+getsizeof}}
+\index{deep\+\_\+getsizeof@{deep\+\_\+getsizeof}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{deep\+\_\+getsizeof()}{deep\_getsizeof()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+deep\+\_\+getsizeof (\begin{DoxyParamCaption}\item[{}]{o,  }\item[{}]{ids }\end{DoxyParamCaption})}
+
+
+
+Method to calculate the size of an object {\ttfamily o} in bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em o} & Object to calculate the size of. \\
+\hline
+{\em ids} & Set of ids to not consider when calculating the size of the object.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Size of object in bytes. 
+\end{DoxyReturn}
+
+
+Definition at line 52 of file S\+A\+M\+Testing.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_ga5edddf8683ce4a2650429c355e4dd7dd}\label{group__icubclient__SAM__Tests_ga5edddf8683ce4a2650429c355e4dd7dd}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!format\+Data\+Func@{format\+Data\+Func}}
+\index{format\+Data\+Func@{format\+Data\+Func}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{format\+Data\+Func()}{formatDataFunc()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+format\+Data\+Func (\begin{DoxyParamCaption}\item[{}]{Ydata }\end{DoxyParamCaption})}
+
+
+
+Utility function to format data for testing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Ydata} & Data to format for testing.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Formatted data for testing. 
+\end{DoxyReturn}
+
+
+Definition at line 304 of file S\+A\+M\+Testing.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_ga684e61ac3df13fa4ae0d20ed03a9979f}\label{group__icubclient__SAM__Tests_ga684e61ac3df13fa4ae0d20ed03a9979f}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!multiple\+Recall@{multiple\+Recall}}
+\index{multiple\+Recall@{multiple\+Recall}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{multiple\+Recall()}{multipleRecall()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+multiple\+Recall (\begin{DoxyParamCaption}\item[{}]{this\+Model,  }\item[{}]{test\+Instance,  }\item[{}]{verbose,  }\item[{}]{visualise\+Info = {\ttfamily None},  }\item[{}]{optimise = {\ttfamily 100} }\end{DoxyParamCaption})}
+
+
+
+Method that performs classification for calibrated multiple model implementations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em this\+Model} & S\+A\+M\+Object model to recall from. \\
+\hline
+{\em test\+Instance} & Novel feature vector to test. \\
+\hline
+{\em verbose} & Enable or disable logging to stdout. \\
+\hline
+{\em visualise\+Info} & None to disable plotting and plot\+Object to display plot of recall. \\
+\hline
+{\em optimise} & Number of optimisation iterations to perform during recall.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Classification label and calibrated familiarity values. 
+\end{DoxyReturn}
+
+
+Definition at line 469 of file S\+A\+M\+Testing.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_gae7639430f294ed485cb2ea03a9bb5095}\label{group__icubclient__SAM__Tests_gae7639430f294ed485cb2ea03a9bb5095}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!multiple\+Recall\+\_\+no\+Calib@{multiple\+Recall\+\_\+no\+Calib}}
+\index{multiple\+Recall\+\_\+no\+Calib@{multiple\+Recall\+\_\+no\+Calib}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{multiple\+Recall\+\_\+no\+Calib()}{multipleRecall\_noCalib()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+multiple\+Recall\+\_\+no\+Calib (\begin{DoxyParamCaption}\item[{}]{this\+Model,  }\item[{}]{test\+Instance,  }\item[{}]{verbose,  }\item[{}]{visualise\+Info = {\ttfamily None},  }\item[{}]{optimise = {\ttfamily True} }\end{DoxyParamCaption})}
+
+
+
+Method that performs classification for uncalibrated multiple model implementations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em this\+Model} & S\+A\+M\+Object model to recall from. \\
+\hline
+{\em test\+Instance} & Novel feature vector to test. \\
+\hline
+{\em verbose} & Enable or disable logging to stdout. \\
+\hline
+{\em visualise\+Info} & None to disable plotting and plot\+Object to display plot of recall. \\
+\hline
+{\em optimise} & Number of optimisation iterations to perform during recall.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Classification label and raw familiarity values. 
+\end{DoxyReturn}
+
+
+Definition at line 432 of file S\+A\+M\+Testing.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_ga3a78ca830aeec689bb106d1af35c2411}\label{group__icubclient__SAM__Tests_ga3a78ca830aeec689bb106d1af35c2411}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!segment\+Testing@{segment\+Testing}}
+\index{segment\+Testing@{segment\+Testing}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{segment\+Testing()}{segmentTesting()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+segment\+Testing (\begin{DoxyParamCaption}\item[{}]{this\+Model,  }\item[{}]{Ysample,  }\item[{}]{Lnum,  }\item[{}]{verbose,  }\item[{}]{label,  }\item[{}]{serial\+Mode = {\ttfamily False},  }\item[{}]{optimise = {\ttfamily 100},  }\item[{}]{calibrate = {\ttfamily False} }\end{DoxyParamCaption})}
+
+
+
+Method to test multiple samples at a time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em this\+Model} & S\+A\+M\+Object model to recall from. \\
+\hline
+{\em Ysample} & Novel feature vector to test. \\
+\hline
+{\em Lnum} & Ground truth labels to compare with. \\
+\hline
+{\em verbose} & Enable or disable logging to stdout. \\
+\hline
+{\em label} & Label for the current segments being tested. \\
+\hline
+{\em serial\+Mode} & Boolean to test serially or in parallel. \\
+\hline
+{\em optimise} & Number of optimisation iterations to perform during recall. \\
+\hline
+{\em calibrate} & Indicate calibration mode when True which requires a different return.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+label\+List, conf\+Matrix, ret, variances\+Known, variances\+Unknown if calibrate is {\ttfamily True}. label\+List, conf\+Matrix, label\+Comparison\+Dict if calibrate is {\ttfamily False}.
+
+label\+List List of classification labels 
+
+conf\+Matrix Numpy array with the confusion matrix 
+
+ret Classification object 
+
+variances\+Known Variances returned during calibration for known training instances 
+
+variances\+Unknown Variances returned during calibration for unknown training instances 
+
+label\+Comparison\+Dict Dictionary with two items {\ttfamily \textquotesingle{}original\textquotesingle{}} and {\ttfamily \textquotesingle{}results\textquotesingle{}}. 
+\end{DoxyReturn}
+
+
+Definition at line 584 of file S\+A\+M\+Testing.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_ga08baf53ab45bde447965b03d0bfa1a35}\label{group__icubclient__SAM__Tests_ga08baf53ab45bde447965b03d0bfa1a35}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!single\+Recall@{single\+Recall}}
+\index{single\+Recall@{single\+Recall}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{single\+Recall()}{singleRecall()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+single\+Recall (\begin{DoxyParamCaption}\item[{}]{this\+Model,  }\item[{}]{test\+Instance,  }\item[{}]{verbose,  }\item[{}]{visualise\+Info = {\ttfamily None},  }\item[{}]{optimise = {\ttfamily 100} }\end{DoxyParamCaption})}
+
+
+
+Method that performs classification for single model implementations. 
+
+This method returns the classification label of a test instance by calculating the predictive mean and variance of the backwards mapping and subsequently decides whether the test instance is first known or unknown and if known its most probable classification label.
+
+
+\begin{DoxyParams}{Parameters}
+{\em this\+Model} & S\+A\+M\+Object model to recall from. \\
+\hline
+{\em test\+Instance} & Novel feature vector to test. \\
+\hline
+{\em verbose} & Enable or disable logging to stdout. \\
+\hline
+{\em visualise\+Info} & None to disable plotting and plot\+Object to display plot of recall. \\
+\hline
+{\em optimise} & Number of optimisation iterations to perform during recall.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Classification label and variance if {\bfseries calibrate\+Unknown} is set to {\ttfamily False} in the config file. Otherwise returns classification label and normalised classification probability. 
+\end{DoxyReturn}
+
+
+Definition at line 326 of file S\+A\+M\+Testing.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_gaa5357ad5f4775cd411d35896655374f5}\label{group__icubclient__SAM__Tests_gaa5357ad5f4775cd411d35896655374f5}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!test\+Segment@{test\+Segment}}
+\index{test\+Segment@{test\+Segment}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{test\+Segment()}{testSegment()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+test\+Segment (\begin{DoxyParamCaption}\item[{}]{this\+Model,  }\item[{}]{Ysample,  }\item[{}]{verbose,  }\item[{}]{visualise\+Info = {\ttfamily None},  }\item[{}]{optimise = {\ttfamily 100} }\end{DoxyParamCaption})}
+
+
+
+Utility function to test a sample. 
+
+This model determines the type of model being used for the testing and directs the query to the appropriate function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em this\+Model} & S\+A\+M\+Object model to recall from. \\
+\hline
+{\em Ysample} & Novel feature vector to test. \\
+\hline
+{\em verbose} & Enable or disable logging to stdout. \\
+\hline
+{\em visualise\+Info} & {\ttfamily None} to disable plotting and plot\+Object to display plot of recall. \\
+\hline
+{\em optimise} & Number of optimisation iterations to perform during recall.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Classification result containing a list with the classification string and a measure of the familiarity or probability of the recall. 
+\end{DoxyReturn}
+
+
+Definition at line 551 of file S\+A\+M\+Testing.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_gab4468c0fd3358f455f808f6e4a4132ea}\label{group__icubclient__SAM__Tests_gab4468c0fd3358f455f808f6e4a4132ea}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!test\+Segments@{test\+Segments}}
+\index{test\+Segments@{test\+Segments}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{test\+Segments()}{testSegments()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+test\+Segments (\begin{DoxyParamCaption}\item[{}]{this\+Model,  }\item[{}]{Ysample,  }\item[{}]{Lnum,  }\item[{}]{verbose,  }\item[{}]{label,  }\item[{}]{serial\+Mode = {\ttfamily False} }\end{DoxyParamCaption})}
+
+
+
+Function to test segments and return a confusion matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em this\+Model} & S\+A\+M\+Object model to recall from. \\
+\hline
+{\em Ysample} & Novel feature vector to test. \\
+\hline
+{\em Lnum} & Ground truth labels to compare with. \\
+\hline
+{\em verbose} & Enable or disable logging to stdout. \\
+\hline
+{\em label} & Label for the current segments being tested. \\
+\hline
+{\em serial\+Mode} & Boolean to test serially or in parallel.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Confusion matrix, confusion labels, list of possible labels and dictionary with results and comparison or truth and classification. 
+\end{DoxyReturn}
+
+
+Definition at line 768 of file S\+A\+M\+Testing.\+py.
+
+\mbox{\Hypertarget{group__icubclient__SAM__Tests_gaa209fbf7add0cf59bd93a76f0387d343}\label{group__icubclient__SAM__Tests_gaa209fbf7add0cf59bd93a76f0387d343}} 
+\index{S\+A\+M Tests@{S\+A\+M Tests}!wait\+\_\+watching\+\_\+stdout@{wait\+\_\+watching\+\_\+stdout}}
+\index{wait\+\_\+watching\+\_\+stdout@{wait\+\_\+watching\+\_\+stdout}!S\+A\+M Tests@{S\+A\+M Tests}}
+\subsubsection{\texorpdfstring{wait\+\_\+watching\+\_\+stdout()}{wait\_watching\_stdout()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+Testing.\+wait\+\_\+watching\+\_\+stdout (\begin{DoxyParamCaption}\item[{}]{ar,  }\item[{}]{dt = {\ttfamily 1},  }\item[{}]{truncate = {\ttfamily 1000} }\end{DoxyParamCaption})}
+
+
+
+Monitoring function that logs to stdout the logging output of multiple threads. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ar} & Thread to log. \\
+\hline
+{\em dt} & Integer delta time between readings of ar.\+stdout. \\
+\hline
+{\em truncate} & Integer limit on the number of lines returned by the threads.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+
+None 
+\end{DoxyReturn}
+
+
+Definition at line 521 of file S\+A\+M\+Testing.\+py.
+

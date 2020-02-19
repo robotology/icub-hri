@@ -1,0 +1,667 @@
+\hypertarget{group__babbling}{}\section{babbling}
+\label{group__babbling}\index{babbling@{babbling}}
+
+
+Motor babbling with the i\+Cub Version\+:1.\+0.  
+
+
+Collaboration diagram for babbling\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{group__babbling}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__babbling_classBabbling}{Babbling}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Motor babbling with the i\+Cub Version\+:1.\+0. 
+
+\begin{DoxyAuthor}{Author}
+Martina Zambelli \href{mailto:m.zambelli13@imperial.ac.uk}{\tt m.\+zambelli13@imperial.\+ac.\+uk} ~\newline
+ 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+Released under the terms of the G\+NU G\+PL v2.\+0 
+\end{DoxyCopyright}
+\hypertarget{group__touchDetector_intro_sec}{}\subsection{Description}\label{group__touchDetector_intro_sec}
+A module to issue pseudo random (sinusoids) commands to the i\+Cub (either several joints, or individual joints)\hypertarget{group__touchDetector_parameters_sec}{}\subsection{Parameters}\label{group__touchDetector_parameters_sec}
+
+\begin{DoxyItemize}
+\item --name\+: To specify the module\textquotesingle{}s name; all the open ports will be tagged with the prefix /name
+\item --robot\+: To specify the robot\textquotesingle{}s name
+\item --single\+\_\+joint\+: To specify whether a single joint should be used for babbling. If $>$=0, the indicated joint will be used. If -\/1, multiple joints will be used.
+\item --start\+\_\+position\+::head\+: Where should the head be pointed during babbling
+\item --start\+\_\+position\+::arm\+: Start joint configuration for arm when doing the babbling
+\item --babbling\+\_\+param\+::freq\+: Frequency used for sinusoids
+\item --babbling\+\_\+param\+::amp\+: Amplitude used for sinusoids
+\item --babbling\+\_\+param\+::duration\+: Time duration for babbling 
+\end{DoxyItemize}\hypertarget{group__touchDetector_inputports_sec}{}\subsection{Input Ports}\label{group__touchDetector_inputports_sec}
+
+\begin{DoxyItemize}
+\item /babbling/rpc \mbox{[}yarp\+::sig\+::\+Bottle\mbox{]} \mbox{[}default carrier\+:tcp\mbox{]}\+: Response port. Supported commands\+:
+\begin{DoxyItemize}
+\item help
+\item quit
+\item babbling arm left/right \mbox{[}duration\mbox{]}
+\item babbling hand left/right
+\item babbling joint joint\+\_\+number left/right \mbox{[}duration\mbox{]}
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{group__touchDetector_outputports_sec}{}\subsection{Output Ports}\label{group__touchDetector_outputports_sec}
+\hypertarget{group__touchDetector_services_sec}{}\subsection{Services}\label{group__touchDetector_services_sec}
+
+
+\subsection{Class Documentation}
+\index{Babbling@{Babbling}}\label{classBabbling}
+\Hypertarget{group__babbling_classBabbling}
+\subsubsection{class Babbling}
+
+
+Definition at line 28 of file babbling.\+h.
+
+
+
+Inheritance diagram for Babbling\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=144pt]{classBabbling__inherit__graph}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__babbling_ac1c06a6f076dc3b824799be9b24e6cd1}{configure} (yarp\+::os\+::\+Resource\+Finder \&rf)
+\item 
+bool \hyperlink{group__babbling_a1f29bf6caa9392f3f99af13df900b05f}{interrupt\+Module} ()
+\item 
+bool \hyperlink{group__babbling_adb907b4b4a41807f128b1b877751eb83}{close} ()
+\item 
+bool \hyperlink{group__babbling_ade91925b1045c2d45603e49e8fa45356}{respond} (const yarp\+::os\+::\+Bottle \&command, yarp\+::os\+::\+Bottle \&reply)
+\item 
+double \hyperlink{group__babbling_a902a318d5b14fcf5a19bb7272abd49e2}{get\+Period} ()
+\item 
+bool \hyperlink{group__babbling_a214e419246e93718c263850171a67a31}{update\+Module} ()
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{group__babbling_aa4c8a1232df2582bc87b3da1ae0cd6a3}{init\+\_\+i\+Cub} ()
+\begin{DoxyCompactList}\small\item\em Initializes all the device controllers. \end{DoxyCompactList}\item 
+bool \hyperlink{group__babbling_a0ea0311715915eb771f8aecaec4b9839}{init\+\_\+left\+\_\+arm} ()
+\begin{DoxyCompactList}\small\item\em Create Poly\+Driver for left arm. \end{DoxyCompactList}\item 
+bool \hyperlink{group__babbling_a222fa43ddad0209a1b216ecc673f6bec}{init\+\_\+right\+\_\+arm} ()
+\begin{DoxyCompactList}\small\item\em Create Poly\+Driver for left arm. \end{DoxyCompactList}\item 
+bool \hyperlink{group__babbling_a436bdc30395e85a4fb1716ccf4d10cee}{do\+Babbling} ()
+\begin{DoxyCompactList}\small\item\em Sets the joints to be in velocity control, then goes in a loop to call {\ttfamily babbling\+Commands} for {\ttfamily duration} seconds. \end{DoxyCompactList}\item 
+void \hyperlink{group__babbling_afcb41e76d1e6dc81d3639a91285c87c0}{babbling\+Commands} (double \&t, int j\+\_\+idx)
+\begin{DoxyCompactList}\small\item\em Issues the actual velocity commands for time {\ttfamily t}. \end{DoxyCompactList}\item 
+bool \hyperlink{group__babbling_a5c0c4032800175a9f2f57fbe9de9037b}{move\+Head\+To\+Start\+Pos} ()
+\begin{DoxyCompactList}\small\item\em Use i\+Gaze\+Controller to move head in start position. \end{DoxyCompactList}\item 
+bool \hyperlink{group__babbling_ac34e8d2ad42bdf8d98b5dc155d2f42dd}{goto\+Start\+Pos} ()
+\begin{DoxyCompactList}\small\item\em Move head + arm in start position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+yarp\+::os\+::\+Rpc\+Server \hyperlink{group__babbling_afc20fc52862c90c52ee56628e1e52d65}{handler\+Port}
+\item 
+yarp\+::dev\+::\+I\+Position\+Control $\ast$ \hyperlink{group__babbling_ae3f0e78b0005659b56d4aabc7868c9a9}{pos\+Left\+Arm}
+\item 
+yarp\+::dev\+::\+I\+Velocity\+Control $\ast$ \hyperlink{group__babbling_a3b87f9dd07393fb9f190bb8e4ced3662}{vel\+Left\+Arm}
+\item 
+yarp\+::dev\+::\+I\+Torque\+Control $\ast$ \hyperlink{group__babbling_a44d279cd82628df4a5e54bb780999157}{itrq\+Left\+Arm}
+\item 
+yarp\+::dev\+::\+I\+Encoders $\ast$ \hyperlink{group__babbling_ab5de0e5815a8c642e2c5f804675f8734}{encs\+Left\+Arm}
+\item 
+yarp\+::dev\+::\+I\+Control\+Mode $\ast$ \hyperlink{group__babbling_ad4dab457a0cb02fe180c88c2c9807131}{ictrl\+Left\+Arm}
+\item 
+yarp\+::dev\+::\+I\+Control\+Limits $\ast$ \hyperlink{group__babbling_a0e0df17a1b42f3732896af945b5b04ac}{ictrl\+Lim\+Left\+Arm}
+\item 
+yarp\+::dev\+::\+I\+Position\+Control $\ast$ \hyperlink{group__babbling_abddc746bc2eae62a162fc48cdc5f5553}{pos\+Right\+Arm}
+\item 
+yarp\+::dev\+::\+I\+Velocity\+Control $\ast$ \hyperlink{group__babbling_a1f4d5e9370fad5b0637d759cada192f1}{vel\+Right\+Arm}
+\item 
+yarp\+::dev\+::\+I\+Torque\+Control $\ast$ \hyperlink{group__babbling_a4b5a1226c09e0c66f06a9d2e0aa73e86}{itrq\+Right\+Arm}
+\item 
+yarp\+::dev\+::\+I\+Encoders $\ast$ \hyperlink{group__babbling_a540345074d41b623588cb5e94d18a8c5}{encs\+Right\+Arm}
+\item 
+yarp\+::dev\+::\+I\+Control\+Mode $\ast$ \hyperlink{group__babbling_a8d08c70bd472b1d00bd55d8aa21ffd63}{ictrl\+Right\+Arm}
+\item 
+yarp\+::dev\+::\+I\+Control\+Limits $\ast$ \hyperlink{group__babbling_a3e5cfc21913105c3fd5ece25a1b2a73d}{ictrl\+Lim\+Right\+Arm}
+\item 
+yarp\+::dev\+::\+I\+Gaze\+Control $\ast$ \hyperlink{group__babbling_aa584e5aa3e9bd4d5a0e0ae4de7d014e2}{igaze}
+\item 
+yarp\+::dev\+::\+Poly\+Driver \hyperlink{group__babbling_aa52eea3bfd656e48ed01bce7a7cd9da8}{left\+Arm\+Dev}
+\item 
+yarp\+::dev\+::\+Poly\+Driver \hyperlink{group__babbling_ab35573fbefffff68d2816c4ce405a0a4}{right\+Arm\+Dev}
+\item 
+yarp\+::dev\+::\+Poly\+Driver \hyperlink{group__babbling_a1428fa9c9e68fada5155fc79fc7af6dd}{head\+Dev}
+\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__babbling_a9ef28388394d078d6578764a6435017c}{encoders\+Left\+Arm}
+\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__babbling_ab8d18ae468c969406e3689fc08732430}{encoders\+Right\+Arm}
+\item 
+std\+::string \hyperlink{group__babbling_a677602f878f4403e2ad99091c86f29a6}{part}
+\begin{DoxyCompactList}\small\item\em Should be \char`\"{}left\+\_\+arm\char`\"{} or \char`\"{}right\+\_\+arm\char`\"{}. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__babbling_a9b705ef5f9e677dab59f274c1582c0fc}{robot}
+\begin{DoxyCompactList}\small\item\em Should be \char`\"{}icub\char`\"{} or \char`\"{}icub\+Sim\char`\"{}. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{group__babbling_aa881d448117e515a051b8385532c3578}{part\+\_\+babbling}
+\begin{DoxyCompactList}\small\item\em Whether to do babbling with the whole \char`\"{}arm\char`\"{} or \char`\"{}hand\char`\"{} (should be either one or the other) \end{DoxyCompactList}\item 
+int \hyperlink{group__babbling_a3db3bc9a3171c963c66b268cd8c28f36}{single\+\_\+joint}
+\begin{DoxyCompactList}\small\item\em Which joint to do babbling with in case it is a single joint. \end{DoxyCompactList}\item 
+double \hyperlink{group__babbling_a48a9e302ed7cc9487963e2588cab2726}{freq}
+\begin{DoxyCompactList}\small\item\em Frequency for sin wave. \end{DoxyCompactList}\item 
+double \hyperlink{group__babbling_ab962dd24eb3bd00db6cb7f8a33bb6496}{amp}
+\begin{DoxyCompactList}\small\item\em Amplitude for sin wave. \end{DoxyCompactList}\item 
+double \hyperlink{group__babbling_a72831e25ddc4b9e79b46dbc25b0923eb}{duration}
+\begin{DoxyCompactList}\small\item\em Duration for the babbling. \end{DoxyCompactList}\item 
+double \hyperlink{group__babbling_a774931f9e0d4b55f143b69c6ddb8c314}{start\+\_\+command\+\_\+arm} \mbox{[}16\mbox{]}
+\begin{DoxyCompactList}\small\item\em Start command for the 16 arm joints. \end{DoxyCompactList}\item 
+yarp\+::sig\+::\+Vector\+Of$<$ double $>$ \hyperlink{group__babbling_ab713d81b43bcf7ae0e0b8dc2ad7dfd7f}{start\+\_\+command\+\_\+head}
+\begin{DoxyCompactList}\small\item\em Target for head in start position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\paragraph{Member Function Documentation}
+\mbox{\Hypertarget{group__babbling_afcb41e76d1e6dc81d3639a91285c87c0}\label{group__babbling_afcb41e76d1e6dc81d3639a91285c87c0}} 
+\index{Babbling@{Babbling}!babbling\+Commands@{babbling\+Commands}}
+\index{babbling\+Commands@{babbling\+Commands}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{babbling\+Commands()}{babblingCommands()}}
+{\footnotesize\ttfamily void Babbling\+::babbling\+Commands (\begin{DoxyParamCaption}\item[{double \&}]{t,  }\item[{int}]{j\+\_\+idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Issues the actual velocity commands for time {\ttfamily t}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & -\/ time to be used for the sin wave \\
+\hline
+{\em j\+\_\+idx} & -\/ if -\/1, do whole arm / whole hand babbling, otherwise babble single joint \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 281 of file babbling.\+cpp.
+
+\mbox{\Hypertarget{group__babbling_adb907b4b4a41807f128b1b877751eb83}\label{group__babbling_adb907b4b4a41807f128b1b877751eb83}} 
+\index{Babbling@{Babbling}!close@{close}}
+\index{close@{close}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool Babbling\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 99 of file babbling.\+cpp.
+
+\mbox{\Hypertarget{group__babbling_ac1c06a6f076dc3b824799be9b24e6cd1}\label{group__babbling_ac1c06a6f076dc3b824799be9b24e6cd1}} 
+\index{Babbling@{Babbling}!configure@{configure}}
+\index{configure@{configure}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{configure()}{configure()}}
+{\footnotesize\ttfamily bool Babbling\+::configure (\begin{DoxyParamCaption}\item[{yarp\+::os\+::\+Resource\+Finder \&}]{rf }\end{DoxyParamCaption})}
+
+
+
+Definition at line 27 of file babbling.\+cpp.
+
+\mbox{\Hypertarget{group__babbling_a436bdc30395e85a4fb1716ccf4d10cee}\label{group__babbling_a436bdc30395e85a4fb1716ccf4d10cee}} 
+\index{Babbling@{Babbling}!do\+Babbling@{do\+Babbling}}
+\index{do\+Babbling@{do\+Babbling}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{do\+Babbling()}{doBabbling()}}
+{\footnotesize\ttfamily bool Babbling\+::do\+Babbling (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Sets the joints to be in velocity control, then goes in a loop to call {\ttfamily babbling\+Commands} for {\ttfamily duration} seconds. 
+
+\begin{DoxyReturn}{Returns}
+True if successful, false if not 
+\end{DoxyReturn}
+
+
+Definition at line 244 of file babbling.\+cpp.
+
+\mbox{\Hypertarget{group__babbling_a902a318d5b14fcf5a19bb7272abd49e2}\label{group__babbling_a902a318d5b14fcf5a19bb7272abd49e2}} 
+\index{Babbling@{Babbling}!get\+Period@{get\+Period}}
+\index{get\+Period@{get\+Period}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{get\+Period()}{getPeriod()}}
+{\footnotesize\ttfamily double Babbling\+::get\+Period (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 240 of file babbling.\+cpp.
+
+\mbox{\Hypertarget{group__babbling_ac34e8d2ad42bdf8d98b5dc155d2f42dd}\label{group__babbling_ac34e8d2ad42bdf8d98b5dc155d2f42dd}} 
+\index{Babbling@{Babbling}!goto\+Start\+Pos@{goto\+Start\+Pos}}
+\index{goto\+Start\+Pos@{goto\+Start\+Pos}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{goto\+Start\+Pos()}{gotoStartPos()}}
+{\footnotesize\ttfamily bool Babbling\+::goto\+Start\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Move head + arm in start position. 
+
+\begin{DoxyReturn}{Returns}
+true if successful 
+\end{DoxyReturn}
+
+
+Definition at line 372 of file babbling.\+cpp.
+
+\mbox{\Hypertarget{group__babbling_aa4c8a1232df2582bc87b3da1ae0cd6a3}\label{group__babbling_aa4c8a1232df2582bc87b3da1ae0cd6a3}} 
+\index{Babbling@{Babbling}!init\+\_\+i\+Cub@{init\+\_\+i\+Cub}}
+\index{init\+\_\+i\+Cub@{init\+\_\+i\+Cub}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{init\+\_\+i\+Cub()}{init\_iCub()}}
+{\footnotesize\ttfamily bool Babbling\+::init\+\_\+i\+Cub (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Initializes all the device controllers. 
+
+\begin{DoxyReturn}{Returns}
+True if successful 
+\end{DoxyReturn}
+
+
+Definition at line 538 of file babbling.\+cpp.
+
+\mbox{\Hypertarget{group__babbling_a0ea0311715915eb771f8aecaec4b9839}\label{group__babbling_a0ea0311715915eb771f8aecaec4b9839}} 
+\index{Babbling@{Babbling}!init\+\_\+left\+\_\+arm@{init\+\_\+left\+\_\+arm}}
+\index{init\+\_\+left\+\_\+arm@{init\+\_\+left\+\_\+arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{init\+\_\+left\+\_\+arm()}{init\_left\_arm()}}
+{\footnotesize\ttfamily bool Babbling\+::init\+\_\+left\+\_\+arm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Create Poly\+Driver for left arm. 
+
+
+
+Definition at line 425 of file babbling.\+cpp.
+
+\mbox{\Hypertarget{group__babbling_a222fa43ddad0209a1b216ecc673f6bec}\label{group__babbling_a222fa43ddad0209a1b216ecc673f6bec}} 
+\index{Babbling@{Babbling}!init\+\_\+right\+\_\+arm@{init\+\_\+right\+\_\+arm}}
+\index{init\+\_\+right\+\_\+arm@{init\+\_\+right\+\_\+arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{init\+\_\+right\+\_\+arm()}{init\_right\_arm()}}
+{\footnotesize\ttfamily bool Babbling\+::init\+\_\+right\+\_\+arm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Create Poly\+Driver for left arm. 
+
+
+
+Definition at line 481 of file babbling.\+cpp.
+
+\mbox{\Hypertarget{group__babbling_a1f29bf6caa9392f3f99af13df900b05f}\label{group__babbling_a1f29bf6caa9392f3f99af13df900b05f}} 
+\index{Babbling@{Babbling}!interrupt\+Module@{interrupt\+Module}}
+\index{interrupt\+Module@{interrupt\+Module}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{interrupt\+Module()}{interruptModule()}}
+{\footnotesize\ttfamily bool Babbling\+::interrupt\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 91 of file babbling.\+cpp.
+
+\mbox{\Hypertarget{group__babbling_a5c0c4032800175a9f2f57fbe9de9037b}\label{group__babbling_a5c0c4032800175a9f2f57fbe9de9037b}} 
+\index{Babbling@{Babbling}!move\+Head\+To\+Start\+Pos@{move\+Head\+To\+Start\+Pos}}
+\index{move\+Head\+To\+Start\+Pos@{move\+Head\+To\+Start\+Pos}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{move\+Head\+To\+Start\+Pos()}{moveHeadToStartPos()}}
+{\footnotesize\ttfamily bool Babbling\+::move\+Head\+To\+Start\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Use i\+Gaze\+Controller to move head in start position. 
+
+\begin{DoxyReturn}{Returns}
+true if successful 
+\end{DoxyReturn}
+
+
+Definition at line 364 of file babbling.\+cpp.
+
+\mbox{\Hypertarget{group__babbling_ade91925b1045c2d45603e49e8fa45356}\label{group__babbling_ade91925b1045c2d45603e49e8fa45356}} 
+\index{Babbling@{Babbling}!respond@{respond}}
+\index{respond@{respond}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{respond()}{respond()}}
+{\footnotesize\ttfamily bool Babbling\+::respond (\begin{DoxyParamCaption}\item[{const yarp\+::os\+::\+Bottle \&}]{command,  }\item[{yarp\+::os\+::\+Bottle \&}]{reply }\end{DoxyParamCaption})}
+
+
+
+Definition at line 114 of file babbling.\+cpp.
+
+\mbox{\Hypertarget{group__babbling_a214e419246e93718c263850171a67a31}\label{group__babbling_a214e419246e93718c263850171a67a31}} 
+\index{Babbling@{Babbling}!update\+Module@{update\+Module}}
+\index{update\+Module@{update\+Module}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{update\+Module()}{updateModule()}}
+{\footnotesize\ttfamily bool Babbling\+::update\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 236 of file babbling.\+cpp.
+
+
+
+\paragraph{Member Data Documentation}
+\mbox{\Hypertarget{group__babbling_ab962dd24eb3bd00db6cb7f8a33bb6496}\label{group__babbling_ab962dd24eb3bd00db6cb7f8a33bb6496}} 
+\index{Babbling@{Babbling}!amp@{amp}}
+\index{amp@{amp}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{amp}{amp}}
+{\footnotesize\ttfamily double Babbling\+::amp\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Amplitude for sin wave. 
+
+
+
+Definition at line 60 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a72831e25ddc4b9e79b46dbc25b0923eb}\label{group__babbling_a72831e25ddc4b9e79b46dbc25b0923eb}} 
+\index{Babbling@{Babbling}!duration@{duration}}
+\index{duration@{duration}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{duration}{duration}}
+{\footnotesize\ttfamily double Babbling\+::duration\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Duration for the babbling. 
+
+
+
+Definition at line 61 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a9ef28388394d078d6578764a6435017c}\label{group__babbling_a9ef28388394d078d6578764a6435017c}} 
+\index{Babbling@{Babbling}!encoders\+Left\+Arm@{encoders\+Left\+Arm}}
+\index{encoders\+Left\+Arm@{encoders\+Left\+Arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{encoders\+Left\+Arm}{encodersLeftArm}}
+{\footnotesize\ttfamily yarp\+::sig\+::\+Vector\+Of$<$double$>$ Babbling\+::encoders\+Left\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 52 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_ab8d18ae468c969406e3689fc08732430}\label{group__babbling_ab8d18ae468c969406e3689fc08732430}} 
+\index{Babbling@{Babbling}!encoders\+Right\+Arm@{encoders\+Right\+Arm}}
+\index{encoders\+Right\+Arm@{encoders\+Right\+Arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{encoders\+Right\+Arm}{encodersRightArm}}
+{\footnotesize\ttfamily yarp\+::sig\+::\+Vector\+Of$<$double$>$ Babbling\+::encoders\+Right\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 52 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_ab5de0e5815a8c642e2c5f804675f8734}\label{group__babbling_ab5de0e5815a8c642e2c5f804675f8734}} 
+\index{Babbling@{Babbling}!encs\+Left\+Arm@{encs\+Left\+Arm}}
+\index{encs\+Left\+Arm@{encs\+Left\+Arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{encs\+Left\+Arm}{encsLeftArm}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Encoders$\ast$ Babbling\+::encs\+Left\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 35 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a540345074d41b623588cb5e94d18a8c5}\label{group__babbling_a540345074d41b623588cb5e94d18a8c5}} 
+\index{Babbling@{Babbling}!encs\+Right\+Arm@{encs\+Right\+Arm}}
+\index{encs\+Right\+Arm@{encs\+Right\+Arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{encs\+Right\+Arm}{encsRightArm}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Encoders$\ast$ Babbling\+::encs\+Right\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 42 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a48a9e302ed7cc9487963e2588cab2726}\label{group__babbling_a48a9e302ed7cc9487963e2588cab2726}} 
+\index{Babbling@{Babbling}!freq@{freq}}
+\index{freq@{freq}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{freq}{freq}}
+{\footnotesize\ttfamily double Babbling\+::freq\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Frequency for sin wave. 
+
+
+
+Definition at line 59 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_afc20fc52862c90c52ee56628e1e52d65}\label{group__babbling_afc20fc52862c90c52ee56628e1e52d65}} 
+\index{Babbling@{Babbling}!handler\+Port@{handler\+Port}}
+\index{handler\+Port@{handler\+Port}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{handler\+Port}{handlerPort}}
+{\footnotesize\ttfamily yarp\+::os\+::\+Rpc\+Server Babbling\+::handler\+Port\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 30 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a1428fa9c9e68fada5155fc79fc7af6dd}\label{group__babbling_a1428fa9c9e68fada5155fc79fc7af6dd}} 
+\index{Babbling@{Babbling}!head\+Dev@{head\+Dev}}
+\index{head\+Dev@{head\+Dev}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{head\+Dev}{headDev}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+Poly\+Driver Babbling\+::head\+Dev\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 50 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_ad4dab457a0cb02fe180c88c2c9807131}\label{group__babbling_ad4dab457a0cb02fe180c88c2c9807131}} 
+\index{Babbling@{Babbling}!ictrl\+Left\+Arm@{ictrl\+Left\+Arm}}
+\index{ictrl\+Left\+Arm@{ictrl\+Left\+Arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{ictrl\+Left\+Arm}{ictrlLeftArm}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Control\+Mode$\ast$ Babbling\+::ictrl\+Left\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 36 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a0e0df17a1b42f3732896af945b5b04ac}\label{group__babbling_a0e0df17a1b42f3732896af945b5b04ac}} 
+\index{Babbling@{Babbling}!ictrl\+Lim\+Left\+Arm@{ictrl\+Lim\+Left\+Arm}}
+\index{ictrl\+Lim\+Left\+Arm@{ictrl\+Lim\+Left\+Arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{ictrl\+Lim\+Left\+Arm}{ictrlLimLeftArm}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Control\+Limits$\ast$ Babbling\+::ictrl\+Lim\+Left\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 37 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a3e5cfc21913105c3fd5ece25a1b2a73d}\label{group__babbling_a3e5cfc21913105c3fd5ece25a1b2a73d}} 
+\index{Babbling@{Babbling}!ictrl\+Lim\+Right\+Arm@{ictrl\+Lim\+Right\+Arm}}
+\index{ictrl\+Lim\+Right\+Arm@{ictrl\+Lim\+Right\+Arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{ictrl\+Lim\+Right\+Arm}{ictrlLimRightArm}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Control\+Limits$\ast$ Babbling\+::ictrl\+Lim\+Right\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 44 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a8d08c70bd472b1d00bd55d8aa21ffd63}\label{group__babbling_a8d08c70bd472b1d00bd55d8aa21ffd63}} 
+\index{Babbling@{Babbling}!ictrl\+Right\+Arm@{ictrl\+Right\+Arm}}
+\index{ictrl\+Right\+Arm@{ictrl\+Right\+Arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{ictrl\+Right\+Arm}{ictrlRightArm}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Control\+Mode$\ast$ Babbling\+::ictrl\+Right\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 43 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_aa584e5aa3e9bd4d5a0e0ae4de7d014e2}\label{group__babbling_aa584e5aa3e9bd4d5a0e0ae4de7d014e2}} 
+\index{Babbling@{Babbling}!igaze@{igaze}}
+\index{igaze@{igaze}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{igaze}{igaze}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Gaze\+Control$\ast$ Babbling\+::igaze\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 46 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a44d279cd82628df4a5e54bb780999157}\label{group__babbling_a44d279cd82628df4a5e54bb780999157}} 
+\index{Babbling@{Babbling}!itrq\+Left\+Arm@{itrq\+Left\+Arm}}
+\index{itrq\+Left\+Arm@{itrq\+Left\+Arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{itrq\+Left\+Arm}{itrqLeftArm}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Torque\+Control$\ast$ Babbling\+::itrq\+Left\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 34 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a4b5a1226c09e0c66f06a9d2e0aa73e86}\label{group__babbling_a4b5a1226c09e0c66f06a9d2e0aa73e86}} 
+\index{Babbling@{Babbling}!itrq\+Right\+Arm@{itrq\+Right\+Arm}}
+\index{itrq\+Right\+Arm@{itrq\+Right\+Arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{itrq\+Right\+Arm}{itrqRightArm}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Torque\+Control$\ast$ Babbling\+::itrq\+Right\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 41 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_aa52eea3bfd656e48ed01bce7a7cd9da8}\label{group__babbling_aa52eea3bfd656e48ed01bce7a7cd9da8}} 
+\index{Babbling@{Babbling}!left\+Arm\+Dev@{left\+Arm\+Dev}}
+\index{left\+Arm\+Dev@{left\+Arm\+Dev}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{left\+Arm\+Dev}{leftArmDev}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+Poly\+Driver Babbling\+::left\+Arm\+Dev\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 48 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a677602f878f4403e2ad99091c86f29a6}\label{group__babbling_a677602f878f4403e2ad99091c86f29a6}} 
+\index{Babbling@{Babbling}!part@{part}}
+\index{part@{part}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{part}{part}}
+{\footnotesize\ttfamily std\+::string Babbling\+::part\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Should be \char`\"{}left\+\_\+arm\char`\"{} or \char`\"{}right\+\_\+arm\char`\"{}. 
+
+
+
+Definition at line 54 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_aa881d448117e515a051b8385532c3578}\label{group__babbling_aa881d448117e515a051b8385532c3578}} 
+\index{Babbling@{Babbling}!part\+\_\+babbling@{part\+\_\+babbling}}
+\index{part\+\_\+babbling@{part\+\_\+babbling}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{part\+\_\+babbling}{part\_babbling}}
+{\footnotesize\ttfamily std\+::string Babbling\+::part\+\_\+babbling\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Whether to do babbling with the whole \char`\"{}arm\char`\"{} or \char`\"{}hand\char`\"{} (should be either one or the other) 
+
+
+
+Definition at line 56 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_ae3f0e78b0005659b56d4aabc7868c9a9}\label{group__babbling_ae3f0e78b0005659b56d4aabc7868c9a9}} 
+\index{Babbling@{Babbling}!pos\+Left\+Arm@{pos\+Left\+Arm}}
+\index{pos\+Left\+Arm@{pos\+Left\+Arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{pos\+Left\+Arm}{posLeftArm}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Position\+Control$\ast$ Babbling\+::pos\+Left\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 32 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_abddc746bc2eae62a162fc48cdc5f5553}\label{group__babbling_abddc746bc2eae62a162fc48cdc5f5553}} 
+\index{Babbling@{Babbling}!pos\+Right\+Arm@{pos\+Right\+Arm}}
+\index{pos\+Right\+Arm@{pos\+Right\+Arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{pos\+Right\+Arm}{posRightArm}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Position\+Control$\ast$ Babbling\+::pos\+Right\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 39 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_ab35573fbefffff68d2816c4ce405a0a4}\label{group__babbling_ab35573fbefffff68d2816c4ce405a0a4}} 
+\index{Babbling@{Babbling}!right\+Arm\+Dev@{right\+Arm\+Dev}}
+\index{right\+Arm\+Dev@{right\+Arm\+Dev}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{right\+Arm\+Dev}{rightArmDev}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+Poly\+Driver Babbling\+::right\+Arm\+Dev\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 49 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a9b705ef5f9e677dab59f274c1582c0fc}\label{group__babbling_a9b705ef5f9e677dab59f274c1582c0fc}} 
+\index{Babbling@{Babbling}!robot@{robot}}
+\index{robot@{robot}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{robot}{robot}}
+{\footnotesize\ttfamily std\+::string Babbling\+::robot\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Should be \char`\"{}icub\char`\"{} or \char`\"{}icub\+Sim\char`\"{}. 
+
+
+
+Definition at line 55 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a3db3bc9a3171c963c66b268cd8c28f36}\label{group__babbling_a3db3bc9a3171c963c66b268cd8c28f36}} 
+\index{Babbling@{Babbling}!single\+\_\+joint@{single\+\_\+joint}}
+\index{single\+\_\+joint@{single\+\_\+joint}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{single\+\_\+joint}{single\_joint}}
+{\footnotesize\ttfamily int Babbling\+::single\+\_\+joint\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Which joint to do babbling with in case it is a single joint. 
+
+
+
+Definition at line 57 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a774931f9e0d4b55f143b69c6ddb8c314}\label{group__babbling_a774931f9e0d4b55f143b69c6ddb8c314}} 
+\index{Babbling@{Babbling}!start\+\_\+command\+\_\+arm@{start\+\_\+command\+\_\+arm}}
+\index{start\+\_\+command\+\_\+arm@{start\+\_\+command\+\_\+arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{start\+\_\+command\+\_\+arm}{start\_command\_arm}}
+{\footnotesize\ttfamily double Babbling\+::start\+\_\+command\+\_\+arm\mbox{[}16\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Start command for the 16 arm joints. 
+
+
+
+Definition at line 63 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_ab713d81b43bcf7ae0e0b8dc2ad7dfd7f}\label{group__babbling_ab713d81b43bcf7ae0e0b8dc2ad7dfd7f}} 
+\index{Babbling@{Babbling}!start\+\_\+command\+\_\+head@{start\+\_\+command\+\_\+head}}
+\index{start\+\_\+command\+\_\+head@{start\+\_\+command\+\_\+head}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{start\+\_\+command\+\_\+head}{start\_command\_head}}
+{\footnotesize\ttfamily yarp\+::sig\+::\+Vector\+Of$<$double$>$ Babbling\+::start\+\_\+command\+\_\+head\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Target for head in start position. 
+
+
+
+Definition at line 64 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a3b87f9dd07393fb9f190bb8e4ced3662}\label{group__babbling_a3b87f9dd07393fb9f190bb8e4ced3662}} 
+\index{Babbling@{Babbling}!vel\+Left\+Arm@{vel\+Left\+Arm}}
+\index{vel\+Left\+Arm@{vel\+Left\+Arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{vel\+Left\+Arm}{velLeftArm}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Velocity\+Control$\ast$ Babbling\+::vel\+Left\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 33 of file babbling.\+h.
+
+\mbox{\Hypertarget{group__babbling_a1f4d5e9370fad5b0637d759cada192f1}\label{group__babbling_a1f4d5e9370fad5b0637d759cada192f1}} 
+\index{Babbling@{Babbling}!vel\+Right\+Arm@{vel\+Right\+Arm}}
+\index{vel\+Right\+Arm@{vel\+Right\+Arm}!Babbling@{Babbling}}
+\subparagraph{\texorpdfstring{vel\+Right\+Arm}{velRightArm}}
+{\footnotesize\ttfamily yarp\+::dev\+::\+I\+Velocity\+Control$\ast$ Babbling\+::vel\+Right\+Arm\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 40 of file babbling.\+h.
+

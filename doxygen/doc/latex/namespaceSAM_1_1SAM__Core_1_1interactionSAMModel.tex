@@ -1,0 +1,88 @@
+\hypertarget{namespaceSAM_1_1SAM__Core_1_1interactionSAMModel}{}\section{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+interaction\+S\+A\+M\+Model Namespace Reference}
+\label{namespaceSAM_1_1SAM__Core_1_1interactionSAMModel}\index{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+interaction\+S\+A\+M\+Model@{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+interaction\+S\+A\+M\+Model}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__SAM__Core_classSAM_1_1SAM__Core_1_1interactionSAMModel_1_1interactionSAMModel}{interaction\+S\+A\+M\+Model}
+\begin{DoxyCompactList}\small\item\em Generic interaction function.  \hyperlink{group__icubclient__SAM__Core_classSAM_1_1SAM__Core_1_1interactionSAMModel_1_1interactionSAMModel}{More...}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespaceSAM_1_1SAM__Core_1_1interactionSAMModel_af61a343a4521eee226bc19ee9931915e}{exception\+\_\+hook} (exc\+\_\+type, exc\+\_\+value, exc\+\_\+traceback)
+\begin{DoxyCompactList}\small\item\em Callback function to record any errors that occur in the log files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1interactionSAMModel_ad95d88996dee123f932dd0236e44687a}{precision}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1interactionSAMModel_ac8fc99c1044c90d77d2bc1d470ed11bd}{mod} = \hyperlink{group__icubclient__SAM__Core_classSAM_1_1SAM__Core_1_1interactionSAMModel_1_1interactionSAMModel}{interaction\+S\+A\+M\+Model}()
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1interactionSAMModel_a5b02d7b171d64258c379d4a115b9b6f6}{rf} = yarp.\+Resource\+Finder()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1interactionSAMModel_af61a343a4521eee226bc19ee9931915e}\label{namespaceSAM_1_1SAM__Core_1_1interactionSAMModel_af61a343a4521eee226bc19ee9931915e}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model}!exception\+\_\+hook@{exception\+\_\+hook}}
+\index{exception\+\_\+hook@{exception\+\_\+hook}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{exception\+\_\+hook()}{exception\_hook()}}
+{\footnotesize\ttfamily def S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+interaction\+S\+A\+M\+Model.\+exception\+\_\+hook (\begin{DoxyParamCaption}\item[{}]{exc\+\_\+type,  }\item[{}]{exc\+\_\+value,  }\item[{}]{exc\+\_\+traceback }\end{DoxyParamCaption})}
+
+
+
+Callback function to record any errors that occur in the log files. 
+
+\begin{DoxyParagraph}{Documentation}
+Substitutes the standard python exception\+\_\+hook with one that records the error into a log file. Can only work if \hyperlink{interactionSAMModel_8py}{interaction\+S\+A\+M\+Model.\+py} is called from python and not ipython because ipython overrides this substitution.
+\end{DoxyParagraph}
+
+\begin{DoxyParams}{Parameters}
+{\em exc\+\_\+type} & Exception Type. \\
+\hline
+{\em exc\+\_\+value} & Exception Value. \\
+\hline
+{\em exc\+\_\+traceback} & Exception Traceback.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+
+None 
+\end{DoxyReturn}
+
+
+Definition at line 875 of file interaction\+S\+A\+M\+Model.\+py.
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1interactionSAMModel_ac8fc99c1044c90d77d2bc1d470ed11bd}\label{namespaceSAM_1_1SAM__Core_1_1interactionSAMModel_ac8fc99c1044c90d77d2bc1d470ed11bd}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model}!mod@{mod}}
+\index{mod@{mod}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{mod}{mod}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+interaction\+S\+A\+M\+Model.\+mod = \hyperlink{group__icubclient__SAM__Core_classSAM_1_1SAM__Core_1_1interactionSAMModel_1_1interactionSAMModel}{interaction\+S\+A\+M\+Model}()}
+
+
+
+Definition at line 883 of file interaction\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1interactionSAMModel_ad95d88996dee123f932dd0236e44687a}\label{namespaceSAM_1_1SAM__Core_1_1interactionSAMModel_ad95d88996dee123f932dd0236e44687a}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model}!precision@{precision}}
+\index{precision@{precision}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{precision}{precision}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+interaction\+S\+A\+M\+Model.\+precision}
+
+
+
+Definition at line 21 of file interaction\+S\+A\+M\+Model.\+py.
+
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1interactionSAMModel_a5b02d7b171d64258c379d4a115b9b6f6}\label{namespaceSAM_1_1SAM__Core_1_1interactionSAMModel_a5b02d7b171d64258c379d4a115b9b6f6}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model}!rf@{rf}}
+\index{rf@{rf}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::interaction\+S\+A\+M\+Model}}
+\subsubsection{\texorpdfstring{rf}{rf}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+interaction\+S\+A\+M\+Model.\+rf = yarp.\+Resource\+Finder()}
+
+
+
+Definition at line 884 of file interaction\+S\+A\+M\+Model.\+py.
+

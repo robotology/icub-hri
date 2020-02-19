@@ -1,0 +1,4 @@
+<map id="icubclient::SubSystem_Speech" name="icubclient::SubSystem_Speech">
+<area shape="rect" id="node3" href="$group__icubclient__subsystems.html#classicubclient_1_1SubSystem__Speech__eSpeak" title="SubSystem for speech synthesis with emotional tuning of speed and pitch using eSpeak. " alt="" coords="5,169,172,211"/>
+<area shape="rect" id="node2" href="$group__icubclient__subsystems.html#classicubclient_1_1SubSystem" title="Abstract class to handle sub&#45;systems of the icub&#45;client. " alt="" coords="5,5,172,32"/>
+</map>

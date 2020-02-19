@@ -1,0 +1,63 @@
+\hypertarget{group__icubclient__create__subsystem}{}\section{Create a new Subsystem}
+\label{group__icubclient__create__subsystem}\index{Create a new Subsystem@{Create a new Subsystem}}
+
+
+This provides a tutorial on how to create your own subsystem for icub-\/client.  
+
+
+This provides a tutorial on how to create your own subsystem for icub-\/client. 
+
+Subsystems provide a centralised way to control the different modules available to icub-\/client. What follows is a description of the steps required to create a custom subsystem providing centralised access to a specific module. From here on in we will be referring to the specific module as {\ttfamily $<$new\+Sub$>$}.
+
+{\bfseries Step 1} Go to {\bfseries icub-\/client/src/libraries/icubclient/include/icubclient/subsystems}, add a new file {\ttfamily subsystem\+\_\+$<$new\+Sub$>$.h} and open it for editing.
+
+{\bfseries Step 2} Go to {\bfseries icub-\/client/src/libraries/icubclient/src/subsystems} and add a new file {\ttfamily subsystem\+\_\+$<$new\+Sub$>$.cpp} and open it for editing.
+
+{\bfseries Step 3} \+: Write the subsystem functions to your .h and .cpp files using {\ttfamily sub\+System\+\_\+agent\+Dector.\+h} and {\ttfamily sub\+System\+\_\+agent\+Dector.\+cpp} as a guideline. The principal functions that must be carried out are\+:
+\begin{DoxyItemize}
+\item {\bfseries Sub\+System\+\_\+$<$new\+Sub$>$(const std\+::string \&master\+Name)} \+: This function creates an R\+PC port having the base name specified by string {\ttfamily master\+Name}
+\item {\bfseries connect()} \+: This function connects the R\+PC Port opened in {\ttfamily Sub\+System\+\_\+$<$new\+Sub$>$()} to the {\ttfamily $<$new\+Sub$>$} module R\+PC port
+\item {\bfseries close()} \+: This function terminates and disconnects the R\+PC port opened in {\ttfamily Sub\+System\+\_\+$<$new\+Sub$>$()}
+\end{DoxyItemize}
+
+Additional functions can also be added to your subsystem to provide custom functionality.
+
+{\bfseries Step 4} \+: Open {\bfseries icub-\/client/src/libraries/icubclient/\+C\+Make\+Lists.\+txt} and to the {\itshape set(\$\{L\+I\+B\+R\+A\+R\+Y\+\_\+\+T\+A\+R\+G\+E\+T\+\_\+\+N\+A\+ME\}\+\_\+\+S\+RC} section, add \+: \begin{DoxyVerb}src/subsystems/subSystem_<newSub>.cpp \end{DoxyVerb}
+
+
+Also to the {\itshape set(\$\{L\+I\+B\+R\+A\+R\+Y\+\_\+\+T\+A\+R\+G\+E\+T\+\_\+\+N\+A\+ME\}\+\_\+\+H\+DR} section add \+: \begin{DoxyVerb}include/${LIBRARY_TARGET_NAME}/subsystems/subSystem_<newSub>.h \end{DoxyVerb}
+
+
+This will enable compilation of your subsystem.
+
+{\bfseries Step 5} \+: Open {\bfseries icub-\/client/src/libraries/icubclient/include/icubclient/all.\+h} for editing and add \+:
+
+\begin{DoxyVerb}#include "icubclient/subsystems/subSystem_<newSub>.h"\end{DoxyVerb}
+ to the section marked as {\itshape subsystems}.
+
+{\bfseries Step 6} \+: Open {\bfseries icub-\/client/src/libraries/icubclient/include/icubclient/clients/icub\+Client.\+h} for editing and add\+: \begin{DoxyVerb}class SubSystem_<newSub>;\end{DoxyVerb}
+ to the other subsystem class definitions at line 53 and \begin{DoxyVerb}SubSystem_<newSub>* get<newSub>Client(); \end{DoxyVerb}
+ at line 109.
+
+{\bfseries Step 7} \+: Open {\bfseries icub-\/client/src/libraries/icubclient/src/clients/icub\+Client.\+cpp} for editing and add \begin{DoxyVerb}#include "icubclient/subsystems/subSystem_<newSub>.h" \end{DoxyVerb}
+ at line 29.
+
+Add\begin{DoxyVerb}else if (currentSS == SUBSYSTEM_<newSub>)
+    subSystems[SUBSYSTEM_<newSub>] = new SubSystem_<newSub>(fullName); \end{DoxyVerb}
+ at line 96.
+
+Add\begin{DoxyVerb}SubSystem_<newSub>* ICubClient::get<newSub>Client()
+{
+    return getSubSystem<SubSystem_<newSub>>(SUBSYSTEM_<newSub>);
+} \end{DoxyVerb}
+ to the end of the file.
+
+If you additionally want to compile python bindings for the subsytem you must also perform the following steps\+:
+
+{\bfseries Step 8}\+: Open {\bfseries icub-\/client/bindings/icubclient.\+i} for editing.
+
+{\bfseries Step 9}\+: Add\begin{DoxyVerb}#include <icubclient/subsystems/subSystem_<newSub>.h> \end{DoxyVerb}
+ to line 28 and\begin{DoxyVerb}%include <icubclient/subsystems/subSystem_<newSub>.h> \end{DoxyVerb}
+ to line 52.
+
+(This page can be edited at \hyperlink{subsystems_8dox}{src/doc/subsystems.\+dox}) 

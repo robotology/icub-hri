@@ -1,0 +1,56 @@
+\hypertarget{namespaceSAM_1_1SAM__Core_1_1SAM__utils}{}\section{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils Namespace Reference}
+\label{namespaceSAM_1_1SAM__Core_1_1SAM__utils}\index{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils@{S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1InterruptableThread}{Interruptable\+Thread}
+\begin{DoxyCompactList}\small\item\em Class to launch a function inside of a separate thread.  \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1InterruptableThread}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1timeout}{timeout}
+\begin{DoxyCompactList}\small\item\em Class to terminate a function running inside of a separate thread.  \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1timeout}{More...}\end{DoxyCompactList}\item 
+class \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1TimeoutError}{Timeout\+Error}
+\begin{DoxyCompactList}\small\item\em Custom \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1TimeoutError}{Timeout\+Error} Exception.  \hyperlink{group__icubclient__SAM__utils_classSAM_1_1SAM__Core_1_1SAM__utils_1_1TimeoutError}{More...}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{group__icubclient__SAM__utils_ga7d1d61b09b614680e853bc0be5e10df1}{initialise\+Models} (argv, update, init\+Mode=\textquotesingle{}training\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Initialise \hyperlink{namespaceSAM}{S\+AM} Model data structure, training parameters and user parameters. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_ga27bd9bc8ab5b70ae2f6cc18857afc88c}{variance\+Class} (variance\+Direction, x, thresh)
+\begin{DoxyCompactList}\small\item\em Utility function to perform threshold or range checking. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_ga1626d58a716c5b4794ff6f6933011076}{plot\+Known\+And\+Unknown} (var\+Dict, colour, axlist, width=\mbox{[}0.\+2, factor=\mbox{[}(0, 0.\+6), plot\+Range=False)
+\begin{DoxyCompactList}\small\item\em Utility function to plot variances of known and unknown as gaussian distributions. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_gafede13612da64cc2471be35b385972ed}{bhattacharyya\+\_\+distance} (mu1, mu2, var1, var2)
+\begin{DoxyCompactList}\small\item\em Calculates a measure for the separability of two univariate gaussians. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_gae515125ab69f88f48f48b3eb766927a1}{plot\+\_\+confusion\+\_\+matrix} (cm, target\+Names, title=\textquotesingle{}Confusion matrix\textquotesingle{}, cmap=plt.\+cm.\+inferno)
+\begin{DoxyCompactList}\small\item\em Generate and display a confusion matrix. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_gaf5214036730562004563e7c122e65998}{plot\+Gauss\+From\+List} (mlist, vlist, rlist, colour, label, width, factor, axlist, plot\+Range=False)
+\begin{DoxyCompactList}\small\item\em Plot multiple Gaussians from a list on the same plot. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_gab49784000971804130fa10c1e3ad817d}{solve\+\_\+intersections} (m1, m2, std1, std2)
+\begin{DoxyCompactList}\small\item\em Solve for the intersection/s of two Gaussian distributions. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_ga36c10c3281fd9c5aa4aeacacc693ee71}{Pfrom\+Hist} (sample, hist, bin\+Width)
+\begin{DoxyCompactList}\small\item\em Calulates the probability of a sample from a histogram. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_ga82624221423212408df437771ccbd026}{mean\+Var\+\_\+variance\+Distribution} (data\+List)
+\begin{DoxyCompactList}\small\item\em Calculate list of means, variances and ranges for the data in the data\+List. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_ga9f9e9fc5c10660319b4d78dcb1a04d10}{bhattacharyya\+\_\+dict} (m, v)
+\begin{DoxyCompactList}\small\item\em Calculate bhattacharyya distances for each item in the dictionaries. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_ga993c63ecfc9099d2e2ccd42282354de5}{smooth1D} (x, window\+\_\+len=11, window=\textquotesingle{}hanning\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Smooth the data using a window with a requested size. \end{DoxyCompactList}\item 
+def \hyperlink{group__icubclient__SAM__utils_ga54c327e56dfec748f1c4a150b9180162}{transform\+Time\+Series\+To\+Seq} (Y, time\+Window, offset=1, normalised=False, reduced=False, noY=False, do\+Offset=False)
+\begin{DoxyCompactList}\small\item\em Utility function to convert a time series into multiple time windows with additional functionality. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceSAM_1_1SAM__Core_1_1SAM__utils_a908d91fede0d299860184c887e66c28c}{precision}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceSAM_1_1SAM__Core_1_1SAM__utils_a908d91fede0d299860184c887e66c28c}\label{namespaceSAM_1_1SAM__Core_1_1SAM__utils_a908d91fede0d299860184c887e66c28c}} 
+\index{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils}!precision@{precision}}
+\index{precision@{precision}!S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils@{S\+A\+M\+::\+S\+A\+M\+\_\+\+Core\+::\+S\+A\+M\+\_\+utils}}
+\subsubsection{\texorpdfstring{precision}{precision}}
+{\footnotesize\ttfamily S\+A\+M.\+S\+A\+M\+\_\+\+Core.\+S\+A\+M\+\_\+utils.\+precision}
+
+
+
+Definition at line 25 of file S\+A\+M\+\_\+utils.\+py.
+

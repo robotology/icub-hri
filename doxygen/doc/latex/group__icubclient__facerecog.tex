@@ -1,0 +1,47 @@
+\hypertarget{group__icubclient__facerecog}{}\section{Face Recognition Tutorial\+: Collecting data and training}
+\label{group__icubclient__facerecog}\index{Face Recognition Tutorial\+: Collecting data and training@{Face Recognition Tutorial\+: Collecting data and training}}
+
+
+This provides a tutorial on how to create your own face recognition model with \hyperlink{namespaceSAM}{S\+AM}.  
+
+
+This provides a tutorial on how to create your own face recognition model with \hyperlink{namespaceSAM}{S\+AM}. 
+
+\subsubsection*{Prerequisites}
+
+To follow this tutorial you need to have\+:
+
+
+\begin{DoxyItemize}
+\item A {\ttfamily S\+A\+M\+\_\+\+Data\+\_\+\+Models} folder set up with the structure indicated in \href{https://github.com/robotology/icub-client/blob/master/src/modules/SAM/README.md}{\tt S\+AM R\+E\+A\+D\+ME}.
+\item You also need human-\/sensing-\/\+S\+AM installed and running. Follow the instructions in \href{https://github.com/dcam0050/human-sensing-SAM/blob/master/README.md}{\tt human-\/\+Sensing-\/\+S\+AM git repo}
+\end{DoxyItemize}
+
+\subsubsection*{Data Collection}
+
+{\bfseries Step 1}\+: First run\+:
+
+\begin{DoxyVerb}CLMYarp --from $CLM_MODEL_DIR 
+yarp connect <imagePort> /CLM/image/in udp+mjpeg \end{DoxyVerb}
+
+
+where {\ttfamily $<$image\+Port$>$} is the yarp port sending images from a camera. Example one of the icub\textquotesingle{}s eyes {\ttfamily /icub/cam/left} or a webcam using {\ttfamily yarpdev opencv\+\_\+grabber}. The above instructions launch and connect C\+L\+M\+Yarp and you should start seeing segmented faces shown on screen. At this point prepare the subject to be recorded in front of the camera being used.
+
+{\bfseries Step 2}\+: Go to S\+A\+M\+\_\+\+Data\+\_\+\+Models/\+Data/$<$my\+Faces\+Folder$>$ directory from the terminal and from this directory run
+
+\begin{DoxyVerb}yarpdatadumper --name /samRecogDumper/faces_in --type image --rxTime --dir <faceName>
+yarp connect /CLM/imageSeg/out /samRecogDumper/faces_in udp\end{DoxyVerb}
+
+
+where {\ttfamily $<$face\+Name$>$} is the name of the person being recorded. As soon as you make the connection, open your file manager and monitor the amount of images being stored. Terminate {\itshape yarpdatadumper} when the amount of required images is reached\+: 300-\/500 images is usually a good amount for training.
+
+Repeat {\bfseries Step 2} for each person that is to be trained, changing {\ttfamily $<$face\+Name$>$} each time such that each person has a separate images folder
+
+\subsubsection*{Training}
+
+For training, run \hyperlink{samSupervisor_8py}{sam\+Supervisor.\+py} from the command line and connect to it using \begin{DoxyVerb}yarp rpc /sam/rpc:i \end{DoxyVerb}
+
+
+Then if you send a {\itshape check\+\_\+all} command you should see $<$my\+Faces\+Folder$>$ listed as available for training. To train, send a {\itshape train $<$my\+Faces\+Folder$>$} command and this will perform the training.
+
+(This page can be edited at \hyperlink{facerecognitiontutorial_8dox}{src/doc/facerecognitiontutorial.\+dox}) 
